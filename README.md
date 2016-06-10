@@ -2,7 +2,6 @@
 *Blog posts from the USGS Office of Water Information*
 
 **Download/installation instructions:** https://gohugo.io/overview/installing/
-
 Essentially, the Hugo executable just needs to sit in a directory referenced in the shell $PATH variable
 
 **Quick start guide for Hugo:** https://gohugo.io/overview/quickstart/
