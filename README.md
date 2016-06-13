@@ -7,7 +7,7 @@ Essentially, the Hugo executable just needs to sit in a directory referenced in 
 
 [**Quick start guide for Hugo**] (https://gohugo.io/overview/quickstart/)
 
-Shows how to build a simple example Hugo site.  
+Shows how to build a simple example Hugo site.  On the left sidebar there are links to more in-depth documentation.
 
 [**Templates for R markdowns**] (https://github.com/hrbrmstr/markdowntemplates)
 
