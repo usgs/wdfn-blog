@@ -3,23 +3,31 @@
  * #b0bec5
  * #78909c
  */
-
+ 
+ aside.site header{
+   color:#003366;
+ }
+ 
+ #owiLogo{
+   width:45px;
+   margin:-12px 5px 0 0;
+ }
+ 
 /* Reset */
 html {
   font-size: 16px;
 }
 
 body {
-  font-family: "Noticia Text", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
-  font-size: inherit;
+  font-family:arial;
   font-size: inherit;
   color: #000;
   line-height: 1rem;
-  background-color: #eceff1;
+  background-color: #fff;
 }
 
 a {
-  color: #000;
+  color: #003366;
 }
 
 a:hover, a:focus, a:active {
@@ -44,7 +52,7 @@ img {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5 ,h6 { margin: 0; }
+h1, h2, h3, h4, h5 ,h6 { margin: 0; font-weight:normal; }
 h1 { font-size: 1.6rem; line-height: 2rem; }
 h2 { font-size: 1.3rem; line-height: 2rem; }
 h3 { font-size: 1.1rem; line-height: 2rem; }
@@ -95,9 +103,9 @@ h5 { font-size: 1rem; line-height: 1rem; }
 /* Layouts */
 .l-header {
   background-color: #fff;
-  padding: 1.5rem 0;
-  text-align: center;
   margin-bottom: 2rem;
+  border-bottom:1px solid #bebebe;
+  height:40px;
 }
 
 .l-footer {
@@ -113,9 +121,35 @@ h5 { font-size: 1rem; line-height: 1rem; }
 }
 
 /* Parts:logo */
+.p-logo{
+  padding:0 10px;
+  height:40px;
+}
+
+@media screen and (min-width:768px){
+  .p-logo{
+    width:760px;
+    margin:0 auto;
+  }
+}
+
+@media screen and (min-width:991px){
+  .p-logo{
+    width:960px;
+  }
+}
+
+@media screen and (min-width:1200px){
+  .p-logo{
+    width:1170px;
+  }
+}
+
 .p-logo a {
-  font-family: 'Marcellus SC', cursive;
-  font-size: 2rem;
+  font-size: 1.5em;
+  display:inline-block;
+  height:40px;
+  padding-top:12px;
 }
 
 /* Parts:menu */
@@ -239,6 +273,8 @@ article.grid {
   height: 24rem;
   max-height: 24rem;
   overflow: hidden;
+  border:1px solid #bebebe;
+  border-radius:10px;
 }
 
 article.grid .image {
