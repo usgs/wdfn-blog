@@ -16,7 +16,9 @@ knit_hooks$set(plot=function(x, options) {
 
 opts_chunk$set(
   echo=TRUE,
-  fig.path="static/ts-colin-discharge/"
+  fig.path="static/ts-colin-discharge/",
+  fig.width=6,
+  fig.height=6
 )
 ```
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
@@ -29,15 +31,16 @@ library(dataRetrieval)
 library(maps)
 
 #Retrieve the stream gage data for this site from NWIS
-siteData <- readNWISdata(service="iv",sites="02310000",startDate="2016-06-04",endDate="2016-06-10")
+siteData <- readNWISdata(service="iv",sites="02310000",
+                         startDate="2016-06-04",endDate="2016-06-10")
 siteData <- renameNWISColumns(siteData)
 loc <- attr(siteData,'siteInfo') #get site lat/lon
 
 #main plot
-png('tsColin.png')
+ 
 plot(x=siteData$dateTime,y=siteData$Flow_Inst, type="l", col="blue", 
      xlab = "Day", ylab = "Discharge (cfs)",lwd=4,cex.lab=1.5,cex.axis=1.25)
-title("Anclote River near Tampa, FL",line=1)
+title(loc$station_nm,line=1)
 mtext("Tropical Storm Colin 6/4/2016-6/10/2016")
 abline(v=as.POSIXct("2016-06-06 03:00:00 UTC",tz="UTC"),col="red",lwd=1.5)
 text(x=as.POSIXct("2016-06-06 02:00:00 UTC",tz="UTC"),y=70,label="Precipitation begins early Monday",srt=90,pos=3,cex=1.3)
@@ -48,5 +51,5 @@ plot.window(xlim=c(-88.5,-80),ylim=c(24.5,31))  #axis limits for the inset
 map('state',regions="FL",lwd=1.5,xlim=c(-88.5,-80),ylim=c(24.5,31),add=TRUE)
 points(loc$dec_lon_va[1],loc$dec_lat_va[1],bg='red',col='red',pch=22,cex=1) #stream gage location
 box(lwd=1.5)
-dev.off() #reset par(plt) values; comment out to leave figure window open
+
 ```

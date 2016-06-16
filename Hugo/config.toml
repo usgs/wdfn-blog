@@ -1,3 +1,78 @@
-baseurl = "tsColin"
+baseurl = "http://owi.usgs.gov/blogs"
 languageCode = "en-us"
 title = "The USGS OWI blog"
+
+canonifyurls = true
+paginate = 10
+
+[indexes]
+  tag = "tags"
+  topic = "topics"
+
+[params]
+  # Shown in the home page
+  subtitle = "Office of Water Information"
+  brand = "OWI"
+  googleAnalytics = "UA-78530187-1"
+  # disqus = "Your Disqus shortname"
+  # CSS name for highlight.js
+  # highlightjs = "androidstudio"
+  # dateFormat = "02 Jan 2006, 15:04"
+
+[menu]
+  # Shown in the side menu.
+  [[menu.main]]
+    name = "Home"
+    pre = "<i class='fa fa-home fa-fw'></i>"
+    weight = 0
+    identifier = "home"
+    url = "/"
+  # [[menu.main]]
+  #  name = "Posts"
+  #  pre = "<i class='fa fa-list fa-fw'></i>"
+  #  weight = 1
+  #  identifier = "post"
+  #  url = "/post/"
+  [[menu.main]]
+    name = "OWI"
+    pre = "<i class='fa fa-user fa-fw'></i>"
+    weight = 2
+    identifier = "OWI"
+    url = "http://owi.usgs.gov"
+  # [[menu.main]]
+  #   name = "Contact"
+  #   pre = "<i class='fa fa-phone fa-fw'></i>"
+  #   weight = 3
+  #   url = "contact"
+
+[social]
+  # Link your social networking accouns to the side menu
+  # by entering your username or ID.
+
+  # SNS microblogging
+  twitter = "USGS_R"
+  # facebook = "USGS"
+  # googleplus = "*"
+  # weibo = "*"
+
+  # SNS photo/video sharing
+  # instagram = "*"
+  # flickr = "*"
+  # pinterest = "*"
+  # youtube = "*"
+  # vimeo = "*"
+  # vine = "*"
+  # slideshare = "*"
+
+  # SNS career oriented
+  # linkedin = "*"
+  # xing = "*"
+
+  # SNS news
+  # reddit = "*"
+  # hackernews = "*"
+
+  # Techie
+  github = "USGS-R"
+  # bitbucket = "*"
+  # stackoverflow = "*"
