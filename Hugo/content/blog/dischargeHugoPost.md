@@ -4,6 +4,7 @@ date: 2016-06-13
 slug: ts-colin-discharge
 type: post
 title: Tropical Storm Colin Discharge Plot R Code
+description: Using dataRetrieval to plot discharge
 categories:
   - r
   - visualize discharge

@@ -4,6 +4,7 @@ date: 2016-06-15
 slug: rResid
 type: post
 title: Using Random Residuals for Censored Data in EGRET
+description: New graphical functionality in EGRET
 categories:
   - r
   - EGRET
