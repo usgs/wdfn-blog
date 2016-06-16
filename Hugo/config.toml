@@ -1,4 +1,4 @@
-baseurl = "http://owi.usgs.gov"
+baseurl = "http://dev-owi.usgs.gov-website.s3-website-us-west-2.amazonaws.com/blog/"
 languageCode = "en-us"
 title = "The USGS OWI blog"
 theme = "hugo-future-imperfect"
@@ -6,6 +6,7 @@ preserveTaxonomyNames = true
 paginate = 3
 disqusShortname = "shortname"
 googleAnalytics = ""
+canonifyurls = true
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
@@ -16,7 +17,7 @@ googleAnalytics = ""
     socialAppearAtTop    = true
     socialAppearAtBottom = true
     # set this to the section name if section is not post
-    viewMorePostLink     = "/blog/"
+    viewMorePostLink     = ""
 
 # Optional Params
     categoriesByCount    = true
@@ -47,6 +48,10 @@ googleAnalytics = ""
 
     about     = "We are committed to advancing USGS science by integrating data across scales and domains, improving access to data and research, and developing tools for analysis and visualization, fostering collaboration with the international community."
 
+[Params]
+  Author = "OWI_blogs"
+  disqusShortname = "OWI_blogs"
+
 # This will also appear on the sidebar.
 # A width of less than 100px is recommended
 # This is optional
@@ -68,7 +73,7 @@ googleAnalytics = ""
 # You can use identifier to prepend a font awesome icon to your text
 [[menu.main]]
     name = "Blog"
-    url = "/blog"
+    url = "/"
     identifier = "fa fa-newspaper-o"
     weight = 1
 

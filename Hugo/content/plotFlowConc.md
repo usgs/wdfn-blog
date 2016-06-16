@@ -1,33 +1,16 @@
 ---
-title: "EGRET plotFlowConc using ggplot2"
-author: "Laura DeCicco and Marcus Beck"
-date: "2016-06-16"
-slug: "plotFlowConc"
-output: markdowntemplates::hugo
+author: Laura DeCicco and Marcus Beck
+date: 2016-06-16
+slug: plotFlowConc
+type: post
+title: EGRET plotFlowConc using ggplot2
+categories:
+  - r
+  - EGRET
 ---
+Here is an example of using `ggplot2` with `EGRET` objects. Here, a function `plotFlowConc` was created:
 
-
-```{r setup, include=FALSE}
-library(knitr)
-
-knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/>", 
-          options$fig.path, options$label, options$fig.cur, options$fig.ext)
-
-})
-
-opts_chunk$set(
-  echo=TRUE,
-  fig.path="../static/plotFlowConc/",
-  fig.width = 7,
-  fig.height = 7
-)
-```
-
-
-Here is an example of using `ggplot2` with `EGRET` objects. Here, a function `plotFlowConc` was created: 
-
-```{r message=FALSE}
+``` r
 library(EGRET)
 library(ggplot2)
 library(tidyr)
@@ -168,16 +151,13 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   return(p)
     
 }
-
 ```
 
 Next, the function can be called with any `EGRET` object:
 
-```{r}
-
+``` r
 eList <-  Choptank_eList
 plotFlowConc(eList)
-
-
 ```
 
+<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/>

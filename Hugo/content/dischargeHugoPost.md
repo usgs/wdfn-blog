@@ -4,10 +4,9 @@ date: 2016-06-13
 slug: ts-colin-discharge
 type: post
 title: Tropical Storm Colin Discharge Plot R Code
-description: Using dataRetrieval to plot discharge
 categories:
   - r
-  - visualize discharge
+  - dataRetrieval
 ---
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
 
@@ -46,4 +45,4 @@ points(loc$dec_lon_va[1],loc$dec_lat_va[1],
 box(lwd=1.5)
 ```
 
-<img src='/../static/ts-colin-discharge/mainPlot-1.png'/>
+<img src='/static/ts-colin-discharge/mainPlot-1.png'/>
