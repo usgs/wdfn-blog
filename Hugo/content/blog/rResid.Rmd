@@ -17,12 +17,11 @@ knit_hooks$set(plot=function(x, options) {
 
 opts_chunk$set(
   echo=TRUE,
-  fig.path="static/rResid/",
-  fig.width=6,
-  fig.height=6
+  fig.path="../static/rResid/",
+  fig.width = 5,
+  fig.height = 5
 )
 ```
-
 
 # Introduction
 

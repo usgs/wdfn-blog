@@ -2,7 +2,7 @@
 author: Robert M. Hirsch and Laura A. De Cicco
 date: 2016-06-15
 slug: rResid
-status: draft
+type: post
 title: Using Random Residuals for Censored Data in EGRET
 categories:
   - r
@@ -18,7 +18,7 @@ eList <- Arkansas_eList
 plotConcTime(eList)
 ```
 
-<img src='/static/rResid/unnamed-chunk-1-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-1-1.png'/>
 
 The solid vertical lines, which represent the range of values that a given censored value could be, is very distracting in terms of getting a picture of the overall behavior of the data. We can see this even more if we try to look at the relationship of concentration to discharge.
 
@@ -26,7 +26,7 @@ The solid vertical lines, which represent the range of values that a given censo
 plotConcQ(eList,qUnit=4)
 ```
 
-<img src='/static/rResid/unnamed-chunk-2-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-2-1.png'/>
 
 It is difficult to see the relationship between ammonia concentration and discharge. If we look at residuals from a fitted WRTDS model and discharge we also find it difficult to see if the pattern looks reasonable (a horizontal cloud of points centered on the zero residual line) or if there is some substantial curvature to the relationship.
 
@@ -34,7 +34,7 @@ It is difficult to see the relationship between ammonia concentration and discha
 plotResidQ(eList,qUnit=4)
 ```
 
-<img src='/static/rResid/unnamed-chunk-3-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-3-1.png'/>
 
 Here again, the plot is not very informative. What solutions might exist to resolve this problem of the graphical representation of the censored data?
 
@@ -52,7 +52,7 @@ eList <- makeAugmentedSample(eList)
 plotConcQ(eList, qUnit = 4, rResid = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-4-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-4-1.png'/>
 
 ``` r
 # now do it all over again
@@ -60,7 +60,7 @@ eList <- makeAugmentedSample(eList)
 plotConcQ(eList, qUnit = 4, rResid = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-4-2.png'/>
+<img src='/../static/rResid/unnamed-chunk-4-2.png'/>
 
 Careful examination of these two figures reveals that the black dots are exactly the same in both, but the open circles are different between the two. In looking at these kinds of plots we are not necessarily looking to see what actually happened on a particular day, but rather to understand the pattern of the relationship between the two variables being plotted.
 
@@ -79,13 +79,13 @@ We can look at our residuals plots in the following manner (using the second set
 plotResidTime(eList, rResid = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-5-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-5-1.png'/>
 
 ``` r
 plotResidQ(eList, qUnit = 4, rResid = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-5-2.png'/>
+<img src='/../static/rResid/unnamed-chunk-5-2.png'/>
 
 Details for how to include random residuals in your computations
 ================================================================
@@ -106,13 +106,13 @@ eList <- makeAugmentedSample(eList)
 multiPlotDataOverview(eList, qUnit = 4, rResid = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-7-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-7-1.png'/>
 
 ``` r
 fluxBiasMulti(eList, qUnit = 4, fluxUnit = 9, rResid = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-8-1.png'/>
+<img src='/../static/rResid/unnamed-chunk-8-1.png'/>
 
 A final thought
 ===============
