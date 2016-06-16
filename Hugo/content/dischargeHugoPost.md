@@ -1,34 +1,18 @@
 ---
-title: "Tropical Storm Colin Discharge Plot R Code"
-slug: "ts-colin-discharge"
-author: "David Watkins"
-date: "2016-06-13"
-type: "post"
-output: markdowntemplates::hugo
+author: David Watkins
+date: 2016-06-13
+slug: ts-colin-discharge
+type: post
+title: Tropical Storm Colin Discharge Plot R Code
+categories:
+  - r
+  - dataRetrieval
 ---
-
-```{r setup, include=FALSE}
-library(knitr)
-
-knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/>", 
-          options$fig.path, options$label, options$fig.cur, options$fig.ext)
-
-})
-
-opts_chunk$set(
-  echo=TRUE,
-  fig.path="../static/ts-colin-discharge/",
-  fig.width = 6,
-  fig.height = 6
-)
-```
-
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
 
-In the next section we make the inset map.  The important part there is the `par()` command, which limits the area of the current plot that will be used for the following commands.  `plot.window` sets the axis limits, and after that are regular `map()` commands.
+In the next section we make the inset map. The important part there is the `par()` command, which limits the area of the current plot that will be used for the following commands. `plot.window` sets the axis limits, and after that are regular `map()` commands.
 
-```{r mainPlot, message=FALSE}
+``` r
 #Tropical Storm Colin discharge
 
 library(dataRetrieval)
@@ -59,5 +43,6 @@ map('state',regions="FL",lwd=1.5,
 points(loc$dec_lon_va[1],loc$dec_lat_va[1],
        bg='red',col='red',pch=22,cex=1) 
 box(lwd=1.5)
-
 ```
+
+<img src='/static/ts-colin-discharge/mainPlot-1.png'/>
