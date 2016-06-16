@@ -19,8 +19,8 @@ knit_hooks$set(plot=function(x, options) {
 opts_chunk$set(
   echo=TRUE,
   fig.path="../static/ts-colin-discharge/",
-  fig.width = 5,
-  fig.height = 5
+  fig.width = 6,
+  fig.height = 6
 )
 ```
 
