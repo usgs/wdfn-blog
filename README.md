@@ -15,6 +15,8 @@ With these installed, you can select the 'Hugo Blog Post' template when you crea
 
 NOTE: `markdowntemplates` by default adds `status: draft` to the markdown header. It is up to you to change that to `type: post` for the post to be published.
 
+NOTE: Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
+
 **Content for blog posts** 
 The necessary pieces for a post are the resulting .md file that is knit from Rstudio, which forms the main body of the post, and then any images that should be associated with the post.  The actual layout of the pages is handled in the Hugo 'theme'.
 
@@ -22,5 +24,17 @@ Current theme development based off:
 ```
 git clone https://github.com/jpescador/hugo-future-imperfect.git
 ```
+So, clone that into the 'themes' folder. Then run the server locally using:
+
+```
+hugo server --theme=hugo-future-imperfect --buildDrafts
+```
 
 
+Disclaimer
+----------
+This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey  (USGS), an agency of the United States Department of Interior. For more information, see the official USGS copyright policy at [http://www.usgs.gov/visual-id/credit_usgs.html#copyright](http://www.usgs.gov/visual-id/credit_usgs.html#copyright)
+
+Although this software program has been used by the USGS, no warranty, expressed or implied, is made by the USGS or the U.S. Government as to the accuracy and functioning of the program and related program material nor shall the fact of distribution constitute any such warranty, and no responsibility is assumed by the USGS in connection therewith.
+
+This software is provided "AS IS."
