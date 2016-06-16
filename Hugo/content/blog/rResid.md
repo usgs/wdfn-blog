@@ -6,6 +6,7 @@ type: post
 title: Using Random Residuals for Censored Data in EGRET
 categories:
   - r
+  - EGRET
 ---
 Introduction
 ============
