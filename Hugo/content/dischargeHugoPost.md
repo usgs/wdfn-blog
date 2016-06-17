@@ -5,7 +5,7 @@ slug: ts-colin-discharge
 type: post
 title: Tropical Storm Colin Discharge Plot R Code
 categories:
-  - r
+  - R
   - dataRetrieval
 image: static/ts-colin-discharge/mainPlot-1.png
 ---

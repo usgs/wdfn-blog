@@ -5,15 +5,73 @@ slug: plotFlowConc
 type: post
 title: EGRET plotFlowConc using ggplot2
 categories:
-  - r
+  - R
   - EGRET
-image: static/plotFlowConc/unnamed-chunk-2-1.png
+image: static/plotFlowConc/unnamed-chunk-4-1.png
 ---
-Here is an example of using `ggplot2` with `EGRET` objects. Here, a function `plotFlowConc` was created:
+Introduction
+============
+
+`EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN.
+
+More information can be found at <https://github.com/USGS-R/EGRET>.
+
+ggplot2
+=======
+
+`ggplot2` is a power and popular graphing package. Although all `EGRET` functions return with a specialized list, it is quite easy to extract the relavent data frames `Daily`, `Sample`, and `INFO`. Here are a few examples of using `ggplot2` to make plots that are also available in `EGRET`.
+
+Please note there are a lot of nuances that are captured in the `EGRET` plotting functions that are not captured in these `ggplot2` examples.
+
+plotConcQ
+---------
 
 ``` r
 library(EGRET)
 library(ggplot2)
+
+eList <-  Choptank_eList
+Sample <- eList$Sample
+INFO <- eList$INFO
+
+Sample$cen <- factor(Sample$Uncen)
+levels(Sample$cen) <- c("Censored","Uncensored") 
+
+plotConcQ_gg <- ggplot(data=Sample) +
+  geom_point(aes(x=Q, y=ConcAve, color = cen)) +
+  scale_x_log10() +
+  ggtitle(INFO$station.nm)
+
+plotConcQ_gg
+plotConcQ(eList)
+```
+
+<img src='/static/plotFlowConc/unnamed-chunk-1-1.png'/><img src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
+
+boxConcMonth
+------------
+
+``` r
+Sample$monthAbb <- as.factor(Sample$Month)
+levels(Sample$monthAbb) <- month.abb
+
+boxConcMonth_gg <- ggplot(data=Sample) +
+  geom_boxplot(aes(monthAbb, ConcAve)) +
+  scale_y_log10() +
+  ggtitle(INFO$station.nm)
+
+boxConcMonth_gg
+boxConcMonth(eList)
+```
+
+<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/><img src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
+
+plotFlowConc
+============
+
+Here is an example of using `ggplot2` with `EGRET` objects. It also takes advantage of the `dplyr` and `tidyr` packages. A function `plotFlowConc` was created:
+
+``` r
 library(tidyr)
 library(dplyr)
 
@@ -161,4 +219,4 @@ eList <-  Choptank_eList
 plotFlowConc(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/>
+<img src='/static/plotFlowConc/unnamed-chunk-4-1.png'/>

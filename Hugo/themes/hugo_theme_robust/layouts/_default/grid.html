@@ -7,6 +7,7 @@
       </div>
       <h2 class="title">{{ .Title }}</h2>
       <div class="image" style="background-image: url({{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}images/owi-mobile.png{{ end }});"></div>
+      <h4 class="author">{{ .Params.author }}</h4>
       <!--<div class="summary">{{ .Summary }}</div>-->
     </footer>
   </a>
