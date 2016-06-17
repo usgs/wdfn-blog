@@ -13,7 +13,7 @@ Shows how to build a simple example Hugo site.  On the left sidebar there are li
 
 With these installed, you can select the 'Hugo Blog Post' template when you create a new R markdown in R studio.  The R markdown will then knit to a .md file, which you should save to the 'content' directory of the Hugo site.  Hugo handles it from there.
 
-NOTE: `markdowntemplates` by default adds `status: draft` to the markdown header. It is up to you to change that to `type: post` for the post to be published.
+NOTE: `markdowntemplates` by default adds `status: draft` to the markdown header (not rmarkdown file). It is up to you to change that to `type: post` for the post to be published.
 
 NOTE: Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
 
@@ -24,7 +24,7 @@ Current theme development based off:
 ```
 git clone https://github.com/jpescador/hugo-future-imperfect.git
 ```
-So, clone that into the 'themes' folder. Then run the server locally using:
+So, clone that into the 'themes' folder. Then run the server locally from the main Hugo folder using:
 
 ```
 hugo server --theme=hugo-future-imperfect --buildDrafts
