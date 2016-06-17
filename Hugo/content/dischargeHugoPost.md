@@ -7,6 +7,7 @@ title: Tropical Storm Colin Discharge Plot R Code
 categories:
   - r
   - dataRetrieval
+image: static/ts-colin-discharge/mainPlot-1.png
 ---
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
 
