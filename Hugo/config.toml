@@ -1,7 +1,7 @@
 baseurl = "http://dev-owi.usgs.gov-website.s3-website-us-west-2.amazonaws.com/blog/"
 languageCode = "en-us"
 title = "The USGS OWI blog"
-theme = "hugo-future-imperfect"
+theme = "hugo_theme_robust"
 preserveTaxonomyNames = true
 paginate = 3
 disqusShortname = "shortname"
