@@ -117,5 +117,5 @@ canonifyurls = true
     facebook        = ""
     facebook_admin  = ""
     twitter_domain  = ""
-    twitter         = "USGS_R"
+    twitter         = "USGS_WaterData"
     email           = ""
