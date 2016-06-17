@@ -7,6 +7,7 @@ title: Using Random Residuals for Censored Data in EGRET
 categories:
   - r
   - EGRET
+image: static/rResid/unnamed-chunk-5-2.png
 ---
 Introduction
 ============

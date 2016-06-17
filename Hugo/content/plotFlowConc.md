@@ -7,6 +7,7 @@ title: EGRET plotFlowConc using ggplot2
 categories:
   - r
   - EGRET
+image: static/plotFlowConc/unnamed-chunk-2-1.png
 ---
 Here is an example of using `ggplot2` with `EGRET` objects. Here, a function `plotFlowConc` was created:
 

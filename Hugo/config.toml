@@ -1,7 +1,7 @@
 baseurl = "http://dev-owi.usgs.gov-website.s3-website-us-west-2.amazonaws.com/blog/"
 languageCode = "en-us"
 title = "The USGS OWI blog"
-theme = "hugo-future-imperfect"
+theme = "hugo_theme_robust"
 preserveTaxonomyNames = true
 paginate = 3
 disqusShortname = "shortname"
@@ -67,7 +67,7 @@ canonifyurls = true
 # Adjust the amount of recent posts on the sidebar.
 # This is optional. The default value 5 will be used
 [params.postAmount]
-    sidebar = 2
+    sidebar = 4
 
 # Set up your menu items in the navigation bar
 # You can use identifier to prepend a font awesome icon to your text
