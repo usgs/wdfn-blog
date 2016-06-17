@@ -45,6 +45,7 @@
 <!--<div class="image" style="background-image: url({{ $.Site.BaseURL }}images/{{ with .Params.image }}{{ . }}{{ else }}default.jpg{{ end }});"></div>-->
         <div class="body">
           <h1>{{ .Title }}</h1>
+          <h3>{{ .Params.author }}</h3>
           {{ .Content }}
         </div>
 
