@@ -5,7 +5,7 @@ slug: rResid
 type: post
 title: Using Random Residuals for Censored Data in EGRET
 categories:
-  - r
+  - R
   - EGRET
 image: static/rResid/unnamed-chunk-5-2.png
 ---

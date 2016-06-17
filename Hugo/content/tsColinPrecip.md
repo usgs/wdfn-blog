@@ -5,7 +5,7 @@ slug: ts-colin-precip
 type: post
 title: Visualizing Tropical Storm Colin Precipitation using geoknife
 categories:
-  - r
+  - R
   - geoknife
 image: static/ts-colin-precip/use-functions-1.png
 ---

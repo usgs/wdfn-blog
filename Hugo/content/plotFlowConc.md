@@ -5,7 +5,7 @@ slug: plotFlowConc
 type: post
 title: EGRET plotFlowConc using ggplot2
 categories:
-  - r
+  - R
   - EGRET
 image: static/plotFlowConc/unnamed-chunk-2-1.png
 ---
