@@ -6,7 +6,8 @@
         <time>{{ with .Site.Params.DateForm }}{{ $.Date.Format . }}{{ else }}{{ $.Date.Format "Mon, Jan 2, 2006" }}{{ end }}</time>
       </div>
       <h2 class="title">{{ .Title }}</h2>
-      <div class="summary">{{ .Summary }}</div>
+      <div class="image" style="background-image: url({{ $.Site.BaseURL }}/{{ with .Params.image }}{{ . }}{{ else }}images/owi-mobile.png{{ end }});"></div>
+      <!--<div class="summary">{{ .Summary }}</div>-->
     </footer>
   </a>
 </article>
