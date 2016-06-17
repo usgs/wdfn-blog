@@ -35,14 +35,14 @@
   </section>
   {{ end }}
 
-  <section>
+<!--  <section>
     <header>LatestPosts</header>
     <div>
       {{ range first 10 .Site.Pages }}
       {{ .Render "li" }}
       {{ end }}
     </div>
-  </section>
+  </section>-->
 
   {{ range $key, $value := .Site.Taxonomies }}
   <section>
