@@ -83,7 +83,7 @@ library(tidyr)
 library(dplyr)
 
 
-plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
+plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
   
   localDaily <- getDaily(eList)
   localINFO <- getInfo(eList)
@@ -114,9 +114,10 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   to_plo <- data.frame(date = surfdts, year = surfyear, month = surfmos, day = surfday, t(ConcDay))
 
   # axis labels
-  ylabel <- localINFO$paramShortName
-  xlabel <- 'LogQ'
-  
+  if(is.null(ylabel))
+    ylabel <- localINFO$paramShortName
+  if(is.null(xlabel))
+    xlabel <- expression(paste('Discharge in ', m^3, '/s'))
   # reshape data frame, average by year, month for symmetry
   to_plo <- to_plo[to_plo$month %in% month, , drop = FALSE]
   names(to_plo)[grep('^X', names(to_plo))] <- paste('flo', flo_grd)
