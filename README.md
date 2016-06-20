@@ -23,17 +23,6 @@ NOTE: Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
 **Content for blog posts** 
 The necessary pieces for a post are the resulting .md file that is knit from Rstudio, which forms the main body of the post, and then any images that should be associated with the post.  The actual layout of the pages is handled in the Hugo 'theme'.
 
-Current theme development based off:
-```
-git clone https://github.com/jpescador/hugo-future-imperfect.git
-```
-So, clone that into the 'themes' folder. Then run the server locally from the main Hugo folder using:
-
-```
-hugo server --theme=hugo-future-imperfect --buildDrafts
-```
-
-OR:
 ```
 hugo server --theme=hugo_theme_robust --buildDrafts
 ```
