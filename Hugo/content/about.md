@@ -1,6 +1,6 @@
 +++
 title = "About OWI blogs"
-date = "2016-06-10"
+date = "2016-06-01"
 +++
 
 The United States Geological Survey's Office of Water Information. 
