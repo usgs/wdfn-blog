@@ -25,7 +25,8 @@
 }
 
 p,
-h2{
+h2,
+h4{
   word-break: keep-all;
 }
 
@@ -123,7 +124,7 @@ h1, h2, h3, h4, h5 ,h6 { margin: 0; font-weight:normal; }
 h1 { font-size: 1.6rem; line-height: 2rem; }
 h2 { font-size: 1.3rem; line-height: 2rem; }
 h3 { font-size: 1.1rem; line-height: 2rem; }
-h4 { font-size: 1rem; line-height: 1rem; }
+h4 { font-size: .95rem; line-height: 1rem; }
 h5 { font-size: 1rem; line-height: 1rem; }
 
 @media (max-width: 768px) {
