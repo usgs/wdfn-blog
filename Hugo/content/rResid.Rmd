@@ -1,6 +1,6 @@
 ---
 title: "Using Random Residuals for Censored Data in EGRET"
-author: "Robert M. Hirsch and Laura A. De Cicco"
+author: "Robert M. Hirsch and Laura DeCicco"
 date: "2016-06-15"
 slug: "rResid"
 output: markdowntemplates::hugo

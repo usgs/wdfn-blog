@@ -1,5 +1,5 @@
 ---
-author: Robert M. Hirsch and Laura A. De Cicco
+author: Robert M. Hirsch and Laura DeCicco
 date: 2016-06-15
 slug: rResid
 type: post
