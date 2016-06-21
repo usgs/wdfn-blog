@@ -1,6 +1,6 @@
 ---
 title: "EGRET plotFlowConc using ggplot2"
-author: "Laura DeCicco and Marcus Beck"
+author: "Marcus Beck and Laura DeCicco"
 date: "2016-06-16"
 slug: "plotFlowConc"
 output: markdowntemplates::hugo

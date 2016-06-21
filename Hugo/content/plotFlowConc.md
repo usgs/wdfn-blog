@@ -1,12 +1,11 @@
 ---
-author: Laura DeCicco and Marcus Beck
+author: Marcus Beck and Laura DeCicco
 date: 2016-06-16
 slug: plotFlowConc
 type: post
 title: EGRET plotFlowConc using ggplot2
-categories:
-  - R
-  - EGRET
+categories: R
+tags: EGRET
 image: static/plotFlowConc/unnamed-chunk-4-1.png
 ---
 Introduction
@@ -74,9 +73,10 @@ Here is an example of using `ggplot2` with `EGRET` objects. It also takes advant
 ``` r
 library(tidyr)
 library(dplyr)
+library(fields)
 
 
-plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
+plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
   
   localDaily <- getDaily(eList)
   localINFO <- getInfo(eList)
@@ -91,9 +91,7 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   surfmos <- as.numeric(format(surfdts, '%m'))
   surfday <- as.numeric(format(surfdts, '%d'))
    
-  # interpolation surfaces
-  yHat <- localsurfaces[,,1] 
-  SE <- localsurfaces[,,2]
+  # interpolation surface
   ConcDay <- localsurfaces[,,3]
 
   # convert month vector to those present in data
@@ -105,21 +103,13 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   # get the grid
   to_plo <- data.frame(date = surfdts, year = surfyear, month = surfmos, day = surfday, t(ConcDay))
-
-  # axis labels
-  ylabel <- localINFO$paramShortName
-  xlabel <- 'LogQ'
   
   # reshape data frame, average by year, month for symmetry
   to_plo <- to_plo[to_plo$month %in% month, , drop = FALSE]
   names(to_plo)[grep('^X', names(to_plo))] <- paste('flo', flo_grd)
   to_plo <- tidyr::gather(to_plo, 'flo', 'res', 5:ncol(to_plo)) %>% 
     mutate(flo = as.numeric(gsub('^flo ', '', flo))) %>% 
-    select(-date, -day) %>% 
-    group_by(year, month, flo) %>% 
-    summarize(
-      res = mean(res, na.rm = TRUE)
-    )
+    select(-day)
   
   # subset years to plot
   if(!is.null(years)){
@@ -130,6 +120,56 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
     if(nrow(to_plo) == 0) stop('No data to plot for the date range')
   
   }
+
+  # smooth the grid
+  if(!is.null(interp)){
+    
+    to_interp <- to_plo
+    to_interp <- ungroup(to_interp) %>% 
+      select(date, flo, res) %>% 
+      tidyr::spread(flo, res)
+    
+    # values to pass to interp
+    dts <- to_interp$date
+    fit_grd <- select(to_interp, -date)
+    flo_fac <- length(flo_grd) * interp
+    flo_fac <- seq(min(flo_grd), max(flo_grd), length.out = flo_fac)
+    yr_fac <- seq(min(dts), max(dts), length.out = length(dts) *  interp)
+    to_interp <- expand.grid(yr_fac, flo_fac)
+          
+    # bilinear interpolation of fit grid
+    interps <- interp.surface(
+      obj = list(
+        y = flo_grd,
+        x = dts,
+        z = data.frame(fit_grd)
+      ), 
+      loc = to_interp
+    )
+
+    # format interped output
+    to_plo <- data.frame(to_interp, interps) %>% 
+      rename(date = Var1, 
+        flo = Var2, 
+        res = interps
+      ) %>% 
+      mutate(
+        month = as.numeric(format(date, '%m')), 
+        year = as.numeric(format(date, '%Y'))
+      )
+
+  }
+
+  # summarize so no duplicate flos for month/yr combos
+  to_plo <- group_by(to_plo, year, month, flo) %>% 
+      summarize(res = mean(res, na.rm = TRUE)) %>% 
+      ungroup
+  
+  # axis labels
+  if(is.null(ylabel))
+    ylabel <- localINFO$paramShortName
+  if(is.null(xlabel))
+    xlabel <- expression(paste('Discharge in ', m^3, '/s'))
 
   # constrain plots to salinity/flow limits for the selected month
   if(!allflo){
@@ -170,7 +210,8 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   # reassign facet names if fac_nms is provided
   if(!is.null(fac_nms)){
     
-    if(length(fac_nms) != length(unique(to_plo$month))) stop('fac_nms must have same lengths as months')
+    if(length(fac_nms) != length(unique(to_plo$month))) 
+      stop('fac_nms must have same lengths as months')
   
     to_plo$month <- factor(to_plo$month, labels = fac_nms)
     
