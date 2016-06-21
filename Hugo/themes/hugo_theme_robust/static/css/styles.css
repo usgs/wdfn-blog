@@ -28,6 +28,55 @@ p,
 h2{
   word-break: keep-all;
 }
+
+/*NAV CSS*/
+#owiCurrent{
+  background:#003366;
+  color:#fff;
+}
+
+#desktopNav {
+  width: 100%;
+}
+#owiLogoSmall {
+  display: none;
+}
+#mobileBurger {
+  position: absolute;
+  left: 5px;
+  top: 7px;
+  width:30px;
+}
+
+@media screen and (min-width:768px){
+  #desktopNav {
+    position: relative;
+    width: 768px;
+    height: 40px;
+    margin: 0 auto;
+  }
+  #owiLogoSmall {
+    display: block;
+    width: 47px;
+    position: absolute;
+    top: 3px;
+  }
+  #mobileBurger {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  #desktopNav {
+    width: 970px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #desktopNav {
+    width: 1170px;
+  }
+}
  
 
 /* Reset */
@@ -140,14 +189,78 @@ h5 { font-size: 1rem; line-height: 1rem; }
 
 /* Parts:logo */
 .p-logo{
+  background: #003366;
+  height: 40px;
+  position: relative;
+  z-index: 10000;
+}
+
+.p-logo ul {
+  display: none;
+  list-style: none;
+  position: absolute;
+  top: 40px;
+  padding:0;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  
+}
+.p-logo ul a {
+  color: #003366;
+  display: inline-block;
+  height: 40px;
+  width: 100%;
+  font-size:1em;
+  padding:8px 0 0 0;
+}
+.p-logo ul a:focus {
+  background: #003366;
+  color: #fff;
+}
+.p-logo ul a li {
+  border-bottom: 1px solid #bebebe;
   padding:0 10px;
-  height:40px;
+  height:32px;
 }
 
 @media screen and (min-width:768px){
   .p-logo{
     width:760px;
     margin:0 auto;
+  }
+  
+  .p-logo {
+    background: none;
+    border-bottom: 1px solid #bebebe;
+    margin-bottom: 10px;
+  }
+  .p-logo ul {
+    display: block !important;
+    position: static;
+    width: 525px;
+    height: 40px;
+    float: right;
+    box-shadow: none;
+    background:none;
+  }
+  .p-logo ul a {
+    width: 105px;
+    text-align: center;
+    display: block;
+    float: left;
+    font-weight: 300;
+    padding-top:8px;
+  }
+  .p-logo ul a:hover {
+    background: #003366;
+    color: #fff;
+    box-shadow:none;
+    outline:none;
+  }
+  .p-logo ul a li {
+    border-bottom: none;
+    padding:0;
   }
 }
 

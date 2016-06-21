@@ -1,13 +1,26 @@
-</head>
+<header class="l-header">
+  <div class="p-logo">
+    <div id="desktopNav">
+      <img id="mobileBurger" src="{{ $.Site.BaseURL }}/images/mobileburger.png" alt="mobile nav menu"/>
+      <a href="{{ .Site.BaseURL }}">
+          <img id="owiLogoSmall" src="{{ $.Site.BaseURL }}images/owi-mobile.png" alt="OWI logo"/>
+      </a>
 
-<body>
-
-  <header class="l-header">
-    <div class="p-logo">
-      <!--<img id="owiLogo" src="static/img/owi-mobile.png" alt="OWI Logo"/>-->
-      <img id="owiLogo" src="{{ $.Site.BaseURL }}images/owi-mobile.png" alt="OWI Logo"/>
-      <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+      <ul id="navigation">
+        <a href="http://owi.usgs.gov/people/"><li>People</li></a>
+        <a href="http://owi.usgs.gov/products/"><li>Products</li></a>
+        <a href="http://owi.usgs.gov/partners/"><li>Partners</li></a>
+        <a href="http://owi.usgs.gov/careers/"><li>Careers</li></a>
+        <a id="owiCurrent" href="{{ .Site.BaseURL }}"><li>Blog</li></a>
+      </ul>
 
     </div>
-  </header>
+  </div>
+</header>
 
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('#mobileBurger').on('click', function(){
+       $('#navigation').toggle('slow');
+    });
+</script>
