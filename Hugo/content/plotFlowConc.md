@@ -4,9 +4,8 @@ date: 2016-06-16
 slug: plotFlowConc
 type: post
 title: EGRET plotFlowConc using ggplot2
-categories:
-  - R
-  - EGRET
+categories: R
+tags: EGRET
 image: static/plotFlowConc/unnamed-chunk-4-1.png
 ---
 Introduction
@@ -46,10 +45,10 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<div class="sideBySide">
-  <img src='/static/plotFlowConc/unnamed-chunk-1-1.png'/>
-  <img src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
-</div>
+
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-1.png'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
+
 
 boxConcMonth
 ------------
@@ -67,10 +66,10 @@ boxConcMonth_gg
 boxConcMonth(eList)
 ```
 
-<div class="sideBySide">
-  <img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/>
-  <img src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
-</div>
+
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-1.png'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
+
 
 plotFlowConc
 ============
