@@ -13,6 +13,16 @@
    margin:-12px 5px 0 0;
  }
  
+ 
+ @media screen and (min-width:768px){
+   .sideBySide{
+    width:50% !important;
+  }
+}
+ 
+ 
+ 
+ 
 /* Reset */
 html {
   font-size: 16px;
