@@ -16,20 +16,24 @@
  
  @media screen and (min-width:768px){
    .sideBySide{
-    width:50% !important;
+    width:49% !important;
   }
 }
 
 .hljs{
   background:#f7f7f7 !important;
 }
+
+p,
+h2{
+  word-break: keep-all;
+}
  
- 
- 
- 
+
 /* Reset */
 html {
   font-size: 16px;
+  word-break: keep-all;
 }
 
 body {
