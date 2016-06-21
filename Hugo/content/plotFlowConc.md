@@ -4,8 +4,10 @@ date: 2016-06-16
 slug: plotFlowConc
 type: post
 title: EGRET plotFlowConc using ggplot2
-categories: R
-tags: EGRET
+categories: Data Science
+tags: 
+  - EGRET
+  - R
 image: static/plotFlowConc/unnamed-chunk-4-1.png
 ---
 Introduction

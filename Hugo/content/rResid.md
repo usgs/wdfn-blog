@@ -4,8 +4,10 @@ date: 2016-06-15
 slug: rResid
 type: post
 title: Using Random Residuals for Censored Data in EGRET
-categories: R
-tags: EGRET
+categories: Data Science
+tags: 
+  - EGRET
+  - R
 image: static/rResid/unnamed-chunk-7-2.png
 ---
 `EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN.
