@@ -53,7 +53,8 @@ h4{
   width:30px;
 }
 
-#usgsfooter{
+#usgsfooter,
+#usgscolorband{
   display:none;
 }
 
@@ -72,6 +73,65 @@ h4{
   }
   #mobileBurger {
     display: none;
+  }
+  
+  /*========usgs-header========*/
+  #usgscolorband {
+    font: 14px Verdana, Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: 5.14em;
+    min-height: 72px;
+    background: #000;
+    position: relative;
+    z-index: 20002;
+    display: block;
+  }
+  
+  #banner{
+    width:300px;
+  }
+  #usgsbanner {
+    width: 100%;
+    height: 72px;
+  }
+  #usgsidentifier {
+    background-color: black;
+    width: 178px;
+    height: 5.14em;
+    float: left;
+  }
+  #usgsidentifier img {
+    border: none;
+  }
+  #usgsccsabox {
+    float: right;
+    background-color: #000000;
+    min-height: 72px;
+    width: 120px;
+  }
+  #usgsccsa {
+    font: 1em/0.5em Verdana, Arial, Helvetica, sans-serif;
+    height: 63px;
+    padding-top: 9px;
+  }
+  #usgsccsa a:link,
+  #usgsccsa a:visited {
+    font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    margin-left: 4px;
+    text-decoration: none;
+  }
+  #usgsccsa a:hover {
+    font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    text-decoration: underline;
+    margin-left: 4px;
+  }
+  #usgsccsa a:active {
+    font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    margin-left: 4px;
+    text-decoration: none;
   }
   
   /*========usgs-footer========*/
