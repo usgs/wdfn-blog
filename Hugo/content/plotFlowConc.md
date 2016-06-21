@@ -47,7 +47,7 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-1-1.png'/><img src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-1.png'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
 
 boxConcMonth
 ------------
@@ -65,7 +65,7 @@ boxConcMonth_gg
 boxConcMonth(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/><img src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-1.png'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
 
 plotFlowConc
 ============
