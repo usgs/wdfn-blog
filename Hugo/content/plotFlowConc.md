@@ -4,8 +4,10 @@ date: 2016-06-16
 slug: plotFlowConc
 type: post
 title: EGRET plotFlowConc using ggplot2
-categories: R
-tags: EGRET
+categories: Data Science
+tags: 
+  - EGRET
+  - R
 image: static/plotFlowConc/unnamed-chunk-4-1.png
 ---
 Introduction
@@ -45,7 +47,7 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-1-1.png'/><img src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-1.png'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
 
 boxConcMonth
 ------------
@@ -63,7 +65,7 @@ boxConcMonth_gg
 boxConcMonth(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/><img src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-1.png'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
 
 plotFlowConc
 ============

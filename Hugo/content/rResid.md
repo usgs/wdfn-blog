@@ -4,8 +4,10 @@ date: 2016-06-15
 slug: rResid
 type: post
 title: Using Random Residuals for Censored Data in EGRET
-categories: R
-tags: EGRET
+categories: Data Science
+tags: 
+  - EGRET
+  - R
 image: static/rResid/unnamed-chunk-7-2.png
 ---
 `EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN.
@@ -36,7 +38,8 @@ If we think about a fitted WRTDS model, what it is telling us is this: For some 
 
 So, what we can say about some particular censored value is that the log of the true value has a mean of **yHat** and a standard deviation of **SE**, it is normally distributed, but is constrained to be in the part of the normal distribution which is less than the log of the reporting limit. Such a random variable is known as a truncated normal random variable. Fortunately there is an R package entirely focused on the truncated normal distribution. It is called **truncnorm**. We can use **truncnorm** to generate a random number for each of the censored values and this random number will be drawn from the lower portion of normal distribution with the correct mean, standard deviation, and upper bound. The idea is to create these random values to substitute for the censored observations. We call them the **rObserved** values (the "r" denotes that they are randomly generated observations) and they reside in an augmented version of the **Sample** data frame in a column called **Sample$rObserved**. The figures below illustrate what a truncated normal distribution density function looks like. They show the density below the censoring threshold for two different examples. The **rObserved** values are samples from these density functions. The area under each density function is equal to 1.
 
-<img src='/static/rResid/unnamed-chunk-5-1.png'/><img src='/static/rResid/unnamed-chunk-5-2.png'/>
+<img class="sideBySide" src='/static/rResid/unnamed-chunk-5-1.png'/>
+<img class="sideBySide" src='/static/rResid/unnamed-chunk-5-2.png'/>
 
 What is most important to understand is that these randomly generated values are never used in any of the WRTDS computations that result in estimates of daily concentrations or fluxes, or annual average concentrations or fluxes, or any trends. These randomly generated values are created strictly to provide a more-easily interpreted set of diagonstic graphics. Here is an example of a plot of concentration versus time using this approach.
 
@@ -44,7 +47,7 @@ The solid circles are the uncensored observations and the open circles are these
 
 ``` r
 eList <- makeAugmentedSample(eList)
-plotConcQ(eList, qUnit = 4, rResid = TRUE)
+plotConcQ(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
 <img src='/static/rResid/unnamed-chunk-6-1.png'/>
@@ -52,7 +55,7 @@ plotConcQ(eList, qUnit = 4, rResid = TRUE)
 ``` r
 # now do it all over again
 eList <- makeAugmentedSample(eList)
-plotConcQ(eList, qUnit = 4, rResid = TRUE)
+plotConcQ(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
 <img src='/static/rResid/unnamed-chunk-6-2.png'/>
@@ -69,13 +72,13 @@ rResid = rObserved - predicted value. All three variables in this equation are i
 We can look at our residuals plots in the following manner (using the second set of rObserved values computed above).
 
 ``` r
-plotResidTime(eList, rResid = TRUE)
+plotResidTime(eList, randomCensored = TRUE)
 ```
 
 <img src='/static/rResid/unnamed-chunk-7-1.png'/>
 
 ``` r
-plotResidQ(eList, qUnit = 4, rResid = TRUE)
+plotResidQ(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
 <img src='/static/rResid/unnamed-chunk-7-2.png'/>
@@ -91,18 +94,18 @@ In order to use the **rObserved** and **rResid** in making graphs in EGRET the p
 
     **eList &lt;- makeAugmentedSample(eList)**
 
-4.  To produce any one of the following graphics, using the **rObserved** or **rResid** values simply add the argument **rResid = TRUE** to the call to the graphical function. Note that it doesn't matter if what is being plotted is an observed value or a residual, the argument is always **rResid = TRUE**. The original option of showing the vertical lines for censored values remains available as the default for any of these functions. The call can either say **rResid = FALSE** or just not include **rResid** in the argument list and the graphs will appear without these random values and without the open circle/closed circle symbology. The censored values or censored residuals will be shown as the vertical lines. The functions where this approach applies are these: **plotConcPred, plotConcQ, plotConcTime, plotConcTimeDaily, plotFluxPred, plotFluxQ, plotFluxTImeDaily, plotResidPred, plotResidQ, plotResidTime**. It is also available in the two multiple plot functions: **multiPlotOverview, and fluxBiasMulti**
+4.  To produce any one of the following graphics, using the **rObserved** or **rResid** values simply add the argument **randomCensored = TRUE** to the call to the graphical function. Note that it doesn't matter if what is being plotted is an observed value or a residual, the argument is always **randomCensored = TRUE**. The original option of showing the vertical lines for censored values remains available as the default for any of these functions. The call can either say **randomCensored = FALSE** or just not include **randomCensored** in the argument list and the graphs will appear without these random values and without the open circle/closed circle symbology. The censored values or censored residuals will be shown as the vertical lines. The functions where this approach applies are these: **plotConcPred, plotConcQ, plotConcTime, plotConcTimeDaily, plotFluxPred, plotFluxQ, plotFluxTImeDaily, plotResidPred, plotResidQ, plotResidTime**. It is also available in the two multiple plot functions: **multiPlotOverview, and fluxBiasMulti**
 
 For example.
 
 ``` r
-multiPlotDataOverview(eList, qUnit = 4, rResid = TRUE)
+multiPlotDataOverview(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
 <img src='/static/rResid/unnamed-chunk-8-1.png'/>
 
 ``` r
-fluxBiasMulti(eList, qUnit = 4, fluxUnit = 9, rResid = TRUE)
+fluxBiasMulti(eList, qUnit = 4, fluxUnit = 9, randomCensored = TRUE)
 ```
 
 <img src='/static/rResid/unnamed-chunk-8-2.png'/>
@@ -110,6 +113,6 @@ fluxBiasMulti(eList, qUnit = 4, fluxUnit = 9, rResid = TRUE)
 Two final thoughts
 ==================
 
-In the EGRET User Guide (<http://pubs.usgs.gov/tm/04/a10/>) the distinction is made between the graphical methods that are used to simply describe the data (and these graphics shown in **multiPlotDataOverview**) as distinct from graphical methods that are used to describe the WRTDS model of the system (such as the graphs in **fluxBiasMulti**). If the **rResid = TRUE** option is used with **multiPlotDataOverview**, or other graphical functions that normally don't depend on the WRTDS model, they now become a hybrid, because they are using the WRTDS model to generate the random values used in the graphs. Take a graph such as **plotConcQ**. With **rResid = FALSE** it is a pure representation of the data. No assumptions are being made. But, when **rResid = TRUE**, it is now a representation of the data which is partly based on an assumption that the fitted WRTDS model is indeed a correct model. The fitted WRTDS model is partly determining the placement of the random values that are less than the reporting limit. If the analyst wants a "pure" representation of the data without any assumed model for graphing, then the **rResid** option should be set to **FALSE**.
+In the EGRET User Guide (<http://pubs.usgs.gov/tm/04/a10/>) the distinction is made between the graphical methods that are used to simply describe the data (and these graphics shown in **multiPlotDataOverview**) as distinct from graphical methods that are used to describe the WRTDS model of the system (such as the graphs in **fluxBiasMulti**). If the **randomCensored = TRUE** option is used with **multiPlotDataOverview**, or other graphical functions that normally don't depend on the WRTDS model, they now become a hybrid, because they are using the WRTDS model to generate the random values used in the graphs. Take a graph such as **plotConcQ**. With **randomCensored = FALSE** it is a pure representation of the data. No assumptions are being made. But, when **randomCensored = TRUE**, it is now a representation of the data which is partly based on an assumption that the fitted WRTDS model is indeed a correct model. The fitted WRTDS model is partly determining the placement of the random values that are less than the reporting limit. If the analyst wants a "pure" representation of the data without any assumed model for graphing, then the **randomCensored** option should be set to **FALSE**.
 
-Also, with figures such as shown in **fluxBiasMulti**, there is a kind of circularity in the logic. The circularity is this: we are using the graphs to assess the adequacy of the model fit, but we are using the model to estimate some of the observations. This circularity is not a fatal flaw to the approach, but is a reality that the user should consider. On balance, the authors think that using **rResid = TRUE** in all of the plots to which it applies is a beneficial approach because it enhances the ability of the analyst to interpret the figures. But, we reiterate here, the choice of using the random approach or not has no bearing whatsoever on the quantitative outputs that the WRTDS method in the EGRET package produces.
+Also, with figures such as shown in **fluxBiasMulti**, there is a kind of circularity in the logic. The circularity is this: we are using the graphs to assess the adequacy of the model fit, but we are using the model to estimate some of the observations. This circularity is not a fatal flaw to the approach, but is a reality that the user should consider. On balance, the authors think that using **randomCensored = TRUE** in all of the plots to which it applies is a beneficial approach because it enhances the ability of the analyst to interpret the figures. But, we reiterate here, the choice of using the random approach or not has no bearing whatsoever on the quantitative outputs that the WRTDS method in the EGRET package produces.
