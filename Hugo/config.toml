@@ -1,4 +1,4 @@
-baseurl = "http://dev-owi.usgs.gov-website.s3-website-us-west-2.amazonaws.com/blog/"
+baseurl = ${HUGO_BASE_URL}
 languageCode = "en-us"
 title = "The USGS OWI blog"
 theme = "hugo_theme_robust"
