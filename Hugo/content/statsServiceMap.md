@@ -8,7 +8,7 @@ categories: Data Science
 tags: 
   - R
   - dataRetrieval
-image: static/service/plot-1.png
+image: static/stats-service-map/plot-1.png
 ---
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html). We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in context of the site's history. At the time of this writing (June 23rd) a storm system had just passed through the OH-WV-PA tri-state area, and the map below shows the increased stream discharges.
 
