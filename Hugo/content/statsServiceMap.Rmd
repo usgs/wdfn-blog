@@ -3,7 +3,7 @@ title: "Using the dataRetrieval Stats Service"
 slug: "stats-service-map"
 author: "David Watkins"
 date: "2016-06-23"
-output: markdowntemplates::hugo
+output: USGSmarkdowntemplates::hugo
 ---
 ```{r setup, include=FALSE}
 library(knitr)
