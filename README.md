@@ -13,17 +13,17 @@ Shows how to build a simple example Hugo site.  On the left sidebar there are li
 
 With these installed, you can select the 'Hugo Blog Post' template when you create a new R markdown in R studio.  The R markdown will then knit to a .md file, which you should save to the 'content' directory of the Hugo site.  Hugo handles it from there.
 
-NOTE: `markdowntemplates` by default adds `status: draft` to the markdown header (not rmarkdown file). It is up to you to change that to `type: post` for the post to be published. OR, in Hugo:
-```
-hugo undraft content/post/foo.md
-```
+NOTE: `markdowntemplates` by default adds `status: draft` to the markdown header (not rmarkdown file). It is up to you to change that to `type: post` for the post AFTER they have been reviewed.
 
 NOTE: Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
 
 **Content for blog posts** 
 The necessary pieces for a post are the resulting .md file that is knit from Rstudio, which forms the main body of the post, and then any images that should be associated with the post.  The actual layout of the pages is handled in the Hugo 'theme'.
 
+To test locally, run:
+
 ```
+export HUGO_BASEURL="blog/"
 hugo server --theme=hugo_theme_robust --buildDrafts
 ```
 
