@@ -6,7 +6,4 @@ tags = ["blog"]
 features = ["blog"]
 min_version = 0.15
 
-[author]
-    name = "Daisuke Tsuji"
-    homepage = "http://yet.unresolved.xyz/"
 
