@@ -2,7 +2,7 @@
 author: David Watkins
 date: 2016-06-23
 slug: stats-service-map
-status: draft
+draft: True
 title: Using the dataRetrieval Stats Service
 tags: 
   - dataRetrieval
