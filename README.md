@@ -8,7 +8,7 @@
 3. Include static images in `static\name-of-blog`
 4. Add a header similar to:
 
-```
+  ```
   ---
   author: Laura DeCicco
   date: 2016-06-16
@@ -21,7 +21,7 @@
     - R
   image: static/plotFlowConc/unnamed-chunk-4-1.png
   ---
-```
+  ```
 
   Important notes about header:
   
