@@ -1,14 +1,16 @@
-# owi-blog
+owi-blog
+----------
+
 *Blog posts from the USGS Office of Water Information*
 
-## Submitting blog post
+# Submitting blog post
 
 1. Fork repo
 2. Create a markdown file (.md) and add to `content` folder
 3. Include static images in `static\name-of-blog`
 4. Add a header similar to:
 
-```
+  ```
   ---
   author: Laura DeCicco
   date: 2016-06-16
@@ -21,27 +23,27 @@
     - R
   image: static/plotFlowConc/unnamed-chunk-4-1.png
   ---
-```
+  ```
 
-Important notes about header:
-
-* Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
-
-* Initial submission **must** include `draft: True`
-
-* `slug` slug will be the name of your url after owi.usgs.gov\blog\xxx
-
-* `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
-
-* `categories` is a small list of approved options. The current list is `Data Science`...and will be expanded.
-
-* `tags` are more specific words, and do not need to be on a pre-approved list.
-
-* It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
+  Important notes about header:
+  
+  * Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
+  
+  * Initial submission **must** include `draft: True`
+  
+  * `slug` slug will be the name of your url after owi.usgs.gov\blog\xxx
+  
+  * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
+  
+  * `categories` is a small list of approved options. The current list is `Data Science`...and will be expanded.
+  
+  * `tags` are more specific words, and do not need to be on a pre-approved list.
+  
+  * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
 
 5. Submit a pull request
 6. Before the pull request is merged, a blog maintainor will verify the header follows the "Important notes" above, and that the content appears to be non-interpretive.
-7. Submitter needs to create an IPDS record, and is responsible to get 2 internal peer-reviews.
+7. Submitter is responsible for getting 2 internal peer-reviews.
 8. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the dev site.
 
 
@@ -62,7 +64,7 @@ export HUGO_BASEURL="blog/"
 hugo server --theme=hugo_theme_robust --buildDrafts
 ```
 
-## Instructions for R users
+# Instructions for R users
 
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
@@ -71,8 +73,6 @@ devtools::install_github("USGS-R/USGSmarkdowntemplates")
 ```
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
-
-
 
 
 
