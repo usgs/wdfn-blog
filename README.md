@@ -6,9 +6,10 @@ owi-blog
 # Submitting blog post
 
 1. Fork repo
-2. Create a markdown file (.md) and add to `content` folder
-3. Include static images in `static\name-of-blog`
-4. Add a header similar to:
+2. Create a markdown file (.md)
+3. Add to `content` folder
+4. Include static images in `static\name-of-blog`
+5. Add a header similar to:
 
   ```
   ---
@@ -41,10 +42,10 @@ owi-blog
   
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
 
-5. Submit a pull request
-6. Before the pull request is merged, a blog maintainor will verify the header follows the "Important notes" above, and that the content appears to be non-interpretive.
-7. Submitter is responsible for getting 2 internal peer-reviews.
-8. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the dev site.
+6. Submit a pull request
+7. Before the pull request is merged, a blog maintainer will verify the header follows the "Important notes" above, and that the content appears to be non-interpretive.
+8. Submitter is responsible for getting 2 internal peer-reviews.
+9. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the dev site.
 
 
 ## Hugo Installation
