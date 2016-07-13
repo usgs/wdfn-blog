@@ -1,9 +1,9 @@
 ---
 title: "EGRET plotFlowConc using ggplot2"
 author: "Marcus Beck and Laura DeCicco"
-date: "2016-06-16"
+date: "2016-07-13"
 slug: "plotFlowConc"
-output: markdowntemplates::hugo
+output: USGSmarkdowntemplates::hugo
 ---
 
 
@@ -26,7 +26,7 @@ opts_chunk$set(
 
 
 #Introduction
-`EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN. 
+[`EGRET`](https://cran.r-project.org/package=EGRET) is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN. 
 
 More information can be found at [https://github.com/USGS-R/EGRET](https://github.com/USGS-R/EGRET).
 
@@ -271,4 +271,9 @@ plotFlowConc(eList)
 
 
 ```
+
+# Questions
+
+Please direct any questions or comments on `EGRET` to:
+[https://github.com/USGS-R/EGRET/issues](https://github.com/USGS-R/EGRET/issues)
 
