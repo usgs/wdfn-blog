@@ -1,7 +1,9 @@
-# owi-blog
+owi-blog
+----------
+
 *Blog posts from the USGS Office of Water Information*
 
-## Submitting blog post
+# Submitting blog post
 
 1. Fork repo
 2. Create a markdown file (.md) and add to `content` folder
@@ -62,7 +64,7 @@ export HUGO_BASEURL="blog/"
 hugo server --theme=hugo_theme_robust --buildDrafts
 ```
 
-## Instructions for R users
+# Instructions for R users
 
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
