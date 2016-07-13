@@ -76,8 +76,6 @@ This will add `draft: True` to the markdown header (not rmarkdown file). It is u
 
 
 
-
-
 Disclaimer
 ----------
 This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey  (USGS), an agency of the United States Department of Interior. For more information, see the official USGS copyright policy at [http://www.usgs.gov/visual-id/credit_usgs.html#copyright](http://www.usgs.gov/visual-id/credit_usgs.html#copyright)
