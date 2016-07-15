@@ -61,3 +61,10 @@ points(loc$dec_lon_va[1],loc$dec_lat_va[1],
 box(lwd=1.5)
 
 ```
+
+
+
+# Questions
+
+Please direct any questions or comments on `dataRetrieval` to:
+[https://github.com/USGS-R/dataRetrieval/issues](https://github.com/USGS-R/dataRetrieval/issues)

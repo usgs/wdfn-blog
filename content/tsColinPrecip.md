@@ -120,3 +120,8 @@ precipMap(precipData,
 ```
 
 <img src='/static/ts-colin-precip/use-functions-1.png'/>
+
+Questions
+=========
+
+Please direct any questions or comments on `dataRetrieval` to: <https://github.com/USGS-R/dataRetrieval/issues>
