@@ -31,7 +31,7 @@ opts_chunk$set(
 More information can be found at [https://github.com/USGS-R/EGRET](https://github.com/USGS-R/EGRET).
 
 # ggplot2
-`ggplot2` is a power and popular graphing package. Although all `EGRET` functions return with a specialized list, it is quite easy to extract the relavent data frames `Daily`, `Sample`, and `INFO`. Here are a few examples of using `ggplot2` to make plots that are also available in `EGRET`.
+`ggplot2` is a powerful and popular graphing package. Although all `EGRET` functions return with a specialized list, it is quite easy to extract the relavent data frames `Daily`, `Sample`, and `INFO`. Here are a few examples of using `ggplot2` to make plots that are also available in `EGRET`.
 
 Please note there are a lot of nuances that are captured in the `EGRET` plotting functions that are not captured in these `ggplot2` examples.
 

@@ -48,3 +48,8 @@ box(lwd=1.5)
 ```
 
 <img src='/static/ts-colin-discharge/mainPlot-1.png'/>
+
+Questions
+=========
+
+Please direct any questions or comments on `dataRetrieval` to: <https://github.com/USGS-R/dataRetrieval/issues>

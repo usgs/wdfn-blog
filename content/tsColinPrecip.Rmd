@@ -133,3 +133,7 @@ precipMap(precipData,
           endDate = endTSColin)
 ```
 
+# Questions
+
+Please direct any questions or comments on `geoknife` to:
+[https://github.com/USGS-R/geoknife/issues](https://github.com/USGS-R/geoknife/issues)
