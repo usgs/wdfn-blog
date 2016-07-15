@@ -3,5 +3,4 @@ title = "The USGS OWI blog"
 theme = "hugo_theme_robust"
 preserveTaxonomyNames = true
 paginate = 100
-googleAnalytics = "UA-78530187-1"
 canonifyurls = true
