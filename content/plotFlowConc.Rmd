@@ -1,6 +1,6 @@
 ---
 title: "EGRET plotFlowConc using ggplot2"
-author: "Marcus Beck and Laura DeCicco"
+author: "Marcus Beck (USEPA, beck.marcus@epa.gov) and Laura DeCicco (USGS, ldecicco@usgs.gov)"
 date: "2016-07-13"
 slug: "plotFlowConc"
 output: USGSmarkdowntemplates::hugo
@@ -280,8 +280,29 @@ plotFlowConc(eList)
 
 ```
 
+The `plotFlowConc` function has several arguments that control the plot aesthetics:
+
+* `eList` input egret object
+* `month` numeric input from 1 to 12 indicating the monthly predictions to plot
+* `years` numeric vector of years to plot, defaults to all
+* `col_vec` chr string of plot colors to use, passed to `ggplot2::scale_colour_gradientn` for line shading
+* `ylabel` chr string for y-axis label
+* `xlabel` chr string for x-axis label
+* `alpha` numeric value from zero to one for line transparency
+* `size` numeric value for line size
+* `allflo` logical indicating if the flow values are limited to the fifth and ninety-fifth percentile of observed values for each month
+* `ncol` numeric argument passed to `ggplot2::facet_wrap` indicating number of facet columns
+* `grids` logical indicating if grid lines are present
+* `scales` chr string passed to `ggplot2::facet_wrap` to change x/y axis scaling on facets, acceptable values are 'free', 'free_x', or 'free_y'
+* `interp` numeric input as a scalar for smoothing the plot line
+* `pretty` logical indicating if preset plot aesthetics are applied, otherwise the ggplot2 default themes are used
+* `use_bw` logical indicating if `ggplot2::theme_bw` is used 
+* `fac_nms` optional chr string for facet labels, which must be equal in length to `month`
+
 # Questions
 
 Please direct any questions or comments on `EGRET` to:
 [https://github.com/USGS-R/EGRET/issues](https://github.com/USGS-R/EGRET/issues)
+
+Questions about `plotFlowConc` can be directed to Marcus Beck at [beck.marcus@epa.gov](mailto:beck.marcus@epa.gov)
 
