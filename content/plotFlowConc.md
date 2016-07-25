@@ -1,13 +1,14 @@
 ---
-author: Marcus Beck and Laura DeCicco
+author: Marcus Beck (USEPA, <beck.marcus@epa.gov>) and Laura DeCicco (USGS, <ldecicco@usgs.gov>)
 date: 2016-07-13
 slug: plotFlowConc
+type: post
 title: EGRET plotFlowConc using ggplot2
 categories: Data Science
 tags: 
   - R
   - EGRET
-image: static/plotFlowConc/unnamed-chunk-4-1.png
+image: static/plotFlowConc/unnamed-chunk-3-1.png  
 ---
 Introduction
 ============
@@ -46,9 +47,10 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-1.png'/>
-<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-2.png'/>
-
+<img src='/static/plotFlowConc/unnamed-chunk-1-1.png'/, alt='/ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/unnamed-chunk-1-2.png'/, alt='/EGRET Concentration Flow plot'/>
+<p class="caption">
+ggplot2 vs EGRET Concentration Discharge plots
+</p>
 boxConcMonth
 ------------
 
@@ -65,9 +67,10 @@ boxConcMonth_gg
 boxConcMonth(eList)
 ```
 
-<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-1.png'/>
-<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-2.png'/>
-
+<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/, alt='/ggplot2 Monthly boxplot'/><img src='/static/plotFlowConc/unnamed-chunk-2-2.png'/, alt='/EGRET monthly boxplot'/>
+<p class="caption">
+ggplot2 vs EGRET Monthly Concentration Boxplots
+</p>
 plotFlowConc
 ============
 
@@ -76,8 +79,8 @@ Here is an example of using `ggplot2` with `EGRET` objects. It also takes advant
 ``` r
 library(tidyr)
 library(dplyr)
+library(ggplot2)
 library(fields)
-
 
 plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
   
@@ -220,6 +223,9 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
     
   }
   
+  # convert discharge to arithmetic scale
+  to_plo$flo <- exp(to_plo$flo)
+  
   # make plot
   p <- ggplot(to_plo, aes(x = flo, y = res, group = year)) + 
     facet_wrap(~month, ncol = ncol, scales = scales)
@@ -232,13 +238,18 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   
   # use bw theme
   if(use_bw) p <- p + theme_bw()
+
+  # log scale breaks
+  brks <- c(0, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
   
   p <- p + 
     geom_line(size = size, aes(colour = year), alpha = alpha) +
     scale_y_continuous(ylabel, expand = c(0, 0)) +
-    scale_x_continuous(xlabel, expand = c(0, 0)) +
+    scale_x_log10(xlabel, expand = c(0, 0), breaks = brks) +
     theme(
-      legend.position = 'top'
+      legend.position = 'top', 
+      axis.text.x = element_text(size = 8), 
+      axis.text.y = element_text(size = 8)
     ) +
     scale_colour_gradientn('Year', colours = cols) +
     guides(colour = guide_colourbar(barwidth = 10)) 
@@ -263,9 +274,32 @@ eList <-  Choptank_eList
 plotFlowConc(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-4-1.png'/>
+<img src='/static/plotFlowConc/unnamed-chunk-4-1.png'/, alt='/Custom plotFlowConc'/>
+<p class="caption">
+Custom plotFlowConc output
+</p>
+The `plotFlowConc` function has several arguments that control the plot aesthetics:
+
+-   `eList` input egret object
+-   `month` numeric input from 1 to 12 indicating the monthly predictions to plot
+-   `years` numeric vector of years to plot, defaults to all
+-   `col_vec` chr string of plot colors to use, passed to `ggplot2::scale_colour_gradientn` for line shading
+-   `ylabel` chr string for y-axis label
+-   `xlabel` chr string for x-axis label
+-   `alpha` numeric value from zero to one for line transparency
+-   `size` numeric value for line size
+-   `allflo` logical indicating if the flow values are limited to the fifth and ninety-fifth percentile of observed values for each month
+-   `ncol` numeric argument passed to `ggplot2::facet_wrap` indicating number of facet columns
+-   `grids` logical indicating if grid lines are present
+-   `scales` chr string passed to `ggplot2::facet_wrap` to change x/y axis scaling on facets, acceptable values are 'free', 'free\_x', or 'free\_y'
+-   `interp` numeric input as a scalar for smoothing the plot line
+-   `pretty` logical indicating if preset plot aesthetics are applied, otherwise the ggplot2 default themes are used
+-   `use_bw` logical indicating if `ggplot2::theme_bw` is used
+-   `fac_nms` optional chr string for facet labels, which must be equal in length to `month`
 
 Questions
 =========
 
 Please direct any questions or comments on `EGRET` to: <https://github.com/USGS-R/EGRET/issues>
+
+Questions about `plotFlowConc` can be directed to Marcus Beck at <beck.marcus@epa.gov>

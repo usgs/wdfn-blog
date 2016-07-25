@@ -11,16 +11,25 @@ output: USGSmarkdowntemplates::hugo
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/>", 
-          options$fig.path, options$label, options$fig.cur, options$fig.ext)
+  sprintf("<img src='/%s%s-%d.%s'/, alt='/%s'/>",
+          options$fig.path, options$label,
+          options$fig.cur, options$fig.ext,
+          options$fig.cap)
 
+})
+
+knit_hooks$set(htmlcap = function(before, options, envir) {
+  if(!before) {
+    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
+    }
 })
 
 opts_chunk$set(
   echo=TRUE,
   fig.path="static/plotFlowConc/",
   fig.width = 7,
-  fig.height = 7
+  fig.height = 7,
+  fig.cap = "TODO"
 )
 ```
 
@@ -37,7 +46,7 @@ Please note there are a lot of nuances that are captured in the `EGRET` plotting
 
 ## plotConcQ
 
-```{r message=FALSE, fig.show='hold', out.width=c('300px', '300px')}
+```{r message=FALSE, fig.show='hold', out.width=c('300px', '300px'), fig.cap=c("ggplot2 Concentration Flow plot","EGRET Concentration Flow plot"), htmlcap="ggplot2 vs EGRET Concentration Discharge plots"}
 library(EGRET)
 library(ggplot2)
 
@@ -60,7 +69,7 @@ plotConcQ(eList)
 
 ## boxConcMonth
 
-```{r fig.show='hold', out.width=c('300px', '300px')}
+```{r fig.show='hold', out.width=c('300px', '300px'),fig.cap=c("ggplot2 Monthly boxplot", "EGRET monthly boxplot"), htmlcap="ggplot2 vs EGRET Monthly Concentration Boxplots"}
 Sample$monthAbb <- as.factor(Sample$Month)
 levels(Sample$monthAbb) <- month.abb
 
@@ -272,7 +281,7 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
 Next, the function can be called with any `EGRET` object:
 
-```{r}
+```{r fig.cap="Custom plotFlowConc", htmlcap="Custom plotFlowConc output"}
 
 eList <-  Choptank_eList
 plotFlowConc(eList)
