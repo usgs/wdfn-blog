@@ -2,7 +2,7 @@
 author: Robert M. Hirsch and Laura DeCicco
 date: 2016-06-15
 slug: rResid
-draft: True
+type: post
 title: Using Random Residuals for Censored Data in EGRET
 categories: Data Science
 tags: 

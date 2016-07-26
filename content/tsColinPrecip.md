@@ -2,7 +2,7 @@
 author: Lindsay R Carr
 date: 2016-06-09
 slug: ts-colin-precip
-draft: True
+type: post
 title: Visualizing Tropical Storm Colin Precipitation using geoknife
 categories: Data Science
 tags: 
