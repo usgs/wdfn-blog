@@ -49,7 +49,7 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/plotConcQ-1.png'/ alt='/ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ alt='/EGRET Concentration Flow plot'/>
+<img class="sideBySide src='/static/plotFlowConc/plotConcQ-1.png'/ alt='/ggplot2 Concentration Flow plot'/><img class="sideBySide src='/static/plotFlowConc/plotConcQ-2.png'/ alt='/EGRET Concentration Flow plot'/>
 <p class="caption">
 ggplot2 vs EGRET Concentration Discharge plots
 </p>
