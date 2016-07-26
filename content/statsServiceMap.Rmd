@@ -9,16 +9,25 @@ output: USGSmarkdowntemplates::hugo
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/>", 
-          options$fig.path, options$label, options$fig.cur, options$fig.ext)
+  sprintf("<img src='/%s%s-%d.%s'/ alt='/%s'/>",
+          options$fig.path, options$label,
+          options$fig.cur, options$fig.ext,
+          options$fig.cap)
 
-})     
+})
+
+knit_hooks$set(htmlcap = function(before, options, envir) {
+  if(!before) {
+    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
+    }
+})
 
 opts_chunk$set(
   echo=TRUE,
   fig.path="static/stats-service-map/",
-  fig.width = 6,
-  fig.height = 6
+  fig.width = 7,
+  fig.height = 7,
+  fig.cap = "TODO"
 )
 ```
 
@@ -89,7 +98,7 @@ finalJoin$class <- ifelse(is.na(finalJoin$p25),
 ## Make the plot
 The base map consists of two plots.  The first makes the county lines with a gray background, and the second overlays the heavier state lines.  After that we add the points for each stream gage, colored by the column we added to `finalJoin`.  In the finishing details, `grconvertXY` is a handy function that converts your inputs from a normalized (0-1) coordinate system to the actual map coordinates, which allows the legend and scale to stay in the same relative location on different maps. 
 
-```{r plot}
+```{r plot, fig.cap="Map discharge percentiles"}
 states <- c("Ohio","West Virginia","Pennsylvania")
 map('county',regions=states,fill=TRUE, col="gray87", lwd=0.5)
 map('state',regions=states,fill=FALSE, lwd=2, add=TRUE)
@@ -112,3 +121,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.01, "npc"))
 ```
 
+# Questions
+
+Please direct any questions or comments on `dataRetrieval` to:
+[https://github.com/USGS-R/dataRetrieval/issues](https://github.com/USGS-R/dataRetrieval/issues)

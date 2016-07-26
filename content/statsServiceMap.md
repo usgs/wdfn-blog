@@ -103,4 +103,9 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.01, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/>
+<img src='/static/stats-service-map/plot-1.png'/ alt='/Map discharge percentiles'/>
+
+Questions
+=========
+
+Please direct any questions or comments on `dataRetrieval` to: <https://github.com/USGS-R/dataRetrieval/issues>
