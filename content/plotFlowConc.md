@@ -1,5 +1,5 @@
 ---
-author: Marcus Beck (USEPA, <beck.marcus@epa.gov>) and Laura DeCicco (USGS, <ldecicco@usgs.gov>)
+author: Marcus Beck (USEPA) and Laura DeCicco (USGS)
 date: 2016-07-13
 slug: plotFlowConc
 type: post
@@ -10,6 +10,9 @@ tags:
   - EGRET
 image: static/plotFlowConc/unnamed-chunk-3-1.png  
 ---
+
+This post was created in collaboration with Marcus Beck from the USEPA ( <beck.marcus@epa.gov>), and Laura DeCicco from the USGS (OWI) (<ldecicco@usgs.gov>)
+
 Introduction
 ============
 
