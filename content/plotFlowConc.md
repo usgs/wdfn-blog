@@ -22,7 +22,7 @@ More information can be found at <https://github.com/USGS-R/EGRET>.
 ggplot2
 =======
 
-`ggplot2` is a powerful and popular graphing package. All`EGRET` functions return or take as an input a specialized list. It is quite easy to extract the simple-to-use, relavent data frames: `Daily`, `Sample`, and `INFO`. Here is a simiple example of using `ggplot2` to make a plot that are also available in `EGRET`.
+`ggplot2` is a powerful and popular graphing package. All`EGRET` functions return, or take as an input, a specialized list (referred as the "eList" in `EGRET` documentation). It is quite easy to extract the simple-to-use, relavent data frames: `Daily`, `Sample`, and `INFO`. Here is a simiple example of using `ggplot2` to make a plot that are also available in `EGRET`.
 
 Please note there are a lot of nuances that are captured in the `EGRET` plotting functions that are not automatically captured by using `ggplot2`. However, this simple example can give you the minimal workflow you might need to create your own more specialized `ggplot2` `EGRET` plots.
 
