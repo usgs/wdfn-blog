@@ -42,7 +42,7 @@ This post was created in collaboration with Marcus Beck from the USEPA ( <beck.m
 More information can be found at [https://github.com/USGS-R/EGRET](https://github.com/USGS-R/EGRET).
 
 # ggplot2
-`ggplot2` is a powerful and popular graphing package. All`EGRET` functions return, or take as an input, a specialized list (referred as the "eList" in `EGRET` documentation). It is quite easy to extract the simple-to-use, relavent data frames: `Daily`, `Sample`, and `INFO`. Here is a simiple example of using `ggplot2` to make a plot that are also available in `EGRET`.
+`ggplot2` is a powerful and popular graphing package. All`EGRET` functions return, or take as an input, a specialized list (referred as the "eList" in `EGRET` documentation). It is quite easy to extract the simple-to-use, relavent data frames: `Daily`, `Sample`, and `INFO`. Here is a simple example of using `ggplot2` to make a plot that is also available in `EGRET`.
 
 Please note there are a lot of nuances that are captured in the `EGRET` plotting functions that are not automatically captured by using `ggplot2`. However, this simple example can give you the minimal workflow you might need to create your own more specialized `ggplot2` `EGRET` plots. 
 
@@ -232,6 +232,7 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   p <- ggplot(to_plo, aes(x = flo, y = res, group = year)) + 
     facet_wrap(~month, ncol = ncol, scales = scales)
   
+  # set lower limit for y-axis if applicable
   lims <- coord_cartesian(ylim = c(ymin, max(to_plo$res, na.rm = TRUE)))
   if(!is.null(scales)){
     if(scales == 'free_x') p <- p + lims
