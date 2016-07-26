@@ -1,13 +1,13 @@
 ---
 author: Lindsay R Carr
-date: 2016-06-13
+date: 2016-06-09
 slug: ts-colin-precip
-type: post
+draft: True
 title: Visualizing Tropical Storm Colin Precipitation using geoknife
 categories: Data Science
 tags: 
-  - geoknife
   - R
+  - geoknife
 image: static/ts-colin-precip/use-functions-1.png
 ---
 Tropical Storm Colin (TS Colin) made landfall on June 6 in western Florida. The storm moved up the east coast, hitting Georgia, South Carolina, and North Carolina. We can explore the impacts of TS Colin using open data and R. Using the USGS-R `geoknife` package, we can pull precipitation data by county.
@@ -119,9 +119,9 @@ precipMap(precipData,
           endDate = endTSColin)
 ```
 
-<img src='/static/ts-colin-precip/use-functions-1.png'/>
+<img src='/static/ts-colin-precip/use-functions-1.png'/ alt='/Map of precipitation'/>
 
 Questions
 =========
 
-Please direct any questions or comments on `dataRetrieval` to: <https://github.com/USGS-R/dataRetrieval/issues>
+Please direct any questions or comments on `geoknife` to: <https://github.com/USGS-R/geoknife/issues>
