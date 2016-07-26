@@ -276,6 +276,7 @@ plotFlowConc(eList)
 <p class="caption">
 Custom plotFlowConc output
 </p>
+
 What these plots suggest is that in the 1980's in most of the year, the concentrations were highest at discharges that are moderate for that time of year, reflecting the concentration in young groundwater that may dominate streamflow at these times, but at the lowest discharges concentrations were somewhat lower, reflecting deeper groundwater that may never have been highly enriched by nitrogen fertilizer applications or are more effectively denitrified along their way to the stream. At higher flows the concentration generally declines with increasing discharge suggesting that direct runoff tended to dilute the nitrate in the stream. With the passage of two to three decades the pattern has changed such that concentrations are higher for any given discharge in every month than they would have been in the 1980's and that the roughly quadratic shape of the relationship has gone away, suggesting that deeper groundwaters have become more contaminated with modern nitrate from the land surface such that the highest nitrate concentration are now taking place at or near the lowest discharges.
 
 The `plotFlowConc` function has several arguments that control the plot aesthetics:
