@@ -14,7 +14,7 @@ Tropical Storm Colin (TS Colin) made landfall on June 6 in western Florida. The 
 
 ### First, we created two functions. One to fetch data and one to map data.
 
-Function to retrieve precip data using [`geoknife`](github.com/USGS-R/geoknife):
+Function to retrieve precip data using [`geoknife`](https://github.com/USGS-R/geoknife):
 
 ``` r
 getPrecip <- function(states, startDate, endDate){
