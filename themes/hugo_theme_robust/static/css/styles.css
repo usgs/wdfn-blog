@@ -17,7 +17,6 @@
    margin:-12px 5px 0 0;
  }
  
- 
  @media screen and (min-width:768px){
    .sideBySide{
     width:49% !important;
@@ -26,6 +25,18 @@
 
 .hljs{
   background:#f7f7f7 !important;
+}
+
+.hljs-string{
+  color:#183691;
+}
+
+.hljs-variable{
+  color:#a71d61;
+}
+
+.hljs-built_in{
+  color:#ed6a43;
 }
 
 p,
@@ -518,7 +529,7 @@ article.li .title {
 article.grid {
   margin-bottom: 2rem;
   background-color: #fff;
-  height: 24rem;
+  height: 340px;
   max-height: 24rem;
   overflow: hidden;
   border:1px solid #bebebe;

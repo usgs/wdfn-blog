@@ -8,7 +8,7 @@
 
       <div class="row">
         {{ range $key, $value := .Paginator.Pages }}
-        {{ if lt $key 4 }}
+        {{ if lt $key 100 }}
         <div class="col-sm-6">
           {{ .Render "grid" }}
         </div>
