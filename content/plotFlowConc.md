@@ -47,7 +47,7 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-1-1.png'/, alt='/ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/unnamed-chunk-1-2.png'/, alt='/EGRET Concentration Flow plot'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-1.png'/ alt='/ggplot2 Concentration Flow plot'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-2.png'/ alt='/EGRET Concentration Flow plot'/>
 <p class="caption">
 ggplot2 vs EGRET Concentration Discharge plots
 </p>
@@ -67,7 +67,7 @@ boxConcMonth_gg
 boxConcMonth(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-2-1.png'/, alt='/ggplot2 Monthly boxplot'/><img src='/static/plotFlowConc/unnamed-chunk-2-2.png'/, alt='/EGRET monthly boxplot'/>
+<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-1.png'/ alt='/ggplot2 Monthly boxplot'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-2.png'/ alt='/EGRET monthly boxplot'/>
 <p class="caption">
 ggplot2 vs EGRET Monthly Concentration Boxplots
 </p>

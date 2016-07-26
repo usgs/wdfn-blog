@@ -11,16 +11,25 @@ output: markdowntemplates::hugo
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/>", 
-          options$fig.path, options$label, options$fig.cur, options$fig.ext)
+  sprintf("<img src='/%s%s-%d.%s'/ alt='/%s'/>",
+          options$fig.path, options$label,
+          options$fig.cur, options$fig.ext,
+          options$fig.cap)
 
+})
+
+knit_hooks$set(htmlcap = function(before, options, envir) {
+  if(!before) {
+    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
+    }
 })
 
 opts_chunk$set(
   echo=TRUE,
   fig.path="static/ts-colin-discharge/",
-  fig.width = 6,
-  fig.height = 6
+  fig.width = 7,
+  fig.height = 7,
+  fig.cap = "TODO"
 )
 ```
 
@@ -28,7 +37,7 @@ The first piece retrieves the discharge data for Anclote River site, and makes t
 
 In the next section we make the inset map.  The important part there is the `par()` command, which limits the area of the current plot that will be used for the following commands.  `plot.window` sets the axis limits, and after that are regular `map()` commands.
 
-```{r mainPlot, message=FALSE}
+```{r mainPlot, message=FALSE, fig.cap="Discharge from Tropical Storm Colin"}
 #Tropical Storm Colin discharge
 
 library(dataRetrieval)
