@@ -8,7 +8,7 @@ owi-blog
 1. Fork repo
 2. Create a markdown file (.md)
 3. Add to `content` folder
-4. Include static images in `static\name-of-blog`
+4. Include static images in `static\name-of-blog`. Images *must* include alt text
 5. Add a header similar to:
 
   ```
@@ -75,6 +75,12 @@ devtools::install_github("USGS-R/USGSmarkdowntemplates")
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
 
+To add 2 figures side by side, add `class="sideBySide"`, for example:
+
+```
+<img class="sideBySide" src='/fig1.png'/ alt='/ggplot2'/>
+<img class="sideBySide" src='/fig2.png'/ alt='/EGRET'/>
+```
 
 
 Disclaimer
