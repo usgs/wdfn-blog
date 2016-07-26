@@ -8,9 +8,8 @@ categories: Data Science
 tags: 
   - R
   - EGRET
-image: static/plotFlowConc/unnamed-chunk-3-1.png  
+image: static/plotFlowConc/plotFlowConc-1.png
 ---
-
 This post was created in collaboration with Marcus Beck from the USEPA ( <beck.marcus@epa.gov>), and Laura DeCicco from the USGS (OWI) (<ldecicco@usgs.gov>)
 
 Introduction
@@ -23,9 +22,9 @@ More information can be found at <https://github.com/USGS-R/EGRET>.
 ggplot2
 =======
 
-`ggplot2` is a powerful and popular graphing package. Although all `EGRET` functions return with a specialized list, it is quite easy to extract the relavent data frames `Daily`, `Sample`, and `INFO`. Here are a few examples of using `ggplot2` to make plots that are also available in `EGRET`.
+`ggplot2` is a powerful and popular graphing package. Although all `EGRET` functions return with a specialized list, it is quite easy to extract the relavent data frames `Daily`, `Sample`, and `INFO`. Here is a simiple example of using `ggplot2` to make a plot that are also available in `EGRET`.
 
-Please note there are a lot of nuances that are captured in the `EGRET` plotting functions that are not captured in these `ggplot2` examples.
+Please note there are a lot of nuances that are captured in the `EGRET` plotting functions that are not automatically captured by using `ggplot2`. However, this simple example can give you the minimal workflow you might need to create your own more specialized `ggplot2` `EGRET` plots.
 
 plotConcQ
 ---------
@@ -50,34 +49,14 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-1.png'/ alt='/ggplot2 Concentration Flow plot'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-1-2.png'/ alt='/EGRET Concentration Flow plot'/>
+<img src='/static/plotFlowConc/plotConcQ-1.png'/ alt='/ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ alt='/EGRET Concentration Flow plot'/>
 <p class="caption">
 ggplot2 vs EGRET Concentration Discharge plots
-</p>
-boxConcMonth
-------------
-
-``` r
-Sample$monthAbb <- as.factor(Sample$Month)
-levels(Sample$monthAbb) <- month.abb
-
-boxConcMonth_gg <- ggplot(data=Sample) +
-  geom_boxplot(aes(monthAbb, ConcAve)) +
-  scale_y_log10() +
-  ggtitle(INFO$station.nm)
-
-boxConcMonth_gg
-boxConcMonth(eList)
-```
-
-<img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-1.png'/ alt='/ggplot2 Monthly boxplot'/><img class="sideBySide" src='/static/plotFlowConc/unnamed-chunk-2-2.png'/ alt='/EGRET monthly boxplot'/>
-<p class="caption">
-ggplot2 vs EGRET Monthly Concentration Boxplots
 </p>
 plotFlowConc
 ============
 
-Here is an example of using `ggplot2` with `EGRET` objects. It also takes advantage of the `dplyr` and `tidyr` packages. A function `plotFlowConc` was created:
+One of the things the WRTDS statistical model provides is a characterization of the gradually changing relationship between concentration and discharge as it evolves over a period of many years, and also a characterization of how that pattern is different for different times of the year. The `plotContours` and `plotDiffContours` functions are two ways that `EGRET` allows a user to represent these changes, but they can be difficult to interpret. Another approach is one developed by Marcus Beck of US EPA that makes very effective use of color and multiple panel graphs to help visualize these evolving conditions. This new function `plotFlowConc` which uses the packages `ggplot2`, `dplyr`, and `tidyr` is a wonderful new way to visualize these changes.
 
 ``` r
 library(tidyr)
@@ -85,12 +64,15 @@ library(dplyr)
 library(ggplot2)
 library(fields)
 
-plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
+plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL, ymin = 0){
   
   localDaily <- getDaily(eList)
   localINFO <- getInfo(eList)
   localsurfaces <- getSurfaces(eList)
   
+  # plot title
+  toplab <- with(eList$INFO, paste(shortName, paramShortName, sep = ', '))
+
   # flow, date info for interpolation surface
   LogQ <- seq(localINFO$bottomLogQ, by=localINFO$stepLogQ, length.out=localINFO$nVectorLogQ)
   year <- seq(localINFO$bottomYear, by=localINFO$stepYear, length.out=localINFO$nVectorYear)
@@ -119,16 +101,6 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   to_plo <- tidyr::gather(to_plo, 'flo', 'res', 5:ncol(to_plo)) %>% 
     mutate(flo = as.numeric(gsub('^flo ', '', flo))) %>% 
     select(-day)
-  
-  # subset years to plot
-  if(!is.null(years)){
-    
-    to_plo <- to_plo[to_plo$year %in% years, ]
-    to_plo <- to_plo[to_plo$month %in% month, ]
-        
-    if(nrow(to_plo) == 0) stop('No data to plot for the date range')
-  
-  }
 
   # smooth the grid
   if(!is.null(interp)){
@@ -169,6 +141,16 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   }
 
+  # subset years to plot
+  if(!is.null(years)){
+ 
+    to_plo <- to_plo[to_plo$year %in% years, ]
+    to_plo <- to_plo[to_plo$month %in% month, ]
+        
+    if(nrow(to_plo) == 0) stop('No data to plot for the date range')
+  
+  }
+  
   # summarize so no duplicate flos for month/yr combos
   to_plo <- group_by(to_plo, year, month, flo) %>% 
       summarize(res = mean(res, na.rm = TRUE)) %>% 
@@ -233,6 +215,14 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   p <- ggplot(to_plo, aes(x = flo, y = res, group = year)) + 
     facet_wrap(~month, ncol = ncol, scales = scales)
   
+  lims <- coord_cartesian(ylim = c(ymin, max(to_plo$res, na.rm = TRUE)))
+  if(!is.null(scales)){
+    if(scales == 'free_x') p <- p + lims
+  } else {
+    p <- p + lims
+  }
+
+  
   # return bare bones if FALSE
   if(!pretty) return(p + geom_line())
   
@@ -244,7 +234,7 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   # log scale breaks
   brks <- c(0, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
-  
+
   p <- p + 
     geom_line(size = size, aes(colour = year), alpha = alpha) +
     scale_y_continuous(ylabel, expand = c(0, 0)) +
@@ -255,7 +245,8 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
       axis.text.y = element_text(size = 8)
     ) +
     scale_colour_gradientn('Year', colours = cols) +
-    guides(colour = guide_colourbar(barwidth = 10)) 
+    guides(colour = guide_colourbar(barwidth = 10)) + 
+    ggtitle(toplab)
   
   # remove grid lines
   if(!grids) 
@@ -277,16 +268,18 @@ eList <-  Choptank_eList
 plotFlowConc(eList)
 ```
 
-<img src='/static/plotFlowConc/unnamed-chunk-4-1.png'/, alt='/Custom plotFlowConc'/>
+<img src='/static/plotFlowConc/plotFlowConc-1.png'/ alt='/Custom plotFlowConc'/>
 <p class="caption">
 Custom plotFlowConc output
 </p>
+What these plots suggest is that in the 1980's in most of the year, the concentrations were highest at discharges that are moderate for that time of year, reflecting the concentration in young groundwater that may dominate streamflow at these times, but at the lowest discharges concentrations were somewhat lower, reflecting deeper groundwater that may never have been highly enriched by nitrogen fertilizer applications or are more effectively denitrified along their way to the stream. At higher flows the concentration generally declines with increasing discharge suggesting that direct runoff tended to dilute the nitrate in the stream. With the passage of two to three decades the pattern has changed such that concentrations are higher for any given discharge in every month than they would have been in the 1980's and that the roughly quadratic shape of the relationship has gone away, suggesting that deeper groundwaters have become more contaminated with modern nitrate from the land surface such that the highest nitrate concentration are now taking place at or near the lowest discharges.
+
 The `plotFlowConc` function has several arguments that control the plot aesthetics:
 
 -   `eList` input egret object
 -   `month` numeric input from 1 to 12 indicating the monthly predictions to plot
 -   `years` numeric vector of years to plot, defaults to all
--   `col_vec` chr string of plot colors to use, passed to `ggplot2::scale_colour_gradientn` for line shading
+-   `col_vec` chr string of plot colors to use, passed to `ggplot2::scale_colour_gradient` for line shading
 -   `ylabel` chr string for y-axis label
 -   `xlabel` chr string for x-axis label
 -   `alpha` numeric value from zero to one for line transparency
@@ -299,6 +292,7 @@ The `plotFlowConc` function has several arguments that control the plot aestheti
 -   `pretty` logical indicating if preset plot aesthetics are applied, otherwise the ggplot2 default themes are used
 -   `use_bw` logical indicating if `ggplot2::theme_bw` is used
 -   `fac_nms` optional chr string for facet labels, which must be equal in length to `month`
+-   `ymin` numeric input for lower limit of y-axis, applies only if `scales = NULL` or `scales = free_x`
 
 Questions
 =========
