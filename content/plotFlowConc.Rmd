@@ -95,12 +95,15 @@ library(dplyr)
 library(ggplot2)
 library(fields)
 
-plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL){
+plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL, ymin = 0){
   
   localDaily <- getDaily(eList)
   localINFO <- getInfo(eList)
   localsurfaces <- getSurfaces(eList)
   
+  # plot title
+  toplab <- with(eList$INFO, paste(shortName, paramShortName, sep = ', '))
+
   # flow, date info for interpolation surface
   LogQ <- seq(localINFO$bottomLogQ, by=localINFO$stepLogQ, length.out=localINFO$nVectorLogQ)
   year <- seq(localINFO$bottomYear, by=localINFO$stepYear, length.out=localINFO$nVectorYear)
@@ -129,16 +132,6 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   to_plo <- tidyr::gather(to_plo, 'flo', 'res', 5:ncol(to_plo)) %>% 
     mutate(flo = as.numeric(gsub('^flo ', '', flo))) %>% 
     select(-day)
-  
-  # subset years to plot
-  if(!is.null(years)){
-    
-    to_plo <- to_plo[to_plo$year %in% years, ]
-    to_plo <- to_plo[to_plo$month %in% month, ]
-        
-    if(nrow(to_plo) == 0) stop('No data to plot for the date range')
-  
-  }
 
   # smooth the grid
   if(!is.null(interp)){
@@ -179,6 +172,16 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   }
 
+  # subset years to plot
+  if(!is.null(years)){
+ 
+    to_plo <- to_plo[to_plo$year %in% years, ]
+    to_plo <- to_plo[to_plo$month %in% month, ]
+        
+    if(nrow(to_plo) == 0) stop('No data to plot for the date range')
+  
+  }
+  
   # summarize so no duplicate flos for month/yr combos
   to_plo <- group_by(to_plo, year, month, flo) %>% 
       summarize(res = mean(res, na.rm = TRUE)) %>% 
@@ -243,6 +246,14 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   p <- ggplot(to_plo, aes(x = flo, y = res, group = year)) + 
     facet_wrap(~month, ncol = ncol, scales = scales)
   
+  lims <- coord_cartesian(ylim = c(ymin, max(to_plo$res, na.rm = TRUE)))
+  if(!is.null(scales)){
+    if(scales == 'free_x') p <- p + lims
+  } else {
+    p <- p + lims
+  }
+
+  
   # return bare bones if FALSE
   if(!pretty) return(p + geom_line())
   
@@ -254,7 +265,7 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   # log scale breaks
   brks <- c(0, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
-  
+
   p <- p + 
     geom_line(size = size, aes(colour = year), alpha = alpha) +
     scale_y_continuous(ylabel, expand = c(0, 0)) +
@@ -265,7 +276,8 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
       axis.text.y = element_text(size = 8)
     ) +
     scale_colour_gradientn('Year', colours = cols) +
-    guides(colour = guide_colourbar(barwidth = 10)) 
+    guides(colour = guide_colourbar(barwidth = 10)) + 
+    ggtitle(toplab)
   
   # remove grid lines
   if(!grids) 
@@ -309,6 +321,7 @@ The `plotFlowConc` function has several arguments that control the plot aestheti
 * `pretty` logical indicating if preset plot aesthetics are applied, otherwise the ggplot2 default themes are used
 * `use_bw` logical indicating if `ggplot2::theme_bw` is used 
 * `fac_nms` optional chr string for facet labels, which must be equal in length to `month`
+* `ymin` numeric input for lower limit of y-axis, applies only if `scales = NULL` or `scales = free_x`
 
 # Questions
 
