@@ -283,7 +283,7 @@ The `plotFlowConc` function has several arguments that control the plot aestheti
 
 -   `eList` input egret object
 -   `month` numeric input from 1 to 12 indicating the monthly predictions to plot
--   `years` numeric vector of years to plot, defaults to all
+-   `years` numeric vector of years to plot, defaults to all.  For example, `seq(1980, 2014, by = 4)` will plot nine years of data from 1980 to 2014 at four year intervals.  Set as `NULL` to plot all years  
 -   `col_vec` chr string of plot colors to use, passed to `ggplot2::scale_colour_gradient` for line shading
 -   `ylabel` chr string for y-axis label
 -   `xlabel` chr string for x-axis label
@@ -293,7 +293,7 @@ The `plotFlowConc` function has several arguments that control the plot aestheti
 -   `ncol` numeric argument passed to `ggplot2::facet_wrap` indicating number of facet columns
 -   `grids` logical indicating if grid lines are present
 -   `scales` chr string passed to `ggplot2::facet_wrap` to change x/y axis scaling on facets, acceptable values are 'free', 'free\_x', or 'free\_y'
--   `interp` numeric input as a scalar for smoothing the plot line
+-   `interp` numeric input as a scalar for smoothing the plot lines. The default is 4 indicating that four times as many values are interpolated and plotted compared to the original results matrix from WRTDS.  The interpolation does not create novel data outside the range of the predictions but instead creates observations in the time, flow domain that are between values that were used explicitly to create the model.  The effect is a smoother plot that reduces the jaggedness of the lines.  A value of 1 or `NULL` can be used to suppress this behavior if the WRTDS results matrix is sufficiently large, i.e., minimal jaggedness in the plot lines.  Values larger than 4 typically do not improve the visual appearance of trends.
 -   `pretty` logical indicating if preset plot aesthetics are applied, otherwise the ggplot2 default themes are used
 -   `use_bw` logical indicating if `ggplot2::theme_bw` is used
 -   `fac_nms` optional chr string for facet labels, which must be equal in length to `month`
