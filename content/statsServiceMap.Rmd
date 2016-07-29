@@ -2,7 +2,7 @@
 title: "Using the dataRetrieval Stats Service"
 slug: "stats-service-map"
 author: "David Watkins"
-date: "2016-06-23"
+date: "2016-07-29"
 output: USGSmarkdowntemplates::hugo
 ---
 ```{r setup, include=FALSE}
@@ -31,7 +31,7 @@ opts_chunk$set(
 )
 ```
 
-This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html).  We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in context of the site's history.  At the time of this writing (June 23rd) a storm system had just passed through the OH-WV-PA tri-state area, and the map below shows the increased stream discharges.  
+This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html).  We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history.  Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
 
 ## Get the data
 
@@ -42,14 +42,15 @@ There are two separate `dataRetrieval` calls here — one to retrieve the daily 
 #reusable for other state(s)
 #David Watkins June 2016
 
-library(dataRetrieval)
+
 library(maps)
 library(dplyr)
 library(lubridate)
+library(dataRetrieval)
 
-#pick state(s)
-states <- c("OH","WV","PA")
-storm.date <- "2016-06-23"
+#pick state(s) and date
+states <- c("WI","MN","ND","SD","IA")
+storm.date <- "2016-07-12"
 
 for(st in states){
 
@@ -99,7 +100,8 @@ finalJoin$class <- ifelse(is.na(finalJoin$p25),
 The base map consists of two plots.  The first makes the county lines with a gray background, and the second overlays the heavier state lines.  After that we add the points for each stream gage, colored by the column we added to `finalJoin`.  In the finishing details, `grconvertXY` is a handy function that converts your inputs from a normalized (0-1) coordinate system to the actual map coordinates, which allows the legend and scale to stay in the same relative location on different maps. 
 
 ```{r plot, fig.cap="Map discharge percentiles"}
-states <- c("Ohio","West Virginia","Pennsylvania")
+#convert states from postal codes to full names
+states <- stateCdLookup(states, outputType = "fullName")
 map('county',regions=states,fill=TRUE, col="gray87", lwd=0.5)
 map('state',regions=states,fill=FALSE, lwd=2, add=TRUE)
 points(finalJoin$dec_lon_va,
@@ -108,16 +110,16 @@ points(finalJoin$dec_lon_va,
 box(lwd=2)
 title(paste("Daily discharge value percentile rank\n",storm.date),line=1)
 par(mar=c(5.1, 4.1, 4.1, 6), xpd=TRUE)
-legend("bottomright",inset=c(0.01,.01),
+legend("bottomleft",inset=c(0.01,.01),
        legend=c("Q > P50*","Q < P50*","Q < P25","P25 < Q < P75","Q > P75"),
        pch=19,cex = 0.75,pt.cex = 1.2,
        col = c("cyan","yellow","red2","green4","navy"),
        ncol = 2)
 map.scale(ratio=FALSE,cex = 0.75,
-          grconvertX(0.08,"npc"), 
-          grconvertY(-0.01, "npc"))
+          grconvertX(.07,"npc"), 
+          grconvertY(.2, "npc"))
 text("*Other percentiles not available for these sites", cex=0.75,
-     x=grconvertX(0.8,"npc"), 
+     x=grconvertX(0.2,"npc"), 
      y=grconvertY(-0.01, "npc"))
 ```
 
