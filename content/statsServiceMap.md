@@ -7,15 +7,18 @@ title: Using the dataRetrieval Stats Service
 categories: Data Science
 tags: 
   - R
-  -dataRetrieval
-image: static/static/stats-service-map/plot-1.png 
+  - dataRetrieval
+image: static/stats-service-map/plot-1.png
 ---
+Introduction
+------------
+
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html). We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history. Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
 
 Get the data
 ------------
 
-There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics. The data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function. Then we add a column to the final data frame to hold the color value for each station.
+There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics. Both calls are inside loops to split them into smaller pieces, to accomodate web service restrictions. The daily values service allows only single states as a filter, so we loop over the list of states. The stats service does not allow requests of more than ten sites, so the loop iterates by groups of ten site codes. Once we have both the daily value and statistics data, the two data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function. Then we add a column to the final data frame to hold the color value for each station.
 
 ``` r
 #example stats service map, comparing real-time current discharge to history for each site
@@ -32,6 +35,7 @@ library(dataRetrieval)
 states <- c("WI","MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
+#download each state individually
 for(st in states){
 
   stDV <- renameNWISColumns(readNWISdata(service="dv",
@@ -105,7 +109,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.01, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ alt='/Map discharge percentiles'/>
+<img src='/static/stats-service-map/plot-1.png'/ alt='/Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
 
 Questions
 =========
