@@ -42,10 +42,11 @@ There are two separate `dataRetrieval` calls here — one to retrieve the daily 
 #reusable for other state(s)
 #David Watkins June 2016
 
-library(dataRetrieval)
+
 library(maps)
 library(dplyr)
 library(lubridate)
+library(dataRetrieval)
 
 #pick state(s) and date
 states <- c("WI","MN","ND","SD","IA")

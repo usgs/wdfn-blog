@@ -2,10 +2,11 @@
 author: David Watkins
 date: 2016-07-29
 slug: stats-service-map
-status: draft
+draft: True
 title: Using the dataRetrieval Stats Service
-categories:
-  - r
+categories: Data Science
+tags: 
+  - R
 ---
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html). We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history. Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
 
@@ -19,10 +20,11 @@ There are two separate `dataRetrieval` calls here — one to retrieve the daily 
 #reusable for other state(s)
 #David Watkins June 2016
 
-library(dataRetrieval)
+
 library(maps)
 library(dplyr)
 library(lubridate)
+library(dataRetrieval)
 
 #pick state(s) and date
 states <- c("WI","MN","ND","SD","IA")
