@@ -36,7 +36,7 @@ owi-blog
   
   * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
   
-  * `categories` is a small list of approved options. The current list is `Data Science`...and will be expanded.
+  * `categories` is a small list of approved options. The current list is `Data Science`...and will be expanded. For any category, there is a list of people that have the authority to approve posts.
   
   * `tags` are more specific words, and do not need to be on a pre-approved list.
   
