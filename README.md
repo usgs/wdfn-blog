@@ -43,10 +43,11 @@ owi-blog
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
 
 6. Submit a pull request
-7. Before the pull request is merged, a blog maintainer will verify the header follows the "Important notes" above, images contain alt tags, and that the content appears to be non-interpretive.
-8. Submitter is responsible for getting 2 internal peer-reviews (interal reviews can be done on a Google Form)
-9. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the QA site.
-10. Assuming all looks good, push to prod
+8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form)
+9. A designated approver must sign off on content based on review response
+10. A designated web content manager will sign off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt tags)
+11. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the QA site.
+12. Assuming all looks good, push to prod
 
 
 ## Hugo Installation
