@@ -4,8 +4,8 @@ slug: "stats-service-map"
 author: "David Watkins"
 date: "2016-07-29"
 output: USGSmarkdowntemplates::hugo
+image: "static/stats-service-map/plot-1.png"
 tag1: dataRetrieval
-image: static/stats-service-map/plot-1.png
 ---
 ```{r setup, include=FALSE}
 library(knitr)

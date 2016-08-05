@@ -5,10 +5,11 @@ slug: stats-service-map
 draft: True
 title: Using the dataRetrieval Stats Service
 categories: Data Science
+image: static/stats-service-map/plot-1.png
 tags: 
   - R
   - dataRetrieval
-image: static/stats-service-map/plot-1.png
+ 
 ---
 Introduction
 ------------
