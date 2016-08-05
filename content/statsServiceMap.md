@@ -5,10 +5,11 @@ slug: stats-service-map
 draft: True
 title: Using the dataRetrieval Stats Service
 categories: Data Science
+image: static/stats-service-map/plot-1.png
 tags: 
   - R
   - dataRetrieval
-image: static/stats-service-map/plot-1.png
+ 
 ---
 Introduction
 ------------
@@ -18,7 +19,7 @@ This script utilizes the new `dataRetrieval` package access to the [USGS Statist
 Get the data
 ------------
 
-There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics. Both calls are inside loops to split them into smaller pieces, to accomodate web service restrictions. The daily values service allows only single states as a filter, so we loop over the list of states. The stats service does not allow requests of more than ten sites, so the loop iterates by groups of ten site codes. Once we have both the daily value and statistics data, the two data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function. Then we add a column to the final data frame to hold the color value for each station.
+There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics. Both calls are inside loops to split them into smaller pieces, to accomodate web service restrictions. The daily values service allows only single states as a filter, so we loop over the list of states. The stats service does not allow requests of more than ten sites, so the loop iterates by groups of ten site codes. Retrieving the data can take a few tens of seconds. Once we have both the daily value and statistics data, the two data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function. We use a [pipe](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html) to send the output of the join to `na.omit()` function. Then we add a column to the final data frame to hold the color value for each station.
 
 ``` r
 #example stats service map, comparing real-time current discharge to history for each site
@@ -68,9 +69,11 @@ statData.storm <- statData[statData$month_nu == month(storm.date) &
                             statData$day_nu == day(storm.date),]
 
 finalJoin <- left_join(storm.data,statData.storm)
-finalJoin <- left_join(finalJoin,sites)
+finalJoin <- left_join(finalJoin,sites) 
 
-finalJoin <- finalJoin[!is.na(finalJoin$Flow),] #remove sites without current data
+#remove sites without current data 
+finalJoin <- finalJoin[!is.na(finalJoin$Flow),] 
+
 
 #classify current discharge values
 finalJoin$class <- NA
@@ -78,7 +81,18 @@ finalJoin$class <- ifelse(is.na(finalJoin$p25),
                           ifelse(finalJoin$Flow > finalJoin$p50_va, "cyan","yellow"),
                           ifelse(finalJoin$Flow < finalJoin$p25_va, "red2",
                           ifelse(finalJoin$Flow > finalJoin$p75_va, "navy","green4")))
+
+#take a look at the columns that we will plot later:
+head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
 ```
+
+    ##   dec_lon_va dec_lat_va class
+    ## 1  -92.09389   46.63333  navy
+    ## 2  -91.59528   46.53778  navy
+    ## 3  -90.96324   46.59439  navy
+    ## 4  -90.59000   46.39472  navy
+    ## 5  -90.69630   46.48661  navy
+    ## 6  -90.90417   46.49722  navy
 
 Make the plot
 -------------
