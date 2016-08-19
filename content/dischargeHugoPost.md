@@ -8,7 +8,7 @@ categories: Data Science
 image: static/ts-colin-discharge/mainPlot-1.png
 tags: 
   - R
-  - dataRetrieval 
+  - dataRetrieval
  
 ---
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
@@ -48,7 +48,7 @@ points(loc$dec_lon_va[1],loc$dec_lat_va[1],
 box(lwd=1.5)
 ```
 
-<img src='/static/ts-colin-discharge/mainPlot-1.png'/ title='/Discharge from Tropical Storm Colin'/>
+<img src='/static/ts-colin-discharge/mainPlot-1.png'/ title='Discharge from Tropical Storm Colin'/>
 
 Questions
 =========
