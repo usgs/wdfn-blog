@@ -3,13 +3,14 @@ title: "Using the dataRetrieval Stats Service"
 slug: "stats-service-map"
 author: "David Watkins"
 date: "2016-07-29"
+image: "static/static/stats-service-map/plot-1.png"
 output: USGSmarkdowntemplates::hugo
 ---
 ```{r setup, include=FALSE}
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ alt='/%s'/>",
+  sprintf("<img src='/%s%s-%d.%s'/ title='/%s'/>",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
           options$fig.cap)
@@ -49,7 +50,7 @@ library(lubridate)
 library(dataRetrieval)
 
 #pick state(s) and date
-states <- c("WI","MN","ND","SD","IA")
+states <- c("MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
 for(st in states){
