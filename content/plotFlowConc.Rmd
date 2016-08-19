@@ -4,6 +4,7 @@ author: "Marcus Beck (USEPA) and Laura DeCicco (USGS)"
 date: "2016-07-13"
 slug: "plotFlowConc"
 image: "static/plotFlowConc/plotFlowConc-1.png"
+tag1: "EGRET"
 output: USGSmarkdowntemplates::hugo
 ---
 

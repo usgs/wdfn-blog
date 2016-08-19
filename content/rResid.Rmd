@@ -4,6 +4,7 @@ author: "Robert M. Hirsch and Laura DeCicco"
 date: "2016-06-15"
 slug: "rResid"
 image: "static/rResid/unnamed-chunk-7-2.png"
+tag1: "EGRET"
 output: USGSmarkdowntemplates::hugo
 ---
 

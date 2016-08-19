@@ -9,6 +9,7 @@ image: static/rResid/unnamed-chunk-7-2.png
 tags: 
   - R
   - EGRET
+ 
 ---
 `EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN.
 

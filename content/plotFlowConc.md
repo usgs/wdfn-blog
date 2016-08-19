@@ -10,7 +10,6 @@ tags:
   - R
   - EGRET
  
- 
 ---
 This post was created in collaboration with Marcus Beck from the USEPA ( <beck.marcus@epa.gov>), and Laura DeCicco from the USGS (OWI) (<ldecicco@usgs.gov>)
 

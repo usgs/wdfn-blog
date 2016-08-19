@@ -5,18 +5,21 @@ slug: stats-service-map
 draft: True
 title: Using the dataRetrieval Stats Service
 categories: Data Science
-image: static/static/stats-service-map/plot-1.png
+image: static/stats-service-map/plot-1.png
 tags: 
   - R
- 
+  - dataRetrieval
  
 ---
+Introduction
+------------
+
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html). We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history. Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
 
 Get the data
 ------------
 
-There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics. The data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function. Then we add a column to the final data frame to hold the color value for each station.
+There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics. Both calls are inside loops to split them into smaller pieces, to accomodate web service restrictions. The daily values service allows only single states as a filter, so we loop over the list of states. The stats service does not allow requests of more than ten sites, so the loop iterates by groups of ten site codes. Retrieving the data can take a few tens of seconds. Once we have both the daily value and statistics data, the two data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function. We use a [pipe](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html) to send the output of the join to `na.omit()` function. Then we add a column to the final data frame to hold the color value for each station.
 
 ``` r
 #example stats service map, comparing real-time current discharge to history for each site
@@ -33,6 +36,7 @@ library(dataRetrieval)
 states <- c("MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
+#download each state individually
 for(st in states){
 
   stDV <- renameNWISColumns(readNWISdata(service="dv",
@@ -65,9 +69,11 @@ statData.storm <- statData[statData$month_nu == month(storm.date) &
                             statData$day_nu == day(storm.date),]
 
 finalJoin <- left_join(storm.data,statData.storm)
-finalJoin <- left_join(finalJoin,sites)
+finalJoin <- left_join(finalJoin,sites) 
 
-finalJoin <- finalJoin[!is.na(finalJoin$Flow),] #remove sites without current data
+#remove sites without current data 
+finalJoin <- finalJoin[!is.na(finalJoin$Flow),] 
+
 
 #classify current discharge values
 finalJoin$class <- NA
@@ -75,7 +81,18 @@ finalJoin$class <- ifelse(is.na(finalJoin$p25),
                           ifelse(finalJoin$Flow > finalJoin$p50_va, "cyan","yellow"),
                           ifelse(finalJoin$Flow < finalJoin$p25_va, "red2",
                           ifelse(finalJoin$Flow > finalJoin$p75_va, "navy","green4")))
+
+#take a look at the columns that we will plot later:
+head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
 ```
+
+    ##   dec_lon_va dec_lat_va class
+    ## 1  -89.61620   48.01211  red2
+    ## 2  -91.79240   46.94688  navy
+    ## 3  -92.04000   47.48111  red2
+    ## 4  -92.63667   46.78167  red2
+    ## 5  -92.41880   46.70328  navy
+    ## 6  -96.01756   46.36940  red2
 
 Make the plot
 -------------
@@ -106,7 +123,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.01, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ title='/Map discharge percentiles'/>
+<img src='/static/stats-service-map/plot-1.png'/ title='/Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
 
 Questions
 =========

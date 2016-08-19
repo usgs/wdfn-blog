@@ -4,6 +4,7 @@ slug: "ts-colin-precip"
 author: "Lindsay R Carr"
 date: "2016-06-09"
 image: "static/ts-colin-precip/use-functions-1.png"
+tag1: geoknife
 output: USGSmarkdowntemplates::hugo
 ---
 
