@@ -3,6 +3,8 @@ title: "EGRET plotFlowConc using ggplot2"
 author: "Marcus Beck (USEPA) and Laura DeCicco (USGS)"
 date: "2016-07-13"
 slug: "plotFlowConc"
+image: "static/plotFlowConc/plotFlowConc-1.png"
+tag1: "EGRET"
 output: USGSmarkdowntemplates::hugo
 ---
 
@@ -11,7 +13,7 @@ output: USGSmarkdowntemplates::hugo
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ alt='/%s'/>",
+  sprintf("<img src='/%s%s-%d.%s'/ title='/%s'/>",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
           options$fig.cap)

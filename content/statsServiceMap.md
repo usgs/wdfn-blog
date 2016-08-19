@@ -33,7 +33,7 @@ library(lubridate)
 library(dataRetrieval)
 
 #pick state(s) and date
-states <- c("WI","MN","ND","SD","IA")
+states <- c("MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
 #download each state individually
@@ -87,12 +87,12 @@ head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
 ```
 
     ##   dec_lon_va dec_lat_va class
-    ## 1  -92.09389   46.63333  navy
-    ## 2  -91.59528   46.53778  navy
-    ## 3  -90.96324   46.59439  navy
-    ## 4  -90.59000   46.39472  navy
-    ## 5  -90.69630   46.48661  navy
-    ## 6  -90.90417   46.49722  navy
+    ## 1  -89.61620   48.01211  red2
+    ## 2  -91.79240   46.94688  navy
+    ## 3  -92.04000   47.48111  red2
+    ## 4  -92.63667   46.78167  red2
+    ## 5  -92.41880   46.70328  navy
+    ## 6  -96.01756   46.36940  red2
 
 Make the plot
 -------------
@@ -123,7 +123,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.01, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ alt='/Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
+<img src='/static/stats-service-map/plot-1.png'/ title='/Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
 
 Questions
 =========
