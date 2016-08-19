@@ -50,7 +50,7 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/plotConcQ-1.png'/ title='/ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ title='/EGRET Concentration Flow plot'/>
+<img src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot'/>
 <p class="caption">
 Plot on the left was produced by ggplot2 and the plot on the right was produced by plotConcQ from the EGRET package.
 </p>
@@ -272,7 +272,7 @@ eList <-  Choptank_eList
 plotFlowConc(eList, years=seq(1980, 2014, by = 4))
 ```
 
-<img src='/static/plotFlowConc/plotFlowConc-1.png'/ title='/Custom plotFlowConc'/>
+<img src='/static/plotFlowConc/plotFlowConc-1.png'/ title='Custom plotFlowConc'/>
 
 This graphic allows the user to see a variety of types of changes. For example, if the curves substantially change their shape over time it may suggest shifts among various pollutant sources (e.g. shallow groundwater, deeper groundwater, point sources, and surface runoff). It may also show changes that are strong in some seasons and weak in others because of factors like shifts in the time when nutrients are applied to the landscape or changes in cropping practices (e.g. no-till farming or cover crops). It can also show seasons when change may be accelerating versus others where conditions may have become more stable over time. All of these kinds of patterns can be useful in developing interpretations of the kinds of changes taking place and can help the user to develop hypotheses that they can test out in a formal manner with the existing data or by adding new data over time.
 

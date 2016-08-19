@@ -123,7 +123,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.01, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ title='/Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
+<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
 
 Questions
 =========
