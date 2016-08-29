@@ -50,7 +50,8 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot'/>
+<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot'/>
+<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot'/>
 <p class="caption">
 Plot on the left was produced by ggplot2 and the plot on the right was produced by plotConcQ from the EGRET package.
 </p>
