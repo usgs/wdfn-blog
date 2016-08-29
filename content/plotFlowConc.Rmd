@@ -280,6 +280,13 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
 ```
 
+The function can also be imported in the workspace from GitHub:
+
+```{r message=FALSE, eval=FALSE}
+library(devtools)
+source_gist("00003218e6a913f681fa16e587c7fbbb", filename = "plotFlowConc.R")
+```
+
 Next, the function can be called with any `EGRET` object:
 
 ```{r plotFlowConc, fig.cap="Custom plotFlowConc", htmlcap="Custom plotFlowConc output"}
