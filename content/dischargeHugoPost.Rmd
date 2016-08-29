@@ -3,15 +3,16 @@ title: "Tropical Storm Colin Discharge Plot R Code"
 slug: "ts-colin-discharge"
 author: "David Watkins"
 date: "2016-06-13"
-type: "post"
-output: markdowntemplates::hugo
+image: "static/ts-colin-discharge/mainPlot-1.png"
+tag1: "dataRetrieval"
+output: USGSmarkdowntemplates::hugo
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ alt='/%s'/>",
+  sprintf("<img src='/%s%s-%d.%s'/ title='%s'/>",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
           options$fig.cap)

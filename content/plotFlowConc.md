@@ -2,13 +2,14 @@
 author: Marcus Beck (USEPA) and Laura DeCicco (USGS)
 date: 2016-07-13
 slug: plotFlowConc
-type: post
+draft: True
 title: EGRET plotFlowConc using ggplot2
 categories: Data Science
+image: static/plotFlowConc/plotFlowConc-1.png
 tags: 
   - R
   - EGRET
-image: static/plotFlowConc/plotFlowConc-1.png
+ 
 ---
 This post was created in collaboration with Marcus Beck from the USEPA ( <beck.marcus@epa.gov>), and Laura DeCicco from the USGS (OWI) (<ldecicco@usgs.gov>)
 
@@ -49,17 +50,17 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-1.png'/ alt='/ggplot2 Concentration Flow plot'/>
-<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-2.png'/ alt='/EGRET Concentration Flow plot'/>
-
+<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot'/>
+<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot'/>
 <p class="caption">
-ggplot2 vs EGRET Concentration Discharge plots
+Plot on the left was produced by ggplot2 and the plot on the right was produced by plotConcQ from the EGRET package.
 </p>
-
 plotFlowConc
 ============
 
-One of the things the WRTDS statistical model provides is a characterization of the gradually changing relationship between concentration and discharge as it evolves over a period of many years, and also a characterization of how that pattern is different for different times of the year. The `plotContours` and `plotDiffContours` functions are two ways that `EGRET` allows a user to represent these changes, but they can be difficult to interpret. Another approach is one developed by Marcus Beck of US EPA that makes very effective use of color and multiple panel graphs to help visualize these evolving conditions. This new function `plotFlowConc` which uses the packages `ggplot2`, `dplyr`, and `tidyr` is a wonderful new way to visualize these changes.
+One of the things the WRTDS statistical model provides is a characterization of the gradually changing relationship between concentration and discharge as it evolves over a period of many years, and also a characterization of how that pattern is different for different times of the year.
+
+The `plotContours`, `plotDiffContours`, `plotConcQSmooth`, and `plotConcTimeSmooth` functions in `EGRET` are all designed to help the user explore various aspects of the model. Because of the multivariate character of the model it is helpful to have a variety of ways to view it to aid in making interpretations about the nature of the changes that have taken place. Another approach is one developed by Marcus Beck of US EPA that makes very effective use of color and multiple panel graphs to help visualize these evolving conditions. This new function `plotFlowConc` which uses the packages `ggplot2`, `dplyr`, and `tidyr` is a wonderful new way to visualize these changes.
 
 ``` r
 library(tidyr)
@@ -269,21 +270,18 @@ Next, the function can be called with any `EGRET` object:
 
 ``` r
 eList <-  Choptank_eList
-plotFlowConc(eList)
+plotFlowConc(eList, years=seq(1980, 2014, by = 4))
 ```
 
-<img src='/static/plotFlowConc/plotFlowConc-1.png'/ alt='/Custom plotFlowConc'/>
-<p class="caption">
-Custom plotFlowConc output
-</p>
+<img src='/static/plotFlowConc/plotFlowConc-1.png'/ title='Custom plotFlowConc'/>
 
-What these plots suggest is that in the 1980's in most of the year, the concentrations were highest at discharges that are moderate for that time of year, reflecting the concentration in young groundwater that may dominate streamflow at these times, but at the lowest discharges concentrations were somewhat lower, reflecting deeper groundwater that may never have been highly enriched by nitrogen fertilizer applications or are more effectively denitrified along their way to the stream. At higher flows the concentration generally declines with increasing discharge suggesting that direct runoff tended to dilute the nitrate in the stream. With the passage of two to three decades the pattern has changed such that concentrations are higher for any given discharge in every month than they would have been in the 1980's and that the roughly quadratic shape of the relationship has gone away, suggesting that deeper groundwaters have become more contaminated with modern nitrate from the land surface such that the highest nitrate concentration are now taking place at or near the lowest discharges.
+This graphic allows the user to see a variety of types of changes. For example, if the curves substantially change their shape over time it may suggest shifts among various pollutant sources (e.g. shallow groundwater, deeper groundwater, point sources, and surface runoff). It may also show changes that are strong in some seasons and weak in others because of factors like shifts in the time when nutrients are applied to the landscape or changes in cropping practices (e.g. no-till farming or cover crops). It can also show seasons when change may be accelerating versus others where conditions may have become more stable over time. All of these kinds of patterns can be useful in developing interpretations of the kinds of changes taking place and can help the user to develop hypotheses that they can test out in a formal manner with the existing data or by adding new data over time.
 
-The `plotFlowConc` function has several arguments that control the plot aesthetics:
+The `plotFlowConc` function has several arguments that control the plot aesthetics. The only argument that is required is the first one (`eList`), all the others have defaults that result in a highly presentable graphic, but there are options that the user can chose if they wish to vary the look of their output.
 
--   `eList` input egret object
+-   `eList` input `EGRET` object
 -   `month` numeric input from 1 to 12 indicating the monthly predictions to plot
--   `years` numeric vector of years to plot, defaults to all
+-   `years` numeric vector of years to plot. For example, `seq(1980, 2014, by = 4)` will plot nine years of data from 1980 to 2014 at four year intervals. Set as `NULL` to plot all years
 -   `col_vec` chr string of plot colors to use, passed to `ggplot2::scale_colour_gradient` for line shading
 -   `ylabel` chr string for y-axis label
 -   `xlabel` chr string for x-axis label
@@ -293,7 +291,7 @@ The `plotFlowConc` function has several arguments that control the plot aestheti
 -   `ncol` numeric argument passed to `ggplot2::facet_wrap` indicating number of facet columns
 -   `grids` logical indicating if grid lines are present
 -   `scales` chr string passed to `ggplot2::facet_wrap` to change x/y axis scaling on facets, acceptable values are 'free', 'free\_x', or 'free\_y'
--   `interp` numeric input as a scalar for smoothing the plot line
+-   `interp` numeric input as a scalar for smoothing the plot lines. The default is 4 indicating that four times as many values are interpolated and plotted compared to the original results matrix from WRTDS. The interpolation does not create novel data outside the range of the predictions but instead creates observations in the time, flow domain that are between values that were used explicitly to create the model. The effect is a smoother plot that reduces the jaggedness of the lines. A value of 1 or `NULL` can be used to suppress this behavior if the WRTDS results matrix is sufficiently large, i.e., minimal jaggedness in the plot lines. Values larger than 4 typically do not improve the visual appearance of trends.
 -   `pretty` logical indicating if preset plot aesthetics are applied, otherwise the ggplot2 default themes are used
 -   `use_bw` logical indicating if `ggplot2::theme_bw` is used
 -   `fac_nms` optional chr string for facet labels, which must be equal in length to `month`
