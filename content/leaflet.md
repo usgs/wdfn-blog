@@ -51,7 +51,7 @@ saveWidget(leafMap, "leafMap.html")
 setwd(currentWD)
 ```
 
-Then, the html that was saved with the `saveWidget` function can be called with the `iframe` html tag. It's not completely obvious to me why the path is `static/leaflet/leafMap/index.html`. If you build the Hugo project, that is where the map ends up.
+Then, the html that was saved with the `saveWidget` function can be called with the `iframe` html tag.
 
 ``` r
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500"></iframe>
@@ -59,4 +59,12 @@ Then, the html that was saved with the `saveWidget` function can be called with 
 
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500">
 </iframe>
-One issue however is that the map itself now indexs to the home page.
+When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html". One issue then is that the created widget page is included in the overall blog index. This could be hidden at least by adding a line to the overall index.html theme page that only lists pages with dates above Jan. 1, 1970 (so really, any legit date):
+
+``` r
+{{ if ge $value.Date.Unix 0 }}
+  <div class="col-sm-4">
+    {{ .Render "grid" }}
+  </div>
+{{ end }}
+```
