@@ -11,7 +11,9 @@ tags:
   - dataRetrieval
  
 ---
-Get some data. In this example, we are looking for phosphorus measured throughout Wisconsin. Using `dplyr`, we filter the data to sites that have records longer than 15 years, and more than 100 measurements.
+We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets` package](http://www.htmlwidgets.org/) in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic prcess to get a basic `leaflet` map in our Hugo-generated blog post.
+
+In this example, we are looking for phosphorus measured throughout Wisconsin with the `dataRetrieval` package. Using `dplyr`, we filter the data to sites that have records longer than 15 years, and more than 100 measurements.
 
 ``` r
 library(dataRetrieval)
@@ -38,7 +40,7 @@ leafMap <- leaflet(data=phos.wi) %>%
                    popup=~station_nm)
 ```
 
-The following code could be generally hid from the reader using `echo=FALSE`.
+Next, we use the `htmlwidgets` package to save a self-contained html file. The following code could be generally hid from the reader using `echo=FALSE`.
 
 ``` r
 library(htmlwidgets)
@@ -51,7 +53,7 @@ saveWidget(leafMap, "leafMap.html")
 setwd(currentWD)
 ```
 
-Then, the html that was saved with the `saveWidget` function can be called with the `iframe` html tag.
+The html that was saved with the `saveWidget` function can be called with the `iframe` html tag.
 
 ``` r
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500"></iframe>
@@ -59,7 +61,7 @@ Then, the html that was saved with the `saveWidget` function can be called with 
 
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500">
 </iframe>
-When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html". One issue then is that the created widget page is included in the overall blog index. This could be hidden at least by adding a line to the overall index.html theme page that only lists pages with dates above Jan. 1, 1970 (so really, any legit date):
+When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html". One issue then is that the created widget page is included in the overall blog index. This could be hidden at least by adding a line to the overall index.html theme page that only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
 
 ``` r
 {{ if ge $value.Date.Unix 0 }}
@@ -68,3 +70,5 @@ When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html"
   </div>
 {{ end }}
 ```
+
+A screenshot of the map was taken to use for the thumbnail in the blog index.
