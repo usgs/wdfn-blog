@@ -2,5 +2,5 @@ languageCode = "en-us"
 title = "The USGS OWI blog"
 theme = "hugo_theme_robust"
 preserveTaxonomyNames = true
-paginate = 100
+paginate = 6
 canonifyurls = true
