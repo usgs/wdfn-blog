@@ -12,11 +12,20 @@ output: USGSmarkdowntemplates::hugo
 ```{r setup, include=FALSE}
 library(knitr)
 
+# knit_hooks$set(plot=function(x, options) {
+#   sprintf("<img src='/%s%s-%d.%s'/ title='%s'/>",
+#           options$fig.path, options$label,
+#           options$fig.cur, options$fig.ext,
+#           options$fig.cap)
+# 
+# })
+
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ title='%s'/>",
+
+  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
-          options$fig.cap)
+          options$fig.cap, options$alt.text, options$class)
 
 })
 
@@ -26,12 +35,27 @@ knit_hooks$set(htmlcap = function(before, options, envir) {
     }
 })
 
+# This gets the div started...but I can't seem to get the trailing div closure to work
+knit_hooks$set(toggle = function(before, options, envir) {
+  if(options$toggle){
+    if(before) {
+      print('<div id="hideMe">')
+    } 
+    # else {
+    #   print('</div>)
+    # }
+  }
+})
+
 opts_chunk$set(
   echo=TRUE,
   fig.path="static/plotFlowConc/",
   fig.width = 7,
   fig.height = 7,
-  fig.cap = "TODO"
+  fig.cap = "TODO",
+  alt.text = "TODO",
+  class = "",
+  toggle = FALSE
 )
 ```
 
@@ -50,7 +74,7 @@ Please note there are a lot of nuances that are captured in the `EGRET` plotting
 
 ## plotConcQ
 
-```{r plotConcQ, message=FALSE, fig.show='hold', out.width=c('300px', '300px'), fig.cap=c("ggplot2 Concentration Flow plot","EGRET Concentration Flow plot"), htmlcap="Plot on the left was produced by ggplot2 and the plot on the right was produced by plotConcQ from the EGRET package."}
+```{r plotConcQ, message=FALSE, fig.show='hold', out.width=c('300px', '300px'), fig.cap=c("ggplot2 Concentration Flow plot","EGRET Concentration Flow plot"), alt.text='ggplot vs EGRET', class = 'sideBySide'}
 library(EGRET)
 library(ggplot2)
 
@@ -78,8 +102,10 @@ One of the things the WRTDS statistical model provides is a characterization of 
 
 The `plotContours`, `plotDiffContours`, `plotConcQSmooth`, and `plotConcTimeSmooth` functions in `EGRET` are all designed to help the user explore various aspects of the model. Because of the multivariate character of the model it is helpful to have a variety of ways to view it to aid in making interpretations about the nature of the changes that have taken place. Another approach is one developed by Marcus Beck of US EPA that makes very effective use of color and multiple panel graphs to help visualize these evolving conditions.  This new function `plotFlowConc` which uses the packages `ggplot2`, `dplyr`, and `tidyr` is a wonderful new way to visualize these changes.
 
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">Show/Hide Code</p>
 
-```{r message=FALSE}
+
+```{r message=FALSE, toggle=TRUE}
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -284,6 +310,7 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
 ```
 
+
 The function can also be imported in the workspace from GitHub:
 
 ```{r message=FALSE, eval=FALSE}
@@ -293,7 +320,7 @@ source_gist("00003218e6a913f681fa16e587c7fbbb", filename = "plotFlowConc.R")
 
 Next, the function can be called with any `EGRET` object:
 
-```{r plotFlowConc, fig.cap="Custom plotFlowConc"}
+```{r plotFlowConc, fig.cap="Custom plotFlowConc", alt.text="Custom ggplot2 plotFlowConc image"}
 
 eList <-  Choptank_eList
 plotFlowConc(eList, years=seq(1980, 2014, by = 4))

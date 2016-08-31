@@ -8,7 +8,7 @@ owi-blog
 1. Fork repo
 2. Create a markdown file (.md)
 3. Add to `content` folder
-4. Include static images in `static\name-of-blog`. Images *must* include alt text
+4. Include static images in `static\name-of-blog`. Images *must* include alt and title text
 5. Add a header similar to:
 
   ```
