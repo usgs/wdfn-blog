@@ -11,9 +11,9 @@ tags:
   - dataRetrieval
  
 ---
-We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets` package](http://www.htmlwidgets.org/) in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic prcess to get a basic `leaflet` map in our Hugo-generated blog post.
+We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets` package](http://www.htmlwidgets.org/) in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic `leaflet` map in our Hugo-generated blog post.
 
-In this example, we are looking for phosphorus measured throughout Wisconsin with the `dataRetrieval` package. Using `dplyr`, we filter the data to sites that have records longer than 15 years, and more than 100 measurements.
+In this example, we are looking for phosphorus measured throughout Wisconsin with the `dataRetrieval` package. Using `dplyr`, we filter the data to sites that have records longer than 15 years, and more than 50 measurements.
 
 ``` r
 library(dataRetrieval)
@@ -61,7 +61,9 @@ The html that was saved with the `saveWidget` function can be called with the `i
 
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500">
 </iframe>
-When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html". One issue then is that the created widget page is included in the overall blog index. This could be hidden at least by adding a line to the overall index.html theme page that only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
+When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html".
+
+One issue for our Hugo theme was that the created widget page is included in the overall blog index. The was fixed by adding a line to the overall index.html layout page to only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
 
 ``` r
 {{ if ge $value.Date.Unix 0 }}
