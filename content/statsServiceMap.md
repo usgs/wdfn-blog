@@ -86,13 +86,13 @@ finalJoin$class <- ifelse(is.na(finalJoin$p25),
 head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
 ```
 
-    ##   dec_lon_va dec_lat_va class
-    ## 1  -89.61620   48.01211  red2
-    ## 2  -91.79240   46.94688  navy
-    ## 3  -92.04000   47.48111  red2
-    ## 4  -92.63667   46.78167  red2
-    ## 5  -92.41880   46.70328  navy
-    ## 6  -96.01756   46.36940  red2
+    ##   dec_lon_va dec_lat_va  class
+    ## 1  -89.61620   48.01211   navy
+    ## 2  -91.79240   46.94688   navy
+    ## 3  -92.04000   47.48111 green4
+    ## 4  -92.63667   46.78167   navy
+    ## 5  -92.41880   46.70328   navy
+    ## 6  -96.01756   46.36940   red2
 
 Make the plot
 -------------
@@ -120,10 +120,10 @@ map.scale(ratio=FALSE,cex = 0.75,
           grconvertY(.2, "npc"))
 text("*Other percentiles not available for these sites", cex=0.75,
      x=grconvertX(0.2,"npc"), 
-     y=grconvertY(-0.01, "npc"))
+     y=grconvertY(-0.08, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles'/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
+<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
 
 Questions
 =========
