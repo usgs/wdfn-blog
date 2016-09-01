@@ -2,6 +2,7 @@
 author: Laura DeCicco
 date: 2016-08-23
 slug: leaflet
+type: post
 title: Using Leaflet and htmlwidgets in a Hugo blog post
 categories: Data Science
 image: static/leaflet/screenshot.png

@@ -2,6 +2,7 @@
 date: 2016-09-01
 slug: introduction
 draft: True
+type: post
 title: Introducing OWI Blogs!
 categories: 
   - Data Science

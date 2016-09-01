@@ -1,6 +1,7 @@
 ---
 date: 2016-06-01
 slug: about
+type: post
 title: About OWI blogs
 categories: 
   - Data Science
