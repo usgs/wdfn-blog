@@ -28,15 +28,6 @@ Why do we blog?
 -   Share ideas and get feedback
 -   Get more in-depth than Twitter, but share faster than apps & websites
 
-Technical Details
-=================
-
-A few details concerning the blog itself. It is produced using [Hugo](https://gohugo.io/). The basic "robust" theme was used as a base, but fairly straightforward modifications were done to comply with OWI website styles.
-
-The development and collaboration on blog posts is done via Github at <https://github.com/USGS-OWI/owi-blog>.
-
-Posts are deployed to a development Amazon S3 bucket using the continuous integration tool Jenkins. When a pull request is merged on github, a Jenkin's job pulls the github repository, builds the Hugo site, and pushes the generated static files from the "public" folder to the development S3 bucket. Once the post has been reviewed for style and content, the status `draft: true` is removed. A production deployment is also done via Jenkins.
-
 Categories
 ==========
 
@@ -45,7 +36,7 @@ There are currently 3 categories: Data Science, OWI Applications, and Software D
 OWI Applications
 ----------------
 
-OWI has a wide variety of applications. Some legacy applications were done on a small scale with local collaborators with only have a very small user-base. On the other hand, NWISweb (Water Data For the Nation) provide access to water-resources data collected at approximately 1.5 million sites in all 50 States, the District of Columbia, Puerto Rico, the Virgin Islands, Guam, American Samoa and the Commonwealth of the Northern Mariana Islands.
+OWI runs about 40 different applications, from the enterprise scale data accession, management, and distribution applications that comprise the National Water Information System that are used by millions of people across the country to boutique data analysis tools that serve a few scientists.
 
 Blogs in this category will provide updates, interesting applications, user-stories, or any number of information on the various applications produced and maintained by the Office of Water Information in the USGS.
 
@@ -127,6 +118,16 @@ Environmental Data Discovery and Transformation
 
 Pilot National Soil Moisture Network
 [http://cida.usgs.gov/nsmn_pilot/](http://cida.usgs.gov/nsmn_pilot/)
+
+Technical Details
+=================
+
+A few details concerning the blog itself. It is produced using [Hugo](https://gohugo.io/). The basic "robust" theme was used as a base, but fairly straightforward modifications were done to comply with OWI website styles.
+
+The development and collaboration on blog posts is done via Github at <https://github.com/USGS-OWI/owi-blog>.
+
+Posts are deployed to a development Amazon S3 bucket using the continuous integration tool Jenkins. When a pull request is merged on github, a Jenkin's job pulls the github repository, builds the Hugo site, and pushes the generated static files from the "public" folder to the development S3 bucket. Once the post has been reviewed for style and content, the status `draft: true` is removed. A production deployment is also done via Jenkins.
+
 
 Disclaimer
 ==========
