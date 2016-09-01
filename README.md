@@ -17,6 +17,7 @@ owi-blog
   date: 2016-06-16
   slug: plotFlowConc
   draft: True
+  type: post
   title: EGRET plotFlowConc using ggplot2
   categories: Data Science
   tags: 
@@ -36,7 +37,7 @@ owi-blog
   
   * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
   
-  * `categories` is a small list of approved options. The current list is `Data Science`...and will be expanded. For any category, there is a list of people that have the authority to approve posts.
+  * `categories` is a small list of approved options. The current list is `Data Science`, `OWI Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
   
   * `tags` are more specific words, and do not need to be on a pre-approved list.
   
@@ -46,7 +47,7 @@ owi-blog
 8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form)
 9. A designated approver must sign off on content based on review response
 10. A designated web content manager will sign off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt tags)
-11. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the QA site.
+11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
 12. Assuming all looks good, push to prod
 
 
