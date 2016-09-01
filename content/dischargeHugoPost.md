@@ -47,7 +47,7 @@ points(loc$dec_lon_va[1],loc$dec_lat_va[1],
 box(lwd=1.5)
 ```
 
-<img src='/static/ts-colin-discharge/mainPlot-1.png'/ title='Discharge from Tropical Storm Colin'/>
+<img src='/static/ts-colin-discharge/mainPlot-1.png'/ title='Discharge from Tropical Storm Colin' alt='Discharge graph from Tropical Storm Colin' class=''/>
 
 Questions
 =========

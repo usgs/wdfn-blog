@@ -12,10 +12,10 @@ output: USGSmarkdowntemplates::hugo
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ title='%s'/>",
+  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
-          options$fig.cap)
+          options$fig.cap, options$alt.text, options$class)
 
 })
 
@@ -30,7 +30,9 @@ opts_chunk$set(
   fig.path="static/ts-colin-discharge/",
   fig.width = 7,
   fig.height = 7,
-  fig.cap = "TODO"
+  fig.cap = "TODO",
+  alt.text = "TODO",
+  class = ""
 )
 ```
 
@@ -38,7 +40,7 @@ The first piece retrieves the discharge data for Anclote River site, and makes t
 
 In the next section we make the inset map.  The important part there is the `par()` command, which limits the area of the current plot that will be used for the following commands.  `plot.window` sets the axis limits, and after that are regular `map()` commands.
 
-```{r mainPlot, message=FALSE, fig.cap="Discharge from Tropical Storm Colin"}
+```{r mainPlot, message=FALSE, fig.cap="Discharge from Tropical Storm Colin", alt.text = "Discharge graph from Tropical Storm Colin"}
 #Tropical Storm Colin discharge
 
 library(dataRetrieval)
