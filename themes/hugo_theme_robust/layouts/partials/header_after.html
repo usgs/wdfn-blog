@@ -12,6 +12,14 @@
 
 <script type="application/javascript" src="https://www2.usgs.gov/scripts/analytics/usgs-analytics.js"></script>
 
+<script>
+  function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if (e.style.display == 'block' || e.style.display=='') e.style.display = 'none';
+        else e.style.display = 'block';
+  }
+</script>
+
 </head>
 
 <!-- BEGIN USGS Header Template -->

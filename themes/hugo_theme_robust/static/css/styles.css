@@ -649,3 +649,15 @@ ol.h-inline {
   display: inline-block;
   margin-right: .5rem;
 }
+
+.ToggleButton {
+  width:150px;
+  height:35px;
+  padding:8px 10px;
+  margin:10px 0 20px 0;
+  text-align:center;
+  border-radius:5px;
+  background:#003366;
+  color:#fff;
+  border:1px solid #003366;
+}

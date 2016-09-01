@@ -50,17 +50,19 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot'/>
-<img class="sideBySide" src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot'/>
-<p class="caption">
-Plot on the left was produced by ggplot2 and the plot on the right was produced by plotConcQ from the EGRET package.
-</p>
+<img src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot' alt='ggplot vs EGRET' class='sideBySide'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot' alt='ggplot vs EGRET' class='sideBySide'/>
+
 plotFlowConc
 ============
 
 One of the things the WRTDS statistical model provides is a characterization of the gradually changing relationship between concentration and discharge as it evolves over a period of many years, and also a characterization of how that pattern is different for different times of the year.
 
 The `plotContours`, `plotDiffContours`, `plotConcQSmooth`, and `plotConcTimeSmooth` functions in `EGRET` are all designed to help the user explore various aspects of the model. Because of the multivariate character of the model it is helpful to have a variety of ways to view it to aid in making interpretations about the nature of the changes that have taken place. Another approach is one developed by Marcus Beck of US EPA that makes very effective use of color and multiple panel graphs to help visualize these evolving conditions. This new function `plotFlowConc` which uses the packages `ggplot2`, `dplyr`, and `tidyr` is a wonderful new way to visualize these changes.
+
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
+Show/Hide Code
+</p>
+<div id="hideMe">
 
 ``` r
 library(tidyr)
@@ -265,10 +267,11 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
     
 }
 ```
+</div>
 
 The function can also be imported in the workspace from GitHub:
 
-```{r message=FALSE, eval=FALSE}
+``` r
 library(devtools)
 source_gist("00003218e6a913f681fa16e587c7fbbb", filename = "plotFlowConc.R")
 ```
@@ -280,7 +283,7 @@ eList <-  Choptank_eList
 plotFlowConc(eList, years=seq(1980, 2014, by = 4))
 ```
 
-<img src='/static/plotFlowConc/plotFlowConc-1.png'/ title='Custom plotFlowConc'/>
+<img src='/static/plotFlowConc/plotFlowConc-1.png'/ title='Custom plotFlowConc' alt='Custom ggplot2 plotFlowConc image' class=''/>
 
 This graphic allows the user to see a variety of types of changes. For example, if the curves substantially change their shape over time it may suggest shifts among various pollutant sources (e.g. shallow groundwater, deeper groundwater, point sources, and surface runoff). It may also show changes that are strong in some seasons and weak in others because of factors like shifts in the time when nutrients are applied to the landscape or changes in cropping practices (e.g. no-till farming or cover crops). It can also show seasons when change may be accelerating versus others where conditions may have become more stable over time. All of these kinds of patterns can be useful in developing interpretations of the kinds of changes taking place and can help the user to develop hypotheses that they can test out in a formal manner with the existing data or by adding new data over time.
 

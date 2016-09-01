@@ -12,10 +12,10 @@ output: USGSmarkdowntemplates::hugo
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ title='%s'/>",
+  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' />",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
-          options$fig.cap)
+          options$fig.cap, options$alt.text)
 
 })
 
@@ -30,7 +30,8 @@ opts_chunk$set(
   fig.path="static/ts-colin-precip/",
   fig.width = 7,
   fig.height = 7,
-  fig.cap = "TODO"
+  fig.cap = "TODO",
+  alt.text = "TODO"
 )
 ```
 
@@ -124,7 +125,7 @@ precipMap <- function(precipData, startDate, endDate){
 
 TS Colin made landfall on June 6th and moved into open ocean on June 7th. Use these dates as the start and end times in our function (need to account for timezone, +5 UTC). We can visualize the path of the storm by mapping cumulative precipitation for each county. 
 
-```{r use-functions, message=FALSE, warning=FALSE, fig.cap="Map of precipitation"}
+```{r use-functions, message=FALSE, warning=FALSE, fig.cap="Map of precipitation", alt.text = "Map of precipitation"}
 library(dplyr)
 library(tidyr)
 library(geoknife) #order matters because 'query' is masked by a function in dplyr
