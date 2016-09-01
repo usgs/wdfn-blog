@@ -661,3 +661,9 @@ ol.h-inline {
   color:#fff;
   border:1px solid #003366;
 }
+
+
+.ToggleButton:hover{
+  background:#fff;
+  color:#003366;
+}
