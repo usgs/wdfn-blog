@@ -1,7 +1,12 @@
-+++
-title = "About OWI blogs"
-date = "2016-06-01"
-+++
+---
+date: 2016-06-01
+slug: about
+title: About OWI blogs
+categories: 
+  - Data Science
+  - Software Development
+  - OWI Applications
+---
 
 The United States Geological Survey's Office of Water Information. 
 
