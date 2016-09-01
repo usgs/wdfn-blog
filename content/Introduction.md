@@ -7,7 +7,7 @@ title: Introducing OWI Blogs!
 categories: 
   - Data Science
   - Software Development
-  - Data Science
+  - OWI Applications
  
  
 ---
