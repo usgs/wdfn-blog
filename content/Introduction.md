@@ -56,4 +56,4 @@ There are many talented software developers working at the USGS. Blogs within th
 Data Science
 ------------
 
-Data science is an emerging field both within and outside the USGS. Posts in this category will tend to show
+Data science is an emerging field both within and outside the USGS. Posts in this category will tend to show workflows for cleaning and analyzing data.
