@@ -55,7 +55,7 @@ library(lubridate)
 library(dataRetrieval)
 
 #pick state(s) and date
-states <- c("MN","ND","SD","IA")
+states <- c("WI","MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
 #download each state individually
