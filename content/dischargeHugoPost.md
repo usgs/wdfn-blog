@@ -2,8 +2,8 @@
 author: David Watkins
 date: 2016-06-13
 slug: ts-colin-discharge
-draft: True
 title: Tropical Storm Colin Discharge Plot R Code
+type: post
 categories: Data Science
 image: static/ts-colin-discharge/mainPlot-1.png
 tags: 
