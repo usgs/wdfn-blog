@@ -11,9 +11,23 @@ tags:
   - EGRET
  
 ---
+
+* Robert Hirsch
+<a href="mailto:rhirsch@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
+<a href="https://www.researchgate.net/profile/Robert_Hirsch3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
+
+* Laura DeCicco
+<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
+<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
+
 `EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN.
 
 More information can be found at <https://github.com/USGS-R/EGRET>.
+
 
 Introduction
 ============

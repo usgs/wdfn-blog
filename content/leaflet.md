@@ -11,9 +11,16 @@ tags:
   - dataRetrieval
  
 ---
-We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets` package](http://www.htmlwidgets.org/) in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic `leaflet` map in our Hugo-generated blog post.
 
-In this example, we are looking for phosphorus measured throughout Wisconsin with the `dataRetrieval` package. Using `dplyr`, we filter the data to sites that have records longer than 15 years, and more than 50 measurements.
+<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
+<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
+
+We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet) map in our Hugo-generated blog post.
+
+In this example, we are looking for phosphorus measured throughout Wisconsin with the [`dataRetrieval`](https://cran.r-project.org/package=dataRetrieval) package. Using [`dplyr`](https://cran.r-project.org/package=dplyr), we filter the data to sites that have records longer than 15 years, and more than 50 measurements.
 
 ``` r
 library(dataRetrieval)
@@ -74,3 +81,8 @@ One issue for our Hugo theme was that the created widget page is included in the
 ```
 
 A screenshot of the map was taken to use for the thumbnail in the blog index.
+
+Questions
+=========
+
+Please direct any questions or comments on `dataRetrieval` to: <https://github.com/USGS-R/dataRetrieval/issues>

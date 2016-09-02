@@ -88,6 +88,10 @@ A few details concerning the blog itself. It is produced using [Hugo](https://go
 
 Each blog post is created in a simple markdown format. Posts are deployed to a development Amazon S3 bucket using the continuous integration tool Jenkins. When a pull request is merged on github, a Jenkin's job pulls the github repository, builds the Hugo site, and pushes the generated static files from the "public" folder to the development S3 bucket. Once the post has been reviewed for style and content, the status `draft: true` is removed. A production deployment is also done via Jenkins.
 
+Questions
+==========
+Please direct any questions or comments about the blog to:
+[https://github.com/USGS-OWI/owi-blog/issues](https://github.com/USGS-OWI/owi-blog/issues)
 
 Disclaimer
 ==========
