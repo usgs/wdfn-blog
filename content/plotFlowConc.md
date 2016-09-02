@@ -2,7 +2,7 @@
 author: Marcus Beck (USEPA) and Laura DeCicco (USGS)
 date: 2016-07-13
 slug: plotFlowConc
-type: post
+draft: True
 title: EGRET plotFlowConc using ggplot2
 categories: Data Science
 image: static/plotFlowConc/plotFlowConc-1.png
@@ -11,7 +11,21 @@ tags:
   - EGRET
  
 ---
-This post was created in collaboration with Marcus Beck from the USEPA ( <beck.marcus@epa.gov>), and Laura DeCicco from the USGS (OWI) (<ldecicco@usgs.gov>)
+
+* Marcus Beck (USEPA)
+<a href="mailto:beck.marcus@epa.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://twitter.com/fawda123"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/fawda123"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://scholar.google.com/citations?user=9ZDDQ_8AAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
+<a href="https://www.researchgate.net/profile/Marcus_Beck"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
+
+* Laura DeCicco (USGS-OWI)
+<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
+<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
+
 
 Introduction
 ============
@@ -21,7 +35,7 @@ Introduction
 More information can be found at <https://github.com/USGS-R/EGRET>.
 
 ggplot2
-=======
+-------
 
 `ggplot2` is a powerful and popular graphing package. All`EGRET` functions return, or take as an input, a specialized list (referred as the "eList" in `EGRET` documentation). It is quite easy to extract the simple-to-use, relavent data frames: `Daily`, `Sample`, and `INFO`. Here is a simple example of using `ggplot2` to make a plot that is also available in `EGRET`.
 

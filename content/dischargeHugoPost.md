@@ -11,6 +11,9 @@ tags:
   - dataRetrieval
  
 ---
+<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
 
 In the next section we make the inset map. The important part there is the `par()` command, which limits the area of the current plot that will be used for the following commands. `plot.window` sets the axis limits, and after that are regular `map()` commands.
