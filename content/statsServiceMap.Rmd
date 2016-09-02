@@ -132,7 +132,7 @@ map.scale(ratio=FALSE,cex = 0.75,
           grconvertY(.2, "npc"))
 text("*Other percentiles not available for these sites", cex=0.75,
      x=grconvertX(0.2,"npc"), 
-     y=grconvertY(-0.01, "npc"))
+     y=grconvertY(-0.08, "npc"))
 ```
 _**Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future._  
 
