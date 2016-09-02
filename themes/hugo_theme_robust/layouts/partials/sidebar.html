@@ -54,5 +54,16 @@
     </div>
   </section>
   {{ end }}
+  
+  {{ if in .Params.tags "R"}}
+  <ul>
+    <li>
+      <a href="https://owi.usgs.gov/R/" target="_blank">USGS-R Website</a> 
+    </li>
+    <li>
+        USGS-R: <a href="https://twitter.com/USGS_R"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+    </li>
+  </ul>
+  {{ end }}
 
 </aside>
