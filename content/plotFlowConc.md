@@ -2,7 +2,7 @@
 author: Marcus Beck (USEPA) and Laura DeCicco (USGS)
 date: 2016-07-13
 slug: plotFlowConc
-draft: True
+type: post
 title: EGRET plotFlowConc using ggplot2
 categories: Data Science
 image: static/plotFlowConc/plotFlowConc-1.png
