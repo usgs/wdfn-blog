@@ -25,7 +25,7 @@ tags:
 <a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
 <a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-
+<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 
 Introduction
 ============
