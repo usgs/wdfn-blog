@@ -55,15 +55,31 @@
   </section>
   {{ end }}
   
+    <ul>
+    <li>
+        <a href="https://twitter.com/USGS_WaterData" class="twitter-follow-button" data-show-count="false">Follow @USGS_WaterData</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </li>
+  
+  
   {{ if in .Params.tags "R"}}
-  <ul>
     <li>
-      <a href="https://owi.usgs.gov/R/" target="_blank">USGS-R Website</a> 
+        <a href="https://twitter.com/USGS_R" class="twitter-follow-button" data-show-count="false">Follow @USGS_R</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </li>
-    <li>
-        USGS-R: <a href="https://twitter.com/USGS_R"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-    </li>
-  </ul>
   {{ end }}
+  
+  {{ if in .Params.tags "GDP"}}
+    <li>
+        <a href="https://twitter.com/USGS_GDP" class="twitter-follow-button" data-show-count="false">Follow @USGS_GDP</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </li>
+  {{ end }}
+  
+  {{ if in .Params.tags "Pubs"}}
+    <li>
+        <a href="https://twitter.com/USGS_Pubs" class="twitter-follow-button" data-show-count="false">Follow @USGS_Pubs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </li>
+  {{ end }}
+  
+  </ul>
+
 
 </aside>
