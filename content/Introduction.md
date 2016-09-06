@@ -7,7 +7,7 @@ title: Introducing OWI Blogs!
 categories: 
   - Data Science
   - Software Development
-  - OWI Applications
+  - Applications
  
  
 ---
@@ -31,9 +31,9 @@ So why do we blog?
 Categories
 ==========
 
-There are currently 3 categories: Data Science, OWI Applications, and Software Development.
+There are currently 3 categories: Data Science, Applications, and Software Development.
 
-OWI Applications
+Applications
 ----------------
 
 OWI runs about 40 different applications, from the enterprise scale data accession, management, and distribution applications that comprise the National Water Information System that are used by millions of people across the country to boutique data analysis tools that serve a few scientists.

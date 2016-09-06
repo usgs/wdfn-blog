@@ -6,7 +6,7 @@ title: About OWI blogs
 categories: 
   - Data Science
   - Software Development
-  - OWI Applications
+  - Applications
 ---
 
 The United States Geological Survey's Office of Water Information. 
