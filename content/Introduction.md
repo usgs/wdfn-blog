@@ -1,14 +1,14 @@
 ---
-date: 2016-09-01
+date: 2016-09-06
 slug: introduction
-draft: True
 type: post
 title: Introducing OWI Blogs!
 categories: 
   - Data Science
   - Software Development
   - Applications
- 
+description: An introduction to the new USGS blog site. 
+keywords: USGS, water information
  
 ---
 Welcome
