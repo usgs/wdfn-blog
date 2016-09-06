@@ -1,12 +1,5 @@
 <aside class="site">
 
-  {{ if and .IsPage (ne .Params.toc false) }}
-  <section>
-    <header>Table Of Contents</header>
-    <div>{{ .TableOfContents }}</div>
-  </section>
-  {{ end }}
-
   {{ if ne (len .Site.Menus) 0 }}
   <section>
     <header>Menu</header>
