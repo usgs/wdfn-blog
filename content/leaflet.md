@@ -9,7 +9,11 @@ image: static/leaflet/screenshot.png
 tags: 
   - R
   - dataRetrieval
- 
+description: Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo blogpost is explained.
+keywords:
+  - leaflet
+  - interactive map
+  - dataRetrieval
 ---
 
 <a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
@@ -17,6 +21,7 @@ tags:
 <a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
 <a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
+<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 
 We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet) map in our Hugo-generated blog post.
 

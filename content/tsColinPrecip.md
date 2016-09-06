@@ -9,7 +9,11 @@ image: static/ts-colin-precip/use-functions-1.png
 tags: 
   - R
   - geoknife
- 
+description: Using the R package geoknife to plot precipitation by county during Tropical Strom Colin. 
+keywords:
+  - geoknife
+  - plotting precipitation
+  - data visualization
 ---
 <a href="mailto:lcarr@usgs.gov  "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://github.com/lindsaycarr"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
