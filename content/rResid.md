@@ -9,7 +9,11 @@ image: static/rResid/unnamed-chunk-7-2.png
 tags: 
   - R
   - EGRET
- 
+description: Using random residuals for censored data in EGRET, and R package. Exploration and Graphics for RivEr Trends (EGRET) is an R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS).
+keywords:
+  - EGRET
+  - random residuals
+  - water quality trends
 ---
 
 * Robert Hirsch

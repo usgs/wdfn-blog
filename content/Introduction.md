@@ -8,8 +8,8 @@ categories:
   - Software Development
   - Applications
 description: An introduction to the new USGS blog site. 
-keywords: USGS, water information
- 
+keywords:
+  - water information
 ---
 Welcome
 =======

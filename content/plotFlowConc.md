@@ -9,7 +9,11 @@ image: static/plotFlowConc/plotFlowConc-1.png
 tags: 
   - R
   - EGRET
- 
+description: Using the R packages, ggplot and EGRET, a new function plotFlowConc shows a new way to visualize the changes between flow and concentration.
+keywords:
+  - EGRET
+  - ggplot2
+  - data visualization
 ---
 
 * Marcus Beck (USEPA)
