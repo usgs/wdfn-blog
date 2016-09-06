@@ -1,12 +1,5 @@
 <aside class="site">
 
-  {{ if and .IsPage (ne .Params.toc false) }}
-  <section>
-    <header>Table Of Contents</header>
-    <div>{{ .TableOfContents }}</div>
-  </section>
-  {{ end }}
-
   {{ if ne (len .Site.Menus) 0 }}
   <section>
     <header>Menu</header>
@@ -62,11 +55,16 @@
     <li>
         <a href="https://twitter.com/USGS_WaterData" class="twitter-follow-button" data-show-count="false">@USGS_WaterData</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </li>
-  
+      <li>
+        <a href="https://owi.usgs.gov/blog/index.xml"><i class="fa fa-rss-square"> RSS Feed </i></a>
+    </li>
   
   {{ if in .Params.tags "R"}}
     <li>
         <a href="https://twitter.com/USGS_R" class="twitter-follow-button" data-show-count="false">@USGS_R</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </li>
+    <li>
+        <a href="https://owi.usgs.gov/blog/tags/r/index.xml"><i class="fa fa-rss-square"> RSS - R Posts</i></a>
     </li>
   {{ end }}
   
@@ -86,5 +84,17 @@
   </div>
   </section>
 
+{{ if in .Params.tags "R"}}
+  <section>
+  <header>Related Blogs</header>
+  <div>
+    <ul>
+      <li>
+        <a href="http://r-bloggers.com">R-bloggers</a>
+      </li>
+    </ul>
+  </div>
+  </section>
+{{ end }}
 
 </aside>
