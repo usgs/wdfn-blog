@@ -21,7 +21,9 @@
       "name": "{{ .Site.Params.author }}",
       "image": "{{ .Site.BaseURL }}images/logo.png"
     },
-
+    {{ with .Keywords }}
+    "keywords":,"{{ delimit . ", " }}",
+    {{ end }}
     "description": "{{ .Description }}"
 
   }
