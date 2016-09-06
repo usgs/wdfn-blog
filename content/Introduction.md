@@ -14,17 +14,16 @@ categories:
 Welcome
 =======
 
-Welcome to the U.S. Geological Survey's Office of Water Information's new blog. We are committed to advancing USGS science by integrating data across scales and domains, improving access to data and research, and developing tools for analysis and visualization, and fostering collaboration with the international community.
+Welcome to the U.S. Geological Survey's Office of Water Information's new blog. We are committed to advancing USGS science by integrating data across scales and domains, improving access to data and research, developing tools for analysis and visualization, and fostering collaboration with the international water informatics community.
 
-The blog posts here represent "non-interpretive" or "interpretive, but not new" information. This is fancy lingo to indicate that nothing that is posted here will be interpreting data or findings in new ways. That sort of information needs to be published in a more rigorous outlet (for example, a peer-reviewed scientific journal article).
+The blog posts here represent "non-interpretive" or "interpretive, but not new" information. This is fancy lingo to indicate that nothing posted here will be interpreting data or findings in new ways. That sort of information needs to be published in a more rigorous outlet (for example, a peer-reviewed scientific journal article).
 
 The Office of Water Information has a wide variety of services available to improve the access and understanding of US water information. Blog posts will highlight data, developments, and applications of these services. 
 
 So why do we blog?
 
--   Show the public where their tax dollars go
--   Raise awareness of the cool software development & analytics at the USGS
--   Engage with public and other agencies
+-   Raise awareness of new software development & analytics at USGS
+-   Engage with the public and other agencies
 -   Share ideas and get feedback
 -   Get more in-depth than Twitter, but share faster than apps & websites
 
@@ -36,26 +35,26 @@ There are currently 3 categories: Data Science, Applications, and Software Devel
 Applications
 ----------------
 
-OWI runs about 40 different applications, from the enterprise scale data accession, management, and distribution applications that comprise the National Water Information System that are used by millions of people across the country to boutique data analysis tools that serve a few scientists.
+OWI runs about 40 different applications, from enterprise scale data assimilation, management, and dissemination systems including the National Water Information System to project-scale data analysis tools that serve more specialized needs.
 
-Blogs in this category will provide updates, interesting applications, user-stories, or any number of information on the various applications produced and maintained by the Office of Water Information in the USGS.
+Blogs in this category will provide updates, interesting applications, user-stories, or other information on the various applications produced and maintained by the Office of Water Information at USGS.
 
 Software Development
 --------------------
 
-There are many talented software developers working at the USGS. Blogs within the "Software Development" category will showcase innovative work being done on a wide variety of software engineering topics and platforms.
+Blogs within the "Software Development" category will showcase innovative work being done on a wide variety of software engineering topics and platforms.
 
 Data Science
 ------------
 
-Data science is an emerging field both within and outside the USGS. Posts in this category will tend to show workflows for cleaning and analyzing data. 
+Data science is an emerging field both inside and outside the USGS. Data scientists build tools and software that enable reproducible data & modeling pipelines.  OWI data scientists collaborate with other scientists to design, implement, and communicate reproducible workflows for earth science (primarily water science). Posts in this category will show workflows for processing and analyzing data. 
 
-Data scientists build tools and software that enable reproducible data & modeling pipelines. The development of these tools is aligned with the architectural recommendations of the software development lifecycle best practices. OWI data scientists collaborate with other scientists to design, implement, and communicate reproducible workflows for earth science (primarily water science).
+The development of these tools is closely coordinated with USGS enterprise information systems providing convenient access to USGS monitoring data within various data analysis environments. 
 
 Communication
 ==========
 
-There are several ways to keep abreast of the work that is done at OWI, and to provide feedback.
+There are several ways to keep up to date on the work that is done at OWI, and to provide feedback.
 
 |Twitter|Github|
 |-----------|------------|
