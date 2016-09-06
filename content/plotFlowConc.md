@@ -1,5 +1,5 @@
 ---
-author: Marcus Beck (USEPA) and Laura DeCicco (USGS)
+author: Marcus Beck and Laura DeCicco
 date: 2016-07-13
 slug: plotFlowConc
 type: post
