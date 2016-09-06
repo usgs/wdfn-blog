@@ -35,7 +35,7 @@ There are currently 3 categories: Data Science, Applications, and Software Devel
 Applications
 ----------------
 
-OWI runs about 40 different applications, from enterprise scale data assimilation, management, and dissemination systems including the National Water Information System to project-scale data analysis tools that serve more specialized needs.
+OWI runs about 40 different applications, from enterprise scale data assimilation, management, and dissemination systems including the [National Water Information System](http://waterdata.usgs.gov/) to project-scale data analysis tools that serve more specialized needs.
 
 Blogs in this category will provide updates, interesting applications, user-stories, or other information on the various applications produced and maintained by the Office of Water Information at USGS.
 
