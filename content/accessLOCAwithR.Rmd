@@ -68,9 +68,9 @@ test_var2<-ncvar_get(nc = loca_nc,
                     count = c(1,1,-1))
 plot_dates<-as.POSIXct(chron(loca_nc$dim$time$vals,
                   origin=c(month=1, day=1, year=1900)))
-plot_data<-gather_(data = data.frame(dates=plot_dates, rcp45=test_var, rcp85=test_var2),
+pData<-gather_(data = data.frame(dates=plot_dates, rcp45=test_var, rcp85=test_var2),
                    key_col = "Pathway", value_col = "data", gather_cols = c("rcp45","rcp85"))
-ggplot(plot_data,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alpha=1/15) +
+ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alpha=1/15) +
   geom_smooth() + ylab('Daily Maximum Temperature (degrees C)') + xlab('Year') +
   ggtitle(paste0('Daily Maximum Temperature from variables:\n',
                 names(loca_nc$var)[5],', ',names(loca_nc$var)[8])) +
@@ -110,7 +110,7 @@ This result shows that the SUM and COUNT are 1465.039 and 1616 respectively. Thi
 
 Next, we'll look at the time it might take to process this data with the Geo Data Portal. We'll use the geoknife setup from above, but the default knife settings rather than those used above to get the SUM and COUNT. First we'll get a single time step, then a year of data. Then we can figure out how long the spatial interstection step as well as each time step should take.
 
-```{r geoknife_run1, echo=FALSE}
+```{r geoknife_run1, echo=TRUE}
 times(fabric) <- c('2006-01-01', '2006-01-01')
 start.time <- Sys.time()
 job_onestep <- geoknife(stencil, fabric, wait = TRUE)
@@ -161,7 +161,7 @@ for(var_to_parse in varList) {
 
 Now that we have all the data and it's parsed into a list containing all the data, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
-```{r climates_summary, echo=FALSE}
+```{r climates_summary, echo=TRUE}
 suppressMessages(library(climates))
 suppressMessages(library(PCICt))
 years<-as.character(loca_data_platte$dates,format='%Y')
@@ -177,7 +177,7 @@ gcms<-c("CCSM4_r6i1p1", "CESM1-BGC_r1i1p1", "CESM1-CAM5_r1i1p1",
 "MIROC-ESM_r1i1p1", "MIROC5_r1i1p1", "MPI-ESM-LR_r1i1p1",
 "MPI-ESM-MR_r1i1p1", "MRI-CGCM3_r1i1p1", "NorESM1-M_r1i1p1",
 "bcc-csm1-1-m_r1i1p1")
-loca_deriv_platte <- list()
+pList <- list()
 
 thresholds <- list(days_tmax_abv_thresh=c(37.7778),
                 days_tmin_blw_thresh=c(0),
@@ -186,16 +186,17 @@ thresholds <- list(days_tmax_abv_thresh=c(37.7778),
                 cooling_degree_day_thresh=c(18.3333))
 
 for(scenario in scenarios) {
-  loca_deriv_platte[[scenario]]<-list()
+  pList[[scenario]]<-list()
   for(thresh in names(thresholds)) { # Set up the empty output data structure.
-    loca_deriv_platte[[scenario]][[thresh]]<-data.frame(year=c(as.numeric(years[1]):(as.numeric(years[length(years)])-1)))
-    loca_deriv_platte[[scenario]][[thresh]][gcms]<-NA
+    pList[[scenario]][[thresh]]<-data.frame(year=c(as.numeric(years[1]):
+                                                    (as.numeric(years[length(years)])-1)))
+    pList[[scenario]][[thresh]][gcms]<-NA
   }
   prVars <- varList[grepl(paste0("pr.*",scenario), varList)]
   tmaxVars <- varList[grepl(paste0("tasmax.*",scenario), varList)]
   tminVars <- varList[grepl(paste0("tasmin.*",scenario), varList)]
-  for(year in 1:length(loca_deriv_platte[[scenario]][[names(thresholds)[1]]]$year)) {
-    subRows<-which(years %in% loca_deriv_platte[[scenario]][[names(thresholds)[1]]]$year[year])
+  for(year in 1:length(pList[[scenario]][[names(thresholds)[1]]]$year)) {
+    subRows<-which(years %in% pList[[scenario]][[names(thresholds)[1]]]$year[year])
     dates_pcict<-as.PCICt(loca_data_platte[subRows,'dates'],cal="gregorian")
     pr <- loca_data_platte[subRows,prVars]
     tmax <- loca_data_platte[subRows,tmaxVars]
@@ -207,7 +208,7 @@ for(scenario in scenarios) {
                              thresholds = thresholds, 
                              time_PCICt = dates_pcict)
     for(thresh in 1:length(names(thresholds))) {
-      loca_deriv_platte[[scenario]][[names(thresholds)[thresh]]][gcms][year,] <- indices[,thresh]
+      pList[[scenario]][[names(thresholds)[thresh]]][gcms][year,] <- indices[,thresh]
     }
   }
 }
@@ -231,7 +232,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
   lwidth <- sum(legend$width)
   gl <- lapply(plots, function(x) x + theme(legend.position="none"))
   gl <- c(gl, ncol = ncol, nrow = nrow)
-
+  
   combined <- switch(position,
                      "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
                                             legend,
@@ -282,23 +283,22 @@ plot_setup<-list(days_tmax_abv_thresh=
 
 for(thresh in names(plot_setup)) {
   for(scenario in scenarios) {
-    plot_data<-gather_(loca_deriv_platte[[scenario]][[thresh]],'gcm','data',
-                       names(loca_deriv_platte[[scenario]][[thresh]])[2:length(loca_deriv_platte[[scenario]][[thresh]])])
-    plot_setup[[thresh]][[paste0("plotAll",scenario)]] <- ggplot(plot_data,aes(x=year,y=data,colour=gcm,group=gcm)) + 
+    datset<-pList[[scenario]][[thresh]]
+    pData<-gather_(datset,'gcm','data',names(datset)[2:length(datset)])
+    plot_setup[[thresh]][[paste0("plotAll",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=gcm,group=gcm)) + 
       plot_setup[[thresh]]$plottype +  ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario)
-    
-    plot_data<-data.frame(mean=apply(loca_deriv_platte[[scenario]][[thresh]][names(loca_deriv_platte[[scenario]][[thresh]])[2:length(loca_deriv_platte[[scenario]][[thresh]])]],1,mean))
-    plot_data['max']<-apply(loca_deriv_platte[[scenario]][[thresh]][names(loca_deriv_platte[[scenario]][[thresh]])[2:length(loca_deriv_platte[[scenario]][[thresh]])]],1,max)
-    plot_data['min']<-apply(loca_deriv_platte[[scenario]][[thresh]][names(loca_deriv_platte[[scenario]][[thresh]])[2:length(loca_deriv_platte[[scenario]][[thresh]])]],1,min)
-    plot_data['year']<-loca_deriv_platte[[scenario]][[thresh]]$year
-    plot_data<-gather_(plot_data,'stat','data',c('mean','max','min'))
-    plot_setup[[thresh]][[paste0("plotStats",scenario)]] <- ggplot(plot_data,aes(x=year,y=data,colour=stat,group=stat)) + plot_setup[[thresh]]$plottype +
+    pData<-data.frame(mean=apply(datset[names(datset)[2:length(datset)]],1,mean))
+    pData['max']<-apply(datset[names(datset)[2:length(datset)]],1,max)
+    pData['min']<-apply(datset[names(datset)[2:length(datset)]],1,min)
+    pData['year']<-datset$year
+    pData<-gather_(pData,'stat','data',c('mean','max','min'))
+    plot_setup[[thresh]][[paste0("plotStats",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=stat,group=stat)) + plot_setup[[thresh]]$plottype +
       ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario)
   }
-plot_setup[[thresh]]$plotStatsrcp45 <- plot_setup[[thresh]]$plotStatsrcp45 + theme(legend.position="none")
-plot_setup[[thresh]]$plotStatsrcp85 <- plot_setup[[thresh]]$plotStatsrcp85 + 
-  theme(axis.title.y=element_blank())
-grid_arrange_shared_legend(plot_setup[[thresh]]$plotStatsrcp45, plot_setup[[thresh]]$plotStatsrcp85,ncol=2,top=plot_setup[[thresh]]$title)
+  plot_setup[[thresh]]$plotStatsrcp45 <- plot_setup[[thresh]]$plotStatsrcp45 + theme(legend.position="none")
+  plot_setup[[thresh]]$plotStatsrcp85 <- plot_setup[[thresh]]$plotStatsrcp85 + 
+    theme(axis.title.y=element_blank())
+  grid_arrange_shared_legend(plot_setup[[thresh]]$plotStatsrcp45, plot_setup[[thresh]]$plotStatsrcp85,ncol=2,top=plot_setup[[thresh]]$title)
 }
 ```
 
@@ -309,7 +309,11 @@ Finally, to give an impression of how much data this example actually pulled in,
 ```{r plot_lots, echo=TRUE}
 for(thresh in names(plot_setup)) {
 plot_setup[[thresh]]$plotAllrcp45 <- plot_setup[[thresh]]$plotAllrcp45
-plot_setup[[thresh]]$plotAllrcp85 <- plot_setup[[thresh]]$plotAllrcp85 + theme(axis.title.y=element_blank())
-grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45, plot_setup[[thresh]]$plotAllrcp85,ncol=2,top=plot_setup[[thresh]]$title,legend.text=element_text(size = 6))
+plot_setup[[thresh]]$plotAllrcp85 <- plot_setup[[thresh]]$plotAllrcp85 + 
+                                       theme(axis.title.y=element_blank())
+grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45, 
+                           plot_setup[[thresh]]$plotAllrcp85,
+                           ncol=2, top=plot_setup[[thresh]]$title,
+                           legend.text=element_text(size = 6))
   }
 ```
