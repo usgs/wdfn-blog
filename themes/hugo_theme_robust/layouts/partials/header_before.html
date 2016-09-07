@@ -24,9 +24,13 @@
     <meta property='twitter:title' content="{{ .Title }} - {{ .Site.Title }}">
     {{ end }}
 
+
     {{ with .Description }}
       <meta name="description" content="{{ . }}">
       <meta name="twitter:description" content="{{ . }}">
+    {{ else }}
+      <meta name="description" content="Blog posts for USGS_WaterData">
+      <meta name="twitter:description" content="Blog posts for USGS_WaterData">    
     {{ end }}
 
     <meta name="twitter:card" content="summary" />
