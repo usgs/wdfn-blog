@@ -24,19 +24,22 @@
     <meta property='twitter:title' content="{{ .Title }} - {{ .Site.Title }}">
     {{ end }}
 
-    <meta property="og:url" content="{{ .Permalink }}">
+
     {{ with .Description }}
       <meta name="description" content="{{ . }}">
       <meta name="twitter:description" content="{{ . }}">
+    {{ else }}
+      <meta name="description" content="Blog posts for USGS_WaterData">
+      <meta name="twitter:description" content="Blog posts for USGS_WaterData">    
     {{ end }}
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@USGS_WaterData" />
-    <meta property="og:url" content="{{ .Site.BaseURL }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
     
-    {{ with .Params.image }}
-      <meta property="og:image" name="twitter:image" content="{{ $.Site.BaseURL }}{{ . }}">
-    {{ end }}
+    
+      <meta property="og:image" name="twitter:image" content="{{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}images/owi-mobile.png{{ end }}">
+    
     
     
     <meta name="keywords" content="{{ with .Keywords }}{{ delimit . ", " }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
