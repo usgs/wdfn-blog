@@ -19,7 +19,10 @@
     "author": {
       "@type": "Person",
       "name": "{{ .Site.Params.author }}",
-      "image": "{{ .Site.BaseURL }}images/logo.png"
+      {{ with .Params.image }}
+      "image": "{{ $.Site.BaseURL }}{{ . }}"
+      {{ end }}
+
     },
     {{ with .Keywords }}
     "keywords":,"{{ delimit . ", " }}",
