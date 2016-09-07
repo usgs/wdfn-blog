@@ -5,6 +5,9 @@ author: "David Watkins"
 date: "2016-06-13"
 image: "static/ts-colin-discharge/mainPlot-1.png"
 tag1: "dataRetrieval"
+description: "Using dataRetrieval to plot streamflow discharge measurements during"
+keyword1: "plotting precipitation"
+keyword2: "data visualization"
 output: USGSmarkdowntemplates::hugo
 ---
 
