@@ -1,64 +1,47 @@
 ---
-title: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
-author: "David Blodgett"
-date: "2016-09-13"
-tag1: "geoknife"
-slug: "LOCAdownscaling"
-description: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
-keywords1: "OPenDAP"
-image: "static/LOCAdownscaling/plotIt-1.png"
-output: USGSmarkdowntemplates::hugo
+author: David Blodgett
+date: 2016-09-13
+slug: LOCAdownscaling
+draft: True
+title: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
+type: post
+categories: Data Science
+image: static/LOCAdownscaling/plotIt-1.png
+tags: 
+  - R
+  - geoknife
+ 
+description: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
+keywords:
+  - R
+  - geoknife
+ 
+ 
+ 
 ---
-
-
-```{r setup, include=FALSE}
-library(knitr)
-
-knit_hooks$set(plot=function(x, options) {
-
-  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
-          options$fig.path, options$label,
-          options$fig.cur, options$fig.ext,
-          options$fig.cap, options$alt.text, options$class)
-
-})
-
-knit_hooks$set(htmlcap = function(before, options, envir) {
-  if(!before) {
-    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
-    }
-})
-
-opts_chunk$set(
-  echo=TRUE,
-  fig.path="static/LOCAdownscaling/",
-  fig.width = 7,
-  fig.height = 7,
-  fig.cap = "TODO",
-  alt.text = "TODO",
-  class = ""
-)
-```
-
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 
-# Introduction
+
+Introduction
+============
 
 In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the `ncdf4` package then use the `geoknife` package to access LOCA data using the Geo Data Portal as a geoprocessing service.
 
-## About LOCA
-This new, feely available, statistically downscaled dataset is summaried in depth at this U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)  
+About LOCA
+----------
 
-**From the Metadata:** LOCA is a statistical downscaling technique that uses past history to add improved fine-scale detail to global climate models. We have used LOCA to downscale 32 global climate models from the CMIP5 archive at a 1/16th degree spatial resolution, covering North America from central Mexico through Southern Canada. The historical period is 1950-2005, and there are two future scenarios available: RCP 4.5 and RCP 8.5 over the period 2006-2100 (although some models stop in 2099). The variables currently available are daily minimum and maximum temperature, and daily precipitation. For more information visit: http://loca.ucsd.edu/ The LOCA data is available due to generous support from the following agencies: The California Energy Commission (CEC), USACE Climate Preparedness and Resilience Program and US Bureau of Reclamation, US Department of Interior/USGS via the Southwest Climate Science Center, NOAA RISA program through the California Nevada Applications Program (CNAP), NASA through the NASA Earth Exchange and Advanced Supercomputing (NAS) Division
-**Reference:** Pierce, D. W., D. R. Cayan, and B. L. Thrasher, 2014: Statistical downscaling using Localized Constructed Analogs (LOCA). Journal of Hydrometeorology, volume 15, page 2558-2585.
+This new, feely available, statistically downscaled dataset is summaried in depth at this U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)
 
-# OPeNDAP Web Service Data Access
+**From the Metadata:** LOCA is a statistical downscaling technique that uses past history to add improved fine-scale detail to global climate models. We have used LOCA to downscale 32 global climate models from the CMIP5 archive at a 1/16th degree spatial resolution, covering North America from central Mexico through Southern Canada. The historical period is 1950-2005, and there are two future scenarios available: RCP 4.5 and RCP 8.5 over the period 2006-2100 (although some models stop in 2099). The variables currently available are daily minimum and maximum temperature, and daily precipitation. For more information visit: <http://loca.ucsd.edu/> The LOCA data is available due to generous support from the following agencies: The California Energy Commission (CEC), USACE Climate Preparedness and Resilience Program and US Bureau of Reclamation, US Department of Interior/USGS via the Southwest Climate Science Center, NOAA RISA program through the California Nevada Applications Program (CNAP), NASA through the NASA Earth Exchange and Advanced Supercomputing (NAS) Division **Reference:** Pierce, D. W., D. R. Cayan, and B. L. Thrasher, 2014: Statistical downscaling using Localized Constructed Analogs (LOCA). Journal of Hydrometeorology, volume 15, page 2558-2585.
+
+OPeNDAP Web Service Data Access
+===============================
 
 We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida-test.er.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida-test.er.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida-test.er.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
-```{r introspect, echo=TRUE, eval=FALSE}
+``` r
 library(ncdf4)
 loca_nc <- nc_open('http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
 loca_globals <- ncatt_get(loca_nc, varid = 0)
@@ -68,16 +51,14 @@ names(loca_nc$dim) # Dimensions of the ncdf4 object.
 loca_nc$nvars # How many variables are available from the ncdf4 object.
 ```
 
-From this, we can see the global variables that are available for the dataset as well as the `ncdf4` object's basic structure. Notice that the dataset has 171 variables! 
+From this, we can see the global variables that are available for the dataset as well as the `ncdf4` object's basic structure. Notice that the dataset has 171 variables!
 
-## Point-based time series data
+Point-based time series data
+----------------------------
 
 For this example, we'll look at the dataset in the Colorado Platte Drainage Basin climate division which includes Denver and North Central Colorado. For the examples that use a point, well use 40.2 degrees north latitude and 105 degrees west longitude, along I25 between Denver and Fort Collins.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">Click to See Code</p>
-
-```{r get_polygon_and_map, echo=TRUE, message=FALSE, toggle=TRUE}
-
+``` r
 library(jsonlite)
 library(leaflet)
 getGDPPolygon<-function(attribute,value) {
@@ -106,21 +87,12 @@ leafMapLOCA <- leaflet() %>%
   addMarkers(lng = -105, lat = 40.2)
 ```
 
-```{r save_html_map, echo=FALSE, message=FALSE}
-library(htmlwidgets)
-library(htmltools)
-currentWD <- getwd()
-dir.create("static/LOCAdownscaling", showWarnings = FALSE)
-setwd("static/LOCAdownscaling")
-saveWidget(leafMapLOCA, "leafMapLOCA.html")
-setwd(currentWD)
-```
-
-<iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
+</iframe>
 
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
-```{r access_point_data, echo=TRUE, eval=FALSE}
+``` r
 lat_poi <- 40.2
 lon_poi <- 360 - 105 # Note LOCA uses 0 - 360 so -105 is 255 degrees.
 lat_index <- which.min(abs(lat_poi-loca_nc$dim$lat$vals))
@@ -135,11 +107,12 @@ test_var<-ncvar_get(nc = loca_nc,
 Sys.time() - start.time # See how long this takes.
 ```
 
-## Time series plot of two scenarios.
+Time series plot of two scenarios.
+----------------------------------
 
 In the code above, we requested the fifth variable, or `tasmax_CCSM4_r6i1p1_rcp45`. Let's request a second variable and see how rcp45 compares to rcp85. For this example, we'll need three additional packages: `chron` to deal with the NetCDF time index conversion, `tidyr` to get data ready to plot with the gather function, and `ggplot2` to create a plot of the data.
 
-```{r plot_the_data, echo=TRUE, message=FALSE, alt.text="Graph of a full time series from two scenarios for one cell of data showing projected daily maximum temperature.", fig.cap="Graph of projected daily maximum temperature."}
+``` r
 library(chron)
 library(tidyr)
 library(ggplot2)
@@ -158,13 +131,14 @@ ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alph
   theme(plot.title = element_text(face="bold"))
 ```
 
-## Areal average time series data access with the Geo Data Portal
+Areal average time series data access with the Geo Data Portal
+--------------------------------------------------------------
 
-Using the method shown above, you can access any variable at any lat/lon location for your application. Next, we'll look at how to get areal statistics of the data for the Platte Drainage Basin climate division polygon shown above.  
+Using the method shown above, you can access any variable at any lat/lon location for your application. Next, we'll look at how to get areal statistics of the data for the Platte Drainage Basin climate division polygon shown above.
 
 For this, we'll need the package `geoknife`. In the code below, we setup the webgeom and webdata objects called stencil and fabric respectively. Then we make a request for one timestep to find out the `SUM` of the cell weights and the total `COUNT` of cells in the area weighted grid statistics calculation that the Geo Data Portal will perform at the request of `geoknife`. This tells us the fractional number of grid cells considered in the calculation as well as the total number of cells that will be considered for each time step.
 
-```{r geoknife_setup, echo=TRUE, message=FALSE}
+``` r
 library(geoknife)
 stencil <- webgeom()
 # query(stencil,'geoms') # Uncomment to see list of available geoms.
@@ -183,15 +157,24 @@ job_onestep <- geoknife(stencil, fabric, knife)
 result(job_onestep)
 ```
 
-## Areal intersection calculation summary
+    ##              DateTime PLATTE DRAINAGE BASIN              variable
+    ## 1 2006-01-01 12:00:00              1465.039 pr_CCSM4_r6i1p1_rcp45
+    ## 2 2006-01-01 12:00:00              1616.000 pr_CCSM4_r6i1p1_rcp45
+    ##   statistic
+    ## 1       SUM
+    ## 2     COUNT
 
-This result shows that the SUM and COUNT are 1465.039 and 1616 respectively. This tells us that of the 1616 grid cells that partially overalap the Platte Drainage Basin polygon, the sum of cell weights in the area weighted grid statistics calculation is 1465.039. The Platte Drainage Basin climate division is about 52,200 square kilometers and the LOCA grid cells are roughly 36 square kilometers (1/16th degree). Given this, we would expect about 1450 grid cells in the Platte Drainage Basin polygon which compares will with the Geo Data Portal's 1465.  
+Areal intersection calculation summary
+--------------------------------------
 
-## Process time and request size analysis
+This result shows that the SUM and COUNT are 1465.039 and 1616 respectively. This tells us that of the 1616 grid cells that partially overalap the Platte Drainage Basin polygon, the sum of cell weights in the area weighted grid statistics calculation is 1465.039. The Platte Drainage Basin climate division is about 52,200 square kilometers and the LOCA grid cells are roughly 36 square kilometers (1/16th degree). Given this, we would expect about 1450 grid cells in the Platte Drainage Basin polygon which compares will with the Geo Data Portal's 1465.
+
+Process time and request size analysis
+--------------------------------------
 
 Next, we'll look at the time it might take to process this data with the Geo Data Portal. We'll use the geoknife setup from above, but the default knife settings rather than those used above to get the SUM and COUNT. First we'll get a single time step, then a year of data. Then we can figure out how long the spatial interstection step as well as each time step should take.
 
-```{r geoknife_run1, echo=TRUE}
+``` r
 times(fabric) <- c('2006-01-01', '2006-01-01')
 start.time <- Sys.time()
 job_onestep <- geoknife(stencil, fabric, wait = TRUE)
@@ -204,24 +187,27 @@ time_per_step <- (time_one_year - time_one_step) / 364
 steps_per_var <- 365 * (2100-2006)
 time_per_var <- time_per_step * steps_per_var
 time_per_int <- time_one_step - time_per_step
-cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable. \nTime for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
+cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable.')
 ```
 
-This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok. In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.  
+    ## Precip time is about 0.4067767 hours per variable.
 
-## GDP run to get all the data.
-Now, lets run the GDP for the whole loca dataset. This will be 168 variables with each variable taking something like a half hour depending on server load. Assuming 30 minutes per variable, **that is 84 hours!** That may seem like a very long time, but considering that each variable is 34310 time steps, that is a throughput of about **19 time steps per second**.  
+``` r
+cat('Time for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
+```
+
+    ## Time for spatial intersection is about 5.912319 seconds.
+
+This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok. In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
+
+GDP run to get all the data.
+----------------------------
+
+Now, lets run the GDP for the whole loca dataset. This will be 168 variables with each variable taking something like a half hour depending on server load. Assuming 30 minutes per variable, **that is 84 hours!** That may seem like a very long time, but considering that each variable is 34310 time steps, that is a throughput of about **19 time steps per second**.
 
 The code below is designed to keep retrying until the processing result for each has been downloaded successfully. For this demonstration, the processing has been completed and all the files are available in the working directory of the script. **NOTE: This is designed to make one request at a time. Please don't make concurrent requests to the GDP, it tends to be slower than executing them in serial.**
 
-```{r get_geoknife_output, echo=FALSE}
-if(!file.exists('loca_demo/')) {
-  download.file('ftp://ftpext.usgs.gov/pub/er/wi/middleton/dblodgett/loca_demo/loca_demo.zip',destfile = 'loca_demo.zip',quiet = TRUE)
-  unzip('loca_demo.zip')
-}
-```
-
-```{r geoknife_run_all, echo=TRUE}
+``` r
 times(fabric) <- c('2006-01-01', '2101-01-01')
 ran_one<-TRUE
 while(ran_one){
@@ -241,16 +227,14 @@ loca_data_platte<-data.frame(dates=parseTimeseries(paste0('loca_demo/',varList[1
 for(var_to_parse in varList) {
   loca_data_platte[var_to_parse] <-   parseTimeseries(paste0('loca_demo/',var_to_parse,'.csv'), delim=',')[2]
 }
-
 ```
 
-## Derivative calculations
+Derivative calculations
+-----------------------
 
 Now that we have all the data and it's parsed into a list containing all the data, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">Click to See Code</p>
-
-```{r climates_summary, echo=TRUE, message=FALSE, toggle=TRUE}
+``` r
 library(climates)
 library(PCICt)
 years<-as.character(loca_data_platte$dates,format='%Y')
@@ -303,15 +287,15 @@ for(scenario in scenarios) {
 }
 ```
 
-## Plot setup
+Plot setup
+----------
 
 Now we have a data in a structure that we can use to create some plots. First, we define a function from the [ggplot2 wiki that allows multiple plots to share a legend.](https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs)
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">Click to See Code</p>
-
-```{r grid_arrange_function, echo=TRUE, toggle=TRUE, message=FALSE}
+``` r
 library(tidyr)
 library(ggplot2)
+
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
   # From https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
@@ -341,13 +325,12 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
 }
 ```
 
-## Summary Plots
+Summary Plots
+-------------
 
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">Click to See Code</p>
-
-```{r plot_it, echo=TRUE, message=FALSE, alt.text="Graph of climate indicator showing min mean and max of GCM ensemble.", fig.cap="Climate Indicator Summary Graph", toggle=TRUE}
+``` r
 library(grid)
 library(gridExtra)
 plot_setup<-list(days_tmax_abv_thresh=
@@ -397,11 +380,14 @@ for(thresh in names(plot_setup)) {
 }
 ```
 
-## All GCM Plots
+<img src='/static/LOCAdownscaling/plotIt-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-5.png'/ title='TODO' alt='TODO' class=''/>
 
-Finally, to give an impression of how much data this example actually pulled in, here are the same plots with all the GCMs shown rather then the ensemble mean, min, and max. 
+All GCM Plots
+-------------
 
-```{r plot_lots, echo=TRUE, message=FALSE, alt.text="Graph of climate indicator showing all GCMs in the ensemble.", fig.cap="Climate Indicator Graph of All GCMs"}
+Finally, to give an impression of how much data this example actually pulled in, here are the same plots with all the GCMs shown rather then the ensemble mean, min, and max.
+
+``` r
 for(thresh in names(plot_setup)) {
 plot_setup[[thresh]]$plotAllrcp45 <- plot_setup[[thresh]]$plotAllrcp45
 plot_setup[[thresh]]$plotAllrcp85 <- plot_setup[[thresh]]$plotAllrcp85 + 
@@ -412,3 +398,5 @@ grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45,
                            legend.text=element_text(size = 6))
   }
 ```
+
+<img src='/static/LOCAdownscaling/plot_lots-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-5.png'/ title='TODO' alt='TODO' class=''/>
