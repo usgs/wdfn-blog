@@ -4,7 +4,7 @@ date: 2016-09-07
 slug: beingvsDoingAgile
 draft: True
 title: Building a nimble and responsive organization
-categories: Software Engineering
+categories: Software Development
 tags:
 - Agile
 - Software Engineering
