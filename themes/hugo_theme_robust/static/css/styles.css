@@ -17,6 +17,23 @@
    margin:-12px 5px 0 0;
  }
  
+ table tr{
+   border-right:1px solid rgb(190,190,190);
+   border-left:1px solid rgb(190,190,190);
+ }
+ 
+ table tr th{
+  padding:10px;
+  border-bottom:1px solid rgb(190,190,190);
+  border-top:1px solid rgb(190,190,190);
+ }
+ 
+ table tr td{
+   padding:10px;
+   border-bottom:1px solid rgb(190,190,190);
+   word-break:break-word;
+ }
+ 
  @media screen and (min-width:768px){
    .sideBySide{
     width:49% !important;
