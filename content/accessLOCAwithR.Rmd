@@ -83,8 +83,8 @@ Using the method shown above, you can access any variable at any lat/lon locatio
 
 For this, we'll need the package `geoknife`. In the code below, we setup the webgeom and webdata objects called stencil and fabric respectively. Then we make a request for one timestep to find out the `SUM` of the cell weights and the total `COUNT` of cells in the area weighted grid statistics calculation that the Geo Data Portal will perform at the request of `geoknife`. This tells us the fractional number of grid cells considered in the calculation as well as the total number of cells that will be considered for each time step.
 
-```{r geoknife_setup, echo=TRUE}
-suppressMessages(library(geoknife))
+```{r geoknife_setup, echo=TRUE, messages=FALSE}
+library(geoknife)
 stencil <- webgeom()
 # query(stencil,'geoms') # Uncomment to see list of available geoms.
 geom(stencil) <- 'sample:CONUS_Climate_Divisions'
@@ -134,6 +134,13 @@ Now, lets run the GDP for the whole loca dataset. This will be 168 variables wit
 
 The code below is designed to keep retrying until the processing result for each has been downloaded successfully. For this demonstration, the processing has been completed and all the files are available in the working directory of the script. **NOTE: This is designed to make one request at a time. Please don't make concurrent requests to the GDP, it tends to be slower than executing them in serial.**
 
+```{r get_geoknife_output, echo=FALSE}
+if(!file.exists('loca_demo/')) {
+  download.file('ftp://ftpext.usgs.gov/pub/er/wi/middleton/dblodgett/loca_demo/loca_demo.zip',destfile = 'loca_demo.zip',quiet = TRUE)
+  unzip('loca_demo.zip')
+}
+```
+
 ```{r geoknife_run_all, echo=TRUE}
 times(fabric) <- c('2006-01-01', '2101-01-01')
 ran_one<-TRUE
@@ -141,18 +148,18 @@ while(ran_one){
   ran_one<-FALSE
   for(var_to_get in varList) {
     # print(var_to_get) # Uncomment for status
-    if(!file.exists(paste0('~/temp/loca_demo/',var_to_get,'.csv'))) {
+    if(!file.exists(paste0('loca_demo/',var_to_get,'.csv'))) {
       variables(fabric) <- var_to_get
       job <- try(geoknife(stencil, fabric, wait=TRUE))
-      try(download(job,paste0('~/temp/loca_demo/',var_to_get,'.csv')))
+      try(download(job,paste0('loca_demo/',var_to_get,'.csv')))
       ran_one<-TRUE
     }
   }
 }
 
-loca_data_platte<-data.frame(dates=parseTimeseries(paste0('~/temp/loca_demo/',varList[1],'.csv'),delim=',')$DateTime)
+loca_data_platte<-data.frame(dates=parseTimeseries(paste0('loca_demo/',varList[1],'.csv'),delim=',')$DateTime)
 for(var_to_parse in varList) {
-  loca_data_platte[var_to_parse] <- parseTimeseries(paste0('~/temp/loca_demo/',var_to_parse,'.csv'), delim=',')[2]
+  loca_data_platte[var_to_parse] <- parseTimeseries(paste0('loca_demo/',var_to_parse,'.csv'), delim=',')[2]
 }
 
 ```
@@ -161,9 +168,9 @@ for(var_to_parse in varList) {
 
 Now that we have all the data and it's parsed into a list containing all the data, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
-```{r climates_summary, echo=TRUE}
-suppressMessages(library(climates))
-suppressMessages(library(PCICt))
+```{r climates_summary, echo=TRUE, message=FALSE}
+library(climates)
+library(PCICt)
 years<-as.character(loca_data_platte$dates,format='%Y')
 scenarios<-c('rcp45','rcp85')
 vars<-c('pr','tmax','tmin')
