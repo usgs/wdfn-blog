@@ -73,24 +73,22 @@ From this, we can see the global variables that are available for the dataset as
 For this example, we'll look at the dataset in the Colorado Platte Drainage Basin climate division which includes Denver and North Central Colorado. For the examples that use a point, well use 40.2 degrees north latitude and 105 degrees west longitude, along I25 between Denver and Fort Collins.
 
 ```{r get_polygon_and_map, echo=TRUE}
-getGDPPolygon<-function(attribute,value) {
+library(jsonlite)
+library(leaflet)
 
+getGDPPolygon<-function(attribute,value) {
   baseURL<-"http://cida.usgs.gov/gdp/geoserver/ows"
   layer<-"sample:CONUS_Climate_Divisions"
   filter<-URLencode(paste0("<Filter><PropertyIsEqualTo><PropertyName>",
                            attribute, "</PropertyName><Literal>",
                            value, "</Literal></PropertyIsEqualTo></Filter>"))
-
   dataURL<-paste0(baseURL,"?service=WFS&version=1.0.0&request=GetFeature&typeName=",
                   layer,"&filter=",filter,"&outputFormat=application/json&srsName=EPSG:4326")
-
   geojson<-fromJSON(txt=readLines(dataURL, warn = FALSE),
                     collapse = "\n",simplifyVector = FALSE)
-
   return(geojson)
 }
-library(jsonlite)
-library(leaflet)
+
 attribute <- "NAME"
 value <- "PLATTE DRAINAGE BASIN"
 analysis_polygon<-getGDPPolygon(attribute = attribute, value = value)
@@ -100,10 +98,9 @@ names(coords)<-c('lon','lat')
 leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 7) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
-  addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE)
+  addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
+  addMarkers(lng = -105, lat = 40.2)
 ```
-
-![](static/accessLOCAwithR/area_of_interest.png) ![](static/accessLOCAwithR/point_of_interest.png)
 
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
