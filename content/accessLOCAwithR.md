@@ -20,7 +20,7 @@ keywords:
 <a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
 <a href="https://github.com/dblodgett-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a> 
 <a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a> 
-<a href="<https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett>"&gt;<i class="fa fa-user fa-2x" aria-hidden="true"></i></a> 
+<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a> 
 <a href="https://www.researchgate.net/profile/David_Blodgett3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
 
 Introduction
