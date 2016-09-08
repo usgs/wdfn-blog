@@ -36,6 +36,8 @@ OPeNDAP Web Service Data Access
 
 We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida-test.er.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida-test.er.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida-test.er.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
+**NOTE:** The code using `ncdf4` below will only work on mac/linux installations of `ncdf4`. Direct OPeNDAP access to datasets is not supported in the Windows version of `ncdf4`.
+
 ``` r
 library(ncdf4)
 loca_nc <- nc_open('http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
