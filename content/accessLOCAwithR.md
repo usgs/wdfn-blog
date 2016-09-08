@@ -91,6 +91,7 @@ For this example, we'll look at the dataset in the Colorado Platte Drainage Basi
 <p class="ToggleButton" onclick="toggle_visibility('hideMe')">
 Click to See Code
 </p>
+<div id="hideMe">
 ``` r
 library(jsonlite)
 library(leaflet)
@@ -119,7 +120,7 @@ leafMapLOCA <- leaflet() %>%
   addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
   addMarkers(lng = -105, lat = 40.2)
 ```
-
+</div>
 <iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
 </iframe>
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
@@ -289,6 +290,7 @@ Now that we have all the data and it's parsed into a list containing all the dat
 <p class="ToggleButton" onclick="toggle_visibility('hideMe')">
 Click to See Code
 </p>
+<div id="hideMe">
 ``` r
 library(climates)
 library(PCICt)
@@ -341,7 +343,7 @@ for(scenario in scenarios) {
   }
 }
 ```
-
+</div>
 Plot setup
 ----------
 
@@ -350,6 +352,7 @@ Now we have a data in a structure that we can use to create some plots. First, w
 <p class="ToggleButton" onclick="toggle_visibility('hideMe')">
 Click to See Code
 </p>
+<div id="hideMe">
 ``` r
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
@@ -379,7 +382,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
   grid.draw(combined)
 }
 ```
-
+</div>
 Summary Plots
 -------------
 
@@ -388,6 +391,7 @@ Now we can create a set of plot configuration options and a set of comparitive p
 <p class="ToggleButton" onclick="toggle_visibility('hideMe')">
 Click to See Code
 </p>
+<div id="hideMe">
 ``` r
 library(grid)
 library(gridExtra)
@@ -437,6 +441,8 @@ for(thresh in names(plot_setup)) {
   grid_arrange_shared_legend(plot_setup[[thresh]]$plotStatsrcp45, plot_setup[[thresh]]$plotStatsrcp85,ncol=2,top=plot_setup[[thresh]]$title)
 }
 ```
+
+</div>
 
 <img src='/static/LOCAdownscaling/plot_it-1.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-2.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-3.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-4.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-5.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/>
 
