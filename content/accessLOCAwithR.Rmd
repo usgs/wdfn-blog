@@ -1,9 +1,46 @@
 ---
 title: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
 author: "David Blodgett"
-date: "September 2, 2016"
-output: html_document
+date: "2016-09-13"
+tag1: "geoknife"
+slug: "LOCAdownscaling"
+description: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
+keywords1: "OPenDAP"
+output: USGSmarkdowntemplates::hugo
 ---
+
+
+```{r setup, include=FALSE}
+library(knitr)
+
+knit_hooks$set(plot=function(x, options) {
+
+  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
+          options$fig.path, options$label,
+          options$fig.cur, options$fig.ext,
+          options$fig.cap, options$alt.text, options$class)
+
+})
+
+knit_hooks$set(htmlcap = function(before, options, envir) {
+  if(!before) {
+    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
+    }
+})
+
+opts_chunk$set(
+  echo=TRUE,
+  fig.path="static/LOCAdownscaling/",
+  fig.width = 7,
+  fig.height = 7,
+  fig.cap = "TODO",
+  alt.text = "TODO",
+  class = ""
+)
+```
+
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 
 # Introduction
 
@@ -190,7 +227,7 @@ while(ran_one){
 
 loca_data_platte<-data.frame(dates=parseTimeseries(paste0('loca_demo/',varList[1],'.csv'),delim=',')$DateTime)
 for(var_to_parse in varList) {
-  loca_data_platte[var_to_parse] <- parseTimeseries(paste0('loca_demo/',var_to_parse,'.csv'), delim=',')[2]
+  loca_data_platte[var_to_parse] <-   parseTimeseries(paste0('loca_demo/',var_to_parse,'.csv'), delim=',')[2]
 }
 
 ```
