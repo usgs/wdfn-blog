@@ -1,4 +1,4 @@
-
+---
 author: Scott Lewein
 date: 2016-09-07
 slug: beingvsDoingAgile
@@ -6,13 +6,20 @@ draft: True
 title: Building a nimble and responsive organization
 categories: Software Development
 tags:
-- Agile
-- Software Engineering
+  - Agile
+description: Building a nimble and responsive organization
+keywords:
+  - agile software development
+---
 
-Being vs. Doing Agile
+<a href="mailto:srlewein@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://plus.google.com/101896392932098540953"><i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://www.linkedin.com/in/scott-lewein-5200974"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
 
 Building a nimble and responsive organization
 -----------------------------------------------------
+
+Being vs. Doing Agile
 
 I have the privilege to manage several high-performing teams of USGS software developers. The stereotypical sloth-like delivery of outdated technology attributed to federal workers does not apply. Embracing an agile philosophy, these teams deliver quality high-value features continuously. They don’t simply “do” agile, they “are” agile.  They are able to quickly pivot, adopt technology, innovate, and respond to the increasing rate of change required to support the USGS science mission.
 
