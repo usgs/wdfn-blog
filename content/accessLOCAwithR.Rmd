@@ -40,9 +40,11 @@ opts_chunk$set(
 )
 ```
 
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/dblodgett-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+<a href="https://www.researchgate.net/profile/David_Blodgett3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
 
 # Introduction
 
@@ -58,7 +60,7 @@ This new, feely available, statistically downscaled dataset is summaried in dept
 
 We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida-test.er.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida-test.er.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida-test.er.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
-```{r introspect, echo=TRUE, eval=FALSE}
+```{r introspect, echo=TRUE, eval=TRUE}
 library(ncdf4)
 loca_nc <- nc_open('http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
 loca_globals <- ncatt_get(loca_nc, varid = 0)
@@ -120,7 +122,7 @@ setwd(currentWD)
 
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
-```{r access_point_data, echo=TRUE, eval=FALSE}
+```{r access_point_data, echo=TRUE, eval=TRUE}
 lat_poi <- 40.2
 lon_poi <- 360 - 105 # Note LOCA uses 0 - 360 so -105 is 255 degrees.
 lat_index <- which.min(abs(lat_poi-loca_nc$dim$lat$vals))
