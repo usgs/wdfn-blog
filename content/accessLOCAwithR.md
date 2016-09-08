@@ -6,28 +6,29 @@ draft: True
 title: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
 type: post
 categories: Data Science
-image: static/LOCAdownscaling/plotIt-1.png
+image: static/LOCAdownscaling/plotIt-3.png
 tags: 
   - R
   - geoknife
- 
-description: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
-keywords:
-  - R
-  - geoknife
- 
- 
- 
+  - Geo Data Portal
+keywords: 
+  - OPenDAP
+  - downscaling
+  - climate projections
+  - Web Services
 ---
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
-
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://github.com/dblodgett-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a> 
+<a href="https://www.researchgate.net/profile/David_Blodgett3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
 
 Introduction
 ============
 
-In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the `ncdf4` package then use the `geoknife` package to access LOCA data using the Geo Data Portal as a geoprocessing service.
+In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the [`ncdf4`](https://cran.r-project.org/web/packages/ncdf4/) package then use the [`geoknife`](https://cran.r-project.org/web/packages/geoknife/) package to access LOCA data using the [Geo Data Portal](http://cida.usgs.gov/gdp/) as a geoprocessing service. More examples like this can be found at the [Geo Data Portal wiki.](https://github.com/USGS-CIDA/geo-data-portal/wiki)
+
+A number of other packages are required for this example. They include: `jsonlite` `leaflet` `chron` `tidyr` `ggplot2` `climates` `PCICt` `grid` `gridExtra`. They are all available from [CRAN](https://cran.r-project.org) except [`climates` which can be installed from github.](https://github.com/jjvanderwal/climates)
 
 About LOCA
 ----------
@@ -41,15 +42,44 @@ OPeNDAP Web Service Data Access
 
 We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida-test.er.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida-test.er.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida-test.er.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
+**NOTE:** The code using `ncdf4` below will only work on mac/linux installations of `ncdf4`. Direct OPeNDAP access to datasets is not supported in the Windows version of `ncdf4`.
+
 ``` r
 library(ncdf4)
 loca_nc <- nc_open('http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
 loca_globals <- ncatt_get(loca_nc, varid = 0)
 names(loca_globals) # Available global attributes.
+```
+
+    ##  [1] "history"              "creation_date"        "Conventions"         
+    ##  [4] "title"                "acknowledgment"       "Metadata_Conventions"
+    ##  [7] "summary"              "keywords"             "id"                  
+    ## [10] "naming_authority"     "cdm_data_type"        "publisher_name"      
+    ## [13] "publisher_url"        "creator_name"         "creator_email"       
+    ## [16] "time_coverage_start"  "time_coverage_end"    "date_modified"       
+    ## [19] "date_issued"          "project"              "publisher_email"     
+    ## [22] "geospatial_lat_min"   "geospatial_lat_max"   "geospatial_lon_min"  
+    ## [25] "geospatial_lon_max"   "license"
+
+``` r
 names(loca_nc) # top level names of the ncdf4 object.
+```
+
+    ##  [1] "filename"    "writable"    "id"          "safemode"    "format"     
+    ##  [6] "is_GMT"      "groups"      "fqgn2Rindex" "ndims"       "natts"      
+    ## [11] "dim"         "unlimdimid"  "nvars"       "var"
+
+``` r
 names(loca_nc$dim) # Dimensions of the ncdf4 object.
+```
+
+    ## [1] "bnds" "lat"  "lon"  "time"
+
+``` r
 loca_nc$nvars # How many variables are available from the ncdf4 object.
 ```
+
+    ## [1] 171
 
 From this, we can see the global variables that are available for the dataset as well as the `ncdf4` object's basic structure. Notice that the dataset has 171 variables!
 
@@ -58,6 +88,10 @@ Point-based time series data
 
 For this example, we'll look at the dataset in the Colorado Platte Drainage Basin climate division which includes Denver and North Central Colorado. For the examples that use a point, well use 40.2 degrees north latitude and 105 degrees west longitude, along I25 between Denver and Fort Collins.
 
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
+Click to See Code
+</p>
+<div id="hideMe">
 ``` r
 library(jsonlite)
 library(leaflet)
@@ -86,10 +120,9 @@ leafMapLOCA <- leaflet() %>%
   addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
   addMarkers(lng = -105, lat = 40.2)
 ```
-
+</div>
 <iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
 </iframe>
-
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
 ``` r
@@ -98,7 +131,21 @@ lon_poi <- 360 - 105 # Note LOCA uses 0 - 360 so -105 is 255 degrees.
 lat_index <- which.min(abs(lat_poi-loca_nc$dim$lat$vals))
 lon_index <- which.min(abs(lon_poi-loca_nc$dim$lon$vals))
 paste('lat',loca_nc$dim$lat$vals[lat_index],'lon',loca_nc$dim$lon$vals[lon_index])
+```
+
+    ## [1] "lat 40.21875 lon 254.96875"
+
+``` r
 names(loca_nc$var)[1:9]
+```
+
+    ## [1] "lat_bnds"                  "lon_bnds"                 
+    ## [3] "time_bnds"                 "pr_CCSM4_r6i1p1_rcp45"    
+    ## [5] "tasmax_CCSM4_r6i1p1_rcp45" "tasmin_CCSM4_r6i1p1_rcp45"
+    ## [7] "pr_CCSM4_r6i1p1_rcp85"     "tasmax_CCSM4_r6i1p1_rcp85"
+    ## [9] "tasmin_CCSM4_r6i1p1_rcp85"
+
+``` r
 start.time <- Sys.time()
 test_var<-ncvar_get(nc = loca_nc,
                     varid = names(loca_nc$var)[5],
@@ -106,6 +153,8 @@ test_var<-ncvar_get(nc = loca_nc,
                     count = c(1,1,-1))
 Sys.time() - start.time # See how long this takes.
 ```
+
+    ## Time difference of 1.104785 mins
 
 Time series plot of two scenarios.
 ----------------------------------
@@ -124,12 +173,21 @@ plot_dates<-as.POSIXct(chron(loca_nc$dim$time$vals,
                   origin=c(month=1, day=1, year=1900)))
 pData<-gather_(data = data.frame(dates=plot_dates, rcp45=test_var, rcp85=test_var2),
                    key_col = "Pathway", value_col = "data", gather_cols = c("rcp45","rcp85"))
+```
+
+    ## Warning in melt_dataframe(data, id_idx - 1L, gather_idx - 1L,
+    ## as.character(key_col), : '.Random.seed' is not an integer vector but of
+    ## type 'NULL', so ignored
+
+``` r
 ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alpha=1/15) +
   geom_smooth() + ylab('Daily Maximum Temperature (degrees C)') + xlab('Year') +
   ggtitle(paste0('Daily Maximum Temperature from variables:\n',
                 names(loca_nc$var)[5],', ',names(loca_nc$var)[8])) +
   theme(plot.title = element_text(face="bold"))
 ```
+
+<img src='/static/LOCAdownscaling/plot_the_data-1.png'/ title='Graph of projected daily maximum temperature.' alt='Graph of a full time series from two scenarios for one cell of data showing projected daily maximum temperature.' class=''/>
 
 Areal average time series data access with the Geo Data Portal
 --------------------------------------------------------------
@@ -187,16 +245,11 @@ time_per_step <- (time_one_year - time_one_step) / 364
 steps_per_var <- 365 * (2100-2006)
 time_per_var <- time_per_step * steps_per_var
 time_per_int <- time_one_step - time_per_step
-cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable.')
+cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable. \nTime for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
 ```
 
-    ## Precip time is about 0.4067767 hours per variable.
-
-``` r
-cat('Time for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
-```
-
-    ## Time for spatial intersection is about 5.912319 seconds.
+    ## Precip time is about 0.4062999 hours per variable. 
+    ## Time for spatial intersection is about 6.057293 seconds.
 
 This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok. In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
 
@@ -234,6 +287,10 @@ Derivative calculations
 
 Now that we have all the data and it's parsed into a list containing all the data, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
+Click to See Code
+</p>
+<div id="hideMe">
 ``` r
 library(climates)
 library(PCICt)
@@ -286,16 +343,17 @@ for(scenario in scenarios) {
   }
 }
 ```
-
+</div>
 Plot setup
 ----------
 
 Now we have a data in a structure that we can use to create some plots. First, we define a function from the [ggplot2 wiki that allows multiple plots to share a legend.](https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs)
 
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
+Click to See Code
+</p>
+<div id="hideMe">
 ``` r
-library(tidyr)
-library(ggplot2)
-
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
   # From https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
@@ -324,12 +382,16 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
   grid.draw(combined)
 }
 ```
-
+</div>
 Summary Plots
 -------------
 
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
+Click to See Code
+</p>
+<div id="hideMe">
 ``` r
 library(grid)
 library(gridExtra)
@@ -380,7 +442,9 @@ for(thresh in names(plot_setup)) {
 }
 ```
 
-<img src='/static/LOCAdownscaling/plotIt-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-5.png'/ title='TODO' alt='TODO' class=''/>
+</div>
+
+<img src='/static/LOCAdownscaling/plot_it-1.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-2.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-3.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-4.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-5.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/>
 
 All GCM Plots
 -------------
@@ -399,4 +463,4 @@ grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45,
   }
 ```
 
-<img src='/static/LOCAdownscaling/plot_lots-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_lots-5.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/LOCAdownscaling/plot_lots-1.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-2.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-3.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-4.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-5.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/>
