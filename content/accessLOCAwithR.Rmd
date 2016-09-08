@@ -3,10 +3,15 @@ title: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
 author: "David Blodgett"
 date: "2016-09-13"
 tag1: "geoknife"
+tag2: "Geo Data Portal"
+tag3: "THREDDS"
 slug: "LOCAdownscaling"
 description: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
 keywords1: "OPenDAP"
-image: "static/LOCAdownscaling/plotIt-1.png"
+keywords2: "downscaling"
+keywords3: "climate projections"
+keywords4: "Web Services"
+image: "static/LOCAdownscaling/plotIt-3.png"
 output: USGSmarkdowntemplates::hugo
 ---
 
@@ -48,7 +53,9 @@ opts_chunk$set(
 
 # Introduction
 
-In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the `ncdf4` package then use the `geoknife` package to access LOCA data using the Geo Data Portal as a geoprocessing service.
+In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the [`ncdf4`](https://cran.r-project.org/web/packages/ncdf4/) package then use the [`geoknife`](https://cran.r-project.org/web/packages/geoknife/) package to access LOCA data using the [Geo Data Portal](http://cida.usgs.gov/gdp/) as a geoprocessing service. More examples like this can be found at the [Geo Data Portal wiki.](https://github.com/USGS-CIDA/geo-data-portal/wiki)
+
+A number of other packages are required for this example. They include: `jsonlite` `leaflet` `chron` `tidyr` `ggplot2` `climates` `PCICt` `grid` `gridExtra`. They are all available from [CRAN](https://cran.r-project.org) except [`climates` which can be installed from github.](https://github.com/jjvanderwal/climates)
 
 ## About LOCA
 This new, feely available, statistically downscaled dataset is summaried in depth at this U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)  
@@ -314,8 +321,6 @@ Now we have a data in a structure that we can use to create some plots. First, w
 <p class="ToggleButton" onclick="toggle_visibility('hideMe')">Click to See Code</p>
 
 ```{r grid_arrange_function, echo=TRUE, toggle=TRUE, message=FALSE}
-library(tidyr)
-library(ggplot2)
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
   # From https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs

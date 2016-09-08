@@ -6,23 +6,29 @@ draft: True
 title: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
 type: post
 categories: Data Science
-image: static/LOCAdownscaling/plotIt-1.png
+image: static/LOCAdownscaling/plotIt-3.png
 tags: 
   - R
   - geoknife
- 
+  - Geo Data Portal
+keywords: 
+  - OPenDAP
+  - downscaling
+  - climate projections
+  - Web Services
 ---
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/dblodgett-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://github.com/dblodgett-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a> 
+<a href="<https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett>"&gt;<i class="fa fa-user fa-2x" aria-hidden="true"></i></a> 
 <a href="https://www.researchgate.net/profile/David_Blodgett3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-
 
 Introduction
 ============
 
-In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the `ncdf4` package then use the `geoknife` package to access LOCA data using the Geo Data Portal as a geoprocessing service.
+In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the [`ncdf4`](https://cran.r-project.org/web/packages/ncdf4/) package then use the [`geoknife`](https://cran.r-project.org/web/packages/geoknife/) package to access LOCA data using the [Geo Data Portal](http://cida.usgs.gov/gdp/) as a geoprocessing service. More examples like this can be found at the [Geo Data Portal wiki.](https://github.com/USGS-CIDA/geo-data-portal/wiki)
+
+A number of other packages are required for this example. They include: `jsonlite` `leaflet` `chron` `tidyr` `ggplot2` `climates` `PCICt` `grid` `gridExtra`. They are all available from [CRAN](https://cran.r-project.org) except [`climates` which can be installed from github.](https://github.com/jjvanderwal/climates)
 
 About LOCA
 ----------
@@ -147,7 +153,7 @@ test_var<-ncvar_get(nc = loca_nc,
 Sys.time() - start.time # See how long this takes.
 ```
 
-    ## Time difference of 2.264757 mins
+    ## Time difference of 1.104785 mins
 
 Time series plot of two scenarios.
 ----------------------------------
@@ -241,8 +247,8 @@ time_per_int <- time_one_step - time_per_step
 cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable. \nTime for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
 ```
 
-    ## Precip time is about 0.4033492 hours per variable. 
-    ## Time for spatial intersection is about 6.12795 seconds.
+    ## Precip time is about 0.4062999 hours per variable. 
+    ## Time for spatial intersection is about 6.057293 seconds.
 
 This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok. In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
 
@@ -345,8 +351,6 @@ Now we have a data in a structure that we can use to create some plots. First, w
 Click to See Code
 </p>
 ``` r
-library(tidyr)
-library(ggplot2)
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
   # From https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
