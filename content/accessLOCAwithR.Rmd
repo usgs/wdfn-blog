@@ -75,7 +75,6 @@ For this example, we'll look at the dataset in the Colorado Platte Drainage Basi
 ```{r get_polygon_and_map, echo=TRUE}
 library(jsonlite)
 library(leaflet)
-
 getGDPPolygon<-function(attribute,value) {
   baseURL<-"http://cida.usgs.gov/gdp/geoserver/ows"
   layer<-"sample:CONUS_Climate_Divisions"
@@ -95,12 +94,23 @@ analysis_polygon<-getGDPPolygon(attribute = attribute, value = value)
 coords<-analysis_polygon$features[[1]]$geometry$coordinates[[1]][[1]]
 coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
 names(coords)<-c('lon','lat')
-leaflet() %>% 
+leafMap <- leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 7) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
   addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
   addMarkers(lng = -105, lat = 40.2)
 ```
+
+```{r save_html_map echo=FALSE}
+library(htmlwidgets)
+library(htmltools)
+currentWD <- getwd()
+dir.create("static/leaflet", showWarnings = FALSE)
+setwd("static/leaflet")
+saveWidget(leafMap, "leafMapLOCA.html")
+setwd(currentWD)
+```
+<iframe seamless src="/static/leaflet/leafMapLOCA.html" width="100%" height="300"></iframe>
 
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
