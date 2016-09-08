@@ -56,7 +56,7 @@ This new, feely available, statistically downscaled dataset is summaried in dept
 
 We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida-test.er.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida-test.er.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida-test.er.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
-```{r introspect, echo=TRUE}
+```{r introspect, echo=TRUE, eval=FALSE}
 library(ncdf4)
 loca_nc <- nc_open('http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
 loca_globals <- ncatt_get(loca_nc, varid = 0)
@@ -76,7 +76,7 @@ For this example, we'll look at the dataset in the Colorado Platte Drainage Basi
 
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
-```{r access_point_data, echo=TRUE}
+```{r access_point_data, echo=TRUE, eval=FALSE}
 lat_poi <- 40.2
 lon_poi <- 360 - 105 # Note LOCA uses 0 - 360 so -105 is 255 degrees.
 lat_index <- which.min(abs(lat_poi-loca_nc$dim$lat$vals))
@@ -95,7 +95,7 @@ Sys.time() - start.time # See how long this takes.
 
 In the code above, we requested the fifth variable, or `tasmax_CCSM4_r6i1p1_rcp45`. Let's request a second variable and see how rcp45 compares to rcp85. For this example, we'll need three additional packages: `chron` to deal with the NetCDF time index conversion, `tidyr` to get data ready to plot with the gather function, and `ggplot2` to create a plot of the data.
 
-```{r plot_the_data, echo=TRUE}
+```{r plot_the_data, echo=TRUE, eval=FALSE}
 library(chron)
 library(tidyr)
 library(ggplot2)
@@ -263,6 +263,9 @@ for(scenario in scenarios) {
 Now we have a data in a structure that we can use to create some plots. First, we define a function from the [ggplot2 wiki that allows multiple plots to share a legend.](https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs)
 
 ```{r grid_arrange_function, echo=TRUE}
+library(tidyr)
+library(ggplot2)
+
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
   # From https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
@@ -297,6 +300,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
 ```{r plot_it, echo=TRUE}
+
 library(grid)
 library(gridExtra)
 plot_setup<-list(days_tmax_abv_thresh=
