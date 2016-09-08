@@ -6,7 +6,7 @@ draft: True
 title: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
 type: post
 categories: Data Science
-image: static/LOCAdownscaling/plot\_it-1.png
+image: static/LOCAdownscaling/plotIt-1.png
 tags: 
   - R
   - geoknife
@@ -19,7 +19,8 @@ keywords:
  
  
 ---
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a><a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 
 Introduction
 ============
@@ -86,6 +87,7 @@ leafMapLOCA <- leaflet() %>%
 
 <iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
 </iframe>
+
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
 ``` r
@@ -186,13 +188,13 @@ time_per_int <- time_one_step - time_per_step
 cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable.')
 ```
 
-    ## Precip time is about 0.4048915 hours per variable.
+    ## Precip time is about 0.4067767 hours per variable.
 
 ``` r
 cat('Time for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
 ```
 
-    ## Time for spatial intersection is about 5.947516 seconds.
+    ## Time for spatial intersection is about 5.912319 seconds.
 
 This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok. In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
 
@@ -376,7 +378,7 @@ for(thresh in names(plot_setup)) {
 }
 ```
 
-<img src='/static/LOCAdownscaling/plot_it-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_it-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_it-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_it-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plot_it-5.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/LOCAdownscaling/plotIt-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/LOCAdownscaling/plotIt-5.png'/ title='TODO' alt='TODO' class=''/>
 
 All GCM Plots
 -------------

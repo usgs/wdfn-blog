@@ -6,7 +6,7 @@ tag1: "geoknife"
 slug: "LOCAdownscaling"
 description: "Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R."
 keywords1: "OPenDAP"
-image: "static/LOCAdownscaling/plot_it-1.png"
+image: "static/LOCAdownscaling/plotIt-1.png"
 output: USGSmarkdowntemplates::hugo
 ---
 
@@ -40,7 +40,8 @@ opts_chunk$set(
 )
 ```
 
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> <a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 
 # Introduction
 
@@ -111,7 +112,7 @@ saveWidget(leafMapLOCA, "leafMapLOCA.html")
 setwd(currentWD)
 ```
 
-<iframe seamless src="/static/LOCAdownscaling/leafMapLOCA/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500"></iframe>
 
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
@@ -338,7 +339,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
 
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
-```{r plot_it, echo=TRUE, warning=FALSE, message=FALSE}
+```{r plotIt, echo=TRUE, warning=FALSE, message=FALSE}
 
 library(grid)
 library(gridExtra)
