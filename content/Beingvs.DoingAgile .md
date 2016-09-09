@@ -2,7 +2,7 @@
 author: Scott Lewein
 date: 2016-09-07
 slug: beingvsDoingAgile
-draft: True
+type: post
 title: Building a nimble and responsive organization
 categories: Software Development
 tags:
