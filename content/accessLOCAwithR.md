@@ -88,9 +88,10 @@ Point-based time series data
 
 For this example, we'll look at the dataset in the Colorado Platte Drainage Basin climate division which includes Denver and North Central Colorado. For the examples that use a point, well use 40.2 degrees north latitude and 105 degrees west longitude, along I25 between Denver and Fort Collins.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe4')">
+<p class="ToggleButton" onclick="toggle_visibility('hideMe1')">
 View Code
 </p>
+<div id="hideMe1" style="display:none">
 ``` r
 library(jsonlite)
 library(leaflet)
@@ -119,6 +120,7 @@ leafMapLOCA <- leaflet() %>%
   addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
   addMarkers(lng = -105, lat = 40.2)
 ```
+</div>
 
 <iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
 </iframe>
@@ -284,9 +286,10 @@ Derivative calculations
 
 Now that we have all the data downloaded and it has been parsed into a list we can work with, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe1')">
+<p class="ToggleButton" onclick="toggle_visibility('hideMe2')">
 View Code
 </p>
+<div id="hideMe2" style="display:none">
 ``` r
 library(climates)
 library(PCICt)
@@ -339,15 +342,17 @@ for(scenario in scenarios) {
   }
 }
 ```
+</div>
 
 Plot setup
 ----------
 
 Now we have a data in a structure that we can use to create some plots. First, we define a function from the [ggplot2 wiki that allows multiple plots to share a legend.](https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs)
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe2')">
+<p class="ToggleButton" onclick="toggle_visibility('hideMe3')">
 View Code
 </p>
+<div id="hideMe3" style="display:none">
 ``` r
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
@@ -377,15 +382,17 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
   grid.draw(combined)
 }
 ```
+</div>
 
 Summary Plots
 -------------
 
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe3')">
+<p class="ToggleButton" onclick="toggle_visibility('hideMe4')">
 View Code
 </p>
+<div id="hideMe4" style="display:none">
 ``` r
 library(grid)
 library(gridExtra)
@@ -435,6 +442,7 @@ for(thresh in names(plot_setup)) {
   grid_arrange_shared_legend(plot_setup[[thresh]]$plotStatsrcp45, plot_setup[[thresh]]$plotStatsrcp85,ncol=2,top=plot_setup[[thresh]]$title)
 }
 ```
+</div>
 
 <img src='/static/LOCAdownscaling/plot_it-1.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-2.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-3.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-4.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-5.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/>
 
