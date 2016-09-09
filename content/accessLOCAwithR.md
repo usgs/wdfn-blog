@@ -28,12 +28,12 @@ Introduction
 
 In this example, we will use the R programming language to access LOCA data via the OPeNDAP web service interface using the [`ncdf4`](https://cran.r-project.org/web/packages/ncdf4/) package then use the [`geoknife`](https://cran.r-project.org/web/packages/geoknife/) package to access LOCA data using the [Geo Data Portal](http://cida.usgs.gov/gdp/) as a geoprocessing service. More examples like this can be found at the [Geo Data Portal wiki.](https://github.com/USGS-CIDA/geo-data-portal/wiki)
 
-A number of other packages are required for this example. They include: `jsonlite` `leaflet` `chron` `tidyr` `ggplot2` `climates` `PCICt` `grid` `gridExtra`. They are all available from [CRAN](https://cran.r-project.org) except [`climates` which can be installed from github.](https://github.com/jjvanderwal/climates)
+A number of other packages are required for this example. They include: `tidyr` for preparing data to plot; `ggplot2` to create the plots; `grid` and `gridExtra` to layout multiple plots in the same figure; `jsonlite` and `leaflet` to create the simple map of a polygon; and `chron`, `climates`, and `PCICt` to calculate derived climate indices. They are all available from [CRAN](https://cran.r-project.org) except [`climates` which can be installed from github.](https://github.com/jjvanderwal/climates)
 
 About LOCA
 ----------
 
-This new, feely available, statistically downscaled dataset is summaried in depth at this U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)
+This new, feely available, statistically downscaled dataset is summarized in depth at the U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)
 
 **From the Metadata:** LOCA is a statistical downscaling technique that uses past history to add improved fine-scale detail to global climate models. We have used LOCA to downscale 32 global climate models from the CMIP5 archive at a 1/16th degree spatial resolution, covering North America from central Mexico through Southern Canada. The historical period is 1950-2005, and there are two future scenarios available: RCP 4.5 and RCP 8.5 over the period 2006-2100 (although some models stop in 2099). The variables currently available are daily minimum and maximum temperature, and daily precipitation. For more information visit: <http://loca.ucsd.edu/> The LOCA data is available due to generous support from the following agencies: The California Energy Commission (CEC), USACE Climate Preparedness and Resilience Program and US Bureau of Reclamation, US Department of Interior/USGS via the Southwest Climate Science Center, NOAA RISA program through the California Nevada Applications Program (CNAP), NASA through the NASA Earth Exchange and Advanced Supercomputing (NAS) Division **Reference:** Pierce, D. W., D. R. Cayan, and B. L. Thrasher, 2014: Statistical downscaling using Localized Constructed Analogs (LOCA). Journal of Hydrometeorology, volume 15, page 2558-2585.
 
@@ -88,10 +88,9 @@ Point-based time series data
 
 For this example, we'll look at the dataset in the Colorado Platte Drainage Basin climate division which includes Denver and North Central Colorado. For the examples that use a point, well use 40.2 degrees north latitude and 105 degrees west longitude, along I25 between Denver and Fort Collins.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
-Click to See Code
+<p class="ToggleButton" onclick="toggle_visibility('hideMe4')">
+View Code
 </p>
-<div id="hideMe">
 ``` r
 library(jsonlite)
 library(leaflet)
@@ -115,14 +114,17 @@ coords<-analysis_polygon$features[[1]]$geometry$coordinates[[1]][[1]]
 coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
 names(coords)<-c('lon','lat')
 leafMapLOCA <- leaflet() %>% 
-  setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 7) %>%
-  addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
+  setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 7,) %>%
+  addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", options=tileOptions(minZoom = 7, maxZoom = 7)) %>%
   addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
   addMarkers(lng = -105, lat = 40.2)
 ```
-</div>
+
 <iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
 </iframe>
+Get time series data for a single cell.
+---------------------------------------
+
 First, let's pull down a time series from our point of interest using ncdf4. To do this, we need to determine which lat/lon index we are interested in then access a variable of data at that index position.
 
 ``` r
@@ -154,7 +156,7 @@ test_var<-ncvar_get(nc = loca_nc,
 Sys.time() - start.time # See how long this takes.
 ```
 
-    ## Time difference of 1.104785 mins
+    ## Time difference of 2.158945 mins
 
 Time series plot of two scenarios.
 ----------------------------------
@@ -173,13 +175,6 @@ plot_dates<-as.POSIXct(chron(loca_nc$dim$time$vals,
                   origin=c(month=1, day=1, year=1900)))
 pData<-gather_(data = data.frame(dates=plot_dates, rcp45=test_var, rcp85=test_var2),
                    key_col = "Pathway", value_col = "data", gather_cols = c("rcp45","rcp85"))
-```
-
-    ## Warning in melt_dataframe(data, id_idx - 1L, gather_idx - 1L,
-    ## as.character(key_col), : '.Random.seed' is not an integer vector but of
-    ## type 'NULL', so ignored
-
-``` r
 ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alpha=1/15) +
   geom_smooth() + ylab('Daily Maximum Temperature (degrees C)') + xlab('Year') +
   ggtitle(paste0('Daily Maximum Temperature from variables:\n',
@@ -194,7 +189,7 @@ Areal average time series data access with the Geo Data Portal
 
 Using the method shown above, you can access any variable at any lat/lon location for your application. Next, we'll look at how to get areal statistics of the data for the Platte Drainage Basin climate division polygon shown above.
 
-For this, we'll need the package `geoknife`. In the code below, we setup the webgeom and webdata objects called stencil and fabric respectively. Then we make a request for one timestep to find out the `SUM` of the cell weights and the total `COUNT` of cells in the area weighted grid statistics calculation that the Geo Data Portal will perform at the request of `geoknife`. This tells us the fractional number of grid cells considered in the calculation as well as the total number of cells that will be considered for each time step.
+For this, we'll need the package `geoknife`. In the code below, we setup the `webgeom` and `webdata` objects called `stencil` and `fabric` respectively. Then we make a request for one timestep to find out the `SUM` of the cell weights and the total `COUNT` of cells in the area weighted grid statistics calculation that the Geo Data Portal will perform at the request of `geoknife`. This tells us the fractional number of grid cells considered in the calculation as well as the total number of cells that will be considered for each time step.
 
 ``` r
 library(geoknife)
@@ -248,10 +243,12 @@ time_per_int <- time_one_step - time_per_step
 cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable. \nTime for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
 ```
 
-    ## Precip time is about 0.4062999 hours per variable. 
-    ## Time for spatial intersection is about 6.057293 seconds.
+    ## Precip time is about 0.5414104 hours per variable. 
+    ## Time for spatial intersection is about 6.027188 seconds.
 
-This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok. In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
+This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok.
+
+In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
 
 GDP run to get all the data.
 ----------------------------
@@ -285,12 +282,11 @@ for(var_to_parse in varList) {
 Derivative calculations
 -----------------------
 
-Now that we have all the data and it's parsed into a list containing all the data, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
+Now that we have all the data downloaded and it has been parsed into a list we can work with, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
-Click to See Code
+<p class="ToggleButton" onclick="toggle_visibility('hideMe1')">
+View Code
 </p>
-<div id="hideMe">
 ``` r
 library(climates)
 library(PCICt)
@@ -343,16 +339,15 @@ for(scenario in scenarios) {
   }
 }
 ```
-</div>
+
 Plot setup
 ----------
 
 Now we have a data in a structure that we can use to create some plots. First, we define a function from the [ggplot2 wiki that allows multiple plots to share a legend.](https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs)
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
-Click to See Code
+<p class="ToggleButton" onclick="toggle_visibility('hideMe2')">
+View Code
 </p>
-<div id="hideMe">
 ``` r
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
@@ -382,16 +377,15 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
   grid.draw(combined)
 }
 ```
-</div>
+
 Summary Plots
 -------------
 
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
-Click to See Code
+<p class="ToggleButton" onclick="toggle_visibility('hideMe3')">
+View Code
 </p>
-<div id="hideMe">
 ``` r
 library(grid)
 library(gridExtra)
@@ -441,8 +435,6 @@ for(thresh in names(plot_setup)) {
   grid_arrange_shared_legend(plot_setup[[thresh]]$plotStatsrcp45, plot_setup[[thresh]]$plotStatsrcp85,ncol=2,top=plot_setup[[thresh]]$title)
 }
 ```
-
-</div>
 
 <img src='/static/LOCAdownscaling/plot_it-1.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-2.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-3.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-4.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-5.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/>
 
