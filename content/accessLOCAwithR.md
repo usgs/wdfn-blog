@@ -2,7 +2,6 @@
 author: David Blodgett
 date: 2016-09-13
 slug: LOCAdownscaling
-draft: True
 title: Accessing LOCA Downscaling Via OPeNDAP and the Geo Data Portal with R.
 type: post
 categories: Data Science
