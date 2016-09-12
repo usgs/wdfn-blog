@@ -40,13 +40,13 @@ This new, feely available, statistically downscaled dataset is summarized in dep
 OPeNDAP Web Service Data Access
 ===============================
 
-We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http:// cida.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http:// cida.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http:// cida.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
+We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
 **NOTE:** The code using `ncdf4` below will only work on mac/linux installations of `ncdf4`. Direct OPeNDAP access to datasets is not supported in the Windows version of `ncdf4`.
 
 ``` r
 library(ncdf4)
-loca_nc <- nc_open('http:// cida.usgs.gov/thredds/dodsC/loca_future')
+loca_nc <- nc_open('http://cida.usgs.gov/thredds/dodsC/loca_future')
 loca_globals <- ncatt_get(loca_nc, varid = 0)
 names(loca_globals) # Available global attributes.
 ```
@@ -158,7 +158,7 @@ test_var<-ncvar_get(nc = loca_nc,
 Sys.time() - start.time # See how long this takes.
 ```
 
-    ## Time difference of 2.158945 mins
+    ## Time difference of 1.653601 mins
 
 Time series plot of two scenarios.
 ----------------------------------
@@ -202,7 +202,7 @@ geom(stencil) <- 'sample:CONUS_Climate_Divisions'
 attribute(stencil) <- 'NAME'
 # query(stencil, 'values') # Uncomment to see list of available attribute values.
 values(stencil) <- 'PLATTE DRAINAGE BASIN'
-fabric <- webdata(url='http:// cida.usgs.gov/thredds/dodsC/loca_future')
+fabric <- webdata(url='http://cida.usgs.gov/thredds/dodsC/loca_future')
 varList<-query(fabric,'variables')
 variables(fabric) <- "pr_CCSM4_r6i1p1_rcp45"
 # query(fabric,'times') # Uncomment to see start and end dates.
@@ -245,8 +245,8 @@ time_per_int <- time_one_step - time_per_step
 cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable. \nTime for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
 ```
 
-    ## Precip time is about 0.5414104 hours per variable. 
-    ## Time for spatial intersection is about 6.027188 seconds.
+    ## Precip time is about 0.4170167 hours per variable. 
+    ## Time for spatial intersection is about 6.68374 seconds.
 
 This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok.
 
@@ -423,18 +423,20 @@ plot_setup<-list(days_tmax_abv_thresh=
                         plottype=geom_line()))
 
 for(thresh in names(plot_setup)) {
+  minPlot<-min(pList[[scenarios[1]]][[thresh]][2:length(pList[[scenarios[1]]][[thresh]])],pList[[scenarios[2]]][[thresh]][2:length(pList[[scenarios[2]]][[thresh]])])
+    maxPlot<-max(pList[[scenarios[1]]][[thresh]][2:length(pList[[scenarios[1]]][[thresh]])],pList[[scenarios[2]]][[thresh]][2:length(pList[[scenarios[2]]][[thresh]])])
   for(scenario in scenarios) {
     datset<-pList[[scenario]][[thresh]]
     pData<-gather_(datset,'gcm','data',names(datset)[2:length(datset)])
     plot_setup[[thresh]][[paste0("plotAll",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=gcm,group=gcm)) + 
-      plot_setup[[thresh]]$plottype +  ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario)
+      plot_setup[[thresh]]$plottype +  ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario) + ylim(minPlot, maxPlot)
     pData<-data.frame(mean=apply(datset[names(datset)[2:length(datset)]],1,mean))
     pData['max']<-apply(datset[names(datset)[2:length(datset)]],1,max)
     pData['min']<-apply(datset[names(datset)[2:length(datset)]],1,min)
     pData['year']<-datset$year
     pData<-gather_(pData,'stat','data',c('mean','max','min'))
     plot_setup[[thresh]][[paste0("plotStats",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=stat,group=stat)) + plot_setup[[thresh]]$plottype +
-      ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario)
+      ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario) + ylim(minPlot, maxPlot)
   }
   plot_setup[[thresh]]$plotStatsrcp45 <- plot_setup[[thresh]]$plotStatsrcp45 + theme(legend.position="none")
   plot_setup[[thresh]]$plotStatsrcp85 <- plot_setup[[thresh]]$plotStatsrcp85 + 

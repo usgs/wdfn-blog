@@ -390,18 +390,20 @@ plot_setup<-list(days_tmax_abv_thresh=
                         plottype=geom_line()))
 
 for(thresh in names(plot_setup)) {
+  minPlot<-min(pList[[scenarios[1]]][[thresh]][2:length(pList[[scenarios[1]]][[thresh]])],pList[[scenarios[2]]][[thresh]][2:length(pList[[scenarios[2]]][[thresh]])])
+    maxPlot<-max(pList[[scenarios[1]]][[thresh]][2:length(pList[[scenarios[1]]][[thresh]])],pList[[scenarios[2]]][[thresh]][2:length(pList[[scenarios[2]]][[thresh]])])
   for(scenario in scenarios) {
     datset<-pList[[scenario]][[thresh]]
     pData<-gather_(datset,'gcm','data',names(datset)[2:length(datset)])
     plot_setup[[thresh]][[paste0("plotAll",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=gcm,group=gcm)) + 
-      plot_setup[[thresh]]$plottype +  ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario)
+      plot_setup[[thresh]]$plottype +  ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario) + ylim(minPlot, maxPlot)
     pData<-data.frame(mean=apply(datset[names(datset)[2:length(datset)]],1,mean))
     pData['max']<-apply(datset[names(datset)[2:length(datset)]],1,max)
     pData['min']<-apply(datset[names(datset)[2:length(datset)]],1,min)
     pData['year']<-datset$year
     pData<-gather_(pData,'stat','data',c('mean','max','min'))
     plot_setup[[thresh]][[paste0("plotStats",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=stat,group=stat)) + plot_setup[[thresh]]$plottype +
-      ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario)
+      ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario) + ylim(minPlot, maxPlot)
   }
   plot_setup[[thresh]]$plotStatsrcp45 <- plot_setup[[thresh]]$plotStatsrcp45 + theme(legend.position="none")
   plot_setup[[thresh]]$plotStatsrcp85 <- plot_setup[[thresh]]$plotStatsrcp85 + 
