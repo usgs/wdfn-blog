@@ -65,13 +65,13 @@ This new, feely available, statistically downscaled dataset is summarized in dep
 
 # OPeNDAP Web Service Data Access
 
-We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida-test.er.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida-test.er.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida-test.er.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
+We'll use the LOCA Future dataset available from the [cida.usgs.gov thredds server.](http://cida.usgs.gov/thredds/catalog.html) [The OPeNDAP service can be seen here.](http://cida.usgs.gov/thredds/dodsC/loca_future.html) and the OPeNDAP base url that we will use with ncdf4 is: `http://cida.usgs.gov/thredds/dodsC/loca_future`. In the code below, we load the OPeNDAP data source and look at some details about it.
 
 **NOTE:** The code using `ncdf4` below will only work on mac/linux installations of `ncdf4`. Direct OPeNDAP access to datasets is not supported in the Windows version of `ncdf4`.
 
 ```{r introspect, echo=TRUE, eval=TRUE}
 library(ncdf4)
-loca_nc <- nc_open('http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
+loca_nc <- nc_open('http://cida.usgs.gov/thredds/dodsC/loca_future')
 loca_globals <- ncatt_get(loca_nc, varid = 0)
 names(loca_globals) # Available global attributes.
 names(loca_nc) # top level names of the ncdf4 object.
@@ -186,7 +186,7 @@ geom(stencil) <- 'sample:CONUS_Climate_Divisions'
 attribute(stencil) <- 'NAME'
 # query(stencil, 'values') # Uncomment to see list of available attribute values.
 values(stencil) <- 'PLATTE DRAINAGE BASIN'
-fabric <- webdata(url='http://cida-test.er.usgs.gov/thredds/dodsC/loca_future')
+fabric <- webdata(url='http://cida.usgs.gov/thredds/dodsC/loca_future')
 varList<-query(fabric,'variables')
 variables(fabric) <- "pr_CCSM4_r6i1p1_rcp45"
 # query(fabric,'times') # Uncomment to see start and end dates.
