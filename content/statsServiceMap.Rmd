@@ -6,6 +6,9 @@ date: "2016-07-29"
 output: USGSmarkdowntemplates::hugo
 image: "static/stats-service-map/plot-1.png"
 tag1: "dataRetrieval"
+description: "Using the R package dataRetrieval Stats Service."
+keywords1: "dataRetrieval"
+keywords2: "streamflow statistics"
 ---
 ```{r setup, include=FALSE}
 library(knitr)

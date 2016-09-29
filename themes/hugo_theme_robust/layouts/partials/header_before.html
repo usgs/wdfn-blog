@@ -21,7 +21,13 @@
     {{ else }}
     <title>{{ .Title }} - {{ .Site.Title }}</title>
     <meta property='og:title' content="{{ .Title }} - {{ .Site.Title }}">
-    <meta property="og:type" content="article">
+    
+    {{ with .Params.image }}
+      <meta property="og:type" content="summary_large_image">
+    {{ else }}
+      <meta property="og:type" content="article">
+    {{ end }}
+    
     <meta property='twitter:title' content="{{ .Title }} - {{ .Site.Title }}">
     {{ end }}
 

@@ -2,15 +2,27 @@
 author: David Watkins
 date: 2016-07-29
 slug: stats-service-map
-draft: True
 title: Using the dataRetrieval Stats Service
+type: post
 categories: Data Science
 image: static/stats-service-map/plot-1.png
 tags: 
   - R
   - dataRetrieval
  
+description: Using the R package dataRetrieval Stats Service.
+keywords:
+  - R
+  - dataRetrieval
+ 
+ 
+ 
 ---
+
+<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> 
+<a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a> 
+
+
 Introduction
 ------------
 
@@ -33,7 +45,7 @@ library(lubridate)
 library(dataRetrieval)
 
 #pick state(s) and date
-states <- c("MN","ND","SD","IA")
+states <- c("WI","MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
 #download each state individually
@@ -87,12 +99,12 @@ head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
 ```
 
     ##   dec_lon_va dec_lat_va  class
-    ## 1  -89.61620   48.01211   navy
-    ## 2  -91.79240   46.94688   navy
-    ## 3  -92.04000   47.48111 green4
-    ## 4  -92.63667   46.78167   navy
-    ## 5  -92.41880   46.70328   navy
-    ## 6  -96.01756   46.36940   red2
+    ## 1  -92.09389   46.63333   navy
+    ## 2  -91.59528   46.53778   navy
+    ## 3  -90.96324   46.59439 green4
+    ## 4  -90.59000   46.39472 green4
+    ## 5  -90.69630   46.48661 green4
+    ## 6  -90.90417   46.49722   navy
 
 Make the plot
 -------------
