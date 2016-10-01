@@ -4,11 +4,19 @@ date: 2016-07-29
 slug: stats-service-map
 draft: True
 title: Using the dataRetrieval Stats Service
+type: post
 categories: Data Science
 image: static/stats-service-map/plot-1.png
 tags: 
   - R
   - dataRetrieval
+ 
+description: Using the R package dataRetrieval Stats Service.
+keywords:
+  - R
+  - dataRetrieval
+ 
+ 
  
 ---
 Introduction
@@ -33,7 +41,7 @@ library(lubridate)
 library(dataRetrieval)
 
 #pick state(s) and date
-states <- c("MN","ND","SD","IA")
+states <- c("WI","MN","ND","SD","IA")
 storm.date <- "2016-07-12"
 
 #download each state individually
@@ -71,28 +79,39 @@ statData.storm <- statData[statData$month_nu == month(storm.date) &
 finalJoin <- left_join(storm.data,statData.storm)
 finalJoin <- left_join(finalJoin,sites) 
 
+finalJoin[,grep("_va",names(finalJoin))] <- sapply(finalJoin[,grep("_va",names(finalJoin))], function(x) as.numeric(x))
+
 #remove sites without current data 
 finalJoin <- finalJoin[!is.na(finalJoin$Flow),] 
 
 
 #classify current discharge values
 finalJoin$class <- NA
-finalJoin$class <- ifelse(is.na(finalJoin$p25), 
-                          ifelse(finalJoin$Flow > finalJoin$p50_va, "cyan","yellow"),
-                          ifelse(finalJoin$Flow < finalJoin$p25_va, "red2",
-                          ifelse(finalJoin$Flow > finalJoin$p75_va, "navy","green4")))
+
+finalJoin$class[finalJoin$Flow > finalJoin$p75_va] <- "navy"
+finalJoin$class[finalJoin$Flow < finalJoin$p25_va] <- "red2"
+
+finalJoin$class[finalJoin$Flow > finalJoin$p25_va & 
+                  finalJoin$Flow <= finalJoin$p50_va] <- "green4"
+finalJoin$class[finalJoin$Flow > finalJoin$p50_va &
+                  finalJoin$Flow <= finalJoin$p75_va] <- "blue"
+
+finalJoin$class[is.na(finalJoin$class) & 
+                  finalJoin$Flow > finalJoin$p50_va] <- "cyan"
+finalJoin$class[is.na(finalJoin$class) & 
+                  finalJoin$Flow < finalJoin$p50_va] <- "yellow"
 
 #take a look at the columns that we will plot later:
 head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
 ```
 
-    ##   dec_lon_va dec_lat_va  class
-    ## 1  -89.61620   48.01211   navy
-    ## 2  -91.79240   46.94688   navy
-    ## 3  -92.04000   47.48111 green4
-    ## 4  -92.63667   46.78167   navy
-    ## 5  -92.41880   46.70328   navy
-    ## 6  -96.01756   46.36940   red2
+    ##   dec_lon_va dec_lat_va class
+    ## 1  -92.09389   46.63333  navy
+    ## 2  -91.59528   46.53778  navy
+    ## 3  -90.96324   46.59439  navy
+    ## 4  -90.59000   46.39472  navy
+    ## 5  -90.69630   46.48661  navy
+    ## 6  -90.90417   46.49722  navy
 
 Make the plot
 -------------
@@ -102,18 +121,24 @@ The base map consists of two plots. The first makes the county lines with a gray
 ``` r
 #convert states from postal codes to full names
 states <- stateCdLookup(states, outputType = "fullName")
+par(pty="s")
 map('county',regions=states,fill=TRUE, col="gray87", lwd=0.5)
 map('state',regions=states,fill=FALSE, lwd=2, add=TRUE)
 points(finalJoin$dec_lon_va,
        finalJoin$dec_lat_va,
        col=finalJoin$class, pch=19)
-box(lwd=2)
 title(paste("Daily discharge value percentile rank\n",storm.date),line=1)
 par(mar=c(5.1, 4.1, 4.1, 6), xpd=TRUE)
 legend("bottomleft",inset=c(0.01,.01),
-       legend=c("Q > P50*","Q < P50*","Q < P25","P25 < Q < P75","Q > P75"),
+       legend=c("Q > P50*","Q < P50*",
+                "Q < P25",
+                "P25 < Q < P50","P50 < Q < P75",
+                "Q > P75"),
        pch=19,cex = 0.75,pt.cex = 1.2,
-       col = c("cyan","yellow","red2","green4","navy"),
+       col = c("cyan","yellow",
+               "red2",
+               "green4","blue",
+               "navy"),
        ncol = 2)
 map.scale(ratio=FALSE,cex = 0.75,
           grconvertX(.07,"npc"), 
