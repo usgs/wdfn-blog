@@ -1,5 +1,67 @@
-# owi-blog
+owi-blog
+----------
+
 *Blog posts from the USGS Office of Water Information*
+
+# Submitting blog post
+
+1. Fork repo
+2. Create a markdown file (.md)
+3. Add to `content` folder
+4. Include static images in `static\name-of-blog`. Images *must* include alt and title text
+5. Add a header similar to:
+
+  ```
+  ---
+  author: Laura DeCicco
+  date: 2016-06-16
+  slug: plotFlowConc
+  draft: True
+  type: post
+  title: EGRET plotFlowConc using ggplot2
+  categories: Data Science
+  tags: 
+    - EGRET
+    - R
+  image: static/plotFlowConc/unnamed-chunk-4-1.png
+  description: Using the R packages, ggplot and EGRET, a new function plotFlowConc        shows a new way to visualize the changes between flow and concentration.
+  keywords:
+    - EGRET
+    - ggplot2
+    - data visualization
+  ---
+  ```
+
+  Important notes about header:
+  
+  * Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
+  
+  * Initial submission **must** include `draft: True`
+  
+  * `slug` slug will be the name of your url after owi.usgs.gov\blog\xxx
+  
+  * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
+  
+  * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
+  
+  * `tags` are more specific words, and do not need to be on a pre-approved list, these will show up on the sidebar of the blog.
+  
+  * `description` will go into a "meta" tag that Google and other sites use
+  
+  * `keywords` (can be the same as tags), also go in a "meta" tag to be used by Google and others.
+  
+  * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
+
+6. Submit a pull request
+7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site. 
+8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site. 
+9. A designated approver must sign off on content based on review response
+10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
+11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
+12. Assuming all looks good, push to prod
+
+
+## Hugo Installation
 
 [**Download/installation instructions**](https://gohugo.io/overview/installing/)
 
@@ -9,33 +71,28 @@ Essentially, the Hugo executable just needs to sit in a directory referenced in 
 
 Shows how to build a simple example Hugo site.  On the left sidebar there are links to more in-depth documentation.
 
-[**Templates for R markdowns**](https://github.com/hrbrmstr/markdowntemplates)
-
-With these installed, you can select the 'Hugo Blog Post' template when you create a new R markdown in R studio.  The R markdown will then knit to a .md file, which you should save to the 'content' directory of the Hugo site.  Hugo handles it from there.
-
-NOTE: `markdowntemplates` by default adds `status: draft` to the markdown header (not rmarkdown file). It is up to you to change that to `type: post` for the post to be published. OR, in Hugo:
-```
-hugo undraft content/post/foo.md
-```
-
-NOTE: Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
-
-**Content for blog posts** 
-The necessary pieces for a post are the resulting .md file that is knit from Rstudio, which forms the main body of the post, and then any images that should be associated with the post.  The actual layout of the pages is handled in the Hugo 'theme'.
-
-Current theme development based off:
-```
-git clone https://github.com/jpescador/hugo-future-imperfect.git
-```
-So, clone that into the 'themes' folder. Then run the server locally from the main Hugo folder using:
+To test locally, run:
 
 ```
-hugo server --theme=hugo-future-imperfect --buildDrafts
-```
-
-OR:
-```
+export HUGO_BASEURL="blog/"
 hugo server --theme=hugo_theme_robust --buildDrafts
+```
+
+# Instructions for R users
+
+[**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
+
+```
+devtools::install_github("USGS-R/USGSmarkdowntemplates")
+```
+
+This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
+
+To add 2 figures side by side, add `class="sideBySide"`, for example:
+
+```
+<img class="sideBySide" src='/fig1.png'/ alt='/ggplot2'/>
+<img class="sideBySide" src='/fig2.png'/ alt='/EGRET'/>
 ```
 
 
