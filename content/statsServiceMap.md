@@ -11,23 +11,13 @@ tags:
   - R
   - dataRetrieval
  
-description: Using the R package dataRetrieval Stats Service.
-keywords:
-  - R
-  - dataRetrieval
- 
- 
- 
 ---
-
-<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-
 Introduction
 ------------
 
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html). We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history. Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
 
-To run this code, we recommend having either `dataRetreival` version 2.5.13 (currently the latest version on CRAN) or version 2.6.1 or later from GRAN.
+To run this code, we recommend having either `dataRetreival` version 2.5.13 (currently the latest release on CRAN) or version 2.6.1 (currently the latest Github release).
 
 Get the data
 ------------
@@ -160,7 +150,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
 <img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/>
 
 Make an interactive plot
--------------------------
+------------------------
 
 Static maps are great for papers and presentations. When possible, interactive maps allow the reader more flexibility to examine the data. The R `leaflet` package makes it easy to create useful interactive maps:
 
