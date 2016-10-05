@@ -11,18 +11,13 @@ tags:
   - R
   - dataRetrieval
  
-description: Using the R package dataRetrieval Stats Service.
-keywords:
-  - R
-  - dataRetrieval
- 
- 
- 
 ---
 Introduction
 ------------
 
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html). We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history. Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
+
+To run this code, we recommend having either `dataRetreival` version 2.5.13 (currently the latest version on CRAN) or version 2.6.1 or later from GRAN.
 
 Get the data
 ------------
@@ -148,7 +143,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.08, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/> ***Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.*
+<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/> **Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.
 
 Questions
 =========
