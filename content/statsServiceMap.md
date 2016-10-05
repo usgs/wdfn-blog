@@ -1,6 +1,6 @@
 ---
 author: David Watkins
-date: 2016-07-29
+date: 2016-10-05
 slug: stats-service-map
 draft: True
 title: Using the dataRetrieval Stats Service
@@ -11,7 +11,17 @@ tags:
   - R
   - dataRetrieval
  
+description: Using the R package dataRetrieval Stats Service.
+keywords:
+  - R
+  - dataRetrieval
+ 
+ 
+ 
 ---
+
+<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+
 Introduction
 ------------
 
@@ -84,10 +94,10 @@ finalJoin <- finalJoin[!is.na(finalJoin$Flow),]
 finalJoin$class <- NA
 
 finalJoin$class[finalJoin$Flow > finalJoin$p75_va] <- "navy"
-finalJoin$class[finalJoin$Flow < finalJoin$p25_va] <- "red2"
+finalJoin$class[finalJoin$Flow < finalJoin$p25_va] <- "red"
 
 finalJoin$class[finalJoin$Flow > finalJoin$p25_va & 
-                  finalJoin$Flow <= finalJoin$p50_va] <- "green4"
+                  finalJoin$Flow <= finalJoin$p50_va] <- "green"
 finalJoin$class[finalJoin$Flow > finalJoin$p50_va &
                   finalJoin$Flow <= finalJoin$p75_va] <- "blue"
 
@@ -108,8 +118,8 @@ head(finalJoin[,c("dec_lon_va","dec_lat_va","class")])
     ## 5  -90.69630   46.48661  navy
     ## 6  -90.90417   46.49722  navy
 
-Make the plot
--------------
+Make the static plot
+--------------------
 
 The base map consists of two plots. The first makes the county lines with a gray background, and the second overlays the heavier state lines. After that we add the points for each stream gage, colored by the column we added to `finalJoin`. In the finishing details, `grconvertXY` is a handy function that converts your inputs from a normalized (0-1) coordinate system to the actual map coordinates, which allows the legend and scale to stay in the same relative location on different maps.
 
@@ -124,16 +134,20 @@ points(finalJoin$dec_lon_va,
        col=finalJoin$class, pch=19)
 title(paste("Daily discharge value percentile rank\n",storm.date),line=1)
 par(mar=c(5.1, 4.1, 4.1, 6), xpd=TRUE)
-legend("bottomleft",inset=c(0.01,.01),
-       legend=c("Q > P50*","Q < P50*",
+
+legend.colors <- c("cyan","yellow",
+               "red",
+               "green","blue",
+               "navy")
+legend.names <- c("Q > P50*","Q < P50*",
                 "Q < P25",
                 "P25 < Q < P50","P50 < Q < P75",
-                "Q > P75"),
+                "Q > P75")
+
+legend("bottomleft",inset=c(0.01,.01),
+       legend=legend.names,
        pch=19,cex = 0.75,pt.cex = 1.2,
-       col = c("cyan","yellow",
-               "red2",
-               "green4","blue",
-               "navy"),
+       col = legend.colors,
        ncol = 2)
 map.scale(ratio=FALSE,cex = 0.75,
           grconvertX(.07,"npc"), 
@@ -143,7 +157,39 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.08, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/> **Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.
+<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/>
+
+Make an interactive plot
+-------------------------
+
+Static maps are great for papers and presentations. When possible, interactive maps allow the reader more flexibility to examine the data. The R `leaflet` package makes it easy to create useful interactive maps:
+
+``` r
+library(leaflet)
+
+finalJoin$popup <- with(finalJoin, paste("<b>",station_nm,"</b></br>",
+                                         "Measured Flow:",Flow,"ft3/s</br>",
+                                         "25% historical:",p25_va,"ft3/s</br>",
+                                         "50% historical:",p50_va,"ft3/s</br>",
+                                         "75% historical:",p75_va,"ft3/s"))
+
+leafMapStat <- leaflet(data=finalJoin) %>% 
+  addProviderTiles("CartoDB.Positron") %>%
+  addCircleMarkers(~dec_lon_va,~dec_lat_va,
+                   color = ~class, radius=3, stroke=FALSE,
+                   fillOpacity = 0.8, opacity = 0.8,
+                   popup=~popup)
+
+leafMapStat <- addLegend(leafMapStat,
+        position = 'bottomleft',
+        colors= legend.colors,
+        labels= legend.names,
+        opacity = 0.8)
+```
+
+<iframe seamless src="/static/stats-service-map/leafMapStat/index.html" width="100%" height="500">
+</iframe>
+**Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.
 
 Questions
 =========
