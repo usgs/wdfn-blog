@@ -2,7 +2,6 @@
 author: David Watkins
 date: 2016-10-05
 slug: stats-service-map
-draft: True
 title: Using the dataRetrieval Stats Service
 type: post
 categories: Data Science
