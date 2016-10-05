@@ -1,6 +1,6 @@
 ---
 author: Lindsay R. Carr
-date: 2016-10-04
+date: 2016-10-05
 slug: Reproducibility
 draft: True
 title: The case for reproducibility
@@ -18,11 +18,11 @@ keywords:
 Science is hard, why make it harder?
 ------------------------------------
 
-Scientists and researchers spend a lot of time on data preparation and analysis, and some of these analyses are quite computationally intensive. The amount of time required to conduct an analysis grows for the increased complexity of calculations, amount of data, and number of datasets that will be analyzed. Many researchers use spreadsheets to conduct their analysis workflows, and apply the same set to each data set manually. A majority of the time in this type of workflow could be spent copying and pasting equations from one spreadsheet or column to another. This spreadsheet workflow is highly error-prone, as *The Economist* shows in "[Excel errors and science papers](http://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3?fsrc=scn/fb/te/bl/ed/excelerrorsandsciencepapers)".
+Scientists and researchers spend a lot of time on data preparation and analysis, and some of these analyses are quite computationally intensive. The amount of time required to conduct an analysis grows for the increased complexity of calculations, amount of data, and number of datasets that will be analyzed. Many researchers use spreadsheets to conduct their analysis workflows, and apply the same tasks to each data set manually. A majority of the time in this type of workflow could be spent copying and pasting equations from one spreadsheet or column to another.
 
 What if I told you there was a better way?
 
-By focusing on reproducibility from the start of a project, you can quickly re-run analyses, easily share your methods with colleagues and collaborators, and apply the same methods to multiple datasets with little effort.
+By focusing on reproducibility from the start of a project, you can quickly re-run analyses, easily share your methods with colleagues and collaborators, apply the same methods to multiple datasets with little effort, and reduce errors.
 
 What does "reproducibility" really mean?
 ----------------------------------------
@@ -35,14 +35,17 @@ Tips and tricks to having reproducible workflows
 ------------------------------------------------
 
 -   script your work!
+-   comment the steps in your code
 -   use relative (not absolute) filepaths
--   limit the number of applications/programs being used
+-   limit the number of applications/programs being used when possible
 -   keep up to date with software versions
 
 What can you do?
 ----------------
 
 If you don't know where to start, try learning some basic R. There are many resources: [tryR from Code School](http://tryr.codeschool.com/), [swirl](http://swirlstats.com/), and the [USGS Introduction to R](https://owi.usgs.gov/R/training.html) Course.
+
+Next, try to script just one piece of your analysis. Pick a set of tasks that need to be applied to several similar datasets or need to be run repeatedly. Write a script that automates one iteration through those tasks. Then reduce your analysis time and mistakes by applying that same script to all of the datasets or runs. Better still, move your code into a loop so that the script automates the repetition, too.
 
 Reproducibility can go beyond your local files. Maybe your plots and tables are scripted, but you're still having to copy and paste into slides or a manuscript. [R Markdown](http://rmarkdown.rstudio.com/) can automate the process of inserting figures and tables into PDFs, Word documents, and slides.
 
