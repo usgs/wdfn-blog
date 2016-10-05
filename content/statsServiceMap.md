@@ -11,6 +11,9 @@ tags:
   - dataRetrieval
  
 ---
+
+<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+
 Introduction
 ------------
 
