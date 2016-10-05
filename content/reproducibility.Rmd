@@ -28,7 +28,7 @@ The best way to accomplish reproducibility is to start scripting your analyses. 
 * script your work!
 * comment the steps in your code
 * use relative (not absolute) filepaths
-* limit the number of applications/programs being used
+* limit the number of applications/programs being used when possible
 * keep up to date with software versions
 
 ## What can you do?
