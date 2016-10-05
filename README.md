@@ -17,12 +17,18 @@ owi-blog
   date: 2016-06-16
   slug: plotFlowConc
   draft: True
+  type: post
   title: EGRET plotFlowConc using ggplot2
   categories: Data Science
   tags: 
     - EGRET
     - R
   image: static/plotFlowConc/unnamed-chunk-4-1.png
+  description: Using the R packages, ggplot and EGRET, a new function plotFlowConc        shows a new way to visualize the changes between flow and concentration.
+  keywords:
+    - EGRET
+    - ggplot2
+    - data visualization
   ---
   ```
 
@@ -36,17 +42,22 @@ owi-blog
   
   * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
   
-  * `categories` is a small list of approved options. The current list is `Data Science`...and will be expanded. For any category, there is a list of people that have the authority to approve posts.
+  * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
   
-  * `tags` are more specific words, and do not need to be on a pre-approved list.
+  * `tags` are more specific words, and do not need to be on a pre-approved list, these will show up on the sidebar of the blog.
+  
+  * `description` will go into a "meta" tag that Google and other sites use
+  
+  * `keywords` (can be the same as tags), also go in a "meta" tag to be used by Google and others.
   
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
 
 6. Submit a pull request
-8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form)
+7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site. 
+8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site. 
 9. A designated approver must sign off on content based on review response
-10. A designated web content manager will sign off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt tags)
-11. Once the content is approved, the draft status can be changed to `draft: False`, and the content will appear on the QA site.
+10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
+11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
 12. Assuming all looks good, push to prod
 
 
