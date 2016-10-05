@@ -42,6 +42,8 @@ opts_chunk$set(
 
 This script utilizes the new `dataRetrieval` package access to the [USGS Statistics Web Service](http://waterservices.usgs.gov/rest/Statistics-Service.html).  We will be pulling daily mean data using the daily value service in `readNWISdata`, and using the stats service data to put it in the context of the site's history.  Here we are retrieving data for July 12th in the Upper Midwest, where a major storm system had recently passed through. You can modify this script to look at other areas and dates simply by modifying the `states` and `storm.date` objects.
 
+To run this code, we recommend having either `dataRetreival` version 2.5.13 (currently the latest version on CRAN) or version 2.6.1 or later from GRAN. 
+
 ## Get the data
 
 There are two separate `dataRetrieval` calls here — one to retrieve the daily discharge data, and one to retrieve the historical discharge statistics.  Both calls are inside loops to split them into smaller pieces, to accomodate web service restrictions.  The daily values service allows only single states as a filter, so we loop over the list of states. The stats service does not allow requests of more than ten sites, so the loop iterates by groups of ten site codes.  Retrieving the data can take a few tens of seconds.  Once we have both the daily value and statistics data, the two data frames are joined by site number via [dplyr's](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) `left_join` function.  We use a [pipe](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html) to send the output of the join to `na.omit()` function.  Then we add a column to the final data frame to hold the color value for each station.    
@@ -154,7 +156,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      x=grconvertX(0.2,"npc"), 
      y=grconvertY(-0.08, "npc"))
 ```
-_**Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future._  
+**Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.  
 
 # Questions
 
