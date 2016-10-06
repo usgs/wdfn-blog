@@ -2,7 +2,7 @@
 title: "The case for reproducibility"
 author: "Lindsay R. Carr"
 slug: "Reproducibility"
-date: "2016-10-04"
+date: "2016-10-06"
 description: "Explanation of reproducibility and resources to start practicing it"
 keyword1: "reproducibility"
 keyword2: "reproducible science"
@@ -47,8 +47,6 @@ And finally, encourage colleagues and collaborators to strive for reproducible s
 
 ## In conclusion...
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen align="center"></iframe>
-
-Video by Ignasi Bartomeus and Francisco Rodríguez-Sánchez.
+Watch [this video](https://www.youtube.com/watch?v=s3JldKoA0zw) on the horrors of non-reproducible workflows by Ignasi Bartomeus and Francisco Rodríguez-Sánchez.
 
 <br>
