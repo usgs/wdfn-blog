@@ -1,6 +1,6 @@
 ---
 author: Lindsay R. Carr
-date: 2016-10-05
+date: 2016-10-06
 slug: Reproducibility
 draft: True
 title: The case for reproducibility
@@ -60,4 +60,6 @@ In conclusion...
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen align="center">
 </iframe>
+Video by Ignasi Bartomeus and Francisco Rodríguez-Sánchez.
+
 <br>

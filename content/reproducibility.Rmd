@@ -49,4 +49,6 @@ And finally, encourage colleagues and collaborators to strive for reproducible s
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen align="center"></iframe>
 
+Video by Ignasi Bartomeus and Francisco Rodríguez-Sánchez.
+
 <br>
