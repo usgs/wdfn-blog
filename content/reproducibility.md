@@ -2,7 +2,6 @@
 author: Lindsay R. Carr
 date: 2016-10-06
 slug: Reproducibility
-draft: True
 title: The case for reproducibility
 type: post
 categories: Data Science
