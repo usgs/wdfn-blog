@@ -1,35 +1,27 @@
 ---
-author: Marcus Beck and Laura DeCicco
+author: Marcus Beck (USEPA) and Laura DeCicco (USGS)
 date: 2016-07-13
 slug: plotFlowConc
-type: post
+draft: True
 title: EGRET plotFlowConc using ggplot2
+type: post
 categories: Data Science
 image: static/plotFlowConc/plotFlowConc-1.png
 tags: 
   - R
   - EGRET
-description: Using the R packages, ggplot and EGRET, a new function plotFlowConc shows a new way to visualize the changes between flow and concentration.
+ 
+description: 
 keywords:
+  - R
   - EGRET
-  - ggplot2
-  - data visualization
+ 
+ 
+ 
 ---
+-   Marcus Beck from the USEPA ( <beck.marcus@epa.gov>) <a href="https://twitter.com/fawda123"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/fawda123"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a> <a href="https://scholar.google.com/citations?user=9ZDDQ_8AAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a> <a href="https://www.researchgate.net/profile/Marcus_Beck"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
 
-* Marcus Beck (USEPA)
-<a href="mailto:beck.marcus@epa.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/fawda123"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/fawda123"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://scholar.google.com/citations?user=9ZDDQ_8AAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.researchgate.net/profile/Marcus_Beck"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-
-* Laura DeCicco (USGS-OWI)
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+-   Laura DeCicco from the USGS (OWI) (<ldecicco@usgs.gov>) <a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a> <a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
 
 Introduction
 ============
@@ -50,8 +42,21 @@ plotConcQ
 
 ``` r
 library(EGRET)
-library(ggplot2)
+```
 
+    ## Warning: replacing previous import by 'lubridate::fast_strptime' when
+    ## loading 'dataRetrieval'
+
+    ## Warning: replacing previous import by 'lubridate::parse_date_time' when
+    ## loading 'dataRetrieval'
+
+``` r
+library(ggplot2)
+```
+
+    ## Warning: package 'ggplot2' was built under R version 3.2.4
+
+``` r
 eList <-  Choptank_eList
 Sample <- eList$Sample
 INFO <- eList$INFO
@@ -84,10 +89,28 @@ Show/Hide Code
 
 ``` r
 library(tidyr)
+```
+
+    ## Warning: package 'tidyr' was built under R version 3.2.5
+
+``` r
 library(dplyr)
+```
+
+    ## Warning: package 'dplyr' was built under R version 3.2.5
+
+``` r
 library(ggplot2)
 library(fields)
+```
 
+    ## Warning: package 'fields' was built under R version 3.2.5
+
+    ## Warning: package 'spam' was built under R version 3.2.5
+
+    ## Warning: package 'maps' was built under R version 3.2.5
+
+``` r
 plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL, ymin = 0){
   
   localDaily <- getDaily(eList)
@@ -285,7 +308,6 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
     
 }
 ```
-</div>
 
 The function can also be imported in the workspace from GitHub:
 
@@ -331,3 +353,5 @@ Questions
 Please direct any questions or comments on `EGRET` to: <https://github.com/USGS-R/EGRET/issues>
 
 Questions about `plotFlowConc` can be directed to Marcus Beck at <beck.marcus@epa.gov>
+
+<div id="extraResources"></div>

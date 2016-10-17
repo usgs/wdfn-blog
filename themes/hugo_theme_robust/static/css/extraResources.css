@@ -1,0 +1,51 @@
+
+.mentionedRepo{
+  border:1px solid rgb(220,220,220);
+  margin:0 0 10px 0;
+}
+
+.mentionedRepo a{
+  display:inline-block;
+  width:100%;
+  height:100px;
+}
+
+.extraResourcesHeader{
+  word-break:break-word;
+}
+
+.repoName{
+  width:80%;
+  float:left;
+  height:100px;
+  padding:11px 10px 10px 10px;
+}
+
+.repoImage{
+  width:20%;
+  height:100px;
+  float:right;
+  text-align:center;
+  border-left:1px solid rgb(220,220,220);
+}
+
+.repoImage img{
+  width:60%;
+  padding-top:50%;
+}
+
+@media screen and (min-width:768px){
+  .repoName{
+    padding-top:23px;
+  }
+  
+  .repoImage img{
+    padding-top:11px;
+  }
+}
+
+@media screen and (min-width:1025px){
+  .repoImage img{
+    padding-top:4px;
+  }
+}
