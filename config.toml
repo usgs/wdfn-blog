@@ -2,7 +2,7 @@ languageCode = "en-us"
 title = "The USGS OWI blog"
 theme = "OWI"
 preserveTaxonomyNames = true
-paginate = 6
+paginate = 100
 canonifyurls = true
 
 
