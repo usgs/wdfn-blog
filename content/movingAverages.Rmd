@@ -4,7 +4,7 @@ slug: "moving-averages"
 author: "Laura DeCicco"
 date: "2016-10-25"
 output: USGSmarkdowntemplates::hugo
-image: "static/moving-averages/unnamed-chunk-6-1.png"
+image: "static/moving-averages/unnamed-chunk-5-1.png"
 tag1: "dataRetrieval"
 description: "Using the R-packages dataRetrieval, dplyr, and ggplot2, a simple discription on how to create a moving average plot."
 keywords1: "dataRetrieval"

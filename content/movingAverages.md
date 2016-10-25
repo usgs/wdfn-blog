@@ -6,7 +6,7 @@ draft: True
 title: Moving Averages on NWIS Data
 type: post
 categories: Data Science
-image: static/moving-averages/unnamed-chunk-6-1.png
+image: static/moving-averages/unnamed-chunk-5-1.png
 tags: 
   - R
   - dataRetrieval
@@ -19,6 +19,7 @@ keywords:
  
  
 ---
+
 <a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
 <a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
