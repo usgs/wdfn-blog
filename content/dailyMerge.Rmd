@@ -87,7 +87,9 @@ ggplot(data = simpleDailySC_SS) +
   facet_grid(parm_cd ~ site_no,scales = "free") 
 ```
 
+# But I prefer base-R graphics!
 
+In many situations, using the base-R plotting functions may be desired. 
 
 
 # Questions
