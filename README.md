@@ -83,7 +83,7 @@ hugo server --theme=hugo_theme_robust --buildDrafts
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
 ```
-devtools::install_github("USGS-R/USGSmarkdowntemplates")
+install.packages("USGSmarkdowntemplates", repos=c("https://owi.usgs.gov/R",getOption("repos")))
 ```
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
