@@ -3,6 +3,12 @@ owi-blog
 
 *Blog posts from the USGS Office of Water Information*
 
+# Guidelines for submission
+1. Applicable/useful to a greater audience.
+2. Content provides additional information not available elsewhere.
+3. Relevant to USGS employees or USGS data users
+4. Showcases databases, applications, software, or common practices associated with OWI or within the OWI portfolio.
+
 # Submitting blog post
 
 1. Fork repo
