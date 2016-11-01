@@ -376,13 +376,14 @@ comp5680 <- data.frame(Date = DatesVec,
 
 #look at the data
 pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
-  geom_line(aes(y = Observed, color = "Observed")) +
-  geom_line(aes(y = Estimated.lm, color = "Estimated.lm")) +
+  geom_line(aes(y = Observed, color = "Observed"),size=1.25) +
+  geom_line(aes(y = Estimated.lm, color = "Estimated.lm"),size=1.25) +
   scale_y_log10() +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
   theme_bw() + 
-  scale_x_date(limits = c(as.Date("2015-06-01"), as.Date("2015-08-31")))
+  scale_x_date(limits = c(as.Date("2015-06-01"), as.Date("2015-08-31"))) +
+  theme(legend.title = element_blank())
 
 
 pLmEst
@@ -411,16 +412,17 @@ comp5680$Estimated.m2obc <- predict(m2obc5680, dataAllDVwide)
 
 #look at the data
 pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
-  geom_line(aes(y = Observed, color = "Observed")) +
-  geom_line(aes(y = Estimated.lm, color = "Estimated.lm")) +
-  geom_line(aes(y = Estimated.m2lc, color = "Estimated.m2lc")) +
-  geom_line(aes(y = Estimated.m2obc, color = "Estimated.m2obc")) +
+  geom_line(aes(y = Observed, color = "Observed"),size=1.25) +
+  geom_line(aes(y = Estimated.lm, color = "Estimated.lm"),size=1.25) +
+  geom_line(aes(y = Estimated.m2lc, color = "Estimated.m2lc"),size=1.25) +
+  geom_line(aes(y = Estimated.m2obc, color = "Estimated.m2obc"),size=1.25) +
   scale_y_log10() +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
   theme_bw() + 
   scale_x_date(limits = c(as.Date("2015-06-01"), as.Date("2015-08-31"))) +
-  scale_y_log10(limits = c(10, 2000))
+  scale_y_log10(limits = c(10, 2000)) +
+  theme(legend.title = element_blank())
 
 pLmEst
 ```
@@ -450,15 +452,16 @@ forSmooth$Smoothed.lm <- adjResid(x = forSmooth$Estimated.lm,
 
 #now lets look at the data
 pLmSmooth <- ggplot(data = forSmooth, aes(x = Date)) +
-  geom_line(aes(y = Observed, color = "Observed")) +
-  geom_line(aes(y = Estimated.lm, color = "Estimated.lm")) +
-  geom_line(aes(y = Estimated.m2lc, color = "Estimated.m2lc")) +
-  geom_line(aes(y = Estimated.m2obc, color = "Estimated.m2obc")) +
-  geom_line(aes(y = Smoothed.lm, color = "Smoothed.lm")) +
+  geom_line(aes(y = Observed, color = "Observed"),size=1.25) +
+  geom_line(aes(y = Estimated.lm, color = "Estimated.lm"),size=1.25) +
+  geom_line(aes(y = Estimated.m2lc, color = "Estimated.m2lc"),size=1.25) +
+  geom_line(aes(y = Estimated.m2obc, color = "Estimated.m2obc"),size=1.25) +
+  geom_line(aes(y = Smoothed.lm, color = "Smoothed.lm"),size=1.5) +
   scale_y_log10() +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
-  theme_bw()
+  theme_bw() +
+  theme(legend.title = element_blank())
 
 pLmSmooth
 ```
