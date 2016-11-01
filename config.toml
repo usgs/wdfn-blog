@@ -1,8 +1,7 @@
-languageCode = "en-us"
+canonifyurls = true
 title = "The USGS OWI blog"
-theme = "OWI"
+name = ["Laura DeCicco"]
+email = ["r_admin@usgs.gov"]
+description = "We are committed to advancing USGS science by integrating data across scales and domains, improving access to data and research, and developing tools for analysis and visualization, fostering collaboration with the international community."
 preserveTaxonomyNames = true
 paginate = 100
-canonifyurls = true
-
-
