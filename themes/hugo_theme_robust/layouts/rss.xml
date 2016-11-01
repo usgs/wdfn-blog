@@ -1,22 +1,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>{{ .Site.Title }} </title>
-    <link href="{{ .Permalink }}" rel="self"/>
-
+    <link>{{ .Permalink }}</link>
+    <atom:link href="{{ .Permalink }}/index.xml" rel="self" type="application/rss+xml" />
+    <description>We are committed to advancing USGS science by integrating data across scales and domains, improving access to data and research, and developing tools for analysis and visualization, fostering collaboration with the international community.</description>
     <language>en-us</language>
 
     {{ range .Data.Pages }}
       {{ if eq .Type "post"}}
-        <entry>
+        <item>
           <title>{{ .Title }}</title>
           <link>{{ .Permalink }}</link>
+          <description>{{ .Description }}</description>
           <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML  }}</pubDate>
           <author>
             <name>{{ .Params.author }}</name>
           </author>
           <guid>{{ .Permalink }}</guid>
           <content type="html">{{ .Content | html }}</content>
-        </entry>
+        </item>
       {{ end }}
     {{ end }}
 
