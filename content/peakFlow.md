@@ -286,11 +286,181 @@ Remove a chunk from site 07055680, find the best sites for comparison, and estim
 library(tidyr)
 datAllDVs <- filter( datAllDVs, Date >= as.Date("2008-06-14")) 
 
-datAllDVwide <- datAllDVs %>%
-   gather(variable, value, Flow:Flow_cd) %>% 
+dataAllDVwide <- datAllDVs %>%
+  select(-Flow_cd) %>%
+   gather(variable, value, Flow) %>% 
    unite(VarG, variable, site_no) %>% 
-   spread(VarG, value)
+   spread(VarG, value) 
+
+# Adding in some NA's for demonstration only
+
+dataAllDVwide$Flow_07055680[dataAllDVwide$Date %in% seq(as.Date("2015-07-01"),as.Date("2015-07-31"), by="1 day")] <- NA
+
+#create a vector of the Dates from the wide data frame
+DatesVec <- dataAllDVwide$Date
+
+library(smwrStats)
+candidateVars <- as.matrix(select(dataAllDVwide, -agency_cd, -Date, -Flow_07055680))
+bestEstLM <- allReg(x = candidateVars, 
+                    y = dataAllDVwide$Flow_07055680, 
+                    nmax = 2, nbst = 3, na.rm.x = TRUE)
 ```
+
+| model.formula                                                  |  stderr|    R2|       Cp|      press|
+|:---------------------------------------------------------------|-------:|-----:|--------:|----------:|
+| dataAllDVwide$Flow\_07055680 ~ Flow\_07055660                  |   239.8|  89.9|   5875.7|  182925879|
+| dataAllDVwide$Flow\_07055680 ~ Flow\_07055646                  |   307.6|  83.4|  11614.9|  300912875|
+| dataAllDVwide$Flow\_07055680 ~ Flow\_07056000                  |   319.9|  82.1|  12816.7|  351837295|
+| dataAllDVwide$Flow\_07055680 ~ Flow\_07055660 + Flow\_07056000 |   147.4|  96.2|    338.1|   76013799|
+| dataAllDVwide$Flow\_07055680 ~ Flow\_07055660 + Flow\_07056700 |   162.9|  95.4|   1080.7|   87505464|
+| dataAllDVwide$Flow\_07055680 ~ Flow\_07055646 + Flow\_07056000 |   203.8|  92.7|   3404.7|  148915176|
+
+``` r
+#how does that compare to log10 transforms, but first deal with 0's
+#which sites have 0's
+#site 07055660 has 0's, set those to NA
+dataAllDVwide$Flow_07055660[dataAllDVwide$Flow_07055660 == 0] <- NA
+candidateVars <- as.matrix(select(dataAllDVwide, -agency_cd, -Date, -Flow_07055680))
+bestEstLMl10 <- allReg(x = log10(candidateVars), 
+                       y = log10(dataAllDVwide$Flow_07055680), 
+                       nmax = 2, nbst = 3, na.rm.x = TRUE)
+```
+
+| model.formula                                                         |  stderr|    R2|      Cp|  press|
+|:----------------------------------------------------------------------|-------:|-----:|-------:|------:|
+| log10(dataAllDVwide$Flow\_07055680) ~ Flow\_07055660                  |     0.2|  93.4|  2366.4|  118.3|
+| log10(dataAllDVwide$Flow\_07055680) ~ Flow\_07056000                  |     0.2|  90.7|  4582.1|  166.7|
+| log10(dataAllDVwide$Flow\_07055680) ~ Flow\_07056700                  |     0.3|  88.8|  6144.1|  201.1|
+| log10(dataAllDVwide$Flow\_07055680) ~ Flow\_07055660 + Flow\_07056000 |     0.2|  96.1|   190.8|   70.6|
+| log10(dataAllDVwide$Flow\_07055680) ~ Flow\_07055660 + Flow\_07056700 |     0.2|  96.0|   223.4|   71.3|
+| log10(dataAllDVwide$Flow\_07055680) ~ Flow\_07055646 + Flow\_07055660 |     0.2|  94.4|  1574.7|  101.1|
+
+``` r
+#adj R-squared doesn't change much, Cp is reduced with the log transforms, so stick with that and create the regression
+lm5680 <- lm(log10(Flow_07055680) ~ log10(Flow_07055660) + log10(Flow_07056700), 
+             data = dataAllDVwide)
+summary(lm5680)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = log10(Flow_07055680) ~ log10(Flow_07055660) + log10(Flow_07056700), 
+    ##     data = dataAllDVwide)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.81359 -0.06011 -0.00047  0.06412  0.91052 
+    ## 
+    ## Coefficients:
+    ##                       Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)          -0.363497   0.020310  -17.90   <2e-16 ***
+    ## log10(Flow_07055660)  0.539955   0.007268   74.29   <2e-16 ***
+    ## log10(Flow_07056700)  0.492316   0.011011   44.71   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.1534 on 3017 degrees of freedom
+    ##   (41 observations deleted due to missingness)
+    ## Multiple R-squared:  0.9603, Adjusted R-squared:  0.9602 
+    ## F-statistic: 3.646e+04 on 2 and 3017 DF,  p-value: < 2.2e-16
+
+``` r
+#use the regression to predict some new DVs for site 07055680
+pred5680 <- 10^predict(lm5680, dataAllDVwide)
+
+#create a new data frame of the observed and estimated data
+comp5680 <- data.frame(Date = DatesVec, 
+                       Observed = datAllDVs$Flow[datAllDVs$site_no == "07055680"], 
+                       Estimated.lm = pred5680)
+
+#look at the data
+pLmEst <- ggplot() +
+  geom_line(data = comp5680, aes(x = Date, y = Observed, color = "Observed")) +
+  geom_line(data = comp5680, aes(x = Date, y = Estimated.lm, color = "Estimated.lm")) +
+  scale_y_log10() +
+  annotation_logticks(sides = "rl") +
+  labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
+  theme_bw() + 
+  scale_x_date(limits = c(as.Date("2015-06-01"), as.Date("2015-08-31")))
+
+
+pLmEst
+```
+
+<img src='/static/peak-flow-analysis/unnamed-chunk-16-1.png'/ title='TODO' alt='TODO' class=''/>
+
+``` r
+#estimates for July look reasonable, look at another method, MOVE.2 with log10 distribution
+#createa and print the model
+m2lc5680 <- move.2(formula = Flow_07055680 ~ Flow_07055660, 
+                   data = dataAllDVwide, 
+                   distribution = "commonlog")
+
+#estimate DVs using the move.2 model
+comp5680$Estimated.m2lc <- predict(m2lc5680, dataAllDVwide)
+
+#before comparing the OLS regression with MOVE.2 using common log distribution, now use MOVE.2 with the optimized Box-Cox transformations
+#first, get the optimized Box-Cox tranformations
+optBC5680 <- optimBoxCox(dataAllDVwide[c("Flow_07055680", "Flow_07055660")])
+m2obc5680 <- move.2(formula = Flow_07055680 ~ Flow_07055660, 
+                    data = dataAllDVwide, distribution = optBC5680)
+
+#estimate DVs using the move.2 model with the Box-Cox distribution
+comp5680$Estimated.m2obc <- predict(m2obc5680, dataAllDVwide)
+
+#look at the data
+pLmEst <- ggplot() +
+  geom_line(data = comp5680, aes(x = Date, y = Observed, color = "Observed")) +
+  geom_line(data = comp5680, aes(x = Date, y = Estimated.lm, color = "Estimated.lm")) +
+  geom_line(data = comp5680, aes(x = Date, y = Estimated.m2lc, color = "Estimated.m2lc")) +
+  geom_line(data = comp5680, aes(x = Date, y = Estimated.m2obc, color = "Estimated.m2obc")) +
+  scale_y_log10() +
+  annotation_logticks(sides = "rl") +
+  labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
+  theme_bw() + 
+  scale_x_date(limits = c(as.Date("2015-01-01"), as.Date("2015-12-30"))) +
+  scale_y_log10(limits = c(10, 2000))
+
+pLmEst
+```
+
+<img src='/static/peak-flow-analysis/unnamed-chunk-17-1.png'/ title='TODO' alt='TODO' class=''/>
+
+``` r
+#create a function to "smooth" the estimated data for July, 2015 by the first and last residual
+adjResid <- function(x, y, dates) {
+  diffDates <- as.numeric(dates[length(dates)]) - as.numeric(dates[1])
+  allResids <- y - x
+  lftRsd <- allResids[1]
+  rghtRsd <- allResids[(length(allResids))]
+  slopeRsd <- (rghtRsd - lftRsd) / diffDates
+  adjResid <- lftRsd + slopeRsd*(as.numeric(dates) - as.numeric(dates[1]))
+  smoothed <- x + adjResid
+  return(smoothed)
+}
+
+#get a subset of the data to "smooth" that starts one day before and ends one day after the missing period
+forSmooth <- comp5680[which(comp5680$Date == "2015-06-30"):which(comp5680$Date == "2015-08-01"),]
+
+#apply the function to the data
+forSmooth$Smoothed.lm <- adjResid(x = forSmooth$Estimated.lm, y = forSmooth$Observed, dates = forSmooth$Date)
+
+#now lets look at the data
+pLmSmooth <- ggplot() +
+  geom_line(data = forSmooth, aes(x = Date, y = Observed, color = "Observed")) +
+  geom_line(data = forSmooth, aes(x = Date, y = Estimated.lm, color = "Estimated.lm")) +
+  geom_line(data = forSmooth, aes(x = Date, y = Estimated.m2lc, color = "Estimated.m2lc")) +
+  geom_line(data = forSmooth, aes(x = Date, y = Estimated.m2obc, color = "Estimated.m2obc")) +
+  geom_line(data = forSmooth, aes(x = Date, y = Smoothed.lm, color = "Smoothed.lm")) +
+  scale_y_log10() +
+  annotation_logticks(sides = "rl") +
+  labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
+  theme_bw()
+
+pLmSmooth
+```
+
+<img src='/static/peak-flow-analysis/unnamed-chunk-18-1.png'/ title='TODO' alt='TODO' class=''/>
 
 Questions
 ---------
