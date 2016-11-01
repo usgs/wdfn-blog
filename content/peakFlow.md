@@ -6,7 +6,7 @@ draft: True
 title: Introduction to peak flow analysis
 type: post
 categories: Data Science
-image: static/surface-water/unnamed-chunk-7-1.png
+image: static/peak-flow-analysis/unnamed-chunk-7-1.png
 tags: 
   - R
   - dataRetrieval

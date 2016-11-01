@@ -4,7 +4,7 @@ slug: "peak-flow-analysis"
 author: "Brian Breaker and Laura DeCicco"
 date: "2016-10-28"
 output: USGSmarkdowntemplates::hugo
-image: "static/surface-water/unnamed-chunk-7-1.png"
+image: "static/peak-flow-analysis/unnamed-chunk-7-1.png"
 tag1: "dataRetrieval"
 description: "Using the R-packages dataRetrieval, dplyr, and ggplot2, a simple analysis on peak flow."
 keywords1: "dataRetrieval"

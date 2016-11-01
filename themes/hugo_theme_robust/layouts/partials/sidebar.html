@@ -28,14 +28,6 @@
   </section>
   {{ end }}
 
-<!--  <section>
-    <header>LatestPosts</header>
-    <div>
-      {{ range first 10 .Site.Pages }}
-      {{ .Render "li" }}
-      {{ end }}
-    </div>
-  </section>-->
 
   {{ range $key, $value := .Site.Taxonomies }}
   <section>
@@ -84,17 +76,36 @@
   </div>
   </section>
 
-{{ if in .Params.tags "R"}}
   <section>
   <header>Related Blogs</header>
-  <div>
-    <ul>
-      <li>
-        <a href="http://R-bloggers.com">R-bloggers</a>
-      </li>
-    </ul>
-  </div>
+    <div>
+      <ul>
+        <li>
+          <a href="https://blog.epa.gov/blog/"  target="blank">EPA</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>
+          <a href="http://oceanservice.noaa.gov/blogs.html"  target="blank">NOAA</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>
+          <a href="http://blogs.nasa.gov/"  target="blank">NASA</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>
+          <a href="http://R-bloggers.com" target="blank">R-bloggers</a>
+        </li>
+      </ul>
+    </div>
   </section>
-{{ end }}
 
 </aside>
