@@ -3,6 +3,12 @@ owi-blog
 
 *Blog posts from the USGS Office of Water Information*
 
+# Guidelines for submission
+1. Applicable/useful to a greater audience.
+2. Content provides additional information not available elsewhere.
+3. Relevant to USGS employees or USGS data users
+4. Showcases databases, applications, software, or common practices associated with OWI or within the OWI portfolio.
+
 # Submitting blog post
 
 1. Fork repo
@@ -83,7 +89,7 @@ hugo server --theme=hugo_theme_robust --buildDrafts
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
 ```
-devtools::install_github("USGS-R/USGSmarkdowntemplates")
+install.packages("USGSmarkdowntemplates", repos=c("https://owi.usgs.gov/R",getOption("repos")))
 ```
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
