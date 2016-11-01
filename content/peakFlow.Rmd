@@ -312,8 +312,9 @@ DatesVec <- dataAllDVwide$Date
 
 library(smwrStats)
 candidateVars <- as.matrix(select(dataAllDVwide, -agency_cd, -Date, -Flow_07055680))
+Flow_07055680 <- dataAllDVwide$Flow_07055680
 bestEstLM <- allReg(x = candidateVars, 
-                    y = dataAllDVwide$Flow_07055680, 
+                    y = Flow_07055680, 
                     nmax = 2, nbst = 3, na.rm.x = TRUE)
 
 ```
@@ -329,7 +330,7 @@ kable(select(bestEstLM, -adjr2, -nvars), digits = 1)
 dataAllDVwide$Flow_07055660[dataAllDVwide$Flow_07055660 == 0] <- NA
 candidateVars <- as.matrix(select(dataAllDVwide, -agency_cd, -Date, -Flow_07055680))
 bestEstLMl10 <- allReg(x = log10(candidateVars), 
-                       y = log10(dataAllDVwide$Flow_07055680), 
+                       y = log10(Flow_07055680), 
                        nmax = 2, nbst = 3, na.rm.x = TRUE)
 ```
 
@@ -341,7 +342,7 @@ kable(select(bestEstLMl10, -adjr2, -nvars), digits = 1)
 
 ```{r}
 #adj R-squared doesn't change much, Cp is reduced with the log transforms, so stick with that and create the regression
-lm5680 <- lm(log10(Flow_07055680) ~ log10(Flow_07055660) + log10(Flow_07056700), 
+lm5680 <- lm(log10(Flow_07055680) ~ log10(Flow_07055660) + log10(Flow_07056000), 
              data = dataAllDVwide)
 summary(lm5680)
 ```
@@ -353,13 +354,13 @@ pred5680 <- 10^predict(lm5680, dataAllDVwide)
 
 #create a new data frame of the observed and estimated data
 comp5680 <- data.frame(Date = DatesVec, 
-                       Observed = datAllDVs$Flow[datAllDVs$site_no == "07055680"], 
+                       Observed = Flow_07055680, 
                        Estimated.lm = pred5680)
 
 #look at the data
-pLmEst <- ggplot() +
-  geom_line(data = comp5680, aes(x = Date, y = Observed, color = "Observed")) +
-  geom_line(data = comp5680, aes(x = Date, y = Estimated.lm, color = "Estimated.lm")) +
+pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
+  geom_line(aes(y = Observed, color = "Observed")) +
+  geom_line(aes(y = Estimated.lm, color = "Estimated.lm")) +
   scale_y_log10() +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
@@ -393,11 +394,11 @@ m2obc5680 <- move.2(formula = Flow_07055680 ~ Flow_07055660,
 comp5680$Estimated.m2obc <- predict(m2obc5680, dataAllDVwide)
 
 #look at the data
-pLmEst <- ggplot() +
-  geom_line(data = comp5680, aes(x = Date, y = Observed, color = "Observed")) +
-  geom_line(data = comp5680, aes(x = Date, y = Estimated.lm, color = "Estimated.lm")) +
-  geom_line(data = comp5680, aes(x = Date, y = Estimated.m2lc, color = "Estimated.m2lc")) +
-  geom_line(data = comp5680, aes(x = Date, y = Estimated.m2obc, color = "Estimated.m2obc")) +
+pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
+  geom_line(aes(y = Observed, color = "Observed")) +
+  geom_line(aes(y = Estimated.lm, color = "Estimated.lm")) +
+  geom_line(aes(y = Estimated.m2lc, color = "Estimated.m2lc")) +
+  geom_line(aes(y = Estimated.m2obc, color = "Estimated.m2obc")) +
   scale_y_log10() +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
@@ -425,18 +426,20 @@ adjResid <- function(x, y, dates) {
 }
 
 #get a subset of the data to "smooth" that starts one day before and ends one day after the missing period
-forSmooth <- comp5680[which(comp5680$Date == "2015-06-30"):which(comp5680$Date == "2015-08-01"),]
+forSmooth <- filter(comp5680, Date >= as.Date("2015-06-30") & Date <= as.Date("2015-08-01"))
 
 #apply the function to the data
-forSmooth$Smoothed.lm <- adjResid(x = forSmooth$Estimated.lm, y = forSmooth$Observed, dates = forSmooth$Date)
+forSmooth$Smoothed.lm <- adjResid(x = forSmooth$Estimated.lm, 
+                                  y = forSmooth$Observed, 
+                                  dates = forSmooth$Date)
 
 #now lets look at the data
-pLmSmooth <- ggplot() +
-  geom_line(data = forSmooth, aes(x = Date, y = Observed, color = "Observed")) +
-  geom_line(data = forSmooth, aes(x = Date, y = Estimated.lm, color = "Estimated.lm")) +
-  geom_line(data = forSmooth, aes(x = Date, y = Estimated.m2lc, color = "Estimated.m2lc")) +
-  geom_line(data = forSmooth, aes(x = Date, y = Estimated.m2obc, color = "Estimated.m2obc")) +
-  geom_line(data = forSmooth, aes(x = Date, y = Smoothed.lm, color = "Smoothed.lm")) +
+pLmSmooth <- ggplot(data = forSmooth, aes(x = Date)) +
+  geom_line(aes(y = Observed, color = "Observed")) +
+  geom_line(aes(y = Estimated.lm, color = "Estimated.lm")) +
+  geom_line(aes(y = Estimated.m2lc, color = "Estimated.m2lc")) +
+  geom_line(aes(y = Estimated.m2obc, color = "Estimated.m2obc")) +
+  geom_line(aes(y = Smoothed.lm, color = "Smoothed.lm")) +
   scale_y_log10() +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
