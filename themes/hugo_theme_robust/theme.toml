@@ -1,7 +1,4 @@
-name = "OWI"
-description = "OWI theme for hugo."
 tags = ["blog"]
 features = ["blog"]
 min_version = 0.15
-
-
+theme = "OWI"
