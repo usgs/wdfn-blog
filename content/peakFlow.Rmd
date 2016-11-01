@@ -403,7 +403,7 @@ pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
   annotation_logticks(sides = "rl") +
   labs(x = "Date", y = expression(paste(Discharge, ", ", ft^{3}/s))) +
   theme_bw() + 
-  scale_x_date(limits = c(as.Date("2015-01-01"), as.Date("2015-12-30"))) +
+  scale_x_date(limits = c(as.Date("2015-06-01"), as.Date("2015-08-31"))) +
   scale_y_log10(limits = c(10, 2000))
 
 pLmEst
@@ -426,7 +426,7 @@ adjResid <- function(x, y, dates) {
 }
 
 #get a subset of the data to "smooth" that starts one day before and ends one day after the missing period
-forSmooth <- filter(comp5680, Date >= as.Date("2015-06-30") & Date <= as.Date("2015-08-01"))
+forSmooth <- filter(comp5680, Date >= as.Date("2015-06-01") & Date <= as.Date("2015-08-31"))
 
 #apply the function to the data
 forSmooth$Smoothed.lm <- adjResid(x = forSmooth$Estimated.lm, 
