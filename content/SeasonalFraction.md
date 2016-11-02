@@ -6,7 +6,7 @@ draft: True
 title: Seasonal Analysis in EGRET
 type: post
 categories: Data Science
-image: static/seasonal-analysis/unnamed-chunk-7-1.png
+image: static/seasonal-analysis/unnamed-chunk-3-1.png
 tags: 
   - R
   - EGRET
@@ -22,7 +22,7 @@ keywords:
 Introduction
 ============
 
-This ducument describes how to obtain information from (EGRET)\[<https://CRAN.R-project.org/package=EGRET>\] results that describe the seasonal distribution of fluxes. For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February). We can look at it for a single year, we can look at averages of it over several years, or we can look at it in terms of flow normalized fluxes.
+This ducument describes how to obtain information from [EGRET](https://CRAN.R-project.org/package=EGRET) results that describe the seasonal distribution of fluxes. For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February). We can look at it for a single year, we can look at averages of it over several years, or we can look at it in terms of flow normalized fluxes.
 
 Getting started
 ===============
@@ -32,73 +32,60 @@ First, you need to have loaded the `EGRET` package and you need to have run the 
 Next, you will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them.
 
 ``` r
-setupSeasons <- function(localDaily, paLong, paStart) {
-    SeasonResults <- setupYearsPlus(localDaily, paLong = paLong, paStart = paStart)
-    AnnualResults <- setupYearsPlus(localDaily, paLong = 12, paStart = paStart)
-    numYears <- length(AnnualResults$DecYear)
-    divide <- 1e+06
-    DecYear <- AnnualResults$DecYear
-    Year <- trunc(DecYear)
-    FluxYear <- AnnualResults$Flux * AnnualResults$Counts/divide
-    FNFluxYear <- AnnualResults$FNFlux * AnnualResults$Counts/divide
-    FluxSeason <- SeasonResults$Flux[1:numYears] * SeasonResults$Counts[1:numYears]/divide
-    FNFluxSeason <- SeasonResults$FNFlux[1:numYears] * SeasonResults$Counts[1:numYears]/divide
-    pctFlux <- ifelse(is.na(FluxYear) | is.na(FluxSeason), NA, 100 * FluxSeason/FluxYear)
-    pctFNFlux <- ifelse(is.na(FNFluxYear) | is.na(FNFluxSeason), NA, 100 * FNFluxSeason/FNFluxYear)
-    seasonPctResults <- data.frame(DecYear, Year, FluxYear, FNFluxYear, FluxSeason, 
-        FNFluxSeason, pctFlux, pctFNFlux)
-    seasonLong <- rep(paLong, numYears)
-    seasonStart <- rep(paStart, numYears)
-    seasonPctResults <- data.frame(seasonPctResults, seasonLong, seasonStart)
-    return(seasonPctResults)
+setupSeasons <- function(localDaily, paLong, paStart){
+  SeasonResults <- setupYearsPlus(localDaily, paLong = paLong, paStart = paStart)
+  AnnualResults <- setupYearsPlus(localDaily, paLong = 12, paStart = paStart)
+  
+  divideBy <- 1000000
+  
+  annualPctResults <- AnnualResults %>%
+    mutate(FluxYear = Flux*Counts/divideBy,
+           FNFluxYear = FNFlux*Counts/divideBy) %>%
+    select(FluxYear, FNFluxYear)
+  
+  seasonPctResults <- SeasonResults %>%
+    mutate(FluxSeason = Flux*Counts/divideBy,
+           FNFluxSeason = FNFlux*Counts/divideBy) %>%
+    bind_cols(annualPctResults) %>%
+    mutate(pctFlux = 100*FluxSeason/FluxYear,
+           pctFNFlux = 100*FNFluxSeason/FNFluxYear,
+           Year = trunc(DecYear)) %>%
+    select(-Q, -Conc, -Flux, -FNFlux, -FNConc, -Counts) %>%
+    rename(seasonStart = paStart,
+           seasonLong = paLong)
+  
+  return(seasonPctResults)
 }
-setupYearsPlus <- function(localDaily, paLong = 12, paStart = 10) {
-    # This is an augmented version of setupYears that also returns the number of
-    # good days in each year or season
-    
-    numDays <- length(localDaily$MonthSeq)
-    firstMonthSeq <- localDaily$MonthSeq[1]
-    lastMonthSeq <- localDaily$MonthSeq[numDays]
-    Starts <- seq(paStart, lastMonthSeq, 12)
-    Ends <- Starts + paLong - 1
-    StartEndSeq <- data.frame(Starts, Ends)
-    StartEndSeq <- StartEndSeq[(StartEndSeq$Starts >= firstMonthSeq) & (StartEndSeq$Ends <= 
-        lastMonthSeq), ]
-    firstMonth <- StartEndSeq[1, 1]
-    numYears <- length(StartEndSeq$Starts)
-    DecYear <- rep(NA, numYears)
-    Q <- rep(NA, numYears)
-    Conc <- rep(NA, numYears)
-    Flux <- rep(NA, numYears)
-    FNConc <- rep(NA, numYears)
-    FNFlux <- rep(NA, numYears)
-    Counts <- rep(NA, numYears)
-    for (i in 1:numYears) {
-        startMonth <- (i - 1) * 12 + firstMonth
-        stopMonth <- startMonth + paLong - 1
-        DailyYear <- localDaily[which(localDaily$MonthSeq %in% startMonth:stopMonth), 
-            ]
-        counter <- ifelse(is.na(DailyYear$ConcDay), 0, 1)
-        if (length(counter) > 0) {
-            good <- (sum(counter) > 25)
-        } else {
-            good <- FALSE
-        }
-        DecYear[i] <- mean(DailyYear$DecYear)
-        Q[i] <- mean(DailyYear$Q)
-        if (good) {
-            Conc[i] <- mean(DailyYear$ConcDay, na.rm = TRUE)
-            Flux[i] <- mean(DailyYear$FluxDay, na.rm = TRUE)
-            FNConc[i] <- mean(DailyYear$FNConc, na.rm = TRUE)
-            FNFlux[i] <- mean(DailyYear$FNFlux, na.rm = TRUE)
-            Counts[i] <- sum(counter)
-        }
-    }
-    PeriodStart <- rep(paStart, numYears)
-    PeriodLong <- rep(paLong, numYears)
-    AnnualResults <- data.frame(DecYear, Q, Conc, Flux, FNConc, FNFlux, PeriodLong, 
-        PeriodStart, Counts)
-    return(AnnualResults)
+
+library(dplyr)
+
+setupYearsPlus <- function (localDaily, paLong = 12, paStart = 10){
+  AnnualResults <- setupYears(localDaily = localDaily, paLong = paLong, paStart = paStart)
+  
+  monthsToUse <- seq(paStart, length=paLong)
+  monthsToUse[monthsToUse > 12] <- monthsToUse[monthsToUse > 12] - 12
+  
+  waterYear <- paLong == 12 & paStart == 10
+  
+  AnnualResults <- localDaily %>%
+    mutate(waterYear = as.integer(format(Date, "%Y"))) %>%
+    mutate(waterYear = ifelse(Month >= 10, waterYear + 1, waterYear)) %>%
+    filter(Month %in% monthsToUse) %>%
+    mutate(Year = ifelse(waterYear, waterYear, as.integer(format(Date, "%Y")))) %>%
+    group_by(Year) %>%
+      summarise(DecYear = mean(DecYear, na.rm = TRUE),
+                Q = mean(Q, na.rm = TRUE),
+                Conc = mean(ConcDay, na.rm = TRUE),
+                Flux = mean(FluxDay, na.rm = TRUE),
+                FNConc = mean(FNConc, na.rm = TRUE),
+                FNFlux = mean(FNFlux, na.rm = TRUE),
+                Counts = sum(!is.na(ConcDay))) %>%
+    mutate(paLong = paLong,
+           paStart = paStart) %>%
+    select(-Year)
+      
+  return(AnnualResults)
+  
 }
 ```
 
@@ -187,10 +174,15 @@ xlim <- c(seasonPctResults$DecYear[1]-1,seasonPctResults$DecYear[nYears]+1)
 xTicks <- pretty(xlim)
 ylim <- c(0,100)
 yTicks <- seq(0,100,10)
-plotTitle = paste("Seasonal Flux as a Percent of Annual Flux\n",eList$INFO$shortName,eList$INFO$paramShortName,"\nSolid line is percentage of flow normalized flux") 
-genericEGRETDotPlot(seasonPctResults$DecYear,seasonPctResults$pctFlux,xlim=xlim,ylim=ylim,xTicks=xTicks,yTicks=yTicks,xaxs="i",yaxs="i",xlab="Year",ylab="Percentage of Annual Flux",plotTitle=plotTitle,xDate=TRUE,cex=1.5)
-par(new=TRUE)
-genericEGRETDotPlot(seasonPctResults$DecYear,seasonPctResults$pctFNFlux,xlim=xlim,ylim=ylim,xTicks=xTicks,yTicks=yTicks,xaxs="i",yaxs="i",xlab="",ylab="",plotTitle=plotTitle,xDate=TRUE,cex=1.5,type="l",col="green",lwd=2)
+plotTitle = paste("Seasonal Flux as a Percent of Annual Flux\n",
+                  eList$INFO$shortName, eList$INFO$paramShortName,
+                  "\nSolid line is percentage of flow normalized flux") 
+genericEGRETDotPlot(seasonPctResults$DecYear,seasonPctResults$pctFlux,
+                    xlim=xlim, ylim=ylim,
+                    xTicks=xTicks,yTicks=yTicks,
+                    xlab="Year",ylab="Percentage of Annual Flux",
+                    plotTitle=plotTitle,xDate=TRUE,cex=1.5)
+lines(seasonPctResults$DecYear,seasonPctResults$pctFNFlux,col="green",lwd=2)
 ```
 
 <img src='/static/seasonal-analysis/unnamed-chunk-3-1.png'/ title='TODO' alt='TODO' class=''/>
@@ -202,23 +194,26 @@ Computing averages over a period of years
 
 Let's say we wanted to answer the question, what percentage of the annual total flux moved in the winter season during the years 2000 through 2010. We can answer that question with a simple set of calculations.
 
--   First we need to look at the list of annual values that we printed out above and find the index numbers for the two years specified. The year 2000 is number 21 on the list and 2010 is number 31 on the list.
+-   Filter the data frame `seasonPctResults` for the years 2000 - 2010.
 
 -   Now we can compute the sum of the annual fluxs for those years and the sum of the seasonal fluxes for those years, and then get our answer by taking the ratio and multiplying by 100.
 
 ``` r
-sumYears <- sum(seasonPctResults$FluxYear[21:31])
+years00_10 <- filter(seasonPctResults, Year >= 2000) %>%
+  filter(Year <= 2010)
+
+sumYears <- sum(years00_10$FluxYear)
  
-sumSeasons <- sum(seasonPctResults$FluxSeason[21:31])
+sumSeasons <- sum(years00_10$FluxSeason)
 
 avePct <- 100 * sumSeasons / sumYears
 ```
 
-The total flux for all years in the period of interest in millions of kg is `sumYears` = 1.7297595.
+The total flux for all years in the period of interest in millions of kg is `sumYears` = 1.727799.
 
 The total seasonal flux for all years of the period of interest in millions of kg is `sumSeasons` = 0.6099614.
 
-The percentage of the total flux for the years 2000 through 2010 that was transported in the winter months is `avePct` = 35.2627852.
+The percentage of the total flux for the years 2000 through 2010 that was transported in the winter months is `avePct` = 35.302796.
 
 This can be determined for any set of years simply by changing the two numbers inside the brackets to the index numbers of the first and last years of interest.
 
