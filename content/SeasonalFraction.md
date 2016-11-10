@@ -32,24 +32,30 @@ First, you need to have loaded the `EGRET` package and you need to have run the 
 Next, you will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them.
 
 ``` r
-setupSeasons <- function(localDaily, paLong, paStart){
-  SeasonResults <- setupYearsPlus(localDaily, paLong = paLong, paStart = paStart)
-  AnnualResults <- setupYearsPlus(localDaily, paLong = 12, paStart = paStart)
+library(dplyr)
+
+setupSeasons <- function(Daily, paLong, paStart){
+  SeasonResults <- setupYearsPlus(Daily, 
+                                  paLong = paLong, 
+                                  paStart = paStart)
+  AnnualResults <- setupYearsPlus(Daily, 
+                                  paLong = 12, 
+                                  paStart = paStart) %>%
+    filter(Counts >= 365)
   
   divideBy <- 1000000
   
   annualPctResults <- AnnualResults %>%
     mutate(FluxYear = Flux*Counts/divideBy,
            FNFluxYear = FNFlux*Counts/divideBy) %>%
-    select(FluxYear, FNFluxYear)
+    select(FluxYear, FNFluxYear, Year)
   
   seasonPctResults <- SeasonResults %>%
     mutate(FluxSeason = Flux*Counts/divideBy,
            FNFluxSeason = FNFlux*Counts/divideBy) %>%
-    bind_cols(annualPctResults) %>%
+    left_join(annualPctResults, by="Year") %>%
     mutate(pctFlux = 100*FluxSeason/FluxYear,
-           pctFNFlux = 100*FNFluxSeason/FNFluxYear,
-           Year = trunc(DecYear)) %>%
+           pctFNFlux = 100*FNFluxSeason/FNFluxYear) %>%
     select(-Q, -Conc, -Flux, -FNFlux, -FNConc, -Counts) %>%
     rename(seasonStart = paStart,
            seasonLong = paLong)
@@ -57,21 +63,24 @@ setupSeasons <- function(localDaily, paLong, paStart){
   return(seasonPctResults)
 }
 
-library(dplyr)
+setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
 
-setupYearsPlus <- function (localDaily, paLong = 12, paStart = 10){
-  AnnualResults <- setupYears(localDaily = localDaily, paLong = paLong, paStart = paStart)
-  
   monthsToUse <- seq(paStart, length=paLong)
   monthsToUse[monthsToUse > 12] <- monthsToUse[monthsToUse > 12] - 12
   
-  waterYear <- paLong == 12 & paStart == 10
+  isWaterYear <- paLong == 12 & paStart == 10
+  crossesYear <- paLong + (paStart - 1) > 12
   
-  AnnualResults <- localDaily %>%
-    mutate(waterYear = as.integer(format(Date, "%Y"))) %>%
-    mutate(waterYear = ifelse(Month >= 10, waterYear + 1, waterYear)) %>%
+  AnnualResults <- Daily %>%
+    mutate(Year =  as.integer(format(Date, "%Y"))) %>%
     filter(Month %in% monthsToUse) %>%
-    mutate(Year = ifelse(waterYear, waterYear, as.integer(format(Date, "%Y")))) %>%
+    mutate(Year = if(isWaterYear){
+      ifelse(Month >= 10, Year + 1, Year)
+    } else if(crossesYear) {
+      ifelse(Month < paStart, Year - 1, Year)
+    } else {
+      Year
+    }) %>%
     group_by(Year) %>%
       summarise(DecYear = mean(DecYear, na.rm = TRUE),
                 Q = mean(Q, na.rm = TRUE),
@@ -81,8 +90,7 @@ setupYearsPlus <- function (localDaily, paLong = 12, paStart = 10){
                 FNFlux = mean(FNFlux, na.rm = TRUE),
                 Counts = sum(!is.na(ConcDay))) %>%
     mutate(paLong = paLong,
-           paStart = paStart) %>%
-    select(-Year)
+           paStart = paStart) 
       
   return(AnnualResults)
   
@@ -209,11 +217,11 @@ sumSeasons <- sum(years00_10$FluxSeason)
 avePct <- 100 * sumSeasons / sumYears
 ```
 
-The total flux for all years in the period of interest in millions of kg is `sumYears` = 1.727799.
+The total flux for all years in the period of interest in millions of kg is `sumYears` = NA.
 
-The total seasonal flux for all years of the period of interest in millions of kg is `sumSeasons` = 0.6099614.
+The total seasonal flux for all years of the period of interest in millions of kg is `sumSeasons` = 0.601381.
 
-The percentage of the total flux for the years 2000 through 2010 that was transported in the winter months is `avePct` = 35.302796.
+The percentage of the total flux for the years 2000 through 2010 that was transported in the winter months is `avePct` = NA.
 
 This can be determined for any set of years simply by changing the two numbers inside the brackets to the index numbers of the first and last years of interest.
 

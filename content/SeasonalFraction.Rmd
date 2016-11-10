@@ -53,28 +53,30 @@ First, you need to have loaded the `EGRET` package and you need to have run the 
 Next, you will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose.  You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. 
 
 ```{r }
-
-
 library(dplyr)
 
-setupSeasons <- function(localDaily, paLong, paStart){
-  SeasonResults <- setupYearsPlus(localDaily, paLong = paLong, paStart = paStart)
-  AnnualResults <- setupYearsPlus(localDaily, paLong = 12, paStart = paStart)
+setupSeasons <- function(Daily, paLong, paStart){
+  SeasonResults <- setupYearsPlus(Daily, 
+                                  paLong = paLong, 
+                                  paStart = paStart)
+  AnnualResults <- setupYearsPlus(Daily, 
+                                  paLong = 12, 
+                                  paStart = paStart) %>%
+    filter(Counts >= 365)
   
   divideBy <- 1000000
   
   annualPctResults <- AnnualResults %>%
     mutate(FluxYear = Flux*Counts/divideBy,
            FNFluxYear = FNFlux*Counts/divideBy) %>%
-    select(FluxYear, FNFluxYear)
+    select(FluxYear, FNFluxYear, Year)
   
   seasonPctResults <- SeasonResults %>%
     mutate(FluxSeason = Flux*Counts/divideBy,
            FNFluxSeason = FNFlux*Counts/divideBy) %>%
-    bind_cols(annualPctResults) %>%
+    left_join(annualPctResults, by="Year") %>%
     mutate(pctFlux = 100*FluxSeason/FluxYear,
-           pctFNFlux = 100*FNFluxSeason/FNFluxYear,
-           Year = trunc(DecYear)) %>%
+           pctFNFlux = 100*FNFluxSeason/FNFluxYear) %>%
     select(-Q, -Conc, -Flux, -FNFlux, -FNConc, -Counts) %>%
     rename(seasonStart = paStart,
            seasonLong = paLong)
@@ -82,19 +84,24 @@ setupSeasons <- function(localDaily, paLong, paStart){
   return(seasonPctResults)
 }
 
-setupYearsPlus <- function (localDaily, paLong = 12, paStart = 10){
-  AnnualResults <- setupYears(localDaily = localDaily, paLong = paLong, paStart = paStart)
-  
+setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
+
   monthsToUse <- seq(paStart, length=paLong)
   monthsToUse[monthsToUse > 12] <- monthsToUse[monthsToUse > 12] - 12
   
-  waterYear <- paLong == 12 & paStart == 10
+  isWaterYear <- paLong == 12 & paStart == 10
+  crossesYear <- paLong + (paStart - 1) > 12
   
-  AnnualResults <- localDaily %>%
-    mutate(waterYear = as.integer(format(Date, "%Y"))) %>%
-    mutate(waterYear = ifelse(Month >= 10, waterYear + 1, waterYear)) %>%
+  AnnualResults <- Daily %>%
+    mutate(Year =  as.integer(format(Date, "%Y"))) %>%
     filter(Month %in% monthsToUse) %>%
-    mutate(Year = ifelse(waterYear, waterYear, as.integer(format(Date, "%Y")))) %>%
+    mutate(Year = if(isWaterYear){
+      ifelse(Month >= 10, Year + 1, Year)
+    } else if(crossesYear) {
+      ifelse(Month < paStart, Year - 1, Year)
+    } else {
+      Year
+    }) %>%
     group_by(Year) %>%
       summarise(DecYear = mean(DecYear, na.rm = TRUE),
                 Q = mean(Q, na.rm = TRUE),
@@ -104,8 +111,7 @@ setupYearsPlus <- function (localDaily, paLong = 12, paStart = 10){
                 FNFlux = mean(FNFlux, na.rm = TRUE),
                 Counts = sum(!is.na(ConcDay))) %>%
     mutate(paLong = paLong,
-           paStart = paStart) %>%
-    select(-Year)
+           paStart = paStart) 
       
   return(AnnualResults)
   
