@@ -4,7 +4,7 @@ slug: "seasonal-analysis"
 author: "Robert Hirsch and Laura DeCicco"
 date: "2016-11-05"
 output: USGSmarkdowntemplates::hugo
-image: "static/seasonal-analysis/unnamed-chunk-3-1.png"
+image: "static/seasonal-analysis/unnamed-chunk-7-1.png"
 tag1: "EGRET"
 description: "Using the R-packages EGRET and EGRETci, investigate seasonal analysis."
 keywords1: "EGRET"
@@ -24,7 +24,7 @@ knit_hooks$set(plot=function(x, options) {
 
 knit_hooks$set(htmlcap = function(before, options, envir) {
   if(!before) {
-    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
+    paste0('<p class="caption">',options$htmlcap,"</p>")
     }
 })
 
@@ -37,32 +37,97 @@ opts_chunk$set(
   alt.text = "TODO",
   class = "",
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  hideMeDiv = TRUE, 
+  toggle=FALSE
 )
+
+
+knit_hooks$set(hideMeDiv = function(before, options, envir) {
+  if(options$toggle){
+    if (before) {
+        '<div id="hideMe">'
+    } else {
+        '<CLOSE ME>'
+    }
+  }
+})
+
+
 ```
 
 
 # Introduction
 
-This ducument describes how to obtain information from [EGRET](https://CRAN.R-project.org/package=EGRET) results that describe the seasonal distribution of fluxes.  For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February).  We can look at it for a single year, we can look at averages of it over several years, or we can look at it in terms of flow normalized fluxes.
+This document describes how to obtain seasonal information from [EGRET](https://CRAN.R-project.org/package=EGRET) results that describe the seasonal distribution of fluxes.  For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February).  We can look at it for a single year, we can look at averages of it over several years, or we can look at it in terms of flow normalized fluxes.
 
 # Getting started
 
-First, you need to have loaded the `EGRET` package and you need to have run the `modelEstimation` function and as a result of that, have an `eList` object.
-
-Next, you will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose.  You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. 
+First, you need to have loaded the `EGRET` package and you need to have run the `modelEstimation` function and as a result of that, have an `eList` object. For this post, we will use the Choptank River as an example. There is an example data set included in `EGRET` with measured nitrate in the Choptank River. Here is an example of how to load that example data. See the `EGRET` vignette or user guide (here)[http://pubs.usgs.gov/tm/04/a10/] for more information on how to use your own water quality data in `EGRET`.  
 
 ```{r }
+library(EGRET)
+eList <- Choptank_eList
+
+```
+
+The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Nov-Oct), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
+
+* `paStart` is the number of the calendar month that is the start of the season.  
+* `paLong` is the length of the season in months (it can be any number from 1 to 12).
+
+For example let's say we want to consider the winter, defined here as December through February, the starting month (`paStart`) would be 12, and the length (`paLong`) would be 3:  
+
+```{r}
+eList <- setPA(eList, paStart = 12, paLong = 3)
+
+```
+
+Now all `EGRET` function will show results for only December through February. If there is a printed year for that season, it will be the year that ended the season of analysis (for example, year 2000 means December 1999 through February 2000). 
+
+# Seasonal Changes
+
+`EGRET` has a function `tableChange` that displays the change in concentration and flux from a set of years. Let's look at the winter change between 1990 and 2010:
+
+```{r}
+tableChange(eList, yearPoints = c(1990,2010))
+```
+
+You can compare that to change from the "water year" 1990 to 2010:
+
+```{r}
+eList <- setPA(eList, paStart = 10, paLong = 12)
+tableChange(eList, yearPoints = c(1990,2010))
+
+```
+
+In this example, there is is a slight difference in concentration trends if you compare just the winter season to the full water year, but very little difference in flux changes. 
+
+What does the seasonal flux trends change actually mean? The default unit "10^6 kg/yr" is mass over time. For these type of seasonal flux changes, it might be more intuitive to think of the changes in mass. December through Feburary has 90 days (31+31+28), so 24.66% of the year. So, the change in the mass of nitrate from Dec-
+Feb between 1990 and 2010 would be .2466 (0.02) 10^6 =  4,932 kg. And the overall change in mass from 1990 to 2010 would be 20,000 kg.
+
+# Seasonal Load Fraction
+
+Next, we can think about the seasonal load fraction.
+
+You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose.  You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. 
+
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">Show/Hide Code</p>
+
+
+```{r toggle=TRUE}
 library(dplyr)
 
-setupSeasons <- function(Daily, paLong, paStart){
+setupSeasons <- function(eList){
+  Daily <- eList$Daily
+  
   SeasonResults <- setupYearsPlus(Daily, 
-                                  paLong = paLong, 
-                                  paStart = paStart)
+                                  paLong = eList$INFO$paLong, 
+                                  paStart = eList$INFO$paStart)
   AnnualResults <- setupYearsPlus(Daily, 
                                   paLong = 12, 
-                                  paStart = paStart) %>%
-    filter(Counts >= 365)
+                                  paStart = eList$INFO$paStart) %>%
+    filter(Counts >= 365) #To make sure we are getting full years
   
   divideBy <- 1000000
   
@@ -89,16 +154,13 @@ setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
   monthsToUse <- seq(paStart, length=paLong)
   monthsToUse[monthsToUse > 12] <- monthsToUse[monthsToUse > 12] - 12
   
-  isWaterYear <- paLong == 12 & paStart == 10
   crossesYear <- paLong + (paStart - 1) > 12
   
   AnnualResults <- Daily %>%
     mutate(Year =  as.integer(format(Date, "%Y"))) %>%
     filter(Month %in% monthsToUse) %>%
-    mutate(Year = if(isWaterYear){
-      ifelse(Month >= 10, Year + 1, Year)
-    } else if(crossesYear) {
-      ifelse(Month < paStart, Year - 1, Year)
+    mutate(Year = if(crossesYear){
+      ifelse(Month >= paStart, Year + 1, Year)
     } else {
       Year
     }) %>%
@@ -117,27 +179,18 @@ setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
   
 }
 
-
 ```
 
-The next step is to establish what season you are interested in looking at.  We do this by specifying `paStart` and `paLong`.
-
-`paStart` is the number of the calendar month that is the start of the season.  
-`paLong` is the length of the season in months (it can be any number from 1 to 12).  
-
-For example lets say we want to consider the winter, defined here as December through February.  This code we would use is. This is written with the example data set Choptank_eList, which comes out of the `EGRET` package.  In running this script you would delete the line `eList <- Choptank_eList` and enter the values of `paLong` and `paStart` that you wish to use.
-
+Simply use the loaded `eList` to calculate these seasonal load fractions. Let's go back to the winter season (Dec-Feb):
 
 ```{r }
-library(EGRET)
-eList <- Choptank_eList
-Daily <- eList$Daily
-seasonPctResults <- setupSeasons(Daily, paLong = 3, paStart = 12)
+eList <- setPA(eList, paStart = 12, paLong = 3)
+seasonPctResults <- setupSeasons(eList)
 ```
 
 # Looking at your results
 
-What you now have is a data frame called seasonPctResults.  The columns it contains are the following:
+What you now have is a data frame called `seasonPctResults`.  The columns it contains are the following:
 
 |variable| Definition|
 |-------------|----------------------------------------------------|
@@ -150,13 +203,13 @@ What you now have is a data frame called seasonPctResults.  The columns it conta
 |pctFlux|Season flux as a percentage of Annual Flux|
 |pctFNFlux|FlowNormalized Seasonal Flux as a percent of Flow Normalized Annual Flux|
 |seasonLong|Length of the Season in Months|
-|seasonStart|Starting Month of the Season, 1=January
+|seasonStart|Starting Month of the Season, 1=January|
 
 # Plotting the time series
 
 We can make a graph showing the percentage flux (estimated annual and flow normalized)
 
-```{r }
+```{r fig.cap="Seasonal flux as a percentage of annual flux.", alt.text="Seasonal flux as a percentage of annual flux."}
 nYears <- length(seasonPctResults$DecYear)
 xlim <- c(seasonPctResults$DecYear[1]-1,seasonPctResults$DecYear[nYears]+1)
 xTicks <- pretty(xlim)
@@ -178,15 +231,17 @@ We can interpret this example graph as follows.  The winter flux of nitrate fluc
 
 # Computing averages over a period of years
 
-Let's say we wanted to answer the question, what percentage of the annual total flux moved in the winter season during the years 2000 through 2010.  We can answer that question with a simple set of calculations.
+Let's say we wanted to answer the question, what percentage of the annual total flux moved in the winter season during the years 2000 through 2010.  We can answer that question with a simple set of calculations. 
+
+Keep in mind, the way we are defining "year" is what year the ending year of the period of anaylsis fell. So, for this analysis, the full 2010 "year" is from Dec. 2009 through the end of November 2010.
 
 * Filter the data frame `seasonPctResults` for the years 2000 - 2010.
 
-* Now we can compute the sum of the annual fluxs for those years and the sum of the seasonal fluxes for those years, and then get our answer by taking the ratio and multiplying by 100.
+* Now we can compute the sum of the annual fluxes for those years and the sum of the seasonal fluxes for those years, and then get our answer by taking the ratio and multiplying by 100.
 
 ```{r }
-years00_10 <- filter(seasonPctResults, Year >= 2000) %>%
-  filter(Year <= 2010)
+
+years00_10 <- filter(seasonPctResults, Year >= 2000, Year <= 2010)
 
 sumYears <- sum(years00_10$FluxYear)
  
