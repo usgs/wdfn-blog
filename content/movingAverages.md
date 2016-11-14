@@ -19,12 +19,12 @@ keywords:
  
 ---
 
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.usgs.gov/staff-profiles/laura-decicco"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x"></i></a>
+<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
+<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x"></i></a>
+<a href="https://www.usgs.gov/staff-profiles/laura-decicco"><i class="fa fa-user fa-2x"></i></a>
 
 This post will show simple way to calculate moving averages, calculate historical-flow quantiles, and plot that information. The goal is to reproduce the graph at this link: [PA Graph](http://pa.water.usgs.gov/drought/indicators/sw/images/f30_01538000.html). The motivation for this post was inspired by a USGS colleague that that is considering creating these type of plots in R. We thought this plot provided an especially fun challenge - maybe you will, too!
 

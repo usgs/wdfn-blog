@@ -19,7 +19,7 @@ keywords:
   - plotting precipitation
   - data visualization
 ---
-<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x"></i></a>
 
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
 

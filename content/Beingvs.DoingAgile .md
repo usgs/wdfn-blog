@@ -13,8 +13,8 @@ keywords:
 ---
 
 <a href="mailto:srlewein@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://plus.google.com/101896392932098540953"><i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://www.linkedin.com/in/scott-lewein-5200974"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://plus.google.com/101896392932098540953"><i class="fa fa-google-plus-square fa-2x"></i></a>
+<a href="https://www.linkedin.com/in/scott-lewein-5200974"><i class="fa fa-linkedin-square fa-2x"></i></a>
 
 
 Being vs. Doing Agile
