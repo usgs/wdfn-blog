@@ -12,8 +12,8 @@ author_gs: "jXd0feEAAAAJ"
 author_staff: "laura-decicco"
 author_email: "ldecicco@usgs.gov"
 description: "Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo blogpost is explained."
-keywords1: "Leaflet"
-keywords2: "Interactive map"
+keyword1: "Leaflet"
+keyword2: "Interactive map"
 ---
 
 We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet)  map in our Hugo-generated blog post.

@@ -22,8 +22,8 @@ keywords:
   - R
   - dataRetrieval
  
- 
- 
+  - dataRetrieval
+  - moving-averages
 ---
 This post will show simple way to calculate moving averages, calculate historical-flow quantiles, and plot that information. The goal is to reproduce the graph at this link: [PA Graph](http://pa.water.usgs.gov/drought/indicators/sw/images/f30_01538000.html). The motivation for this post was inspired by a USGS colleague that that is considering creating these type of plots in R. We thought this plot provided an especially fun challenge - maybe you will, too!
 

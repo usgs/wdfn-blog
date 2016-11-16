@@ -22,8 +22,8 @@ keywords:
   - R
   - dataRetrieval
  
- 
- 
+  - Leaflet
+  - Interactive map
 ---
 We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet) map in our Hugo-generated blog post.
 
