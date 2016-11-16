@@ -2,7 +2,6 @@
 author: Laura DeCicco
 date: 2016-10-25
 slug: moving-averages
-draft: True
 title: Calculating Moving Averages and Historical Flow Quantiles
 type: post
 categories: Data Science

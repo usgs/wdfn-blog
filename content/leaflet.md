@@ -2,7 +2,6 @@
 author: Laura DeCicco
 date: 2016-08-23
 slug: leaflet
-draft: True
 title: Using Leaflet and htmlwidgets in a Hugo blog post
 type: post
 categories: Data Science
