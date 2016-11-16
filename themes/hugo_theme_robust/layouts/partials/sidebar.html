@@ -47,17 +47,12 @@
     <li>
         <a href="https://twitter.com/USGS_WaterData" class="twitter-follow-button" data-show-count="false">@USGS_WaterData</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </li>
-      <li>
-        <a href="{{ .Permalink }}index.xml"><i class="fa fa-rss-square"> RSS Feed </i></a>
-    </li>
   
   {{ if in .Params.tags "R"}}
     <li>
         <a href="https://twitter.com/USGS_R" class="twitter-follow-button" data-show-count="false">@USGS_R</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </li>
-    <li>
-        <a href="{{ .Permalink }}/tags/r/index.xml"><i class="fa fa-rss-square"> RSS - R Posts</i></a>
-    </li>
+
   {{ end }}
   
   {{ if in .Params.tags "GDP"}}
@@ -105,6 +100,16 @@
           <a href="http://R-bloggers.com" target="blank">R-bloggers</a>
         </li>
       </ul>
+    </div>
+  </section>
+  
+  <section>
+    <header>RSS Feed</header>
+    <div>
+      <a href="https://owi.usgs.gov/blog/index.xml" target="blank"><i class="fa fa-rss-square fa-2x">  Main</i></a>
+    </div>
+    <div>
+      <a href="https://owi.usgs.gov/blog/tags/r/index.xml" target="blank"><i class="fa fa-rss-square fa-2x" >  R Feed</i></a>
     </div>
   </section>
 
