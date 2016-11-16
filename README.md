@@ -63,7 +63,7 @@ owi-blog
   
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
   
-  * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), USGS staff profile (`author_staff`), and email (`author_email`)
+  * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
 
 6. Submit a pull request
 7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site. 
