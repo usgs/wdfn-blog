@@ -55,14 +55,29 @@
         <div class="body">
           <h1>{{ .Title }}</h1>
           
-          <ul>
-            {{range .Params.authors}}
-              <li>{{ . }}</li>
-            {{ end }}
-          </ul>
-          
           <h3>{{ .Params.author }}</h3>
+          
+            {{ if .Params.author_email }}
+<a href="mailto:{{.Params.author_email}}" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a>
+            {{ end }}  
+            {{ if .Params.author_github }}
+            <a href="https://github.com/{{.Params.author_github }}" target="blank"><i class="fa fa-github-square fa-2x"></i></a>
+            {{ end }}
+            {{ if .Params.author_twitter }}
+            <a href="https://twitter.com/{{.Params.author_twitter }}" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+            {{ end }}
+            {{ if .Params.author_gs }}
+            <a href="https://scholar.google.com/citations?hl=en&user={{ .Params.author_gs}}" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a>
+            {{ end }}
+            {{ if .Params.author_researchgate }}
+<a href="https://www.researchgate.net/profile/{{.Params.author_researchgate}}" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a>
+            {{ end }}
+            {{ if .Params.author_staff }}
+<a href="https://www.usgs.gov/staff-profiles/{{.Params.author_staff}}" target="blank"><i class="fa fa-user fa-2x"></i></a>
+            {{ end }}            
+            
           {{ .Content }}
+          
         </div>
 
         <aside>

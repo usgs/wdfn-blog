@@ -2,6 +2,11 @@
 title: "Calculating Moving Averages and Historical Flow Quantiles"
 slug: "moving-averages"
 author: "Laura DeCicco"
+author_twitter: "DeCiccoDonk"
+author_github: "ldecicco-usgs"
+author_gs: "jXd0feEAAAAJ"
+author_staff: "laura-decicco"
+author_email: "ldecicco@usgs.gov"
 date: "2016-10-25"
 output: USGSmarkdowntemplates::hugo
 image: "static/moving-averages/unnamed-chunk-4-1.png"
