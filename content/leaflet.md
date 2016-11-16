@@ -2,6 +2,7 @@
 author: Laura DeCicco
 date: 2016-08-23
 slug: leaflet
+draft: True
 title: Using Leaflet and htmlwidgets in a Hugo blog post
 type: post
 categories: Data Science
@@ -17,7 +18,7 @@ tags:
   - R
   - dataRetrieval
  
-description: 
+description: Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo blogpost is explained.
 keywords:
   - R
   - dataRetrieval
