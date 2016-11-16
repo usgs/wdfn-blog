@@ -35,13 +35,13 @@ owi-blog
     - EGRET
     - ggplot2
     - data visualization
-  ---
   author_twitter: DeCiccoDonk
   author_github: ldecicco-usgs
   author_gs: jXd0feEAAAAJ
   author_staff: laura-decicco
   author_email: <ldecicco@usgs.gov>
   author_researchgate: Laura_De_Cicco
+    ---
   ```
 
   Important notes about header:
