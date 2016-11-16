@@ -41,6 +41,7 @@ owi-blog
   author_gs: jXd0feEAAAAJ
   author_staff: laura-decicco
   author_email: <ldecicco@usgs.gov>
+  author_researchgate: Laura_De_Cicco
   ```
 
   Important notes about header:
