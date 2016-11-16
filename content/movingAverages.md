@@ -6,6 +6,13 @@ title: Calculating Moving Averages and Historical Flow Quantiles
 type: post
 categories: Data Science
 image: static/moving-averages/unnamed-chunk-4-1.png
+author_twitter: DeCiccoDonk
+author_github: ldecicco-usgs
+author_gs: jXd0feEAAAAJ
+ 
+author_staff: laura-decicco
+author_email: <ldecicco@usgs.gov>
+
 tags: 
   - R
   - dataRetrieval
@@ -14,18 +21,10 @@ description: Using the R-packages dataRetrieval, dplyr, and ggplot2, a simple di
 keywords:
   - R
   - dataRetrieval
-  - moving averages
-  - ggplot2
  
+  - dataRetrieval
+  - moving-averages
 ---
-
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
-<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x"></i></a>
-<a href="https://www.usgs.gov/staff-profiles/laura-decicco"><i class="fa fa-user fa-2x"></i></a>
-
 This post will show simple way to calculate moving averages, calculate historical-flow quantiles, and plot that information. The goal is to reproduce the graph at this link: [PA Graph](http://pa.water.usgs.gov/drought/indicators/sw/images/f30_01538000.html). The motivation for this post was inspired by a USGS colleague that that is considering creating these type of plots in R. We thought this plot provided an especially fun challenge - maybe you will, too!
 
 First we get the data using the [dataRetrieval](https://CRAN.R-project.org/package=dataRetrieval) package. The siteNumber and parameterCd could be adjusted for other sites or measured parameters. In this example, we are getting discharge (parameter code 00060) at a site in PA.

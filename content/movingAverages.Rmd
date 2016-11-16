@@ -2,13 +2,18 @@
 title: "Calculating Moving Averages and Historical Flow Quantiles"
 slug: "moving-averages"
 author: "Laura DeCicco"
+author_twitter: "DeCiccoDonk"
+author_github: "ldecicco-usgs"
+author_gs: "jXd0feEAAAAJ"
+author_staff: "laura-decicco"
+author_email: "ldecicco@usgs.gov"
 date: "2016-10-25"
 output: USGSmarkdowntemplates::hugo
 image: "static/moving-averages/unnamed-chunk-4-1.png"
 tag1: "dataRetrieval"
 description: "Using the R-packages dataRetrieval, dplyr, and ggplot2, a simple discription on how to create a moving-average plot with historical flow quantiles."
-keywords1: "dataRetrieval"
-keywords2: "moving-averages"
+keyword1: "dataRetrieval"
+keyword2: "moving-averages"
 ---
 ```{r setup, include=FALSE}
 library(knitr)

@@ -13,7 +13,10 @@ keywords:
   - reproducibility
   - reproducible science
   - spreadsheets
+author_github: lindsaycarr
+author_email: <lcarr@usgs.gov>
 ---
+
 Science is hard. Why make it harder?
 ------------------------------------
 

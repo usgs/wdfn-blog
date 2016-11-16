@@ -9,6 +9,8 @@ tag1: "dataRetrieval"
 description: "Using the R package dataRetrieval Stats Service."
 keywords1: "dataRetrieval"
 keywords2: "streamflow statistics"
+author_github: "wdwatkins"
+author_email: "wwatkins@usgs.gov"
 ---
 ```{r setup, include=FALSE}
 library(knitr)
