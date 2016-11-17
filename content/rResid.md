@@ -2,8 +2,8 @@
 author: Robert M. Hirsch and Laura DeCicco
 date: 2016-06-15
 slug: rResid
-type: post
 title: Using Random Residuals for Censored Data in EGRET
+type: post
 categories: Data Science
 image: static/rResid/unnamed-chunk-7-2.png
 tags: 
@@ -11,29 +11,14 @@ tags:
   - EGRET
 description: Using random residuals for censored data in EGRET, and R package. Exploration and Graphics for RivEr Trends (EGRET) is an R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS).
 keywords:
+  - R
   - EGRET
   - random residuals
   - water quality trends
 ---
-
-* Robert Hirsch
-<a href="mailto:rhirsch@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.researchgate.net/profile/Robert_Hirsch3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/rhirsch"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
-
-* Laura DeCicco
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
-
 `EGRET` is an R-package for the analysis of long-term changes in water quality and streamflow, and includes the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS). It is available on CRAN.
 
 More information can be found at <https://github.com/USGS-R/EGRET>.
-
 
 Introduction
 ============
@@ -136,3 +121,23 @@ Two final thoughts
 In the EGRET User Guide (<http://pubs.usgs.gov/tm/04/a10/>) the distinction is made between the graphical methods that are used to simply describe the data (and these graphics shown in **multiPlotDataOverview**) as distinct from graphical methods that are used to describe the WRTDS model of the system (such as the graphs in **fluxBiasMulti**). If the **randomCensored = TRUE** option is used with **multiPlotDataOverview**, or other graphical functions that normally don't depend on the WRTDS model, they now become a hybrid, because they are using the WRTDS model to generate the random values used in the graphs. Take a graph such as **plotConcQ**. With **randomCensored = FALSE** it is a pure representation of the data. No assumptions are being made. But, when **randomCensored = TRUE**, it is now a representation of the data which is partly based on an assumption that the fitted WRTDS model is indeed a correct model. The fitted WRTDS model is partly determining the placement of the random values that are less than the reporting limit. If the analyst wants a "pure" representation of the data without any assumed model for graphing, then the **randomCensored** option should be set to **FALSE**.
 
 Also, with figures such as shown in **fluxBiasMulti**, there is a kind of circularity in the logic. The circularity is this: we are using the graphs to assess the adequacy of the model fit, but we are using the model to estimate some of the observations. This circularity is not a fatal flaw to the approach, but is a reality that the user should consider. On balance, the authors think that using **randomCensored = TRUE** in all of the plots to which it applies is a beneficial approach because it enhances the ability of the analyst to interpret the figures. But, we reiterate here, the choice of using the random approach or not has no bearing whatsoever on the quantitative outputs that the WRTDS method in the EGRET package produces.
+
+Questions
+=========
+
+Please direct any questions or comments on `EGRET` to: <https://github.com/USGS-R/EGRET/issues>
+
+* Robert Hirsch
+<a href="mailto:rhirsch@usgs.gov "><i class="fa fa-envelope-square fa-2x"></i></a>
+<a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
+<a href="https://www.researchgate.net/profile/Robert_Hirsch3"><i class="ai ai-researchgate-square ai-2x"></i></a>
+<a href="https://profile.usgs.gov/rhirsch"><i class="fa fa-user fa-2x"></i></a>
+
+* Laura DeCicco
+<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x"></i></a>
+<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
+<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x"></i></a>
+<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x"></i></a>
+

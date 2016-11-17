@@ -7,6 +7,13 @@ title: Seasonal Analysis in EGRET
 type: post
 categories: Data Science
 image: static/seasonal-analysis/unnamed-chunk-7-1.png
+ 
+ 
+ 
+ 
+ 
+ 
+
 tags: 
   - R
   - EGRET
@@ -16,8 +23,8 @@ keywords:
   - R
   - EGRET
  
- 
- 
+  - seasonal analysis
+  - surface water
 ---
 Introduction
 ============
@@ -108,11 +115,6 @@ Next, we can think about the seasonal load fraction.
 
 You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
-Show/Hide Code
-</p>
-<div id="hideMe">
-
 ``` r
 library(dplyr)
 
@@ -177,8 +179,6 @@ setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
   
 }
 ```
-
-</div>
 
 Simply use the loaded `eList` to calculate these seasonal load fractions. Let's go back to the winter season (Dec-Feb):
 
@@ -306,3 +306,7 @@ Questions
 ---------
 
 Please direct any questions or comments on `EGRET` to: <https://github.com/USGS-R/EGRET/issues>
+
+-   Robert Hirsch <a href="mailto:rhirsch@usgs.gov "><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Robert_Hirsch3"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://profile.usgs.gov/rhirsch"><i class="fa fa-user fa-2x"></i></a>
+
+-   Laura DeCicco <a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x"></i></a>
