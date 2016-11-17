@@ -8,21 +8,19 @@
       "@id":"{{ .Site.BaseURL }}"
     },
     "headline": "{{ .Title }} | {{ .Site.Params.titlefull }} {{ .Site.Params.titlesub}}",
+    {{ with .Params.image }}
     "image": {
       "@type": "ImageObject",
-      "url": "",
+      "url": "{{ $.Site.BaseURL }}{{ . }}"
       "height": 700,
       "width": 700
     },
+    {{ end }}
     "datePublished": "{{ .Date.Format "2006-01-02T15:04:05JST" }}",
     "dateModified": "{{ .Date.Format "2006-01-02T15:04:05JST" }}",
     "author": {
       "@type": "Person",
-      "name": "{{ .Site.Params.author }}",
-      {{ with .Params.image }}
-      "image": "{{ $.Site.BaseURL }}{{ . }}"
-      {{ end }}
-
+      "name": "{{ .Site.Params.author }}"
     },
     {{ with .Keywords }}
     "keywords":,"{{ delimit . ", " }}",
@@ -53,9 +51,14 @@
         </aside>
         
         <div class="body">
-          <h1>{{ .Title }}</h1>
           
-          <h3>{{ .Params.author }}</h3>
+        <h1>{{ .Title }}</h1>
+
+		    <h3> {{ .Params.author }}  </h3>
+          
+        {{ range .Params.authors }}
+        <h3> {{ . }}  </h3>
+        {{ end }}
           
             {{ if .Params.author_email }}
 <a href="mailto:{{.Params.author_email}}" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a>

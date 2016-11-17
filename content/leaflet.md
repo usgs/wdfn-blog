@@ -1,27 +1,23 @@
 ---
 author: Laura DeCicco
+author_twitter: DeCiccoDonk
+author_github: ldecicco-usgs
+author_gs: jXd0feEAAAAJ
+author_staff: laura-decicco
+author_email: <ldecicco@usgs.gov>  
 date: 2016-08-23
 slug: leaflet
 title: Using Leaflet and htmlwidgets in a Hugo blog post
 type: post
 categories: Data Science
 image: static/leaflet/screenshot.png
-author_twitter: DeCiccoDonk
-author_github: ldecicco-usgs
-author_gs: jXd0feEAAAAJ
- 
-author_staff: laura-decicco
-author_email: <ldecicco@usgs.gov>
-
 tags: 
   - R
   - dataRetrieval
- 
 description: Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo blogpost is explained.
 keywords:
   - R
   - dataRetrieval
- 
   - Leaflet
   - Interactive map
 ---
