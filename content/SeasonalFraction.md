@@ -43,7 +43,7 @@ library(EGRET)
 eList <- Choptank_eList
 ```
 
-The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Nov-Oct), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
+The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
 -   `paStart` is the number of the calendar month that is the start of the season.
 -   `paLong` is the length of the season in months (it can be any number from 1 to 12).
