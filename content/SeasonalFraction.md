@@ -320,11 +320,11 @@ Information on USGS-R packages used in this post:
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><a href="https://github.com/USGS-R/EGRET"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 100px;" target="blank"/></a></td>
+<td><a href="https://github.com/USGS-R/EGRET"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" target="blank"/></a></td>
 <td><a href="https://github.com/USGS-R/EGRET/issues">EGRET</a>: An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS)</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/USGS-R/dataRetrieval"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 100px;" target="blank"/></a></td>
+<td><a href="https://github.com/USGS-R/dataRetrieval"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" target="blank"/></a></td>
 <td><a href="https://github.com/USGS-R/dataRetrieval/issues">dataRetrieval</a>: This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services.</td>
 </tr>
 </tbody>
