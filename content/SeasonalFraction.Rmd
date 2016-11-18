@@ -266,7 +266,7 @@ Information on USGS-R packages used in this post:
 
 | | |
 |-------------|----------------------------------------------------|
-|[<img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" target="blank"/>](https://github.com/USGS-R/EGRET) | [EGRET](https://github.com/USGS-R/EGRET/issues): An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS) |
+|[<img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" target="blank"/>](https://github.com/USGS-R/EGRET) | [EGRET](https://github.com/USGS-R/EGRET/issues): Exploration and Graphics for RivEr Trends: An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS) |
 |[<img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" target="blank"/>](https://github.com/USGS-R/dataRetrieval) | [dataRetrieval](https://github.com/USGS-R/dataRetrieval/issues): This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services. |
 
 
