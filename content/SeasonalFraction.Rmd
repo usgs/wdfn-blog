@@ -1,7 +1,7 @@
 ---
 title: "Seasonal Analysis in EGRET"
 slug: "seasonal-analysis"
-author: "Robert Hirsch and Laura DeCicco"
+author: "Robert M. Hirsch and Laura DeCicco"
 date: "2016-11-21"
 output: USGSmarkdowntemplates::hugo
 image: "static/seasonal-analysis/unnamed-chunk-8-1.png"
@@ -67,7 +67,7 @@ To start with lets look at the results calculated for complete water years.
 tableResults(eList)
 ```
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year.  Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year.  Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
@@ -115,7 +115,8 @@ The results show above also express the change as a slope (either 0.001 or 0.000
 
 Next, we can think about the seasonal load fraction.
 
-You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose.  You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. 
+You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose.  You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. The functions use the package [`dplyr`](https://CRAN.R-project.org/package=dplyr), a package that is useful for general data exploration and manipulation.
+
 
 
 ```{r }
@@ -210,23 +211,21 @@ What you now have is a data frame called `seasonPctResults`.  The columns it con
 
 # Plotting the time series
 
-We can make a graph showing the percentage flux (estimated annual and flow normalized)
+We can make a graph showing the percentage flux (estimated annual and flow normalized). Note, this workflow uses base R plotting functions. You could also use the `EGRET` function `genericEGRETDotPlot` to automatically to pick some plotting styles that are consistent with other `EGRET` plots. 
 
 ```{r fig.cap="Seasonal flux as a percentage of annual flux.", alt.text="Seasonal flux as a percentage of annual flux."}
-nYears <- length(seasonPctResults$DecYear)
-xlim <- c(seasonPctResults$DecYear[1]-1,seasonPctResults$DecYear[nYears]+1)
-xTicks <- pretty(xlim)
-ylim <- c(0,100)
-yTicks <- seq(0,100,10)
+
 plotTitle = paste("Seasonal Flux as a Percent of Annual Flux\n",
                   eList$INFO$shortName, eList$INFO$paramShortName,
                   "\nSolid line is percentage of flow normalized flux") 
-genericEGRETDotPlot(seasonPctResults$DecYear,seasonPctResults$pctFlux,
-                    xlim=xlim, ylim=ylim,
-                    xTicks=xTicks,yTicks=yTicks,
-                    xlab="Year",ylab="Percentage of Annual Flux",
-                    plotTitle=plotTitle,xDate=TRUE,cex=1.5)
+par(mar=c(5,6,4,2) + 0.1,mgp=c(3,1,0))
+plot(seasonPctResults$DecYear, seasonPctResults$pctFlux,pch=20,
+     yaxs="i",ylim = c(0,100),las=1,tck=.01,
+     xlab="Year",ylab="Percentage of Annual Flux",
+     main=plotTitle,cex=1.5)
 lines(seasonPctResults$DecYear,seasonPctResults$pctFNFlux,col="green",lwd=2)
+axis(3, labels = FALSE,tck=.01)
+axis(4, labels = FALSE,tck=.01)
 
 ```
 
@@ -264,7 +263,7 @@ This can be determined for any set of years simply by changing the two numbers i
 
 ## Questions
 
-* Robert Hirsch
+* Robert M. Hirsch
 <a href="mailto:rhirsch@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a>
 <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a>
 <a href="https://www.researchgate.net/profile/Robert_Hirsch3" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a>

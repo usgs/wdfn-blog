@@ -1,5 +1,5 @@
 ---
-author: Robert Hirsch and Laura DeCicco
+author: Robert M. Hirsch and Laura DeCicco
 date: 2016-11-21
 slug: seasonal-analysis
 draft: True
@@ -10,6 +10,7 @@ image: static/seasonal-analysis/unnamed-chunk-8-1.png
 tags: 
   - R
   - EGRET
+ 
 description: Using the R-packages EGRET and EGRETci, investigate seasonal analysis.
 keywords:
   - R
@@ -53,12 +54,14 @@ tableResults(eList)
     ##    1982      3.05     1.036     0.993    0.0985     0.110
     ##    1983      4.99     1.007     0.993    0.1329     0.112
     ...
+    ##    2006      3.59     1.382     1.362    0.1409     0.147
+    ##    2007      4.28     1.408     1.382    0.1593     0.149
     ##    2008      2.56     1.477     1.401    0.1008     0.149
     ##    2009      3.68     1.409     1.419    0.1328     0.149
     ##    2010      7.19     1.323     1.438    0.2236     0.149
     ##    2011      5.24     1.438     1.457    0.1554     0.148
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
@@ -90,6 +93,8 @@ tableResults(eList)
     ##    1982     5.057      1.16      1.15    0.1764     0.165
     ##    1983     3.504      1.21      1.16    0.1310     0.169
     ...
+    ##    2006     5.843      1.51      1.51    0.2675     0.214
+    ##    2007     5.417      1.55      1.53    0.2419     0.216
     ##    2008     2.436      1.62      1.55    0.1217     0.217
     ##    2009     2.711      1.66      1.56    0.1396     0.216
     ##    2010    13.779      1.26      1.57    0.4161     0.215
@@ -97,7 +102,7 @@ tableResults(eList)
 
 Note that now the estimated flow normalized flux is 0.215 10<sup>6</sup> kg/year. Let's take a moment to think about that in relation to the previous result. What it is saying is that the flux (mass per unit time) is greater during this three month period that the average flux for the entire water year. That makes sense, some seasons will have higher than average fluxes and other seasons will have lower than average fluxes.
 
-Now, it might be that we want to think about these results, not in terms of a flux but in terms of mass alone. In the first result (water year) the mass for the year is 0.149 10<sup>6</sup> kg. But for the winter season we would compute the mass as 0.215 \* [90 / 365] to give us a result of 0.053 10<sup>6</sup> kg. To get this result we took the annual rate (0.215) and divided by the number of days in the year (365) to get a rate in mass per day and then multiplied by the number of days in the season (90) which is the sum of the length of those three months (31 + 31 + 28) to simply get a total mass.
+Now, it might be that we want to think about these results, not in terms of a flux but in terms of mass alone. In the first result (water year) the mass for the year is 0.149 10<sup>6</sup> kg. But for the winter season we would compute the mass as 0.215 \* 90 / 365 to give us a result of 0.053 10<sup>6</sup> kg. To get this result we took the annual rate (0.215) and divided by the number of days in the year (365) to get a rate in mass per day and then multiplied by the number of days in the season (90) which is the sum of the length of those three months (31 + 31 + 28) to simply get a total mass.
 
 We have taken pains here to run through this calculation because users have sometimes been confused, wondering how the flux for a part of the year can be greater than the flux for the whole year. Depending on the ultimate objective of the analysis one might want to present the seasonal results in either of these ways (mass or mass per unit time).
 
@@ -161,7 +166,7 @@ Seasonal Load Fraction
 
 Next, we can think about the seasonal load fraction.
 
-You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them.
+You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. The functions use the package [`dplyr`](https://CRAN.R-project.org/package=dplyr), a package that is useful for general data exploration and manipulation.
 
 ``` r
 library(dplyr)
@@ -298,23 +303,20 @@ What you now have is a data frame called `seasonPctResults`. The columns it cont
 Plotting the time series
 ========================
 
-We can make a graph showing the percentage flux (estimated annual and flow normalized)
+We can make a graph showing the percentage flux (estimated annual and flow normalized). Note, this workflow uses base R plotting functions. You could also use the `EGRET` function `genericEGRETDotPlot` to automatically to pick some plotting styles that are consistent with other `EGRET` plots.
 
 ``` r
-nYears <- length(seasonPctResults$DecYear)
-xlim <- c(seasonPctResults$DecYear[1]-1,seasonPctResults$DecYear[nYears]+1)
-xTicks <- pretty(xlim)
-ylim <- c(0,100)
-yTicks <- seq(0,100,10)
 plotTitle = paste("Seasonal Flux as a Percent of Annual Flux\n",
                   eList$INFO$shortName, eList$INFO$paramShortName,
                   "\nSolid line is percentage of flow normalized flux") 
-genericEGRETDotPlot(seasonPctResults$DecYear,seasonPctResults$pctFlux,
-                    xlim=xlim, ylim=ylim,
-                    xTicks=xTicks,yTicks=yTicks,
-                    xlab="Year",ylab="Percentage of Annual Flux",
-                    plotTitle=plotTitle,xDate=TRUE,cex=1.5)
+par(mar=c(5,6,4,2) + 0.1,mgp=c(3,1,0))
+plot(seasonPctResults$DecYear, seasonPctResults$pctFlux,pch=20,
+     yaxs="i",ylim = c(0,100),las=1,tck=.01,
+     xlab="Year",ylab="Percentage of Annual Flux",
+     main=plotTitle,cex=1.5)
 lines(seasonPctResults$DecYear,seasonPctResults$pctFNFlux,col="green",lwd=2)
+axis(3, labels = FALSE,tck=.01)
+axis(4, labels = FALSE,tck=.01)
 ```
 
 <img src='/static/seasonal-analysis/unnamed-chunk-8-1.png'/ title='Seasonal flux as a percentage of annual flux.' alt='Seasonal flux as a percentage of annual flux.' class=''/>
@@ -353,7 +355,7 @@ This can be determined for any set of years simply by changing the two numbers i
 Questions
 ---------
 
--   Robert Hirsch <a href="mailto:rhirsch@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Robert_Hirsch3" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/robert-hirsch" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Robert M. Hirsch <a href="mailto:rhirsch@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Robert_Hirsch3" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/robert-hirsch" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
 -   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.researchgate.net/profile/Laura_De_Cicco" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
