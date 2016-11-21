@@ -6,7 +6,7 @@ draft: True
 title: Seasonal Analysis in EGRET
 type: post
 categories: Data Science
-image: static/seasonal-analysis/unnamed-chunk-7-1.png
+image: static/seasonal-analysis/unnamed-chunk-8-1.png
 tags: 
   - R
   - EGRET

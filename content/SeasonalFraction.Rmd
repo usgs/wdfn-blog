@@ -4,7 +4,7 @@ slug: "seasonal-analysis"
 author: "Robert Hirsch and Laura DeCicco"
 date: "2016-11-21"
 output: USGSmarkdowntemplates::hugo
-image: "static/seasonal-analysis/unnamed-chunk-7-1.png"
+image: "static/seasonal-analysis/unnamed-chunk-8-1.png"
 tag1: "EGRET"
 description: "Using the R-packages EGRET and EGRETci, investigate seasonal analysis."
 keyword1: "seasonal analysis"
