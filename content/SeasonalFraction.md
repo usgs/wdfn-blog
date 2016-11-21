@@ -1,28 +1,19 @@
 ---
 author: Robert Hirsch and Laura DeCicco
-date: 2016-11-05
+date: 2016-11-21
 slug: seasonal-analysis
 draft: True
 title: Seasonal Analysis in EGRET
 type: post
 categories: Data Science
-image: static/seasonal-analysis/unnamed-chunk-7-1.png
- 
- 
- 
- 
- 
- 
-
+image: static/seasonal-analysis/unnamed-chunk-8-1.png
 tags: 
   - R
   - EGRET
- 
 description: Using the R-packages EGRET and EGRETci, investigate seasonal analysis.
 keywords:
   - R
   - EGRET
- 
   - seasonal analysis
   - surface water
 ---
@@ -43,6 +34,32 @@ library(EGRET)
 eList <- Choptank_eList
 ```
 
+To start with lets look at the results calculated for complete water years.
+
+``` r
+tableResults(eList)
+```
+
+    ## 
+    ##    Choptank River 
+    ##    Inorganic nitrogen (nitrate and nitrite)
+    ##    Water Year 
+    ## 
+    ##    Year   Discharge    Conc    FN_Conc     Flux    FN_Flux
+    ##              cms            mg/L             10^6 kg/yr 
+    ## 
+    ##    1980      4.25     0.949     1.003    0.1154     0.106
+    ##    1981      2.22     1.035     0.999    0.0675     0.108
+    ##    1982      3.05     1.036     0.993    0.0985     0.110
+    ##    1983      4.99     1.007     0.993    0.1329     0.112
+    ...
+    ##    2008      2.56     1.477     1.401    0.1008     0.149
+    ##    2009      3.68     1.409     1.419    0.1328     0.149
+    ##    2010      7.19     1.323     1.438    0.2236     0.149
+    ##    2011      5.24     1.438     1.457    0.1554     0.148
+
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February.
+
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
 -   `paStart` is the number of the calendar month that is the start of the season.
@@ -54,15 +71,10 @@ For example let's say we want to consider the winter, defined here as December t
 eList <- setPA(eList, paStart = 12, paLong = 3)
 ```
 
-Now all `EGRET` function will show results for only December through February. If there is a printed year for that season, it will be the year that ended the season of analysis (for example, year 2000 means December 1999 through February 2000).
-
-Seasonal Changes
-================
-
-`EGRET` has a function `tableChange` that displays the change in concentration and flux from a set of years. Let's look at the winter change between 1990 and 2010:
+Now lets view our results when we are focusing on the winter season.
 
 ``` r
-tableChange(eList, yearPoints = c(1990,2010))
+tableResults(eList)
 ```
 
     ## 
@@ -70,19 +82,31 @@ tableChange(eList, yearPoints = c(1990,2010))
     ##    Inorganic nitrogen (nitrate and nitrite)
     ##    Season Consisting of Dec Jan Feb 
     ## 
-    ##            Concentration trends
-    ##    time span       change     slope    change     slope
-    ##                      mg/L   mg/L/yr        %       %/yr
+    ##    Year   Discharge    Conc    FN_Conc     Flux    FN_Flux
+    ##              cms            mg/L             10^6 kg/yr 
     ## 
-    ##  1990  to  2010      0.24     0.012        18      0.89
-    ## 
-    ## 
-    ##                  Flux Trends
-    ##    time span          change        slope       change        slope
-    ##                   10^6 kg/yr    10^6 kg/yr /yr      %         %/yr
-    ##  1990  to  2010         0.02        0.001           10         0.51
+    ##    1980     4.220      1.10      1.11    0.1403     0.156
+    ##    1981     1.960      1.20      1.13    0.0735     0.161
+    ##    1982     5.057      1.16      1.15    0.1764     0.165
+    ##    1983     3.504      1.21      1.16    0.1310     0.169
+    ...
+    ##    2008     2.436      1.62      1.55    0.1217     0.217
+    ##    2009     2.711      1.66      1.56    0.1396     0.216
+    ##    2010    13.779      1.26      1.57    0.4161     0.215
+    ##    2011     3.369      1.66      1.57    0.1669     0.215
 
-You can compare that to change from the "water year" 1990 to 2010:
+Note that now the estimated flow normalized flux is 0.215 10<sup>6</sup> kg/year. Let's take a moment to think about that in relation to the previous result. What it is saying is that the flux (mass per unit time) is greater during this three month period that the average flux for the entire water year. That makes sense, some seasons will have higher than average fluxes and other seasons will have lower than average fluxes.
+
+Now, it might be that we want to think about these results, not in terms of a flux but in terms of mass alone. In the first result (water year) the mass for the year is 0.149 10<sup>6</sup> kg. But for the winter season we would compute the mass as 0.215 \* [90 / 365] to give us a result of 0.053 10<sup>6</sup> kg. To get this result we took the annual rate (0.215) and divided by the number of days in the year (365) to get a rate in mass per day and then multiplied by the number of days in the season (90) which is the sum of the length of those three months (31 + 31 + 28) to simply get a total mass.
+
+We have taken pains here to run through this calculation because users have sometimes been confused, wondering how the flux for a part of the year can be greater than the flux for the whole year. Depending on the ultimate objective of the analysis one might want to present the seasonal results in either of these ways (mass or mass per unit time).
+
+Next we will look at descriptions of change.
+
+Seasonal Changes
+================
+
+Let's use the tableChange function to explore the change from 1990 to 2010. We will do it first for the full water year and then for the winter season.
 
 ``` r
 eList <- setPA(eList, paStart = 10, paLong = 12)
@@ -106,9 +130,31 @@ tableChange(eList, yearPoints = c(1990,2010))
     ##                   10^6 kg/yr    10^6 kg/yr /yr      %         %/yr
     ##  1990  to  2010         0.02      0.00099           15         0.76
 
-In this example, there is is a slight difference in concentration trends if you compare just the winter season to the full water year, but very little difference in flux changes.
+``` r
+eList <- setPA(eList, paStart = 12, paLong = 3)
+tableChange(eList, yearPoints = c(1990,2010))
+```
 
-What does the seasonal flux trends change actually mean? The default unit "10^6 kg/yr" is mass over time. For these type of seasonal flux changes, it might be more intuitive to think of the changes in mass. December through Feburary has 90 days (31+31+28), so 24.66% of the year. So, the change in the mass of nitrate from Dec- Feb between 1990 and 2010 would be .2466 (0.02) 10^6 = 4,932 kg. And the overall change in mass from 1990 to 2010 would be 20,000 kg.
+    ## 
+    ##    Choptank River 
+    ##    Inorganic nitrogen (nitrate and nitrite)
+    ##    Season Consisting of Dec Jan Feb 
+    ## 
+    ##            Concentration trends
+    ##    time span       change     slope    change     slope
+    ##                      mg/L   mg/L/yr        %       %/yr
+    ## 
+    ##  1990  to  2010      0.24     0.012        18      0.89
+    ## 
+    ## 
+    ##                  Flux Trends
+    ##    time span          change        slope       change        slope
+    ##                   10^6 kg/yr    10^6 kg/yr /yr      %         %/yr
+    ##  1990  to  2010         0.02        0.001           10         0.51
+
+What we see is a fairly large difference between the concentration trends for the winter as compared to the whole year (concentration rose more steeply for the winter than it did for the year on average). But what we are going to focus on here is the trend in flux. The first thing to note is that the change from 1990 to 2010 is identical for the winter season and the year as a whole. That is, the change in the flow normalized flux for the full water year is +0.020 10<sup>6</sup> kg/year (it went from 0.129 to 0.149) and then, when we look at the winter season the change is also +0.020 10<sup>6</sup> kg/yr (from 0.195 to 0.215). So the change for this season over the 20 year period is essentially the same as the change for the entire water year. In other words, the results tell us that although the change in flux (mass per unit time) for the winter is the same as for the full year, the change in the mass for the winter season is about 25% of the change for the full year (because the winter consists of about 25% of the days in the year). Thus, we can conclude that the winter change is not atypical of the changes for the other parts of the year.
+
+The results show above also express the change as a slope (either 0.001 or 0.00099 virtually identical to each other) and these are simply the change results divided by the number of years. The next entry in the `tableChange` output is for change expressed as %. Here we see a big difference between the winter and the whole year. The whole year shows an increase of + 15 % over the 20 years, while the winter season shows an increase of 10 %. That is because the same amount of increase 0.02 10<sup>6</sup> kg / year is being compared to a the smaller number (1990 flow normalized annual flux of 0.129 10<sup>6</sup> kg/year) in the first table and compared to a larger number (seasonal flux of 0.195 10<sup>6</sup> kg/year) in the second table. So, even though the change is focused equally in the winter and non-winter months, the percentage change for the winter is smaller than the percentage change for the whole year.
 
 Seasonal Load Fraction
 ======================
@@ -271,7 +317,7 @@ genericEGRETDotPlot(seasonPctResults$DecYear,seasonPctResults$pctFlux,
 lines(seasonPctResults$DecYear,seasonPctResults$pctFNFlux,col="green",lwd=2)
 ```
 
-<img src='/static/seasonal-analysis/unnamed-chunk-7-1.png'/ title='Seasonal flux as a percentage of annual flux.' alt='Seasonal flux as a percentage of annual flux.' class=''/>
+<img src='/static/seasonal-analysis/unnamed-chunk-8-1.png'/ title='Seasonal flux as a percentage of annual flux.' alt='Seasonal flux as a percentage of annual flux.' class=''/>
 
 We can interpret this example graph as follows. The winter flux of nitrate fluctuates a good deal from year to year. From a low of around 10% to a high of around 60% but the mean percentage hasn't changed much over the years. It is around 35% of the annual total flux.
 
