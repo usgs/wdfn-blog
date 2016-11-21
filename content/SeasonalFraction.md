@@ -1,5 +1,5 @@
 ---
-author: Robert Hirsch and Laura DeCicco
+author: Robert M. Hirsch and Laura DeCicco
 date: 2016-11-21
 slug: seasonal-analysis
 draft: True
