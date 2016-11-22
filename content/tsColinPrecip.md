@@ -140,4 +140,4 @@ Questions
 
 Please direct any questions or comments on `geoknife` to: <https://github.com/USGS-R/geoknife/issues>
 
-*Edited on 11/22: fips retrieval now using US Census data based on geoknife update. See issue [here](https://github.com/USGS-R/geoknife/issues/278).*
+*Edited on 11/22. Works with geoknife v1.4.0 on CRAN. Changes to fips retrieval to use US Census data based on changes for [this geoknife issue](https://github.com/USGS-R/geoknife/issues/278).*
