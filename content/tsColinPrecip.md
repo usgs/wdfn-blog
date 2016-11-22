@@ -6,6 +6,8 @@ title: Visualizing Tropical Storm Colin Precipitation using geoknife
 type: post
 categories: Data Science
 image: static/ts-colin-precip/use-functions-1.png
+author_github: lindsaycarr
+author_email: <lcarr@usgs.gov>
 tags: 
   - R
   - geoknife

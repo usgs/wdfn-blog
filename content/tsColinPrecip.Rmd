@@ -6,6 +6,8 @@ date: "2016-06-09"
 image: "static/ts-colin-precip/use-functions-1.png"
 tag1: geoknife
 output: USGSmarkdowntemplates::hugo
+author_github: "lindsaycarr"
+author_email: "lcarr@usgs.gov"
 description: "Using the R package geoknife to plot precipitation by county during Tropical Strom Colin."
 ---
 
