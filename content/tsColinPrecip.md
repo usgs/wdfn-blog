@@ -2,22 +2,18 @@
 author: Lindsay R Carr
 date: 2016-06-09
 slug: ts-colin-precip
-type: post
 title: Visualizing Tropical Storm Colin Precipitation using geoknife
+type: post
 categories: Data Science
 image: static/ts-colin-precip/use-functions-1.png
 tags: 
   - R
   - geoknife
-description: Using the R package geoknife to plot precipitation by county during Tropical Strom Colin. 
+description: Using the R package geoknife to plot precipitation by county during Tropical Strom Colin.
 keywords:
+  - R
   - geoknife
-  - plotting precipitation
-  - data visualization
-author_github: lindsaycarr
-author_email: <lcarr@usgs.gov>
 ---
-
 Tropical Storm Colin (TS Colin) made landfall on June 6 in western Florida. The storm moved up the east coast, hitting Georgia, South Carolina, and North Carolina. We can explore the impacts of TS Colin using open data and R. Using the USGS-R `geoknife` package, we can pull precipitation data by county.
 
 ### First, we created two functions. One to fetch data and one to map data.
@@ -27,12 +23,20 @@ Function to retrieve precip data using [`geoknife`](https://github.com/USGS-R/ge
 ``` r
 getPrecip <- function(states, startDate, endDate){
   
-  wg_s <- webgeom(geom = 'derivative:US_Counties', attribute = 'STATE')
-  wg_c <- webgeom(geom = 'derivative:US_Counties', attribute = 'COUNTY')
+  # fips webgeom
   wg_f <- webgeom(geom = 'derivative:US_Counties', attribute = 'FIPS')
-  county_info <- data.frame(state = query(wg_s, 'values'), county = query(wg_c, 'values'), 
-                            fips = query(wg_f, 'values'), stringsAsFactors = FALSE) %>% 
-    unique() 
+  
+  # use fips data from US Census Bureau (found in Data.gov catalog:
+  # https://catalog.data.gov/dataset/fips-county-code-look-up-tool)
+  fips_lookup <- read.csv('http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt', 
+                       colClasses = 'character', header=FALSE) %>%
+    setNames(c('state','stateFIPS','countyFIPS','county','FIPSclass')) %>%
+    mutate(fips = paste0(stateFIPS, countyFIPS)) %>%
+    select(fips, state, county)
+  
+  # join fips based on fips webgeom & census data 
+  county_info <- data_frame(fips=query(wg_f, 'values')) %>%
+    left_join(fips_lookup, by='fips')
   
   counties_fips <- county_info %>% filter(state %in% states) %>%
     mutate(state_fullname = tolower(state.name[match(state, state.abb)])) %>%
