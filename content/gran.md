@@ -6,13 +6,7 @@ draft: True
 title: The US Geological Survey R Archive Network - GRAN
 type: post
 categories: Data Science
-image: images/USGS\_R.png
- 
- 
- 
- 
- 
- 
+image: images/USGS_R.png
 
 tags: 
   - R
@@ -21,8 +15,7 @@ tags:
 description: Description of the reason and development of grantools, an R package to help with the updating of GRAN.
 keywords:
   - R
-  - R repository
- 
+  - R repository 
   - automated builds of R repository
  
 ---
@@ -183,6 +176,10 @@ We are currently working on a way to clearly define package tiers: Core, Researc
 ### Package landing pages
 
 We are debating if there should be a landing page for each package on GRAN.
+
+### Tracking Downloads
+
+We have scripts to get the downloads, but it would be great to incorporate those into either the `grantools` package or as part of the Jenkin's job.
 
 Questions
 ---------
