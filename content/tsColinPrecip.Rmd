@@ -52,15 +52,16 @@ getPrecip <- function(states, startDate, endDate){
   
   # use fips data from US Census Bureau (found in Data.gov catalog:
   # https://catalog.data.gov/dataset/fips-county-code-look-up-tool)
-  fips_lookup <- read.csv('http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt', 
-                       colClasses = 'character', header=FALSE) %>%
-    setNames(c('state','stateFIPS','countyFIPS','county','FIPSclass')) %>%
-    mutate(fips = paste0(stateFIPS, countyFIPS)) %>%
+  fips_lookup <- data.frame(maps::county.fips, stringsAsFactors = FALSE) %>% 
+    tidyr::separate(polyname, c('statename', 'county'), ',') %>% 
+    mutate(state = state.abb[match(toupper(statename), toupper(state.name))],
+           fips = sprintf('%05d', fips)) %>% 
     select(fips, state, county)
+ 
   
   # join fips based on fips webgeom & census data 
   county_info <- data_frame(fips=query(wg_f, 'values')) %>%
-    left_join(fips_lookup, by='fips')
+  left_join(fips_lookup, by='fips')
   
   counties_fips <- county_info %>% filter(state %in% states) %>%
     mutate(state_fullname = tolower(state.name[match(state, state.abb)])) %>%
