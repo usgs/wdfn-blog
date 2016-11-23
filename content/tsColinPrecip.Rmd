@@ -49,12 +49,10 @@ getPrecip <- function(states, startDate, endDate){
  
   # use fips data from maps package
   counties_fips <- maps::county.fips %>% 
-    mutate(statecounty=as.character(polyname)) %>% 
+    mutate(statecounty=as.character(polyname)) %>% # character to split into state & county
     tidyr::separate(polyname, c('statename', 'county'), ',') %>%
-    mutate(state = state.abb[match(toupper(statename), toupper(state.name))],
-           fips = sprintf('%05d', fips)) %>%
-    filter(state %in% states) %>% 
-    select(fips, statename, statecounty)
+    mutate(fips = sprintf('%05d', fips)) %>% # fips need 5 digits to join w/ geoknife result
+    filter(statename %in% states) 
   
   stencil <- webgeom(geom = 'derivative:US_Counties',
                      attribute = 'FIPS',
@@ -67,13 +65,13 @@ getPrecip <- function(states, startDate, endDate){
   
   job <- geoknife(stencil, fabric, wait = TRUE, REQUIRE_FULL_COVERAGE=FALSE)
   check(job)
-  precipData <- result(job, with.units=TRUE)
-  precipData2 <- precipData %>% 
+  precipData_result <- result(job, with.units=TRUE)
+  precipData <- precipData_result %>% 
     select(-variable, -statistic, -units) %>% 
     gather(key = fips, value = precipVal, -DateTime) %>%
-    left_join(counties_fips, by="fips")
+    left_join(counties_fips, by="fips") #join w/ counties data
   
-  return(precipData2)
+  return(precipData)
   
 }
 ```
@@ -126,7 +124,8 @@ library(geoknife) #order matters because 'query' is masked by a function in dply
 library(RColorBrewer)
 library(maps)
 
-statesTSColin <- c('FL', 'AL', 'GA', 'SC', 'NC')
+statesTSColin <- c('florida', 'alabama', 'georgia', 
+                   'south carolina', 'north carolina')
 startTSColin <- "2016-06-06 05:00:00"
 endTSColin <- "2016-06-08 05:00:00"
 
