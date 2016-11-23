@@ -46,27 +46,15 @@ Function to retrieve precip data using [`geoknife`](https://github.com/USGS-R/ge
 
 ```{r getPrecip, message=FALSE}
 getPrecip <- function(states, startDate, endDate){
-  
-  # fips webgeom
-  wg_f <- webgeom(geom = 'derivative:US_Counties', attribute = 'FIPS')
-  
-  # use fips data from US Census Bureau (found in Data.gov catalog:
-  # https://catalog.data.gov/dataset/fips-county-code-look-up-tool)
-  fips_lookup <- data.frame(maps::county.fips, stringsAsFactors = FALSE) %>% 
-    tidyr::separate(polyname, c('statename', 'county'), ',') %>% 
-    mutate(state = state.abb[match(toupper(statename), toupper(state.name))],
-           fips = sprintf('%05d', fips)) %>% 
-    select(fips, state, county)
  
-  
-  # join fips based on fips webgeom & census data 
-  county_info <- data_frame(fips=query(wg_f, 'values')) %>%
-  left_join(fips_lookup, by='fips')
-  
-  counties_fips <- county_info %>% filter(state %in% states) %>%
-    mutate(state_fullname = tolower(state.name[match(state, state.abb)])) %>%
-    mutate(county_mapname = paste(state_fullname, tolower(county), sep=",")) %>%
-    mutate(county_mapname = unlist(strsplit(county_mapname, split = " county")))
+  # use fips data from maps package
+  counties_fips <- maps::county.fips %>% 
+    mutate(statecounty=as.character(polyname)) %>% 
+    tidyr::separate(polyname, c('statename', 'county'), ',') %>%
+    mutate(state = state.abb[match(toupper(statename), toupper(state.name))],
+           fips = sprintf('%05d', fips)) %>%
+    filter(state %in% states) %>% 
+    select(fips, statename, statecounty)
   
   stencil <- webgeom(geom = 'derivative:US_Counties',
                      attribute = 'FIPS',
@@ -82,7 +70,7 @@ getPrecip <- function(states, startDate, endDate){
   precipData <- result(job, with.units=TRUE)
   precipData2 <- precipData %>% 
     select(-variable, -statistic, -units) %>% 
-    gather(key = fips, value = precipVal, -DateTime) %>% 
+    gather(key = fips, value = precipVal, -DateTime) %>%
     left_join(counties_fips, by="fips")
   
   return(precipData2)
@@ -98,28 +86,22 @@ precipMap <- function(precipData, startDate, endDate){
   precip_breaks <- c(seq(0,80,by = 10), 200)
   
   precipData_cols <- precipData %>% 
-    group_by(state_fullname, county_mapname) %>% 
+    group_by(statename, statecounty) %>% 
     summarize(cumprecip = sum(precipVal)) %>% 
-    mutate(cols = cut(cumprecip, breaks = precip_breaks, labels = cols, right=FALSE)) %>% 
+    mutate(cols = cut(cumprecip, breaks = precip_breaks, labels = cols, right=FALSE)) %>%
     mutate(cols = as.character(cols))
   
   par(mar = c(0,0,3,0))
   
   # png('tsColin.png', width = 7, height = 5, res = 150, units = 'in')
-  m1 <- map('county', regions = precipData_cols$state_fullname, col = "lightgrey")
-  m2 <- map('state', regions = precipData_cols$state_fullname, 
+  m1 <- map('county', regions = precipData_cols$statename, col = "lightgrey")
+  m2 <- map('state', regions = precipData_cols$statename, 
             add = TRUE, lwd = 1.5, col = "darkgrey")
   
-  # some county names are mismatched, only plot the ones that maps library 
-  # knows about and then order them the same as the map
-  precipData_cols <- precipData_cols %>%
-    mutate(county_mapname = gsub(x = county_mapname, pattern = 'saint', replacement = 'st')) %>%
-    mutate(county_mapname = gsub(x = county_mapname, pattern = 'okaloosa',
-                                 replacement = 'okaloosa:main')) %>%
-    filter(county_mapname %in% m1$names)
-  precipData_cols <- precipData_cols[na.omit(match(m1$names, precipData_cols$county_mapname)),]
-  
-  m3 <- map('county', regions = precipData_cols$county_mapname, 
+  # some county names are mismatched, order them the same as the map
+  precipData_cols <- precipData_cols[na.omit(match(m1$names, precipData_cols$statecounty)),]
+
+  m3 <- map('county', regions = precipData_cols$statecounty, 
             add = TRUE, fill = TRUE, col = precipData_cols$cols)
   
   legend(x = "bottomright", fill = cols, cex = 0.7, bty = 'n', 
