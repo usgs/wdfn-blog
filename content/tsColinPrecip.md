@@ -68,16 +68,8 @@ precipMap <- function(precipData, startDate, endDate){
   
   par(mar = c(0,0,3,0))
   
-  # png('tsColin.png', width = 7, height = 5, res = 150, units = 'in')
-  # m1 <- map('county', regions = precipData_cols$statename, col = "lightgrey")
-  # m2 <- map('state', regions = precipData_cols$statename, 
-  #           add = TRUE, lwd = 1.5, col = "darkgrey")
-  
-  # some county names are mismatched, order them the same as the map
-  # precipData_cols <- precipData_cols[na.omit(match(m1$names, precipData_cols$statecounty)),]
-
-  m3 <- map('county', regions = precipData_cols$statecounty, 
-            fill = TRUE, col = precipData_cols$cols, exact=TRUE)
+  map('county', regions = precipData_cols$statecounty, 
+      fill = TRUE, col = precipData_cols$cols, exact=TRUE)
   
   legend(x = "bottomright", fill = cols, cex = 0.7, bty = 'n', 
          title = "Cumulative\nPrecipitation (mm)",
@@ -121,4 +113,4 @@ Questions
 
 Please direct any questions or comments on `geoknife` to: <https://github.com/USGS-R/geoknife/issues>
 
-*Edited on 11/22. Works with geoknife v1.4.0 on CRAN. Changes to fips retrieval to use US Census data based on changes for [this geoknife issue](https://github.com/USGS-R/geoknife/issues/278).*
+*Edited on 11/23. Works with geoknife v1.4.0 on CRAN. Changes to fips retrieval to use US Census data based on changes for [this geoknife issue](https://github.com/USGS-R/geoknife/issues/278).*
