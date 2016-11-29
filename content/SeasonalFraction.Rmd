@@ -2,7 +2,7 @@
 title: "Seasonal Analysis in EGRET"
 slug: "seasonal-analysis"
 author: "Robert M. Hirsch and Laura DeCicco"
-date: "2016-11-21"
+date: "2016-11-29"
 output: USGSmarkdowntemplates::hugo
 image: "static/seasonal-analysis/unnamed-chunk-8-1.png"
 tag1: "EGRET"
@@ -67,7 +67,7 @@ To start with lets look at the results calculated for complete water years.
 tableResults(eList)
 ```
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year.  Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year.  Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 

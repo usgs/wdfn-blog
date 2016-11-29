@@ -1,8 +1,7 @@
 ---
 author: Robert M. Hirsch and Laura DeCicco
-date: 2016-11-21
+date: 2016-11-29
 slug: seasonal-analysis
-draft: True
 title: Seasonal Analysis in EGRET
 type: post
 categories: Data Science
@@ -10,7 +9,6 @@ image: static/seasonal-analysis/unnamed-chunk-8-1.png
 tags: 
   - R
   - EGRET
- 
 description: Using the R-packages EGRET and EGRETci, investigate seasonal analysis.
 keywords:
   - R
@@ -18,10 +16,13 @@ keywords:
   - seasonal analysis
   - surface water
 ---
+
 Introduction
 ============
 
-This document describes how to obtain seasonal information from the R package [EGRET](https://CRAN.R-project.org/package=EGRET). For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February). We can look at the seasonal information for a single year, or averages over several years, or in terms of flow normalized fluxes.
+This document describes how to obtain seasonal information from the R package [EGRET](https://CRAN.R-project.org/package=EGRET) - Exploration and Graphics for RivEr Trends: An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS)
+
+For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February). We can look at the seasonal information for a single year, or averages over several years, or in terms of flow normalized fluxes.
 
 Getting started
 ===============
@@ -53,7 +54,7 @@ tableResults(eList)
     ##    1981      2.22     1.035     0.999    0.0675     0.108
     ##    1982      3.05     1.036     0.993    0.0985     0.110
     ##    1983      4.99     1.007     0.993    0.1329     0.112
-    ...
+    ....
     ##    2006      3.59     1.382     1.362    0.1409     0.147
     ##    2007      4.28     1.408     1.382    0.1593     0.149
     ##    2008      2.56     1.477     1.401    0.1008     0.149
@@ -61,7 +62,7 @@ tableResults(eList)
     ##    2010      7.19     1.323     1.438    0.2236     0.149
     ##    2011      5.24     1.438     1.457    0.1554     0.148
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we choose here to define as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. *Note*: some lines (1984-2005) were removed from this blog post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
@@ -92,7 +93,7 @@ tableResults(eList)
     ##    1981     1.960      1.20      1.13    0.0735     0.161
     ##    1982     5.057      1.16      1.15    0.1764     0.165
     ##    1983     3.504      1.21      1.16    0.1310     0.169
-    ...
+    ....
     ##    2006     5.843      1.51      1.51    0.2675     0.214
     ##    2007     5.417      1.55      1.53    0.2419     0.216
     ##    2008     2.436      1.62      1.55    0.1217     0.217
