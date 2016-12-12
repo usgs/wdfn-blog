@@ -2,23 +2,20 @@
 author: Lindsay R Carr
 date: 2016-06-09
 slug: ts-colin-precip
-type: post
 title: Visualizing Tropical Storm Colin Precipitation using geoknife
+type: post
 categories: Data Science
 image: static/ts-colin-precip/use-functions-1.png
+author_github: lindsaycarr
+author_email: <lcarr@usgs.gov>
 tags: 
   - R
   - geoknife
-description: Using the R package geoknife to plot precipitation by county during Tropical Strom Colin. 
+description: Using the R package geoknife to plot precipitation by county during Tropical Strom Colin.
 keywords:
+  - R
   - geoknife
-  - plotting precipitation
-  - data visualization
 ---
-<a href="mailto:lcarr@usgs.gov  "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/lindsaycarr"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-
-
 Tropical Storm Colin (TS Colin) made landfall on June 6 in western Florida. The storm moved up the east coast, hitting Georgia, South Carolina, and North Carolina. We can explore the impacts of TS Colin using open data and R. Using the USGS-R `geoknife` package, we can pull precipitation data by county.
 
 ### First, we created two functions. One to fetch data and one to map data.
@@ -27,18 +24,13 @@ Function to retrieve precip data using [`geoknife`](https://github.com/USGS-R/ge
 
 ``` r
 getPrecip <- function(states, startDate, endDate){
-  
-  wg_s <- webgeom(geom = 'derivative:US_Counties', attribute = 'STATE')
-  wg_c <- webgeom(geom = 'derivative:US_Counties', attribute = 'COUNTY')
-  wg_f <- webgeom(geom = 'derivative:US_Counties', attribute = 'FIPS')
-  county_info <- data.frame(state = query(wg_s, 'values'), county = query(wg_c, 'values'), 
-                            fips = query(wg_f, 'values'), stringsAsFactors = FALSE) %>% 
-    unique() 
-  
-  counties_fips <- county_info %>% filter(state %in% states) %>%
-    mutate(state_fullname = tolower(state.name[match(state, state.abb)])) %>%
-    mutate(county_mapname = paste(state_fullname, tolower(county), sep=",")) %>%
-    mutate(county_mapname = unlist(strsplit(county_mapname, split = " county")))
+ 
+  # use fips data from maps package
+  counties_fips <- maps::county.fips %>% 
+    mutate(statecounty=as.character(polyname)) %>% # character to split into state & county
+    tidyr::separate(polyname, c('statename', 'county'), ',') %>%
+    mutate(fips = sprintf('%05d', fips)) %>% # fips need 5 digits to join w/ geoknife result
+    filter(statename %in% states) 
   
   stencil <- webgeom(geom = 'derivative:US_Counties',
                      attribute = 'FIPS',
@@ -46,18 +38,17 @@ getPrecip <- function(states, startDate, endDate){
   
   fabric <- webdata(url = 'http://cida.usgs.gov/thredds/dodsC/stageiv_combined', 
                     variables = "Total_precipitation_surface_1_Hour_Accumulation", 
-                    times = c(as.POSIXct(startDate), 
-                              as.POSIXct(endDate)))
+                    times = c(startDate, endDate))
   
   job <- geoknife(stencil, fabric, wait = TRUE, REQUIRE_FULL_COVERAGE=FALSE)
   check(job)
-  precipData <- result(job, with.units=TRUE)
-  precipData2 <- precipData %>% 
+  precipData_result <- result(job, with.units=TRUE)
+  precipData <- precipData_result %>% 
     select(-variable, -statistic, -units) %>% 
-    gather(key = fips, value = precipVal, -DateTime) %>% 
-    left_join(counties_fips, by="fips")
+    gather(key = fips, value = precipVal, -DateTime) %>%
+    left_join(counties_fips, by="fips") #join w/ counties data
   
-  return(precipData2)
+  return(precipData)
   
 }
 ```
@@ -70,29 +61,15 @@ precipMap <- function(precipData, startDate, endDate){
   precip_breaks <- c(seq(0,80,by = 10), 200)
   
   precipData_cols <- precipData %>% 
-    group_by(state_fullname, county_mapname) %>% 
+    group_by(statename, statecounty) %>% 
     summarize(cumprecip = sum(precipVal)) %>% 
-    mutate(cols = cut(cumprecip, breaks = precip_breaks, labels = cols, right=FALSE)) %>% 
+    mutate(cols = cut(cumprecip, breaks = precip_breaks, labels = cols, right=FALSE)) %>%
     mutate(cols = as.character(cols))
   
   par(mar = c(0,0,3,0))
   
-  # png('tsColin.png', width = 7, height = 5, res = 150, units = 'in')
-  m1 <- map('county', regions = precipData_cols$state_fullname, col = "lightgrey")
-  m2 <- map('state', regions = precipData_cols$state_fullname, 
-            add = TRUE, lwd = 1.5, col = "darkgrey")
-  
-  # some county names are mismatched, only plot the ones that maps library 
-  # knows about and then order them the same as the map
-  precipData_cols <- precipData_cols %>%
-    mutate(county_mapname = gsub(x = county_mapname, pattern = 'saint', replacement = 'st')) %>%
-    mutate(county_mapname = gsub(x = county_mapname, pattern = 'okaloosa',
-                                 replacement = 'okaloosa:main')) %>%
-    filter(county_mapname %in% m1$names)
-  precipData_cols <- precipData_cols[na.omit(match(m1$names, precipData_cols$county_mapname)),]
-  
-  m3 <- map('county', regions = precipData_cols$county_mapname, 
-            add = TRUE, fill = TRUE, col = precipData_cols$cols)
+  map('county', regions = precipData_cols$statecounty, 
+      fill = TRUE, col = precipData_cols$cols, exact=TRUE)
   
   legend(x = "bottomright", fill = cols, cex = 0.7, bty = 'n', 
          title = "Cumulative\nPrecipitation (mm)",
@@ -116,7 +93,8 @@ library(geoknife) #order matters because 'query' is masked by a function in dply
 library(RColorBrewer)
 library(maps)
 
-statesTSColin <- c('FL', 'AL', 'GA', 'SC', 'NC')
+statesTSColin <- c('florida', 'alabama', 'georgia', 
+                   'south carolina', 'north carolina')
 startTSColin <- "2016-06-06 05:00:00"
 endTSColin <- "2016-06-08 05:00:00"
 
@@ -134,3 +112,5 @@ Questions
 =========
 
 Please direct any questions or comments on `geoknife` to: <https://github.com/USGS-R/geoknife/issues>
+
+*Edited on 11/23. Works with geoknife v1.4.0 on CRAN. Changes to fips retrieval to use US Census data based on changes for [this geoknife issue](https://github.com/USGS-R/geoknife/issues/278).*

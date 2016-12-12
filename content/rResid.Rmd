@@ -6,6 +6,14 @@ slug: "rResid"
 image: "static/rResid/unnamed-chunk-7-2.png"
 tag1: "EGRET"
 output: USGSmarkdowntemplates::hugo
+author_twitter: "DeCiccoDonk"
+author_github: "ldecicco-usgs"
+author_gs: "jXd0feEAAAAJ"
+author_staff: "laura-decicco"
+author_email: "ldecicco@usgs.gov"
+description: "Using random residuals for censored data in EGRET, and R package. Exploration and Graphics for RivEr Trends (EGRET) is an R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS)."
+keyword1: random residuals
+keyword2: water quality trends
 ---
 
 ```{r setup, include=FALSE}

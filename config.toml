@@ -1,8 +1,6 @@
-languageCode = "en-us"
-title = "The USGS OWI blog"
-theme = "OWI"
-preserveTaxonomyNames = true
-paginate = 6
 canonifyurls = true
-
-
+title = "The USGS OWI blog"
+name = ["Laura DeCicco"]
+email = ["r_admin@usgs.gov"]
+preserveTaxonomyNames = true
+paginate = 100

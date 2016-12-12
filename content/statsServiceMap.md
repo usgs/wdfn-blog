@@ -6,13 +6,16 @@ title: Using the dataRetrieval Stats Service
 type: post
 categories: Data Science
 image: static/stats-service-map/plot-1.png
+author_github: wdwatkins
+author_email: <wwatkins@usgs.gov>
 tags: 
   - R
   - dataRetrieval
- 
+description: Using the R package dataRetrieval Stats Service.
+keywords:
+  - R
+  - dataRetrieval
 ---
-
-<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
 
 Introduction
 ------------

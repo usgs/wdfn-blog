@@ -1,9 +1,14 @@
 ---
 author: Laura DeCicco
+author_twitter: DeCiccoDonk
+author_github: ldecicco-usgs
+author_gs: jXd0feEAAAAJ
+author_staff: laura-decicco
+author_email: <ldecicco@usgs.gov>  
 date: 2016-08-23
 slug: leaflet
-type: post
 title: Using Leaflet and htmlwidgets in a Hugo blog post
+type: post
 categories: Data Science
 image: static/leaflet/screenshot.png
 tags: 
@@ -11,18 +16,11 @@ tags:
   - dataRetrieval
 description: Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo blogpost is explained.
 keywords:
-  - leaflet
-  - interactive map
+  - R
   - dataRetrieval
+  - Leaflet
+  - Interactive map
 ---
-
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
-
 We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet) map in our Hugo-generated blog post.
 
 In this example, we are looking for phosphorus measured throughout Wisconsin with the [`dataRetrieval`](https://cran.r-project.org/package=dataRetrieval) package. Using [`dplyr`](https://cran.r-project.org/package=dplyr), we filter the data to sites that have records longer than 15 years, and more than 50 measurements.

@@ -3,6 +3,12 @@ owi-blog
 
 *Blog posts from the USGS Office of Water Information*
 
+# Guidelines for submission
+1. Applicable/useful to a greater audience.
+2. Content provides additional information not available elsewhere.
+3. Relevant to USGS employees or USGS data users
+4. Showcases databases, applications, software, or common practices associated with OWI or within the OWI portfolio.
+
 # Submitting blog post
 
 1. Fork repo
@@ -29,7 +35,13 @@ owi-blog
     - EGRET
     - ggplot2
     - data visualization
-  ---
+  author_twitter: DeCiccoDonk
+  author_github: ldecicco-usgs
+  author_gs: jXd0feEAAAAJ
+  author_staff: laura-decicco
+  author_email: <ldecicco@usgs.gov>
+  author_researchgate: Laura_De_Cicco
+    ---
   ```
 
   Important notes about header:
@@ -51,6 +63,8 @@ owi-blog
   * `keywords` (can be the same as tags), also go in a "meta" tag to be used by Google and others.
   
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
+  
+  * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
 
 6. Submit a pull request
 7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site. 
@@ -83,7 +97,7 @@ hugo server --theme=hugo_theme_robust --buildDrafts
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
 ```
-devtools::install_github("USGS-R/USGSmarkdowntemplates")
+install.packages("USGSmarkdowntemplates", repos=c("https://owi.usgs.gov/R",getOption("repos")))
 ```
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
@@ -94,6 +108,8 @@ To add 2 figures side by side, add `class="sideBySide"`, for example:
 <img class="sideBySide" src='/fig1.png'/ alt='/ggplot2'/>
 <img class="sideBySide" src='/fig2.png'/ alt='/EGRET'/>
 ```
+
+
 
 
 Disclaimer

@@ -28,14 +28,6 @@
   </section>
   {{ end }}
 
-<!--  <section>
-    <header>LatestPosts</header>
-    <div>
-      {{ range first 10 .Site.Pages }}
-      {{ .Render "li" }}
-      {{ end }}
-    </div>
-  </section>-->
 
   {{ range $key, $value := .Site.Taxonomies }}
   <section>
@@ -52,49 +44,76 @@
   <header>FOLLOW US</header>
   <div>
     <ul>
-    <li>
         <a href="https://twitter.com/USGS_WaterData" class="twitter-follow-button" data-show-count="false">@USGS_WaterData</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </li>
-      <li>
-        <a href="https://owi.usgs.gov/blog/index.xml"><i class="fa fa-rss-square"> RSS Feed </i></a>
-    </li>
+    </ul>
   
   {{ if in .Params.tags "R"}}
-    <li>
+    <ul>
         <a href="https://twitter.com/USGS_R" class="twitter-follow-button" data-show-count="false">@USGS_R</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </li>
-    <li>
-        <a href="https://owi.usgs.gov/blog/tags/r/index.xml"><i class="fa fa-rss-square"> RSS - R Posts</i></a>
-    </li>
+    </ul>
+
   {{ end }}
   
   {{ if in .Params.tags "GDP"}}
-    <li>
+    <ul>
         <a href="https://twitter.com/USGS_GDP" class="twitter-follow-button" data-show-count="false">@USGS_GDP</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </li>
+    </ul>
   {{ end }}
   
   {{ if in .Params.tags "Pubs"}}
-    <li>
+    <ul>
         <a href="https://twitter.com/USGS_Pubs" class="twitter-follow-button" data-show-count="false">@USGS_Pubs</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </li>
+    </ul>
   {{ end }}
   
-  </ul>
+
   </div>
   </section>
 
-{{ if in .Params.tags "R"}}
   <section>
   <header>Related Blogs</header>
-  <div>
-    <ul>
-      <li>
-        <a href="http://r-bloggers.com">R-bloggers</a>
-      </li>
-    </ul>
-  </div>
+    <div>
+      <ul>
+        <li>
+          <a href="https://blog.epa.gov/blog/"  target="blank">EPA</a>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <a href="http://oceanservice.noaa.gov/blogs.html"  target="blank">NOAA</a>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <a href="http://blogs.nasa.gov/"  target="blank">NASA</a>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <a href="http://R-bloggers.com" target="blank">R-bloggers</a>
+        </li>
+      </ul>
+    </div>
   </section>
-{{ end }}
+  
+  <section>
+    <header>RSS Feed</header>
+    <div>
+    <ul>
+
+            <a href="{{ .Site.BaseURL }}index.xml" target="blank"><i class="fa fa-rss-square fa-2x"></i>    Main</a>
+
+    </ul>
+
+    <ul>
+
+            <a href="{{ .Site.BaseURL }}tags/r/index.xml" target="blank"><i class="fa fa-rss-square fa-2x" ></i>    R Feed</a>
+
+    </ul>
+    </div>
+  </section>
 
 </aside>
