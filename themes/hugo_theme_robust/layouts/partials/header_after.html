@@ -54,21 +54,22 @@
 <header class="l-header">
 			
   <div class="p-logo">
-    <div id="desktopNav">
-      <img id="mobileBurger" src="{{ $.Site.BaseURL }}images/mobileburger.png" alt="mobile nav menu"/>
-      <a href="http://owi.usgs.gov/">
-          <img id="owiLogoSmall" src="{{ $.Site.BaseURL }}images/owi-mobile.png" alt="OWI logo"/>
-      </a>
-
-      <ul id="navigation">
-        <a href="https://owi.usgs.gov/people/"><li>People</li></a>
-        <a href="https://owi.usgs.gov/products/"><li>Products</li></a>
-        <a href="https://owi.usgs.gov/partners/"><li>Partners</li></a>
-        <a href="https://owi.usgs.gov/careers/"><li>Careers</li></a>
-        <a id="owiCurrent" href="{{ .Site.BaseURL }}"><li>Blog</li></a>
-      </ul>
-
-    </div>
+    <div class="navContent">
+        <div id="menu">
+            Menu
+        </div>
+       <ul id="navigation">
+           <a id="people" href="https://owi.usgs.gov/people/"><li>People</li></a>
+           <a href="https://owi.usgs.gov/products/"><li>Products</li></a>
+           <a href="https://owi.usgs.gov/partners/"><li>Partners</li></a>
+           <a href="https://owi.usgs.gov/datascience/"><li>Data Science</li></a>
+           <a href="https://owi.usgs.gov/careers/"><li>Careers</li></a>
+           <a id="owiCurrent" href="{{ $.Site.BaseURL }}"><li>Blog</li></a>
+       </ul>
+        <a href="https://owi.usgs.gov/">
+            <img id="owiLogoSmall" src="{{ $.Site.BaseURL }}images/owi-mobile.png" alt="OWI logo"/>
+        </a>
+   </div>
   </div>
   
   {{ if .RSSlink }}
@@ -80,7 +81,11 @@
 
 <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 <script type="text/javascript">
-    $('#mobileBurger').on('click', function(){
-       $('#navigation').toggle('slow');
+    $(document).on('click', function(){
+      $('#navigation').hide();
+    });
+    $('#menu').on('click', function(e){
+        e.stopPropagation();
+       $('#navigation').toggle();
     });
 </script>
