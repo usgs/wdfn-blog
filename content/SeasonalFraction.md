@@ -16,18 +16,15 @@ keywords:
   - seasonal analysis
   - surface water
 ---
-
 Introduction
 ============
 
-This document describes how to obtain seasonal information from the R package [EGRET](https://CRAN.R-project.org/package=EGRET) - Exploration and Graphics for RivEr Trends: An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS)
-
-For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February). We can look at the seasonal information for a single year, or averages over several years, or in terms of flow normalized fluxes.
+This document describes how to obtain seasonal information from the R package [EGRET](https://CRAN.R-project.org/package=EGRET). For example, we might want to know the fraction of the load that takes place in the winter season (say that is December, January, and February). We can look at the seasonal information for a single year, or averages over several years, or in terms of flow normalized fluxes.
 
 Getting started
 ===============
 
-First, you need to have installed and loaded the `EGRET` package. Then, you'll need need to create an `eList` object. See the `EGRET` vignette or user guide [here](http://pubs.usgs.gov/tm/04/a10/) for more information on how to use your own water quality data in `EGRET`. Once the `eList` object has been created, run the `modelEstimation` function to create a WRTDS model.
+First, you need to have installed and loaded the `EGRET` package. Then, you'll need need to create an `eList` object. See the `EGRET` vignette or user guide [here](https://pubs.usgs.gov/tm/04/a10/) for more information on how to use your own water quality data in `EGRET`. Once the `eList` object has been created, run the `modelEstimation` function to create a WRTDS model.
 
 For this post, we will use the Choptank River as an example. There is an example data set included in `EGRET` with measured nitrate in the Choptank River. Here is an example of how to load that example data:
 
@@ -62,7 +59,7 @@ tableResults(eList)
     ##    2010      7.19     1.323     1.438    0.2236     0.149
     ##    2011      5.24     1.438     1.457    0.1554     0.148
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. *Note*: some lines (1984-2005) were removed from this blog post simply to save space.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
@@ -160,14 +157,14 @@ tableChange(eList, yearPoints = c(1990,2010))
 
 What we see is a fairly large difference between the concentration trends for the winter as compared to the whole year (concentration rose more steeply for the winter than it did for the year on average). But what we are going to focus on here is the trend in flux. The first thing to note is that the change from 1990 to 2010 is identical for the winter season and the year as a whole. That is, the change in the flow normalized flux for the full water year is +0.020 10<sup>6</sup> kg/year (it went from 0.129 to 0.149) and then, when we look at the winter season the change is also +0.020 10<sup>6</sup> kg/yr (from 0.195 to 0.215). So the change for this season over the 20 year period is essentially the same as the change for the entire water year. In other words, the results tell us that although the change in flux (mass per unit time) for the winter is the same as for the full year, the change in the mass for the winter season is about 25% of the change for the full year (because the winter consists of about 25% of the days in the year). Thus, we can conclude that the winter change is not atypical of the changes for the other parts of the year.
 
-The results show above also express the change as a slope (either 0.001 or 0.00099 virtually identical to each other) and these are simply the change results divided by the number of years. The next entry in the `tableChange` output is for change expressed as %. Here we see a big difference between the winter and the whole year. The whole year shows an increase of + 15 % over the 20 years, while the winter season shows an increase of 10 %. That is because the same amount of increase 0.02 10<sup>6</sup> kg / year is being compared to a the smaller number (1990 flow normalized annual flux of 0.129 10<sup>6</sup> kg/year) in the first table and compared to a larger number (seasonal flux of 0.195 10<sup>6</sup> kg/year) in the second table. So, even though the change is focused equally in the winter and non-winter months, the percentage change for the winter is smaller than the percentage change for the whole year.
+The results shown above also express the change as a slope (either 0.001 or 0.00099 virtually identical to each other) and these are simply the change results divided by the number of years. The next entry in the `tableChange` output is for change expressed as %. Here we see a big difference between the winter and the whole year. The whole year shows an increase of + 15 % over the 20 years, while the winter season shows an increase of 10 %. That is because the same amount of increase 0.02 10<sup>6</sup> kg / year is being compared to a the smaller number (1990 flow normalized annual flux of 0.129 10<sup>6</sup> kg/year) in the first table and compared to a larger number (seasonal flux of 0.195 10<sup>6</sup> kg/year) in the second table. So, even though the change is focused equally in the winter and non-winter months, the percentage change for the winter is smaller than the percentage change for the whole year.
 
 Seasonal Load Fraction
 ======================
 
 Next, we can think about the seasonal load fraction.
 
-You will need to read in two new function called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. The functions use the package [`dplyr`](https://CRAN.R-project.org/package=dplyr), a package that is useful for general data exploration and manipulation.
+You will need to read in two new functions called `setupSeasons` and `setupYearsPlus` designed for this purpose. You can copy them from here and paste them into your workspace (all as a single copy and paste) or you can create an .R file from them that you will source each time you want to use them. The functions use the package [`dplyr`](https://CRAN.R-project.org/package=dplyr), a package that is useful for general data exploration and manipulation.
 
 ``` r
 library(dplyr)
@@ -351,14 +348,25 @@ The total seasonal flux for all years of the period of interest in millions of k
 
 The percentage of the total flux for the years 2000 through 2010 that was transported in the winter months is `avePct` = 35.2627852.
 
-This can be determined for any set of years simply by changing the two numbers inside the brackets to the index numbers of the first and last years of interest.
+This can be determined for any set of years simply by changing `Year` values in the `filter` function. So, for the years 1990-1999:
+
+``` r
+years90_99 <- filter(seasonPctResults, Year >= 1990, Year <= 1999)
+
+c("sumYears" = sum(years00_10$FluxYear),
+"sumSeasons" = sum(years00_10$FluxSeason),
+"avePct" = 100 * sumSeasons / sumYears)
+```
+
+    ##   sumYears sumSeasons     avePct 
+    ##  1.7297595  0.6099614 35.2627852
 
 Questions
 ---------
 
 -   Robert M. Hirsch <a href="mailto:rhirsch@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Robert_Hirsch3" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/robert-hirsch" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
--   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.researchgate.net/profile/Laura_De_Cicco" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
 Information on USGS-R packages used in this post:
 
