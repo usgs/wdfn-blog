@@ -1,67 +1,43 @@
 ---
-title: "Water-Quality Monitoring over time"
-author: "Jordan Read and Laura DeCicco"
-date: "2017-03-02"
-slug: "nitrate"
-tag1: "dataRetrieval"
-output: USGSmarkdowntemplates::hugo
-image: "static/nitrate/map-1.png"
-description: "Using the R packages dataRetrieval to discover how water-quailty has changed over time."
-keyword1: "dataRetrieval"
-keyword2: "Water-Quality"
+author: Jordan Read and Laura DeCicco
+date: 2017-03-02
+slug: usMap
+draft: True
+title: Map Stuff
+type: post
+categories: Data Science
+image: static/usMap/map-1.png
+ 
+ 
+ 
+ 
+ 
+ 
+
+tags: 
+  - R
+  - dataRetrieval
+ 
+description: Using the R packages dataRetrieval to discover how water-quailty has changed over time.
+keywords:
+  - R
+  - dataRetrieval
+ 
+  - dataRetrieval
+  - Water-Quality
 ---
+-   Jordan Read <a href="mailto:jread@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/jordansread" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/jread-USGS" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=geFLqWAAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://cida.usgs.gov/people/jread.html" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
-* Jordan Read
-<a href="mailto:jread@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a>
-<a href="https://twitter.com/jordansread" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-<a href="https://github.com/jread-USGS" target="blank"><i class="fa fa-github-square fa-2x"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=geFLqWAAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a>
-<a href="https://cida.usgs.gov/people/jread.html" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
-* Laura DeCicco
-<a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a>
-<a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-<a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a>
-<a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a>
-<a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
-
-```{r setup, include=FALSE}
-library(knitr)
-
-knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
-          options$fig.path, options$label,
-          options$fig.cur, options$fig.ext,
-          options$fig.cap, options$alt.text, options$class)
-
-})
-
-knit_hooks$set(htmlcap = function(before, options, envir) {
-  if(!before) {
-    paste('<p class="caption">',options$htmlcap,"</p>",sep="")
-    }
-})
-
-opts_chunk$set(
-  echo=TRUE,
-  fig.path="static/nitrate/",
-  fig.width = 7,
-  fig.height = 5,
-  fig.cap = "TODO",
-  alt.text = "TODO",
-  class = "",
-  warning = FALSE,
-  message = FALSE
-)
-```
-
-
-```{r eval=FALSE, echo=TRUE}
+``` r
 library(dataRetrieval)
 library(dplyr)
 
 all_sites <- data.frame()
 failed_sites <- c()
+
+#Running this full code takes about 15 minutes:
 
 for(i in stateCd$STUSAB[c(1:51,55)]){ 
   
@@ -92,64 +68,19 @@ for(i in stateCd$STUSAB[c(1:51,55)]){
     message("***************Errored on",i,"***********\n")
     return(all_sites)
   })
-  saveRDS(all_sites, "allSites.rds")
+  saveRDS(all_sites, "static/usMap/allSites.rds")
 }
-
-# parameterCdFile <- parameterCdFile
-# 
-# Nitrate <- parameterCdFile %>%
-#   filter(grepl("nitrate", parameter_nm, ignore.case = TRUE),
-#          parameter_group_nm == "Nutrient")
-# 
-# p_Nitrite <- Nitrate %>%
-#   filter(grepl("nitrite", parameter_nm, ignore.case = TRUE)) 
-# 
-# p_Nitrite <- p_Nitrite$parameter_cd
-# 
-# p_Nitrate <- Nitrate$parameter_cd[!(Nitrate$parameter_cd %in% p_Nitrite)]
-
-all_data <- data.frame()
-all_sites <- data.frame()
-
-for(i in stateCd$STUSAB[c(30:51,55)]){ 
-  
-  cat("Getting:",i,"\n")
-  
-  tryCatch({
-    
-    nitrate <- readWQPdata(characteristicName=c("Nitrate","Nitrite"),
-                            stateCd = i)
-    saveRDS(nitrate, 
-            paste0("D:/LADData/RCode/owi-blog/content/static/nitrate/n_data_",i,".rds"))
-  },
-  error=function(cond) {
-    message("***************Errored on",i,"***********\n")
-  })
-
-}
-
-
 ```
 
-```{r echo=FALSE}
-library(dplyr)
-library(dataRetrieval)
-
-all_sites <- readRDS("allSites.rds")
-
-```
-
-```{r}
+``` r
 unique_sites <- all_sites %>%
   group_by(site_no, station_nm, dec_lat_va, dec_long_va) %>%
   top_n(1, years) %>%
   data.frame() %>%
   distinct()
-
 ```
 
-
-```{r}
+``` r
 proj.string <- "+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"
 
 to_sp <- function(...){
@@ -212,7 +143,6 @@ sites = SpatialPoints(coords, proj4string = CRS(wgs84)) %>%
 
 sites.df <- as.data.frame(sites)
 
-
 for(i in names(move_variables)){
   shifted <- do.call(shift_sp, c(sp = stuff_to_move[[i]], 
                                  move_variables[[i]],  
@@ -230,12 +160,9 @@ for(i in names(move_variables)){
   sites.df[unique_sites$state == i, ] <- shifted.sites
   
 }
-
-
 ```
 
-
-```{r map}
+``` r
 library(ggplot2)
 gsMap <- ggplot() +
   geom_polygon(aes(x = long, y = lat, group = group),
@@ -250,13 +177,24 @@ gsMap <- ggplot() +
         axis.title = element_blank())
 
 gsMap
-
 ```
 
-## Questions
+<img src='/static/usMap/map-1.png'/ title='TODO' alt='TODO' class=''/>
+
+Questions
+---------
 
 Information on USGS-R packages used in this post:
 
-| | |
-|-------------|----------------------------------------------------|
-|<a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a> | <a href="https://github.com/USGS-R/dataRetrieval/issues" target="_blank">dataRetrieval</a>: This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services. |
+<table style="width:93%;">
+<colgroup>
+<col width="19%" />
+<col width="73%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
+<td><a href="https://github.com/USGS-R/dataRetrieval/issues" target="_blank">dataRetrieval</a>: This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services.</td>
+</tr>
+</tbody>
+</table>

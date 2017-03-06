@@ -1,11 +1,11 @@
 ---
-title: "Water-Quality Monitoring over time"
+title: "Map Stuff"
 author: "Jordan Read and Laura DeCicco"
 date: "2017-03-02"
-slug: "nitrate"
+slug: "usMap"
 tag1: "dataRetrieval"
 output: USGSmarkdowntemplates::hugo
-image: "static/nitrate/map-1.png"
+image: "static/usMap/map-1.png"
 description: "Using the R packages dataRetrieval to discover how water-quailty has changed over time."
 keyword1: "dataRetrieval"
 keyword2: "Water-Quality"
@@ -44,7 +44,7 @@ knit_hooks$set(htmlcap = function(before, options, envir) {
 
 opts_chunk$set(
   echo=TRUE,
-  fig.path="static/nitrate/",
+  fig.path="static/usMap/",
   fig.width = 7,
   fig.height = 5,
   fig.cap = "TODO",
@@ -62,6 +62,8 @@ library(dplyr)
 
 all_sites <- data.frame()
 failed_sites <- c()
+
+#Running this full code takes about 15 minutes:
 
 for(i in stateCd$STUSAB[c(1:51,55)]){ 
   
@@ -92,42 +94,8 @@ for(i in stateCd$STUSAB[c(1:51,55)]){
     message("***************Errored on",i,"***********\n")
     return(all_sites)
   })
-  saveRDS(all_sites, "allSites.rds")
+  saveRDS(all_sites, "static/usMap/allSites.rds")
 }
-
-# parameterCdFile <- parameterCdFile
-# 
-# Nitrate <- parameterCdFile %>%
-#   filter(grepl("nitrate", parameter_nm, ignore.case = TRUE),
-#          parameter_group_nm == "Nutrient")
-# 
-# p_Nitrite <- Nitrate %>%
-#   filter(grepl("nitrite", parameter_nm, ignore.case = TRUE)) 
-# 
-# p_Nitrite <- p_Nitrite$parameter_cd
-# 
-# p_Nitrate <- Nitrate$parameter_cd[!(Nitrate$parameter_cd %in% p_Nitrite)]
-
-all_data <- data.frame()
-all_sites <- data.frame()
-
-for(i in stateCd$STUSAB[c(30:51,55)]){ 
-  
-  cat("Getting:",i,"\n")
-  
-  tryCatch({
-    
-    nitrate <- readWQPdata(characteristicName=c("Nitrate","Nitrite"),
-                            stateCd = i)
-    saveRDS(nitrate, 
-            paste0("D:/LADData/RCode/owi-blog/content/static/nitrate/n_data_",i,".rds"))
-  },
-  error=function(cond) {
-    message("***************Errored on",i,"***********\n")
-  })
-
-}
-
 
 ```
 
@@ -135,21 +103,22 @@ for(i in stateCd$STUSAB[c(30:51,55)]){
 library(dplyr)
 library(dataRetrieval)
 
-all_sites <- readRDS("allSites.rds")
+all_sites <- readRDS("static/usMap/allSites.rds")
 
 ```
 
-```{r}
+```{r }
 unique_sites <- all_sites %>%
   group_by(site_no, station_nm, dec_lat_va, dec_long_va) %>%
   top_n(1, years) %>%
   data.frame() %>%
   distinct()
 
+
 ```
 
 
-```{r}
+```{r }
 proj.string <- "+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"
 
 to_sp <- function(...){
@@ -211,7 +180,6 @@ sites = SpatialPoints(coords, proj4string = CRS(wgs84)) %>%
   spTransform(CRS(proj4string(states.out)))
 
 sites.df <- as.data.frame(sites)
-
 
 for(i in names(move_variables)){
   shifted <- do.call(shift_sp, c(sp = stuff_to_move[[i]], 
