@@ -194,6 +194,11 @@ We are currently working on a way to clearly define package tiers: Core, Researc
 
 We are debating if there should be a landing page for each package on GRAN. 
 
+### Tracking Downloads
+
+We have scripts to get the downloads, but it would be great to incorporate those into either the `grantools` package or as part of the Jenkin's job.
+
+
 ## Questions
 
 Information on USGS-R packages used in this post:
