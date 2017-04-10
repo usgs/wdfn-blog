@@ -1,0 +1,172 @@
+---
+author: Jason C Fisher
+date: 2017-04-10
+slug: basemaps
+draft: True
+type: post
+title: The National Map Base Maps
+categories: Data Science
+tags:
+  - leaflet
+  - R
+image: static/basemaps/screenshot.png
+description: Integrate The National Map services within your own interactive web map using Leaflet for R.
+keywords:
+  - Leaflet
+  - data visualization
+  - The National Map
+  - dataRetrieval
+author_github: jfisher-usgs
+author_email: <jfisher@usgs.gov>
+---
+
+A number of map services are offered through The National Map ([TNM](https://nationalmap.gov/)).
+There are no use restrictions on these [services](https://viewer.nationalmap.gov/services/).
+However, map content is limited to the United States and Territories.
+This post explains how to integrate TNM services within your own interactive web map using
+[Leaflet for R](https://rstudio.github.io/leaflet/).
+
+R packages required for this tutorial include
+[leaflet](https://CRAN.R-project.org/package=leaflet),
+[rgdal](https://CRAN.R-project.org/package=rgdal), and
+[dataRetrieval](https://CRAN.R-project.org/package=dataRetrieval).
+Install the required packages from the Comprehensive R Archive Network ([CRAN](https://cran.r-project.org/))
+using the following commands:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+for (pkg in c("leaflet", "rgdal", "dataRetrieval")) {
+  if (!pkg %in% rownames(utils::installed.packages()))
+    utils:install.packages(pkg, repos = "https://cloud.r-project.org/")
+}
+```
+
+
+The first step is to create a Leaflet map widget:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+map <- leaflet::leaflet()
+```
+
+
+In Leaflet, a map layer is used to display a specific dataset.
+Map layers are organized by group.
+Many layers can belong to the same group, but each layer can only belong to zero or one groups.
+For this example, each map layer belongs to a discrete group.
+Create a vector of unique group names identifying the five layers to be added to the map widget:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+grp <- c("USGS Topo", "USGS Imagery Only", "USGS Imagery Topo",
+         "USGS Shaded Relief", "Hydrography")
+```
+
+Specify the line of attribution text to display in the map using the Hypertext Markup Language (HTML) syntax:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+att <- paste0("<a href='https://www.usgs.gov/'>",
+              "U.S. Geological Survey</a> | ",
+              "<a href='https://www.usgs.gov/laws/policies_notices.html'>",
+              "Policies</a>")
+```
+
+Leaflet supports base maps using [map tiles](https://www.mapbox.com/help/how-web-maps-work/).
+TNM base maps are available as Web Map Service ([WMS](https://en.wikipedia.org/wiki/Web_Map_Service)) tiles.
+Add tiled layers (base maps) that describe topographic information in TNM to the map widget:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+GetURL <- function(service, host = "basemap.nationalmap.gov") {
+  sprintf("https://%s/arcgis/services/%s/MapServer/WmsServer", host, service)
+}
+map <- leaflet::addWMSTiles(map, GetURL("USGSTopo"),
+                            group = grp[1], attribution = att, layers = "0")
+map <- leaflet::addWMSTiles(map, GetURL("USGSImageryOnly"),
+                            group = grp[2], attribution = att, layers = "0")
+map <- leaflet::addWMSTiles(map, GetURL("USGSImageryTopo"),
+                            group = grp[3], attribution = att, layers = "0")
+map <- leaflet::addWMSTiles(map, GetURL("USGSShadedReliefOnly"),
+                            group = grp[4], attribution = att, layers = "0")
+```
+
+The content of these layers is described in the
+[TNM Base Maps](https://viewer.nationalmap.gov/help/3.0%20TNM%20Base%20Maps.htm) document.
+
+An overlay map layer adds information, such as river and lake features, to a base map.
+Add the tiled overlay for the [National Hydrography Dataset](https://nhd.usgs.gov/) to the map widget:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+opt <- leaflet::WMSTileOptions(format = "image/png", transparent = TRUE)
+map <- leaflet::addWMSTiles(map, GetURL("USGSHydroCached"),
+                            group = grp[5], options = opt, layers = "0")
+map <- leaflet::hideGroup(map, grp[5])
+```
+
+Point locations, that appear on the map as icons, may be added to a base map using a marker overlay.
+In this example, site locations are included for selected wells in the
+[USGS Idaho National Laboratory](https://id.water.usgs.gov/INL/)
+water-quality observation network.
+Create the marker-overlay dataset using the following commands (requires web access):
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+site_no <- c("USGS 1"    = "432700112470801",
+             "USGS 14"   = "432019112563201",
+             "USGS 8"    = "433121113115801",
+             "USGS 126A" = "435529112471301",
+             "USGS 29"   = "434407112285101",
+             "USGS 52"   = "433414112554201",
+             "USGS 84"   = "433356112574201",
+             "TRA 4"     = "433521112574201")
+dat <- dataRetrieval::readNWISsite(site_no)
+sp::coordinates(dat) <- c("dec_long_va", "dec_lat_va")
+sp::proj4string(dat) <- sp::CRS("+proj=longlat +datum=NAD83")
+dat <- sp::spTransform(dat, sp::CRS("+init=epsg:4326"))
+```
+
+Popups are small boxes containing text that appear when marker icons are clicked.
+Specify the text to display in the popups using the HTML syntax:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+num <- dat$site_no  # site number
+nam <- names(site_no)[match(num, site_no)]  # local site name
+url <- sprintf("https://waterdata.usgs.gov/nwis/inventory/?site_no=%s", num)
+pop <- sprintf("<b>Name:</b> %s<br/><b>Site No:</b> <a href='%s'>%s</a>",
+               nam, url, num)
+```
+
+
+Add the marker overlay to the map widget:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+opt <- leaflet::markerClusterOptions(showCoverageOnHover = FALSE)
+map <- leaflet::addCircleMarkers(map, radius = 10, weight = 3, popup = pop,
+                                 clusterOptions = opt, data = dat)
+```
+
+Add a Leaflet control feature that allows users to interactively show and hide base maps:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+opt <- leaflet::layersControlOptions(collapsed = FALSE)
+map <- leaflet::addLayersControl(map, baseGroups = grp[1:4],
+                                 overlayGroups = grp[5], options = opt)
+```
+
+
+Print the map widget to display it in your web browser:
+
+```{r echo=TRUE, eval=FALSE}
+print(map)
+```
+
+```{r echo=FALSE, eval=TRUE}
+wd <- getwd()
+dir.create("static/basemaps", recursive=TRUE, showWarnings=FALSE)
+setwd("static/basemaps")
+htmlwidgets::saveWidget(map, "map.html")
+setwd(wd)
+```
+
+<iframe seamless src="/static/basemaps/map/index.html" width="100%" height="500"></iframe>
+
+And let's not forget the R session information.
+
+```{r echo=TRUE}
+print(utils::sessionInfo())
+```
