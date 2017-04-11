@@ -170,6 +170,16 @@ print(map)
 
 <iframe seamless src="/static/basemaps/map/index.html" width="100%" height="500"></iframe>
 
+Some users have reported that base maps do not render correctly in the
+[RStudio](https://www.rstudio.com/) viewer.
+Until RStudio can address this issue, the following workaround is provided:
+
+
+```r
+options(viewer = NULL)
+print(map)
+```
+
 And let's not forget the R session information.
 
 
@@ -204,5 +214,5 @@ print(utils::sessionInfo())
 ## [25] shiny_1.0.1         reshape2_1.4.2      readr_1.1.0        
 ## [28] htmlwidgets_0.8     curl_2.4            evaluate_0.10      
 ## [31] mime_0.5            sp_1.2-4            stringi_1.1.5      
-## [34] jsonlite_1.3        lubridate_1.6.0     httpuv_1.3.3
+## [34] jsonlite_1.4        lubridate_1.6.0     httpuv_1.3.3
 ```
