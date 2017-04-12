@@ -1,8 +1,7 @@
 ---
 author: Jason C Fisher
-date: 2017-04-10
+date: 2017-04-12
 slug: basemaps
-draft: True
 type: post
 title: The National Map Base Maps
 categories: Data Science
