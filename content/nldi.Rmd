@@ -336,7 +336,7 @@ This final map illustrates a very important detail about the NLDI if you zoom in
 
 The two sources of linked data shown above, `nwissite` and `wqp`, are both queryable from [the dataRetrieval package.](https://owi.usgs.gov/blog/tags/dataretrieval/) The `siteNumber` input of the dataRetrieval functions that start with `readNWIS` can be found by removing "USGS-" from the "identifier" attribute of features found using `nwissite` as the `dataSource` input. The following code shows the NLDI identifiers and how to use them with the `dataRetrieval` function `readNWISdv`.
 
-```{r dv, echo=TRUE, message=FALSE, warning=FALSE}
+```{r dv, fig.cap="Daily Streamflow Plot", alt.text = "Plot of daily streamflow derived from the National Water Information system", echo=TRUE, message=FALSE, warning=FALSE}
 nwis_ids <- as.character(nwis_gages@data$identifier)
 print(paste("The NLDI ID for:", nwis_gages@data$name, "is", nwis_ids))
 nwis_ids <- gsub(pattern = "USGS-", replacement = "", nwis_ids)

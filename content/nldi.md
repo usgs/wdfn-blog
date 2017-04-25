@@ -317,9 +317,9 @@ plot(dv_data$Date, dv_data$X_00060_00003,
      main = paste("Daily Streamflow for", nwis_gages@data$name[1]), xlab = "", ylab = "Daily Streamflow (CFS)")
 ```
 
-<img src="static/nldi-intro/dv-1.png" alt="TODO" width="672" />
+<img src="static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
 <p class="caption">
-TODO
+Daily Streamflow Plot
 </p>
 
 Similarly, we can use identifiers returned using `wqp` as the `dataSource` with the `readWQPqw` function. In this case, the identifiers can be used without modification as shown below. Note that the NLDI query for downstream mainstem found 2756 sites and upstream tributaries found 1908 sites. The query below gets data from just one! The NLDI is used as a spatial pre-filter in the [Water Quality Portal user interface](https://www.waterqualitydata.us/portal/), which has a rich set of filter options in addition to network navigation.
@@ -330,23 +330,23 @@ wqp_site <- list(names = as.character(nldi_data$DMwqp@data$name),
 print(paste(wqp_site$names[1:10], "has id", wqp_site$ids[1:10]))
 ```
 
-    ##  [1] "29S.04E.06.334 has id USGS-314831106344501"                               
-    ##  [2] "RIO GRANDE AT ANTHONY - EP#1 NEAR ANTHONY, NM has id USGS-315853106371510"
-    ##  [3] "27S.03E.05.414 has id USGS-315910106391301"                               
-    ##  [4] "MBOWN-123 - 26S.02E.32.333 has id USGS-315944106460101"                   
-    ##  [5] "MBOWN-140 - 26S.03E.32.441 (USBR-39) has id USGS-315953106391501"         
-    ##  [6] "23S.01E.34.423D has id USGS-321539106492205"                              
-    ##  [7] "23S.02E.29.143 has id USGS-321657106453801"                               
-    ##  [8] "23S.02E.17.210A has id USGS-321849106452702"                              
-    ##  [9] "19S.03W.11.341 has id USGS-323957107071801"                               
-    ## [10] "17S.04W.06.113+DUP has id USGS-325143107174801"
+    ##  [1] "28S.03E.21.224 has id USGS-315143106380501"                                  
+    ##  [2] "27S.03E.36.422 has id USGS-315452106390201"                                  
+    ##  [3] "MBOWN-241 - JL-49-04-479 (CWF-1B) has id USGS-315712106361202"               
+    ##  [4] "MBOWN-159 - 27S.03E.09.1334 has id USGS-315823106384001"                     
+    ##  [5] "ANTHONY WWTP OUTFALL AT NM-186 BR NR ANTHONY, NM has id USGS-320122106385610"
+    ##  [6] "24S.02E.21.112 has id USGS-321243106445301"                                  
+    ##  [7] "USBR-14 Gravity Site has id USGS-321341106444701"                            
+    ##  [8] "23S.02E.17.212 has id USGS-321849106452701"                                  
+    ##  [9] "MBOWN-21 - 23S.01E.09.433 (USBR-16) has id USGS-321853106504001"             
+    ## [10] "19S.02W.18.242 has id USGS-323929107043801"
 
 ``` r
 wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], parameterCd = "")
 print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivityStartDate), " and ", max(wqp_data$ActivityStartDate), ' for characteristics: "', paste(unique(wqp_data$CharacteristicName), collapse = '", "'), '"'))
 ```
 
-    ## [1] "Got 65 samples beween 1957-04-29 and 2012-06-28 for characteristics: \"Chloride\", \"Total dissolved solids\", \"Strontium\", \"Alkalinity, total\", \"Silica\", \"Fluoride\", \"Sulfate\", \"Potassium\", \"Calcium\", \"Phosphorus\", \"Nitrate\", \"Nitrite\", \"Bicarbonate\", \"Oxygen\", \"Specific conductance\", \"Phosphate-phosphorus\", \"Hydrogen ion\", \"Carbon dioxide\", \"Sodium, percent total cations\", \"Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)]\", \"Hardness, non-carbonate\", \"Hardness, Ca, Mg\", \"Orthophosphate\", \"Bromide\", \"Temperature, water\", \"Stream flow, instantaneous\", \"pH\", \"Temperature, air, deg C\", \"Magnesium\", \"Sodium\", \"Inorganic nitrogen (nitrate and nitrite)\", \"Boron\", \"Lead\", \"Manganese\", \"Oxygen-18\", \"Sulfur-34/Sulfur-32 ratio\", \"Deuterium\", \"Strontium-87/Strontium-86, ratio\", \"Carbonate\", \"Depth\", \"Flow rate, instantaneous\", \"Depth to water level below land surface\", \"Depth, from ground surface to well water level\""
+    ## [1] "Got 65 samples beween 1948-03-25 and 2014-02-11 for characteristics: \"pH\", \"Specific conductance\", \"Depth\", \"Total dissolved solids\", \"Hardness, Ca, Mg\", \"Calcium\", \"Magnesium\", \"Potassium\", \"Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)]\", \"Sodium, percent total cations\", \"Sodium\", \"Alkalinity, total\", \"Carbon dioxide\", \"Chloride\", \"Fluoride\", \"Hydrogen ion\", \"Silica\", \"Sulfate\", \"Inorganic nitrogen (nitrate and nitrite)\", \"Temperature, air, deg C\", \"Depth, from ground surface to well water level\", \"Depth to water level below land surface\", \"Barometric pressure\", \"Oxygen\", \"Flow rate, instantaneous\", \"Temperature, water\", \"Hardness, non-carbonate\", \"Bicarbonate\", \"Kjeldahl nitrogen\", \"Ammonia and ammonium\", \"Nitrate\", \"Nitrite\", \"Organic Nitrogen\", \"Orthophosphate\", \"Phosphorus\", \"Nitrogen, mixed forms (NH3), (NH4), organic, (NO2) and (NO3)\", \"Aluminum\", \"Barium\", \"Carbonate\", \"Iron\", \"Manganese\", \"Cadmium\", \"Chromium\", \"Copper\", \"Lead\", \"Lithium\", \"Mercury\", \"Nickel\", \"Silver\", \"Strontium\", \"Zinc\", \"Arsenic\", \"Boron\", \"Selenium\", \"Stream flow, instantaneous\", \"RBP Stream width\", \"Bromide\", \"Floating algae mat - severity (choice list)\", \"Floating debris - severity (choice list)\", \"Floating Garbage Severity (choice List)\", \"Odor, atmospheric\", \"Detergent, severity (choice list)\", \"RBP High water mark\", \"Fish Kill, Severity (choice list)\", \"Oil and Grease\", \"Sodium plus potassium\""
 
 Summary
 -------
