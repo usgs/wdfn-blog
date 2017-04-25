@@ -46,7 +46,8 @@ Available network linked feature sources (`featureSource`s) can be found from th
 
 For now, the particular `featureID` to be accessed from a given `featureSource` needs to be found outside the NLDI, so the [getFeatures](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getFeaturesUsingGET_1) request doesn't return anything. So let's use a [well known NWIS Streamgage](https://www.usgs.gov/news/first-usgs-streamgage-records-125-years-measuring-new-mexico%E2%80%99s-vital-water-resources) on the [Rio Grande at Embudo NM](https://waterdata.usgs.gov/nwis/inventory/?site_no=08279500&agency_cd=USGS) as our starting point.
 
-<img src='static/nldi-intro/first_streamgage.jpeg'/ title='First USGS Stream Gage Rio Grande at Embudo' alt='Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.' width="100%" />
+![Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Grande at Embudo")
+
 
 ### Indexed Features
 
@@ -97,7 +98,7 @@ We can use the [getRegisteredFeature](https://cida.usgs.gov/nldi/swagger-ui.html
     ## with 1 features
     ## It has 0 fields
 
-<iframe seamless src="static/nldi-intro/map_1.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_1/index.html" width="60%" height="500">
 </iframe>
 *Note: The second section of this blog post shows how to make maps of NLDI like this in R.*
 
@@ -116,7 +117,7 @@ The *navigation* property of the returned feature is a url for the [*getNavigati
 
 Each of the URLs found via the *getNavigationTypes* request is a complete [*getFlowlines*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `distance`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150>
 
-<iframe seamless src="static/nldi-intro/map_2.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_2/index.html" width="60%" height="500">
 </iframe>
 *Notice that the flowline goes downstream of the gage because the NLDI is referenced to whole NHDPlus catchments, not to precise network locations.*
 
@@ -124,7 +125,7 @@ Each of the URLs found via the *getNavigationTypes* request is a complete [*getF
 
 Now that we have a `featureSource` = `nwissite`, a `featureID` = `USGS-082795001`, the `navigate` operation on the feature, and the `navigationMode` = `UM` with `distance` = `10`km, we can use the [*getFeatures*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `featureSource` which, in the context of a *getFeatures* request is called a `dataSource`. Setting the `dataSource` = `nwissite` and taking off the distance filter, we can see if there are any active NWIS streamgages upstream on the main stem with a request that looks like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150> Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites, wqp is used in the example below.
 
-<iframe seamless src="static/nldi-intro/map_3.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_3/index.html" width="60%" height="500">
 </iframe>
 *Note: Click the black NWIS gage to see a pop up and link!*
 
@@ -132,7 +133,7 @@ Now that we have a `featureSource` = `nwissite`, a `featureID` = `USGS-082795001
 
 So far, we've covered four parameters of the NLDI Web API. The two base parameters, `featureSource` and `featureID`, and two that apply to the `navigate` option, `navigationMode` and `distance`. In addition to the `navigate` option, the NLDI offers a `basin` option for any `featureSource`/`featureID`. The [*getBasin*](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage liiks like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>.
 
-<iframe seamless src="static/nldi-intro/map_4.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_4/index.html" width="60%" height="500">
 </iframe>
 ### NLDI API Summary
 
@@ -149,7 +150,7 @@ Bringing together all the operations summarized above, we can get:
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" /> <img src='static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" /> *Screenshots of NLDI data loaded into QGIS.*
+<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" /> *Screenshots of NLDI data loaded into QGIS.*
 
 Using the NLDI in R.
 --------------------
@@ -168,7 +169,7 @@ nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500"
              DMwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp")
 
 nldi_data <- list()
-# nldi_data <- readRDS("static/nldi-intro/temp_nldi_data.rds")
+# nldi_data <- readRDS("/static/nldi-intro/temp_nldi_data.rds")
 for(n in names(nldiURLs)) {
   nldi_data[n] <- rgdal::readOGR(dsn = nldiURLs[n][[1]], layer = "OGRGeoJSON")
   print(paste(n, "is of class", class(nldi_data[n][[1]])[1], "and has", length(nldi_data[n][[1]]), "features"))
@@ -263,7 +264,7 @@ map <- leaflet::addCircleMarkers(map,
                                  color = "red")
 ```
 
-<iframe seamless src="static/nldi-intro/map_5.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_5/index.html" width="60%" height="500">
 </iframe>
 To complete the picture, we can add the downstream main stem and water quality sites. Now we have an interactive map of all the upstream tributaries, water quality sites, basin boundary, the entire main stem, and water quality sites downstream.
 
@@ -282,7 +283,7 @@ map <- leaflet::addCircleMarkers(map = map,
                                  popup = DMwqp_html)
 ```
 
-<iframe seamless src="static/nldi-intro/map_6.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_6/index.html" width="60%" height="500">
 </iframe>
 This final map illustrates a very important detail about the NLDI if you zoom in on the downstream main stem. Notice that the sites are not all *on* the main stem flowpath. When the system indexes data sources that aren't already indexed to particular reachcodes and measures along those reaches, it links sites (points) by looking at what local catchment polygon the site is in. This means that sites found through navigation may not be *on* the main flowpath of a catchment. In the future, we hope to improve the system such that it would know if indexed data are *on* or *off* the main flowpath of a catchment, but for now users need to be aware of this limitation.
 
@@ -317,7 +318,7 @@ plot(dv_data$Date, dv_data$X_00060_00003,
      main = paste("Daily Streamflow for", nwis_gages@data$name[1]), xlab = "", ylab = "Daily Streamflow (CFS)")
 ```
 
-<img src="static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
+<img src="/static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
 <p class="caption">
 Daily Streamflow Plot
 </p>
