@@ -36,7 +36,7 @@ using the following commands:
 ```r
 for (pkg in c("leaflet", "rgdal", "dataRetrieval")) {
   if (!pkg %in% rownames(utils::installed.packages()))
-    utils:install.packages(pkg, repos = "https://cloud.r-project.org/")
+    utils::install.packages(pkg, repos = "https://cloud.r-project.org/")
 }
 ```
 
