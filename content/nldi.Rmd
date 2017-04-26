@@ -141,6 +141,7 @@ map <- leaflet::addCircleMarkers(map,
                                  color = "red", 
                                  opacity = 1)
 ```
+
 ```{r map_1, echo=FALSE, eval=TRUE}
 wd <- getwd()
 dir.create("static/nldi-intro", recursive=TRUE, showWarnings=FALSE)
@@ -149,7 +150,7 @@ htmlwidgets::saveWidget(map, "map_1.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_1/index.html" width="60%" height="500"></iframe>  
+<iframe seamless src="/static/nldi-intro/map_1/index.html" width="60%" height="500"></iframe>
 
 Note: The second section of this blog post shows how to make maps of NLDI like this in R.
 
@@ -233,7 +234,7 @@ Bringing together all the operations summarized above, we can get:
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" />  <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />
+<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" />  <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />  
 _Screenshots of NLDI data loaded into QGIS._
 
 ## Using the NLDI in R.

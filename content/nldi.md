@@ -56,6 +56,7 @@ For now, the particular `{featureID}` to be accessed from a given `{featureSourc
 
 ![Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Grande at Embudo")
 
+
 ### Indexed Features
 
 We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500> The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
@@ -326,7 +327,7 @@ plot(dv_data$Date, dv_data$X_00060_00003,
      main = paste("Daily Streamflow for", nwis_gages@data$name[1]), xlab = "", ylab = "Daily Streamflow (CFS)")
 ```
 
-<img src="static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
+<img src="/static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
 <p class="caption">
 Daily Streamflow Plot
 </p>
