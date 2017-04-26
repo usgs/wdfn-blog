@@ -72,8 +72,9 @@ In this blog post, we introduce the basic functions of the NLDI and show how to 
 
 The NLDI's Web API follows a losely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.  
 
-In this post, we use text highlighting in six ways.  
-1) The names of API parameters such as `{featureSource}`.  
+In this post, we use text highlighting in six ways:
+
+1) The names of API parameters such as `{featureSource}`   
 2) Example values of API parameters such as: `USGS-08279500`  
 3) API operation names: _**navigation**_ and _**basin**_  
 4) API request names such as: _getDataSources_  
@@ -123,10 +124,10 @@ main_stem_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?
 nwis_gage_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
 basin_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin"
 
-site <- rgdal::readOGR(dsn = site_url, layer = "OGRGeoJSON", verbose = FALSE)
-main_stem <- rgdal::readOGR(dsn = main_stem_url, layer = "OGRGeoJSON", verbose = FALSE)
-nwis_gages <- rgdal::readOGR(dsn = nwis_gage_url, layer = "OGRGeoJSON", verbose = FALSE)
-basin <- rgdal::readOGR(dsn = basin_url, layer = "OGRGeoJSON", verbose = FALSE)
+# site <- rgdal::readOGR(dsn = site_url, layer = "OGRGeoJSON", verbose = FALSE)
+# main_stem <- rgdal::readOGR(dsn = main_stem_url, layer = "OGRGeoJSON", verbose = FALSE)
+# nwis_gages <- rgdal::readOGR(dsn = nwis_gage_url, layer = "OGRGeoJSON", verbose = FALSE)
+# basin <- rgdal::readOGR(dsn = basin_url, layer = "OGRGeoJSON", verbose = FALSE)
 
 nwis_popups <- paste('<a href="',
                       nwis_gages@data$uri,
@@ -150,7 +151,7 @@ htmlwidgets::saveWidget(map, "map_1.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_1/index.html" width="60%" height="500"></iframe>
+<iframe seamless src="/static/nldi-intro/map_1/index.html" width="100%" height="500"></iframe>
 
 Note: The second section of this blog post shows how to make maps of NLDI like this in R.
 
@@ -181,7 +182,8 @@ htmlwidgets::saveWidget(map, "map_2.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_2/index.html" width="60%" height="500"></iframe>  
+<iframe seamless src="/static/nldi-intro/map_2/index.html" width="100%" height="500"></iframe>
+
 Notice that the flowline goes downstream of the gage because the NLDI is referenced to whole NHDPlus catchments, not to precise network locations.
 
 ### Get Linked Data from Navigation
@@ -200,7 +202,8 @@ htmlwidgets::saveWidget(map, "map_3.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_3/index.html" width="60%" height="500"></iframe>  
+<iframe seamless src="/static/nldi-intro/map_3/index.html" width="100%" height="500"></iframe>
+
 Note: Click the black NWIS gage to see a pop up and link!
 
 ### Get the Upstream Basin Boundary
@@ -218,7 +221,7 @@ htmlwidgets::saveWidget(map, "map_4.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_4/index.html" width="60%" height="500"></iframe>  
+<iframe seamless src="/static/nldi-intro/map_4/index.html" width="100%" height="500"></iframe>  
 
 ### NLDI API Summary
 There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change. There are also two options on the _**navigate**_ option, `{legacy}` and `{stopComid}`, that are preliminary and subject to change.
@@ -234,14 +237,16 @@ Bringing together all the operations summarized above, we can get:
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" />  <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />  
-_Screenshots of NLDI data loaded into QGIS._
+<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" />  <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />
+
+Screenshots of NLDI data loaded into QGIS.
 
 ## Using the NLDI in R.
 
 Starting from the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created the the National Map basemap blog post was wrapped up into the `get_base_map()` function called in the code shown below.
 
 First, we get all our URLs into a list and use **readOGR** from the [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html) package to download and read all the data into spatial data types. The end of this code block creates html for popup text with a web link tag that we'll use later.
+
 ```{r load_data, echo=TRUE, message=FALSE, warning=FALSE}
 nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500",
              basin_boundary = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin",
@@ -314,9 +319,10 @@ htmlwidgets::saveWidget(map, "map_5.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_5/index.html" width="60%" height="500"></iframe>  
+<iframe seamless src="/static/nldi-intro/map_5/index.html" width="100%" height="500"></iframe>
 
 To complete the picture, we can add the downstream main stem and water quality sites. Now we have an interactive map of all the upstream tributaries, water quality sites, basin boundary, the entire main stem, and water quality sites downstream.
+
 ```{r map_6, echo=TRUE, message=FALSE, warning=FALSE}
 map <- leaflet::addPolylines(map,
                              data = nldi_data$DM, 
@@ -337,7 +343,7 @@ htmlwidgets::saveWidget(map, "map_6.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_6/index.html" width="60%" height="500"></iframe>  
+<iframe seamless src="/static/nldi-intro/map_6/index.html" width="100%" height="500"></iframe>
 
 This final map illustrates a very important detail about the NLDI if you zoom in on the downstream main stem. Notice that the sites are not all **on** the main stem flowpath. When the system indexes data sources that aren't already indexed to particular reachcodes and measures along those reaches, it links sites (points) by looking at what local catchment polygon the site is in. This means that sites found through navigation may not be **on** the main flowpath of a catchment. In the future, we hope to improve the system such that it would know if indexed data are **on** or **off** the main flowpath of a catchment, but for now users need to be aware of this limitation.
 
