@@ -38,13 +38,14 @@ The NLDI Web API
 
 The NLDI's Web API follows a losely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.
 
-In this post, we use text highlighting in six ways.
-1) The names of API parameters such as `{featureSource}`.
-2) Example values of API parameters such as: `USGS-08279500`
-3) API operation names: ***navigation*** and ***basin***
-4) API request names such as: *getDataSources*
-5) R functions such as: **readOGR**
-6) Other specific strings such as "siteNumber"
+In this post, we use text highlighting in six ways:  
+
+1) The names of API parameters such as `{featureSource}`  
+2) Example values of API parameters such as: `USGS-08279500`  
+3) API operation names: ***navigation*** and ***basin***  
+4) API request names such as: *getDataSources*  
+5) R functions such as: **readOGR**  
+6) Other specific strings such as "siteNumber"  
 
 ### Feature Sources
 
@@ -85,7 +86,7 @@ We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.ht
       ]
     }
 
-<iframe seamless src="/static/nldi-intro/map_1/index.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_1/index.html" width="100%" height="500">
 </iframe>
 Note: The second section of this blog post shows how to make maps of NLDI like this in R.
 
@@ -104,7 +105,7 @@ The ***navigation*** property of the returned feature is a url for the [*getNavi
 
 Each of the URLs found via the *getNavigationTypes* request is a complete [*getFlowlines*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150>
 
-<iframe seamless src="/static/nldi-intro/map_2/index.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_2/index.html" width="100%" height="500">
 </iframe>
 Notice that the flowline goes downstream of the gage because the NLDI is referenced to whole NHDPlus catchments, not to precise network locations.
 
@@ -112,7 +113,7 @@ Notice that the flowline goes downstream of the gage because the NLDI is referen
 
 Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the ***navigate*** operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `10`km, we can use the [*getFeatures*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a *getFeatures* request is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150> Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
 
-<iframe seamless src="/static/nldi-intro/map_3/index.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_3/index.html" width="100%" height="500">
 </iframe>
 Note: Click the black NWIS gage to see a pop up and link!
 
@@ -120,25 +121,26 @@ Note: Click the black NWIS gage to see a pop up and link!
 
 So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the ***navigate*** option, `{navigationMode}` and `{distance}`. In addition to the ***navigate*** option, the NLDI offers a ***basin*** option for any `{featureSource}`/`{featureID}`. The [*getBasin*](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage liiks like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>.
 
-<iframe seamless src="/static/nldi-intro/map_4/index.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_4/index.html" width="100%" height="500">
 </iframe>
 ### NLDI API Summary
 
 There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change. There are also two options on the ***navigate*** option, `{legacy}` and `{stopComid}`, that are preliminary and subject to change.
 
-Bringing together all the operations summarized above, we can get:
-1) The NWIS site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500>
-2) The basin upstream of the site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>
-3) All upstream with tributaries flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>
-4) The upstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>
-5) The downstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>
-6) The water quality observation sites in upstream catchments: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>
-7) The water quality observations in downstream catchments: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>
+Bringing together all the operations summarized above, we can get:  
+1) The NWIS site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500>  
+2) The basin upstream of the site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>  
+3) All upstream with tributaries flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>  
+4) The upstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>  
+5) The downstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>  
+6) The water quality observation sites in upstream catchments: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>  
+7) The water quality observations in downstream catchments: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>  
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
 <img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />
-*Screenshots of NLDI data loaded into QGIS.*
+
+Screenshots of NLDI data loaded into QGIS.
 
 Using the NLDI in R.
 --------------------
@@ -224,7 +226,7 @@ map <- leaflet::addCircleMarkers(map,
                                  color = "red")
 ```
 
-<iframe seamless src="/static/nldi-intro/map_5/index.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_5/index.html" width="100%" height="500">
 </iframe>
 To complete the picture, we can add the downstream main stem and water quality sites. Now we have an interactive map of all the upstream tributaries, water quality sites, basin boundary, the entire main stem, and water quality sites downstream.
 
@@ -243,7 +245,7 @@ map <- leaflet::addCircleMarkers(map = map,
                                  popup = DMwqp_html)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_6/index.html" width="60%" height="500">
+<iframe seamless src="/static/nldi-intro/map_6/index.html" width="100%" height="500">
 </iframe>
 This final map illustrates a very important detail about the NLDI if you zoom in on the downstream main stem. Notice that the sites are not all **on** the main stem flowpath. When the system indexes data sources that aren't already indexed to particular reachcodes and measures along those reaches, it links sites (points) by looking at what local catchment polygon the site is in. This means that sites found through navigation may not be **on** the main flowpath of a catchment. In the future, we hope to improve the system such that it would know if indexed data are **on** or **off** the main flowpath of a catchment, but for now users need to be aware of this limitation.
 
@@ -278,7 +280,7 @@ plot(dv_data$Date, dv_data$X_00060_00003,
      main = paste("Daily Streamflow for", nwis_gages@data$name[1]), xlab = "", ylab = "Daily Streamflow (CFS)")
 ```
 
-<img src="static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
+<img src="/static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
 <p class="caption">
 Daily Streamflow Plot
 </p>
@@ -291,23 +293,23 @@ wqp_site <- list(names = as.character(nldi_data$DMwqp@data$name),
 print(paste(wqp_site$names[1:10], "has id", wqp_site$ids[1:10]))
 ```
 
-    ##  [1] "Rio Grande at Island St nr El Paso, TX has id USGS-08366500"                   
-    ##  [2] "Rio Grande blw Alamo Ck nr Castolon, TX has id USGS-08374535"                  
-    ##  [3] "Rio Grande nr Ranger Stn at Rio Grande Village, TX has id USGS-291046102573900"
-    ##  [4] "Rio Grande at Maravillas Ck nr Sanderson, TX has id USGS-293340102463700"      
-    ##  [5] "Rio Grande abv Bear Cyn, TX (2011 Gain-Loss) has id USGS-294453102363200"      
-    ##  [6] "Rio Grande abv Rattlesnake Canyon nr Langtry, TX has id USGS-294527101381700"  
-    ##  [7] "Rio Grande blw Ramsey Cyn, TX (2011 Gain-Loss) has id USGS-294627101430600"    
-    ##  [8] "Rio Grande blw Palmas Cyn, TX (2011 Gain-Loss) has id USGS-294654102295100"    
-    ##  [9] "JL-49-04-728 has id USGS-315424106353201"                                      
-    ## [10] "JL-49-04-409 has id USGS-315607106365901"
+    ##  [1] "Los Lunas WWTP has id 21NMEX-NM0020303"                                        
+    ##  [2] "Las Cruces WWTP has id 21NMEX-NM0023311"                                       
+    ##  [3] "South Central Regional WWTP - NM0030490 has id 21NMEX_WQX-NM0030490"           
+    ##  [4] "Sierra County Regional WWTP - NM0030864 has id 21NMEX_WQX-NM0030864"           
+    ##  [5] "UNNAMED MEXICAN DRAIN has id TCEQMAIN-13143"                                   
+    ##  [6] "RIO GRANDE ABOVE ANTHONY DRAIN has id TCEQMAIN-13276"                          
+    ##  [7] "RIO GRANDE AT EL CENIZO PARK has id TCEQMAIN-21542"                            
+    ##  [8] "PERALTA MAIN CANAL BOR SITE 5 NR ISLETA, NM has id USGS-08330965"              
+    ##  [9] "TEMP WELL INFLOW ABV VINTON BRIDGE NEAR VINTON, TX has id USGS-315832106365010"
+    ## [10] "23S.02E.29.241+DUP has id USGS-320036106451901"
 
 ``` r
 wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], parameterCd = "")
 print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivityStartDate), " and ", max(wqp_data$ActivityStartDate), " for characteristics: ", paste(unique(wqp_data$CharacteristicName), collapse = ", ")))
 ```
 
-    ## [1] "Got 65 samples beween 2006-02-10 and 2006-02-10 for characteristics: Hydrogen ion, Temperature, water, Specific conductance, Oxygen, pH, Carbon dioxide, Ammonia and ammonium, Orthophosphate, Hardness, non-carbonate, Stream flow, instantaneous, Hardness, Ca, Mg, Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)], Sodium, percent total cations, Total dissolved solids, Nitrate, Nitrite, Carbonate, Bicarbonate, Inorganic nitrogen (nitrate and nitrite), Calcium, Magnesium, Sodium, Potassium, Chloride, Sulfate, Fluoride, Silica, Arsenic, Boron, Iron, Strontium, Vanadium, Lithium, Selenium, Alkalinity, total, Oxygen-18, Bromide, Deuterium, Nitrogen-15/14 ratio"
+    ## [1] "Got 65 samples beween 1966-08-03 and 2016-08-30 for characteristics: Temperature, sample, Depth, Secchi disk depth, Specific conductance, pH, Oxygen, Nitrogen, Chlorophyll a, Total dissolved solids, Alkalinity, total, Inorganic nitrogen (nitrate and nitrite), Organic carbon, Fluoride, Sulfate, Orthophosphate, Phosphorus, Chloride, Total suspended solids, Total volatile solids, RBP Stream width, Precipitation, Wind direction (direction from, expressed 0-360 deg), Depth, Hardness, magnesium, Flow, Calcium, Sodium, Escherichia coli, Count, Magnesium, Lead, True color, Vanadium, Biochemical oxygen demand, standard conditions, Ammonia, Selenium, Silicon, Chemical oxygen demand, Cadmium, Aluminum, Potassium, Copper, Mercury, Tin, Kjeldahl nitrogen, Manganese, Barium, Fecal Coliform, Arsenic, Bicarbonate, Uranium, Total Coliform, Dissolved oxygen (DO), Ammonia-nitrogen, Temperature, water, Dissolved oxygen saturation, Chlorine, Phosphate-phosphorus, Pheophytin a, Cobalt, Silver, Chromium, Beryllium, Hardness, Ca, Mg, Molybdenum, Nickel, Zinc, Iron, Strontium, Salinity, Turbidity, Total solids, Inorganic nitrogen (nitrate and nitrite) as N, Carbonate, Boron, Sulfate as SO4, Suspended Sediment Concentration (SSC), Suspended sediment concentration (SSC), Stream flow, instantaneous, Nitrate, Hydrogen ion, Silica, Carbon dioxide, Sodium plus potassium, Hardness, non-carbonate"
 
 Summary
 -------
