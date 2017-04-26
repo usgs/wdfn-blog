@@ -56,7 +56,6 @@ For now, the particular `{featureID}` to be accessed from a given `{featureSourc
 
 ![Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Grande at Embudo")
 
-
 ### Indexed Features
 
 We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500> The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
@@ -85,26 +84,6 @@ We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.ht
         }
       ]
     }
-
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500", layer: "OGRGeoJSON"
-    ## with 1 features
-    ## It has 7 fields
-
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150", layer: "OGRGeoJSON"
-    ## with 58 features
-    ## It has 1 fields
-
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150", layer: "OGRGeoJSON"
-    ## with 4 features
-    ## It has 7 fields
-
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin", layer: "OGRGeoJSON"
-    ## with 1 features
-    ## It has 0 fields
 
 <iframe seamless src="/static/nldi-intro/map_1/index.html" width="60%" height="500">
 </iframe>
@@ -158,7 +137,7 @@ Bringing together all the operations summarized above, we can get:
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />  
+<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navitation results. Basin bounday, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navitation results. Main stem, water quality sites.' width="44%" />
 *Screenshots of NLDI data loaded into QGIS.*
 
 Using the NLDI in R.
@@ -180,45 +159,17 @@ nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500"
 nldi_data <- list()
 
 for(n in names(nldiURLs)) {
-  nldi_data[n] <- rgdal::readOGR(dsn = nldiURLs[n][[1]], layer = "OGRGeoJSON")
+  nldi_data[n] <- rgdal::readOGR(dsn = nldiURLs[n][[1]], layer = "OGRGeoJSON", verbose = FALSE)
   print(paste(n, "is of class", class(nldi_data[n][[1]])[1], "and has", length(nldi_data[n][[1]]), "features"))
 }
 ```
 
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500", layer: "OGRGeoJSON"
-    ## with 1 features
-    ## It has 7 fields
     ## [1] "site_data is of class SpatialPointsDataFrame and has 1 features"
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin", layer: "OGRGeoJSON"
-    ## with 1 features
-    ## It has 0 fields
     ## [1] "basin_boundary is of class SpatialPolygonsDataFrame and has 1 features"
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT", layer: "OGRGeoJSON"
-    ## with 3371 features
-    ## It has 1 fields
     ## [1] "UT is of class SpatialLinesDataFrame and has 3371 features"
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM", layer: "OGRGeoJSON"
-    ## with 184 features
-    ## It has 1 fields
     ## [1] "UM is of class SpatialLinesDataFrame and has 184 features"
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM", layer: "OGRGeoJSON"
-    ## with 1367 features
-    ## It has 1 fields
     ## [1] "DM is of class SpatialLinesDataFrame and has 1367 features"
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp", layer: "OGRGeoJSON"
-    ## with 1908 features
-    ## It has 7 fields
     ## [1] "UTwqp is of class SpatialPointsDataFrame and has 1908 features"
-    ## OGR data source with driver: GeoJSON 
-    ## Source: "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp", layer: "OGRGeoJSON"
-    ## with 2756 features
-    ## It has 7 fields
     ## [1] "DMwqp is of class SpatialPointsDataFrame and has 2756 features"
 
 ``` r
@@ -327,7 +278,7 @@ plot(dv_data$Date, dv_data$X_00060_00003,
      main = paste("Daily Streamflow for", nwis_gages@data$name[1]), xlab = "", ylab = "Daily Streamflow (CFS)")
 ```
 
-<img src="/static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
+<img src="static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
 <p class="caption">
 Daily Streamflow Plot
 </p>
@@ -340,23 +291,23 @@ wqp_site <- list(names = as.character(nldi_data$DMwqp@data$name),
 print(paste(wqp_site$names[1:10], "has id", wqp_site$ids[1:10]))
 ```
 
-    ##  [1] "RIO GRANDE BOR SITE 1 NR ISLETA, NM, has id USGS-08330961"              
-    ##  [2] "Montoya Drain ABV Montoya Rd, El Paso, TX has id USGS-315230106355110"  
-    ##  [3] "MBOWN-188 - 28S.03E.09.1324 has id USGS-315318106384301"                
-    ##  [4] "Vinton Drain at Nemexas Drain nr Vinton, TX has id USGS-315642106371110"
-    ##  [5] "26S.03E.16.423 has id USGS-320236106380701"                             
-    ##  [6] "26S.03E.08.143 has id USGS-320340106394201"                             
-    ##  [7] "MBOWN-77 - 24S.02E.17.423B (M-3B) has id USGS-321304106451503"          
-    ##  [8] "M-4 Gravity Site has id USGS-321332106443704"                           
-    ##  [9] "23S.01E.17.423 has id USGS-321814106512601"                             
-    ## [10] "23S.01E.04.114 has id USGS-322030106510201"
+    ##  [1] "Rio Grande at Island St nr El Paso, TX has id USGS-08366500"                   
+    ##  [2] "Rio Grande blw Alamo Ck nr Castolon, TX has id USGS-08374535"                  
+    ##  [3] "Rio Grande nr Ranger Stn at Rio Grande Village, TX has id USGS-291046102573900"
+    ##  [4] "Rio Grande at Maravillas Ck nr Sanderson, TX has id USGS-293340102463700"      
+    ##  [5] "Rio Grande abv Bear Cyn, TX (2011 Gain-Loss) has id USGS-294453102363200"      
+    ##  [6] "Rio Grande abv Rattlesnake Canyon nr Langtry, TX has id USGS-294527101381700"  
+    ##  [7] "Rio Grande blw Ramsey Cyn, TX (2011 Gain-Loss) has id USGS-294627101430600"    
+    ##  [8] "Rio Grande blw Palmas Cyn, TX (2011 Gain-Loss) has id USGS-294654102295100"    
+    ##  [9] "JL-49-04-728 has id USGS-315424106353201"                                      
+    ## [10] "JL-49-04-409 has id USGS-315607106365901"
 
 ``` r
 wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], parameterCd = "")
 print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivityStartDate), " and ", max(wqp_data$ActivityStartDate), " for characteristics: ", paste(unique(wqp_data$CharacteristicName), collapse = ", ")))
 ```
 
-    ## [1] "Got 65 samples beween 1972-11-01 and 2013-02-27 for characteristics: Selenium, Boron, Zinc, Arsenic, Silver, Mercury, Lead, Manganese, Iron, Copper, Chromium(VI), Chromium, Cadmium, Orthophosphate, Barium, Sulfate, Inorganic nitrogen (nitrate and nitrite), Silica, Hydrogen ion, Chloride, Fluoride, Carbonate, Bicarbonate, Carbon dioxide, Alkalinity, total, Sodium, percent total cations, Sodium, Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)], Potassium, Hardness, non-carbonate, Calcium, pH, Magnesium, Total dissolved solids, Specific conductance, Bromide, Hardness, Ca, Mg, Stream flow, instantaneous, RBP Stream width, Temperature, water, Temperature, air, deg C, Oxygen, Depth, Depth to water level below land surface, Depth, from ground surface to well water level, Flow rate, instantaneous, Oil and Grease, Detergent, severity (choice list), Floating Garbage Severity (choice List), Floating algae mat - severity (choice list), Odor, atmospheric, Fish Kill, Severity (choice list), Floating debris - severity (choice list), Turbidity severity (choice list), Suspended Sediment Concentration (SSC), Suspended sediment concentration (SSC)"
+    ## [1] "Got 65 samples beween 2006-02-10 and 2006-02-10 for characteristics: Hydrogen ion, Temperature, water, Specific conductance, Oxygen, pH, Carbon dioxide, Ammonia and ammonium, Orthophosphate, Hardness, non-carbonate, Stream flow, instantaneous, Hardness, Ca, Mg, Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)], Sodium, percent total cations, Total dissolved solids, Nitrate, Nitrite, Carbonate, Bicarbonate, Inorganic nitrogen (nitrate and nitrite), Calcium, Magnesium, Sodium, Potassium, Chloride, Sulfate, Fluoride, Silica, Arsenic, Boron, Iron, Strontium, Vanadium, Lithium, Selenium, Alkalinity, total, Oxygen-18, Bromide, Deuterium, Nitrogen-15/14 ratio"
 
 Summary
 -------

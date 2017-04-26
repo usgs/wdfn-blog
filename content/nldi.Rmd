@@ -123,10 +123,10 @@ main_stem_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?
 nwis_gage_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
 basin_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin"
 
-site <- rgdal::readOGR(dsn = site_url, layer = "OGRGeoJSON")
-main_stem <- rgdal::readOGR(dsn = main_stem_url, layer = "OGRGeoJSON")
-nwis_gages <- rgdal::readOGR(dsn = nwis_gage_url, layer = "OGRGeoJSON")
-basin <- rgdal::readOGR(dsn = basin_url, layer = "OGRGeoJSON")
+site <- rgdal::readOGR(dsn = site_url, layer = "OGRGeoJSON", verbose = FALSE)
+main_stem <- rgdal::readOGR(dsn = main_stem_url, layer = "OGRGeoJSON", verbose = FALSE)
+nwis_gages <- rgdal::readOGR(dsn = nwis_gage_url, layer = "OGRGeoJSON", verbose = FALSE)
+basin <- rgdal::readOGR(dsn = basin_url, layer = "OGRGeoJSON", verbose = FALSE)
 
 nwis_popups <- paste('<a href="',
                       nwis_gages@data$uri,
@@ -254,7 +254,7 @@ nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500"
 nldi_data <- list()
 
 for(n in names(nldiURLs)) {
-  nldi_data[n] <- rgdal::readOGR(dsn = nldiURLs[n][[1]], layer = "OGRGeoJSON")
+  nldi_data[n] <- rgdal::readOGR(dsn = nldiURLs[n][[1]], layer = "OGRGeoJSON", verbose = FALSE)
   print(paste(n, "is of class", class(nldi_data[n][[1]])[1], "and has", length(nldi_data[n][[1]]), "features"))
 }
 
