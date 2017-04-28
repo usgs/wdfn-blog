@@ -33,12 +33,7 @@ The Hydro [Network-Linked Data Index (NLDI)](https://cida.usgs.gov/nldi/about) i
 
 In this blog post, we introduce the basic functions of the NLDI and show how to use it as a data discovery and access tool in R. The first section describes the operations available from the [NLDI's Web API](https://cida.usgs.gov/nldi/swagger-ui.html). The second section shows how to map NLDI data and how to use the NLDI to discover data to be accessed with [the dataRetrieval package.](https://owi.usgs.gov/R/dataRetrieval.html)
 
-The NLDI Web API
-----------------
-
-The NLDI's Web API follows a losely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.
-
-In this post, we use text highlighting in six ways:  
+Below, text highlighting is used in six ways:
 
 1) The names of API parameters such as `{featureSource}`  
 2) Example values of API parameters such as: `USGS-08279500`  
@@ -46,6 +41,11 @@ In this post, we use text highlighting in six ways:
 4) API request names such as: *getDataSources*  
 5) R functions such as: **readOGR**  
 6) Other specific strings such as "siteNumber"  
+
+The NLDI Web API
+----------------
+
+The NLDI's Web API follows a losely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.
 
 ### Feature Sources
 
@@ -59,7 +59,9 @@ For now, the particular `{featureID}` to be accessed from a given `{featureSourc
 
 ### Indexed Features
 
-We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500> The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
+We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500>  
+The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
 
     {
       "type": "FeatureCollection",
@@ -88,8 +90,6 @@ We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.ht
 
 <iframe seamless src="/static/nldi-intro/map_1/index.html" width="100%" height="500">
 </iframe>
-Note: The second section of this blog post shows how to make maps of NLDI like this in R.
-
 ### Navigation
 
 The ***navigation*** property of the returned feature is a url for the [*getNavigationTypes*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getNavigationTypesUsingGET) request. This request provides four ***navigation*** options as shown below. Each of these URLs returns the NHDPlus flowlines for the navigation type.
@@ -103,7 +103,8 @@ The ***navigation*** property of the returned feature is a url for the [*getNavi
 
 ### Get Flowlines from Navigation
 
-Each of the URLs found via the *getNavigationTypes* request is a complete [*getFlowlines*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150>
+Each of the URLs found via the *getNavigationTypes* request is a complete [*getFlowlines*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150>
 
 <iframe seamless src="/static/nldi-intro/map_2/index.html" width="100%" height="500">
 </iframe>
@@ -111,30 +112,39 @@ Notice that the flowline goes downstream of the gage because the NLDI is referen
 
 ### Get Linked Data from Navigation
 
-Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the ***navigate*** operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `10`km, we can use the [*getFeatures*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a *getFeatures* request is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150> Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
+Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the ***navigate*** operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `150`km, we can use the [*getFeatures*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a *getFeatures* request, is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150>  
+Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
 
 <iframe seamless src="/static/nldi-intro/map_3/index.html" width="100%" height="500">
 </iframe>
-Note: Click the black NWIS gage to see a pop up and link!
+Note: Click the black NWIS gage points to see a pop up and link!
 
 ### Get the Upstream Basin Boundary
 
-So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the ***navigate*** option, `{navigationMode}` and `{distance}`. In addition to the ***navigate*** option, the NLDI offers a ***basin*** option for any `{featureSource}`/`{featureID}`. The [*getBasin*](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage liiks like: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>.
+So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the ***navigate*** option, `{navigationMode}` and `{distance}`. In addition to the ***navigate*** option, the NLDI offers a ***basin*** option for any `{featureSource}`/`{featureID}`. The [*getBasin*](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage liiks like:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>.
 
 <iframe seamless src="/static/nldi-intro/map_4/index.html" width="100%" height="500">
 </iframe>
 ### NLDI API Summary
 
-There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change. There are also two options on the ***navigate*** option, `{legacy}` and `{stopComid}`, that are preliminary and subject to change.
+There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change.
 
 Bringing together all the operations summarized above, we can get:  
 1) The NWIS site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500>  
-2) The basin upstream of the site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>  
-3) All upstream with tributaries flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>  
-4) The upstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>  
-5) The downstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>  
-6) The water quality observation sites in upstream catchments: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>  
-7) The water quality observations in downstream catchments: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>  
+2) The basin upstream of the site:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>  
+3) All upstream with tributaries flowlines:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>  
+4) The upstream mainstem flowlines:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>  
+5) The downstream mainstem flowlines:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>  
+6) The water quality observation sites in upstream catchments:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>  
+7) The water quality observations in downstream catchments:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>  
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
@@ -145,18 +155,49 @@ Screenshots of NLDI data loaded into QGIS.
 Using the NLDI in R.
 --------------------
 
-Starting from the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created the the National Map basemap blog post was wrapped up into the `get_base_map()` function called in the code shown below.
+Starting from the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created in the National Map basemap blog post was wrapped up into the `get_base_map()` function called in the code shown below.
+
+``` r
+GetURL <- function(service, host = "basemap.nationalmap.gov") {
+  sprintf("https://%s/arcgis/services/%s/MapServer/WmsServer", host, service)
+}
+
+get_base_map <- function() {
+  map <- leaflet::leaflet()
+  grp <- c("USGS Topo", "USGS Imagery Only", "USGS Imagery Topo",
+           "USGS Shaded Relief", "Hydrography")
+  att <- paste0("<a href='https://www.usgs.gov/'>",
+                "U.S. Geological Survey</a> | ",
+                "<a href='https://www.usgs.gov/laws/policies_notices.html'>",
+                "Policies</a>")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSTopo"),
+                              group = grp[1], attribution = att, layers = "0")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSImageryOnly"),
+                              group = grp[2], attribution = att, layers = "0")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSImageryTopo"),
+                              group = grp[3], attribution = att, layers = "0")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSShadedReliefOnly"),
+                              group = grp[4], attribution = att, layers = "0")
+  opt <- leaflet::WMSTileOptions(format = "image/png", transparent = TRUE)
+  map <- leaflet::addWMSTiles(map, GetURL("USGSHydroCached"),
+                              group = grp[5], options = opt, layers = "0")
+  map <- leaflet::hideGroup(map, grp[5])
+  opt <- leaflet::layersControlOptions(collapsed = FALSE)
+  map <- leaflet::addLayersControl(map, baseGroups = grp[1:4],
+                                   overlayGroups = grp[5], options = opt)
+}
+```
 
 First, we get all our URLs into a list and use **readOGR** from the [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html) package to download and read all the data into spatial data types. The end of this code block creates html for popup text with a web link tag that we'll use later.
 
 ``` r
 nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500",
-             basin_boundary = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin",
-             UT = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT",
-             UM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM",
-             DM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM",
-             UTwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp",
-             DMwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp")
+  basin_boundary = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin",
+  UT = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT",
+  UM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM",
+  DM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM",
+  UTwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp",
+  DMwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp")
 
 nldi_data <- list()
 
@@ -191,7 +232,7 @@ DMwqp_html <- paste('<a href="',
 Now that we have all our data, we can use leaflet functions to add the data to a map. First, let's map just the upstream data. Note that the order we add them determines the order the layers are drawn. You can zoom in on the map shown and click the water quality sites to get a popup containing a link to the site's landing page.
 
 ``` r
-map <- get_base_map()
+map <- get_base_map() # the function described above.
 
 map <- leaflet::addPolygons(map, 
                             data=nldi_data$basin_boundary, 
@@ -281,9 +322,6 @@ plot(dv_data$Date, dv_data$X_00060_00003,
 ```
 
 <img src="/static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
-<p class="caption">
-Daily Streamflow Plot
-</p>
 
 Similarly, we can use identifiers returned using `wqp` as the `{dataSource}` with the **readWQPqw** function. In this case, the identifiers can be used without modification as shown below. Note that the NLDI query for downstream mainstem found 2756 sites and upstream tributaries found 1908 sites. The query below gets data from just one! The NLDI is used as a spatial pre-filter in the [Water Quality Portal user interface](https://www.waterqualitydata.us/portal/), which has a rich set of filter options in addition to network navigation.
 
@@ -293,33 +331,40 @@ wqp_site <- list(names = as.character(nldi_data$DMwqp@data$name),
 print(paste(wqp_site$names[1:10], "has id", wqp_site$ids[1:10]))
 ```
 
-    ##  [1] "Los Lunas WWTP has id 21NMEX-NM0020303"                                        
-    ##  [2] "Las Cruces WWTP has id 21NMEX-NM0023311"                                       
-    ##  [3] "South Central Regional WWTP - NM0030490 has id 21NMEX_WQX-NM0030490"           
-    ##  [4] "Sierra County Regional WWTP - NM0030864 has id 21NMEX_WQX-NM0030864"           
-    ##  [5] "UNNAMED MEXICAN DRAIN has id TCEQMAIN-13143"                                   
-    ##  [6] "RIO GRANDE ABOVE ANTHONY DRAIN has id TCEQMAIN-13276"                          
-    ##  [7] "RIO GRANDE AT EL CENIZO PARK has id TCEQMAIN-21542"                            
-    ##  [8] "PERALTA MAIN CANAL BOR SITE 5 NR ISLETA, NM has id USGS-08330965"              
-    ##  [9] "TEMP WELL INFLOW ABV VINTON BRIDGE NEAR VINTON, TX has id USGS-315832106365010"
-    ## [10] "23S.02E.29.241+DUP has id USGS-320036106451901"
+    ##  [1] "28S.03E.27.341 has id USGS-315019106373101"                                   
+    ##  [2] "28S.03E.20.333 has id USGS-315100106394701"                                   
+    ##  [3] "MBOWN-160 - 27S.03E.15.213A (ISC-2A/ISC-2M) has id USGS-315754106372401"      
+    ##  [4] "MBOWN-307 MES52R has id USGS-315814106394001"                                 
+    ##  [5] "23S.01E.35.423 has id USGS-321542106481401"                                   
+    ##  [6] "23S.01E.35.424 has id USGS-321544106480801"                                   
+    ##  [7] "MBOWN-55 - 23S.02E.29.441 (NMSU-10) has id USGS-321628106451501"              
+    ##  [8] "RIO GRANDE BELOW PICACHO BRIDGE NR LAS CRUCES, NM has id USGS-321745106492510"
+    ##  [9] "MBOWN-40 - 23S.02E.07.122 (LC-11) has id USGS-321945106461501"                
+    ## [10] "21S.01W.36.221 has id USGS-322640106532601"
 
 ``` r
-wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], parameterCd = "")
-print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivityStartDate), " and ", max(wqp_data$ActivityStartDate), " for characteristics: ", paste(unique(wqp_data$CharacteristicName), collapse = ", ")))
+wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], 
+                                     parameterCd = "")
+print(paste0("Got ", 
+             ncol(wqp_data), 
+             " samples beween ", 
+             min(wqp_data$ActivityStartDate), 
+             " and ", max(wqp_data$ActivityStartDate), 
+             " for characteristics: ", 
+             paste(unique(wqp_data$CharacteristicName), collapse = ", ")))
 ```
 
-    ## [1] "Got 65 samples beween 1966-08-03 and 2016-08-30 for characteristics: Temperature, sample, Depth, Secchi disk depth, Specific conductance, pH, Oxygen, Nitrogen, Chlorophyll a, Total dissolved solids, Alkalinity, total, Inorganic nitrogen (nitrate and nitrite), Organic carbon, Fluoride, Sulfate, Orthophosphate, Phosphorus, Chloride, Total suspended solids, Total volatile solids, RBP Stream width, Precipitation, Wind direction (direction from, expressed 0-360 deg), Depth, Hardness, magnesium, Flow, Calcium, Sodium, Escherichia coli, Count, Magnesium, Lead, True color, Vanadium, Biochemical oxygen demand, standard conditions, Ammonia, Selenium, Silicon, Chemical oxygen demand, Cadmium, Aluminum, Potassium, Copper, Mercury, Tin, Kjeldahl nitrogen, Manganese, Barium, Fecal Coliform, Arsenic, Bicarbonate, Uranium, Total Coliform, Dissolved oxygen (DO), Ammonia-nitrogen, Temperature, water, Dissolved oxygen saturation, Chlorine, Phosphate-phosphorus, Pheophytin a, Cobalt, Silver, Chromium, Beryllium, Hardness, Ca, Mg, Molybdenum, Nickel, Zinc, Iron, Strontium, Salinity, Turbidity, Total solids, Inorganic nitrogen (nitrate and nitrite) as N, Carbonate, Boron, Sulfate as SO4, Suspended Sediment Concentration (SSC), Suspended sediment concentration (SSC), Stream flow, instantaneous, Nitrate, Hydrogen ion, Silica, Carbon dioxide, Sodium plus potassium, Hardness, non-carbonate"
+    ## [1] "Got 65 samples beween 1972-10-30 and 2013-02-26 for characteristics: Stream flow, instantaneous, Temperature, air, deg C, pH, Specific conductance, Temperature, water, Turbidity, Hardness, Ca, Mg, Hardness, non-carbonate, Total dissolved solids, Calcium, Magnesium, Potassium, Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)], Sodium, percent total cations, Sodium, Alkalinity, total, Bicarbonate, Carbon dioxide, Carbonate, Chloride, Fluoride, Hydrogen ion, Silica, Sulfate, Kjeldahl nitrogen, Ammonia and ammonium, Inorganic nitrogen (nitrate and nitrite), Nitrate, Nitrite, Organic Nitrogen, Orthophosphate, Phosphorus, Nitrogen, mixed forms (NH3), (NH4), organic, (NO2) and (NO3), Aluminum, Barium, Cadmium, Chromium, Cobalt, Copper, Iron, Lead, Lithium, Manganese, Mercury, Molybdenum, Nickel, Silver, Strontium, Vanadium, Zinc, Arsenic, Selenium, Phosphate-phosphorus, Beryllium, Barometric pressure, Oxygen, Strontium-87/Strontium-86, ratio, Bromide, Oxygen-18, Deuterium, Sulfur-34/Sulfur-32 ratio, Boron, Flow rate, instantaneous, Thallium, Antimony, Terbuthylazine, Hexazinone, Simazine, Prometryn, Prometon, Cyanazine, Fonofos, Tritium, Gross-Uranium, Dibromomethane, Dichlorobromomethane, Carbon tetrachloride, 1,2-Dichloroethane, Tribromomethane, Chlorodibromomethane, Chloroform, Toluene, Benzene, Acrylonitrile, Chlorobenzene, Chloroethane, .alpha.-Endosulfan, Ethylbenzene, Hexachloroethane, Methylene chloride, Tetrachloroethene, CFC-11, 1,1-Dichloroethane, 1,1-Dichloroethylene, 1,1,1-Trichloroethane, 1,1,2-Trichloroethane, 1,1,2,2-Tetrachloroethane, o-Dichlorobenzene, 1,2-Dichloropropane, trans-1,2-Dichloroethylene, 1,2,4-Trichlorobenzene, m-Dichlorobenzene, p-Dichlorobenzene, Naphthalene, trans-1,3-Dichloropropene, cis-1,3-Dichloropropene, Chlorpyrifos, Vinyl chloride, Trichloroethene (TCE), Dieldrin, Metolachlor, Malathion, Diazinon, Atrazine, Hexachlorobutadiene, Alachlor, Methyl Acrylate, Acetochlor, Carbon-14, 1,2,3,4-Tetramethylbenzene, 1,2,3,5-Tetramethylbenzene, Vinyl bromide, Ethyl tert-butyl ether, tert-Amyl methyl ether, Endosulfan sulfate, Fenamiphos, Isofenphos, Metalaxyl, Methidathion, Myclobutanil, Oxyfluorfen, 2-Chloro-2',6'-diethylacetanilide, 3,5-Dichloroaniline, Disulfoton sulfone, Fenamiphos Sulfone, Malaoxon, Terbufos oxygen analog sulfone, 5-Amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-[(trifluoromethyl)thio]pyrazole-3-carbonitrile, Fipronil Sulfone, Desulfinylfipronil, Hydrogen sulfide, trans-1,4-Dichloro-2-butene, Ethyl methacrylate, Carbon disulfide, cis-1,2-Dichloroethylene, 2-Hexanone, Styrene, o-Xylene, 1,1-Dichloropropene, 2,2-Dichloropropane, 1,3-Dichloropropane, o-Ethyltoluene, 1,2,3-Trimethylbenzene, 1,2,4-Trimethylbenzene, Cumene, n-Propylbenzene, 1,3,5-Trimethylbenzene, o-Chlorotoluene, p-Chlorotoluene, Halon 1011, n-Butylbenzene, sec-Butylbenzene, tert-Butylbenzene, p-Cymene, 1,2,3-Trichloropropane, 1,1,1,2-Tetrachloroethane, 1,2,3-Trichlorobenzene, Ethylene dibromide, CFC-113, Methyl tert-butyl ether, Methyl isobutyl ketone, Acetone, Bromobenzene, Ethyl ether, Isopropyl ether, Methacrylonitrile, Methyl ethyl ketone, Methyl methacrylate, Tetrahydrofuran, Carbon, isotope of mass 13, Radon-222, Ethion, 1,2-Dibromo-3-chloropropane, Metribuzin, 2,6-Diethylaniline, Trifluralin, Phorate, Methyl parathion, S-Ethyl dipropylthiocarbamate, Tebuthiuron, Molinate, Ethoprop, Benfluralin, Terbufos, Pronamide, Propanil, Thiobencarb, Chlorthal-dimethyl, Pendimethalin, Propargite, 1rs Cis-Permethrin, m,p-Xylene, Total Coliform, Escherichia coli, Coliphage, Male Specific (F+) all Groups, 1,2-Dichloroethane-d4, Toluene-d8, p-Bromofluorobenzene, Diazinon-D10, .alpha.-HCH-d6, Trihalomethanes, Organic carbon, 2-Chloro-4-isopropylamino-6-amino-s-triazine, Methyl bromide, Chloromethane, CFC-12, Dicrotophos, Dichlorvos, 1-Naphthol, Cyfluthrin, Beta Cypermethrin, Iprodione, .lambda.-Cyhalothrin, Phosmet, Tefluthrin, Tribufos, 2-Ethyl-6-methylaniline, 3,4-Dichloroaniline, 4-Chloro-2-methylphenol, Azinphos-methyl oxygen analog, Chlorpyrifos O.A., Ethion monooxon, Fenamiphos sulfoxide, Methyl paraoxon, Phorate O.A., Phosmetoxon, Allyl chloride, Fipronil, Desulfinylfipronil amide, Methyl iodide, cis-Propiconazole, trans-Propiconazole, Dimethoate, Carbofuran, Disulfoton, Carbaryl, Azinphos-methyl, RBP High water mark, Depth, Depth to water level below land surface, Depth, from ground surface to well water level, Gage height, 4-Bromo-3,5-dimethylphenyl N-Methylcarbamate, 2,4,5-T, 2,4-D, 2,4-DB, 4,6-Dinitro-o-cresol, 3-Hydroxycarbofuran, Acifluorfen, Aldicarb sulfone, Aldicarb sulfoxide, Aldicarb, .alpha.-Hexachlorocyclohexane, Bentazon, Bromacil, Bromoxynil, Butylate, Chloramben-methyl, Chlorothalonil, Clopyralid, Chlorthal-Monomethyl, Dicamba, Dichlobenil, Dichloroprop, Dinoseb, Diuron, Esfenvalerate, Ethalfluralin, Fenuron, Fluometuron, Lindane, Linuron, MCPA, MCPB, Methiocarb, Methomyl, Napropamide, Neburon, Norflurazon, Oryzalin, Oxamyl, p,p'-DDE, Parathion, Pebulate, Picloram, Propachlor, Propham, Propoxur, Silvex, Terbacil, Triallate, Triclopyr"
 
 Summary
 -------
 
-In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate any any `{featureID}`, `{navigation}` (and it's optional `{distance}` parameter) and ***basin*** was demonstrated. The the `{navigation}` function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.
+In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, ***navigation*** (and it's optional `{distance}` parameter) and ***basin*** were demonstrated. The ***navigation*** function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.
 
-Building on the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal packge function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)
+Building on the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal package function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)
 
-The post finishes by showing how to use sites found with the NLDI to download data from the National Water Information System and Water Quality portal. The potential for extending this use of the NLDI is vast. As more feature/data sources are indexed and the system evolves, the NLDI should serve as a major new discovery service for many sources of observed and modeled data.
+The post finishes by showing how to use sites found with the NLDI to download data from the National Water Information System and Water Quality portal. The potential for extending this use of the NLDI is vast. As more feature/data sources are indexed and the system evolves, the NLDI should serve as a discovery service for many sources of observed and modeled data.
 
-The NLDI is an exciting new service that is being implemented in an incremental and agile development process. Given that, the API will expand and new versions of the API may have somewhat different design. The intention is to keep the Web API described here the same, only changing it by introducing a version identifier as an API parameter. If you found this useful and plan on using the NLDI as a dependency in a project of application, we would greatly appreciate hearing about your use case and can answer any questions you have while implementing your application.
+The NLDI is a new service that is being implemented in an incremental and agile development process. Given that, the API will expand and new versions of the API may have somewhat different design. The intention is to keep the Web API described here the same, only changing it by introducing a version identifier as an API parameter. If you found this useful and plan on using the NLDI as a dependency in a project of application, we would greatly appreciate hearing about your use case and can answer any questions you have while implementing your application.
 
 Please email <dblodgett@usgs.gov> with questions and feedback.
