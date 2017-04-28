@@ -68,11 +68,7 @@ The Hydro [Network-Linked Data Index (NLDI)](https://cida.usgs.gov/nldi/about) i
 
 In this blog post, we introduce the basic functions of the NLDI and show how to use it as a data discovery and access tool in R. The first section describes the operations available from the [NLDI's Web API](https://cida.usgs.gov/nldi/swagger-ui.html). The second section shows how to map NLDI data and how to use the NLDI to discover data to be accessed with [the dataRetrieval package.](https://owi.usgs.gov/R/dataRetrieval.html)
  
-## The NLDI Web API
-
-The NLDI's Web API follows a losely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.  
-
-In this post, we use text highlighting in six ways:
+Below, text highlighting is used in six ways:
 
 1) The names of API parameters such as `{featureSource}`   
 2) Example values of API parameters such as: `USGS-08279500`  
@@ -80,6 +76,10 @@ In this post, we use text highlighting in six ways:
 4) API request names such as: _getDataSources_  
 5) R functions such as: **readOGR**  
 6) Other specific strings such as "siteNumber"  
+
+## The NLDI Web API
+
+The NLDI's Web API follows a losely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.  
 
 ### Feature Sources
 Available network linked feature sources (`{featureSource}`s) can be found from the [_getDataSources_ request.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getDataSourcesUsingGET) (hint: Click the "try it out" button on the swagger page!) These are the collections of network linked features the NLDI knows about. Think of them as watershed outlets that can be used as a starting point. For this demo, we'll use NWIS Stream Gages as the `{featureSource}`. As a note for later, `{featureSource}` here is the same as the `{dataSource}` described below.   
@@ -90,7 +90,9 @@ For now, the particular `{featureID}` to be accessed from a given `{featureSourc
 ![Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Grande at Embudo")
 
 ### Indexed Features
-We can use the [_getRegisteredFeature_](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url: [https://cida.usgs.gov/nldi/nwissite/USGS-08279500](https://cida.usgs.gov/nldi/nwissite/USGS-08279500) The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
+We can use the [_getRegisteredFeature_](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:  
+[https://cida.usgs.gov/nldi/nwissite/USGS-08279500](https://cida.usgs.gov/nldi/nwissite/USGS-08279500)  
+The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
 ```
 {
   "type": "FeatureCollection",
@@ -124,10 +126,10 @@ main_stem_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?
 nwis_gage_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
 basin_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin"
 
-# site <- rgdal::readOGR(dsn = site_url, layer = "OGRGeoJSON", verbose = FALSE)
-# main_stem <- rgdal::readOGR(dsn = main_stem_url, layer = "OGRGeoJSON", verbose = FALSE)
-# nwis_gages <- rgdal::readOGR(dsn = nwis_gage_url, layer = "OGRGeoJSON", verbose = FALSE)
-# basin <- rgdal::readOGR(dsn = basin_url, layer = "OGRGeoJSON", verbose = FALSE)
+site <- rgdal::readOGR(dsn = site_url, layer = "OGRGeoJSON", verbose = FALSE)
+main_stem <- rgdal::readOGR(dsn = main_stem_url, layer = "OGRGeoJSON", verbose = FALSE)
+nwis_gages <- rgdal::readOGR(dsn = nwis_gage_url, layer = "OGRGeoJSON", verbose = FALSE)
+basin <- rgdal::readOGR(dsn = basin_url, layer = "OGRGeoJSON", verbose = FALSE)
 
 nwis_popups <- paste('<a href="',
                       nwis_gages@data$uri,
@@ -153,9 +155,6 @@ setwd(wd)
 
 <iframe seamless src="/static/nldi-intro/map_1/index.html" width="100%" height="500"></iframe>
 
-Note: The second section of this blog post shows how to make maps of NLDI like this in R.
-
-
 ### Navigation
 The _**navigation**_ property of the returned feature is a url for the [_getNavigationTypes_](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getNavigationTypesUsingGET) request. This request provides four _**navigation**_ options as shown below. Each of these URLs returns the NHDPlus flowlines for the navigation type.
 
@@ -169,7 +168,8 @@ The _**navigation**_ property of the returned feature is a url for the [_getNavi
 ```
 
 ### Get Flowlines from Navigation
-Each of the URLs found via the _getNavigationTypes_ request is a complete [_getFlowlines_](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like: [https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150)
+Each of the URLs found via the _getNavigationTypes_ request is a complete [_getFlowlines_](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like:  
+[https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150)
 
 ```{r map_2, echo=FALSE, message=FALSE, warning=FALSE, eval=TRUE}
 map <- leaflet::addPolylines(map, 
@@ -187,7 +187,9 @@ setwd(wd)
 Notice that the flowline goes downstream of the gage because the NLDI is referenced to whole NHDPlus catchments, not to precise network locations.
 
 ### Get Linked Data from Navigation
-Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the _**navigate**_ operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `10`km, we can use the [_getFeatures_](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a _getFeatures_ request is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like: [https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150) Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
+Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the _**navigate**_ operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `150`km, we can use the [_getFeatures_](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a _getFeatures_ request, is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like:  
+[https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150)  
+Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
 
 ```{r map_3, echo=FALSE, message=FALSE, warning=FALSE}
 map <- leaflet::addCircleMarkers(map = map,
@@ -204,10 +206,11 @@ setwd(wd)
 
 <iframe seamless src="/static/nldi-intro/map_3/index.html" width="100%" height="500"></iframe>
 
-Note: Click the black NWIS gage to see a pop up and link!
+Note: Click the black NWIS gage points to see a pop up and link!
 
 ### Get the Upstream Basin Boundary
-So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the _**navigate**_ option, `{navigationMode}` and `{distance}`. In addition to the _**navigate**_ option, the NLDI offers a _**basin**_ option for any `{featureSource}`/`{featureID}`. The [_getBasin_](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage liiks like: [https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin).
+So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the _**navigate**_ option, `{navigationMode}` and `{distance}`. In addition to the _**navigate**_ option, the NLDI offers a _**basin**_ option for any `{featureSource}`/`{featureID}`. The [_getBasin_](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage liiks like:  
+[https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin).
 
 ```{r map_4, echo=FALSE, message=FALSE, warning=FALSE}
 map <- leaflet::addPolygons(map, 
@@ -224,7 +227,7 @@ setwd(wd)
 <iframe seamless src="/static/nldi-intro/map_4/index.html" width="100%" height="500"></iframe>  
 
 ### NLDI API Summary
-There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change. There are also two options on the _**navigate**_ option, `{legacy}` and `{stopComid}`, that are preliminary and subject to change.
+There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change.  
 
 Bringing together all the operations summarized above, we can get:  
 1) The NWIS site: https://cida.usgs.gov/nldi/nwissite/USGS-08279500  
@@ -232,8 +235,10 @@ Bringing together all the operations summarized above, we can get:
 3) All upstream with tributaries flowlines: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT  
 4) The upstream mainstem flowlines: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM  
 5) The downstream mainstem flowlines: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM  
-6) The water quality observation sites in upstream catchments: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp  
-7) The water quality observations in downstream catchments: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp  
+6) The water quality observation sites in upstream catchments:  
+https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp  
+7) The water quality observations in downstream catchments:  
+https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp  
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
@@ -243,7 +248,40 @@ Screenshots of NLDI data loaded into QGIS.
 
 ## Using the NLDI in R.
 
-Starting from the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created the the National Map basemap blog post was wrapped up into the `get_base_map()` function called in the code shown below.
+Starting from the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created in the National Map basemap blog post was wrapped up into the `get_base_map()` function called in the code shown below.
+
+```{r functions, echo=TRUE, message=FALSE, warning=FALSE}
+
+GetURL <- function(service, host = "basemap.nationalmap.gov") {
+  sprintf("https://%s/arcgis/services/%s/MapServer/WmsServer", host, service)
+}
+
+get_base_map <- function() {
+  map <- leaflet::leaflet()
+  grp <- c("USGS Topo", "USGS Imagery Only", "USGS Imagery Topo",
+           "USGS Shaded Relief", "Hydrography")
+  att <- paste0("<a href='https://www.usgs.gov/'>",
+                "U.S. Geological Survey</a> | ",
+                "<a href='https://www.usgs.gov/laws/policies_notices.html'>",
+                "Policies</a>")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSTopo"),
+                              group = grp[1], attribution = att, layers = "0")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSImageryOnly"),
+                              group = grp[2], attribution = att, layers = "0")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSImageryTopo"),
+                              group = grp[3], attribution = att, layers = "0")
+  map <- leaflet::addWMSTiles(map, GetURL("USGSShadedReliefOnly"),
+                              group = grp[4], attribution = att, layers = "0")
+  opt <- leaflet::WMSTileOptions(format = "image/png", transparent = TRUE)
+  map <- leaflet::addWMSTiles(map, GetURL("USGSHydroCached"),
+                              group = grp[5], options = opt, layers = "0")
+  map <- leaflet::hideGroup(map, grp[5])
+  opt <- leaflet::layersControlOptions(collapsed = FALSE)
+  map <- leaflet::addLayersControl(map, baseGroups = grp[1:4],
+                                   overlayGroups = grp[5], options = opt)
+}
+
+```
 
 First, we get all our URLs into a list and use **readOGR** from the [rgdal](https://cran.r-project.org/web/packages/rgdal/index.html) package to download and read all the data into spatial data types. The end of this code block creates html for popup text with a web link tag that we'll use later.
 
@@ -279,7 +317,7 @@ DMwqp_html <- paste('<a href="',
 Now that we have all our data, we can use leaflet functions to add the data to a map. First, let's map just the upstream data. Note that the order we add them determines the order the layers are drawn. You can zoom in on the map shown and click the water quality sites to get a popup containing a link to the site's landing page.
 
 ```{r map_data, echo=TRUE, message=FALSE, warning=FALSE}
-map <- get_base_map()
+map <- get_base_map() # the function described above.
 
 map <- leaflet::addPolygons(map, 
                             data=nldi_data$basin_boundary, 
@@ -374,7 +412,7 @@ print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivitySt
 
 ## Summary
 
-In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate any any `{featureID}`, `{navigation}` (and it's optional `{distance}` parameter) and _**basin**_ was demonstrated. The the `{navigation}` function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.  
+In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, _**navigation**_ (and it's optional `{distance}` parameter) and _**basin**_ were demonstrated. The the _**navigation**_ function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.  
 
 Building on the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal packge function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)  
 
