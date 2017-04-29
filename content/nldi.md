@@ -2,7 +2,6 @@
 author: David Blodgett
 date: 2017-04-22
 slug: nldi-intro
-draft: True
 title: The Hydro Network-Linked Data Index
 type: post
 categories: Data Science
