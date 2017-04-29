@@ -35,12 +35,12 @@ In this blog post, we introduce the basic functions of the NLDI and show how to 
 
 Below, text highlighting is used in six ways:
 
-1) The names of API parameters such as `{featureSource}`  
-2) Example values of API parameters such as: `USGS-08279500`  
-3) API operation names: ***navigation*** and ***basin***  
-4) API request names such as: *getDataSources*  
-5) R functions such as: **readOGR**  
-6) Other specific strings such as "siteNumber"  
+1) The names of API parameters such as `{featureSource}`
+2) Example values of API parameters such as: `USGS-08279500`
+3) API operation names: ***navigation*** and ***basin***
+4) API request names such as: *getDataSources*
+5) R functions such as: **readOGR**
+6) Other specific strings such as "siteNumber"
 
 The NLDI Web API
 ----------------
@@ -59,8 +59,8 @@ For now, the particular `{featureID}` to be accessed from a given `{featureSourc
 
 ### Indexed Features
 
-We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500>  
+We can use the [*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500>
 The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
 
     {
@@ -88,8 +88,9 @@ The response contains the location of the feature, is in [geojson](http://geojso
       ]
     }
 
-<iframe seamless src="/static/nldi-intro/map_1/index.html" width="100%" height="500">
-</iframe>
+<iframe seamless src="/static/nldi-intro/map_1/index.html" width="80%" height="500">
+</iframe>  
+
 ### Navigation
 
 The ***navigation*** property of the returned feature is a url for the [*getNavigationTypes*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getNavigationTypesUsingGET) request. This request provides four ***navigation*** options as shown below. Each of these URLs returns the NHDPlus flowlines for the navigation type.
@@ -103,54 +104,52 @@ The ***navigation*** property of the returned feature is a url for the [*getNavi
 
 ### Get Flowlines from Navigation
 
-Each of the URLs found via the *getNavigationTypes* request is a complete [*getFlowlines*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like:  
+Each of the URLs found via the *getNavigationTypes* request is a complete [*getFlowlines*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like:
 <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150>
 
-<iframe seamless src="/static/nldi-intro/map_2/index.html" width="100%" height="500">
-</iframe>
+<iframe seamless src="/static/nldi-intro/map_2/index.html" width="80%" height="500">
+</iframe>  
+
 Notice that the flowline goes downstream of the gage because the NLDI is referenced to whole NHDPlus catchments, not to precise network locations.
 
 ### Get Linked Data from Navigation
 
-Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the ***navigate*** operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `150`km, we can use the [*getFeatures*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a *getFeatures* request, is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150>  
+Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the ***navigate*** operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `150`km, we can use the [*getFeatures*](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a *getFeatures* request, is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like:
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150>
 Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
 
-<iframe seamless src="/static/nldi-intro/map_3/index.html" width="100%" height="500">
-</iframe>
+<iframe seamless src="/static/nldi-intro/map_3/index.html" width="80%" height="500">
+</iframe>  
+
 Note: Click the black NWIS gage points to see a pop up and link!
 
 ### Get the Upstream Basin Boundary
 
-So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the ***navigate*** option, `{navigationMode}` and `{distance}`. In addition to the ***navigate*** option, the NLDI offers a ***basin*** option for any `{featureSource}`/`{featureID}`. The [*getBasin*](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage looks like:  
+So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the ***navigate*** option, `{navigationMode}` and `{distance}`. In addition to the ***navigate*** option, the NLDI offers a ***basin*** option for any `{featureSource}`/`{featureID}`. The [*getBasin*](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage looks like:
 <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>.
 
-<iframe seamless src="/static/nldi-intro/map_4/index.html" width="100%" height="500">
-</iframe>
+<iframe seamless src="/static/nldi-intro/map_4/index.html" width="80%" height="500">
+</iframe>  
+
 ### NLDI API Summary
 
 There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change.
 
-Bringing together all the operations summarized above, we can get:  
-1) The NWIS site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500>  
-2) The basin upstream of the site:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>  
-3) All upstream with tributaries flowlines:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>  
-4) The upstream mainstem flowlines:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>  
-5) The downstream mainstem flowlines:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>  
-6) The water quality observation sites in upstream catchments:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>  
-7) The water quality observations in downstream catchments:  
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>  
+Bringing together all the operations summarized above, we can get:
+1) The NWIS site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500>
+2) The basin upstream of the site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>
+3) All upstream with tributaries flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>
+4) The upstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>
+5) The downstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>
+6) The water quality observation sites in upstream catchments:
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>
+7) The water quality observations in downstream catchments:
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />
-
-Screenshots of NLDI data loaded into QGIS.
+<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />  
+Screenshots of NLDI data loaded into QGIS.  
 
 Using the NLDI in R.
 --------------------
@@ -162,8 +161,8 @@ GetURL <- function(service, host = "basemap.nationalmap.gov") {
   sprintf("https://%s/arcgis/services/%s/MapServer/WmsServer", host, service)
 }
 
-get_base_map <- function() {
-  map <- leaflet::leaflet()
+get_base_map <- function(options = leaflet::leafletOptions()) {
+  map <- leaflet::leaflet(options = options)
   grp <- c("USGS Topo", "USGS Imagery Only", "USGS Imagery Topo",
            "USGS Shaded Relief", "Hydrography")
   att <- paste0("<a href='https://www.usgs.gov/'>",
@@ -192,12 +191,12 @@ First, we get all our URLs into a list and use **readOGR** from the [rgdal](http
 
 ``` r
 nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500",
-  basin_boundary = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin",
-  UT = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT",
-  UM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM",
-  DM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM",
-  UTwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp",
-  DMwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp")
+             basin_boundary = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin",
+             UT = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT",
+             UM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM",
+             DM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM",
+             UTwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp",
+             DMwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp")
 
 nldi_data <- list()
 
@@ -267,8 +266,9 @@ map <- leaflet::addCircleMarkers(map,
                                  color = "red")
 ```
 
-<iframe seamless src="/static/nldi-intro/map_5/index.html" width="100%" height="500">
-</iframe>
+<iframe seamless src="/static/nldi-intro/map_5/index.html" width="80%" height="500">
+</iframe>  
+
 To complete the picture, we can add the downstream main stem and water quality sites. Now we have an interactive map of all the upstream tributaries, water quality sites, basin boundary, the entire main stem, and water quality sites downstream.
 
 ``` r
@@ -286,8 +286,9 @@ map <- leaflet::addCircleMarkers(map = map,
                                  popup = DMwqp_html)
 ```
 
-<iframe seamless src="/static/nldi-intro/map_6/index.html" width="100%" height="500">
-</iframe>
+<iframe seamless src="/static/nldi-intro/map_6/index.html" width="80%" height="500">
+</iframe>  
+
 This final map illustrates a very important detail about the NLDI if you zoom in on the downstream main stem. Notice that the sites are not all **on** the main stem flowpath. When the system indexes data sources that aren't already indexed to particular reachcodes and measures along those reaches, it links sites (points) by looking at what local catchment polygon the site is in. This means that sites found through navigation may not be **on** the main flowpath of a catchment. In the future, we hope to improve the system such that it would know if indexed data are **on** or **off** the main flowpath of a catchment, but for now users need to be aware of this limitation.
 
 ### Using the NLDI to discover linked observations data.
@@ -331,40 +332,33 @@ wqp_site <- list(names = as.character(nldi_data$DMwqp@data$name),
 print(paste(wqp_site$names[1:10], "has id", wqp_site$ids[1:10]))
 ```
 
-    ##  [1] "28S.03E.27.341 has id USGS-315019106373101"                                   
-    ##  [2] "28S.03E.20.333 has id USGS-315100106394701"                                   
-    ##  [3] "MBOWN-160 - 27S.03E.15.213A (ISC-2A/ISC-2M) has id USGS-315754106372401"      
-    ##  [4] "MBOWN-307 MES52R has id USGS-315814106394001"                                 
-    ##  [5] "23S.01E.35.423 has id USGS-321542106481401"                                   
-    ##  [6] "23S.01E.35.424 has id USGS-321544106480801"                                   
-    ##  [7] "MBOWN-55 - 23S.02E.29.441 (NMSU-10) has id USGS-321628106451501"              
-    ##  [8] "RIO GRANDE BELOW PICACHO BRIDGE NR LAS CRUCES, NM has id USGS-321745106492510"
-    ##  [9] "MBOWN-40 - 23S.02E.07.122 (LC-11) has id USGS-321945106461501"                
-    ## [10] "21S.01W.36.221 has id USGS-322640106532601"
+    ##  [1] "Unm Resaca nr Hidalgo, TX has id USGS-260708098164501"                    
+    ##  [2] "Rio Grande at Talley Cpgd, BBNP, TX has id USGS-285858103110000"          
+    ##  [3] "Rio Grande at Boquillas Crsg, BBNP, TX has id USGS-291119102564400"       
+    ##  [4] "Lk Amistad Site AMS nr Del Rio, TX has id USGS-292816101061801"           
+    ##  [5] "Rio Grande at Soldado Ck, TX (2011 Gain-Loss) has id USGS-294616101394200"
+    ##  [6] "JL-49-13-823 has id USGS-314516106251401"                                 
+    ##  [7] "JL-49-13-945 has id USGS-314607106244701"                                 
+    ##  [8] "JL-49-14-415 has id USGS-314930106221201"                                 
+    ##  [9] "JL-49-05-630 has id USGS-315659106241101"                                 
+    ## [10] "JL-49-04-106 has id USGS-315733106364501"
 
 ``` r
-wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], 
-                                     parameterCd = "")
-print(paste0("Got ", 
-             ncol(wqp_data), 
-             " samples beween ", 
-             min(wqp_data$ActivityStartDate), 
-             " and ", max(wqp_data$ActivityStartDate), 
-             " for characteristics: ", 
-             paste(unique(wqp_data$CharacteristicName), collapse = ", ")))
+wqp_data <- dataRetrieval::readWQPqw(siteNumbers = wqp_site$ids[1:10], parameterCd = "")
+print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivityStartDate), " and ", max(wqp_data$ActivityStartDate), " for characteristics: ", paste(unique(wqp_data$CharacteristicName), collapse = ", ")))
 ```
 
-    ## [1] "Got 65 samples beween 1972-10-30 and 2013-02-26 for characteristics: Stream flow, instantaneous, Temperature, air, deg C, pH, Specific conductance, Temperature, water, Turbidity, Hardness, Ca, Mg, Hardness, non-carbonate, Total dissolved solids, Calcium, Magnesium, Potassium, Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)], Sodium, percent total cations, Sodium, Alkalinity, total, Bicarbonate, Carbon dioxide, Carbonate, Chloride, Fluoride, Hydrogen ion, Silica, Sulfate, Kjeldahl nitrogen, Ammonia and ammonium, Inorganic nitrogen (nitrate and nitrite), Nitrate, Nitrite, Organic Nitrogen, Orthophosphate, Phosphorus, Nitrogen, mixed forms (NH3), (NH4), organic, (NO2) and (NO3), Aluminum, Barium, Cadmium, Chromium, Cobalt, Copper, Iron, Lead, Lithium, Manganese, Mercury, Molybdenum, Nickel, Silver, Strontium, Vanadium, Zinc, Arsenic, Selenium, Phosphate-phosphorus, Beryllium, Barometric pressure, Oxygen, Strontium-87/Strontium-86, ratio, Bromide, Oxygen-18, Deuterium, Sulfur-34/Sulfur-32 ratio, Boron, Flow rate, instantaneous, Thallium, Antimony, Terbuthylazine, Hexazinone, Simazine, Prometryn, Prometon, Cyanazine, Fonofos, Tritium, Gross-Uranium, Dibromomethane, Dichlorobromomethane, Carbon tetrachloride, 1,2-Dichloroethane, Tribromomethane, Chlorodibromomethane, Chloroform, Toluene, Benzene, Acrylonitrile, Chlorobenzene, Chloroethane, .alpha.-Endosulfan, Ethylbenzene, Hexachloroethane, Methylene chloride, Tetrachloroethene, CFC-11, 1,1-Dichloroethane, 1,1-Dichloroethylene, 1,1,1-Trichloroethane, 1,1,2-Trichloroethane, 1,1,2,2-Tetrachloroethane, o-Dichlorobenzene, 1,2-Dichloropropane, trans-1,2-Dichloroethylene, 1,2,4-Trichlorobenzene, m-Dichlorobenzene, p-Dichlorobenzene, Naphthalene, trans-1,3-Dichloropropene, cis-1,3-Dichloropropene, Chlorpyrifos, Vinyl chloride, Trichloroethene (TCE), Dieldrin, Metolachlor, Malathion, Diazinon, Atrazine, Hexachlorobutadiene, Alachlor, Methyl Acrylate, Acetochlor, Carbon-14, 1,2,3,4-Tetramethylbenzene, 1,2,3,5-Tetramethylbenzene, Vinyl bromide, Ethyl tert-butyl ether, tert-Amyl methyl ether, Endosulfan sulfate, Fenamiphos, Isofenphos, Metalaxyl, Methidathion, Myclobutanil, Oxyfluorfen, 2-Chloro-2',6'-diethylacetanilide, 3,5-Dichloroaniline, Disulfoton sulfone, Fenamiphos Sulfone, Malaoxon, Terbufos oxygen analog sulfone, 5-Amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-[(trifluoromethyl)thio]pyrazole-3-carbonitrile, Fipronil Sulfone, Desulfinylfipronil, Hydrogen sulfide, trans-1,4-Dichloro-2-butene, Ethyl methacrylate, Carbon disulfide, cis-1,2-Dichloroethylene, 2-Hexanone, Styrene, o-Xylene, 1,1-Dichloropropene, 2,2-Dichloropropane, 1,3-Dichloropropane, o-Ethyltoluene, 1,2,3-Trimethylbenzene, 1,2,4-Trimethylbenzene, Cumene, n-Propylbenzene, 1,3,5-Trimethylbenzene, o-Chlorotoluene, p-Chlorotoluene, Halon 1011, n-Butylbenzene, sec-Butylbenzene, tert-Butylbenzene, p-Cymene, 1,2,3-Trichloropropane, 1,1,1,2-Tetrachloroethane, 1,2,3-Trichlorobenzene, Ethylene dibromide, CFC-113, Methyl tert-butyl ether, Methyl isobutyl ketone, Acetone, Bromobenzene, Ethyl ether, Isopropyl ether, Methacrylonitrile, Methyl ethyl ketone, Methyl methacrylate, Tetrahydrofuran, Carbon, isotope of mass 13, Radon-222, Ethion, 1,2-Dibromo-3-chloropropane, Metribuzin, 2,6-Diethylaniline, Trifluralin, Phorate, Methyl parathion, S-Ethyl dipropylthiocarbamate, Tebuthiuron, Molinate, Ethoprop, Benfluralin, Terbufos, Pronamide, Propanil, Thiobencarb, Chlorthal-dimethyl, Pendimethalin, Propargite, 1rs Cis-Permethrin, m,p-Xylene, Total Coliform, Escherichia coli, Coliphage, Male Specific (F+) all Groups, 1,2-Dichloroethane-d4, Toluene-d8, p-Bromofluorobenzene, Diazinon-D10, .alpha.-HCH-d6, Trihalomethanes, Organic carbon, 2-Chloro-4-isopropylamino-6-amino-s-triazine, Methyl bromide, Chloromethane, CFC-12, Dicrotophos, Dichlorvos, 1-Naphthol, Cyfluthrin, Beta Cypermethrin, Iprodione, .lambda.-Cyhalothrin, Phosmet, Tefluthrin, Tribufos, 2-Ethyl-6-methylaniline, 3,4-Dichloroaniline, 4-Chloro-2-methylphenol, Azinphos-methyl oxygen analog, Chlorpyrifos O.A., Ethion monooxon, Fenamiphos sulfoxide, Methyl paraoxon, Phorate O.A., Phosmetoxon, Allyl chloride, Fipronil, Desulfinylfipronil amide, Methyl iodide, cis-Propiconazole, trans-Propiconazole, Dimethoate, Carbofuran, Disulfoton, Carbaryl, Azinphos-methyl, RBP High water mark, Depth, Depth to water level below land surface, Depth, from ground surface to well water level, Gage height, 4-Bromo-3,5-dimethylphenyl N-Methylcarbamate, 2,4,5-T, 2,4-D, 2,4-DB, 4,6-Dinitro-o-cresol, 3-Hydroxycarbofuran, Acifluorfen, Aldicarb sulfone, Aldicarb sulfoxide, Aldicarb, .alpha.-Hexachlorocyclohexane, Bentazon, Bromacil, Bromoxynil, Butylate, Chloramben-methyl, Chlorothalonil, Clopyralid, Chlorthal-Monomethyl, Dicamba, Dichlobenil, Dichloroprop, Dinoseb, Diuron, Esfenvalerate, Ethalfluralin, Fenuron, Fluometuron, Lindane, Linuron, MCPA, MCPB, Methiocarb, Methomyl, Napropamide, Neburon, Norflurazon, Oryzalin, Oxamyl, p,p'-DDE, Parathion, Pebulate, Picloram, Propachlor, Propham, Propoxur, Silvex, Terbacil, Triallate, Triclopyr"
+    ## [1] "Got 65 samples beween 1975-06-02 and 2014-05-21 for characteristics: Oxygen, Hydrogen ion, Temperature, water, Barometric pressure, Specific conductance, pH, Depth, Hexachlorocyclopentadiene, Isophorone, Nitrobenzene, 1,2-Dichloropropane, Isopropyl acetate, HCFC-22, HFC-152a, CFC-114, HCFC-123, 1-Methoxy-4-(2-propenyl)benzene, 1,3-Butadiene, Ethylene glycol monoethyl ether acetate, 2-Propen-1-ol, .alpha.-Terpineol, Butyraldehyde, trans-Crotonaldehyde, Stream flow, instantaneous, Hardness, Ca, Mg, Hardness, non-carbonate, Sodium adsorption ratio [(Na)/(sq root of 1/2 Ca + Mg)], Sodium, percent total cations, Total dissolved solids, Ammonia and ammonium, Carbonate, Acetonitrile, Methyl acetate, 1-Butanol, tert-Butanol, Pentanal, 2-Nitropropane, 4-Methyl-2-pentanol, HCFC-21, 5-Methyl-2-hexanone, Isobutyl acetate, 1-Octanol, 1,2,3,4-Tetrahydronaphthalene, 2,6-Dimethyl-4-heptanone, 1,2,3-Trichloropropane, Chloropicrin, Ethylene dibromide, Methyl tert-butyl ether, N-Nitrosodiethylamine, Bicarbonate, Nitrite, Inorganic nitrogen (nitrate and nitrite), Orthophosphate, Calcium, Magnesium, Sodium, Potassium, Chloride, Sulfate, Fluoride, Silica, Arsenic, Boron, Iron, Strontium, Vanadium, Lithium, 1,1-Dichloropropanone, Butane, Dimethoxymethane, 1,4-Dioxane, 1,3-Dioxolane, Ethyl acetate, Hexane, Pentane, 1,2-Dibromo-3-chloropropane, 1-Chloro-1,1-difluoroethane, 1-Bromo-3-chloropropane-d6, Tetrahydrofuran-d8, Carbon dioxide, Trihalomethanes, 2,4-D-d3, Selenium, Alkalinity, total, Bromide, Deuterium, Oxygen-18, Diuron-d6, cis-Permethrin-13C6, Butachlor ESA, Dimethachlor sulfonic acid, Tebuconazole-d6, Thiobencarb-d10, Metolachlor-d6, Nicosulfuron-d6, Hexazinone-d6, Linuron-d6, Malathion-D10, Diflubenzuron-d4, Carbendazim-d4, Carbofuran-D3, Deethylatrazine-d6, Diazinon-D10, Acetochlor-d11, Alachlor-d13, Carbaryl-d7, 3-Phenoxybenzoic acid-13C6, 3-Phenoxybenzoic acid, Chlorimuron-ethyl, Alachlor ESA, 1rs Cis-Permethrin, Triclopyr, Triallate, Tribufos, Transpermethrin, Terbufos sulfone, Terbufos sulfoxide, Terbufos oxon sulfoxide, Terbufos oxygen analog sulfone, Terbufos, Terbufos oxon, Terbacil, Tebuthiuron TP 109, Tebuthiuron, Tebupirimfos oxon, Tebufenozide, Phostebupirim, 2,3,3-Trichloro-2-propene-1-sulfonic acid (sodium salt), Sulfosulfuron ethyl sulfone, Sulfosulfuron, Sulfentrazone, Sulfometuron methyl, sec-Alachlor oxanilic acid, Siduron, sec-Acetochlor oxanilic acid, Pyriproxyfen, Pyridaben, Propoxur, Pymetrozine, Propazine, Propargite, Profenofos, Phthalazinone, Phorate sulfoxide, Phorate sulfone, Phorate oxygen analog sulfone, Phorate oxon sulfoxide, Phorate, Phorate O.A., Oxamyl oxime, Paraoxon, Oryzalin, Oxamyl, Orthosulfamuron, 2-Hydroxy-4-isopropylamino-6-amino-s-triazine, 2-Hydroxyatrazine, Omethoate, O-Ethyl S-methyl S-propyl phosphorodithioate, O-Ethyl S-propyl phosphorothioate, 2-Hydroxy-6-ethylamino-4-amino-s-triazine, Novaluron, Naled, Metribuzin DK, Metolachlor ESA, Metribuzin, Metolachlor OA, Methyl paraoxon, Metolachlor hydroxy morpholinone, Methomyl oxime, Methoxyfenozide, MCPA, Methamidophos, Methomyl, Linuron, Lactofen, Isoxaflutole, Hydroxysimazine, Imazamox, Indoxacarb, Hydroxyphthalazinone, Hydroxytebuthiuron, Hydroxymetolachlor, Hydroxyfluometuron, Hydroxy didemethyl fluometuron, Hydroxy monodemethyl fluometuron, Hydroxydiazinon, Hydroxyalachlor, Hydroxyacetochlor, Fluometuron, 2-(1-Hydroxyethyl)-6-methylaniline, Fipronil amide, Fipronil sulfonate, Flubendiamide, Fentin, Fenamiphos sulfoxide, Fenbutatin-oxide, Fenamiphos Sulfone, Fenamiphos, O-Ethyl O-methyl S-propyl phosphorothioate, Etoxazole, Ethoprop, 2-[(2-Ethyl-6-methylphenyl)amino]-1-propanol, Disulfoton sulfone, Oxydisulfoton, Demethyl fluometuron, Disulfoton oxon sulfone, Demeton-S, Disulfoton oxon sulfoxide, Dimethenamid ESA, Dimethenamid sulfinylacetic acid, Dimethenamid oxanilic acid, Diflufenzopyr, Benzenepropanenitrile, .alpha.-(cyclopropylcarbonyl)- 2-(methylsulfonyl)-.beta.- oxo-4-(trifluoromethyl)-, Dimethenamid, Diflubenzuron, Didemethyl tebuthiuron, Dichlorvos, Dicrotophos, Dicamba, Metribuzin DA, Metribuzin DADK, Desulfinylfipronil amide, Desmethylnorflurazon, Deisopropyl prometryn, Deiodo flubendiamide, Dechlorometolachlor, Dechlorofipronil, cis-Cyhalothric acid, Chlorthal-Monomethyl, 2-Chloro-4-isopropylamino-6-amino-s-triazine, Desisopropyl atrazine, Chlorosulfonamide acid, Carboxy molinate, Carbendazim, 2-Chloro-4,6-diamino-s-triazine, Bromoxynil, Butralin, Bentazon, Bromacil, Ametryn, Asulam, Aldicarb sulfoxide, Aldicarb sulfone, Alachlor sulfinylacetic acid, Aldicarb, Alachlor oxanilic acid, Acetochlor sulfinylacetic acid, 2-Chloro-2',6'-diethylacetanilide, Acetochlor OA, Acetochlor ESA, 2-Chloro-N-(2-ethyl-6-methylphenyl)acetamide, Acetochlor, 4-Hydroxy molinate, Acephate, 4-Chlorobenzylmethyl sulfoxide, 4-(Hydroxymethyl) pendimethalin, 2-Isopropyl-6-methyl-4-pyrimidinol, 3-Hydroxycarbofuran, 2-Aminobenzimidazole, 2-Amino-N-isopropylbenzamide, Metalaxyl, 1H-1,2,4-Triazole, 2,4-D, Imidacloprid, Malaoxon, 4-Hydroxychlorothalonil, 1-(3,4-dichlorophenyl)-3-methyl urea, Diazoxon, Chlorpyrifos O.A., 3,4-Dichlorophenylurea, Azinphos-methyl oxygen analog, Prometon, Pronamide, Kresoxim-methyl, Norflurazon, Disulfoton, Famoxadone, Trifloxystrobin, Tetraconazole, Chlorsulfuron, Flumetsulam, Halosulfuron-methyl, Imazaquin, Imazethapyr, Nicosulfuron, Prosulfuron, Alachlor, Azinphos-methyl, Bifenthrin, Butylate, Carbaryl, Carbofuran, Chlorpyrifos, Diazinon, S-Ethyl dipropylthiocarbamate, Fonofos, Hexazinone, Malathion, Methidathion, Metolachlor, Molinate, Oxyfluorfen, Pendimethalin, Piperonyl butoxide, Prometryn, Simazine, Thiobencarb, Azoxystrobin, Cyanazine, Dimethoate, Diuron, Fipronil, 1H-Pyrazole-3-carbonitrile, 5-amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-(trifluoromethyl)-, 5-Amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-[(trifluoromethyl)thio]pyrazole-3-carbonitrile, Fipronil Sulfone, Metconazole, Myclobutanil, Propanil, Propiconazole, Pyraclostrobin, Tebuconazole, Terbuthylazine, Barium, Beryllium, Cadmium, Chromium, Cobalt, Copper, Lead, Manganese, Thallium, Molybdenum, Nickel, Silver, Zinc, Antimony, Aluminum, Gross-Uranium, Perchlorate, Nitrate, Organic Nitrogen, Radium-224, Radium-226, Lead-210, Polonium-210, Arsenate, Monomethylarsonate, Cacodylic acid, Alpha particle, Beta particle, Arsenite, Radium-228, Temperature, air, deg C, Turbidity, Dichlorobromomethane, Carbon tetrachloride, 1,2-Dichloroethane, Tribromomethane, Chlorodibromomethane, Chloroform, Toluene, Benzene, Chlorobenzene, Ethylbenzene, Methyl bromide, Methylene chloride, Tetrachloroethene, 1,1-Dichloroethane, 1,1-Dichloroethylene, 1,1,1-Trichloroethane, 1,1,2-Trichloroethane, o-Dichlorobenzene, Nitrogen, mixed forms (NH3), (NH4), organic, (NO2) and (NO3), Kjeldahl nitrogen, Phosphorus, trans-1,2-Dichloroethylene, 1,2,4-Trichlorobenzene, p-Dichlorobenzene, Naphthalene, trans-1,3-Dichloropropene, cis-1,3-Dichloropropene, Vinyl chloride, Trichloroethene (TCE), Isobutyl alcohol-d6, Carbon disulfide, cis-1,2-Dichloroethylene, Styrene, o-Xylene, 1,2,4-Trimethylbenzene, n-Propylbenzene, Halon 1011, sec-Butylbenzene, 1,1,1,2-Tetrachloroethane, m,p-Xylene, 1,2-Dichloroethane-d4, Chloromethane, p-Bromofluorobenzene, Toluene-d8, Organic carbon, Radon-222, Escherichia coli, Total Coliform, Enterococcus, Coliphage, Male Specific (F+) all Groups, cis-Androsterone-2,2,3,4,4-d5, Carbon-14, Carbon, isotope of mass 13, Tritium"
 
 Summary
 -------
 
-In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, ***navigation*** (and it's optional `{distance}` parameter) and ***basin*** were demonstrated. The ***navigation*** function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.
+In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, ***navigation*** (and it's optional `{distance}` parameter) and ***basin*** were demonstrated. The the ***navigation*** function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.
 
-Building on the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal package function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)
+Building on the [recent blog post](https://owi.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal packge function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)
 
-The post finishes by showing how to use sites found with the NLDI to download data from the National Water Information System and Water Quality portal. The potential for extending this use of the NLDI is vast. As more feature/data sources are indexed and the system evolves, the NLDI should serve as a discovery service for many sources of observed and modeled data.
+The post finishes by showing how to use sites found with the NLDI to download data from the National Water Information System and Water Quality portal. The potential for extending this use of the NLDI is vast. As more feature/data sources are indexed and the system evolves, the NLDI should serve as a major new discovery service for many sources of observed and modeled data.
 
-The NLDI is a new service that is being implemented in an incremental and agile development process. Given that, the API will expand and new versions of the API may have somewhat different design. The intention is to keep the Web API described here the same, only changing it by introducing a version identifier as an API parameter. If you found this useful and plan on using the NLDI as a dependency in a project of application, we would greatly appreciate hearing about your use case and can answer any questions you have while implementing your application.
+The NLDI is an exciting new service that is being implemented in an incremental and agile development process. Given that, the API will expand and new versions of the API may have somewhat different design. The intention is to keep the Web API described here the same, only changing it by introducing a version identifier as an API parameter. If you found this useful and plan on using the NLDI as a dependency in a project of application, we would greatly appreciate hearing about your use case and can answer any questions you have while implementing your application.
 
 Please email <dblodgett@usgs.gov> with questions and feedback.
