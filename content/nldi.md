@@ -1,6 +1,6 @@
 ---
 author: David Blodgett
-date: 2017-04-22
+date: 2017-05-01
 slug: nldi-intro
 title: The Hydro Network-Linked Data Index
 type: post
@@ -25,12 +25,13 @@ keywords:
   - hydrography
   - data discovery
 ---
+
 Introduction
 ------------
 
 The Hydro [Network-Linked Data Index (NLDI)](https://cida.usgs.gov/nldi/about) is a system that can index data to [NHDPlus V2](http://www.horizon-systems.com/NHDPlus/V2NationalData.php) catchments and offers a search service to discover indexed information. Data linked to the NLDI includes [active NWIS stream gages](https://waterdata.usgs.gov/nwis/rt), [water quality portal sites](https://www.waterqualitydata.us/), and [outlets of HUC12 watersheds](https://www.sciencebase.gov/catalog/item/5762b664e4b07657d19a71ea). The NLDI is a core product of the [Open Water Data Initiative](http://acwi.gov/spatial/owdi/) and is being developed as [an open source project.](https://github.com/ACWI-SSWD) coordinated through the [Advisory Committee on Water Information (ACWI) Subcommittee on Spatial Water Data](http://acwi.gov/spatial).
 
-In this blog post, we introduce the basic functions of the NLDI and show how to use it as a data discovery and access tool in R. The first section describes the operations available from the [NLDI's Web API](https://cida.usgs.gov/nldi/swagger-ui.html). The second section shows how to map NLDI data and how to use the NLDI to discover data to be accessed with [the dataRetrieval package.](https://owi.usgs.gov/R/dataRetrieval.html)
+In this blog post, we introduce the basic functions of the NLDI and show how to use it as a data discovery and access tool in R. The first section describes the operations available from the [NLDI's Web API](https://cida.usgs.gov/nldi/swagger-ui.html). The second section shows how to map NLDI data and how to use the NLDI to discover data to be accessed with the [dataRetrieval](https://github.com/USGS-R/dataRetrieval) R- package.
 
 Below, text highlighting is used in six ways:
 
@@ -152,7 +153,9 @@ Bringing together all the operations summarized above, we can get:
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" /> <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />  
+<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" />
+
+<img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />  
 Screenshots of NLDI data loaded into QGIS.  
 
 Using the NLDI in R.
