@@ -34,12 +34,12 @@ In this blog post, we introduce the basic functions of the NLDI and show how to 
 
 Below, text highlighting is used in six ways:
 
-1) The names of API parameters such as `{featureSource}`
-2) Example values of API parameters such as: `USGS-08279500`
-3) API operation names: ***navigation*** and ***basin***
-4) API request names such as: *getDataSources*
-5) R functions such as: **readOGR**
-6) Other specific strings such as "siteNumber"
+1) The names of API parameters such as `{featureSource}`  
+2) Example values of API parameters such as: `USGS-08279500`  
+3) API operation names: ***navigation*** and ***basin***  
+4) API request names such as: *getDataSources*  
+5) R functions such as: **readOGR**  
+6) Other specific strings such as "siteNumber"  
 
 The NLDI Web API
 ----------------
@@ -134,16 +134,21 @@ So far, we've covered four parameters of the NLDI Web API. The two base paramete
 
 There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change.
 
-Bringing together all the operations summarized above, we can get:
-1) The NWIS site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500>
-2) The basin upstream of the site: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>
-3) All upstream with tributaries flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>
-4) The upstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>
-5) The downstream mainstem flowlines: <https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>
-6) The water quality observation sites in upstream catchments:
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>
-7) The water quality observations in downstream catchments:
-<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>
+Bringing together all the operations summarized above, we can get:  
+1) The NWIS site:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500>  
+2) The basin upstream of the site:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin>  
+3) All upstream with tributaries flowlines:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT>  
+4) The upstream mainstem flowlines:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM>  
+5) The downstream mainstem flowlines:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM>  
+6) The water quality observation sites in upstream catchments:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp>  
+7) The water quality observations in downstream catchments:  
+<https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp>  
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
