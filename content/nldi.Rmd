@@ -1,6 +1,6 @@
 ---
 author: "David Blodgett"
-date: "2017-04-22"
+date: "2017-05-01"
 slug: "nldi-intro"
 title: "The Hydro Network-Linked Data Index"
 tag1: "leaflet"
