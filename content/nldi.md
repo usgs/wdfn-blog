@@ -16,7 +16,7 @@ author_email: <dblodgett@usgs.gov>
 tags: 
   - R
   - leaflet
-  - R
+  - dataRetrieval
 description: Access subsets of NHDPlus data and discover sites on the river network with the hydro Network Linked Data Index. Navigation types include upstream mainstem, upstream with tributaries, downstream mainstem and downstream with diversions. Services to provide a basin boundary, linked NWIS stream gage sites, water quality data sites, and twelve digit hydrologic unit code (HUC) watershed outlets.
 keywords:
   - R
