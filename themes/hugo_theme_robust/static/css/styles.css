@@ -48,16 +48,32 @@
   line-height:1.5em;
 }
 
+.hljs-number{
+  color:#aa5146  !important;
+}
+
+.hljs-preprocessor > .hljs-title,
+.hljs-preprocessor,
+.hljs-comment{
+  color:#586e75;
+}
+
+.hljs-value,
 .hljs-string{
-  color:#183691;
+  color:#183691  !important;
 }
 
-.hljs-variable{
-  color:#a71d61;
-}
-
+.hljs-class > .hljs-title,
+.nginx > .hljs-title,
+.hljs-title,
+.css > .hljs-tag,
+.hljs-tag,
+.hljs-keyword,
+.hljs-variable,
+.hljs-attribute,
+.hljs-attr_selector,
 .hljs-built_in{
-  color:#ed6a43;
+  color:#000;
 }
 
 p,
