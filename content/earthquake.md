@@ -3,7 +3,7 @@ author: Laura DeCicco
 date: 2017-09-11
 slug: earthquake
 draft: True
-title: Groundwater levels accros US affected by Mexico earthquake
+title: Groundwater levels across US affected by Mexico earthquake
 type: post
 categories: Data Science
 image: static/earthquake/earthquake.png
