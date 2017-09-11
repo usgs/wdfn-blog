@@ -228,12 +228,21 @@ dev.off()
 
 <img src='/static/earthquake/earthquake.png'/ title='Water levels in US affected by Mexico earthquake' alt='Water levels in US affected by Mexico earthquake' />
 
-Have Question on Groundwater?
------------------------------
+What does the plot mean?
+------------------------
+
+While this blog is primarily focused on the process used to create the plot, far more effort was expended by others in understanding and describing the data. The following information was released with the graph:
+
+Did you know? We often see a response to large (and sometimes not so large) earthquakes in groundwater levels in wells. The USGS maintains a network of wells for monitoring various things like natural variability in water levels and response to pumping and climate change across the U.S. The well network can be seen here: <https://groundwaterwatch.usgs.gov/> The M8.1 earthquake that took place 9-8-2017 in the Pacific region offshore Chiapas, Mexico was observed across the U.S. in confined aquifer wells within the network. The wells in this plot are available from the National Water Information System (NWIS) web are from: TX, CA (southern), OK, MO, VA, CA (central), MD, NJ, PA, OH, NY and ME (from south to north). This is just a small sampling of the wells. USGS hydrologists are poring over the data from other states to see what the full extent of response might have been.
+
+Read about how the 2011 earthquake in Mineral, VA affected ground water levels here: <https://water.usgs.gov/ogw/eq/VAquake2011.html>
 
 Find more information about groundwater response to earthquakes. <https://earthquake.usgs.gov/learn/topics/groundwater.php>
 
-Read about how the 2011 earthquake in Mineral, VA affected ground water levels here: <https://water.usgs.gov/ogw/eq/VAquake2011.html>
+The frequency of data in these plots varies -- some are collected every minute, some every 15 minutes, and some hourly -- depending upon the purpose of the monitoring, giving different responses to the earthquake. The magnitude of the response depends on the local geology and hydrology, when the data point was collected and when the seismic wave hit the aquifer that the well penetrates.
+
+Have Questions on Groundwater?
+------------------------------
 
 -   Rodney A. Sheets <a href="mailto:rasheets@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/rodney-a-sheets" target="blank"><i class="fa fa-user fa-2x"></i></a>
 -   Charles Schalk <a href="mailto:cwschalk@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/charles-schalk" target="blank"><i class="fa fa-user fa-2x"></i></a>
@@ -244,8 +253,8 @@ Have Questions on NWIS?
 
 -   Brad Garner <a href="mailto:bdgarner@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/bradley-garner" target="blank"><i class="fa fa-user fa-2x"></i></a>
 
-Have Questions on the R package dataRetrieval?
-----------------------------------------------
+Have Questions on the R package: dataRetrieval?
+-----------------------------------------------
 
 <table style="width:93%;">
 <colgroup>
