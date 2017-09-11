@@ -1,5 +1,5 @@
 ---
-title: "Groundwater levels accros US affected by Mexico earthquake"
+title: "Groundwater levels across US affected by Mexico earthquake"
 slug: "earthquake"
 author: "Laura DeCicco"
 date: "2017-09-11"
