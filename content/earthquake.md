@@ -1,8 +1,7 @@
 ---
 author: Laura DeCicco
-date: 2017-09-11
+date: 2017-09-12
 slug: earthquake
-draft: True
 title: Groundwater levels across US affected by Mexico earthquake
 type: post
 categories: Data Science

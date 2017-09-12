@@ -2,7 +2,7 @@
 title: "Groundwater levels across US affected by Mexico earthquake"
 slug: "earthquake"
 author: "Laura DeCicco"
-date: "2017-09-11"
+date: "2017-09-12"
 image: "static/earthquake/earthquake.png"
 tag1: dataRetrieval
 output: USGSmarkdowntemplates::hugo
