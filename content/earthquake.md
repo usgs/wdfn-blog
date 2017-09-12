@@ -31,7 +31,7 @@ What happened?
 
 A magnitude 8.1 earthquake was measured in the Pacific region offshore Chiapas, Mexico at 04:49:21 UTC on September 8th 2017.
 
-Working in the Water Mission Area for the USGS, our [Data Science Team](https://owi.usgs.gov/datascience/) was already hard at work polishing up water visualizations for the devastating [Hurricane Harvey](https://owi.usgs.gov/vizlab/hurricane-harvey/), as well as creating a new visualization for Hurricane Irma. That is to say, the resources available for a timely visualization were already spent.
+Working in the Water Mission Area for the USGS, our [Data Science Team](https://owi.usgs.gov/datascience/) was already hard at work polishing up water visualizations for the devastating [Hurricane Harvey](https://owi.usgs.gov/vizlab/hurricane-harvey/), as well as creating a new visualization for [Hurricane Irma](https://owi.usgs.gov/vizlab/hurricane-irma/). That is to say, the resources available for a timely visualization were already spent.
 
 By 10 am on Friday however, a team of USGS groundwater scientist had realized that the affects of the earthquake were being observed in groundwater water level measurements across the United States, and were collecting a list of sites that clearly showed the phenomena. It was interesting to view the data directly from the National Water Information System [NWIS](https://waterdata.usgs.gov/nwis) pages.
 
