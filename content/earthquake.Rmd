@@ -127,8 +127,7 @@ Since the y-axis is quite different between sites, it seemed to make the most se
 library(ggplot2)
 
 depth_plot <- ggplot(data = gw_data_sub) +
-  geom_line(aes(x = dateTime, y = X_72019_00000, 
-                color = site_no), size = 1.5) +
+  geom_line(aes(x = dateTime, y = X_72019_00000)) +
   theme_bw() +
   scale_y_continuous(trans = "reverse") +
   facet_grid(site_no ~ ., scales = "free") +
@@ -137,9 +136,7 @@ depth_plot <- ggplot(data = gw_data_sub) +
   theme(strip.background = element_blank(),
         strip.text.y = element_text(angle = 0),
         panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        legend.position="none",
-        panel.spacing.y=unit(0.04, "lines"))
+        panel.grid.minor = element_blank())
 
 depth_plot
 ```
