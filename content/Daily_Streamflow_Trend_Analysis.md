@@ -6,11 +6,11 @@ draft: True
 title: Daily Streamflow Trend Analysis
 type: post
 categories: Data Science
-image: static/Quantile-Kendall/unnamed-chunk-8.1.png
+image: static/Quantile-Kendall/unnamed-chunk-5-5.png
  
  
 author_gs: Jt5I-0gAAAAJ
- 
+author_researchgate: Robert\_Hirsch3
 author_staff: robert-hirsch
 author_email: <rmhirsch@usgs.gov>
 
@@ -38,7 +38,13 @@ First, you need to have installed and loaded the `EGRET` package. Then, you'll n
 
 For this post, we will use the Choptank River in Maryland as an example. There is an example data set included in `EGRET`. The data set consists of metadata, daily discharge data, and water quality data, but this application does not use the water quality data.
 
-There are two limitation that users should know about this application before proceeding any farther. 1) The code was designed for discharge records that are complete (no gaps). 2) The discharge on every day should be a positive value (not zero or negative). The EGRET code that is used here to read in new data has a "work around" for situations where there are a very small number of non-positive discharge values. It adds a small constant to all the discharge data so they will all be positive. This should have almost no impact on the results provided the number of non-positive days is very small, say less than 0.1% of all the days. That translates to about 11 days out of 30 years. For data sets with more zero or negative flow days some different code would need to be written (we would appreciate it if an user could work on developing such a set of code).
+There are two limitation that users should know about this application before proceeding any farther.
+
+1.  The code was designed for discharge records that are complete (no gaps).
+
+2.  The discharge on every day should be a positive value (not zero or negative).
+
+The `EGRET` code that is used here to read in new data has a "work around" for situations where there are a very small number of non-positive discharge values. It adds a small constant to all the discharge data so they will all be positive. This should have almost no impact on the results provided the number of non-positive days is very small, say less than 0.1% of all the days. That translates to about 11 days out of 30 years. For data sets with more zero or negative flow days some different code would need to be written (we would appreciate it if an user could work on developing such a set of code).
 
 To start, the following R commands are needed.
 
@@ -92,24 +98,38 @@ To run the analysis and produce the graphs you will need a few R functions in ad
 library(rkt)
 library(zyp)
 ################ this is the function you will use ##############
-makeQuantileKendall <- function(eList, startDate = NA, endDate = NA, paStart = 4, paLong = 12, legendLocation = "topleft", legendSize = 1.5) {
+makeQuantileKendall <- function(eList, 
+                                startDate = NA, endDate = NA, 
+                                paStart = 4, paLong = 12, 
+                                legendLocation = "topleft", 
+                                legendSize = 1.5) {
   localDaily <- eList$Daily
   localINFO <- eList$INFO
   localINFO$paStart <- paStart
   localINFO$paLong <- paLong
   localINFO$window <- 30
-  start <- if(is.na(startDate)) as.Date(localDaily$Date[1]) else as.Date(startDate)
-  end <- if(is.na(endDate)) as.Date(localDaily$Date[length(localDaily$Date)]) else as.Date(endDate)
+  
+  start <- as.Date(startDate)
+  end <- as.Date(endDate)
+  
+  if(is.na(startDate)){
+    start <- as.Date(localDaily$Date[1]) 
+  } 
+  
+  if(is.na(endDate)){
+    end <- as.Date(localDaily$Date[length(localDaily$Date)])
+  }
+  
   localDaily <- subset(localDaily, Date >= start & Date <= end)
+  
   eList <- as.egret(localINFO,localDaily)
-  # eList <- setPA(eList,paStart = paStart, paLong = paLong, window = 30)
-  # pdf(file = fileName, width = 8, height = 6)
   plotFlowSingleKendall(eList,istat = 1, qUnit = 2)
-  eList <- setPA(eList,paStart=paStart,paLong=paLong,window=30) # NOW THE INDIVIDUAL STATS ARE ALL ON CLIMATE YEARS
+  eList <- setPA(eList,paStart=paStart,paLong=paLong,window=30)
+  # NOW THE INDIVIDUAL STATS ARE ALL ON CLIMATE YEARS
   plotFlowSingleKendall(eList, istat = 4, qUnit = 2)
   plotFlowSingleKendall(eList, istat = 8, qUnit = 2)
   plotFlowSingleKendall(eList, istat = 5, qUnit = 2)
-  # eList <- setPA(eList,paStart = paStart, paLong = paLong, window = 30)
+
   v <- makeSortQ(eList)
   sortQ <- v[[1]]
   time <- v[[2]]
@@ -147,15 +167,109 @@ makeQuantileKendall <- function(eList, startDate = NA, endDate = NA, paStart = 4
               "black","red"),pch = 20,
          pt.cex=1.0, cex = legendSize)
 }     
-######################### what follows are a set of other functions neede #############
-#
+```
+
+``` r
+plotFlowSingleKendall <- function (eList, istat, 
+                                   yearStart = NA, yearEnd = NA, 
+                                   qMax = NA, 
+                                   printTitle = TRUE, tinyPlot = FALSE, 
+                                   customPar = FALSE, runoff = FALSE,
+                                   qUnit = 2, printStaName = TRUE, printPA = TRUE,
+                                   printIstat = TRUE, cex = 0.8, cex.axis = 1.1,
+                                   cex.main = 1.1, lwd = 2, col = "black", ...){
+  
+  localAnnualSeries <- makeAnnualSeries(eList)
+  localINFO <- getInfo(eList)
+  
+  qActual <- localAnnualSeries[2, istat, ]
+  qSmooth <- localAnnualSeries[3, istat, ]
+  years <- localAnnualSeries[1, istat, ]
+  Q <- qActual
+  time <- years
+  LogQ <- log(Q)
+  mktFrame <- data.frame(time,LogQ)
+  mktFrame <- na.omit(mktFrame)
+  mktOut <- rkt::rkt(mktFrame$time,mktFrame$LogQ)
+  slope <- mktOut$B
+  slopePct <- 100 * (exp(slope)) - 100
+  slopePct <- format(slopePct,digits=2)
+  pValue <- mktOut$sl
+  pValue <- format(pValue,digits = 3)
+  
+  if (is.numeric(qUnit)) {
+    qUnit <- qConst[shortCode = qUnit][[1]]
+  } else if (is.character(qUnit)) {
+    qUnit <- qConst[qUnit][[1]]
+  }
+  
+  paLong <- localINFO$paLong
+  paStart <- localINFO$paStart
+  window <- localINFO$window
+  
+  qFactor <- qUnit@qUnitFactor
+  yLab <- qUnit@qUnitTiny
+  
+  if (runoff) {
+    qActual <- qActual * 86.4/localINFO$drainSqKm
+    qSmooth <- qSmooth * 86.4/localINFO$drainSqKm
+    yLab <- "Runoff in mm/day"
+  } else {
+    qActual * qFactor
+    qSmooth <- qSmooth * qFactor
+  }
+
+  localSeries <- data.frame(years, qActual, qSmooth)
+  
+  if (!is.na(yearStart)){
+    localSeries <- subset(localSeries, years >= yearStart)
+  }
+  
+  if (!is.na(yearEnd)){
+    localSeries <- subset(localSeries, years <= yearEnd)
+  }
+  
+  yInfo <- generalAxis(x = qActual, maxVal = qMax, minVal = 0, 
+                       tinyPlot = tinyPlot)
+  xInfo <- generalAxis(x = localSeries$years, maxVal = yearEnd, 
+                       minVal = yearStart, padPercent = 0, tinyPlot = tinyPlot)
+  
+  line1 <- localINFO$shortName
+  nameIstat <- c("minimum day", "7-day minimum", "30-day minimum", 
+                 "median daily", "mean daily", "30-day maximum", "7-day maximum", 
+                 "maximum day")
+  
+  line2 <-  paste0("\n", setSeasonLabelByUser(paStartInput = paStart, 
+                                      paLongInput = paLong), "  ", nameIstat[istat])
+
+  line3 <- paste0("\nSlope estimate is ",slopePct,"% per year, Mann-Kendall p-value is ",pValue)
+  
+  if(tinyPlot){
+    title <- paste(nameIstat[istat])
+  } else {
+    title <- paste(line1, line2, line3)
+  }
+  
+  if (!printTitle){
+    title <- ""
+  }
+
+  genericEGRETDotPlot(x = localSeries$years, y = localSeries$qActual, 
+                      xlim = c(xInfo$bottom, xInfo$top), ylim = c(yInfo$bottom, 
+                      yInfo$top), xlab = "", ylab = yLab, customPar = customPar, 
+                      xTicks = xInfo$ticks, yTicks = yInfo$ticks, cex = cex, 
+                      plotTitle = title, cex.axis = cex.axis, cex.main = cex.main, 
+                      tinyPlot = tinyPlot, lwd = lwd, col = col, ...)
+  lines(localSeries$years, localSeries$qSmooth, lwd = lwd, 
+        col = col)
+}
+```
+
+`makeSortQ` creates a matrix called `Qsort`. It sorted from smallest to largest over dimDays (if working with full year dimDays=365), and also creates other vectors that contain information about this array.
+
+``` r
 makeSortQ <- function(eList){
-# creates a matrix called Qsort
-# Qsort[dimDays,dimYears]
-# no missing values, all values discharge values 
-# sorted from smallest to largest over dimDays (if working with full year dimDays=365)
-#   also creates other vectors that contain information about this array
-#   
+
     localINFO <- getInfo(eList)
     localDaily <- getDaily(eList)
     paStart <- localINFO$paStart
@@ -225,7 +339,11 @@ makeSortQ <- function(eList){
     
     return(sortQList)           
 }
-############################################
+```
+
+Another internal function `trendSortQ`:
+
+``` r
 trendSortQ <- function(Qsort, time){
 # note requires packages zyp and rkt
     nFreq <- dim(Qsort)[1]
@@ -233,7 +351,7 @@ trendSortQ <- function(Qsort, time){
     results <- as.data.frame(matrix(ncol=9,nrow=nFreq))
     colnames(results) <- c("slopeLog","slopePct","pValue","pValueAdj","tau","rho1","rho2","freq","z")
     for(iRank in 1:nFreq){
-        mkOut <- rkt(time,log(Qsort[iRank,]))
+        mkOut <- rkt::rkt(time,log(Qsort[iRank,]))
         results$slopeLog[iRank] <- mkOut$B
         results$slopePct[iRank] <- 100 * (exp(mkOut$B) - 1)
         results$pValue[iRank] <- mkOut$sl
@@ -251,20 +369,24 @@ trendSortQ <- function(Qsort, time){
     }
     return(results)
 }
-#############################################
-#
+```
+
+Finally, here are a few basic supporting functions:
+
+``` r
 getFirstJulian <- function(monthSeq){
     year <- 1850 + trunc((monthSeq - 1) / 12)
     month <- monthSeq - 12 * (trunc((monthSeq-1)/12))
-    charMonth <- ifelse(month<10,paste("0",as.character(month),sep=""),as.character(month))
-    theDate <- paste(year,"-",charMonth,"-01",sep="")
+    charMonth <- ifelse(month<10, paste0("0",as.character(month)), as.character(month))
+    theDate <- paste0(year,"-",charMonth,"-01")
     Julian1 <- as.numeric(julian(as.Date(theDate),origin=as.Date("1850-01-01")))
     return(Julian1)
 }
-#
-#######################################
-# code for deleting one value when the period that contains Februaries
-# has a length that is an odd number
+```
+
+`leapOdd` is a function for deleting one value when the period that contains Februaries has a length that is an odd number:
+
+``` r
 leapOdd <- function(x){
     n <- length(x)
     m <- n - 1
@@ -275,10 +397,11 @@ leapOdd <- function(x){
     y[1:midMinus] <- x[1:midMinus]
     y[mid:m] <- x[mid1:n]
     return(y)}
-#
-#######################################
-# code for deleting one value when the period that contains Februaries
-# has a length that is an even number
+```
+
+`leapEven` is a function for deleting one value when the period that contains Februaries has a length that is an even number
+
+``` r
 leapEven <- function(x){
     n <- length(x)
     m <- n - 1
@@ -292,124 +415,37 @@ leapEven <- function(x){
     y[mid1:m] <- x[mid2 : n]
     return(y)
 }
-#
-########################################
-odd <- function(x) {if ((x %% 2) == 0) FALSE else TRUE}
-#
-################# Calculation of what water year each day is in ########################
-calcWY <- function (df) 
-{
+```
+
+``` r
+odd <- function(x) {(!(x %% 2) == 0)}
+```
+
+Basic function to calculate water year and insert into a data frame:
+
+``` r
+calcWY <- function (df) {
     df$WaterYear <- as.integer(df$DecYear)
     df$WaterYear[df$Month >= 10] <- df$WaterYear[df$Month >= 
         10] + 1
     return(df)
 }
-#
-############ Calculating of what climate year each day is in ########################
-calcCY <- function (df)
-# computes climate year and adds it to the Daily data frame
-{
+```
+
+Basic function to calculate climate year and insert into a data frame:
+
+``` r
+calcCY <- function (df){
   df$ClimateYear <- as.integer(df$DecYear)
   df$ClimateYear[df$Month >= 4] <- df$ClimateYear[df$Month >= 
                                                  4] + 1
   return(df)
 }
-#
-#########################################################################
-#
-plotFlowSingleKendall <- function (eList, istat, yearStart = NA, yearEnd = NA, qMax = NA, 
-                  printTitle = TRUE, tinyPlot = FALSE, customPar = FALSE, runoff = FALSE, 
-                  qUnit = 2, printStaName = TRUE, printPA = TRUE, printIstat = TRUE, 
-                  cex = 0.8, cex.axis = 1.1, cex.main = 1.1, lwd = 2, col = "black", ...){
-  
-  localAnnualSeries <- makeAnnualSeries(eList)
-  localINFO <- getInfo(eList)
-  qActual <- localAnnualSeries[2, istat, ]
-  qSmooth <- localAnnualSeries[3, istat, ]
-  years <- localAnnualSeries[1, istat, ]
-  Q <- qActual
-  time <- years
-  LogQ <- log(Q)
-  mktFrame <- data.frame(time,LogQ)
-  mktFrame <- na.omit(mktFrame)
-  mktOut <- rkt(mktFrame$time,mktFrame$LogQ)
-  slope <- mktOut$B
-  slopePct <- 100 * (exp(slope)) - 100
-  slopePct <- format(slopePct,digits=2)
-  pValue <- mktOut$sl
-  pValue <- format(pValue,digits = 3)
-  
-  if (is.numeric(qUnit)) {
-    qUnit <- qConst[shortCode = qUnit][[1]]
-  } else if (is.character(qUnit)) {
-    qUnit <- qConst[qUnit][[1]]
-  }
-  
-  paLong <- localINFO$paLong
-  paStart <- localINFO$paStart
-  window <- localINFO$window
-  
-  qFactor <- qUnit@qUnitFactor
-  yLab <- qUnit@qUnitTiny
-  
-  if (runoff) {
-    qActual <- qActual * 86.4/localINFO$drainSqKm
-    qSmooth <- qSmooth * 86.4/localINFO$drainSqKm
-    yLab <- "Runoff in mm/day"
-  } else {
-    qActual * qFactor
-    qSmooth <- qSmooth * qFactor
-  }
+```
 
-  localSeries <- data.frame(years, qActual, qSmooth)
-  
-  if (!is.na(yearStart)){
-    localSeries <- subset(localSeries, years >= yearStart)
-  }
-  
-  if (!is.na(yearEnd)){
-    localSeries <- subset(localSeries, years <= yearEnd)
-  }
-  
-  yInfo <- generalAxis(x = qActual, maxVal = qMax, minVal = 0, 
-                       tinyPlot = tinyPlot)
-  xInfo <- generalAxis(x = localSeries$years, maxVal = yearEnd, 
-                       minVal = yearStart, padPercent = 0, tinyPlot = tinyPlot)
-  
-  line1 <- localINFO$shortName
-  nameIstat <- c("minimum day", "7-day minimum", "30-day minimum", 
-                 "median daily", "mean daily", "30-day maximum", "7-day maximum", 
-                 "maximum day")
-  
-  line2 <-  paste0("\n", setSeasonLabelByUser(paStartInput = paStart, 
-                                      paLongInput = paLong), "  ", nameIstat[istat])
+The following smoother function does the trend in real discharge units and not logs. It is placed here so that users wanting to run this alternative have it available
 
-  line3 <- paste0("\nSlope estimate is ",slopePct,"% per year, Mann-Kendall p-value is ",pValue)
-  
-  if(tinyPlot){
-    title <- paste(nameIstat[istat])
-  } else {
-    title <- paste(line1, line2, line3)
-  }
-  
-  
-  if (!printTitle){
-    title <- ""
-  }
-
-  genericEGRETDotPlot(x = localSeries$years, y = localSeries$qActual, 
-                      xlim = c(xInfo$bottom, xInfo$top), ylim = c(yInfo$bottom, 
-                      yInfo$top), xlab = "", ylab = yLab, customPar = customPar, 
-                      xTicks = xInfo$ticks, yTicks = yInfo$ticks, cex = cex, 
-                      plotTitle = title, cex.axis = cex.axis, cex.main = cex.main, 
-                      tinyPlot = tinyPlot, lwd = lwd, col = col, ...)
-  lines(localSeries$years, localSeries$qSmooth, lwd = lwd, 
-        col = col)
-}
-####################################
-#  the following smoother function does the trend in real discharge units and not logs
-#  it is placed here so that users wanting to run this alternative have it available
-#
+``` r
 smoother <- function(xy, window){
   edgeAdjust <- TRUE
   x <- xy$x
@@ -443,7 +479,7 @@ Now all we need to do is to run the **makeQuantileKendall** function that was th
 makeQuantileKendall(eList)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-4-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-4-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-4-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-4-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-4-5.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-5-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-5.png'/ title='TODO' alt='TODO' class=''/>
 
 Explanation of the 5 basic plots.
 =================================
@@ -490,7 +526,7 @@ makeQuantileKendall(eList,
                     legendLocation = "bottomright", legendSize = 1.0)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-5-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-5-5.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-6-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-5.png'/ title='TODO' alt='TODO' class=''/>
 
 Downloading the data for your site of interest
 ==============================================
@@ -512,7 +548,7 @@ eList <- as.egret(INFO, Daily)
 makeQuantileKendall(eList, legendLocation = "bottomleft")
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-6-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-6-5.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-7-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-7-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-7-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-7-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-7-5.png'/ title='TODO' alt='TODO' class=''/>
 
 Final thoughts
 ==============
