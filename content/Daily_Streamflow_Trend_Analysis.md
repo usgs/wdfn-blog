@@ -6,11 +6,11 @@ draft: True
 title: Daily Streamflow Trend Analysis
 type: post
 categories: Data Science
-image: static/Quantile-Kendall/unnamed-chunk-8.1.png
+image: static/Quantile-Kendall/unnamed-chunk-6.5.png
  
  
 author_gs: Jt5I-0gAAAAJ
- 
+author_researchgate: Robert\_Hirsch3
 author_staff: robert-hirsch
 author_email: <rmhirsch@usgs.gov>
 
