@@ -8,7 +8,7 @@ author_email: "rmhirsch@usgs.gov"
 author_researchgate: "Robert_Hirsch3"
 date: "2018-01-24"
 output: USGSmarkdowntemplates::hugo
-image: "static/Quantile-Kendall/unnamed-chunk-6.5.png"
+image: "static/Quantile-Kendall/unnamed-chunk-5-5.png"
 tag1: "EGRET"
 description:  "Using the R-package EGRET to investigate trends in daily streamflow"
 keyword1:  "surface water"
