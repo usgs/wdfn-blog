@@ -70,7 +70,7 @@ Links
 |Main USGS page|[https://www.usgs.gov/](https://www.usgs.gov/)|
 |Office of Water Information|[https://owi.usgs.gov/](https://owi.usgs.gov/)|
 |USGS Water Services|[http://waterservices.usgs.gov/](http://waterservices.usgs.gov/)|
-|USGS Water Data for the Nation|[http://nwis.waterdata.usgs.gov/](http://nwis.waterdata.usgs.gov/)|
+|USGS Water Data for the Nation|[http://waterdata.usgs.gov/](http://waterdata.usgs.gov/)|
 |Water Quality Portal|[http://www.waterqualitydata.us/](http://www.waterqualitydata.us/)|
 |USGS Publications Warehouse|[https://pubs.er.usgs.gov/](https://pubs.er.usgs.gov/)|
 |National Water Census - Data Portal|[http://cida.usgs.gov/nwc/](http://cida.usgs.gov/nwc/)|
