@@ -529,7 +529,6 @@ smoother <- function(xy, window){
 ```
 </div>
 
-
 Making a graph of the trend in a single flow statistic
 ======================================================
 
@@ -700,7 +699,7 @@ startDate <- "1920-04-01"
 endDate <- "2016-03-31"
 INFO <- readNWISInfo(siteNumber = sta, parameterCd = param, interactive = FALSE)
 Daily <- readNWISDaily(siteNumber = sta, parameterCd = param, startDate = startDate, 
-endDate = endDate, interactive =  FALSE)
+endDate = endDate, verbose =  FALSE)
 eList <- as.egret(INFO, Daily)
 plotFiveTrendGraphs(eList, legendLocation = "bottomleft")
 ```
