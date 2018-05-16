@@ -6,7 +6,7 @@ draft: True
 title: Daily Streamflow Trend Analysis
 type: post
 categories: Data Science
-image: static/Quantile-Kendall/unnamed-chunk-5-5.png
+image: static/Quantile-Kendall/unnamed-chunk-14-5.png
  
  
 author_gs: Jt5I-0gAAAAJ
