@@ -1,8 +1,7 @@
 ---
 author: Robert M. Hirsch
-date: 2018-01-24
+date: 2018-05-29
 slug: Quantile-Kendall
-draft: True
 title: Daily Streamflow Trend Analysis
 type: post
 categories: Data Science
@@ -540,7 +539,7 @@ To use it you will need to know about the index of flow statistics used in EGRET
 plotFlowTrend(eList, istat = 1)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-4-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-4-1.png'/ title='Discharge as a function of Year, slope estimates -0.5% and Mann-Kendall p-value 0.785' alt='Discharge as a function of Year, slope estimates and Mann-Kendall p-value' class=''/>
 
 Explanation of the FlowTrend Plot, annual minimum day
 -----------------------------------------------------
@@ -561,7 +560,7 @@ The median day is computed for each year in the record.It is the middle day, tha
 plotFlowTrend(eList, istat = 4)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-5-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-5-1.png'/ title='Discharge as a function of Year annual median day' alt='Discharge as a function of Year annual median day' class=''/>
 
 The annual maximum day
 ----------------------
@@ -574,7 +573,7 @@ At this point we will add one more concept, which is the period of analysis. In 
 plotFlowTrend(eList, istat = 8, paStart = 10)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-6-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-6-1.png'/ title='Discharge as a function of Year annual maximum day' alt='Discharge as a function of Year annual maximum day' class=''/>
 
 The fourth plot is the *annual mean discharge*. It is constructed in exactly the same manner as the previous three, but it represents the mean streamflow for all of the days in the year rather than a single order statistic such as minimum, median, or maximum. We will also use the water year for this analysis.
 
@@ -582,7 +581,7 @@ The fourth plot is the *annual mean discharge*. It is constructed in exactly the
 plotFlowTrend(eList, istat = 5, paStart = 10)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-7-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-7-1.png'/ title='Discharge as a function of Year annual mean discharge' alt='Discharge as a function of Year annual mean discharge' class=''/>
 
 Some observations about these figures
 =====================================
@@ -622,7 +621,7 @@ Here is an example that shows the use of several of these arguments. Say we want
 plotFlowTrend(eList, istat = 8, startDate = "1982-10-01", endDate = "2010-09-30", window = 15, runoff = TRUE)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-9-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-9-1.png'/ title='Discharge as a function of year runoff plot' alt='Discharge as a function of year runoff plot' class=''/>
 
 It is worth noting here that compared to the previous plot of the annual maximum daily discharges, the removal of four particular years brought about a substantial change in the slope and the significance of the trend. This is a common issue in trend analysis with relatively short records.
 
@@ -637,7 +636,7 @@ Here is what it looks like for the Choptank data set. What we see is that genera
 plotQuantileKendall(eList)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-10-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-10-1.png'/ title='The Quantile-Kendall Plot' alt='The Quantile-Kendall Plot' class=''/>
 
 There is one special manipulation of the data that is needed to account for leap years (this is a detail about the computation but is not crucial to understanding the plots). The 366 daily values observed in a leap year are reduced by one so that all years have 365 values. The one value eliminated is accomplished by replacing the two middle values in the ranked list of values by a single value which is the average of the two. A similar approach is used when the period of analysis is any set of months that contains the month of February. The number of leap year values are reduced by one and the reduction takes place at the median value for the year.
 
@@ -650,7 +649,7 @@ We might be interested in particularly looking at trends in a certain season of 
 plotQuantileKendall(eList, paStart = 3, paLong = 4)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-11-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-11-1.png'/ title='The Quantile-Kendall Plot in spring' alt='The Quantile-Kendall Plot in spring' class=''/>
 
 What we can see is that for this portion of the year, the discharge trends are rather minimal and certainly not statistically significant, except that the 5 or so highest flow days in the season do show rather large trends and the annual maximum trend is the largest of all (in percent per year) and is the only one that is significcant.
 
@@ -671,7 +670,7 @@ plotQuantileKendall(eList, startDate = "1982-08-01", endDate = "2010-11-30",
 paStart = 8, paLong = 3, legendLocation = "bottomright", legendSize = 0.5, yMax = 4, yMin = -4)
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-12-1.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-12-1.png'/ title='The Quantile-Kendall Plot with design modifications' alt='The Quantile-Kendall Plot with design modifications' class=''/>
 
 What this graph shows us is that unlike the year as a whole, this late summer to fall period has been one of very substantially increasing discharge. From about the median of the distribution to the top, the trends are greater than 3% per year and many are significant at least at the alpha level of 0.1. There is one feature of this figure that may look odd. That is the fact that at the lower end of the distribution there are many trend slopes that are exactly zero. Using the gray dot at the far left as an example, the trend slope estimation method uses all pairwise comparisons of the lowest discharge of each year. Because of the USGS reporting conventions, many of these discharge values cluster around a few specific values, so that in the comparisons, there are many ties. The slope estimate is the median of all the pairwise slopes and since a significant number of these slopes are zero, the slope estimate is zero.
 
@@ -704,7 +703,7 @@ eList <- as.egret(INFO, Daily)
 plotFiveTrendGraphs(eList, legendLocation = "bottomleft")
 ```
 
-<img src='/static/Quantile-Kendall/unnamed-chunk-14-1.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-2.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-3.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-4.png'/ title='TODO' alt='TODO' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-5.png'/ title='TODO' alt='TODO' class=''/>
+<img src='/static/Quantile-Kendall/unnamed-chunk-14-1.png'/ title='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' alt='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-2.png'/ title='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' alt='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-3.png'/ title='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' alt='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-4.png'/ title='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' alt='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' class=''/><img src='/static/Quantile-Kendall/unnamed-chunk-14-5.png'/ title='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' alt='Quantile-Kendall Plots of the Sugar River near Brodhead, WI' class=''/>
 
 Final thoughts
 ==============

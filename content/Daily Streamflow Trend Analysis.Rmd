@@ -6,7 +6,7 @@ author_gs: "Jt5I-0gAAAAJ"
 author_staff: "robert-hirsch"
 author_email: "rmhirsch@usgs.gov"
 author_researchgate: "Robert_Hirsch3"
-date: "2018-01-24"
+date: "2018-05-29"
 output: USGSmarkdowntemplates::hugo
 image: "static/Quantile-Kendall/unnamed-chunk-14-5.png"
 tag1: "EGRET"
@@ -544,7 +544,7 @@ Now all we need to do is to run the **plotFlowTrend** function that was the firs
 
 To use it you will need to know about the index of flow statistics used in EGRET.  They are called **istat** and the statistics represented by **istat** are:  (1) 1-day minimum, (2) 7-day minimum, (3) 30-day minimum, (4) median (5) mean, (6) 30-day maximum, (7) 7-day maximum, and (8) 1-day maximum.  So to run the annual minimum daily discharge statistic we would set **istat = 1**.  To run the **plotFlowTrend** function it in its simplest form the only arguments we need are the eList (which contains the metadata and the discharge data), and istat.
 
-```{r}
+```{r fig.cap="Discharge as a function of Year, slope estimates -0.5% and Mann-Kendall p-value 0.785", alt.text="Discharge as a function of Year, slope estimates and Mann-Kendall p-value"}
 plotFlowTrend(eList, istat = 1)
 ```
 
@@ -560,7 +560,7 @@ We can do some other similar plots.  In this case we will do the annual median d
 
 The median day is computed for each year in the record.It is the middle day, that is 182 values had discharges lower than it and 182 values had discharges greater than it (for a leap year it is the average of the 183rd and 184th ranked values).  Everything else about it is the same as the first plot.  Here is the annual median day discharge record.  
 
-```{r}
+```{r fig.cap="Discharge as a function of Year annual median day", alt.text="Discharge as a function of Year annual median day"}
 plotFlowTrend(eList, istat = 4)
 ```
 
@@ -571,13 +571,13 @@ The third plot is for the *maximum day* of the year.  Otherwise it is exactly th
 At this point we will add one more concept, which is the period of analysis.  In the first two plots the data were organized by **climate year**.  But, when we look at annual maximum or annual mean discharge the standard approach is to use the water year.  To do this we need to designate that we want our **period of analysis** to start with the month of October (month 10).  To do this we need to add one more argument to our call to the function.  **paStart = 10**.  We did not need to specify the **paStart** in the first two plots, because the default is **paStart = 4.** Notice that this change in the period of analysis is noted in the text on the graphic.
 
 
-```{r}
+```{r fig.cap="Discharge as a function of Year annual maximum day", alt.text="Discharge as a function of Year annual maximum day"}
 plotFlowTrend(eList, istat = 8, paStart = 10)
 ```
 
 The fourth plot is the *annual mean discharge*.  It is constructed in exactly the same manner as the previous three, but it represents the mean streamflow for all of the days in the year rather than a single order statistic such as minimum, median, or maximum.  We will also use the water year for this analysis.
 
-```{r}
+```{r fig.cap="Discharge as a function of Year annual mean discharge", alt.text="Discharge as a function of Year annual mean discharge"}
 plotFlowTrend(eList, istat = 5, paStart = 10)
 ```
 
@@ -613,7 +613,7 @@ Here is a list of the optional arguments that are available to the user.
 
 Here is an example that shows the use of several of these arguments.  Say we want to see what would happen if we only looked at annual maximum daily discharge from 1983 - 2010 (trimming off three low years at the start and one high year at the end), and used a shorter smoothing window, and expressed our results as runoff in mm/day
 
-```{r}
+```{r fig.cap="Discharge as a function of year runoff plot", alt.text="Discharge as a function of year runoff plot"}
 
 plotFlowTrend(eList, istat = 8, startDate = "1982-10-01", endDate = "2010-09-30", window = 15, runoff = TRUE)
 ```
@@ -626,7 +626,7 @@ Now we will look at a new kind of plot called the *Quantile-Kendall plot*.  Each
 
 Here is what it looks like for the Choptank data set.  What we see is that generally across the probability distribution the changes are generally not statistically significant except for the highest and second highest days of the year.  The trends are slightly negative at the low end of the distribution (the lowest 10%).  Near the median they are positive and modestly large (around 1.5% per year).  Then near the 90th percentile they drop to near zero slope and only above about the 99th percentile do they seem to be particularly large.
 
-```{r}
+```{r fig.cap="The Quantile-Kendall Plot", alt.text="The Quantile-Kendall Plot"}
 plotQuantileKendall(eList)
 ```
 
@@ -636,7 +636,7 @@ There is one special manipulation of the data that is needed to account for leap
 
 We might be interested in particularly looking at trends in a certain season of the year.  In the case of the Choptank we know that tropical storm generated floods have been particularly significant in the later part of this record and these have been mostly in August, September and October.  Or, if our interest were related to the flows happening in the spring and early summer, which is the period of time during which the delivery to the Chesapeake Bay (into which the Choptank River flows) then we might want to run our analysis on the period March through June.  To do that we can use **paStart = 3 and paLong = 4**.
 
-```{r}
+```{r fig.cap="The Quantile-Kendall Plot in spring", alt.text="The Quantile-Kendall Plot in spring"}
 plotQuantileKendall(eList, paStart = 3, paLong = 4)
 ```
 
@@ -655,7 +655,7 @@ There are two arguments that relate to the appearance of the graph.
 
 Here is an example bringing all of the arguments into play.  It is for a case where we want to consider the time period 1982-08-01 through 2010-11-30, for only the months of August through October, and we want the legend to go in the bottom right and be only half the size of what we saw in the first example.
 
-```{r}
+```{r fig.cap="The Quantile-Kendall Plot with design modifications", alt.text="The Quantile-Kendall Plot with design modifications"}
 plotQuantileKendall(eList, startDate = "1982-08-01", endDate = "2010-11-30", 
 paStart = 8, paLong = 3, legendLocation = "bottomright", legendSize = 0.5, yMax = 4, yMin = -4)
 ```
@@ -676,7 +676,7 @@ The steps for downloading data from USGS web services (or obtaining it from user
 
 Say we want to look at USGS station number 01646500 (Sugar River near Brodhead, WI) and we want to consider data from Climate Years 1921 through 2016.  Note that this much longer period of record causes the computations to take a good deal more time than the previous cases, but it should still take well under a minute to complete the whole job.  The following commands would do what is needed.
 
-```{r}
+```{r fig.cap="Quantile-Kendall Plots of the Sugar River near Brodhead, WI", alt.text="Quantile-Kendall Plots of the Sugar River near Brodhead, WI"}
 library(EGRET)
 sta <- "05436500"
 param <- "00060" # this is the parameter code for daily discharge
