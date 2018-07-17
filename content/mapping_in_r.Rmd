@@ -44,7 +44,7 @@ opts_chunk$set(
 There are many different R packages for dealing with spatial data. The main distinctions between them involve the types of data they work with --- raster or polygonal --- and the sophistication of the analyses they can do.  Raster data can be thought of as pixels, similar to an image, while polygonal data consists of lines or polygons.  Spatial data manipulation can be quite complex, but creating some basic plots can be done with just a few commands. In this post, we will show simple examples of each for plotting gage locations, and link to some other more complex examples.
 
 #Setting up
-We'll start with a polygon example.  First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access Sciencebase. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package.  The `readOGR` function from `rgdal` reads shapefiles into R.  `rgdal` accesses the [Geospatial Data Abstraction Library](http://www.gdal.org/) (GDAL) system library.
+First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access Sciencebase. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package.  Both of these packages are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).  The `readOGR` function from `rgdal` reads shapefiles into R.  `rgdal` accesses the [Geospatial Data Abstraction Library](http://www.gdal.org/) (GDAL) system library.
 
 ```{r get_data}
 library(sbtools)
