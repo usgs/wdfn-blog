@@ -34,12 +34,12 @@ There are many different R packages for dealing with spatial data. The main dist
 Setting up
 ==========
 
-We'll start with a polygon example. First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access Sciencebase. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package. The `readOGR` function from `rgdal` reads shapefiles into R. `rgdal` accesses the [Geospatial Data Abstraction Library](http://www.gdal.org/) (GDAL) system library.
+First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access Sciencebase. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package. Both of these packages are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/). The `readOGR` function from `rgdal` reads shapefiles into R. `rgdal` accesses the [Geospatial Data Abstraction Library](http://www.gdal.org/) (GDAL) system library.
 
 ``` r
 library(sbtools)
 library(dataRetrieval)
-library(rgdal)
+library(sf)
 
 item_file_download(sb_id = "5a83025ce4b00f54eb32956b", 
                    names = "huc8_05010007_example.zip", 
@@ -51,21 +51,22 @@ item_file_download(sb_id = "5a83025ce4b00f54eb32956b",
 
 ``` r
 unzip('huc8_05010007_example.zip', overwrite = TRUE)
-huc_poly <- readOGR('huc8_05010007_example')
+huc_poly <- st_read('huc8_05010007_example')
 ```
 
-    ## OGR data source with driver: ESRI Shapefile 
-    ## Source: "/Users/wwatkins/Documents/R/owi-blog/content/huc8_05010007_example", layer: "wbdhu8_alb_simp"
-    ## with 1 features
-    ## It has 9 fields
+    ## Reading layer `wbdhu8_alb_simp' from data source `/Users/wwatkins/Documents/R/owi-blog/content/huc8_05010007_example' using driver `ESRI Shapefile'
+    ## Simple feature collection with 1 feature and 9 fields
+    ## geometry type:  POLYGON
+    ## dimension:      XY
+    ## bbox:           xmin: -79.45512 ymin: 39.91875 xmax: -78.55573 ymax: 40.77377
+    ## epsg (SRID):    4326
+    ## proj4string:    +proj=longlat +datum=WGS84 +no_defs
 
 ``` r
 class(huc_poly)
 ```
 
-    ## [1] "SpatialPolygonsDataFrame"
-    ## attr(,"package")
-    ## [1] "sp"
+    ## [1] "sf"         "data.frame"
 
 ``` r
 huc_gages <- whatNWISdata(huc = "05010007", parameterCd = "00060", service="uv")
@@ -110,13 +111,13 @@ print(huc_gages)
     ## 1245    <NA> 122490       <NA>           wat        <NA> 1645423         0
     ##      begin_date   end_date count_nu
     ## 197  1987-10-03 1998-09-26     4011
-    ## 591  1991-10-01 2018-07-13     9782
-    ## 621  2001-12-13 2018-07-13     6056
-    ## 731  1991-10-01 2018-07-13     9782
-    ## 824  1991-10-15 2018-07-13     9768
-    ## 964  1991-10-01 2018-07-13     9782
-    ## 1058 1986-10-01 2018-07-13    11608
-    ## 1245 2010-10-01 2018-07-13     2842
+    ## 591  1991-10-01 2018-07-17     9786
+    ## 621  2001-12-13 2018-07-18     6061
+    ## 731  1991-10-01 2018-07-18     9787
+    ## 824  1991-10-15 2018-07-18     9773
+    ## 964  1991-10-01 2018-07-18     9787
+    ## 1058 1986-10-01 2018-07-18    11613
+    ## 1245 2010-10-01 2018-07-18     2847
 
 The `huc_poly` object is a new type of object that we haven't seen --- a `SpatialPolygonsDataFrame`. It has several different parts, or "slots". You can click on the object in your Rstudio environment window to see what is inside, or run `slotNames(t)`. Slots can be referenced directly using `@`, e.g. `huc_poly@data`. The `data` slot is like a regular R data frame, and contains information about the polygon. You can look at its contents in the nice Rstudio data frame format using `View(huc_poly@data)`. Since this shapefile only contains a single polygon, it only has one row . The `polygons` slot contains the actual vertices of the polygon. If there were multiple polygons in this object, the `plotOrder` field would determine the order in which they are drawn. The `bbox` field gives the bounding box of all polygons in the object, and `proj4.string` gives the projection. These fields can be used and modified to change or reference specific things about the object. In this examples, we will use the `bbox` slot in order to request a map zoomed to this HUC.
 
@@ -131,8 +132,9 @@ For the raster map, we will use the `ggmap` package to create a political map an
 library(ggmap)
 
 #setting zoom to 9 gives us a bit of padding around the bounding box
-basemap_streets <- get_map(maptype = "roadmap", location = c(huc_poly@bbox), zoom = 9)
-basemap_satellite <- get_map(maptype = "satellite", location = c(huc_poly@bbox), zoom = 9)
+bbox <- setNames(st_bbox(huc_poly), c("left", "bottom", "right", "top"))
+basemap_streets <- get_map(maptype = "roadmap", location = bbox, zoom = 9)
+basemap_satellite <- get_map(maptype = "satellite", location = bbox, zoom = 9)
 street_map <- ggmap(basemap_streets) 
 satellite_map <- ggmap(basemap_satellite)
 print(street_map)
@@ -149,24 +151,25 @@ print(satellite_map)
 Now we can start adding to our maps. To use a spatial polygon with `ggmap`, we first need to convert it to a standard data frame. Fortunately, the `tidy` function in the `broom` package does this for us. Also similar to `ggplot`, functions like `geom_polygon` and `geom_point` add to your base map.
 
 ``` r
-tidy_huc_poly <- broom::tidy(huc_poly)
-satellite_map + geom_polygon(data = tidy_huc_poly, aes(long, lat, group = group),
-                             color = "white", fill = NA) + 
-  geom_point(data = huc_gages, aes(x = dec_long_va, y = dec_lat_va, color = "Gage")) + 
-  labs(color = NULL, x = "Longitude", y = "Latitude") + 
-  geom_text(data = huc_gages, aes(label=site_no, x = dec_long_va, y = dec_lat_va), 
-                                 hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
+huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"), crs = st_crs(huc_poly),
+                      remove = FALSE)
+satellite_map + geom_sf(data = huc_poly,
+                        inherit.aes = FALSE,
+                        color = "white", fill = NA) +
+  geom_sf(data = huc_gages_sf, inherit.aes = FALSE, color = "red") +
+  geom_text(data = huc_gages_sf, aes(label = site_no, x = dec_long_va, y = dec_lat_va),
+             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 ```
 
 <img src='/static/mapping-in-r/raster_map_add-1.png'/ title='satellite map with HUC and gages' alt='base maps with HUC and gages' class=''/>
 
 ``` r
-street_map + geom_polygon(data = tidy_huc_poly, aes(long, lat, group = group),
-                             color = "black", fill = NA) + 
-  geom_point(data = huc_gages, aes(x = dec_long_va, y = dec_lat_va, color = "Gage")) + 
-  labs(color = NULL, x = "Longitude", y ="Latitude") + 
-  geom_text(data = huc_gages, aes(label=site_no, x = dec_long_va, y = dec_lat_va), 
-                                 hjust = 0, size=2.5, nudge_x = 0.02)
+street_map + geom_sf(data = huc_poly,
+                        inherit.aes = FALSE,
+                        color = "black", fill = NA) +
+  geom_sf(data = huc_gages_sf, inherit.aes = FALSE, color = "red") +
+  geom_text(data = huc_gages_sf, aes(label = site_no, x = dec_long_va, y = dec_lat_va),
+             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 ```
 
 <img src='/static/mapping-in-r/raster_map_add-2.png'/ title='street map with HUC and gages' alt='base maps with HUC and gages' class=''/>
@@ -181,8 +184,8 @@ library(maps)
 map(database = 'state', regions = 'Pennsylvania', col = "tan", fill = TRUE, border = NA)
 #this draws all PA counties since the regions argument uses partial matching
 map(database = 'county', regions = 'Pennsylvania', col = "white", fill = FALSE, add = TRUE)
-plot(huc_poly, col = NA, add = TRUE)
-points(x = huc_gages$dec_long_va, y = huc_gages$dec_lat_va, col = "red", pch = 19, cex = 0.7)
+plot(st_geometry(huc_poly), col = NA, add = TRUE)
+plot(st_geometry(huc_gages_sf), add = TRUE, col = "red", pch = 19, cex = 0.7)
 legend("bottomright", legend = c("Gage", "Subbasin boundary"), pch = c(19,NA), lty = c(NA, 1),
        col = c("red", "black"), title = "Legend")
 title("Conemaugh Subbasin")
@@ -193,10 +196,10 @@ title("Conemaugh Subbasin")
 Similarly, we could create a map zoomed in to the HUC polygon. We will start by plotting the HUC first, so that it sets the plot's boundaries, although if we wanted something else "on the bottom" we could specify a bounding box to the `map` function (you could access the coordinates from the shapefile with `huc_poly@bbox`.
 
 ``` r
-  plot(huc_poly, col = "dodgerblue", border = NA)
+  plot(st_geometry(huc_poly), col = "dodgerblue", border = NA)
   map(database = 'county', regions = 'Pennsylvania', add = TRUE, col = "lightgray")
   box()
-  points(x = huc_gages$dec_long_va, y = huc_gages$dec_lat_va, col = "red", pch = 19, cex = 0.7)
+ plot(st_geometry(huc_gages_sf), add = TRUE, col = "red", pch = 19, cex = 0.7)
   legend("bottomleft", legend = c("Gage", "Conemaugh subbasin"), pch = c(19,NA), lty = c(NA, 1),
        col = c("red", "dodgerblue"), title = "Legend", lwd = c(1,15), bg = "wheat")
   text(x = huc_gages$dec_long_va, y = huc_gages$dec_lat_va, labels = huc_gages$site_no,
@@ -210,8 +213,8 @@ Other packages and examples
 
 Like plotting in R, there are endless intricacies to making maps, and we are only really scratching the surface here. Some other packages that you may find useful for certain applications include:
 
--   [sp](https://cran.r-project.org/web/packages/sp/index.html): The workhorse package for handling spatial data
--   [sf](https://cran.r-project.org/web/packages/sf/index.html): A newer package by many of the same authors as `sp` that simplifies spatial data manipulation
 -   [raster](https://cran.r-project.org/web/packages/raster/index.html): For working with your own raster data
+-   [sp](https://cran.r-project.org/web/packages/sp/index.html): The original workhorse package for handling spatial data. `sf` is largely replacing it, but you will see it a lot when Googling things.
+-   [geoknife](https://cran.r-project.org/web/packages/geoknife/index.html): A USGS package that utilizes the \[Geo Data Portal\] for processing gridded data. Covered in the [packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
 
 Also, check out our [additional topics in R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum/Additional/) page for links to some other tutorials.
