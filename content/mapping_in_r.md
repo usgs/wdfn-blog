@@ -34,7 +34,7 @@ There are many different R packages for dealing with spatial data. The main dist
 Setting up
 ==========
 
-First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access [ScienceBase](https://www.sciencebase.gov/catalog/). The `st_read` function from the `sf` (for "simple features") package reads in the shapefile. We will be using `sf` throughout these examples to manipulate and the points and polygon for the gages and HUC. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package. Both `dataRetrieval` and `sbtools` are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
+First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access [ScienceBase](https://www.sciencebase.gov/catalog/). The `st_read` function from the `sf` (for "simple features") package reads in the shapefile. We will be using `sf` throughout these examples to manipulate the points and polygon for the gages and HUC. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package. Both `dataRetrieval` and `sbtools` are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
 
 ``` r
 library(sbtools)
@@ -164,7 +164,7 @@ Now that we understand this new object, let's make some maps.
 Raster map example
 ------------------
 
-For the raster map, we will use the `ggmap` package to create a road map and a satellite basemap for the HUC. Since the basemaps that `ggmap` uses are quite detailed, they are too large to include with the package and must be retrieved from the web with the `get_map` function. For the `location` argument, we are getting the bbox from the `huc_poly` object. `st_bbox` returns the bbox in the format we need, except for the names, which we add with `setNames`. The `ggmap` function is analogous to the `ggplot` function in the `ggplot2` package that you have likely already used. It creates the base map, which we can then add things to. Many of the commands used here are from the `ggplot2` package (`ggmap` imports them), and others could be used to further customize this map.
+For the raster map, we will use the `ggmap` package to create a road and satellite basemaps for the HUC. Since the basemaps that `ggmap` uses are quite detailed, they are too large to include with the package and must be retrieved from the web with the `get_map` function. For the `location` argument, we are getting the bbox from the `huc_poly` object. `st_bbox` returns the bbox in the format we need, except for the names, which we add with `setNames`. The `ggmap` function is analogous to the `ggplot` function in the `ggplot2` package that you have likely already used. It creates the base map, which we can then add things to. Many of the commands used here are from the `ggplot2` package (`ggmap` imports them), and others could be used to further customize this map.
 
 Note that `ggmap` is probably not a good choice if you need your data to be in a particular projection. Compared to base plotting, it provides simplicity at the cost of control.
 
@@ -188,17 +188,18 @@ print(satellite_map)
 
 <img src='/static/mapping-in-r/raster_map_base-2.png'/ title='satellite base map' alt='plain base maps' class=''/>
 
-Now we can start adding to our maps. First, we convert the `huc_gages` data.frame to an `sf` object using `st_as_sf`, assinging it the same coordinate reference system as `huc_poly` using `st_crs`. `ggplot` functions like `geom_sf` and `geom_text` add to your base map.
+Now we can start adding to our maps. First, we convert the `huc_gages` data.frame to an `sf` object using `st_as_sf`, assigning it the same coordinate reference system as `huc_poly` using `st_crs`. `ggplot` functions like `geom_sf` and `geom_text` add to your base map.
 
 ``` r
-huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"), crs = st_crs(huc_poly),
-                      remove = FALSE)
+huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"), 
+                         crs = st_crs(huc_poly), remove = FALSE)
 satellite_map + geom_sf(data = huc_poly,
                         inherit.aes = FALSE,
                         color = "white", fill = NA) +
   geom_sf(data = huc_gages_sf, inherit.aes = FALSE, color = "red") +
-  geom_text(data = huc_gages_sf, aes(label = site_no, x = dec_long_va, y = dec_lat_va),
-             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
+  geom_text(data = huc_gages_sf, 
+            aes(label = site_no, x = dec_long_va, y = dec_lat_va),
+            hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 ```
 
 <img src='/static/mapping-in-r/raster_map_add-1.png'/ title='satellite map with HUC and gages' alt='base maps with HUC and gages' class=''/>
@@ -233,7 +234,7 @@ title("Conemaugh Subbasin")
 
 <img src='/static/mapping-in-r/poly-map-state-1.png'/ title='Polygon map of Pennsylvania' alt='Polygon map of Pennsylvania' class=''/>
 
-Similarly, we can create a map zoomed in to the HUC polygon. Note that we set the x and y limits of the map using by extracting the limits by of the `bbox` object we created earlier. We can use the names `left`, `right`, etc. because `bbox` is a named vector.
+Similarly, we can create a map zoomed in to the HUC polygon. Note that we set the x and y limits of the map by extracting the limits of the `bbox` object we created earlier. We can use the names `left`, `right`, etc. because `bbox` is a named vector.
 
 ``` r
   map(database = 'county', regions = 'Pennsylvania', col = "lightgray", 
