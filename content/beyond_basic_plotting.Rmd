@@ -4,7 +4,7 @@ author: "Lindsay R Carr"
 slug: "beyond-basic-plotting"
 date: "2018-08-01"
 description: "Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style."
-image: "static/beyond-basic-plotting/cowplot_multi_plot-1.png"
+image: "static/beyond-basic-plotting/cowplotmulti-1.png"
 tag1: "Beyond Basic R"
 keyword1: "R"
 keyword2: "ggplot2"
@@ -133,7 +133,7 @@ library(cowplot)
 source('theme_USGS.R')
 ```
 
-```{r cowplot_multi_plot, warning=FALSE, message=FALSE, fig.cap="Multi-plot figure generated using cowplot.", alt.text="Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.", fig.width = 7, fig.height=5}
+```{r cowplotmulti, warning=FALSE, message=FALSE, fig.cap="Multi-plot figure generated using cowplot.", alt.text="Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.", fig.width = 7, fig.height=5}
 wi_daily_wq <- readNWISdv(siteNumbers = "05430175", 
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")

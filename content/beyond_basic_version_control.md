@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - version control via Git
 type: post
 categories: Data Science
-image: static/beyond-basic-version-control/github\_workflow\_basic.png
+image: static/beyond-basic-version-control/github-workflow-basic.png
  
  
  
