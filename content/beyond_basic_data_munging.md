@@ -16,12 +16,12 @@ author_email: <soliver@usgs.gov>
 
 tags: 
   - R
-  - data munging
+  - Beyond Basic R
  
 description: More advanced data munging techniques in R that were not covered in the Intro to R class.
 keywords:
   - R
-  - data munging
+  - Beyond Basic R
  
   - data munging
   - R

@@ -5,11 +5,11 @@ author: "David Watkins"
 date: "2018-08-11"
 output: USGSmarkdowntemplates::hugo
 image: "static/beyond-basic-mapping/poly-map-state-1.png"
-tag1: "maps"
 description:  "Basic mapping in R with the maps and ggmap package"
-keyword1: "Beyond Basic R"
+tag1: "Beyond Basic R"
+keyword1: "ggmap"
 keyword2:  "maps"
-keyword3: "ggmap"
+keyword3: ""
 ---
 ```{r setup, include=FALSE}
 library(knitr)

@@ -16,15 +16,15 @@ image: static/beyond-basic-plotting/cowplot\_multi\_plot-1.png
 
 tags: 
   - R
- 
+  - Beyond Basic R
  
 description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
 keywords:
   - R
- 
+  - Beyond Basic R
  
   - R
-  - Beyond Basic R
+  - ggplot2
 ---
 R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 

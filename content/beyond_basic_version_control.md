@@ -16,12 +16,12 @@ categories: Data Science
 
 tags: 
   - R
- 
+  - Beyond Basic R
  
 description: Brief introduction to version control, Git, and GitHub; plus, resources for learning more.
 keywords:
   - R
- 
+  - Beyond Basic R
  
   - R
   - git

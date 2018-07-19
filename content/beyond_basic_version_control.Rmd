@@ -4,9 +4,10 @@ author: "Lindsay R Carr"
 slug: "beyond-basic-git"
 date: "2018-08-15"
 description: "Brief introduction to version control, Git, and GitHub; plus, resources for learning more."
+tag1: "Beyond Basic R"
 keyword1: "R"
 keyword2: "git"
-keyword3: "Beyond Basic R"
+keyword3: ""
 output: USGSmarkdowntemplates::hugo
 ---
 

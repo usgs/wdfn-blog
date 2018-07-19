@@ -6,10 +6,10 @@ author_email: "soliver@usgs.gov"
 date: "2018-07-25"
 output: USGSmarkdowntemplates::hugo
 image: "static/beyond-basic-data-munging/cumulativedischarge-1.png"
-tag1: "data munging"
+tag1: "Beyond Basic R"
 keyword1: "data munging"
 keyword2: "R"
-keyword3: "Beyond Basic R"
+keyword3: ""
 description: "More advanced data munging techniques in R that were not covered in the Intro to R class."
 
 ---

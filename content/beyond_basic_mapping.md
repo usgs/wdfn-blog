@@ -16,14 +16,14 @@ image: static/beyond-basic-mapping/poly-map-state-1.png
 
 tags: 
   - R
-  - maps
+  - Beyond Basic R
  
 description: Basic mapping in R with the maps and ggmap package
 keywords:
   - R
-  - maps
- 
   - Beyond Basic R
+ 
+  - ggmap
   - maps
 ---
 Introduction

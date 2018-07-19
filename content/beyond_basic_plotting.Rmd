@@ -5,8 +5,9 @@ slug: "beyond-basic-plotting"
 date: "2018-08-01"
 description: "Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style."
 image: "static/beyond-basic-plotting/cowplot_multi_plot-1.png"
+tag1: "Beyond Basic R"
 keyword1: "R"
-keyword2: "Beyond Basic R"
+keyword2: "ggplot2"
 keyword3: ""
 output: USGSmarkdowntemplates::hugo
 ---
