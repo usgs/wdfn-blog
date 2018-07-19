@@ -18,7 +18,7 @@ tags:
   - R
  
  
-description: 
+description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
 keywords:
   - R
  
