@@ -1,6 +1,6 @@
 ---
 author: Lindsay R Carr
-date: 2018-08-1
+date: 2018-08-01
 slug: beyond-basic-plotting
 draft: True
 title: Beyond basic R - plotting with ggplot2 and USGS style
@@ -101,7 +101,10 @@ usgs_plot <- ggplot(wi_daily_q, aes(x=Date, y=Flow)) +
 usgs_plot
 ```
 
-<img src="beyond_basic_plotting_files/figure-markdown_github/unnamed-chunk-4-1.png" width="672" />
+<img src="beyond_basic_plotting_files/figure-markdown_github/unnamed-chunk-4-1.png" alt="Simple flow timeseries for site 03339500." width="672" />
+<p class="caption">
+Simple flow timeseries for site 03339500.
+</p>
 
 Using `cowplot` to create multiple plots in one image
 -----------------------------------------------------
@@ -147,7 +150,10 @@ plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
           rel_heights = c(0.2, 1, 1))
 ```
 
-<img src="beyond_basic_plotting_files/figure-markdown_github/unnamed-chunk-7-1.png" width="672" />
+<img src="beyond_basic_plotting_files/figure-markdown_github/unnamed-chunk-7-1.png" alt="Multi-plot figure generated using cowplot." width="672" />
+<p class="caption">
+Multi-plot figure generated using cowplot.
+</p>
 
 Grouped boxplots in `ggplot2`
 -----------------------------
@@ -179,4 +185,7 @@ ggplot(temp_q_data, aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
   theme_USGS()
 ```
 
-<img src="beyond_basic_plotting_files/figure-markdown_github/unnamed-chunk-8-1.png" width="672" />
+<img src="beyond_basic_plotting_files/figure-markdown_github/unnamed-chunk-8-1.png" alt="Grouped boxplot produced by ggplot2 with USGS style." width="672" />
+<p class="caption">
+Grouped boxplot produced by ggplot2 with USGS style.
+</p>
