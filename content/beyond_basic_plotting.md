@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - plotting with ggplot2 and USGS style
 type: post
 categories: Data Science
- 
+image: static/beyond-basic-plotting/cowplot\_multi\_plot-1.png
  
  
  
@@ -16,15 +16,15 @@ categories: Data Science
 
 tags: 
   - R
- 
+  - Beyond Basic R
  
 description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
 keywords:
   - R
- 
+  - Beyond Basic R
  
   - R
-  - Beyond Basic R
+  - ggplot2
 ---
 R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
@@ -101,7 +101,7 @@ usgs_plot <- ggplot(wi_daily_q, aes(x=Date, y=Flow)) +
 usgs_plot
 ```
 
-<img src='static/beyond-basic-plotting/unnamed-chunk-4-1.png'/ title='Simple flow timeseries for site 03339500.' alt='Hydrograph produced by ggplot2 with USGS-style.' class=''/>
+<img src='/static/beyond-basic-plotting/use_theme_plot-1.png'/ title='Simple flow timeseries for site 03339500.' alt='Hydrograph produced by ggplot2 with USGS-style.' class=''/>
 
 Using `cowplot` to create multiple plots in one image
 -----------------------------------------------------
@@ -147,7 +147,7 @@ plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
           rel_heights = c(0.2, 1, 1))
 ```
 
-<img src='static/beyond-basic-plotting/unnamed-chunk-7-1.png'/ title='Multi-plot figure generated using cowplot.' alt='Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.' class=''/>
+<img src='/static/beyond-basic-plotting/cowplot_multi_plot-1.png'/ title='Multi-plot figure generated using cowplot.' alt='Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.' class=''/>
 
 Grouped boxplots in `ggplot2`
 -----------------------------
@@ -179,4 +179,4 @@ ggplot(temp_q_data, aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
   theme_USGS()
 ```
 
-<img src='static/beyond-basic-plotting/unnamed-chunk-8-1.png'/ title='Grouped boxplot produced by ggplot2 with USGS style.' alt='Boxplots of water temperature for day and night grouped by USGS sites.' class=''/>
+<img src='/static/beyond-basic-plotting/grouped_barplots-1.png'/ title='Grouped boxplot produced by ggplot2 with USGS style.' alt='Boxplots of water temperature for day and night grouped by USGS sites.' class=''/>

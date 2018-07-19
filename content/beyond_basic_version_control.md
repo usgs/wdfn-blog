@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - version control via Git
 type: post
 categories: Data Science
- 
+image: static/beyond-basic-version-control/github\_workflow\_basic.png
  
  
  
@@ -16,12 +16,12 @@ categories: Data Science
 
 tags: 
   - R
- 
+  - Beyond Basic R
  
 description: Brief introduction to version control, Git, and GitHub; plus, resources for learning more.
 keywords:
   - R
- 
+  - Beyond Basic R
  
   - R
   - git
@@ -53,3 +53,7 @@ There are many existing blogs and websites that dive into how to use these tools
 -   [Git guides](https://maraaverick.rbind.io/2017/12/git-guides/) (Mara Averick)
 -   [Git and GitHub](http://r-pkgs.had.co.nz/git.html) from R Packages (Hadley Wickham)
 -   [Version control with Git](https://www.r-bloggers.com/version-control-with-git/) (R-bloggers)
+
+------------------------------------------------------------------------
+
+*Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.*
