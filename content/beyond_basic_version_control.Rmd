@@ -1,5 +1,5 @@
 ---
-title: "Beyond basic R: version control via Git"
+title: "Beyond basic R - version control via Git"
 author: "Lindsay R Carr"
 slug: "beyond-basic-git"
 date: "2018-08-15"

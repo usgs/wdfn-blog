@@ -1,5 +1,5 @@
 ---
-title: "Beyond basic R: data munging"
+title: "Beyond basic R - data munging"
 slug: "beyond-basic-data-munging"
 author: "Samantha Oliver"
 author_email: "soliver@usgs.gov"

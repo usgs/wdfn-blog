@@ -3,7 +3,7 @@ author: Samantha Oliver
 date: 2018-07-25
 slug: beyond-basic-data-munging
 draft: True
-title: Beyond basic R: data munging
+title: Beyond basic R - data munging
 type: post
 categories: Data Science
 image: static/data-munging-beyond-basics/cumulativedischarge-1.png

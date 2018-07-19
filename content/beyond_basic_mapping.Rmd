@@ -1,5 +1,5 @@
 ---
-title: "Beyond basic R: mapping"
+title: "Beyond basic R - mapping"
 slug: "beyond-basic-mapping"
 author: "David Watkins"
 date: "2018-08-11"

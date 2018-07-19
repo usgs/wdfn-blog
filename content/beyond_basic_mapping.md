@@ -3,7 +3,7 @@ author: David Watkins
 date: 2018-08-11
 slug: beyond-basic-mapping
 draft: True
-title: Beyond basic R: mapping
+title: Beyond basic R - mapping
 type: post
 categories: Data Science
 image: static/mapping-in-r/poly-map-state-1.png

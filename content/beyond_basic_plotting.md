@@ -3,7 +3,7 @@ author: Lindsay R Carr
 date: 2018-08-1
 slug: beyond-basic-plotting
 draft: True
-title: Beyond basic R: plotting with ggplot2 and USGS style
+title: Beyond basic R - plotting with ggplot2 and USGS style
 type: post
 categories: Data Science
  
