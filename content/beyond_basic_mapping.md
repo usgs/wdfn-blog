@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - mapping
 type: post
 categories: Data Science
-image: static/mapping-in-r/poly-map-state-1.png
+image: static/beyond-basic-mapping/poly-map-state-1.png
  
  
  

@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - data munging
 type: post
 categories: Data Science
-image: static/data-munging-beyond-basics/cumulativedischarge-1.png
+image: static/beyond-basic-data-munging/cumulativedischarge-1.png
  
  
  

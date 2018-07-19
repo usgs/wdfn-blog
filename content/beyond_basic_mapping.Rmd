@@ -4,7 +4,7 @@ slug: "beyond-basic-mapping"
 author: "David Watkins"
 date: "2018-08-11"
 output: USGSmarkdowntemplates::hugo
-image: "static/mapping-in-r/poly-map-state-1.png"
+image: "static/beyond-basic-mapping/poly-map-state-1.png"
 tag1: "maps"
 description:  "Basic mapping in R with the maps and ggmap package"
 keyword1: "Beyond Basic R"

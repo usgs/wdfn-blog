@@ -5,7 +5,7 @@ author: "Samantha Oliver"
 author_email: "soliver@usgs.gov"
 date: "2018-07-25"
 output: USGSmarkdowntemplates::hugo
-image: "static/data-munging-beyond-basics/cumulativedischarge-1.png"
+image: "static/beyond-basic-data-munging/cumulativedischarge-1.png"
 tag1: "data munging"
 keyword1: "data munging"
 keyword2: "R"
