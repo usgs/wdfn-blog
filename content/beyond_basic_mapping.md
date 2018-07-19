@@ -1,9 +1,9 @@
 ---
 author: David Watkins
-date: 2018-07-11
-slug: mapping-in-r
+date: 2018-08-11
+slug: beyond-basic-mapping
 draft: True
-title: Basic mapping in R
+title: Beyond basic R: mapping
 type: post
 categories: Data Science
 image: static/mapping-in-r/poly-map-state-1.png
@@ -23,7 +23,7 @@ keywords:
   - R
   - maps
  
- 
+  - Beyond Basic R
   - maps
 ---
 Introduction
@@ -55,7 +55,7 @@ unzip('huc8_05010007_example.zip', overwrite = TRUE)
 huc_poly <- st_read('huc8_05010007_example')
 ```
 
-    ## Reading layer `wbdhu8_alb_simp' from data source `/Users/wwatkins/Documents/R/owi-blog/content/huc8_05010007_example' using driver `ESRI Shapefile'
+    ## Reading layer `wbdhu8_alb_simp' from data source `D:\LRCData\R\owi-blog\content\huc8_05010007_example' using driver `ESRI Shapefile'
     ## Simple feature collection with 1 feature and 9 fields
     ## geometry type:  POLYGON
     ## dimension:      XY
@@ -151,11 +151,11 @@ head(huc_gages)
     ## 964 122477       <NA>           wat        <NA> 1645423         0
     ##     begin_date   end_date count_nu
     ## 197 1987-10-03 1998-09-26     4011
-    ## 591 1991-10-01 2018-07-17     9786
-    ## 621 2001-12-13 2018-07-18     6061
-    ## 731 1991-10-01 2018-07-18     9787
-    ## 824 1991-10-15 2018-07-18     9773
-    ## 964 1991-10-01 2018-07-18     9787
+    ## 591 1991-10-01 2018-07-19     9788
+    ## 621 2001-12-13 2018-07-19     6062
+    ## 731 1991-10-01 2018-07-19     9788
+    ## 824 1991-10-15 2018-07-19     9774
+    ## 964 1991-10-01 2018-07-19     9788
 
 The `huc_poly` object is a new type of object that we haven't seen --- it has classes `sf` as well as `data.frame`. Looking inside the object with the `str` command, we can see it is structured very much like a `data.frame` with several factor columns, except for the `geometry` column, which is of type `sfc_POLYGON`. `sf` provides various functions to extract useful information from this kind object, generally prefixed with `st_`. `st_geometry` extracts the entire geometry part of the object; `st_bbox` extracts the bounding box from the geometry; and `st_crs` extracts the coordinate reference system. There are others, but we will use these three to get the parts of the `sf` object we need for plotting.
 

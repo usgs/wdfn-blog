@@ -1,9 +1,9 @@
 ---
 author: Samantha Oliver
-date: 2018-07-13
-slug: data-munging-beyond-basics
+date: 2018-07-25
+slug: beyond-basic-data-munging
 draft: True
-title: Data munging - beyond the basics
+title: Beyond basic R: data munging
 type: post
 categories: Data Science
 image: static/data-munging-beyond-basics/cumulativedischarge-1.png
@@ -234,12 +234,12 @@ head(yahara_long)
     ## # Groups:   waterYear [1]
     ##   Date       waterYear cumulative_dis wy_doy variable      value
     ##   <date>         <dbl>          <dbl>  <int> <chr>         <dbl>
-    ## 1 1997-10-01      1998             11      1 Discharge_cfs    11
-    ## 2 1997-10-02      1998             22      2 Discharge_cfs    11
-    ## 3 1997-10-03      1998             34      3 Discharge_cfs    12
-    ## 4 1997-10-04      1998             45      4 Discharge_cfs    11
-    ## 5 1997-10-05      1998             56      5 Discharge_cfs    11
-    ## 6 1997-10-06      1998             67      6 Discharge_cfs    11
+    ## 1 1997-10-01      1998           11.0      1 Discharge_cfs  11.0
+    ## 2 1997-10-02      1998           22.0      2 Discharge_cfs  11.0
+    ## 3 1997-10-03      1998           34.0      3 Discharge_cfs  12.0
+    ## 4 1997-10-04      1998           45.0      4 Discharge_cfs  11.0
+    ## 5 1997-10-05      1998           56.0      5 Discharge_cfs  11.0
+    ## 6 1997-10-06      1998           67.0      6 Discharge_cfs  11.0
 
 Now, we can use `ggplot` to plot all values against time and `facet_wrap` by the "variable" column to create panels of data.
 

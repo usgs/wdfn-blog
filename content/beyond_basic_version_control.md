@@ -1,9 +1,9 @@
 ---
 author: Lindsay R Carr
-date: 2018-7-19
-slug: intro-git
+date: 2018-08-15
+slug: beyond-basic-git
 draft: True
-title: Version control via Git
+title: Beyond basic R: version control via Git
 type: post
 categories: Data Science
  

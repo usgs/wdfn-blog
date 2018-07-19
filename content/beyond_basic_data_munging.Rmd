@@ -1,14 +1,15 @@
 ---
-title: "Data munging - beyond the basics"
-slug: "data-munging-beyond-basics"
+title: "Beyond basic R: data munging"
+slug: "beyond-basic-data-munging"
 author: "Samantha Oliver"
 author_email: "soliver@usgs.gov"
-date: "2018-07-13"
+date: "2018-07-25"
 output: USGSmarkdowntemplates::hugo
 image: "static/data-munging-beyond-basics/cumulativedischarge-1.png"
 tag1: "data munging"
 keyword1: "data munging"
 keyword2: "R"
+keyword3: "Beyond Basic R"
 description: "More advanced data munging techniques in R that were not covered in the Intro to R class."
 
 ---
