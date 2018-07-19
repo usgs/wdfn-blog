@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - plotting with ggplot2 and USGS style
 type: post
 categories: Data Science
-image: static/beyond-basic-plotting/cowplot\_multi\_plot-1.png
+image: static/beyond-basic-plotting/cowplotmulti-1.png
  
  
  
@@ -147,7 +147,7 @@ plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
           rel_heights = c(0.2, 1, 1))
 ```
 
-<img src='/static/beyond-basic-plotting/cowplot_multi_plot-1.png'/ title='Multi-plot figure generated using cowplot.' alt='Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.' class=''/>
+<img src='/static/beyond-basic-plotting/cowplotmulti-1.png'/ title='Multi-plot figure generated using cowplot.' alt='Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.' class=''/>
 
 Grouped boxplots in `ggplot2`
 -----------------------------
