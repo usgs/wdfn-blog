@@ -6,7 +6,7 @@ draft: True
 title: Beyond basic R - plotting with ggplot2 and USGS style
 type: post
 categories: Data Science
- 
+image: static/beyond-basic-plotting/cowplot\_multi\_plot-1.png
  
  
  
