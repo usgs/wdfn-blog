@@ -180,13 +180,13 @@ satellite_map <- ggmap(basemap_satellite)
 print(street_map)
 ```
 
-<img src='static/beyond-basic-mapping/raster_map_base-1.png'/ title='street base map' alt='plain base maps' class=''/>
+<img src='/static/beyond-basic-mapping/raster_map_base-1.png'/ title='street base map' alt='plain base maps' class=''/>
 
 ``` r
 print(satellite_map)
 ```
 
-<img src='static/beyond-basic-mapping/raster_map_base-2.png'/ title='satellite base map' alt='plain base maps' class=''/>
+<img src='/static/beyond-basic-mapping/raster_map_base-2.png'/ title='satellite base map' alt='plain base maps' class=''/>
 
 Now we can start adding to our maps. First, we convert the `huc_gages` data.frame to an `sf` object using `st_as_sf`, assigning it the same coordinate reference system as `huc_poly` using `st_crs`. `ggplot` functions like `geom_sf` and `geom_text` add to your base map.
 
@@ -202,7 +202,7 @@ satellite_map + geom_sf(data = huc_poly,
             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 ```
 
-<img src='static/beyond-basic-mapping/raster_map_add-1.png'/ title='satellite map with HUC and gages' alt='base maps with HUC and gages' class=''/>
+<img src='/static/beyond-basic-mapping/raster_map_add-1.png'/ title='satellite map with HUC and gages' alt='base maps with HUC and gages' class=''/>
 
 ``` r
 street_map + geom_sf(data = huc_poly,
@@ -213,7 +213,7 @@ street_map + geom_sf(data = huc_poly,
              hjust = 0, size=2.5, nudge_x = 0.02, col = "black")
 ```
 
-<img src='static/beyond-basic-mapping/raster_map_add-2.png'/ title='street map with HUC and gages' alt='base maps with HUC and gages' class=''/>
+<img src='/static/beyond-basic-mapping/raster_map_add-2.png'/ title='street map with HUC and gages' alt='base maps with HUC and gages' class=''/>
 
 Vector map example
 ------------------
@@ -232,7 +232,7 @@ legend("bottomright", legend = c("Gage", "Subbasin boundary"), pch = c(19,NA), l
 title("Conemaugh Subbasin")
 ```
 
-<img src='static/beyond-basic-mapping/poly-map-state-1.png'/ title='Polygon map of Pennsylvania' alt='Polygon map of Pennsylvania' class=''/>
+<img src='/static/beyond-basic-mapping/poly-map-state-1.png'/ title='Polygon map of Pennsylvania' alt='Polygon map of Pennsylvania' class=''/>
 
 Similarly, we can create a map zoomed in to the HUC polygon. Note that we set the x and y limits of the map by extracting the limits of the `bbox` object we created earlier. We can use the names `left`, `right`, etc. because `bbox` is a named vector.
 
@@ -248,7 +248,7 @@ Similarly, we can create a map zoomed in to the HUC polygon. Note that we set th
        pos = 4, cex = 0.7)
 ```
 
-<img src='static/beyond-basic-mapping/poly_map_zoomed_in-1.png'/ title='Polygon map zoomed to HUC' alt='Polygon map zoomed to HUC' class=''/>
+<img src='/static/beyond-basic-mapping/poly_map_zoomed_in-1.png'/ title='Polygon map zoomed to HUC' alt='Polygon map zoomed to HUC' class=''/>
 
 Other packages and examples
 ---------------------------
