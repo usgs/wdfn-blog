@@ -64,7 +64,7 @@ In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curr
 
 Producing a plot to look at your data is fairly straightforward; however, when you are ready to produce the plot for a publication or to share in some way, there is a lot more work. One convenience with ggplot2 are the use of built-in themes which can change plot aesthetics. Theme elements can be manually manipulated so that you can produce the perfect plot, but it does take a lot of work and Googling to figure out. Luckily for us, developers at the Lower Mississippi-Gulf Water Science Center shared their custom ggplot2 theme for USGS style guidelines. This does not guarantee perfect USGS style, but gets you pretty close and gives you the ability to edit, update, or amend specific pieces for your needs.
 
-```{r}
+```{r theme_USGS}
 # custom USGS theme for plots
 theme_USGS <-  function(base_size = 8){
   theme(
@@ -93,17 +93,17 @@ theme_USGS <-  function(base_size = 8){
 
 Here is an example of how to use that function (make sure you actually source the file or run the function’s code to have it available in your environment):
 
-```{r warning=FALSE, message=FALSE}
+```{r use_theme_load_libs, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(dataRetrieval)
 ```
 
-```{r eval=FALSE}
+```{r use_theme_load_theme, eval=FALSE}
 # load theme_USGS() from a file in your current working directory
 source('theme_USGS.R')
 ```
 
-```{r warning=FALSE, message=FALSE, fig.cap="Simple flow timeseries for site 03339500.", alt.text="Hydrograph produced by ggplot2 with USGS-style.", fig.width = 7, fig.height=5}
+```{r use_theme_plot, warning=FALSE, message=FALSE, fig.cap="Simple flow timeseries for site 03339500.", alt.text="Hydrograph produced by ggplot2 with USGS-style.", fig.width = 7, fig.height=5}
 wi_daily_q <- readNWISdv(siteNumbers = "03339500", parameterCd = "00060",
                          startDate = "2018-04-01", endDate = "2018-04-30")
 wi_daily_q <- renameNWISColumns(wi_daily_q)
@@ -118,7 +118,7 @@ usgs_plot
 
 There are a few other tricks with ggplot2 that can make it easy to get the plots you want. There’s a helper package called `cowplot` that has some nice wrapper functions for ggplot2 plots to have shared legends, put plots into a grid, annotate plots, and more. Below is some code that shows how to use some of these helpful `cowplot` functions to create a figure that has three plots and a shared title.
 
-```{r warning=FALSE, message=FALSE}
+```{r cowplot_load_libs, warning=FALSE, message=FALSE}
 library(dataRetrieval)
 library(dplyr) # for `rename`
 library(tidyr) # for `gather`
@@ -126,12 +126,12 @@ library(ggplot2)
 library(cowplot)
 ```
 
-```{r eval=FALSE}
+```{r cowplot_load_theme, eval=FALSE}
 # load theme_USGS() from a file in your current working directory
 source('theme_USGS.R')
 ```
 
-```{r warning=FALSE, message=FALSE, fig.cap="Multi-plot figure generated using cowplot.", alt.text="Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.", fig.width = 7, fig.height=5}
+```{r cowplot_multi_plot, warning=FALSE, message=FALSE, fig.cap="Multi-plot figure generated using cowplot.", alt.text="Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.", fig.width = 7, fig.height=5}
 wi_daily_wq <- readNWISdv(siteNumbers = "05430175", 
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")
@@ -162,7 +162,7 @@ plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
 
 The final plotting example we will show is how to create grouped boxplots, which has been a common question. This is one of those instances where factors are useful because the first step is to make your grouping variable a factor. Once it is a factor, ggplot2 will automatically understand that it should treat those as groups. Then, you can easily create grouped boxplots by setting the x aesthetic to the grouping variable column. The example below also shows off the function `case_when` from dplyr to create a new categorical column based on the values of another variable (in this case, using time to say whether the data was from the daytime or nighttime). Running this code assumes that you already have `theme_USGS()` in your environment.
 
-```{r warning=FALSE, message=FALSE, fig.cap="Grouped boxplot produced by ggplot2 with USGS style.", alt.text="Boxplots of water temperature for day and night grouped by USGS sites.", fig.width = 7, fig.height=5}
+```{r grouped_barplots, warning=FALSE, message=FALSE, fig.cap="Grouped boxplot produced by ggplot2 with USGS style.", alt.text="Boxplots of water temperature for day and night grouped by USGS sites.", fig.width = 7, fig.height=5}
 library(dataRetrieval)
 library(dplyr) # for `mutate` and `case_when`
 library(ggplot2)
