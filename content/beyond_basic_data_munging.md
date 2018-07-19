@@ -1,9 +1,9 @@
 ---
 author: Samantha Oliver
-date: 2018-07-13
-slug: data-munging-beyond-basics
+date: 2018-07-25
+slug: beyond-basic-data-munging
 draft: True
-title: Data munging - beyond the basics
+title: Beyond basic R - data munging
 type: post
 categories: Data Science
 image: static/data-munging-beyond-basics/cumulativedischarge-1.png
@@ -142,7 +142,7 @@ ggplot(cumulative_dat, aes(x = wy_doy, y = cumulative_dis, group = waterYear)) +
   labs(color = "Water Year", x = "", y = "Cumulative Discharge")
 ```
 
-<img src='/static/data-munging-beyond-basics/cumulativedischarge-1.png'/ title='Cumulative discharge (by water year) in the Yahara River.' alt='Cumulative discharge (by water year) in the Yahara River.' class=''/>
+<img src='static/beyond-basic-data-munging/cumulativedischarge-1.png'/ title='Cumulative discharge (by water year) in the Yahara River.' alt='Cumulative discharge (by water year) in the Yahara River.' class=''/>
 
 ### Create categorical variables from continuous data
 
@@ -217,7 +217,7 @@ First, we want to plot the variables through time to see major discharge and con
   theme_bw()
 ```
 
-<img src='/static/data-munging-beyond-basics/tp_time-1.png'/ title='Total phosphorus concentration through time in the Yahara River.' alt='Total phosphorus concentration through time in the Yahara River.' class=''/>
+<img src='static/beyond-basic-data-munging/tp_time-1.png'/ title='Total phosphorus concentration through time in the Yahara River.' alt='Total phosphorus concentration through time in the Yahara River.' class=''/>
 
 But what if we wanted to stack this figure with a discharge through time plot, where the panels are aligned by date and share x-axis labels? We can do this by facetting in `ggplot`, but our current data structure is wide (each variable is in its own column), and we need a single "variable" column with an associated "value" that is presented in long format. To get our data in long format, we will `gather` (from the package `tidyr`) the nutrient and discharge columns.
 
@@ -234,12 +234,12 @@ head(yahara_long)
     ## # Groups:   waterYear [1]
     ##   Date       waterYear cumulative_dis wy_doy variable      value
     ##   <date>         <dbl>          <dbl>  <int> <chr>         <dbl>
-    ## 1 1997-10-01      1998             11      1 Discharge_cfs    11
-    ## 2 1997-10-02      1998             22      2 Discharge_cfs    11
-    ## 3 1997-10-03      1998             34      3 Discharge_cfs    12
-    ## 4 1997-10-04      1998             45      4 Discharge_cfs    11
-    ## 5 1997-10-05      1998             56      5 Discharge_cfs    11
-    ## 6 1997-10-06      1998             67      6 Discharge_cfs    11
+    ## 1 1997-10-01      1998           11.0      1 Discharge_cfs  11.0
+    ## 2 1997-10-02      1998           22.0      2 Discharge_cfs  11.0
+    ## 3 1997-10-03      1998           34.0      3 Discharge_cfs  12.0
+    ## 4 1997-10-04      1998           45.0      4 Discharge_cfs  11.0
+    ## 5 1997-10-05      1998           56.0      5 Discharge_cfs  11.0
+    ## 6 1997-10-06      1998           67.0      6 Discharge_cfs  11.0
 
 Now, we can use `ggplot` to plot all values against time and `facet_wrap` by the "variable" column to create panels of data.
 
@@ -251,7 +251,7 @@ Now, we can use `ggplot` to plot all values against time and `facet_wrap` by the
   theme_bw()
 ```
 
-<img src='/static/data-munging-beyond-basics/facet_plot-1.png'/ title='Nutrients and discharge through time in the Yahara River.' alt='Nutrients and discharge through time in the Yahara River.' class=''/>
+<img src='static/beyond-basic-data-munging/facet_plot-1.png'/ title='Nutrients and discharge through time in the Yahara River.' alt='Nutrients and discharge through time in the Yahara River.' class=''/>
 
 ### Spreading data to pair observations using `spread`
 
@@ -284,7 +284,7 @@ ggplot(p_dat, aes(x = Discharge_cfs, y = value)) +
   labs(x = "Discarge (cfs)", color = "Annual Hydrologic \nCondition")
 ```
 
-<img src='/static/data-munging-beyond-basics/spread_data-1.png'/ title='The relationship between discharge and various measures of phosphorus in the Yahara River.' alt='The relationship between discharge and various measures of phosphorus in the Yahara River.' class=''/>
+<img src='static/beyond-basic-data-munging/spread_data-1.png'/ title='The relationship between discharge and various measures of phosphorus in the Yahara River.' alt='The relationship between discharge and various measures of phosphorus in the Yahara River.' class=''/>
 
 ### Operations by row using `rowwise`
 

@@ -1,12 +1,12 @@
 ---
-title: "Version control via Git"
+title: "Beyond basic R - version control via Git"
 author: "Lindsay R Carr"
-slug: "intro-git"
-date: "2018-7-19"
+slug: "beyond-basic-git"
+date: "2018-08-15"
 description: "Brief introduction to version control, Git, and GitHub; plus, resources for learning more."
 keyword1: "R"
 keyword2: "git"
-keyword3: ""
+keyword3: "Beyond Basic R"
 output: USGSmarkdowntemplates::hugo
 ---
 

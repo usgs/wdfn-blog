@@ -1,9 +1,9 @@
 ---
 author: David Watkins
-date: 2018-07-11
-slug: mapping-in-r
+date: 2018-08-11
+slug: beyond-basic-mapping
 draft: True
-title: Basic mapping in R
+title: Beyond basic R - mapping
 type: post
 categories: Data Science
 image: static/mapping-in-r/poly-map-state-1.png
@@ -23,7 +23,7 @@ keywords:
   - R
   - maps
  
- 
+  - Beyond Basic R
   - maps
 ---
 Introduction
@@ -55,7 +55,7 @@ unzip('huc8_05010007_example.zip', overwrite = TRUE)
 huc_poly <- st_read('huc8_05010007_example')
 ```
 
-    ## Reading layer `wbdhu8_alb_simp' from data source `/Users/wwatkins/Documents/R/owi-blog/content/huc8_05010007_example' using driver `ESRI Shapefile'
+    ## Reading layer `wbdhu8_alb_simp' from data source `D:\LRCData\R\owi-blog\content\huc8_05010007_example' using driver `ESRI Shapefile'
     ## Simple feature collection with 1 feature and 9 fields
     ## geometry type:  POLYGON
     ## dimension:      XY
@@ -151,11 +151,11 @@ head(huc_gages)
     ## 964 122477       <NA>           wat        <NA> 1645423         0
     ##     begin_date   end_date count_nu
     ## 197 1987-10-03 1998-09-26     4011
-    ## 591 1991-10-01 2018-07-17     9786
-    ## 621 2001-12-13 2018-07-18     6061
-    ## 731 1991-10-01 2018-07-18     9787
-    ## 824 1991-10-15 2018-07-18     9773
-    ## 964 1991-10-01 2018-07-18     9787
+    ## 591 1991-10-01 2018-07-19     9788
+    ## 621 2001-12-13 2018-07-19     6062
+    ## 731 1991-10-01 2018-07-19     9788
+    ## 824 1991-10-15 2018-07-19     9774
+    ## 964 1991-10-01 2018-07-19     9788
 
 The `huc_poly` object is a new type of object that we haven't seen --- it has classes `sf` as well as `data.frame`. Looking inside the object with the `str` command, we can see it is structured very much like a `data.frame` with several factor columns, except for the `geometry` column, which is of type `sfc_POLYGON`. `sf` provides various functions to extract useful information from this kind object, generally prefixed with `st_`. `st_geometry` extracts the entire geometry part of the object; `st_bbox` extracts the bounding box from the geometry; and `st_crs` extracts the coordinate reference system. There are others, but we will use these three to get the parts of the `sf` object we need for plotting.
 
@@ -180,13 +180,13 @@ satellite_map <- ggmap(basemap_satellite)
 print(street_map)
 ```
 
-<img src='/static/mapping-in-r/raster_map_base-1.png'/ title='street base map' alt='plain base maps' class=''/>
+<img src='static/beyond-basic-mapping/raster_map_base-1.png'/ title='street base map' alt='plain base maps' class=''/>
 
 ``` r
 print(satellite_map)
 ```
 
-<img src='/static/mapping-in-r/raster_map_base-2.png'/ title='satellite base map' alt='plain base maps' class=''/>
+<img src='static/beyond-basic-mapping/raster_map_base-2.png'/ title='satellite base map' alt='plain base maps' class=''/>
 
 Now we can start adding to our maps. First, we convert the `huc_gages` data.frame to an `sf` object using `st_as_sf`, assigning it the same coordinate reference system as `huc_poly` using `st_crs`. `ggplot` functions like `geom_sf` and `geom_text` add to your base map.
 
@@ -202,7 +202,7 @@ satellite_map + geom_sf(data = huc_poly,
             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 ```
 
-<img src='/static/mapping-in-r/raster_map_add-1.png'/ title='satellite map with HUC and gages' alt='base maps with HUC and gages' class=''/>
+<img src='static/beyond-basic-mapping/raster_map_add-1.png'/ title='satellite map with HUC and gages' alt='base maps with HUC and gages' class=''/>
 
 ``` r
 street_map + geom_sf(data = huc_poly,
@@ -213,7 +213,7 @@ street_map + geom_sf(data = huc_poly,
              hjust = 0, size=2.5, nudge_x = 0.02, col = "black")
 ```
 
-<img src='/static/mapping-in-r/raster_map_add-2.png'/ title='street map with HUC and gages' alt='base maps with HUC and gages' class=''/>
+<img src='static/beyond-basic-mapping/raster_map_add-2.png'/ title='street map with HUC and gages' alt='base maps with HUC and gages' class=''/>
 
 Vector map example
 ------------------
@@ -232,7 +232,7 @@ legend("bottomright", legend = c("Gage", "Subbasin boundary"), pch = c(19,NA), l
 title("Conemaugh Subbasin")
 ```
 
-<img src='/static/mapping-in-r/poly-map-state-1.png'/ title='Polygon map of Pennsylvania' alt='Polygon map of Pennsylvania' class=''/>
+<img src='static/beyond-basic-mapping/poly-map-state-1.png'/ title='Polygon map of Pennsylvania' alt='Polygon map of Pennsylvania' class=''/>
 
 Similarly, we can create a map zoomed in to the HUC polygon. Note that we set the x and y limits of the map by extracting the limits of the `bbox` object we created earlier. We can use the names `left`, `right`, etc. because `bbox` is a named vector.
 
@@ -248,7 +248,7 @@ Similarly, we can create a map zoomed in to the HUC polygon. Note that we set th
        pos = 4, cex = 0.7)
 ```
 
-<img src='/static/mapping-in-r/poly_map_zoomed_in-1.png'/ title='Polygon map zoomed to HUC' alt='Polygon map zoomed to HUC' class=''/>
+<img src='static/beyond-basic-mapping/poly_map_zoomed_in-1.png'/ title='Polygon map zoomed to HUC' alt='Polygon map zoomed to HUC' class=''/>
 
 Other packages and examples
 ---------------------------

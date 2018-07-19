@@ -1,12 +1,13 @@
 ---
-title: "Basic mapping in R"
-slug: "mapping-in-r"
+title: "Beyond basic R - mapping"
+slug: "beyond-basic-mapping"
 author: "David Watkins"
-date: "2018-07-11"
+date: "2018-08-11"
 output: USGSmarkdowntemplates::hugo
 image: "static/mapping-in-r/poly-map-state-1.png"
 tag1: "maps"
 description:  "Basic mapping in R with the maps and ggmap package"
+keyword1: "Beyond Basic R"
 keyword2:  "maps"
 keyword3: "ggmap"
 ---
@@ -14,7 +15,7 @@ keyword3: "ggmap"
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
+  sprintf("<img src='%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
           options$fig.cap, options$alt.text, options$class)
@@ -29,7 +30,7 @@ knit_hooks$set(htmlcap = function(before, options, envir) {
 
 opts_chunk$set(
   echo=TRUE,
-  fig.path="static/mapping-in-r/",
+  fig.path="static/beyond-basic-mapping/",
   fig.width = 7,
   fig.height = 7,
   fig.cap = "TODO",
