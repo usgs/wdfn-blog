@@ -33,7 +33,7 @@ knit_hooks$set(htmlcap = function(before, options, envir) {
 
 opts_chunk$set(
   echo=TRUE,
-  fig.path="static/data-munging-beyond-basics/",
+  fig.path="static/beyond-basic-data-munging/",
   fig.width = 7,
   fig.height = 7,
   fig.cap = "TODO",

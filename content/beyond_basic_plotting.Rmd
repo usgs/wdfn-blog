@@ -10,6 +10,36 @@ keyword3: ""
 output: USGSmarkdowntemplates::hugo
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+
+knit_hooks$set(plot=function(x, options) {
+  sprintf("<img src='/%s%s-%d.%s'/ title='%s' alt='%s' class='%s'/>",
+          options$fig.path, options$label,
+          options$fig.cur, options$fig.ext,
+          options$fig.cap, options$alt.text, options$class)
+
+})
+
+knit_hooks$set(htmlcap = function(before, options, envir) {
+  if(!before) {
+    paste0('<p class="caption">',options$htmlcap,"</p>")
+    }
+})
+
+opts_chunk$set(
+  echo=TRUE,
+  fig.path="static/beyond-basic-plotting/",
+  fig.width = 7,
+  fig.height = 7,
+  fig.cap = "TODO",
+  alt.text = "TODO",
+  class = "",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
 R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
 In base R:
