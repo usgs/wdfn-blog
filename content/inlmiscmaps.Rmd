@@ -47,6 +47,8 @@ knitr::opts_chunk$set(echo=TRUE,
                       message=FALSE)
 ```
 
+## Introduction
+
 This document gives a brief introduction to making static and dynamic maps using
 [inlmisc](https://CRAN.R-project.org/package=inlmisc),
 an R package developed by researchers at the United States Geological Survey (USGS)
@@ -83,7 +85,7 @@ r <- raster::mask(r, meuse.grid)
 
 Next, plot a map from the gridded data and include a scale bar and vertical legend.
 
-```{r plot_meuse, fig.cap="Something"}
+```{r plot_meuse, fig.cap="Static map of meuse data set.", alt.text="Static map of meuse data set."}
 Pal <- function(n) viridisLite::viridis(n, begin = 0.2)  # color palette
 breaks <- seq(0, 2000, by = 200)  # break points used to partition colors
 credit <- paste("Data collected in a flood plain of the river Meuse,",
@@ -114,7 +116,7 @@ r <- raster::raster(m, xmn = min(x), xmx = max(x), ymn = min(y), ymx = max(y),
 
 Next, plot a map from the gridded data and include a color key beneath the plot region.
 
-```{r plot_volcano, fig.cap="Something"}
+```{r plot_volcano, fig.cap="Static map of valcano data set.", alt.text="Static map of valcano data set."}
 credit <- paste("Digitized from a topographic map by Ross Ihaka",
                 "on a grid with 10-meter by 10-meter spacing.")
 explanation <- "Elevation on Auckland's Maunga Whau volcano, in meters."
@@ -154,7 +156,7 @@ cat(sprintf("width = %s, height = %s", din[1], din[2]))
 Replotting the map using the returned device dimensions results in
 a figure that is void of extraneous white space.
 
-```{r plot_volcano_din, echo=FALSE, fig.cap="Something", fig.width=din[1], fig.height=din[2]}
+```{r plot_volcano_din, echo=FALSE, fig.cap="Static map of valcano data set with improved device dimensions.", alt.text="Static map of valcano data set with improved device dimensions.", fig.width=din[1], fig.height=din[2]}
 inlmisc::PlotMap(r, xlim = range(x), ylim = range(y), extend.z = TRUE,
                  pal = terrain.colors, explanation = explanation, credit = credit,
                  shade = list(alpha = 0.3), contour.lines = list(col = "#1F1F1F"),
