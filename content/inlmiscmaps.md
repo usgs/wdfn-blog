@@ -23,6 +23,8 @@ draft: True
 
 
 
+## Introduction
+
 This document gives a brief introduction to making static and dynamic maps using
 [inlmisc](https://CRAN.R-project.org/package=inlmisc),
 an R package developed by researchers at the United States Geological Survey (USGS)
@@ -80,7 +82,7 @@ inlmisc::AddGradientLegend(breaks, Pal, at = breaks,
                            strip.dim = c(2, 20))
 ```
 
-<img src='/static/inlmiscmaps/plot_meuse-1.png'/ title='Something' alt='TODO' class=''/>
+<img src='/static/inlmiscmaps/plot_meuse-1.png'/ title='Static map of meuse data set.' alt='Static map of meuse data set.' class=''/>
 
 For the next example, transform Auckland's Maunga Whau volcano data set into a static map.
 First define a georeferenced raster layer object for the volcano's topographic information.
@@ -107,7 +109,7 @@ inlmisc::PlotMap(r, xlim = range(x), ylim = range(y), extend.z = TRUE,
                  useRaster = TRUE)
 ```
 
-<img src='/static/inlmiscmaps/plot_volcano-1.png'/ title='Something' alt='TODO' class=''/>
+<img src='/static/inlmiscmaps/plot_volcano-1.png'/ title='Static map of valcano data set.' alt='Static map of valcano data set.' class=''/>
 
 One thing you may have noticed is the white space drawn above and below the raster image.
 White space that results from plotting to a graphics device
@@ -144,7 +146,7 @@ cat(sprintf("width = %s, height = %s", din[1], din[2]))
 Replotting the map using the returned device dimensions results in
 a figure that is void of extraneous white space.
 
-<img src='/static/inlmiscmaps/plot_volcano_din-1.png'/ title='Something' alt='TODO' class=''/>
+<img src='/static/inlmiscmaps/plot_volcano_din-1.png'/ title='Static map of valcano data set with improved device dimensions.' alt='Static map of valcano data set with improved device dimensions.' class=''/>
 
 ## Dynamic Maps
 
@@ -286,7 +288,7 @@ R-session information for content in this document is as follows:
 ##  language (EN)                        
 ##  collate  English_United States.1252  
 ##  tz       America/Los_Angeles         
-##  date     2018-07-17                  
+##  date     2018-07-20                  
 ## 
 ##  package        * version date       source        
 ##  backports        1.1.2   2017-12-13 CRAN (R 3.5.0)
@@ -297,7 +299,7 @@ R-session information for content in this document is as follows:
 ##  datasets       * 3.5.1   2018-07-02 local         
 ##  devtools         1.13.6  2018-06-27 CRAN (R 3.5.1)
 ##  digest           0.6.15  2018-01-28 CRAN (R 3.5.1)
-##  evaluate         0.10.1  2017-06-24 CRAN (R 3.5.1)
+##  evaluate         0.11    2018-07-17 CRAN (R 3.5.1)
 ##  FNN              1.1     2013-07-31 CRAN (R 3.5.1)
 ##  graphics       * 3.5.1   2018-07-02 local         
 ##  grDevices      * 3.5.1   2018-07-02 local         
@@ -305,7 +307,7 @@ R-session information for content in this document is as follows:
 ##  gstat            1.1-6   2018-04-02 CRAN (R 3.5.1)
 ##  htmltools        0.3.6   2017-04-28 CRAN (R 3.5.1)
 ##  htmlwidgets      1.2     2018-04-19 CRAN (R 3.5.1)
-##  httpuv           1.4.4.2 2018-07-02 CRAN (R 3.5.1)
+##  httpuv           1.4.5   2018-07-19 CRAN (R 3.5.1)
 ##  igraph           1.2.1   2018-03-10 CRAN (R 3.5.1)
 ##  inlmisc          0.4.2   2018-07-14 CRAN (R 3.5.1)
 ##  intervals        0.15.1  2015-08-27 CRAN (R 3.5.0)
@@ -328,9 +330,10 @@ R-session information for content in this document is as follows:
 ##  rgeos            0.3-28  2018-06-08 CRAN (R 3.5.1)
 ##  rmarkdown        1.10    2018-06-11 CRAN (R 3.5.1)
 ##  rprojroot        1.3-2   2018-01-03 CRAN (R 3.5.1)
+##  rstudioapi       0.7     2017-09-07 CRAN (R 3.5.1)
 ##  shiny            1.1.0   2018-05-17 CRAN (R 3.5.1)
 ##  sp               1.3-1   2018-06-05 CRAN (R 3.5.1)
-##  spacetime        1.2-1   2017-09-24 CRAN (R 3.5.1)
+##  spacetime        1.2-2   2018-07-17 CRAN (R 3.5.1)
 ##  stats          * 3.5.1   2018-07-02 local         
 ##  stringi          1.2.3   2018-06-12 CRAN (R 3.5.1)
 ##  stringr          1.3.1   2018-05-10 CRAN (R 3.5.1)
