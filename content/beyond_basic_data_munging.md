@@ -31,7 +31,7 @@ What we couldn't cover
 
 In the data cleaning portion of our [Intro to R class](https://owi.usgs.gov/R/training-curriculum/intro-curriculum/Introduction/), we cover a variety of common data manipulation tasks. Most of these were achieved using the package `dplyr`, including removing or retaining certain columns (`select`), filtering out rows by column condition (`filter`), creating new columns (`mutate`), renaming columns (`rename`), grouping data by categorical variables (`group_by`), and summarizing data (`summarize`).
 
-But often, data users need to do more complex manipulation of their data, like changing the shape of the data or creating a new column conditional on values in another column. In this post, we will use USGS stream data to demonstrate data munging techniques that are beyond the basics taught in our Intro to R course.
+But often, data users need to do more complex manipulation of their data, like changing the shape of the data or creating a new column conditional on values in another column. In this post, we will use USGS stream data to demonstrate data munging techniques that are beyond the basics taught in our Intro to R course. If you're following along and see a new function and want to learn more, a reminder that you can see the help file for that function by executing a `?` followed by the function name in your console to see the help file and examples.
 
 What we want to achieve
 -----------------------
@@ -52,6 +52,7 @@ library(dataRetrieval)
 library(lubridate)
 library(tidyr)
 library(ggplot2)
+library(viridis)
 
 # Get data for the Yahara River at Windsor in Dane County, Wisconsin
 yahara_no <- '05427718'
@@ -71,11 +72,13 @@ yahara_dat <- yahara_dat %>%
          SS_mgL = X_80154_00003, SS_cd = X_80154_00003_cd)
 ```
 
-Note you may have learned you can `select` and `rename` columns in two steps. Above is a demonstration of doing it in one step using `select`-- simply use `new_name = old_name` to do both simulataneously.
+Note you may have learned you can `select` and `rename` columns in two steps. Above is a demonstration of doing it in one step using `select`-- simply use `new_name = old_name` to do both simultaneously.
+
+You may be seeing the pipe (`%>%`) for the first time in the above code snippet. The pipe comes from the package `magrittr` and is used in `dplyr` to connect commands. `dplyr` functions generally take arguments in the same order: the dataframe you want to manipulate, and what you want to do it. A pipe upstream of a command "pipes in" the results of the upstream function; that is, you no longer have to specify the dataframe you want to manipulate. It's an efficient way to code if you don't care to create intermediate data objects. You can read more about the history and functionality of the pipe in R from [DataCamp's tutorial on pipes](https://www.datacamp.com/community/tutorials/pipe-r-tutorial).
 
 ### Match strings
 
-Notice that in our new dataset, we have retained code columns, or those that end in "\_cd". How can we quickly identify which columns contain that string? Here, we'll introduce you to pattern matching functions (including `grep` and `gsub`) which have wide application to data munging. First, we'll use grep to return the index of string or the string itself that contains "\_cd".
+Notice that in our new dataset, we have retained code columns, or those that end in "\_cd". How can we quickly identify which columns contain that string? Here, we'll introduce you to pattern matching functions (including `grep` and `gsub`) which have wide application to data munging. First, we'll use grep to return the index of the string or the string itself that contains "\_cd".
 
 ``` r
 # use function `grep` to identify which columns are code columns
@@ -124,11 +127,13 @@ These functions use regular expression to evaluate matches, and can be used to f
 First, let's compare discharge across water years. The current data frame only has dates, so we'll need to create a water year and a day of water year variable to use in our comparisons. We can use the handy `addWaterYear` function from `dataRetrieval` to do so. Next, we'll calculate cumulative discharge by day for each year using `group_by` and `mutate`.
 
 ``` r
-# add water year variable "waterYear"
+# add water year variable "waterYear" to our dataframe
 yahara_dat <- addWaterYear(yahara_dat)
 
 # calculate cumulative discharge for each year by first grouping by water year,
 # and then using the "cumsum" function. Add day of water year for plotting purposes.
+# These steps will build a new dataframe, with the existing information in yahara_dat
+# but with two additional columns.
 cumulative_dat <- group_by(yahara_dat, waterYear) %>%
   mutate(cumulative_dis = cumsum(Discharge_cfs), 
          wy_doy = seq(1:n()))
@@ -188,7 +193,7 @@ summary(as.factor(year_sums$discharge_dry_normal_wet))
     ##    dry normal    wet 
     ##      5     10      5
 
-In some instances, you may want to create categorical variables based on a more complex set of rules. For example, if there was an important management action in this watershed that occured in the year 2000, you may want your low/high discharge categories to be further classified as before/after. We'll use the function `case_when` to use multiple rules to define our categories.
+In some instances, you may want to create categorical variables based on a more complex set of rules. For example, if there was an important management action in this watershed that occurred in the year 2000, you may want your low/high discharge categories to be further classified as before/after. We'll use the function `case_when` to use multiple rules to define our categories.
 
 ``` r
 year_sums <- year_sums %>%
@@ -208,7 +213,7 @@ summary(as.factor(year_sums$discharge_before_after))
 
 ### Gather or stack variables in long data frame using `gather`
 
-First, we want to plot the variables through time to see major discharge and concentration events. With our current data structure, we could easily create individual plots of all constituents and discharge through time - e.g., this plot of TP through time:
+We can plot the variables through time to see major discharge and concentration events. With our current data structure, we could easily create individual plots of all constituents and discharge through time - e.g., this plot of TP through time:
 
 ``` r
  ggplot(cumulative_dat, aes(x = Date, y = TP_mgL)) +
@@ -219,7 +224,7 @@ First, we want to plot the variables through time to see major discharge and con
 
 <img src='/static/beyond-basic-data-munging/tp_time-1.png'/ title='Total phosphorus concentration through time in the Yahara River.' alt='Total phosphorus concentration through time in the Yahara River.' class=''/>
 
-But what if we wanted to stack this figure with a discharge through time plot, where the panels are aligned by date and share x-axis labels? We can do this by facetting in `ggplot`, but our current data structure is wide (each variable is in its own column), and we need a single "variable" column with an associated "value" that is presented in long format. To get our data in long format, we will `gather` (from the package `tidyr`) the nutrient and discharge columns.
+But what if we wanted to stack this figure with a discharge through time plot, where the panels are aligned by date and share x-axis labels? We can do this by faceting in `ggplot`, but our current data structure is wide (each variable is in its own column), and we need a single "variable" column with an associated "value" that is presented in long format. To get our data in long format, we will `gather` (from the package `tidyr`) the nutrient and discharge columns.
 
 For the `gather` function, we need to provide a key name which will become the column where the variable names are stored. We also provide a value name, which will become the column where the measured values are stored. Finally, we tell the gather function which columns we don't want to gather by adding a negative sign to those column names.
 
@@ -234,12 +239,12 @@ head(yahara_long)
     ## # Groups:   waterYear [1]
     ##   Date       waterYear cumulative_dis wy_doy variable      value
     ##   <date>         <dbl>          <dbl>  <int> <chr>         <dbl>
-    ## 1 1997-10-01      1998           11.0      1 Discharge_cfs  11.0
-    ## 2 1997-10-02      1998           22.0      2 Discharge_cfs  11.0
-    ## 3 1997-10-03      1998           34.0      3 Discharge_cfs  12.0
-    ## 4 1997-10-04      1998           45.0      4 Discharge_cfs  11.0
-    ## 5 1997-10-05      1998           56.0      5 Discharge_cfs  11.0
-    ## 6 1997-10-06      1998           67.0      6 Discharge_cfs  11.0
+    ## 1 1997-10-01      1998             11      1 Discharge_cfs    11
+    ## 2 1997-10-02      1998             22      2 Discharge_cfs    11
+    ## 3 1997-10-03      1998             34      3 Discharge_cfs    12
+    ## 4 1997-10-04      1998             45      4 Discharge_cfs    11
+    ## 5 1997-10-05      1998             56      5 Discharge_cfs    11
+    ## 6 1997-10-06      1998             67      6 Discharge_cfs    11
 
 Now, we can use `ggplot` to plot all values against time and `facet_wrap` by the "variable" column to create panels of data.
 
@@ -251,7 +256,7 @@ Now, we can use `ggplot` to plot all values against time and `facet_wrap` by the
   theme_bw()
 ```
 
-<img src='/static/beyond-basic-data-munging/facet_plot-1.png'/ title='Nutrients and discharge through time in the Yahara River.' alt='Nutrients and discharge through time in the Yahara River.' class=''/>
+<img src='/static/beyond-basic-data-munging/facet_plot-1.png'/ title='Nutrients and discharge through time in the Yahara River.' alt='Nutrients and discharge through time in the Yahara River.' class=''/> If you're following along and executing the code, you'll notice a warning after the last `ggplot` command, stating you've removed rows due to missing data. Not all variables had the same temporal coverage, and are therefore "missing" during certain time periods. The plot still should have generated, and the message serves as an "FYI" to what was going on behind the scenes.
 
 ### Spreading data to pair observations using `spread`
 
