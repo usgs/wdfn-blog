@@ -49,3 +49,6 @@ Scripting can significantly increase your ability to create reproducible results
 ***
 
 This is a brief list of good practices to consider when writing R code, and there are lots of other resources to reference when it comes to “best practices”. You should take a look at other posts to get an idea of what the R community thinks more broadly. To start, you could reference [Best Practices for Writing R](https://swcarpentry.github.io/r-novice-inflammation/06-best-practices-R/) by Software Carpentry or [Efficient R programming](https://csgillespie.github.io/efficientR/coding-style.html) by Colin Gillespie and Robin Lovelace. As you explore suggested practices online, keep in mind that R is open-source software and is constantly evolving which means best practices will evolve, too.
+
+# Disclaimer
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.

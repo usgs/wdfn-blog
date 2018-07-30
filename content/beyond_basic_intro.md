@@ -8,15 +8,21 @@ categories: Data Science
 image: static/beyond-basic-intro/usgs-r-logo.png
 author_twitter: LindsayRCarr
 author_github: lindsaycarr
+ 
+ 
 author_staff: lindsay-r-carr
 author_email: <lcarr@usgs.gov>
+
 tags: 
   - R
   - Beyond Basic R
+ 
 description: Brief introduction to the series of blog posts about next steps after learning basic R, plus some tips on best practices for scripting in R.
 keywords:
   - R
   - Beyond Basic R
+ 
+ 
  
 ---
 We queried more than 60 people who have taken the [USGS Introduction to R](http://owi.usgs.gov/R/training-curriculum/intro-curriculum) class over the last two years to understand what other skills and techniques are desired, but not covered in the course. Though many people have asked for an intermediate level class, we believe that many of the skills could be best taught through existing online materials. Instead of creating a stand-alone course, we invested our time into compiling the results of the survey, creating short examples, and linking to the necessary resources within a series of blog posts. This is the first in a series of 5 posts called ***Beyond basic R***.
@@ -56,3 +62,8 @@ Code itself
 ------------------------------------------------------------------------
 
 This is a brief list of good practices to consider when writing R code, and there are lots of other resources to reference when it comes to “best practices”. You should take a look at other posts to get an idea of what the R community thinks more broadly. To start, you could reference [Best Practices for Writing R](https://swcarpentry.github.io/r-novice-inflammation/06-best-practices-R/) by Software Carpentry or [Efficient R programming](https://csgillespie.github.io/efficientR/coding-style.html) by Colin Gillespie and Robin Lovelace. As you explore suggested practices online, keep in mind that R is open-source software and is constantly evolving which means best practices will evolve, too.
+
+Disclaimer
+==========
+
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
