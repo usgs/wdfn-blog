@@ -1,15 +1,17 @@
 ---
-title: "Beyond basic R - version control via Git"
+title: "Beyond Basic R - Version Control via Git"
 author: "Lindsay R Carr"
 slug: "beyond-basic-git"
 date: "2018-08-15"
 description: "Brief introduction to version control, Git, and GitHub; plus, resources for learning more."
 image: "static/beyond-basic-version-control/github-workflow-basic.png"
 tag1: "Beyond Basic R"
-keyword1: "R"
-keyword2: "git"
-keyword3: ""
+keyword1: "git"
 output: USGSmarkdowntemplates::hugo
+author_email: "lcarr@usgs.gov"
+author_github: "lindsaycarr"
+author_twitter: "LindsayRCarr"
+author_staff: "lindsay-r-carr"
 ---
 
 Depending on how new you are to software development and/or R programming, you may have heard people mention version control, Git, or GitHub. Version control refers to the idea of tracking changes to files through time and various contributors. Git is an example of a version control programming language, and GitHub is the web interface for Git. That’s it. Easy! 

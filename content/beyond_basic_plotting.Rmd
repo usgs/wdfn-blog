@@ -1,15 +1,17 @@
 ---
-title: "Beyond basic R - plotting with ggplot2 and USGS style"
+title: "Beyond Basic R - Plotting with ggplot2 and Custom Themes"
 author: "Lindsay R Carr"
 slug: "beyond-basic-plotting"
-date: "2018-08-01"
+date: "2018-08-03"
 description: "Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style."
 image: "static/beyond-basic-plotting/cowplotmulti-1.png"
 tag1: "Beyond Basic R"
-keyword1: "R"
-keyword2: "ggplot2"
-keyword3: ""
+keyword1: "ggplot2"
 output: USGSmarkdowntemplates::hugo
+author_email: "lcarr@usgs.gov"
+author_github: "lindsaycarr"
+author_twitter: "LindsayRCarr"
+author_staff: "lindsay-r-carr"
 ---
 
 ```{r setup, include=FALSE}
@@ -62,7 +64,7 @@ In ggplot2:
 
 In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) class, we have switched to teaching ggplot2 because it works nicely with other tidyverse packages (dplyr, tidyr), and can create interesting and powerful graphics with little code. The following plotting examples will go through some additional features of ggplot2, and how to apply them.
 
-## Custom USGS theme
+## Custom theme
 
 Producing a plot to look at your data is fairly straightforward; however, when you are ready to produce the plot for a publication or to share in some way, there is a lot more work. One convenience with ggplot2 are the use of built-in themes which can change plot aesthetics. Theme elements can be manually manipulated so that you can produce the perfect plot, but it does take a lot of work and Googling to figure out. Luckily for us, developers at the Lower Mississippi-Gulf Water Science Center shared their custom ggplot2 theme for USGS style guidelines. This does not guarantee perfect USGS style, but gets you pretty close and gives you the ability to edit, update, or amend specific pieces for your needs.
 

@@ -1,17 +1,18 @@
 ---
-title: "Beyond basic R - data munging"
-slug: "beyond-basic-data-munging"
+title: "Beyond Basic R - Data Munging"
+slug: "data-munging"
 author: "Samantha Oliver"
-author_email: "soliver@usgs.gov"
-date: "2018-07-25"
+date: "2018-08-01"
 output: USGSmarkdowntemplates::hugo
 image: "static/beyond-basic-data-munging/cumulativedischarge-1.png"
 tag1: "Beyond Basic R"
 keyword1: "data munging"
-keyword2: "R"
-keyword3: ""
 description: "More advanced data munging techniques in R that were not covered in the Intro to R class."
-
+author_email: "soliver@usgs.gov"
+author_github: "limnoliver"
+author_twitter: "limnoliver"
+author_staff: "samantha-k-oliver"
+author_gs: "Do0JHvkAAAAJ"
 ---
 
 ```{r setup, include=FALSE}

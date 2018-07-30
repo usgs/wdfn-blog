@@ -1,29 +1,22 @@
 ---
 author: Lindsay R Carr
-date: 2018-07-25
-slug: beyond-basic-intro-best-practices
-draft: True
-title: Beyond basic R - intro and best practices
+date: 2018-07-30
+slug: intro-best-practices
+title: Beyond Basic R - Introduction and Best Practices
 type: post
 categories: Data Science
 image: static/beyond-basic-intro/usgs-r-logo.png
- 
- 
- 
- 
- 
- 
-
+author_twitter: LindsayRCarr
+author_github: lindsaycarr
+author_staff: lindsay-r-carr
+author_email: <lcarr@usgs.gov>
 tags: 
   - R
   - Beyond Basic R
- 
 description: Brief introduction to the series of blog posts about next steps after learning basic R, plus some tips on best practices for scripting in R.
 keywords:
   - R
   - Beyond Basic R
- 
-  - R
  
 ---
 We queried more than 60 people who have taken the [USGS Introduction to R](http://owi.usgs.gov/R/training-curriculum/intro-curriculum) class over the last two years to understand what other skills and techniques are desired, but not covered in the course. Though many people have asked for an intermediate level class, we believe that many of the skills could be best taught through existing online materials. Instead of creating a stand-alone course, we invested our time into compiling the results of the survey, creating short examples, and linking to the necessary resources within a series of blog posts. This is the first in a series of 5 posts called ***Beyond basic R***.
@@ -31,11 +24,11 @@ We queried more than 60 people who have taken the [USGS Introduction to R](http:
 Other posts that will be released during the next month include:
 
 -   Data munging
--   Plotting with ggplot2 and USGS style
+-   Plotting with ggplot2 and setting custom themes
 -   Mapping
 -   Version control via Git
 
-You can see all blogs in this series by clicking the tag “Beyond basic R” or follow [this link](http://dev-owi.usgs.gov/blog/tags/beyond-basic-r/).
+You can see all blogs in this series by clicking the tag “Beyond Basic R” or follow [this link](http://owi.usgs.gov/blog/tags/beyond-basic-r/).
 
 Best practices for writing reproducible R scripts
 =================================================
@@ -56,8 +49,8 @@ Code itself
 -   **Use `library()` NOT `require()` when loading packages in scripts.** `library` will throw an error if it the library is not already installed, but `require` will silently fail. This means you get a mysterious failure later on when functions within a package are not available and you thought they were. Learn more about this in [Yihui Xie’s blog post](https://yihui.name/en/2014/07/library-vs-require/).
 -   **Do not use functions that change someone’s computer** (e.g. install.packages, or setwd). [Jenny Bryan has a great blog](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/) about the pitfalls of creating code that is not self-contained.
 -   **Comment incessantly.** Comments should not take the place of clean and clear code, but can help explain why you might have done certain steps or used certain functions. Commenting is just as important for you as it is for any one else reading your code - as they say, your worst collaborator is you from 6 months ago. Learn a few more tricks with commenting and organizing code that RStudio offers [here](https://support.rstudio.com/hc/en-us/articles/200484568-Code-Folding-and-Sections).
--   **Follow a style and be consistent.** There is no single correct way to style your code, but the important part is that you are consistent. Consistent style makes your code more readable, which makes collaboration with others and the future you much easier. When we talk about style, we are talking about how you name variables, functions, or files (camelCase, under\_scores, etc) and how your code is visually organized (e.g. how long a single line can span, where you indent, etc). You can choose your own style guide, but [this style guide from Google](https://google.github.io/styleguide/Rguide.xml) and [this one from tidyverse](http://style.tidyverse.org/) are good places to start. When it comes to visual organization, RStudio has autoindent features that help make it easier for you to put your code in the right place, and you can always force the RStudio indent by highlighting code and using `CTRL + I`.
--   As you are writing your code, **take advantage of RStudio’s autocomplete features** (and/or copy/paste). Typing mistakes are often a reason that code doesn’t work (e.g. a lowercase letter that really should have been uppercase), and using autocomplete or copy/paste reduces the prevalence of these mistakes. To use autocomplete, start typing something and hit the `Tab` button on your keyboard. You should see options start to pop up. More about auto-complete features [here](https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion).
+-   **Follow a style and be consistent.** There is no single correct way to style your code, but the important part is that you are consistent. Consistent style makes your code more readable, which makes collaboration with others and the future you much easier. When we talk about style, we are talking about how you name variables, functions, or files (camelCase, under\_scores, etc) and how your code is visually organized (e.g. how long a single line can span, where you indent, etc). You can choose your own style guide, but [this style guide from Google](https://google.github.io/styleguide/Rguide.xml) and [this one from tidyverse](http://style.tidyverse.org/) are good places to start. When it comes to visual organization, RStudio has auto-indent features that help make it easier for you to put your code in the right place, and you can always force the RStudio indent by highlighting code and using `CTRL + I`.
+-   As you are writing your code, **take advantage of RStudio’s autocomplete features** (and/or copy/paste). Typing mistakes are often a reason that code doesn’t work (e.g. a lowercase letter that really should have been uppercase), and using auto-complete or copy/paste reduces the prevalence of these mistakes. To use auto-complete, start typing something and hit the `Tab` button on your keyboard. You should see options start to pop up. More about auto-complete features [here](https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion).
 -   **Learn to use loops or functions when you find yourself copying and pasting** chunks of code with only minor changes. More code means more to maintain and troubleshoot, so try to reuse code via loops and functions when possible. Consider [this tutorial from Nice R Code](https://nicercode.github.io/guides/repeating-things/), the USGS Introduction to R [lesson on R programming structures](https://owi.usgs.gov/R/training-curriculum/intro-curriculum/Reproduce/), or the [Software Carpentry loop tutorial](https://swcarpentry.github.io/r-novice-inflammation/15-supp-loops-in-depth/) to learn more.
 
 ------------------------------------------------------------------------

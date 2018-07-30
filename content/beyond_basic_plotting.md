@@ -1,18 +1,18 @@
 ---
 author: Lindsay R Carr
-date: 2018-08-01
+date: 2018-08-03
 slug: beyond-basic-plotting
 draft: True
-title: Beyond basic R - plotting with ggplot2 and USGS style
+title: Beyond Basic R - Plotting with ggplot2 and Custom Themes
 type: post
 categories: Data Science
 image: static/beyond-basic-plotting/cowplotmulti-1.png
+author_twitter: LindsayRCarr
+author_github: lindsaycarr
  
  
- 
- 
- 
- 
+author_staff: lindsay-r-carr
+author_email: <lcarr@usgs.gov>
 
 tags: 
   - R
@@ -23,8 +23,8 @@ keywords:
   - R
   - Beyond Basic R
  
-  - R
   - ggplot2
+ 
 ---
 R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
@@ -46,8 +46,8 @@ In ggplot2:
 
 In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) class, we have switched to teaching ggplot2 because it works nicely with other tidyverse packages (dplyr, tidyr), and can create interesting and powerful graphics with little code. The following plotting examples will go through some additional features of ggplot2, and how to apply them.
 
-Custom USGS theme
------------------
+Custom theme
+------------
 
 Producing a plot to look at your data is fairly straightforward; however, when you are ready to produce the plot for a publication or to share in some way, there is a lot more work. One convenience with ggplot2 are the use of built-in themes which can change plot aesthetics. Theme elements can be manually manipulated so that you can produce the perfect plot, but it does take a lot of work and Googling to figure out. Luckily for us, developers at the Lower Mississippi-Gulf Water Science Center shared their custom ggplot2 theme for USGS style guidelines. This does not guarantee perfect USGS style, but gets you pretty close and gives you the ability to edit, update, or amend specific pieces for your needs.
 
