@@ -1,17 +1,17 @@
 ---
 author: Samantha Oliver
-date: 2018-07-25
-slug: beyond-basic-data-munging
+date: 2018-08-01
+slug: data-munging
 draft: True
-title: Beyond basic R - data munging
+title: Beyond Basic R - Data Munging
 type: post
 categories: Data Science
 image: static/beyond-basic-data-munging/cumulativedischarge-1.png
+author_twitter: limnoliver
+author_github: limnoliver
+author_gs: Do0JHvkAAAAJ
  
- 
- 
- 
- 
+author_staff: samantha-k-oliver
 author_email: <soliver@usgs.gov>
 
 tags: 
@@ -24,7 +24,7 @@ keywords:
   - Beyond Basic R
  
   - data munging
-  - R
+ 
 ---
 What we couldn't cover
 ----------------------

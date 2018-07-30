@@ -1,15 +1,18 @@
 ---
-title: "Beyond basic R - intro and best practices"
+title: "Beyond Basic R - Introduction and Best Practices"
 author: "Lindsay R Carr"
-slug: "beyond-basic-intro-best-practices"
-date: "2018-07-25"
+slug: "intro-best-practices"
+date: "2018-07-30"
 description: "Brief introduction to the series of blog posts about next steps after learning basic R, plus some tips on best practices for scripting in R."
 image: "static/beyond-basic-intro/usgs-r-logo.png"
 tag1: "Beyond Basic R"
-keyword1: "R"
 keyword2: ""
 keyword3: ""
 output: USGSmarkdowntemplates::hugo
+author_email: "lcarr@usgs.gov"
+author_github: "lindsaycarr"
+author_twitter: "LindsayRCarr"
+author_staff: "lindsay-r-carr"
 ---
 
 We queried more than 60 people who have taken the [USGS Introduction to R](http://owi.usgs.gov/R/training-curriculum/intro-curriculum) class over the last two years to understand what other skills and techniques are desired, but not covered in the course. Though many people have asked for an intermediate level class, we believe that many of the skills could be best taught through existing online materials. Instead of creating a stand-alone course, we invested our time into compiling the results of the survey, creating short examples, and linking to the necessary resources within a series of blog posts. This is the first in a series of 5 posts called **_Beyond basic R_**. 
@@ -17,11 +20,11 @@ We queried more than 60 people who have taken the [USGS Introduction to R](http:
 Other posts that will be released during the next month include:
 
 * Data munging
-* Plotting with ggplot2 and USGS style
+* Plotting with ggplot2 and setting custom themes
 * Mapping
 * Version control via Git
 
-You can see all blogs in this series by clicking the tag “Beyond basic R” or follow [this link](http://dev-owi.usgs.gov/blog/tags/beyond-basic-r/).
+You can see all blogs in this series by clicking the tag “Beyond Basic R” or follow [this link](http://owi.usgs.gov/blog/tags/beyond-basic-r/).
 
 # Best practices for writing reproducible R scripts
 

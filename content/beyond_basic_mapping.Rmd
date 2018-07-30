@@ -1,5 +1,5 @@
 ---
-title: "Beyond basic R - mapping"
+title: "Beyond Basic R - Mapping"
 slug: "beyond-basic-mapping"
 author: "David Watkins"
 date: "2018-08-11"
@@ -8,8 +8,10 @@ image: "static/beyond-basic-mapping/poly-map-state-1.png"
 description:  "Basic mapping in R with the maps and ggmap package"
 tag1: "Beyond Basic R"
 keyword1: "ggmap"
-keyword2:  "maps"
-keyword3: ""
+keyword2: "maps"
+author_email: "wwatkins@usgs.gov"
+author_github: "wdwatkins"
+author_staff: "william-d-watkins"
 ---
 ```{r setup, include=FALSE}
 library(knitr)
