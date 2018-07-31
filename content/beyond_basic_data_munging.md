@@ -64,15 +64,12 @@ params <- c('00060', '00671', '80154', '00665')
 yahara_dat <- readNWISdv(siteNumbers = yahara_no, parameterCd = params, 
                          startDate = '1997-10-01', endDate = '2017-09-30')
 
-# keep columns of interest, rename rest of columns
-yahara_dat <- yahara_dat %>%
-  select(Date, Discharge_cfs = X_00060_00003, Discharge_cd = X_00060_00003_cd,
-         TP_mgL = X_00665_00003, TP_cd = X_00665_00003_cd,
-         Orthophosphate_mgL = X_00671_00003, Orthophosphate_cd = X_00671_00003_cd,
-         SS_mgL = X_80154_00003, SS_cd = X_80154_00003_cd)
+# rename columns using renameNWISColumns from package dataRetrieval
+yahara_dat <- renameNWISColumns(yahara_dat, 
+                                p00665 = "TP_mgL",
+                                p00671 = "Orthophosphate_mgL",
+                                p80154 = "SS_mgL")
 ```
-
-Note you may have learned you can `select` and `rename` columns in two steps. Above is a demonstration of doing it in one step using `select`-- simply use `new_name = old_name` to do both simultaneously.
 
 You may be seeing the pipe (`%>%`) for the first time in the above code snippet. The pipe comes from the package `magrittr` and is used in `dplyr` to connect commands. `dplyr` functions generally take arguments in the same order: the dataframe you want to manipulate, and what you want to do it. A pipe upstream of a command "pipes in" the results of the upstream function; that is, you no longer have to specify the dataframe you want to manipulate. It's an efficient way to code if you don't care to create intermediate data objects. You can read more about the history and functionality of the pipe in R from [DataCamp's tutorial on pipes](https://www.datacamp.com/community/tutorials/pipe-r-tutorial).
 
@@ -86,14 +83,14 @@ yahara_names <- names(yahara_dat)
 grep('_cd', yahara_names) # returns the index of the match
 ```
 
-    ## [1] 3 5 7 9
+    ## [1]  1  5  7  9 11
 
 ``` r
 grep('_cd', yahara_names, value = TRUE) # returns the matched elements themselves
 ```
 
-    ## [1] "Discharge_cd"      "TP_cd"             "Orthophosphate_cd"
-    ## [4] "SS_cd"
+    ## [1] "agency_cd"             "Flow_cd"               "TP_mgL_cd"            
+    ## [4] "Orthophosphate_mgL_cd" "SS_mgL_cd"
 
 ``` r
 # change the code column names to be more explicit about what they contain
@@ -101,9 +98,12 @@ grep('_cd', yahara_names, value = TRUE) # returns the matched elements themselve
 gsub('_cd', '_code', yahara_names)
 ```
 
-    ## [1] "Date"                "Discharge_cfs"       "Discharge_code"     
-    ## [4] "TP_mgL"              "TP_code"             "Orthophosphate_mgL" 
-    ## [7] "Orthophosphate_code" "SS_mgL"              "SS_code"
+    ##  [1] "agency_code"             "site_no"                
+    ##  [3] "Date"                    "Flow"                   
+    ##  [5] "Flow_code"               "TP_mgL"                 
+    ##  [7] "TP_mgL_code"             "Orthophosphate_mgL"     
+    ##  [9] "Orthophosphate_mgL_code" "SS_mgL"                 
+    ## [11] "SS_mgL_code"
 
 The package `dplyr` also has some handy pattern matching functions built in. For example, we can use the function `contains` in `select` to exclude those columns with the "\_cd" string.
 
@@ -112,13 +112,13 @@ yahara_dat <- select(yahara_dat, -contains('_cd'))
 head(yahara_dat)
 ```
 
-    ##         Date Discharge_cfs TP_mgL Orthophosphate_mgL SS_mgL
-    ## 1 1997-10-01            11   0.05                 NA   18.8
-    ## 2 1997-10-02            11   0.05                 NA   18.6
-    ## 3 1997-10-03            12   0.05                 NA   18.5
-    ## 4 1997-10-04            11   0.04                 NA   18.5
-    ## 5 1997-10-05            11   0.04                 NA   18.4
-    ## 6 1997-10-06            11   0.04                 NA   18.4
+    ##    site_no       Date Flow TP_mgL Orthophosphate_mgL SS_mgL
+    ## 1 05427718 1997-10-01   11   0.05                 NA   18.8
+    ## 2 05427718 1997-10-02   11   0.05                 NA   18.6
+    ## 3 05427718 1997-10-03   12   0.05                 NA   18.5
+    ## 4 05427718 1997-10-04   11   0.04                 NA   18.5
+    ## 5 05427718 1997-10-05   11   0.04                 NA   18.4
+    ## 6 05427718 1997-10-06   11   0.04                 NA   18.4
 
 These functions use regular expression to evaluate matches, and can be used to find much more complex patterns. We've only scratched the surface here on what can be done with pattern matching. Further reading on the topic of regular expression in R that we recommend include RStudio's [regular expression cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf) and the ["strings" section from the R for Data Science book](http://r4ds.had.co.nz/strings.html).
 
@@ -135,7 +135,7 @@ yahara_dat <- addWaterYear(yahara_dat)
 # These steps will build a new dataframe, with the existing information in yahara_dat
 # but with two additional columns.
 cumulative_dat <- group_by(yahara_dat, waterYear) %>%
-  mutate(cumulative_dis = cumsum(Discharge_cfs), 
+  mutate(cumulative_dis = cumsum(Flow), 
          wy_doy = seq(1:n()))
   
 # visually compare cumulative discharge across years
@@ -157,9 +157,9 @@ There is variability year-to-year in cumulative discharge and the timing of larg
 # sum discharge by water year, also check to be sure each year has 
 # data for every day by counting observations in a year
 year_sums <- yahara_dat %>%
-  filter(!is.na(Discharge_cfs)) %>%
+  filter(!is.na(Flow)) %>%
   group_by(waterYear) %>%
-  summarize(yearly_discharge = sum(Discharge_cfs, na.rm = T),
+  summarize(yearly_discharge = sum(Flow, na.rm = TRUE),
             ndays = n()) 
 ```
 
@@ -180,7 +180,7 @@ summary(as.factor(year_sums$discharge_high_low))
 Now suppose you want to create a variable with three categories: dry, normal, and wet. We'll use the `cut` function to do this so we can give multiple numeric break points to create the categories. We'll arbitrarily use the 25th and 75th percentiles to define our cutoffs values.
 
 ``` r
-cut_vals <- quantile(year_sums$yearly_discharge, probs = c(0.25, 0.75), na.rm = T)
+cut_vals <- quantile(year_sums$yearly_discharge, probs = c(0.25, 0.75), na.rm = TRUE)
 year_sums <- mutate(year_sums, 
                     discharge_dry_normal_wet = cut(yearly_discharge, 
                                                  breaks = c(-Inf, cut_vals, Inf), 
@@ -226,37 +226,38 @@ We can plot the variables through time to see major discharge and concentration 
 
 But what if we wanted to stack this figure with a discharge through time plot, where the panels are aligned by date and share x-axis labels? We can do this by faceting in `ggplot`, but our current data structure is wide (each variable is in its own column), and we need a single "variable" column with an associated "value" that is presented in long format. To get our data in long format, we will `gather` (from the package `tidyr`) the nutrient and discharge columns.
 
-For the `gather` function, we need to provide a key name which will become the column where the variable names are stored. We also provide a value name, which will become the column where the measured values are stored. Finally, we tell the gather function which columns we don't want to gather by adding a negative sign to those column names.
+For the `gather` function, we need to provide a key name which will become the column where the measured parameter names are stored. We also provide a value name, which will become the column where the measured values are stored. Finally, we tell the gather function which columns we do (by listing) or do not (by list with a negative sign) want to gather by adding a negative sign to those column names.
 
 ``` r
 yahara_long <- cumulative_dat %>%
-  gather(key = variable, value = value, -Date, -waterYear, -wy_doy, -cumulative_dis)
+  gather(key = measured_parameter, value = value, Flow, TP_mgL, Orthophosphate_mgL, SS_mgL)
 
 head(yahara_long)
 ```
 
-    ## # A tibble: 6 x 6
+    ## # A tibble: 6 x 7
     ## # Groups:   waterYear [1]
-    ##   Date       waterYear cumulative_dis wy_doy variable      value
-    ##   <date>         <dbl>          <dbl>  <int> <chr>         <dbl>
-    ## 1 1997-10-01      1998             11      1 Discharge_cfs    11
-    ## 2 1997-10-02      1998             22      2 Discharge_cfs    11
-    ## 3 1997-10-03      1998             34      3 Discharge_cfs    12
-    ## 4 1997-10-04      1998             45      4 Discharge_cfs    11
-    ## 5 1997-10-05      1998             56      5 Discharge_cfs    11
-    ## 6 1997-10-06      1998             67      6 Discharge_cfs    11
+    ##   site_no  Date       waterYear cumulative_dis wy_doy measured_parameter
+    ##   <chr>    <date>         <dbl>          <dbl>  <int> <chr>             
+    ## 1 05427718 1997-10-01      1998             11      1 Flow              
+    ## 2 05427718 1997-10-02      1998             22      2 Flow              
+    ## 3 05427718 1997-10-03      1998             34      3 Flow              
+    ## 4 05427718 1997-10-04      1998             45      4 Flow              
+    ## 5 05427718 1997-10-05      1998             56      5 Flow              
+    ## 6 05427718 1997-10-06      1998             67      6 Flow              
+    ## # ... with 1 more variable: value <dbl>
 
 Now, we can use `ggplot` to plot all values against time and `facet_wrap` by the "variable" column to create panels of data.
 
 ``` r
  ggplot(yahara_long, aes(x = Date, y = value)) +
   geom_point() +
-  facet_wrap(~variable, ncol = 1, scales = 'free_y') +
+  facet_wrap(~measured_parameter, ncol = 1, scales = 'free_y') +
   labs(x = "Date", y = '') +
   theme_bw()
 ```
 
-<img src='/static/beyond-basic-data-munging/facet_plot-1.png'/ title='Nutrients and discharge through time in the Yahara River.' alt='Nutrients and discharge through time in the Yahara River.' class=''/> If you're following along and executing the code, you'll notice a warning after the last `ggplot` command, stating you've removed rows due to missing data. Not all variables had the same temporal coverage, and are therefore "missing" during certain time periods. The plot still should have generated, and the message serves as an "FYI" to what was going on behind the scenes.
+<img src='/static/beyond-basic-data-munging/facet_plot-1.png'/ title='Nutrients and discharge through time in the Yahara River.' alt='Nutrients and discharge through time in the Yahara River.' class=''/> If you're following along and executing the code, you may see a warning after the last `ggplot` command, stating you've removed rows due to missing data. Not all variables had the same temporal coverage, and are therefore "missing" during certain time periods. The plot still should have generated, and the message serves as an "FYI" to what was going on behind the scenes.
 
 ### Spreading data to pair observations using `spread`
 
@@ -266,27 +267,28 @@ The first step is to create a TP:OrthoP variable, but in our long dataset, our t
 
 ``` r
 yahara_wide <- yahara_long %>%
-  spread(key = variable, value = value) %>%
+  spread(key = measured_parameter, value = value) %>%
   mutate(TP_OrthoP = TP_mgL/Orthophosphate_mgL)
 
 # again, gather the phosphorus variables
 # merge with our wet/dry variable of interest
 p_dat <- ungroup(yahara_wide) %>%
-  select(Date, TP_mgL, Orthophosphate_mgL, TP_OrthoP, Discharge_cfs, waterYear) %>%
-  gather(key = P_variables, value = value, -Date, -Discharge_cfs, -waterYear) %>%
+  select(Date, TP_mgL, Orthophosphate_mgL, TP_OrthoP, Flow, waterYear) %>%
+  gather(key = P_variables, value = value, -Date, -Flow, -waterYear) %>%
   left_join(select(year_sums, discharge_dry_normal_wet, waterYear))
 
 # visualize phosphorus ~ discharge relationships and color code
 # by wet/dry year
-ggplot(p_dat, aes(x = Discharge_cfs, y = value)) +
+ggplot(p_dat, aes(x = Flow, y = value)) +
   geom_point(aes(color = discharge_dry_normal_wet), alpha = 0.3) + 
   facet_wrap(~P_variables, ncol = 1, scales = 'free_y') +
   geom_smooth(aes(group = discharge_dry_normal_wet, color = discharge_dry_normal_wet), 
               alpha = 0.5, method = 'lm') +
-  scale_y_continuous(trans = 'log') +
-  scale_x_continuous(trans = 'log') +
+  scale_y_log10() +
+  scale_x_log10() +
+  annotation_logticks() +
   theme_bw() +
-  labs(x = "Discarge (cfs)", color = "Annual Hydrologic \nCondition")
+  labs(x = "Discharge (cfs)", color = "Annual Hydrologic \nCondition")
 ```
 
 <img src='/static/beyond-basic-data-munging/spread_data-1.png'/ title='The relationship between discharge and various measures of phosphorus in the Yahara River.' alt='The relationship between discharge and various measures of phosphorus in the Yahara River.' class=''/>
