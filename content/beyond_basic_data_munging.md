@@ -2,7 +2,6 @@
 author: Samantha Oliver
 date: 2018-08-01
 slug: data-munging
-draft: True
 title: Beyond Basic R - Data Munging
 type: post
 categories: Data Science
