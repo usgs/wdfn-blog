@@ -380,7 +380,7 @@ ggplot_box_legend()
 
 For another example, let's take a quick look at some data included in the `dplyr` package:
 
-```{r starWars, fig.cap="Star wars character's mass distribution by planet.", fig.alt="Star wars character's mass distribution by planet."}
+```{r starWars, fig.cap="Star wars character's mass distribution by planet.", fig.alt="Star wars character's mass distribution by planet.", warning=FALSE}
 
 explain_plot <- ggplot_box_legend()
 
