@@ -241,7 +241,7 @@ ggplot_box_legend <- function(){
               hjust = 0, vjust = 0.5, fontface = "bold", size = 3) +
     geom_text(aes(x = c(2.1), 
                   y =  ggplot_output[["lower_dots"]], 
-                  label = "-Value is >1.5 times"), 
+                  label = "-Value is >1.5 times and"), 
               hjust = 0, vjust = 0.5, size = 3) +
     geom_text(aes(x = 1.17, 
                   y = ggplot_output[["lower_dots"]], 
