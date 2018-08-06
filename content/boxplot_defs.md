@@ -106,7 +106,7 @@ Is that graph great? YES! And for presentations and/or journal publications, tha
 <td>Adjust <code>geom_text</code> defaults</td>
 </tr>
 <tr class="odd">
-<td>Change font</td>
+<td>Change font (we'll use &quot;serif&quot; in this blog, although that is not the official USGS font))</td>
 <td>Adjust <code>geom_text</code> defaults</td>
 </tr>
 </tbody>
@@ -237,7 +237,7 @@ Boxplot Visualization
 Let's plot that information, and while we're at it, we can make the function used in the first plot. There is a *lot* of `ggplot2` code to digest here. Most of it is style adjustments to approximate the USGS style guidelines for a boxplot legend.
 
 ``` r
-ggplot_box_legend <- function(family = "sans"){
+ggplot_box_legend <- function(family = "serif"){
   set.seed(100)
 
   sample_df <- data.frame(parameter = "test",
@@ -330,7 +330,7 @@ ggplot_box_legend()
 Now, let's get our style requirements figured out. First, we can set some basic plot elements for a theme. We can start with the `theme_bw` and add to that. Here we remove the grid, set the size of the title, bring the y ticks inside the plotting area, and remove the x ticks:
 
 ``` r
-theme_USGS_box <- function(base_family = "sans", ...){
+theme_USGS_box <- function(base_family = "serif", ...){
   theme_bw(base_family = base_family, ...) +
   theme(
     panel.grid = element_blank(),
@@ -348,7 +348,7 @@ Next, we can change the defaults of the geom\_text to a smaller size and font.
 ``` r
 update_geom_defaults("text", 
                    list(size = 3, 
-                        family = "sans"))
+                        family = "serif"))
 ```
 
 We als need to figure out what other `ggplot2` elements need to be added. The basic ggplot code for the chloride plot would be:
@@ -376,13 +376,13 @@ ggplot(data = chloride,
 Finally, we can bring all of those elements together into a single list that `ggplot2` can use. While we're at it, we can create a function that is flexible for both linear and logrithmic scales.
 
 ``` r
-boxplot_framework <- function(upper_limit,  
+boxplot_framework <- function(upper_limit, family_font = "serif",
                               lower_limit = 0, logY = FALSE, 
                               fill = "lightgrey", width = 0.6){
   
   update_geom_defaults("text", 
                      list(size = 3, 
-                          family = "sans"))
+                          family = family_font))
   
   n_fun <- function(x, lY = logY){
     return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),

@@ -73,7 +73,7 @@ ggplot2_boxplot <- function(x){
               "lower_dots" = lower_dots))
 }
 
-ggplot_box_legend <- function(family = "sans"){
+ggplot_box_legend <- function(family = "serif"){
   set.seed(100)
 
   sample_df <- data.frame(parameter = "test",
@@ -155,7 +155,7 @@ ggplot_box_legend <- function(family = "sans"){
   
 }
 
-theme_USGS_box <- function(base_family = "sans", ...){
+theme_USGS_box <- function(base_family = "serif", ...){
   theme_bw(base_family = base_family, ...) +
   theme(
     panel.grid = element_blank(),
@@ -167,13 +167,13 @@ theme_USGS_box <- function(base_family = "sans", ...){
   )
 }
 
-boxplot_framework <- function(upper_limit, 
+boxplot_framework <- function(upper_limit, family_font = "serif",
                               lower_limit = 0, logY = FALSE, 
                               fill = "lightgrey", width = 0.6){
   
   update_geom_defaults("text", 
                      list(size = 3, 
-                          family = "sans"))
+                          family = family_font))
   
   n_fun <- function(x, lY = logY){
     return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
@@ -243,7 +243,7 @@ Is that graph great? YES! And for presentations and/or journal publications, tha
 |Add very specific legend | Create function `ggplot_box_legend`|
 |Add the number of observations above each boxplot| Add custom `stat_summary`|
 |Change text size | Adjust `geom_text` defaults|
-|Change font | Adjust `geom_text` defaults| 
+|Change font (we'll use "serif" in this blog, although that is not the official USGS font)) | Adjust `geom_text` defaults| 
 
 As you can see, it will not be as simple as creating a single custom ggplot theme to comply with the requirements. However, we can string together ggplot commands in a list for easy re-use. This blog is *not* going to get you perfect compliance with the USGS standards, but it will get much closer. Also, while these style adjustments are tailored to USGS requirements, the process described here may be useful for other graphic guidelines as well.
 
@@ -362,7 +362,7 @@ Let's plot that information, and while we're at it, we can make the function use
 
 ```{r visualizeBox, fig.cap="ggplot2 box plot with explanation.", alt.text="ggplot2 box plot with explanation.",  fig.width=3}
 
-ggplot_box_legend <- function(family = "sans"){
+ggplot_box_legend <- function(family = "serif"){
   set.seed(100)
 
   sample_df <- data.frame(parameter = "test",
@@ -452,7 +452,7 @@ ggplot_box_legend()
 Now, let's get our style requirements figured out. First, we can set some basic plot elements for a theme. We can start with the `theme_bw` and add to that. Here we remove the grid, set the size of the title, bring the y ticks inside the plotting area, and remove the x ticks:
 
 ```{r}
-theme_USGS_box <- function(base_family = "sans", ...){
+theme_USGS_box <- function(base_family = "serif", ...){
   theme_bw(base_family = base_family, ...) +
   theme(
     panel.grid = element_blank(),
@@ -471,7 +471,7 @@ Next, we can change the defaults of the geom_text to a smaller size and font.
 ```{r}
 update_geom_defaults("text", 
                    list(size = 3, 
-                        family = "sans"))
+                        family = "serif"))
 
 ```
 
@@ -500,13 +500,13 @@ ggplot(data = chloride,
 Finally, we can bring all of those elements together into a single list that `ggplot2` can use. While we're at it, we can create a function that is flexible for both linear and logrithmic scales. 
 
 ```{r }
-boxplot_framework <- function(upper_limit,  
+boxplot_framework <- function(upper_limit, family_font = "serif",
                               lower_limit = 0, logY = FALSE, 
                               fill = "lightgrey", width = 0.6){
   
   update_geom_defaults("text", 
                      list(size = 3, 
-                          family = "sans"))
+                          family = family_font))
   
   n_fun <- function(x, lY = logY){
     return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
