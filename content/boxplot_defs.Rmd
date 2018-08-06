@@ -1,8 +1,8 @@
 ---
-title: "Describing ggplot2 boxplots"
+title: "Exploring ggplot2 boxplots - Defining limits and adjusting style"
 slug: "boxplots"
 author: "Laura DeCicco"
-date: "2018-08-02"
+date: "2018-08-06"
 image: "static/boxplots/visualizeBox-1.png"
 keyword1: boxplot
 keyword2: ggplot2
@@ -37,12 +37,16 @@ opts_chunk$set(
   fig.path="static/boxplots/",
   fig.cap = "TODO",
   alt.text = "TODO",
+  fig.width = 7,
+  fig.height = 5,
+  class = "",
   message = FALSE,
   warnings = FALSE
 )
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
 
 ggplot2_boxplot <- function(x){
   
@@ -69,7 +73,7 @@ ggplot2_boxplot <- function(x){
               "lower_dots" = lower_dots))
 }
 
-ggplot_box_legend <- function(){
+ggplot_box_legend <- function(family = "serif"){
   set.seed(100)
 
   sample_df <- data.frame(parameter = "test",
@@ -82,6 +86,16 @@ ggplot_box_legend <- function(){
   
   ggplot_output <- ggplot2_boxplot(sample_df$values)
   
+  update_geom_defaults("text", 
+                     list(size = 3, 
+                          hjust = 0,
+                          family = family))
+  
+  update_geom_defaults("label", 
+                     list(size = 3, 
+                          hjust = 0,
+                          family = family))
+  
   explain_plot <- ggplot() +
     stat_boxplot(data = sample_df,
                  aes(x = parameter, y=values),
@@ -89,11 +103,11 @@ ggplot_box_legend <- function(){
     geom_boxplot(data = sample_df,
                  aes(x = parameter, y=values), 
                  width = 0.3, fill = "lightgrey") +
-    geom_text(aes(x = 1, y = 950, label = "500"), size = 3) +
+    geom_text(aes(x = 1, y = 950, label = "500"), hjust = 0.5) +
     geom_text(aes(x = 1.17, y = 950,
                   label = "Number of values"),
-              fontface = "bold", hjust = 0, vjust = 0.4, size = 3) +
-    theme_minimal(base_size = 5) +
+              fontface = "bold", vjust = 0.4) +
+    theme_minimal(base_size = 5, base_family = family) +
     geom_segment(aes(x = 2.3, xend = 2.3, 
                      y = ggplot_output[["quartiles"]][1], 
                      yend = ggplot_output[["quartiles"]][3])) +
@@ -105,34 +119,33 @@ ggplot_box_legend <- function(){
                      yend = ggplot_output[["quartiles"]][3])) +
     geom_text(aes(x = 2.4, y = ggplot_output[["quartiles"]][2]), 
               label = "Interquartile\nrange", fontface = "bold",
-              hjust = 0, vjust = 0.4, size = 3) +
+              vjust = 0.4) +
     geom_text(aes(x = c(1.17,1.17), 
                   y = c(ggplot_output[["upper_whisker"]],
                         ggplot_output[["lower_whisker"]]), 
                   label = c("Largest value within 1.5 times\ninterquartile range above\n75th percentile",
                             "Smallest value within 1.5 times\ninterquartile range below\n25th percentile")),
-                  fontface = "bold", hjust = 0, vjust = 0.9, size = 3) +
+                  fontface = "bold", vjust = 0.9) +
     geom_text(aes(x = c(1.17), 
                   y =  ggplot_output[["lower_dots"]], 
                   label = "Outside value"), 
-              hjust = 0, vjust = 0.5, fontface = "bold", size = 3) +
+              vjust = 0.5, fontface = "bold") +
     geom_text(aes(x = c(2.1), 
                   y =  ggplot_output[["lower_dots"]], 
                   label = "-Value is >1.5 times and"), 
-              hjust = 0, vjust = 0.5, size = 3) +
+              vjust = 0.5) +
     geom_text(aes(x = 1.17, 
                   y = ggplot_output[["lower_dots"]], 
                   label = "<3 times the interquartile range\nbeyond either end of the box"), 
-              hjust = 0, vjust = 1.5, size = 3) +
+              vjust = 1.5) +
     geom_label(aes(x = 1.17, y = ggplot_output[["quartiles"]], 
                   label = names(ggplot_output[["quartiles"]])),
-              vjust = c(0.4,0.85,0.4), hjust = 0, 
-              fill = "white", label.size = 0, size = 3) +
+              vjust = c(0.4,0.85,0.4), 
+              fill = "white", label.size = 0) +
     ylab("") + xlab("") +
     theme(axis.text = element_blank(),
           axis.ticks = element_blank(),
           panel.grid = element_blank(),
-          text = element_text(family = "sans"),
           plot.title = element_text(hjust = 0.5, size = 10),
           plot.margin = unit(c(1,0,1,0), "cm")) +
     coord_cartesian(xlim = c(1.4,3.1), ylim = c(-600, 1000)) +
@@ -142,11 +155,59 @@ ggplot_box_legend <- function(){
   
 }
 
+theme_USGS_box <- function(base_family = "serif", ...){
+  theme_bw(base_family = base_family, ...) +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 8),
+    axis.ticks.length = unit(-0.05, "in"),
+    axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")), 
+    axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
+    axis.ticks.x = element_blank()
+  )
+}
+
+boxplot_framework <- function(upper_limit, family_font = "serif",
+                              lower_limit = 0, logY = FALSE, 
+                              fill = "lightgrey", width = 0.6){
+  
+  update_geom_defaults("text", 
+                     list(size = 3, 
+                          family = family_font))
+  
+  n_fun <- function(x, lY = logY){
+    return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
+                      label = length(x)))
+  }
+  
+  basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
+                        geom_boxplot(width = width, fill = fill),
+                        stat_summary(fun.data = n_fun, geom = "text", hjust =0.5),
+                        expand_limits(y = lower_limit),
+                        theme_USGS_box())
+  
+  if(logY){
+    
+    return(c(basic_elements,
+              scale_y_log10(limits = c(lower_limit, upper_limit),
+                  expand = expand_scale(mult = c(0, 0))),
+              annotation_logticks(sides = c("rl"))))      
+  } else {
+    
+    return(c(basic_elements,
+              scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+                                                     name = NULL),
+                                 expand = expand_scale(mult = c(0, 0)),
+                                 breaks = pretty(c(lower_limit,upper_limit), n = 5), 
+                                 limits = c(lower_limit,upper_limit))))    
+  }
+}
+
 ```
 
-Boxplots are often used to show data distributions, and `ggplot2` is often used to visualize data. A question that comes up is what exactly do the box plots represent? The `ggplot2` box plots follow standard Tukey representations, and there are many references of this online and in standard statistical text books. The base R function to calculate the box plot limits is `boxplot.stats`. The help file for this function is very informative, but it's often non-R users asking what exactly the plot means. Therefore, this blog post breaks down the calculations into (hopefully!) easy-to-follow chunks of code for you to make your own box plot legend if necessary. Some additional goals here are to create the boxplots *close* to USGS style. 
+Boxplots are often used to show data distributions, and `ggplot2` is often used to visualize data. A question that comes up is what exactly do the box plots represent? The `ggplot2` box plots follow standard Tukey representations, and there are many references of this online and in standard statistical text books. The base R function to calculate the box plot limits is `boxplot.stats`. The help file for this function is very informative, but it's often non-R users asking what exactly the plot means. Therefore, this blog post breaks down the calculations into (hopefully!) easy-to-follow chunks of code for you to make your own box plot legend if necessary. Some additional goals here are to create boxplots that come *close* to USGS style. Features in this blog post take advantage of enhancements to `ggplot2` in version 3.0.0 or later.
 
-I'm going to start this post backwards and show the results first. Let's get some chloride data (parameter code "00940") from a USGS station in Green Bay, WI (station ID "04085139"). We'll use the package `dataRetrieval` to get the data (see [this tutorial](https://owi.usgs.gov/R/dataRetrieval.html) for more information on `dataRetrieval`), and plot a simple boxplot by month using `ggplot2`: 
+First, let's get some data that might be typically plotted in a USGS report using a boxplot.  Here we'll use chloride data (parameter code "00940") measured at a USGS station on the Fox River in Green Bay, WI (station ID "04085139"). We'll use the package `dataRetrieval` to get the data (see [this tutorial](https://owi.usgs.gov/R/dataRetrieval.html) for more information on `dataRetrieval`), and plot a simple boxplot by month using `ggplot2`: 
 
 ```{r getChoride, fig.width = 7, fig.height=7}
 library(dataRetrieval)
@@ -156,44 +217,49 @@ chloride <- readNWISqw("04085139", "00940")
 chloride$month <- month.abb[as.numeric(format(chloride$sample_dt, "%m"))]
 chloride$month <- factor(chloride$month, labels = month.abb)
 
-ggplot() +
-  geom_boxplot(data = chloride, aes(x = month, y = result_va))
+parameter_name <- attr(chloride, "variableInfo")[["parameter_nm"]]
+site_name <- attr(chloride, "siteInfo")[["station_nm"]]
+
+ggplot(data = chloride, 
+       aes(x = month, y = result_va)) +
+  geom_boxplot() +
+  xlab("Month") +
+  ylab(parameter_name) +
+  labs(title = site_name)
 
 ```
 
-Now I'll use some code that will be described below to create the same plot, but getting closer to USGS style guidelines including a boxplot legend:
+Is that graph great? YES! And for presentations and/or journal publications, that graph might be appropriate. However, for an official USGS report, USGS employees need to get the graphics approved to assure they follow specific style guidelines. The approving officer would probably come back from the review with the following comments:
+
+|Reviewer's Comments | Adjustment in `ggplot2` |
+|------------------------------------|----------------------------------|
+|Remove background color, grid lines|Adjust theme|
+|Add horizontal bars to the upper and lower whiskers|Add `stat_boxplot`|
+|Have tick marks go inside the plot|Adjust theme|
+|Tick marks should be on both sides of the y axis|Add `sec.axis` to `scale_y_continuous`|
+|Remove tick marks from discrete data|Adjust theme|
+|y-axis needs to start exactly at 0|Add `expand_limits`|
+|y-axis labels need to be shown at 0 and at the upper scale| Add `breaks` and `limits` to `scale_y_continuous`|
+|Add very specific legend | Create function `ggplot_box_legend`|
+|Add the number of observations above each boxplot| Add custom `stat_summary`|
+|Change text size | Adjust `geom_text` defaults|
+|Change font (we'll use "serif" in this blog, although that is not the official USGS font)) | Adjust `geom_text` defaults| 
+
+As you can see, it will not be as simple as creating a single custom ggplot theme to comply with the requirements. However, we can string together ggplot commands in a list for easy re-use. This blog is *not* going to get you perfect compliance with the USGS standards, but it will get much closer. Also, while these style adjustments are tailored to USGS requirements, the process described here may be useful for other graphic guidelines as well.
+
+So, let's skip to the exciting conclusion and use some code that will be described later (`boxplot_framework` and `ggplot_box_legend`) to create the same plot, now closer to those USGS style requirements:
 
 ```{r chlorideWithLegend, fig.cap="Chloride by month styled.", fig.alt="Chloride by month, styled."}
 library(cowplot)
-library(dplyr)
-
-counts <- chloride %>%
-  group_by(month) %>%
-  summarize(counts = n())
 
 legend_plot <- ggplot_box_legend()
 
-chloride_plot <- ggplot(data = chloride, aes(x = month, y = result_va)) +
-  stat_boxplot(geom ='errorbar', width = 0.6) +
-  geom_boxplot(width = 0.6, fill = "lightgrey") +
-  geom_text(data = counts, aes(x = month, y = 65, label = counts),
-            size = 3, family = "sans") +
-  expand_limits(y = 0) +
-  theme_bw() + 
+chloride_plot <- ggplot(data = chloride, 
+       aes(x = month, y = result_va)) +
+  boxplot_framework(upper_limit = 70) + 
   xlab("Month") +
-  ylab(attr(chloride, "variableInfo")[["parameter_nm"]]) +
-  labs(title = attr(chloride, "siteInfo")[["station_nm"]]) +
-  scale_y_continuous(sec.axis = dup_axis(label = NULL, 
-                                         name = NULL),
-                     expand = expand_scale(mult = c(0, 0)),
-                     breaks = pretty(c(0,chloride$result_va, 70), n = 5), 
-                     limits = c(0,70)) +
-  theme(panel.grid = element_blank(),
-        text = element_text(family = "sans", size = 9),
-        axis.ticks.length = unit(-0.05, "in"),
-        axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")), 
-        axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
-        axis.ticks.x = element_blank()) 
+  ylab(parameter_name) +
+  labs(title = site_name)
 
 plot_grid(chloride_plot, 
           legend_plot,
@@ -201,19 +267,11 @@ plot_grid(chloride_plot,
 
 ```
 
-What are some of the notable style additions to this graph?
+As can be seen in the code chunk, we are now using a function `ggplot_box_legend` to make a legend, `boxplot_framework` to accommodate all of the style requirements, and the `cowplot` package to plot them together.
 
-* Ticks on the inside of the graph, and on both left and right side (see `?dup_axis`).
-* No ticks for discrete scales.
-* y-limit start at zero, and zero is labeled.
-* Whiskers have horizontal line (see `?stat_boxplot`)
-* Detailed legend
+# `ggplot_box_legend`: What is a boxplot?
 
-So how do we create the function `ggplot_box_legend`? First, let's create a function to calculate the important features of a boxplot. 
-
-# Boxplots values
-
-We'll set up random data using the R function `sample` and then create a function to calculate the values for the lines and dots.  
+To make the legend, we need to verify what all the lines and dots on the box plot mean. To do that, let's set up random data using the R function `sample` and then create a function to calculate each value.  
 
 ## Data Setup
 
@@ -254,6 +312,9 @@ ggplot2_boxplot <- function(x){
   lower_dots <- x[x < (quartiles[1] - 1.5*IQR)]
 
   return(list("quartiles" = quartiles,
+              "25th percentile" = as.numeric(quartiles[1]),
+              "50th percentile\n(median)" = as.numeric(quartiles[2]),
+              "75th percentile" = as.numeric(quartiles[3]),
               "IQR" = IQR,
               "upper_whisker" = upper_whisker,
               "lower_whisker" = lower_whisker,
@@ -296,12 +357,12 @@ ggplot_output[["lower_whisker"]] == base_R_output[["stats"]][1]
 
 ## Boxplot Visualization
 
-Let's plot that information, and while we're at it, we can make the function used in the first plot. There is a *lot* of `ggplot2` code to digest here. Most of it is style adjustments to approximate USGS style guidelines and requirements for legends. The `cowplot` package makes it easy to bind two or more `ggplot2` objects. We can make a 
+Let's plot that information, and while we're at it, we can make the function used in the first plot. There is a *lot* of `ggplot2` code to digest here. Most of it is style adjustments to approximate the USGS style guidelines for a boxplot legend. 
 
 
-```{r visualizeBox, fig.cap="ggplot2 box plot with explanation.", alt.text="ggplot2 box plot with explanation.",fig.height=7,  fig.width=3, warnings = FALSE, class="sideBySide"}
+```{r visualizeBox, fig.cap="ggplot2 box plot with explanation.", alt.text="ggplot2 box plot with explanation.",  fig.width=3}
 
-ggplot_box_legend <- function(){
+ggplot_box_legend <- function(family = "serif"){
   set.seed(100)
 
   sample_df <- data.frame(parameter = "test",
@@ -314,6 +375,16 @@ ggplot_box_legend <- function(){
   
   ggplot_output <- ggplot2_boxplot(sample_df$values)
   
+  update_geom_defaults("text", 
+                     list(size = 3, 
+                          hjust = 0,
+                          family = family))
+  
+  update_geom_defaults("label", 
+                     list(size = 3, 
+                          hjust = 0,
+                          family = family))
+  
   explain_plot <- ggplot() +
     stat_boxplot(data = sample_df,
                  aes(x = parameter, y=values),
@@ -321,50 +392,49 @@ ggplot_box_legend <- function(){
     geom_boxplot(data = sample_df,
                  aes(x = parameter, y=values), 
                  width = 0.3, fill = "lightgrey") +
-    geom_text(aes(x = 1, y = 950, label = "500"), size = 3) +
+    geom_text(aes(x = 1, y = 950, label = "500"), hjust = 0.5) +
     geom_text(aes(x = 1.17, y = 950,
                   label = "Number of values"),
-              fontface = "bold", hjust = 0, vjust = 0.4, size = 3) +
-    theme_minimal(base_size = 5) +
+              fontface = "bold", vjust = 0.4) +
+    theme_minimal(base_size = 5, base_family = family) +
     geom_segment(aes(x = 2.3, xend = 2.3, 
-                     y = ggplot_output[["quartiles"]][1], 
-                     yend = ggplot_output[["quartiles"]][3])) +
+                     y = ggplot_output[["25th percentile"]], 
+                     yend = ggplot_output[["75th percentile"]])) +
     geom_segment(aes(x = 1.2, xend = 2.3, 
-                     y = ggplot_output[["quartiles"]][1], 
-                     yend = ggplot_output[["quartiles"]][1])) +
+                     y = ggplot_output[["25th percentile"]], 
+                     yend = ggplot_output[["25th percentile"]])) +
     geom_segment(aes(x = 1.2, xend = 2.3, 
-                     y = ggplot_output[["quartiles"]][3], 
-                     yend = ggplot_output[["quartiles"]][3])) +
-    geom_text(aes(x = 2.4, y = ggplot_output[["quartiles"]][2]), 
+                     y = ggplot_output[["75th percentile"]], 
+                     yend = ggplot_output[["75th percentile"]])) +
+    geom_text(aes(x = 2.4, y = ggplot_output[["50th percentile\n(median)"]]), 
               label = "Interquartile\nrange", fontface = "bold",
-              hjust = 0, vjust = 0.4, size = 3) +
+              vjust = 0.4) +
     geom_text(aes(x = c(1.17,1.17), 
                   y = c(ggplot_output[["upper_whisker"]],
                         ggplot_output[["lower_whisker"]]), 
                   label = c("Largest value within 1.5 times\ninterquartile range above\n75th percentile",
                             "Smallest value within 1.5 times\ninterquartile range below\n25th percentile")),
-                  fontface = "bold", hjust = 0, vjust = 0.9, size = 3) +
+                  fontface = "bold", vjust = 0.9) +
     geom_text(aes(x = c(1.17), 
                   y =  ggplot_output[["lower_dots"]], 
                   label = "Outside value"), 
-              hjust = 0, vjust = 0.5, fontface = "bold", size = 3) +
+              vjust = 0.5, fontface = "bold") +
     geom_text(aes(x = c(2.1), 
                   y =  ggplot_output[["lower_dots"]], 
                   label = "-Value is >1.5 times and"), 
-              hjust = 0, vjust = 0.5, size = 3) +
+              vjust = 0.5) +
     geom_text(aes(x = 1.17, 
                   y = ggplot_output[["lower_dots"]], 
                   label = "<3 times the interquartile range\nbeyond either end of the box"), 
-              hjust = 0, vjust = 1.5, size = 3) +
+              vjust = 1.5) +
     geom_label(aes(x = 1.17, y = ggplot_output[["quartiles"]], 
                   label = names(ggplot_output[["quartiles"]])),
-              vjust = c(0.4,0.85,0.4), hjust = 0, 
-              fill = "white", label.size = 0, size = 3) +
+              vjust = c(0.4,0.85,0.4), 
+              fill = "white", label.size = 0) +
     ylab("") + xlab("") +
     theme(axis.text = element_blank(),
           axis.ticks = element_blank(),
           panel.grid = element_blank(),
-          text = element_text(family = "sans"),
           plot.title = element_text(hjust = 0.5, size = 10),
           plot.margin = unit(c(1,0,1,0), "cm")) +
     coord_cartesian(xlim = c(1.4,3.1), ylim = c(-600, 1000)) +
@@ -375,40 +445,153 @@ ggplot_box_legend <- function(){
 }
 
 ggplot_box_legend()
+```
+
+# `boxplot_framework`: Styling the boxplot
+
+Now, let's get our style requirements figured out. First, we can set some basic plot elements for a theme. We can start with the `theme_bw` and add to that. Here we remove the grid, set the size of the title, bring the y ticks inside the plotting area, and remove the x ticks:
+
+```{r}
+theme_USGS_box <- function(base_family = "serif", ...){
+  theme_bw(base_family = base_family, ...) +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 8),
+    axis.ticks.length = unit(-0.05, "in"),
+    axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")), 
+    axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
+    axis.ticks.x = element_blank()
+  )
+}
 
 ```
 
-For another example, let's take a quick look at some data included in the `dplyr` package:
+Next, we can change the defaults of the geom_text to a smaller size and font.
 
-```{r starWars, fig.cap="Star wars character's mass distribution by planet.", fig.alt="Star wars character's mass distribution by planet.", warning=FALSE}
+```{r}
+update_geom_defaults("text", 
+                   list(size = 3, 
+                        family = "serif"))
 
-explain_plot <- ggplot_box_legend()
+```
 
-starwars <- starwars
+We als need to figure out what other `ggplot2` elements need to be added. The basic ggplot code for the chloride plot would be:
 
-# Reduce data to homeworlds with several characters:
-starwars <- starwars %>%
-  group_by(homeworld) %>%
-  filter(n() > 5)
+```{r eval=FALSE}
+n_fun <- function(x){
+  return(data.frame(y = 0.95*70,
+                    label = length(x)))
+}
 
-size_dist <- ggplot(data = starwars, aes(x = homeworld, y = mass)) +
-  stat_boxplot(geom ='errorbar', width = 0.3) +
-  geom_boxplot(width = 0.3, fill = "lightgrey") +
+ggplot(data = chloride, 
+       aes(x = month, y = result_va)) +
+  stat_boxplot(geom ='errorbar', width = 0.6) +
+  geom_boxplot(width = 0.6, fill = "lightgrey") +
+  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
   expand_limits(y = 0) +
-  theme_bw() + 
+  theme_USGS_box() +
   scale_y_continuous(sec.axis = dup_axis(label = NULL, 
                                          name = NULL),
-                     expand = expand_scale(mult = c(0, 0.01)),
-                     breaks = pretty(starwars$mass, n = 5)) +
-  theme(panel.grid = element_blank(),
-        plot.title = element_text(hjust = 0.5),
-        text = element_text(family = "Times", size = 9),
-        axis.ticks.length = unit(-0.25, "cm"),
-        axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")), 
-        axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
-        axis.ticks.x = element_blank()) 
+                     expand = expand_scale(mult = c(0, 0)),
+                     breaks = pretty(c(0,70), n = 5), 
+                     limits = c(0,70))
+```
 
-plot_grid(size_dist, 
+Finally, we can bring all of those elements together into a single list that `ggplot2` can use. While we're at it, we can create a function that is flexible for both linear and logrithmic scales. 
+
+```{r }
+boxplot_framework <- function(upper_limit, family_font = "serif",
+                              lower_limit = 0, logY = FALSE, 
+                              fill = "lightgrey", width = 0.6){
+  
+  update_geom_defaults("text", 
+                     list(size = 3, 
+                          family = family_font))
+  
+  n_fun <- function(x, lY = logY){
+    return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
+                      label = length(x)))
+  }
+  
+  basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
+                        geom_boxplot(width = width, fill = fill),
+                        stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5),
+                        expand_limits(y = lower_limit),
+                        theme_USGS_box())
+  
+  if(logY){
+    
+    return(c(basic_elements,
+              scale_y_log10(limits = c(lower_limit, upper_limit),
+                  expand = expand_scale(mult = c(0, 0))),
+              annotation_logticks(sides = c("rl"))))      
+  } else {
+    
+    return(c(basic_elements,
+              scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+                                                     name = NULL),
+                                 expand = expand_scale(mult = c(0, 0)),
+                                 breaks = pretty(c(lower_limit, upper_limit), n = 5), 
+                                 limits = c(lower_limit,upper_limit))))    
+  }
+}
+
+```
+
+# Logrithem boxplots
+
+For another example, we might need to make a boxplot with a logarithm scale. This data is for phosphorus measurements on the Pheasant Branch Creek in Middleton, WI.
+
+```{r phosDistribution, fig.cap="Phosphorus distribution by month.", fig.alt="Phosphorus distribution by month.", warning=FALSE}
+
+library(dplyr)
+explain_plot <- ggplot_box_legend()
+
+site <- "05427948"
+pCode <- "00665"
+
+phos_data <- readNWISqw(site, pCode)
+phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
+phos_data$month <- factor(phos_data$month, labels = month.abb)
+
+parameter_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
+site_name <- attr(phos_data, "siteInfo")[["station_nm"]]
+
+phos_plot <- ggplot(data = phos_data, 
+       aes(x = month, y = result_va)) +
+  boxplot_framework(upper_limit = 50, 
+                    lower_limit = 0.01, 
+                    logY = TRUE) + 
+  xlab("Month") +
+  ylab(parameter_name) +
+  labs(title = site_name) 
+
+plot_grid(phos_plot, 
           explain_plot,
           nrow = 1, rel_widths = c(.6,.4))
 ```
+
+What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add the detection limits as horizontal lines to the phosphorous graph:
+
+```{r}
+
+DLs <- unique(as.numeric(phos_data$rpt_lev_va))
+DLs <- DLs[!is.na(DLs)]
+
+phos_plot_with_DL <- phos_plot +
+  geom_hline(linetype = "dashed",
+             yintercept = DLs)
+
+explain_plot_DL <- ggplot_box_legend() +
+  geom_segment(aes(y = -650, yend = -650,
+               x = 1.2, xend = 2.3),
+           linetype="dashed") +
+  geom_text(aes(y = -650, x = 2.4, label = "Detection Limit"))
+
+plot_grid(phos_plot_with_DL, 
+          explain_plot_DL,
+          nrow = 1, rel_widths = c(.6,.4))
+
+```
+
+I hoped you like my "deep dive" into `ggplot2` boxplots. Many of the techniques here can be used to modify other `ggplot2` plots.
