@@ -39,17 +39,17 @@ chloride$month <- month.abb[as.numeric(format(chloride$sample_dt, "%m"))]
 chloride$month <- factor(chloride$month, labels = month.abb)
 
 cl_name <- attr(chloride, "variableInfo")[["parameter_nm"]]
-site_name <- attr(chloride, "siteInfo")[["station_nm"]]
+cl_site <- attr(chloride, "siteInfo")[["station_nm"]]
 
 ggplot(data = chloride, 
        aes(x = month, y = result_va)) +
   geom_boxplot() +
   xlab("Month") +
   ylab(cl_name) +
-  labs(title = site_name)
+  labs(title = cl_site)
 ```
 
-<img src='/static/boxplots/getChoride-1.png'/ title='TODO' alt='TODO' />
+<img src='/static/boxplots/getChoride-1.png'/ title='ggplot2 defaults for boxplots.' alt='ggplot2 defaults for boxplots.' />
 
 Is that graph great? YES! And for presentations and/or journal publications, that graph might be appropriate. However, for an official USGS report, USGS employees need to get the graphics approved to assure they follow specific style guidelines. The approving officer would probably come back from the review with the following comments:
 
@@ -126,14 +126,14 @@ chloride_plot <- ggplot(data = chloride,
   boxplot_framework(upper_limit = 70) + 
   xlab("Month") +
   ylab(cl_name) +
-  labs(title = site_name)
+  labs(title = cl_site)
 
 plot_grid(chloride_plot, 
           legend_plot,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-<img src='/static/boxplots/chlorideWithLegend-1.png'/ title='Chloride by month styled.' alt='TODO' />
+<img src='/static/boxplots/chlorideWithLegend-1.png'/ title='Chloride by month styled.' alt='Chloride by month, styled.' />
 
 As can be seen in the code chunk, we are now using a function `ggplot_box_legend` to make a legend, `boxplot_framework` to accommodate all of the style requirements, and the `cowplot` package to plot them together.
 
@@ -204,7 +204,7 @@ phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
 phos_data$month <- factor(phos_data$month, labels = month.abb)
 
 phos_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
-site_name <- attr(phos_data, "siteInfo")[["station_nm"]]
+phos_site <- attr(phos_data, "siteInfo")[["station_nm"]]
 
 n_fun <- function(x){
     return(data.frame(y = 0.95*log10(50),
@@ -222,12 +222,12 @@ phos_plot <- ggplot(data = phos_data,
   annotation_logticks(sides = c("rl")) +
   xlab("Month") +
   ylab(phos_name) +
-  labs(title = site_name) 
+  labs(title = phos_site) 
 
 phos_plot
 ```
 
-<img src='/static/boxplots/phosDistribution-1.png'/ title='Phosphorus distribution by month.' alt='TODO' />
+<img src='/static/boxplots/phosDistribution-1.png'/ title='Phosphorus distribution by month.' alt='Phosphorus distribution by month.' />
 
 Grouped boxplots
 ----------------
@@ -286,7 +286,7 @@ temperature_plot <- ggplot(data = temp_q_data,
 temperature_plot
 ```
 
-<img src='/static/boxplots/groupPlot1-1.png'/ title='TODO' alt='TODO' />
+<img src='/static/boxplots/groupPlot1-1.png'/ title='Grouped boxplots.' alt='Grouped boxplots' />
 
 The parameter name that comes back from `dataRetrieval` could use some formatting. The following function can fix that for both `ggplot2` and base R graphics:
 
@@ -376,7 +376,7 @@ chloride_plot <- ggplot(data = chloride,
   boxplot_framework(upper_limit = 70) + 
   xlab("Month") +
   ylab(cl_name) +
-  labs(title = site_name)
+  labs(title = cl_site)
 
 phos_plot <- ggplot(data = phos_data, 
        aes(x = month, y = result_va)) +
@@ -385,7 +385,7 @@ phos_plot <- ggplot(data = phos_data,
                     logY = TRUE) +
   xlab("Month") +
   ylab("Phosphorus in milligraphs per liter") +
-  labs(title = site_name) 
+  labs(title = phos_site) 
 
 temperature_plot <- ggplot(data = temp_q_data, 
        aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
@@ -406,7 +406,7 @@ plot_grid(chloride_plot,
           nrow = 2)
 ```
 
-<img src='/static/boxplots/comboGraph-1.png'/ title='TODO' alt='TODO' />
+<img src='/static/boxplots/comboGraph-1.png'/ title='Combining boxplots using framework function and cowplot's plot_grid.' alt='Combining boxplots using framework function and cowplot's plot_grid.' />
 
 `ggplot_box_legend`: What is a boxplot?
 =======================================
@@ -612,6 +612,6 @@ plot_grid(phos_plot_with_DL,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-<img src='/static/boxplots/picsWithDL-1.png'/ title='TODO' alt='TODO' />
+<img src='/static/boxplots/picsWithDL-1.png'/ title='Boxplot with additional ggplot2 features.' alt='Boxplot with additional ggplot2 features.' />
 
 I hoped you like my "deep dive" into `ggplot2` boxplots. Many of the techniques here can be used to modify other `ggplot2` plots.

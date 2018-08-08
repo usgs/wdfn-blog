@@ -218,7 +218,7 @@ Boxplots are often used to show data distributions, and `ggplot2` is often used 
 
 First, let's get some data that might be typically plotted in a USGS report using a boxplot.  Here we'll use chloride data (parameter code "00940") measured at a USGS station on the Fox River in Green Bay, WI (station ID "04085139"). We'll use the package `dataRetrieval` to get the data (see [this tutorial](https://owi.usgs.gov/R/dataRetrieval.html) for more information on `dataRetrieval`), and plot a simple boxplot by month using `ggplot2`: 
 
-```{r getChoride, fig.width = 7, fig.height=5}
+```{r getChoride, fig.width = 7, fig.height=5, alt.text="ggplot2 defaults for boxplots.", fig.cap="ggplot2 defaults for boxplots."}
 library(dataRetrieval)
 library(ggplot2)
 
@@ -227,14 +227,14 @@ chloride$month <- month.abb[as.numeric(format(chloride$sample_dt, "%m"))]
 chloride$month <- factor(chloride$month, labels = month.abb)
 
 cl_name <- attr(chloride, "variableInfo")[["parameter_nm"]]
-site_name <- attr(chloride, "siteInfo")[["station_nm"]]
+cl_site <- attr(chloride, "siteInfo")[["station_nm"]]
 
 ggplot(data = chloride, 
        aes(x = month, y = result_va)) +
   geom_boxplot() +
   xlab("Month") +
   ylab(cl_name) +
-  labs(title = site_name)
+  labs(title = cl_site)
 
 ```
 
@@ -258,7 +258,7 @@ As you can see, it will not be as simple as creating a single custom ggplot them
 
 So, let's skip to the exciting conclusion and use some code that will be described later (`boxplot_framework` and `ggplot_box_legend`) to create the same plot, now closer to those USGS style requirements:
 
-```{r chlorideWithLegend, fig.cap="Chloride by month styled.", fig.alt="Chloride by month, styled.", warning=FALSE, fig.height=5}
+```{r chlorideWithLegend, fig.cap="Chloride by month styled.", alt.text="Chloride by month, styled.", warning=FALSE, fig.height=5}
 library(cowplot)
 
 legend_plot <- ggplot_box_legend()
@@ -268,7 +268,7 @@ chloride_plot <- ggplot(data = chloride,
   boxplot_framework(upper_limit = 70) + 
   xlab("Month") +
   ylab(cl_name) +
-  labs(title = site_name)
+  labs(title = cl_site)
 
 plot_grid(chloride_plot, 
           legend_plot,
@@ -337,7 +337,7 @@ Let's look at a few other common boxplots to see if there are other ggplot2 elem
 
 For another example, we might need to make a boxplot with a logarithm scale. This data is for phosphorus measurements on the Pheasant Branch Creek in Middleton, WI.
 
-```{r phosDistribution, fig.cap="Phosphorus distribution by month.", fig.alt="Phosphorus distribution by month.", warning=FALSE, fig.height=5}
+```{r phosDistribution, fig.cap="Phosphorus distribution by month.", alt.text="Phosphorus distribution by month.", warning=FALSE, fig.height=5}
 site <- "05427948"
 pCode <- "00665"
 
@@ -346,7 +346,7 @@ phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
 phos_data$month <- factor(phos_data$month, labels = month.abb)
 
 phos_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
-site_name <- attr(phos_data, "siteInfo")[["station_nm"]]
+phos_site <- attr(phos_data, "siteInfo")[["station_nm"]]
 
 n_fun <- function(x){
     return(data.frame(y = 0.95*log10(50),
@@ -364,7 +364,7 @@ phos_plot <- ggplot(data = phos_data,
   annotation_logticks(sides = c("rl")) +
   xlab("Month") +
   ylab(phos_name) +
-  labs(title = site_name) 
+  labs(title = phos_site) 
 
 phos_plot
 
@@ -374,7 +374,7 @@ phos_plot
 
 We might also want to make grouped boxplots. In ggplot, it's pretty easy to add a "fill" to the `aes` argument. Here we'll plot temperature distributions at 4 USGS stations. We'll group the measurements by a "daytime" and "nighttime" factor. Temperature might be a parameter that would not be required to start at 0.
 
-```{r groupPlot1, fig.height=5}
+```{r groupPlot1, fig.height=5, alt.text="Grouped boxplots", fig.cap="Grouped boxplots."}
 library(dplyr)
 
 temp_q_data <- readNWISuv(siteNumbers = c("04026561", "04063700",
@@ -510,7 +510,7 @@ boxplot_framework <- function(upper_limit,
 
 Let's see if it works! Let's take the last set of examples using the framework. I'm also going to use the 'cowplot' package to print them all together. I'll also include the `ggplot_box_legend` which will be described in the next section.
 
-```{r comboGraph, fig.width=7, fig.height=7}
+```{r comboGraph, fig.width=7, fig.height=7, fig.cap="Combining boxplots using framework function and cowplot's plot_grid.", alt.text = "Combining boxplots using framework function and cowplot's plot_grid." }
 
 legend_plot <- ggplot_box_legend()
 
@@ -519,7 +519,7 @@ chloride_plot <- ggplot(data = chloride,
   boxplot_framework(upper_limit = 70) + 
   xlab("Month") +
   ylab(cl_name) +
-  labs(title = site_name)
+  labs(title = cl_site)
 
 phos_plot <- ggplot(data = phos_data, 
        aes(x = month, y = result_va)) +
@@ -528,7 +528,7 @@ phos_plot <- ggplot(data = phos_data,
                     logY = TRUE) +
   xlab("Month") +
   ylab("Phosphorus in milligraphs per liter") +
-  labs(title = site_name) 
+  labs(title = phos_site) 
 
 temperature_plot <- ggplot(data = temp_q_data, 
        aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
@@ -732,7 +732,7 @@ ggplot_box_legend()
 
 What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add the detection limits as horizontal lines to the phosphorous graph:
 
-```{r picsWithDL, warning=FALSE, fig.height=5}
+```{r picsWithDL, warning=FALSE, fig.height=5, fig.cap="Boxplot with additional ggplot2 features.", alt.text = "Boxplot with additional ggplot2 features."}
 
 DLs <- unique(as.numeric(phos_data$rpt_lev_va))
 DLs <- DLs[!is.na(DLs)]
