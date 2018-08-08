@@ -206,14 +206,17 @@ boxplot_framework <- function(upper_limit, family_font = "serif",
       basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
                             geom_boxplot(width = width),
                             stat_summary(fun.data = n_fun, 
-                                         geom = "text", position = position_dodge(width),
+                                         geom = "text", 
+                                         position = position_dodge(width),
+                                         hjust =0.5,
                                          aes_string(group=fill_var)),
                             expand_limits(y = lower_limit),
                             theme_USGS_box())
   } else {
       basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
                             geom_boxplot(width = width, fill = fill),
-                            stat_summary(fun.data = n_fun, geom = "text", hjust =0.5),
+                            stat_summary(fun.data = n_fun, 
+                                         geom = "text", hjust =0.5),
                             expand_limits(y = lower_limit),
                             theme_USGS_box())
   }
@@ -302,7 +305,7 @@ temp_q_data <- readNWISuv(siteNumbers = c("04026561", "04063700",
                                           "04082400", "05427927"),
                           parameterCd = '00010', 
                           startDate = "2018-06-01", 
-                          endDate = "2018-06-30")
+                          endDate = "2018-06-03")
 
 parameter_name <- attr(temp_q_data, "variableInfo") %>%
   filter(variableCode == "00010") %>% pull(variableName)
@@ -323,12 +326,19 @@ temp_q_data <- temp_q_data %>%
 
 q_plot <- ggplot(data = temp_q_data, 
        aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
-  boxplot_framework(upper_limit = 30, fill_var = "timeOfDay") + 
+  boxplot_framework(upper_limit = 30, 
+                    fill_var = "timeOfDay") + 
   xlab("Station ID") +
   ylab(parameter_name) +
   scale_fill_discrete(name = "EXPLANATION") +
-  theme(legend.position = c(0.9, 0.2))
+  theme(legend.position = c(0.8, 0.2))
+
+plot_grid(q_plot, 
+          explain_plot,
+          nrow = 1, rel_widths = c(.6,.4))
 ```
+
+<img src='/static/boxplots/unnamed-chunk-6-1.png'/ title='TODO' alt='TODO' />
 
 `ggplot_box_legend`: What is a boxplot?
 =======================================
