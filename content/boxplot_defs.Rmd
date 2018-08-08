@@ -168,7 +168,7 @@ theme_USGS_box <- function(base_family = "serif", ...){
 }
 
 boxplot_framework <- function(upper_limit, family_font = "serif",
-                              lower_limit = 0, logY = FALSE, 
+                              lower_limit = 0, logY = FALSE, fill_var = NA,
                               fill = "lightgrey", width = 0.6){
   
   update_geom_defaults("text", 
@@ -180,20 +180,28 @@ boxplot_framework <- function(upper_limit, family_font = "serif",
                       label = length(x)))
   }
   
-  basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
-                        geom_boxplot(width = width, fill = fill),
-                        stat_summary(fun.data = n_fun, geom = "text", hjust =0.5),
-                        expand_limits(y = lower_limit),
-                        theme_USGS_box())
+  if(!is.na(fill_var)){
+      basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
+                            geom_boxplot(width = width),
+                            stat_summary(fun.data = n_fun, 
+                                         geom = "text", position = position_dodge(width),
+                                         aes_string(group=fill_var)),
+                            expand_limits(y = lower_limit),
+                            theme_USGS_box())
+  } else {
+      basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
+                            geom_boxplot(width = width, fill = fill),
+                            stat_summary(fun.data = n_fun, geom = "text", hjust =0.5),
+                            expand_limits(y = lower_limit),
+                            theme_USGS_box())
+  }
   
   if(logY){
-    
     return(c(basic_elements,
               scale_y_log10(limits = c(lower_limit, upper_limit),
                   expand = expand_scale(mult = c(0, 0))),
               annotation_logticks(sides = c("rl"))))      
   } else {
-    
     return(c(basic_elements,
               scale_y_continuous(sec.axis = dup_axis(label = NULL, 
                                                      name = NULL),
@@ -249,7 +257,7 @@ As you can see, it will not be as simple as creating a single custom ggplot them
 
 So, let's skip to the exciting conclusion and use some code that will be described later (`boxplot_framework` and `ggplot_box_legend`) to create the same plot, now closer to those USGS style requirements:
 
-```{r chlorideWithLegend, fig.cap="Chloride by month styled.", fig.alt="Chloride by month, styled."}
+```{r chlorideWithLegend, fig.cap="Chloride by month styled.", fig.alt="Chloride by month, styled.", warning=FALSE}
 library(cowplot)
 
 legend_plot <- ggplot_box_legend()
@@ -268,6 +276,205 @@ plot_grid(chloride_plot,
 ```
 
 As can be seen in the code chunk, we are now using a function `ggplot_box_legend` to make a legend, `boxplot_framework` to accommodate all of the style requirements, and the `cowplot` package to plot them together.
+
+
+
+# `boxplot_framework`: Styling the boxplot
+
+Now, let's get our style requirements figured out. First, we can set some basic plot elements for a theme. We can start with the `theme_bw` and add to that. Here we remove the grid, set the size of the title, bring the y ticks inside the plotting area, and remove the x ticks:
+
+```{r}
+theme_USGS_box <- function(base_family = "serif", ...){
+  theme_bw(base_family = base_family, ...) +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 8),
+    axis.ticks.length = unit(-0.05, "in"),
+    axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")), 
+    axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
+    axis.ticks.x = element_blank()
+  )
+}
+
+```
+
+Next, we can change the defaults of the geom_text to a smaller size and font.
+
+```{r}
+update_geom_defaults("text", 
+                   list(size = 3, 
+                        family = "serif"))
+
+```
+
+We als need to figure out what other `ggplot2` elements need to be added. The basic ggplot code for the chloride plot would be:
+
+```{r eval=FALSE}
+n_fun <- function(x){
+  return(data.frame(y = 0.95*70,
+                    label = length(x)))
+}
+
+ggplot(data = chloride, 
+       aes(x = month, y = result_va)) +
+  stat_boxplot(geom ='errorbar', width = 0.6) +
+  geom_boxplot(width = 0.6, fill = "lightgrey") +
+  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
+  expand_limits(y = 0) +
+  theme_USGS_box() +
+  scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+                                         name = NULL),
+                     expand = expand_scale(mult = c(0, 0)),
+                     breaks = pretty(c(0,70), n = 5), 
+                     limits = c(0,70))
+```
+
+Finally, we can bring all of those elements together into a single list that `ggplot2` can use. While we're at it, we can create a function that is flexible for both linear and logrithmic scales. 
+
+```{r }
+boxplot_framework <- function(upper_limit, family_font = "serif",
+                              lower_limit = 0, logY = FALSE, fill_var = NA,
+                              fill = "lightgrey", width = 0.6){
+  
+  update_geom_defaults("text", 
+                     list(size = 3, 
+                          family = family_font))
+  
+  n_fun <- function(x, lY = logY){
+    return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
+                      label = length(x)))
+  }
+  
+  if(!is.na(fill_var)){
+      basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
+                            geom_boxplot(width = width),
+                            stat_summary(fun.data = n_fun, 
+                                         geom = "text", position = position_dodge(width),
+                                         aes_string(group=fill_var)),
+                            expand_limits(y = lower_limit),
+                            theme_USGS_box())
+  } else {
+      basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
+                            geom_boxplot(width = width, fill = fill),
+                            stat_summary(fun.data = n_fun, geom = "text", hjust =0.5),
+                            expand_limits(y = lower_limit),
+                            theme_USGS_box())
+  }
+  
+  if(logY){
+    return(c(basic_elements,
+              scale_y_log10(limits = c(lower_limit, upper_limit),
+                  expand = expand_scale(mult = c(0, 0))),
+              annotation_logticks(sides = c("rl"))))      
+  } else {
+    return(c(basic_elements,
+              scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+                                                     name = NULL),
+                                 expand = expand_scale(mult = c(0, 0)),
+                                 breaks = pretty(c(lower_limit,upper_limit), n = 5), 
+                                 limits = c(lower_limit,upper_limit))))    
+  }
+}
+
+```
+
+# Logrithem boxplots
+
+For another example, we might need to make a boxplot with a logarithm scale. This data is for phosphorus measurements on the Pheasant Branch Creek in Middleton, WI.
+
+```{r phosDistribution, fig.cap="Phosphorus distribution by month.", fig.alt="Phosphorus distribution by month.", warning=FALSE}
+
+library(dplyr)
+explain_plot <- ggplot_box_legend()
+
+site <- "05427948"
+pCode <- "00665"
+
+phos_data <- readNWISqw(site, pCode)
+phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
+phos_data$month <- factor(phos_data$month, labels = month.abb)
+
+parameter_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
+site_name <- attr(phos_data, "siteInfo")[["station_nm"]]
+
+phos_plot <- ggplot(data = phos_data, 
+       aes(x = month, y = result_va)) +
+  boxplot_framework(upper_limit = 50, 
+                    lower_limit = 0.01, 
+                    logY = TRUE) + 
+  xlab("Month") +
+  ylab(parameter_name) +
+  labs(title = site_name) 
+
+plot_grid(phos_plot, 
+          explain_plot,
+          nrow = 1, rel_widths = c(.6,.4))
+```
+
+What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add the detection limits as horizontal lines to the phosphorous graph:
+
+```{r picsWithDL, warning=FALSE}
+
+DLs <- unique(as.numeric(phos_data$rpt_lev_va))
+DLs <- DLs[!is.na(DLs)]
+
+phos_plot_with_DL <- phos_plot +
+  geom_hline(linetype = "dashed",
+             yintercept = DLs)
+
+explain_plot_DL <- ggplot_box_legend() +
+  geom_segment(aes(y = -650, yend = -650,
+               x = 1.2, xend = 2.3),
+           linetype="dashed") +
+  geom_text(aes(y = -650, x = 2.4, label = "Detection Limit"))
+
+plot_grid(phos_plot_with_DL, 
+          explain_plot_DL,
+          nrow = 1, rel_widths = c(.6,.4))
+
+```
+
+## Grouped boxplots
+
+```{r}
+library(dplyr)
+
+temp_q_data <- readNWISuv(siteNumbers = c("04026561", "04063700",
+                                          "04082400", "05427927"),
+                          parameterCd = '00010', 
+                          startDate = "2018-06-01", 
+                          endDate = "2018-06-30")
+
+parameter_name <- attr(temp_q_data, "variableInfo") %>%
+  filter(variableCode == "00010") %>% pull(variableName)
+
+station_nms <- attr(temp_q_data, "siteInfo")
+
+temp_q_data <- renameNWISColumns(temp_q_data)
+
+# add an hour of day to create groups (daytime or nighttime)
+temp_q_data <- temp_q_data %>% 
+  mutate(site_no = factor(site_no)) %>% # grouping var should be a factor
+  mutate(hourOfDay = as.numeric(format(dateTime, "%H"))) %>% 
+  mutate(timeOfDay = case_when(
+    hourOfDay < 20 & hourOfDay > 6 ~ "daytime",
+    TRUE ~ "nighttime" # catchall for anything that doesn't fit above
+  ))
+
+
+q_plot <- ggplot(data = temp_q_data, 
+       aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
+  boxplot_framework(upper_limit = 30, fill_var = "timeOfDay") + 
+  xlab("Station ID") +
+  ylab(parameter_name) +
+  scale_fill_discrete(name = "EXPLANATION") +
+  theme(legend.position = c(0.9, 0.2))
+
+plot_grid(q_plot, 
+          explain_plot,
+          nrow = 1, rel_widths = c(.6,.4))
+
+```
 
 # `ggplot_box_legend`: What is a boxplot?
 
@@ -445,153 +652,6 @@ ggplot_box_legend <- function(family = "serif"){
 }
 
 ggplot_box_legend()
-```
-
-# `boxplot_framework`: Styling the boxplot
-
-Now, let's get our style requirements figured out. First, we can set some basic plot elements for a theme. We can start with the `theme_bw` and add to that. Here we remove the grid, set the size of the title, bring the y ticks inside the plotting area, and remove the x ticks:
-
-```{r}
-theme_USGS_box <- function(base_family = "serif", ...){
-  theme_bw(base_family = base_family, ...) +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 8),
-    axis.ticks.length = unit(-0.05, "in"),
-    axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")), 
-    axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
-    axis.ticks.x = element_blank()
-  )
-}
-
-```
-
-Next, we can change the defaults of the geom_text to a smaller size and font.
-
-```{r}
-update_geom_defaults("text", 
-                   list(size = 3, 
-                        family = "serif"))
-
-```
-
-We als need to figure out what other `ggplot2` elements need to be added. The basic ggplot code for the chloride plot would be:
-
-```{r eval=FALSE}
-n_fun <- function(x){
-  return(data.frame(y = 0.95*70,
-                    label = length(x)))
-}
-
-ggplot(data = chloride, 
-       aes(x = month, y = result_va)) +
-  stat_boxplot(geom ='errorbar', width = 0.6) +
-  geom_boxplot(width = 0.6, fill = "lightgrey") +
-  stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
-  expand_limits(y = 0) +
-  theme_USGS_box() +
-  scale_y_continuous(sec.axis = dup_axis(label = NULL, 
-                                         name = NULL),
-                     expand = expand_scale(mult = c(0, 0)),
-                     breaks = pretty(c(0,70), n = 5), 
-                     limits = c(0,70))
-```
-
-Finally, we can bring all of those elements together into a single list that `ggplot2` can use. While we're at it, we can create a function that is flexible for both linear and logrithmic scales. 
-
-```{r }
-boxplot_framework <- function(upper_limit, family_font = "serif",
-                              lower_limit = 0, logY = FALSE, 
-                              fill = "lightgrey", width = 0.6){
-  
-  update_geom_defaults("text", 
-                     list(size = 3, 
-                          family = family_font))
-  
-  n_fun <- function(x, lY = logY){
-    return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
-                      label = length(x)))
-  }
-  
-  basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
-                        geom_boxplot(width = width, fill = fill),
-                        stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5),
-                        expand_limits(y = lower_limit),
-                        theme_USGS_box())
-  
-  if(logY){
-    
-    return(c(basic_elements,
-              scale_y_log10(limits = c(lower_limit, upper_limit),
-                  expand = expand_scale(mult = c(0, 0))),
-              annotation_logticks(sides = c("rl"))))      
-  } else {
-    
-    return(c(basic_elements,
-              scale_y_continuous(sec.axis = dup_axis(label = NULL, 
-                                                     name = NULL),
-                                 expand = expand_scale(mult = c(0, 0)),
-                                 breaks = pretty(c(lower_limit, upper_limit), n = 5), 
-                                 limits = c(lower_limit,upper_limit))))    
-  }
-}
-
-```
-
-# Logrithem boxplots
-
-For another example, we might need to make a boxplot with a logarithm scale. This data is for phosphorus measurements on the Pheasant Branch Creek in Middleton, WI.
-
-```{r phosDistribution, fig.cap="Phosphorus distribution by month.", fig.alt="Phosphorus distribution by month.", warning=FALSE}
-
-library(dplyr)
-explain_plot <- ggplot_box_legend()
-
-site <- "05427948"
-pCode <- "00665"
-
-phos_data <- readNWISqw(site, pCode)
-phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
-phos_data$month <- factor(phos_data$month, labels = month.abb)
-
-parameter_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
-site_name <- attr(phos_data, "siteInfo")[["station_nm"]]
-
-phos_plot <- ggplot(data = phos_data, 
-       aes(x = month, y = result_va)) +
-  boxplot_framework(upper_limit = 50, 
-                    lower_limit = 0.01, 
-                    logY = TRUE) + 
-  xlab("Month") +
-  ylab(parameter_name) +
-  labs(title = site_name) 
-
-plot_grid(phos_plot, 
-          explain_plot,
-          nrow = 1, rel_widths = c(.6,.4))
-```
-
-What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add the detection limits as horizontal lines to the phosphorous graph:
-
-```{r}
-
-DLs <- unique(as.numeric(phos_data$rpt_lev_va))
-DLs <- DLs[!is.na(DLs)]
-
-phos_plot_with_DL <- phos_plot +
-  geom_hline(linetype = "dashed",
-             yintercept = DLs)
-
-explain_plot_DL <- ggplot_box_legend() +
-  geom_segment(aes(y = -650, yend = -650,
-               x = 1.2, xend = 2.3),
-           linetype="dashed") +
-  geom_text(aes(y = -650, x = 2.4, label = "Detection Limit"))
-
-plot_grid(phos_plot_with_DL, 
-          explain_plot_DL,
-          nrow = 1, rel_widths = c(.6,.4))
-
 ```
 
 I hoped you like my "deep dive" into `ggplot2` boxplots. Many of the techniques here can be used to modify other `ggplot2` plots.
