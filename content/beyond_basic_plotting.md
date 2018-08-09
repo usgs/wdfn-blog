@@ -144,8 +144,9 @@ yahara_daily_wq <- readNWISdv(siteNumbers = "05430175",
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names
-yahara_daily_wq <- renameNWISColumns(yahara_daily_wq)
-yahara_daily_wq <- rename(yahara_daily_wq, TSS = `X_00530`, InorganicN = `X_00631`)
+yahara_daily_wq <- renameNWISColumns(yahara_daily_wq, 
+                                     p00530 = "TSS",
+                                     p00631 = "InorganicN")
 
 # Create the three different plots
 flow_timeseries <- ggplot(yahara_daily_wq, aes(x=Date, y=Flow)) + 
