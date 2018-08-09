@@ -779,7 +779,6 @@ plot_grid(phos_plot_with_DL,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-</div>
 
 <img src='/static/boxplots/picsWithDL-1.png'/ title='Boxplot with additional ggplot2 features.' alt='Boxplot with additional ggplot2 features.' />
 
