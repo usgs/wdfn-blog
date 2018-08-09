@@ -2,27 +2,21 @@
 author: Lindsay R Carr
 date: 2018-08-09
 slug: beyond-basic-plotting
-draft: True
 title: Beyond Basic R - Plotting with ggplot2 and Multiple Plots in One Figure
 type: post
 categories: Data Science
 image: static/beyond-basic-plotting/cowplotmulti-1.png
 author_twitter: LindsayRCarr
 author_github: lindsaycarr
- 
- 
 author_staff: lindsay-r-carr
 author_email: <lcarr@usgs.gov>
-
 tags: 
   - R
   - Beyond Basic R
- 
 description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
 keywords:
   - R
   - Beyond Basic R
- 
   - ggplot2
  
 ---
