@@ -1,30 +1,25 @@
 ---
-author: Lindsay R Carr
-date: 2018-08-03
-slug: beyond-basic-plotting
-draft: True
-title: Beyond Basic R - Plotting with ggplot2 and Custom Themes
-type: post
-categories: Data Science
-image: static/beyond-basic-plotting/cowplotmulti-1.png
-author_twitter: LindsayRCarr
-author_github: lindsaycarr
- 
- 
+title: "Beyond Basic R - Plotting with ggplot2 and Multiple Plots in One Figure"
+author: "Lindsay R Carr"
+date: '2018-08-09'
 author_staff: lindsay-r-carr
-author_email: <lcarr@usgs.gov>
-
-tags: 
-  - R
-  - Beyond Basic R
- 
-description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
+author_twitter: LindsayRCarr
+categories: Data Science
+author_github: lindsaycarr
+description: Resources for plotting, plus short examples for using ggplot2 for common
+  use-cases and adding USGS style.
+draft: yes
+image: static/beyond-basic-plotting/cowplotmulti-1.png
 keywords:
-  - R
-  - Beyond Basic R
- 
-  - ggplot2
- 
+- R
+- Beyond Basic R
+- ggplot2
+slug: beyond-basic-plotting
+tags:
+- R
+- Beyond Basic R
+author_email: <lcarr@usgs.gov>
+type: post
 ---
 R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
@@ -44,69 +39,86 @@ In ggplot2:
 -   [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 -   [ggplot2 reference guide](http://ggplot2.tidyverse.org/reference/)
 
-In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) class, we have switched to teaching ggplot2 because it works nicely with other tidyverse packages (dplyr, tidyr), and can create interesting and powerful graphics with little code. The following plotting examples will go through some additional features of ggplot2, and how to apply them.
+In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) class, we have switched to teaching ggplot2 because it works nicely with other tidyverse packages (dplyr, tidyr), and can create interesting and powerful graphics with little code. While `ggplot2` has many useful features, this blog post will explore how to create figures with multiple `ggplot2` plots.
 
-Custom theme
-------------
+You may have already heard of ways to put multiple R plots into a single figure - specifying `mfrow` or `mfcol` arguments to `par`, `split.screen`, and `layout` are all ways to do this. However, there are other methods to do this that are optimized for `ggplot2` plots.
 
-Producing a plot to look at your data is fairly straightforward; however, when you are ready to produce the plot for a publication or to share in some way, there is a lot more work. One convenience with ggplot2 are the use of built-in themes which can change plot aesthetics. Theme elements can be manually manipulated so that you can produce the perfect plot, but it does take a lot of work and Googling to figure out. Luckily for us, developers at the Lower Mississippi-Gulf Water Science Center shared their custom ggplot2 theme for USGS style guidelines. This does not guarantee perfect USGS style, but gets you pretty close and gives you the ability to edit, update, or amend specific pieces for your needs.
-
-``` r
-# custom USGS theme for plots
-theme_USGS <-  function(base_size = 8){
-  theme(
-    plot.title = element_text (vjust = 3, size = 9,family="serif"), 
-    panel.border = element_rect (colour = "black", fill = F, size = 0.1),
-    panel.grid.major = element_blank (),
-    panel.grid.minor = element_blank (),
-    panel.background = element_rect (fill = "white"),
-    legend.background = element_blank(),
-    legend.justification=c(0, 0),
-    legend.position = c(0.1, 0.7),
-    legend.key = element_blank (),
-    legend.title = element_blank (),
-    legend.text = element_text (size = 8),
-    axis.title.x = element_text (size = 9, family="serif"),
-    axis.title.y = element_text (vjust = 1, angle = 90, size = 9, family="serif"),
-    axis.text.x = element_text (size = 8, vjust = -0.25, colour = "black", 
-                                family="serif", margin=margin(10,5,20,5,"pt")),
-    axis.text.y = element_text (size = 8, hjust = 1, colour = "black", 
-                                family="serif", margin=margin(5,10,10,5,"pt")),
-    axis.ticks = element_line (colour = "black", size = 0.1),
-    axis.ticks.length = unit(-0.25 , "cm")
-  )
-}
-```
-
-Here is an example of how to use that function (make sure you actually source the file or run the function’s code to have it available in your environment):
-
-``` r
-library(ggplot2)
-library(dataRetrieval)
-```
-
-``` r
-# load theme_USGS() from a file in your current working directory
-source('theme_USGS.R')
-```
-
-``` r
-wi_daily_q <- readNWISdv(siteNumbers = "03339500", parameterCd = "00060",
-                         startDate = "2018-04-01", endDate = "2018-04-30")
-wi_daily_q <- renameNWISColumns(wi_daily_q)
-
-usgs_plot <- ggplot(wi_daily_q, aes(x=Date, y=Flow)) + 
-  geom_point() + 
-  theme_USGS()
-usgs_plot
-```
-
-<img src='/static/beyond-basic-plotting/use_theme_plot-1.png'/ title='Simple flow timeseries for site 03339500.' alt='Hydrograph produced by ggplot2 with USGS-style.' class=''/>
-
-Using `cowplot` to create multiple plots in one image
+Multiple plots in one figure using ggplot2 and facets
 -----------------------------------------------------
 
-There are a few other tricks with ggplot2 that can make it easy to get the plots you want. There’s a helper package called `cowplot` that has some nice wrapper functions for ggplot2 plots to have shared legends, put plots into a grid, annotate plots, and more. Below is some code that shows how to use some of these helpful `cowplot` functions to create a figure that has three plots and a shared title.
+When you are creating multiple plots and they share axes, you should consider using facet functions from ggplot2 (`facet_grid`, `facet_wrap`). You write your `ggplot2` code as if you were putting all of the data onto one plot, and then you use one of the faceting functions to specify how to slice up the graph.
+
+Let's start by considering a set of graphs with a common x axis. You have a data.frame with four columns: Date, site\_no, parameter, and value. You want three different plots in the same figure - a timeseries for each of the parameters with different colored symbols for the different sites. Sounds like a lot, but facets can make this very simple. First, setup your ggplot code as if you aren't faceting.
+
+``` r
+library(dataRetrieval)
+library(dplyr) # for `rename` & `select`
+library(tidyr) # for `gather`
+library(ggplot2)
+
+# Get the data
+wi_daily_wq <- readNWISdv(siteNumbers = c("05430175", "05427880", "05427927"),
+                          parameterCd = c("00060", "00530", "00631"),
+                          startDate = "2017-08-01", endDate = "2017-08-31")
+
+# Clean up data to have human-readable names + move data into long format
+wi_daily_wq <- renameNWISColumns(wi_daily_wq) %>% 
+  rename(TSS = `X_00530`, InorganicN = `X_00631`) %>% 
+  select(-ends_with("_cd")) %>% 
+  gather(key = "parameter", value = "value", -site_no, -Date)
+
+# Setup plot without facets
+p <- ggplot(data = wi_daily_wq, aes(x = Date, y = value)) + 
+  geom_point(aes(color = site_no)) + 
+  theme_bw()
+
+# Now, we can look at the plot and see how it looks before we facet
+# Obviously, the scales are off because we are plotting flow with concentrations
+p
+```
+
+<img src='/static/beyond-basic-plotting/nofacetplot-1.png'/ title='ggplot2 setup before faceting' alt='Basic ggplot2 timeseries with 3 parameters represented in one: inorganic N, TSS, and flow.' class=''/>
+
+Now, we know that we can't keep these different parameters on the same plot. We could have written code to filter the data frame to the appropriate values and make a plot for each of them, but we can also take advantage of `facet_grid`. Since the resulting three plots that we want will all share an x axis (Date), we can imagine slicing up the figure in the vertical direction so that the x axis remains in-tact but we end up with three different y axes. We can do this using `facet_grid` and a formula syntax, `y ~ x`. So, if you want to divide the figure along the y axis, you put variable in the data that you want to use to decide which plot data goes into as the first entry in the formula. You can use a `.` if you do not want to divide the plot in the other direction.
+
+``` r
+# Add vertical facets, aka divide the plot up vertically since they share an x axis
+p + facet_grid(parameter ~ .)
+```
+
+<img src='/static/beyond-basic-plotting/verticalfacetplot-1.png'/ title='ggplot2 basic vertical facet' alt='Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three different facets along the y axis.' class=''/>
+
+The result is a figure divided along the y axis based on the unique values of the `parameter` column in the data.frame. So, we have three plots in one figure. They still all share the same axes, which works for the x axis but not for the y axes. We can change that by letting the y axes scale freely to the data that appears just on that facet. Add the argument `scales` to `facet_grid` and specify that they should be "free" rather than the default "fixed".
+
+``` r
+# Add vertical facets, but scale only the y axes freely
+p + facet_grid(parameter ~ ., scales = "free_y")
+```
+
+<img src='/static/beyond-basic-plotting/verticalfacetplotfreescale-1.png'/ title='ggplot2 with freely scaled, vertical facets' alt='Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three individually scaled facets along the y axis.' class=''/>
+
+From here, there might be a few things you want to change about how it's labelling the facets. We would probably want the y axis labels to say the parameter and units on the left side. So, we can adjust how the facets are labeled and styled to become our y axis labels.
+
+``` r
+p + facet_grid(parameter ~ ., scales = "free_y",
+               switch = "y", # flip the facet labels along the y axis from the right side to the left
+               labeller = as_labeller( # redefine the text that shows up for the facets
+                 c(Flow = "Flow, cfs", InorganicN = "Inorganic N, mg/L", TSS = "TSS, mg/L"))) +
+  ylab(NULL) + # remove the word "values"
+  theme(strip.background = element_blank(), # remove the background
+        strip.placement = "outside") # put labels to the left of the axis text
+```
+
+<img src='/static/beyond-basic-plotting/verticalfacetplotfixedlabels-1.png'/ title='ggplot2 with facet labels as the y axis labels' alt='Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three individually scaled facets along the y axis, and appropriately labeled axes.' class=''/>
+
+There are still other things you can do with facets, such as using `space = "free"`. The [Cookbook for R facet examples](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/) have even more to explore!
+
+Using `cowplot` to create multiple plots in one figure
+------------------------------------------------------
+
+When you are creating multiple plots and they do not share axes or do not fit into the facet framework, you could use the packages `cowplot` or `patchwork` (very new!), or the `grid.arrange` function from `gridExtra`. In this blog post, we will show how to use `cowplot`, but you can explore the features of `patchwork` [here](https://github.com/thomasp85/patchwork).
+
+The package called `cowplot` has nice wrapper functions for ggplot2 plots to have shared legends, put plots into a grid, annotate plots, and more. Below is some code that shows how to use some of these helpful `cowplot` functions to create a figure that has three plots and a shared title.
 
 ``` r
 library(dataRetrieval)
@@ -114,29 +126,26 @@ library(dplyr) # for `rename`
 library(tidyr) # for `gather`
 library(ggplot2)
 library(cowplot)
-```
 
-``` r
-# load theme_USGS() from a file in your current working directory
-source('theme_USGS.R')
-```
-
-``` r
-wi_daily_wq <- readNWISdv(siteNumbers = "05430175", 
+# Get the data
+yahara_daily_wq <- readNWISdv(siteNumbers = "05430175", 
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")
-wi_daily_wq <- renameNWISColumns(wi_daily_wq)
-wi_daily_wq <- rename(wi_daily_wq, TSS = `X_00530`, InorganicN = `X_00631`)
 
-flow_timeseries <- ggplot(wi_daily_wq, aes(x=Date, y=Flow)) + 
-  geom_point() + theme_USGS()
+# Clean up data to have human-readable names
+yahara_daily_wq <- renameNWISColumns(yahara_daily_wq)
+yahara_daily_wq <- rename(yahara_daily_wq, TSS = `X_00530`, InorganicN = `X_00631`)
 
-wi_daily_wq_long <- gather(wi_daily_wq, Nutrient, Nutrient_va, TSS, InorganicN)
-nutrient_boxplot <- ggplot(wi_daily_wq_long, aes(x=Nutrient, y=Nutrient_va)) +
-  geom_boxplot() + theme_USGS()
+# Create the three different plots
+flow_timeseries <- ggplot(yahara_daily_wq, aes(x=Date, y=Flow)) + 
+  geom_point() + theme_bw()
 
-tss_flow_plot <- ggplot(wi_daily_wq, aes(x=Flow, y=TSS)) + 
-  geom_point() + theme_USGS()
+yahara_daily_wq_long <- gather(yahara_daily_wq, Nutrient, Nutrient_va, TSS, InorganicN)
+nutrient_boxplot <- ggplot(yahara_daily_wq_long, aes(x=Nutrient, y=Nutrient_va)) +
+  geom_boxplot() + theme_bw()
+
+tss_flow_plot <- ggplot(yahara_daily_wq, aes(x=Flow, y=TSS)) + 
+  geom_point() + theme_bw()
 
 # Create Flow timeseries plot that spans the grid by making one plot_grid
 #   and then nest it inside of a second. Also, include a title at the top 
@@ -148,35 +157,3 @@ plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
 ```
 
 <img src='/static/beyond-basic-plotting/cowplotmulti-1.png'/ title='Multi-plot figure generated using cowplot.' alt='Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.' class=''/>
-
-Grouped boxplots in `ggplot2`
------------------------------
-
-The final plotting example we will show is how to create grouped boxplots, which has been a common question. This is one of those instances where factors are useful because the first step is to make your grouping variable a factor. Once it is a factor, ggplot2 will automatically understand that it should treat those as groups. Then, you can easily create grouped boxplots by setting the x aesthetic to the grouping variable column. The example below also shows off the function `case_when` from dplyr to create a new categorical column based on the values of another variable (in this case, using time to say whether the data was from the daytime or nighttime). Running this code assumes that you already have `theme_USGS()` in your environment.
-
-``` r
-library(dataRetrieval)
-library(dplyr) # for `mutate` and `case_when`
-library(ggplot2)
-
-temp_q_data <- readNWISuv(siteNumbers = c("04026561", "04063700", "04082400", "05427927"),
-                          parameterCd = c('00060', '00010'), 
-                          startDate = "2018-06-01", endDate = "2018-06-03")
-temp_q_data <- renameNWISColumns(temp_q_data)
-
-# add an hour of day to create groups (daytime or nighttime)
-temp_q_data <- temp_q_data %>% 
-  mutate(site_no = factor(site_no)) %>% # grouping var should be a factor
-  mutate(hourOfDay = as.numeric(format(dateTime, "%H"))) %>% 
-  mutate(timeOfDay = case_when(
-    hourOfDay < 20 & hourOfDay > 6 ~ "daytime",
-    TRUE ~ "nighttime" # catchall for anything that doesn't fit above
-  ))
-
-# grouped boxplot
-ggplot(temp_q_data, aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
-  geom_boxplot() +
-  theme_USGS()
-```
-
-<img src='/static/beyond-basic-plotting/grouped_barplots-1.png'/ title='Grouped boxplot produced by ggplot2 with USGS style.' alt='Boxplots of water temperature for day and night grouped by USGS sites.' class=''/>
