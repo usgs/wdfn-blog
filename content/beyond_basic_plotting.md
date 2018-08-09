@@ -1,27 +1,32 @@
 ---
-title: "Beyond Basic R - Plotting with ggplot2 and Multiple Plots in One Figure"
-author: "Lindsay R Carr"
-date: '2018-08-09'
-author_staff: lindsay-r-carr
-author_twitter: LindsayRCarr
-categories: Data Science
-author_github: lindsaycarr
-description: Resources for plotting, plus short examples for using ggplot2 for common
-  use-cases and adding USGS style.
-draft: yes
-image: static/beyond-basic-plotting/cowplotmulti-1.png
-keywords:
-- R
-- Beyond Basic R
-- ggplot2
+author: Lindsay R Carr
+date: 2018-08-09
 slug: beyond-basic-plotting
-tags:
-- R
-- Beyond Basic R
-author_email: <lcarr@usgs.gov>
+draft: True
+title: Beyond Basic R - Plotting with ggplot2 and Multiple Plots in One Figure
 type: post
+categories: Data Science
+image: static/beyond-basic-plotting/cowplotmulti-1.png
+author_twitter: LindsayRCarr
+author_github: lindsaycarr
+ 
+ 
+author_staff: lindsay-r-carr
+author_email: <lcarr@usgs.gov>
+
+tags: 
+  - R
+  - Beyond Basic R
+ 
+description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
+keywords:
+  - R
+  - Beyond Basic R
+ 
+  - ggplot2
+ 
 ---
-R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
+R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The [Introduction to R curriculum](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
 In base R:
 
@@ -50,20 +55,24 @@ When you are creating multiple plots and they share axes, you should consider us
 
 Let's start by considering a set of graphs with a common x axis. You have a data.frame with four columns: Date, site\_no, parameter, and value. You want three different plots in the same figure - a timeseries for each of the parameters with different colored symbols for the different sites. Sounds like a lot, but facets can make this very simple. First, setup your ggplot code as if you aren't faceting.
 
+We will download USGS water data for use in this example from the USGS National Water Information System (NWIS) using the `dataRetrieval` package (you can learn more about `dataRetrieval` in [this curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/)). Three USGS gage sites in Wisconsin were chosen because they have data for all three water quality parameters (flow, total suspended solids, and inorganic nitrogen) we are using in this example.
+
 ``` r
 library(dataRetrieval)
 library(dplyr) # for `rename` & `select`
 library(tidyr) # for `gather`
 library(ggplot2)
 
-# Get the data
+# Get the data by giving site numbers and parameter codes
+# 00060 = stream flow, 00530 = total suspended solids, 00631 = concentration of inorganic nitrogen 
 wi_daily_wq <- readNWISdv(siteNumbers = c("05430175", "05427880", "05427927"),
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names + move data into long format
-wi_daily_wq <- renameNWISColumns(wi_daily_wq) %>% 
-  rename(TSS = `X_00530`, InorganicN = `X_00631`) %>% 
+wi_daily_wq <- renameNWISColumns(wi_daily_wq, 
+                                 p00530 = "TSS",
+                                 p00631 = "InorganicN") %>% 
   select(-ends_with("_cd")) %>% 
   gather(key = "parameter", value = "value", -site_no, -Date)
 
@@ -120,6 +129,8 @@ When you are creating multiple plots and they do not share axes or do not fit in
 
 The package called `cowplot` has nice wrapper functions for ggplot2 plots to have shared legends, put plots into a grid, annotate plots, and more. Below is some code that shows how to use some of these helpful `cowplot` functions to create a figure that has three plots and a shared title.
 
+Just as in the previous example, we will download USGS water data from the USGS NWIS using the `dataRetrieval` package (find out more about `dataRetrieval` in [this curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/)). This USGS gage site on the Yahara River in Wisconsin was chosen because it has data for all three water quality parameters (flow, total suspended solids, and inorganic nitrogen) we are using in this example.
+
 ``` r
 library(dataRetrieval)
 library(dplyr) # for `rename`
@@ -133,8 +144,9 @@ yahara_daily_wq <- readNWISdv(siteNumbers = "05430175",
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names
-yahara_daily_wq <- renameNWISColumns(yahara_daily_wq)
-yahara_daily_wq <- rename(yahara_daily_wq, TSS = `X_00530`, InorganicN = `X_00631`)
+yahara_daily_wq <- renameNWISColumns(yahara_daily_wq, 
+                                     p00530 = "TSS",
+                                     p00631 = "InorganicN")
 
 # Create the three different plots
 flow_timeseries <- ggplot(yahara_daily_wq, aes(x=Date, y=Flow)) + 

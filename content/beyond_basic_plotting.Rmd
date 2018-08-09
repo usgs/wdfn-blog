@@ -44,7 +44,7 @@ opts_chunk$set(
 )
 ```
 
-R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The Introduction to R curriculum summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
+R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The [Introduction to R curriculum](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
 In base R:
 
@@ -70,7 +70,9 @@ You may have already heard of ways to put multiple R plots into a single figure 
 
 When you are creating multiple plots and they share axes, you should consider using facet functions from ggplot2 (`facet_grid`, `facet_wrap`). You write your `ggplot2` code as if you were putting all of the data onto one plot, and then you use one of the faceting functions to specify how to slice up the graph. 
 
-Let's start by considering a set of graphs with a common x axis. You have a data.frame with four columns: Date, site_no, parameter, and value. You want three different plots in the same figure - a timeseries for each of the parameters with different colored symbols for the different sites. Sounds like a lot, but facets can make this very simple. First, setup your ggplot code as if you aren't faceting.
+Let's start by considering a set of graphs with a common x axis. You have a data.frame with four columns: Date, site_no, parameter, and value. You want three different plots in the same figure - a timeseries for each of the parameters with different colored symbols for the different sites. Sounds like a lot, but facets can make this very simple. First, setup your ggplot code as if you aren't faceting. 
+
+We will download USGS water data for use in this example from the USGS National Water Information System (NWIS) using the `dataRetrieval` package (you can learn more about `dataRetrieval` in [this curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/)). Three USGS gage sites in Wisconsin were chosen because they have data for all three water quality parameters (flow, total suspended solids, and inorganic nitrogen) we are using in this example.
 
 ```{r nofacetplot, warning=FALSE, message=FALSE, fig.cap="ggplot2 setup before faceting", alt.text="Basic ggplot2 timeseries with 3 parameters represented in one: inorganic N, TSS, and flow.", fig.width = 7, fig.height=5}
 library(dataRetrieval)
@@ -78,14 +80,16 @@ library(dplyr) # for `rename` & `select`
 library(tidyr) # for `gather`
 library(ggplot2)
 
-# Get the data
+# Get the data by giving site numbers and parameter codes
+# 00060 = stream flow, 00530 = total suspended solids, 00631 = concentration of inorganic nitrogen 
 wi_daily_wq <- readNWISdv(siteNumbers = c("05430175", "05427880", "05427927"),
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names + move data into long format
-wi_daily_wq <- renameNWISColumns(wi_daily_wq) %>% 
-  rename(TSS = `X_00530`, InorganicN = `X_00631`) %>% 
+wi_daily_wq <- renameNWISColumns(wi_daily_wq, 
+                                 p00530 = "TSS",
+                                 p00631 = "InorganicN") %>% 
   select(-ends_with("_cd")) %>% 
   gather(key = "parameter", value = "value", -site_no, -Date)
 
@@ -140,6 +144,8 @@ When you are creating multiple plots and they do not share axes or do not fit in
 
 The package called `cowplot` has nice wrapper functions for ggplot2 plots to have shared legends, put plots into a grid, annotate plots, and more. Below is some code that shows how to use some of these helpful `cowplot` functions to create a figure that has three plots and a shared title.
 
+Just as in the previous example, we will download USGS water data from the USGS NWIS using the `dataRetrieval` package (find out more about `dataRetrieval` in [this curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/)). This USGS gage site on the Yahara River in Wisconsin was chosen because it has data for all three water quality parameters (flow, total suspended solids, and inorganic nitrogen) we are using in this example.
+
 ```{r cowplotmulti, warning=FALSE, message=FALSE, fig.cap="Multi-plot figure generated using cowplot.", alt.text="Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.", fig.width = 7, fig.height=5}
 library(dataRetrieval)
 library(dplyr) # for `rename`
@@ -153,8 +159,9 @@ yahara_daily_wq <- readNWISdv(siteNumbers = "05430175",
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names
-yahara_daily_wq <- renameNWISColumns(yahara_daily_wq)
-yahara_daily_wq <- rename(yahara_daily_wq, TSS = `X_00530`, InorganicN = `X_00631`)
+yahara_daily_wq <- renameNWISColumns(yahara_daily_wq, 
+                                     p00530 = "TSS",
+                                     p00631 = "InorganicN")
 
 # Create the three different plots
 flow_timeseries <- ggplot(yahara_daily_wq, aes(x=Date, y=Flow)) + 
