@@ -1,6 +1,6 @@
 ---
 author: David Watkins
-date: 2018-08-11
+date: 2018-08-15
 slug: beyond-basic-mapping
 draft: True
 title: Beyond Basic R - Mapping

@@ -1,6 +1,6 @@
 ---
 author: Lindsay R Carr
-date: 2018-08-15
+date: 2018-08-22
 slug: beyond-basic-git
 draft: True
 title: Beyond Basic R - Version Control via Git
