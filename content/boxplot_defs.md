@@ -1,8 +1,7 @@
 ---
 author: Laura DeCicco
-date: 2018-08-13
+date: 2018-08-10
 slug: boxplots
-draft: True
 title: Exploring ggplot2 boxplots - Defining limits and adjusting style
 type: post
 categories: Data Science
