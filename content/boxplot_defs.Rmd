@@ -148,6 +148,7 @@ ggplot_box_legend <- function(family = "serif"){
     theme(axis.text = element_blank(),
           axis.ticks = element_blank(),
           panel.grid = element_blank(),
+          aspect.ratio = 4/3,
           plot.title = element_text(hjust = 0.5, size = 10)) +
     coord_cartesian(xlim = c(1.4,3.1), ylim = c(-600, 900)) +
     labs(title = "EXPLANATION")
@@ -224,7 +225,7 @@ First, let's get some data that might be typically plotted in a USGS report usin
 library(dataRetrieval)
 library(ggplot2)
 
-# Get cloride data using dataRetrieval:
+# Get chloride data using dataRetrieval:
 chloride <- readNWISqw("04085139", "00940")
 # Add a month column:
 chloride$month <- month.abb[as.numeric(format(chloride$sample_dt, "%m"))]
@@ -364,10 +365,12 @@ For another example, we might need to make a boxplot with a logarithm scale. Thi
 site <- "05427948"
 pCode <- "00665"
 
+# Get phosphorus data using dataRetrieval:
 phos_data <- readNWISqw(site, pCode)
+# Create a month column:
 phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
 phos_data$month <- factor(phos_data$month, labels = month.abb)
-
+# Get site name and paramter name for labels:
 phos_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
 phos_site <- attr(phos_data, "siteInfo")[["station_nm"]]
 
@@ -376,14 +379,42 @@ n_fun <- function(x){
                       label = length(x)))
 }
 
+prettyLogs <- function(x){
+  pretty_range <- range(x[x > 0])
+  pretty_logs <- 10^(-10:10)
+  log_index <- which(pretty_logs < pretty_range[2] & 
+                       pretty_logs > pretty_range[1])
+  log_index <- c(log_index[1]-1,log_index, log_index[length(log_index)]+1)
+  pretty_logs_new <-  pretty_logs[log_index] 
+  return(pretty_logs_new)
+}
+
+fancyNumbers <- function(n){
+  nNoNA <- n[!is.na(n)]
+  x <-gsub(pattern = "1e",replacement = "10^",
+           x = format(nNoNA, scientific = TRUE))
+  exponents <- as.numeric(sapply(strsplit(x, "\\^"), function(j) j[2]))
+
+  base <- ifelse(exponents == 0, "1", ifelse(exponents == 1, "10","10^"))
+  exponents[base == "1" | base == "10"] <- ""
+  textNums <- rep(NA, length(n))  
+  textNums[!is.na(n)] <- paste0(base,exponents)
+  
+  textReturn <- parse(text=textNums)
+  return(textReturn)
+}
+
+
 phos_plot <- ggplot(data = phos_data, 
        aes(x = month, y = result_va)) +
   stat_boxplot(geom ='errorbar', width = 0.6) +
   geom_boxplot(width = 0.6, fill = "lightgrey") +
   stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
   theme_USGS_box() +
-  scale_y_log10(limits = c(0.01, 50),
-                expand = expand_scale(mult = c(0, 0))) +
+  scale_y_log10(limits = c(0.001, 50),
+                expand = expand_scale(mult = c(0, 0)),
+                labels=fancyNumbers,
+                breaks=prettyLogs) +
   annotation_logticks(sides = c("rl")) +
   xlab("Month") +
   ylab(phos_name) +
@@ -400,6 +431,8 @@ What are the new features we have to consider for log scales?
 |stat_boxplot| The `stat_boxplot` function is the same, but our custom function to calculate counts need to be adjusted so the position would be in log units.|
 |scale_y_log10|This is used instead of `scale_y_continuous`.|
 |annotation_logticks(sides = c("rl"))|Adds nice log ticks to the right ("r") and left ("l") side.|
+|prettyLogs|This function forces the y-axis breaks to be on every 10^x. This could be adjusted if a finer scale was needed.|
+|fancyNumbers|This is a custom formatting function for the log axis. This function could be adjusted if other formatting was needed.|
 
 
 ## Grouped boxplots
@@ -409,26 +442,21 @@ We might also want to make grouped boxplots. In ggplot, it's pretty easy to add 
 ```{r groupPlot1, fig.height=5, alt.text="Grouped boxplots", fig.cap="Grouped boxplots."}
 library(dplyr)
 
+# Get water temperature data for a variety of USGS stations
 temp_q_data <- readNWISuv(siteNumbers = c("04026561", "04063700",
                                           "04082400", "05427927"),
                           parameterCd = '00010', 
                           startDate = "2018-06-01", 
                           endDate = "2018-06-03")
 
-temperature_name <- attr(temp_q_data, "variableInfo") %>%
-  filter(variableCode == "00010") %>% pull(variableName)
-
-station_nms <- attr(temp_q_data, "siteInfo")
-
-temp_q_data <- renameNWISColumns(temp_q_data)
+temperature_name <- attr(temp_q_data, "variableInfo")[["variableName"]]
 
 # add an hour of day to create groups (daytime or nighttime)
 temp_q_data <- temp_q_data %>% 
-  mutate(site_no = factor(site_no)) %>% # grouping var should be a factor
-  mutate(hourOfDay = as.numeric(format(dateTime, "%H"))) %>% 
-  mutate(timeOfDay = case_when(
-    hourOfDay < 20 & hourOfDay > 6 ~ "daytime",
-    TRUE ~ "nighttime" # catchall for anything that doesn't fit above
+  renameNWISColumns() %>%
+  mutate(hourOfDay = as.numeric(format(dateTime, "%H")),
+         timeOfDay = case_when(hourOfDay < 20 & hourOfDay > 6 ~ "daytime",
+                               TRUE ~ "nighttime" # catchall 
   ))
 
 n_fun <- function(x){
@@ -510,6 +538,32 @@ boxplot_framework <- function(upper_limit,
                       label = length(x)))
   }
   
+  prettyLogs <- function(x){
+    pretty_range <- range(x[x > 0])
+    pretty_logs <- 10^(-10:10)
+    log_index <- which(pretty_logs < pretty_range[2] & 
+                         pretty_logs > pretty_range[1])
+    log_index <- c(log_index[1]-1,log_index,
+                   log_index[length(log_index)]+1)
+    pretty_logs_new <-  pretty_logs[log_index] 
+    return(pretty_logs_new)
+  }
+  
+  fancyNumbers <- function(n){
+    nNoNA <- n[!is.na(n)]
+    x <-gsub(pattern = "1e",replacement = "10^",
+             x = format(nNoNA, scientific = TRUE))
+    exponents <- as.numeric(sapply(strsplit(x, "\\^"), function(j) j[2]))
+  
+    base <- ifelse(exponents == 0, "1", ifelse(exponents == 1, "10","10^"))
+    exponents[base == "1" | base == "10"] <- ""
+    textNums <- rep(NA, length(n))  
+    textNums[!is.na(n)] <- paste0(base,exponents)
+    
+    textReturn <- parse(text=textNums)
+    return(textReturn)
+  }
+  
   if(!is.na(fill_var)){
       basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
                             geom_boxplot(width = width),
@@ -532,7 +586,9 @@ boxplot_framework <- function(upper_limit,
   if(logY){
     return(c(basic_elements,
               scale_y_log10(limits = c(lower_limit, upper_limit),
-                  expand = expand_scale(mult = c(0, 0))),
+                  expand = expand_scale(mult = c(0, 0)),
+                  labels=fancyNumbers,
+                  breaks=prettyLogs),
               annotation_logticks(sides = c("rl"))))      
   } else {
     return(c(basic_elements,
@@ -564,7 +620,7 @@ chloride_plot <- ggplot(data = chloride,
 phos_plot <- ggplot(data = phos_data, 
        aes(x = month, y = result_va)) +
   boxplot_framework(upper_limit = 50,
-                    lower_limit = 0.01,
+                    lower_limit = 0.001,
                     logY = TRUE) +
   xlab(label = "Month") +
   #Shortened label since the graph area is smaller
@@ -794,6 +850,7 @@ ggplot_box_legend <- function(family = "serif"){
     theme(axis.text = element_blank(),
           axis.ticks = element_blank(),
           panel.grid = element_blank(),
+          aspect.ratio = 4/3,
           plot.title = element_text(hjust = 0.5, size = 10)) +
     coord_cartesian(xlim = c(1.4,3.1), ylim = c(-600, 900)) +
     labs(title = "EXPLANATION")
@@ -807,22 +864,19 @@ ggplot_box_legend()
 
 # Bring it together
 
-What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add the detection limits as horizontal lines to the phosphorous graph:
+What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add a reporting limit as horizontal lines to the phosphorous graph:
 
 ```{r picsWithDL, warning=FALSE, fig.height=5, fig.cap="Boxplot with additional ggplot2 features.", alt.text = "Boxplot with additional ggplot2 features."}
 
-DLs <- unique(as.numeric(phos_data$rpt_lev_va))
-DLs <- DLs[!is.na(DLs)]
-
 phos_plot_with_DL <- phos_plot +
   geom_hline(linetype = "dashed",
-             yintercept = DLs)
+             yintercept = 0.01)
 
 explain_plot_DL <- ggplot_box_legend() +
   geom_segment(aes(y = -650, yend = -650,
                x = 0.6, xend = 1.6),
            linetype="dashed") +
-  geom_text(aes(y = -650, x = 1.8, label = "Detection Limit"))
+  geom_text(aes(y = -650, x = 1.8, label = "Reporting Limit"))
 
 plot_grid(phos_plot_with_DL, 
           explain_plot_DL,
