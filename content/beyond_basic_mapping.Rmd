@@ -2,7 +2,7 @@
 title: "Beyond Basic R - Mapping"
 slug: "beyond-basic-mapping"
 author: "David Watkins"
-date: "2018-08-15"
+date: "2018-08-16"
 output: USGSmarkdowntemplates::hugo
 image: "static/beyond-basic-mapping/poly-map-state-1.png"
 description:  "Basic mapping in R with the maps and ggmap package"
@@ -47,7 +47,7 @@ opts_chunk$set(
 There are many different R packages for dealing with spatial data. The main distinctions between them involve the types of data they work with --- raster or vector --- and the sophistication of the analyses they can do.  Raster data can be thought of as pixels, similar to an image, while vector data consists of points, lines, or polygons.  Spatial data manipulation can be quite complex, but creating some basic plots can be done with just a few commands. In this post, we will show simple examples of raster and vector spatial data for plotting a watershed and gage locations, and link to some other more complex examples.
 
 #Setting up
-First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access [ScienceBase](https://www.sciencebase.gov/catalog/). The `st_read` function from the `sf` (for "simple features") package reads in the shapefile.  We will be using `sf` throughout these examples to manipulate the points and polygon for the gages and HUC.  Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package.  Both `dataRetrieval` and `sbtools` are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
+First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylvania, using the `sbtools` package to access [ScienceBase](https://www.sciencebase.gov/catalog/). The `st_read` function from the `sf` (for "simple features") package reads in the shapefile.  We will be using `sf` throughout these examples to manipulate the points and polygon for the gages and HUC.  Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package.  Both `dataRetrieval` and `sbtools` are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
 
 ```{r get_data}
 library(sbtools)
@@ -83,8 +83,8 @@ Note that `ggmap` is probably not a good choice if you need your data to be in a
 ```{r, raster_map_base, alt.text = "plain base maps", fig.cap = c("street base map","satellite base map")}
 library(ggmap)
 
-#setting zoom to 9 gives us a bit of padding around the bounding box
 bbox <- setNames(st_bbox(huc_poly), c("left", "bottom", "right", "top"))
+#setting zoom to 9 gives us a bit of padding around the bounding box
 basemap_streets <- get_map(maptype = "roadmap", location = bbox, zoom = 9)
 basemap_satellite <- get_map(maptype = "satellite", location = bbox, zoom = 9)
 street_map <- ggmap(basemap_streets) 

@@ -1,19 +1,14 @@
 ---
 author: David Watkins
-date: 2018-08-15
+date: 2018-08-16
 slug: beyond-basic-mapping
-draft: True
 title: Beyond Basic R - Mapping
 type: post
 categories: Data Science
 image: static/beyond-basic-mapping/poly-map-state-1.png
- 
 author_github: wdwatkins
- 
- 
 author_staff: william-d-watkins
 author_email: <wwatkins@usgs.gov>
-
 tags: 
   - R
   - Beyond Basic R
@@ -22,7 +17,6 @@ description: Basic mapping in R with the maps and ggmap package
 keywords:
   - R
   - Beyond Basic R
- 
   - ggmap
   - maps
 ---
@@ -34,7 +28,7 @@ There are many different R packages for dealing with spatial data. The main dist
 Setting up
 ==========
 
-First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylania, using the `sbtools` package to access [ScienceBase](https://www.sciencebase.gov/catalog/). The `st_read` function from the `sf` (for "simple features") package reads in the shapefile. We will be using `sf` throughout these examples to manipulate the points and polygon for the gages and HUC. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package. Both `dataRetrieval` and `sbtools` are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
+First, let's download an example shapefile (a polygon) of a HUC8 from western Pennsylvania, using the `sbtools` package to access [ScienceBase](https://www.sciencebase.gov/catalog/). The `st_read` function from the `sf` (for "simple features") package reads in the shapefile. We will be using `sf` throughout these examples to manipulate the points and polygon for the gages and HUC. Then we'll retrieve gages with discharge from this watershed using the `dataRetrieval` package. Both `dataRetrieval` and `sbtools` are covered in our [USGS Packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
 
 ``` r
 library(sbtools)
@@ -151,11 +145,11 @@ head(huc_gages)
     ## 964 122477       <NA>           wat        <NA> 1645423         0
     ##     begin_date   end_date count_nu
     ## 197 1987-10-03 1998-09-26     4011
-    ## 591 1991-10-01 2018-07-30     9799
-    ## 621 2001-12-13 2018-07-30     6073
-    ## 731 1991-10-01 2018-07-30     9799
-    ## 824 1991-10-15 2018-07-30     9785
-    ## 964 1991-10-01 2018-07-30     9799
+    ## 591 1991-10-01 2018-08-16     9816
+    ## 621 2001-12-13 2018-08-16     6090
+    ## 731 1991-10-01 2018-08-16     9816
+    ## 824 1991-10-15 2018-08-16     9802
+    ## 964 1991-10-01 2018-08-16     9816
 
 The `huc_poly` object is a new type of object that we haven't seen --- it has classes `sf` as well as `data.frame`. Looking inside the object with the `str` command, we can see it is structured very much like a `data.frame` with several factor columns, except for the `geometry` column, which is of type `sfc_POLYGON`. `sf` provides various functions to extract useful information from this kind object, generally prefixed with `st_`. `st_geometry` extracts the entire geometry part of the object; `st_bbox` extracts the bounding box from the geometry; and `st_crs` extracts the coordinate reference system. There are others, but we will use these three to get the parts of the `sf` object we need for plotting.
 
@@ -171,8 +165,8 @@ Note that `ggmap` is probably not a good choice if you need your data to be in a
 ``` r
 library(ggmap)
 
-#setting zoom to 9 gives us a bit of padding around the bounding box
 bbox <- setNames(st_bbox(huc_poly), c("left", "bottom", "right", "top"))
+#setting zoom to 9 gives us a bit of padding around the bounding box
 basemap_streets <- get_map(maptype = "roadmap", location = bbox, zoom = 9)
 basemap_satellite <- get_map(maptype = "satellite", location = bbox, zoom = 9)
 street_map <- ggmap(basemap_streets) 
