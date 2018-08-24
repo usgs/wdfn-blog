@@ -25,11 +25,11 @@ keywords:
   - git
  
 ---
-Depending on how new you are to software development and/or R programming, you may have heard people mention version control, Git, or GitHub. Version control refers to the idea of tracking changes to files through time and various contributors. Git is an example of a version control programming language, and GitHub is a popular web interface for Git. That’s it. Easy!
+Depending on how new you are to software development and/or R programming, you may have heard people mention version control, Git, or GitHub. Version control refers to the idea of tracking changes to files through time and various contributors. Git is an example of a version control tool, and GitHub is a popular web interface for Git. That’s it. Easy!
 
-***But wait, I would need to learn an additional programming language?***
+***But wait, I would need to learn an additional tool?***
 
-Yes, kind of. Git is a language you use to perform various commands that help you track your changes. Luckily, you don’t need to know too many commands in Git to use the basic functionality. As an added bonus, using Git with RStudio takes away some of the burden of knowing Git commands by including buttons for common actions.
+Yes, but don't panic! Git is a tool with various commands that you can use to help track your changes. Luckily, you don’t need to know too many commands in Git to use the basic functionality. As an added bonus, using Git with RStudio takes away some of the burden of knowing Git commands by including buttons for common actions.
 
 As with any tool that you pick up to help your scientific workflows, there is some upfront work before you can start seeing the benefits. Don’t let that deter you. Git can be very easy once you get the gist. Think about the benefits of being able to track changes: you can make some changes, have a record of that change and who made it, and you can tie that change to a specific problem that was reported or feature request that was noted.
 
