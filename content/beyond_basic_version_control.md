@@ -1,8 +1,7 @@
 ---
 author: Lindsay R Carr
-date: 2018-08-22
+date: 2018-08-27
 slug: beyond-basic-git
-draft: True
 title: Beyond Basic R - Version Control with Git
 type: post
 categories: Data Science
@@ -52,7 +51,7 @@ There are many existing blogs and websites that dive into how to use these tools
 -   [Happy Git and GitHub for the useR](http://happygitwithr.com/) (Jenny Bryan)
 -   [Git guides](https://maraaverick.rbind.io/2017/12/git-guides/) (Mara Averick)
 -   [Git and GitHub](http://r-pkgs.had.co.nz/git.html) from R Packages (Hadley Wickham)
--   [Version control with Git](https://www.r-bloggers.com/version-control-with-git/) (R-bloggers)
+-   [Version control with Git](https://rmhogervorst.nl/cleancode/blog/2016/03/01/content/post/2016-03-01-version-control-start/) (Roel M. Hogervorst)
 
 ------------------------------------------------------------------------
 
