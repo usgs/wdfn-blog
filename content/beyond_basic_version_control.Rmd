@@ -2,7 +2,7 @@
 title: "Beyond Basic R - Version Control with Git"
 author: "Lindsay R Carr"
 slug: "beyond-basic-git"
-date: "2018-08-27"
+date: "2018-08-24"
 description: "Brief introduction to version control, Git, and GitHub; plus, resources for learning more."
 image: "static/beyond-basic-version-control/github-workflow-basic.png"
 tag1: "Beyond Basic R"

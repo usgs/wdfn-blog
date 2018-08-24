@@ -1,6 +1,6 @@
 ---
 author: Lindsay R Carr
-date: 2018-08-27
+date: 2018-08-24
 slug: beyond-basic-git
 title: Beyond Basic R - Version Control with Git
 type: post
