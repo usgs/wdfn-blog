@@ -3,7 +3,7 @@ author: Lindsay R Carr
 date: 2018-08-22
 slug: beyond-basic-git
 draft: True
-title: Beyond Basic R - Version Control via Git
+title: Beyond Basic R - Version Control with Git
 type: post
 categories: Data Science
 image: static/beyond-basic-version-control/github-workflow-basic.png
@@ -26,7 +26,7 @@ keywords:
   - git
  
 ---
-Depending on how new you are to software development and/or R programming, you may have heard people mention version control, Git, or GitHub. Version control refers to the idea of tracking changes to files through time and various contributors. Git is an example of a version control programming language, and GitHub is the web interface for Git. That’s it. Easy!
+Depending on how new you are to software development and/or R programming, you may have heard people mention version control, Git, or GitHub. Version control refers to the idea of tracking changes to files through time and various contributors. Git is an example of a version control programming language, and GitHub is a popular web interface for Git. That’s it. Easy!
 
 ***But wait, I would need to learn an additional programming language?***
 
@@ -47,7 +47,7 @@ Ease into using Git and GitHub. There is no need need to jump into the deep end 
 
 If you’d rather start by getting a project setup in Git and GitHub, you can follow our [lesson on version control in the R Package Development](https://owi.usgs.gov/R/training-curriculum/r-package-dev/git/) curriculum. Please note that you don’t need to be creating an R package to use Git or GitHub. Here is [an example of a basic R project](https://github.com/USGS-R/exampleRproj) that has R code, is not a package, and uses Git and GitHub.
 
-There are many existing blogs and websites that dive into how to use these tools. There are also many different ways to use apply Git and GitHub to create an effective workflow. We suggest you follow the typical workflow used by the community at USGS-R, see our [lesson on version control from the R Package Development](https://owi.usgs.gov/R/training-curriculum/r-package-dev/git/#our-recommended-workflow) course. Here are some other resources for mastering Git and GitHub:
+There are many existing blogs and websites that dive into how to use these tools. There are also many different ways to use apply Git and GitHub to create an effective workflow. We suggest you follow the typical workflow used by the community at USGS-R; see our [lesson on version control from the R Package Development](https://owi.usgs.gov/R/training-curriculum/r-package-dev/git/#our-recommended-workflow) course. Here are some other resources for mastering Git and GitHub:
 
 -   [Happy Git and GitHub for the useR](http://happygitwithr.com/) (Jenny Bryan)
 -   [Git guides](https://maraaverick.rbind.io/2017/12/git-guides/) (Mara Averick)
