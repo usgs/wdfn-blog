@@ -2,7 +2,7 @@
 title: "Pretty big data... now what?"
 slug: "formats"
 author: "Laura DeCicco"
-requested_date: "2018-08-30"
+date: "2018-08-30"
 image: "static/formats/visualizeBox-1.png"
 keyword1: files
 keyword2: io

@@ -1,6 +1,6 @@
 ---
 author: Laura DeCicco
-date: 
+date: 2018-08-31
 slug: formats
 draft: True
 title: Pretty big data... now what?
