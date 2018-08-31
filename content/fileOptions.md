@@ -1,6 +1,6 @@
 ---
 author: Laura DeCicco
-date: 2018-08-30
+date: 
 slug: formats
 draft: True
 title: Pretty big data... now what?
@@ -43,9 +43,9 @@ If a single file can be easily passed around to coworkers, and loaded entirely i
 
 Not being an expert, I asked and got great advice from members of the [rOpenSci](https://ropensci.org/) community. This is what I learned:
 
--   "Identify how much CRUD (create, read, update, delete) you need to do over time and how complicated your conceptual model is. If you need people to be interacting and changing data a shared database can help add change tracking and important constraints to data inputs. If you have multiple things that interact like sites, species, field people, measurement classes, complicated date concepts etc then the db can help." (Steph Locke)
+-   "Identify how much CRUD (create, read, uprequested\_date, delete) you need to do over time and how complicated your conceptual model is. If you need people to be interacting and changing data a shared database can help add change tracking and important constraints to data inputs. If you have multiple things that interact like sites, species, field people, measurement classes, complicated requested\_date concepts etc then the db can help." (Steph Locke)
 
--   "One thing to consider is whether the data are updated and how and by single or multiple processes." (Elin Waring)
+-   "One thing to consider is whether the data are uprequested\_dated and how and by single or multiple processes." (Elin Waring)
 
 -   "I encourage people towards databases when/if they need to make use of all the validation logic you can put into databases. If they just need to query, a pattern I like is to keep the data in a text-based format like CSV/TSV and load the data into sqlite for querying." (Bryce Mecum)
 
@@ -62,7 +62,7 @@ I will be using a large data frame to test `data.table`,`readr`, `fst`, `feather
 
 What is in the data frame is not important to this analysis. Keep in mind your own personal "biggish" data frame and your hardware might have different results.
 
-Let's start by loading the whole file into memory. The columns are a mix of factors, characters, numerics, dates, and logicals.
+Let's start by loading the whole file into memory. The columns are a mix of factors, characters, numerics, requested\_dates, and logicals.
 
 ``` r
 biggish <- readRDS("test.rds")
@@ -92,75 +92,96 @@ library(fst)
 library(RSQLite)
 library(MonetDBLite)
 
-sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
-con <- dbConnect(MonetDBLite::MonetDBLite(), dbname="test.montdb")
+tested <- c("rds","rds_compressed","readr","readr_compressed",
+            "fread","feather","fst","fst_compressed",
+            "sqlite","monetDB","monetDB_csv")
+file_name <- setNames(c("test.rds","test_compressed.rds",
+                        "test_readr.csv","test_readr.csv.gz",
+                        "test.csv","test.feather",
+                        "test.fst", "test_compressed.fst","test.sqlite",
+                        "test.montdb","test.csv"),tested)
 
 write_times <- microbenchmark(
-  rds = saveRDS(biggish, "test.rds",compress = FALSE),
-  rds_compressed = saveRDS(biggish, "test_compressed.rds"),
-  readr = write_csv(biggish, "test_readr.csv"),
-  readr_compressed = write_csv(biggish, "test_readr.csv.gz"),
-  fread = fwrite(biggish, "test.csv"),
-  feather = write_feather(biggish, "test.feather"),
-  fst = write_fst(biggish, "test.fst", compress = 0),
-  fst_compressed = write_fst(biggish, "test_compressed.fst", compress = 100),
-  sqlite = dbWriteTable(sqldb,name =  "test", biggish, 
+  rds = saveRDS(biggish, file_name[["rds"]],compress = FALSE),
+  rds_compressed = saveRDS(biggish, file_name[["rds_compressed"]]),
+  readr = write_csv(biggish, file_name[["readr"]]),
+  readr_compressed = write_csv(biggish, file_name[["readr_compressed"]]),
+  fread = fwrite(biggish, file_name[["fread"]]),
+  feather = write_feather(biggish, file_name[["feather"]]),
+  fst = write_fst(biggish, file_name[["fst"]], compress = 0),
+  fst_compressed = write_fst(biggish, file_name[["fst_compressed"]], compress = 100),
+  sqlite = {sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
+  dbWriteTable(sqldb,name =  "test", biggish, 
              row.names=FALSE, overwrite=TRUE,
-             append=FALSE, field.types=NULL),
-  monetDB_write = dbWriteTable(con, name = "test", biggish,
+             append=FALSE, field.types=NULL)
+  dbDisconnect(sqldb)
+  },
+  monetDB_write = { 
+    con <- dbConnect(MonetDBLite(), dbname="test.montdb")
+    dbWriteTable(con, name = "test", biggish,
                  row.names=FALSE, overwrite=TRUE,
-                 append=FALSE, field.types=NULL),
+                 append=FALSE, field.types=NULL)
+    dbDisconnect(con, shutdown=TRUE)},
+  monetDB_write_csv = NA,
   times = 1
 )
+
+monet.read.csv <- function(file) {
+  monet.con <- DBI::dbConnect(MonetDBLite::MonetDBLite(), ":memory:")
+  suppressMessages(MonetDBLite::monetdb.read.csv(monet.con, file, "file", sep = ",",best.effort = TRUE))
+  result <- DBI::dbReadTable(monet.con, "file")
+  DBI::dbDisconnect(monet.con, shutdown = T)
+  return(result)  
+}
 
 read_times <- microbenchmark(
-  rds_df <- readRDS("test.rds"),
-  rds_compressed_df <- readRDS("test_compressed.rds"),
-  readr_df <- read_csv("test_readr.csv"),
-  readr_compressed_df = read_csv("test_readr.csv.gz"),
-  fread_df <- fread("test.csv"),
-  feather_df <- read_feather("test.feather"),
-  fst_df <- read.fst("test.fst"),
-  fst_compressed_df <- read.fst("test_compressed.fst"),
-  sql_df <- dbGetQuery(sqldb, "SELECT * FROM test"),
-  montDB_df <- dbGetQuery(con, "SELECT * FROM test"),
+  rds_df <- readRDS(file_name[["rds"]]),
+  rds_compressed_df <- readRDS(file_name[["rds_compressed"]]),
+  readr_df <- read_csv(file_name[["readr"]]),
+  readr_compressed_df = read_csv(file_name[["readr_compressed"]]),
+  fread_df <- fread(file_name[["fread"]]),
+  feather_df <- read_feather(file_name[["feather"]]),
+  fst_df <- read.fst(file_name[["fst"]]),
+  fst_compressed_df <- read.fst(file_name[["fst_compressed"]]),
+  sql_df <- {
+    sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
+    dbGetQuery(sqldb, "SELECT * FROM test")
+    dbDisconnect(sqldb)},
+  monetDB_df <- {
+    con <- dbConnect(MonetDBLite(), dbname="test.montdb")
+    dbGetQuery(con, "SELECT * FROM test")
+    dbDisconnect(con, shutdown=TRUE)},
+  monetDB_csv <- monet.read.csv(file_name[["monetDB_csv"]]),
   times = 1
 )
-dbDisconnect(sqldb)
-dbDisconnect(con)
 
 file_size <- c()
-file_size[["rds"]] <- file.info("test.rds")[["size"]]
-file_size[["rds_compressed"]] <- file.info("test_compressed.rds")[["size"]]
-file_size[["readr"]] <- file.info("test_readr.csv")[["size"]]
-file_size[["readr_compressed"]] <- file.info("test_readr.csv.gz")[["size"]]
-file_size[["fread"]] <- file.info("test.csv")[["size"]]
-file_size[["feather"]] <- file.info("test.feather")[["size"]]
-file_size[["fst"]] <- file.info("test.fst")[["size"]]
-file_size[["fst_compressed"]] <- file.info("test_compressed.fst")[["size"]]
-file_size[["sqlite"]] <- file.info("test.sqlite")[["size"]]
-file_size[["monetDB"]] <- file.info("test.montdb")[["size"]]
+
+for(file_to_measure in names(file_name)){
+  file_size[[file_to_measure]] <- file.info(file_name[[file_to_measure]])[["size"]]
+}
 
 knitr::kable(data.frame(file_size/10^6,
                         summary(write_times)$median,
                         summary(read_times)$median), 
-             digits = c(1,1,1),col.names = c("File Size","Write Time", "Read Time"))
+             digits = c(1,1,1),col.names = c("File Size (MB)","Write Time(seconds)", "Read Time(seconds)"))
 ```
 
-|                   |  File Size|  Write Time|  Read Time|
-|-------------------|----------:|-----------:|----------:|
-| rds               |     1280.6|        24.6|       37.5|
-| rds\_compressed   |       55.4|        61.9|       53.8|
-| readr             |      703.9|        86.5|       28.3|
-| readr\_compressed |       65.7|        74.3|       40.1|
-| fread             |      503.7|         2.7|       13.0|
-| feather           |      818.4|         3.8|       11.8|
-| fst               |      988.6|         8.3|        8.0|
-| fst\_compressed   |      121.8|        13.0|        9.5|
-| sqlite            |      464.2|        36.8|       50.6|
-| monetDB           |        0.0|        42.8|        6.1|
+|                   |  File Size (MB)|  Write Time(seconds)|  Read Time(seconds)|
+|-------------------|---------------:|--------------------:|-------------------:|
+| rds               |          1280.6|          23718712554|                37.1|
+| rds\_compressed   |            55.4|          59535221658|                25.1|
+| readr             |           703.9|          75741387245|                22.0|
+| readr\_compressed |            65.7|          72301143892|                23.3|
+| fread             |           503.7|           2037711038|                 6.3|
+| feather           |           818.4|           4186654260|                 4.7|
+| fst               |           988.6|           5536972050|                 5.7|
+| fst\_compressed   |           121.8|           9906188766|                 3.9|
+| sqlite            |           464.2|          29701176137|                23.0|
+| monetDB           |             0.0|          30060578173|                13.8|
+| monetDB\_csv      |           503.7|                  428|                30.0|
 
-MonetDBLite was tacked on at the last minute to this blog. I'm not sure if there's a single file that can be shared. It seems like a whole folder. So...that might be out of running for our criteria...but I'll keep it in anyway.
+MonetDBLite was tacked on at the last minute to this blog. I'm not 100% sure I'm doing things the most efficient way. It can read a csv file, which is tested in the read. I don't think it writes a single file, it seems to write a folder. I tried to follow some examples from [here](https://statcompute.wordpress.com/2018/05/09/mimicking-sqldf-with-monetdblite/).
 
 Note! I didn't explore adjusting the `nThread` argument in `fread`/`fwrite`. I also didn't include a compressed version of `fread`/`fwrite`. Our crew is a hog-pog of Windows, Mac, and Linux, and we try to make our code work on any OS. Many of the solutions for combining compression with `data.table` functions looked fragile on the different OS. For the same reason, I didn't try compressing the `feather` format. Both `data.table` and `feather` have open GitHub issues to support compression in the future. It may be worth updating this script once those features are added.
 
@@ -171,7 +192,7 @@ If you can read in all your data at once, that's all the analysis you need (assu
 Read partial files
 ------------------
 
-All that's well and good, but there are many instances in our "biggish" data projects that we don't always need nor want ALL the data. The following tests how these packages compare to eachother grabbing a subset of the data. I'm going to pull out a date column, numeric, and string, and only rows that have specific strings and greater than a threshold.
+All that's well and good, but there are many instances in our "biggish" data projects that we don't always need nor want ALL the data. The following tests how these packages compare to eachother grabbing a subset of the data. I'm going to pull out a requested\_date column, numeric, and string, and only rows that have specific strings and greater than a threshold.
 
 Here's what we're trying to get:
 
@@ -181,7 +202,7 @@ library(dplyr)
 smallish <- readRDS("test.rds") %>%
   filter(bytes > 100000,
          grepl("00060",parametercds)) %>%
-  select(bytes, Date, parametercds) 
+  select(bytes, requested_date, parametercds) 
 ```
 
 Here's how I figured out how to load that data in other ways. I would be happy to hear if there are other methods I've missed!
@@ -189,9 +210,9 @@ Here's how I figured out how to load that data in other ways. I would be happy t
 ### feather
 
 ``` r
-db_feather <- feather("test.feather")
+db_feather <- feather(file_name[["feather"]])
 
-smallish_feather <- db_feather[,c("bytes","Date","parametercds")] %>%
+smallish_feather <- db_feather[,c("bytes","requested_date","parametercds")] %>%
   filter(bytes > 100000,
          grepl("00060",parametercds))
 ```
@@ -199,9 +220,15 @@ smallish_feather <- db_feather[,c("bytes","Date","parametercds")] %>%
 ### fst
 
 ``` r
-db_fst <- fst("test.fst")
+db_fst <- fst(file_name[["fst"]])
 
-smallish_fst <- db_fst[,c("bytes","Date","parametercds")] %>%
+smallish_fst <- db_fst[,c("bytes","requested_date","parametercds")] %>%
+  filter(bytes > 100000,
+         grepl("00060",parametercds))
+
+db_fst <- fst(file_name[["fst_compressed"]])
+
+smallish_fst_compressed <- db_fst[,c("bytes","requested_date","parametercds")] %>%
   filter(bytes > 100000,
          grepl("00060",parametercds))
 ```
@@ -209,8 +236,8 @@ smallish_fst <- db_fst[,c("bytes","Date","parametercds")] %>%
 ### fread
 
 ``` r
-smallish_fread <- fread("test.csv", 
-                      select = c("bytes","Date","parametercds")) %>%
+smallish_fread <- fread(file_name[["fread"]], 
+                      select = c("bytes","requested_date","parametercds")) %>%
   filter(bytes > 100000,
          grepl("00060",parametercds)) 
 ```
@@ -220,10 +247,10 @@ smallish_fread <- fread("test.csv",
 ``` r
 library(dbplyr)
 
-sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
+sqldb <- dbConnect(SQLite(), dbname=file_name[["sqlite"]])
 
 smallish_sqlite <- tbl(sqldb,"test") %>%
-  select(bytes, Date, parametercds) %>%
+  select(bytes, requested_date, parametercds) %>%
   filter(bytes > 100000,
          parametercds %like% '%00060%') %>%
   collect()
@@ -236,15 +263,15 @@ dbDisconnect(sqldb)
 ``` r
 library(dbplyr)
 
-con <- dbConnect(MonetDBLite::MonetDBLite(), dbname="test.montdb")
+con <- dbConnect(MonetDBLite::MonetDBLite(), dbname=file_name[["monetDB"]])
 
 smallish_monet <- tbl(con,"test") %>%
-  select(bytes, Date, parametercds) %>%
+  select(bytes, requested_date, parametercds) %>%
   filter(bytes > 100000,
          parametercds %like% '%00060%') %>%
   collect()
 
-dbDisconnect(con)
+dbDisconnect(con, shutdown=TRUE)
 ```
 
 ### Comparisons
@@ -253,58 +280,62 @@ dbDisconnect(con)
 library(dplyr)
 library(dbplyr)
 
+sqldb <- dbConnect(SQLite(), dbname=file_name[["sqlite"]])
+con <- dbConnect(MonetDBLite(), dbname=file_name[["monetDB"]])
+
 partial_read <- microbenchmark(
-  rds = {smallish <- readRDS("test.rds") %>%
+  rds = {smallish <- readRDS(file_name[["rds"]]) %>%
               filter(bytes > 100000,
                      grepl("00060",parametercds)) %>%
-              select(bytes, Date, parametercds) },
-  fread = {smallish_fread <- fread("test.csv", 
-              select = c("bytes","Date","parametercds")) %>%
+              select(bytes, requested_date, parametercds) },
+  fread = {smallish_fread <- fread(file_name[["fread"]], 
+              select = c("bytes","requested_date","parametercds")) %>%
               filter(bytes > 100000,
                      grepl("00060",parametercds)) },
-  feather = {db_feather <- feather("test.feather")
-              smallish_feather <- db_feather[,c("bytes","Date","parametercds")] %>%
+  feather = {db_feather <- feather(file_name[["feather"]])
+              smallish_feather <- db_feather[,c("bytes","requested_date","parametercds")] %>%
                 filter(bytes > 100000,
                        grepl("00060",parametercds))},
-  fst = {db_fst <- fst("test.fst")
-          smallish_fst <- db_fst[,c("bytes","Date","parametercds")] %>%
+  fst = {db_fst <- fst(file_name[["fst"]])
+          smallish_fst <- db_fst[,c("bytes","requested_date","parametercds")] %>%
                 filter(bytes > 100000,
                        grepl("00060",parametercds))},
-  sqlite = {sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
-            smallish_sqlite <- tbl(sqldb,"test") %>%
-            select(bytes, Date, parametercds) %>%
+  fst_compressed = {db_fst <- fst(file_name[["fst_compressed"]])
+          smallish_fst <- db_fst[,c("bytes","requested_date","parametercds")] %>%
+                filter(bytes > 100000,
+                       grepl("00060",parametercds))},
+  sqlite = {smallish_sqlite <- tbl(sqldb,"test") %>%
+            select(bytes, requested_date, parametercds) %>%
             filter(bytes > 100000,
                    parametercds %like% '%00060%') %>%
-            collect()
-          
-          dbDisconnect(sqldb)},
-  monetDB = {
-    con <- dbConnect(MonetDBLite::MonetDBLite(), dbname="test.montdb")
-
-    smallish_monet <- tbl(con,"test") %>%
-      select(bytes, Date, parametercds) %>%
+            collect()},
+  monetDB = {smallish_monet <- tbl(con,"test") %>%
+      select(bytes, requested_date, parametercds) %>%
       filter(bytes > 100000,
              parametercds %like% '%00060%') %>%
-      collect()
-    
-    dbDisconnect(con)
-  },
+      collect()},
   times = 1
 )
 
+dbDisconnect(sqldb)
+dbDisconnect(con, shutdown=TRUE)
+
 knitr::kable(data.frame(names(summary(partial_read$expr)),
                         summary(partial_read)$median),digits = c(1,1),
-             col.names = c("","Read Time (ms)"))
+             col.names = c("","Read Time (seconds)"))
 ```
 
-|         |  Read Time (ms)|
-|---------|---------------:|
-| rds     |            39.2|
-| fread   |             4.9|
-| feather |             5.3|
-| fst     |             2.6|
-| sqlite  |            19.8|
-| monetDB |             2.2|
+|                 |  Read Time (seconds)|
+|-----------------|--------------------:|
+| rds             |                 34.3|
+| fread           |                  3.0|
+| feather         |                  2.1|
+| fst             |                  2.1|
+| fst\_compressed |                  1.6|
+| sqlite          |                 13.7|
+| monetDB         |                  1.6|
+
+Note that only sqlite and monetDB actually filtered out rows before collecting the data. The other options in this table only filtered out columns on the collection. If the data is even bigger than this "biggish" dataframe, that will be important.
 
 So...what have I learned now? There are a bunch of good options. Depending on how we're creating, sharing, and opening the files, I think there are best choices.
 
@@ -319,28 +350,28 @@ use_credentials()
 bucket_name <- "ds-nwis-logs"
 
 upload_times <- microbenchmark(
-  rds = put_object("test.rds", bucket = bucket_name),
-  rds_compressed <- put_object("test_compressed.rds", bucket = bucket_name),
-  readr <- put_object("test_readr.csv", bucket = bucket_name),
-  readr_compressed = put_object("test_readr.csv.gz", bucket = bucket_name),
-  fread <- put_object("test.csv", bucket = bucket_name),
-  feather <- put_object("test.feather", bucket = bucket_name),
-  fst <- put_object("test.fst", bucket = bucket_name),
-  fst_compressed <- put_object("test_compressed.fst", bucket = bucket_name),
-  sql <- put_object("test.sqlite", bucket = bucket_name),
+  rds = put_object(file_name[["rds"]], bucket = bucket_name),
+  rds_compressed <- put_object(file_name[["rds_compressed"]], bucket = bucket_name),
+  readr <- put_object(file_name[["readr"]], bucket = bucket_name),
+  readr_compressed = put_object(file_name[["readr_compressed"]], bucket = bucket_name),
+  fread <- put_object(file_name[["fread"]], bucket = bucket_name),
+  feather <- put_object(file_name[["feather"]], bucket = bucket_name),
+  fst <- put_object(file_name[["fst"]], bucket = bucket_name),
+  fst_compressed <- put_object(file_name[["fst_compressed"]], bucket = bucket_name),
+  sql <- put_object(file_name[["sqlite"]], bucket = bucket_name),
   times = 1
 )
 
 download_times <- microbenchmark(
-  rds = save_object("test.rds", bucket = bucket_name, overwrite = TRUE),
-  rds_compressed <- save_object("test_compressed.rds", bucket = bucket_name, overwrite = TRUE),
-  readr = save_object("test_readr.csv", bucket = bucket_name, overwrite = TRUE),
-  readr_compressed = save_object("test_readr.csv.gz", bucket = bucket_name, overwrite = TRUE),
-  fread = save_object("test.csv", bucket = bucket_name),
-  feather = save_object("test.feather", bucket = bucket_name, overwrite = TRUE),
-  fst = save_object("test.fst", bucket = bucket_name, overwrite = TRUE),
-  fst_compressed = save_object("test_compressed.fst", bucket = bucket_name, overwrite = TRUE),
-  sql = save_object("test.sqlite", bucket = bucket_name, overwrite = TRUE),
+  rds = save_object(file_name[["rds"]], bucket = bucket_name, overwrite = TRUE),
+  rds_compressed <- save_object(file_name[["rds_compressed"]], bucket = bucket_name, overwrite = TRUE),
+  readr = save_object(file_name[["readr"]], bucket = bucket_name, overwrite = TRUE),
+  readr_compressed = save_object(file_name[["readr_compressed"]], bucket = bucket_name, overwrite = TRUE),
+  fread = save_object(file_name[["fread"]], bucket = bucket_name),
+  feather = save_object(file_name[["feather"]], bucket = bucket_name, overwrite = TRUE),
+  fst = save_object(file_name[["fst"]], bucket = bucket_name, overwrite = TRUE),
+  fst_compressed = save_object(file_name[["fst_compressed"]], bucket = bucket_name, overwrite = TRUE),
+  sql = save_object(file_name[["sqlite"]], bucket = bucket_name, overwrite = TRUE),
   times = 1
 )
 
