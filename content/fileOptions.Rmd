@@ -129,7 +129,6 @@ write_times <- microbenchmark(
                  row.names=FALSE, overwrite=TRUE,
                  append=FALSE, field.types=NULL)
     dbDisconnect(con, shutdown=TRUE)},
-  monetDB_write_csv = NA,
   times = 1
 )
 
@@ -168,8 +167,11 @@ for(file_to_measure in names(file_name)){
   file_size[[file_to_measure]] <- file.info(file_name[[file_to_measure]])[["size"]]
 }
 
+# MonetDB isn't really 0...it's a folder:
+file_size[file_size == 0] <- NA
+
 knitr::kable(data.frame(file_size/10^6,
-                        summary(write_times)$median,
+                        c(summary(write_times)$median,NA),
                         summary(read_times)$median), 
              digits = c(1,1,1),col.names = c("File Size (MB)","Write Time(seconds)", "Read Time(seconds)"))
 

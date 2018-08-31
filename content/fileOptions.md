@@ -1,6 +1,6 @@
 ---
 author: Laura DeCicco
-date: 2018-08-31
+date: 2018-08-30
 slug: formats
 draft: True
 title: Pretty big data... now what?
@@ -122,7 +122,6 @@ write_times <- microbenchmark(
                  row.names=FALSE, overwrite=TRUE,
                  append=FALSE, field.types=NULL)
     dbDisconnect(con, shutdown=TRUE)},
-  monetDB_write_csv = NA,
   times = 1
 )
 
@@ -161,25 +160,28 @@ for(file_to_measure in names(file_name)){
   file_size[[file_to_measure]] <- file.info(file_name[[file_to_measure]])[["size"]]
 }
 
+# MonetDB isn't really 0...it's a folder:
+file_size[file_size == 0] <- NA
+
 knitr::kable(data.frame(file_size/10^6,
-                        summary(write_times)$median,
+                        c(summary(write_times)$median,NA),
                         summary(read_times)$median), 
              digits = c(1,1,1),col.names = c("File Size (MB)","Write Time(seconds)", "Read Time(seconds)"))
 ```
 
 |                   |  File Size (MB)|  Write Time(seconds)|  Read Time(seconds)|
 |-------------------|---------------:|--------------------:|-------------------:|
-| rds               |          1280.6|          23718712554|                37.1|
-| rds\_compressed   |            55.4|          59535221658|                25.1|
-| readr             |           703.9|          75741387245|                22.0|
-| readr\_compressed |            65.7|          72301143892|                23.3|
-| fread             |           503.7|           2037711038|                 6.3|
-| feather           |           818.4|           4186654260|                 4.7|
-| fst               |           988.6|           5536972050|                 5.7|
-| fst\_compressed   |           121.8|           9906188766|                 3.9|
-| sqlite            |           464.2|          29701176137|                23.0|
-| monetDB           |             0.0|          30060578173|                13.8|
-| monetDB\_csv      |           503.7|                  428|                30.0|
+| rds               |          1280.6|                 30.6|                31.2|
+| rds\_compressed   |            55.4|                 52.0|                31.0|
+| readr             |           703.9|                 78.3|                17.6|
+| readr\_compressed |            65.7|                127.3|                31.3|
+| fread             |           503.7|                  2.3|                 8.8|
+| feather           |           818.4|                  4.2|                13.1|
+| fst               |           988.6|                  6.5|                 4.3|
+| fst\_compressed   |           121.8|                 13.2|                 6.1|
+| sqlite            |           464.2|                 49.3|                30.4|
+| monetDB           |             NA|                 41.2|                18.0|
+| monetDB\_csv      |           503.7|                   NA|                31.8|
 
 MonetDBLite was tacked on at the last minute to this blog. I'm not 100% sure I'm doing things the most efficient way. It can read a csv file, which is tested in the read. I don't think it writes a single file, it seems to write a folder. I tried to follow some examples from [here](https://statcompute.wordpress.com/2018/05/09/mimicking-sqldf-with-monetdblite/).
 
