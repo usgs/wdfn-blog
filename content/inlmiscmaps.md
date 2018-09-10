@@ -18,6 +18,7 @@ keywords:
   - inlmisc
   - leaflet
 description: Using the R-package inlmisc to create static and dynamic maps.
+draft: True
 ---
 
 
@@ -64,7 +65,7 @@ Next, plot a map from the gridded data and include a scale bar and vertical lege
 
 
 ```r
-Pal <- function(n) viridisLite::viridis(n, begin = 0.2)  # color palette
+Pal <- function(n) inlmisc::GetTolColors(n, start=0.3, end=0.9)  # color palette
 breaks <- seq(0, 2000, by = 200)  # break points used to partition colors
 credit <- paste("Data collected in a flood plain of the river Meuse,",
                 "near the village of Stein (Netherlands),",
@@ -74,7 +75,7 @@ inlmisc::PlotMap(r, breaks = breaks, pal = Pal, dms.tick = TRUE, bg.lines = TRUE
                  contour.lines = list(col = "#1F1F1F"), credit = credit,
                  draw.key = FALSE, simplify = 0)
 inlmisc::AddScaleBar(unit = c("KILOMETER", "MILES"), conv.fact = c(0.001, 0.0006214),
-                     loc = "bottomright", offset = c(-0.4, 0.1))
+                     loc = "bottomright", inset = c(0.12, 0.05))
 inlmisc::AddGradientLegend(breaks, Pal, at = breaks,
                            title = "Topsoil zinc\nconcentration\n(ppm)",
                            loc = "topleft", inset = c(0.05, 0.1),
@@ -287,7 +288,7 @@ R-session information for content in this document is as follows:
 ##  language (EN)                        
 ##  collate  English_United States.1252  
 ##  tz       America/Los_Angeles         
-##  date     2018-07-20                  
+##  date     2018-09-10                  
 ## 
 ##  package        * version date       source        
 ##  backports        1.1.2   2017-12-13 CRAN (R 3.5.0)
@@ -297,9 +298,9 @@ R-session information for content in this document is as follows:
 ##  crosstalk        1.0.0   2016-12-21 CRAN (R 3.5.1)
 ##  datasets       * 3.5.1   2018-07-02 local         
 ##  devtools         1.13.6  2018-06-27 CRAN (R 3.5.1)
-##  digest           0.6.15  2018-01-28 CRAN (R 3.5.1)
+##  digest           0.6.16  2018-08-22 CRAN (R 3.5.1)
 ##  evaluate         0.11    2018-07-17 CRAN (R 3.5.1)
-##  FNN              1.1     2013-07-31 CRAN (R 3.5.1)
+##  FNN              1.1.2.1 2018-08-10 CRAN (R 3.5.1)
 ##  graphics       * 3.5.1   2018-07-02 local         
 ##  grDevices      * 3.5.1   2018-07-02 local         
 ##  grid             3.5.1   2018-07-02 local         
@@ -307,41 +308,39 @@ R-session information for content in this document is as follows:
 ##  htmltools        0.3.6   2017-04-28 CRAN (R 3.5.1)
 ##  htmlwidgets      1.2     2018-04-19 CRAN (R 3.5.1)
 ##  httpuv           1.4.5   2018-07-19 CRAN (R 3.5.1)
-##  igraph           1.2.1   2018-03-10 CRAN (R 3.5.1)
-##  inlmisc          0.4.2   2018-07-14 CRAN (R 3.5.1)
+##  igraph           1.2.2   2018-07-27 CRAN (R 3.5.1)
+##  inlmisc          0.4.3   2018-09-10 CRAN (R 3.5.1)
 ##  intervals        0.15.1  2015-08-27 CRAN (R 3.5.0)
 ##  jsonlite         1.5     2017-06-01 CRAN (R 3.5.1)
 ##  knitr            1.20    2018-02-20 CRAN (R 3.5.1)
-##  later            0.7.3   2018-06-08 CRAN (R 3.5.1)
+##  later            0.7.4   2018-08-31 CRAN (R 3.5.1)
 ##  lattice          0.20-35 2017-03-25 CRAN (R 3.5.1)
-##  leaflet          2.0.1   2018-06-04 CRAN (R 3.5.1)
+##  leaflet          2.0.2   2018-08-27 CRAN (R 3.5.1)
 ##  leaflet.extras   1.0.0   2018-04-21 CRAN (R 3.5.1)
 ##  magrittr         1.5     2014-11-22 CRAN (R 3.5.1)
 ##  memoise          1.1.0   2017-04-21 CRAN (R 3.5.1)
 ##  methods        * 3.5.1   2018-07-02 local         
 ##  mime             0.5     2016-07-07 CRAN (R 3.5.0)
-##  pkgconfig        2.0.1   2017-03-21 CRAN (R 3.5.1)
+##  pkgconfig        2.0.2   2018-08-16 CRAN (R 3.5.1)
 ##  promises         1.0.1   2018-04-13 CRAN (R 3.5.1)
 ##  R6               2.2.2   2017-06-17 CRAN (R 3.5.1)
 ##  raster           2.6-7   2017-11-13 CRAN (R 3.5.1)
-##  Rcpp             0.12.17 2018-05-18 CRAN (R 3.5.1)
-##  rgdal            1.3-3   2018-06-22 CRAN (R 3.5.1)
+##  Rcpp             0.12.18 2018-07-23 CRAN (R 3.5.1)
+##  rgdal            1.3-4   2018-08-03 CRAN (R 3.5.1)
 ##  rgeos            0.3-28  2018-06-08 CRAN (R 3.5.1)
 ##  rmarkdown        1.10    2018-06-11 CRAN (R 3.5.1)
 ##  rprojroot        1.3-2   2018-01-03 CRAN (R 3.5.1)
-##  rstudioapi       0.7     2017-09-07 CRAN (R 3.5.1)
 ##  shiny            1.1.0   2018-05-17 CRAN (R 3.5.1)
 ##  sp               1.3-1   2018-06-05 CRAN (R 3.5.1)
 ##  spacetime        1.2-2   2018-07-17 CRAN (R 3.5.1)
 ##  stats          * 3.5.1   2018-07-02 local         
-##  stringi          1.2.3   2018-06-12 CRAN (R 3.5.1)
+##  stringi          1.2.4   2018-07-20 CRAN (R 3.5.1)
 ##  stringr          1.3.1   2018-05-10 CRAN (R 3.5.1)
 ##  tools            3.5.1   2018-07-02 local         
 ##  utils          * 3.5.1   2018-07-02 local         
-##  viridisLite      0.3.0   2018-02-01 CRAN (R 3.5.1)
 ##  withr            2.1.2   2018-03-15 CRAN (R 3.5.1)
-##  xtable           1.8-2   2016-02-05 CRAN (R 3.5.1)
+##  xtable           1.8-3   2018-08-29 CRAN (R 3.5.1)
 ##  xts              0.11-0  2018-07-16 CRAN (R 3.5.1)
-##  yaml             2.1.19  2018-05-01 CRAN (R 3.5.1)
+##  yaml             2.2.0   2018-07-25 CRAN (R 3.5.1)
 ##  zoo              1.8-3   2018-07-16 CRAN (R 3.5.1)
 ```
