@@ -86,7 +86,7 @@ r <- raster::mask(r, meuse.grid)
 Next, plot a map from the gridded data and include a scale bar and vertical legend.
 
 ```{r plot_meuse, fig.cap="Static map of meuse data set.", alt.text="Static map of meuse data set."}
-Pal <- function(n) viridisLite::viridis(n, begin = 0.2)  # color palette
+Pal <- function(n) inlmisc::GetTolColors(n, start=0.3, end=0.9)  # color palette
 breaks <- seq(0, 2000, by = 200)  # break points used to partition colors
 credit <- paste("Data collected in a flood plain of the river Meuse,",
                 "near the village of Stein (Netherlands),",
@@ -96,7 +96,7 @@ inlmisc::PlotMap(r, breaks = breaks, pal = Pal, dms.tick = TRUE, bg.lines = TRUE
                  contour.lines = list(col = "#1F1F1F"), credit = credit,
                  draw.key = FALSE, simplify = 0)
 inlmisc::AddScaleBar(unit = c("KILOMETER", "MILES"), conv.fact = c(0.001, 0.0006214),
-                     loc = "bottomright", offset = c(-0.4, 0.1))
+                     loc = "bottomright", inset = c(0.12, 0.05))
 inlmisc::AddGradientLegend(breaks, Pal, at = breaks,
                            title = "Topsoil zinc\nconcentration\n(ppm)",
                            loc = "topleft", inset = c(0.05, 0.1),
