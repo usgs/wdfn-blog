@@ -98,6 +98,8 @@ library(feather)
 library(fst)
 library(RSQLite)
 library(MonetDBLite)
+library(dplyr)
+library(dbplyr)
 
 tested <- c("rds","rds_compressed","readr","readr_compressed",
             "fread","feather","fst","fst_compressed",
@@ -117,23 +119,23 @@ write_times <- microbenchmark(
   feather = write_feather(biggish, file_name[["feather"]]),
   fst = write_fst(biggish, file_name[["fst"]], compress = 0),
   fst_compressed = write_fst(biggish, file_name[["fst_compressed"]], compress = 100),
-  sqlite = {sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
+  sqlite = {sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
   dbWriteTable(sqldb,name =  "test", biggish, 
              row.names=FALSE, overwrite=TRUE,
              append=FALSE, field.types=NULL)
   dbDisconnect(sqldb)
   },
   monetDB_write = { 
-    con <- dbConnect(MonetDBLite(), dbname="test.montdb")
+    con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
     dbWriteTable(con, name = "test", biggish,
                  row.names=FALSE, overwrite=TRUE,
                  append=FALSE, field.types=NULL)
     dbDisconnect(con, shutdown=TRUE)},
-  times = 1
+  times = 10
 )
 
 monet.read.csv <- function(file) {
-  monet.con <- DBI::dbConnect(MonetDBLite::MonetDBLite(), ":memory:")
+  monet.con <- DBI::dbConnect(MonetDBLite(), ":memory:")
   suppressMessages(MonetDBLite::monetdb.read.csv(monet.con, file, "file", sep = ",",best.effort = TRUE))
   result <- DBI::dbReadTable(monet.con, "file")
   DBI::dbDisconnect(monet.con, shutdown = T)
@@ -149,16 +151,16 @@ read_times <- microbenchmark(
   feather_df <- read_feather(file_name[["feather"]]),
   fst_df <- read.fst(file_name[["fst"]]),
   fst_compressed_df <- read.fst(file_name[["fst_compressed"]]),
-  sql_df <- {
-    sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
-    dbGetQuery(sqldb, "SELECT * FROM test")
+  sql_df = {
+    sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
+    sql_df <- tbl(sqldb,"test") %>% collect()
     dbDisconnect(sqldb)},
-  monetDB_df <- {
-    con <- dbConnect(MonetDBLite(), dbname="test.montdb")
-    dbGetQuery(con, "SELECT * FROM test")
+  monetDB_df = {
+    con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
+    monetDB_df <- tbl(con,"test") %>% collect()
     dbDisconnect(con, shutdown=TRUE)},
   monetDB_csv <- monet.read.csv(file_name[["monetDB_csv"]]),
-  times = 1
+  times = 10
 )
 
 file_size <- c()
@@ -192,8 +194,6 @@ All that's well and good, but there are many instances in our "biggish" data pro
 Here's what we're trying to get:
 
 ```{r oldFashion, eval=FALSE}
-library(dplyr)
-
 smallish <- readRDS("test.rds") %>%
   filter(bytes > 100000,
          grepl("00060",parametercds)) %>%
@@ -231,19 +231,15 @@ smallish_fst_compressed <- db_fst[,c("bytes","requested_date","parametercds")] %
 
 ### fread
 ```{r freadDB, eval=FALSE}
-
 smallish_fread <- fread(file_name[["fread"]], 
                       select = c("bytes","requested_date","parametercds")) %>%
   filter(bytes > 100000,
-         grepl("00060",parametercds)) 
-   
+         grepl("00060",parametercds))
 
 ```
 
 ### SQLite
 ```{r sqLiteDB, eval=FALSE}
-library(dbplyr)
-
 sqldb <- dbConnect(SQLite(), dbname=file_name[["sqlite"]])
 
 smallish_sqlite <- tbl(sqldb,"test") %>%
@@ -258,9 +254,7 @@ dbDisconnect(sqldb)
 
 ### MonetDBLite
 ```{r MonetDBLite, eval=FALSE}
-library(dbplyr)
-
-con <- dbConnect(MonetDBLite::MonetDBLite(), dbname=file_name[["monetDB"]])
+con <- dbConnect(MonetDBLite(), dbname=file_name[["monetDB"]])
 
 smallish_monet <- tbl(con,"test") %>%
   select(bytes, requested_date, parametercds) %>%
@@ -275,11 +269,8 @@ dbDisconnect(con, shutdown=TRUE)
 
 ### Comparisons
 ```{r compare, cache=TRUE}
-library(dplyr)
-library(dbplyr)
-
-sqldb <- dbConnect(SQLite(), dbname=file_name[["sqlite"]])
-con <- dbConnect(MonetDBLite(), dbname=file_name[["monetDB"]])
+sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
+con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
 
 partial_read <- microbenchmark(
   rds = {smallish <- readRDS(file_name[["rds"]]) %>%
@@ -312,7 +303,7 @@ partial_read <- microbenchmark(
       filter(bytes > 100000,
              parametercds %like% '%00060%') %>%
       collect()},
-  times = 1
+  times = 10
 )
 
 dbDisconnect(sqldb)
@@ -348,7 +339,7 @@ upload_times <- microbenchmark(
   fst <- put_object(file_name[["fst"]], bucket = bucket_name),
   fst_compressed <- put_object(file_name[["fst_compressed"]], bucket = bucket_name),
   sql <- put_object(file_name[["sqlite"]], bucket = bucket_name),
-  times = 1
+  times = 10
 )
 
 download_times <- microbenchmark(
@@ -361,7 +352,7 @@ download_times <- microbenchmark(
   fst = save_object(file_name[["fst"]], bucket = bucket_name, overwrite = TRUE),
   fst_compressed = save_object(file_name[["fst_compressed"]], bucket = bucket_name, overwrite = TRUE),
   sql = save_object(file_name[["sqlite"]], bucket = bucket_name, overwrite = TRUE),
-  times = 1
+  times = 10
 )
 
 knitr::kable(data.frame(summary(upload_times)$median,

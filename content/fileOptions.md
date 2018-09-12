@@ -91,6 +91,8 @@ library(feather)
 library(fst)
 library(RSQLite)
 library(MonetDBLite)
+library(dplyr)
+library(dbplyr)
 
 tested <- c("rds","rds_compressed","readr","readr_compressed",
             "fread","feather","fst","fst_compressed",
@@ -110,14 +112,14 @@ write_times <- microbenchmark(
   feather = write_feather(biggish, file_name[["feather"]]),
   fst = write_fst(biggish, file_name[["fst"]], compress = 0),
   fst_compressed = write_fst(biggish, file_name[["fst_compressed"]], compress = 100),
-  sqlite = {sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
+  sqlite = {sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
   dbWriteTable(sqldb,name =  "test", biggish, 
              row.names=FALSE, overwrite=TRUE,
              append=FALSE, field.types=NULL)
   dbDisconnect(sqldb)
   },
   monetDB_write = { 
-    con <- dbConnect(MonetDBLite(), dbname="test.montdb")
+    con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
     dbWriteTable(con, name = "test", biggish,
                  row.names=FALSE, overwrite=TRUE,
                  append=FALSE, field.types=NULL)
@@ -126,7 +128,7 @@ write_times <- microbenchmark(
 )
 
 monet.read.csv <- function(file) {
-  monet.con <- DBI::dbConnect(MonetDBLite::MonetDBLite(), ":memory:")
+  monet.con <- DBI::dbConnect(MonetDBLite(), ":memory:")
   suppressMessages(MonetDBLite::monetdb.read.csv(monet.con, file, "file", sep = ",",best.effort = TRUE))
   result <- DBI::dbReadTable(monet.con, "file")
   DBI::dbDisconnect(monet.con, shutdown = T)
@@ -142,13 +144,13 @@ read_times <- microbenchmark(
   feather_df <- read_feather(file_name[["feather"]]),
   fst_df <- read.fst(file_name[["fst"]]),
   fst_compressed_df <- read.fst(file_name[["fst_compressed"]]),
-  sql_df <- {
-    sqldb <- dbConnect(SQLite(), dbname="test.sqlite")
-    dbGetQuery(sqldb, "SELECT * FROM test")
+  sql_df = {
+    sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
+    sql_df <- tbl(sqldb,"test") %>% collect()
     dbDisconnect(sqldb)},
-  monetDB_df <- {
-    con <- dbConnect(MonetDBLite(), dbname="test.montdb")
-    dbGetQuery(con, "SELECT * FROM test")
+  monetDB_df = {
+    con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
+    monetDB_df <- tbl(con,"test") %>% collect()
     dbDisconnect(con, shutdown=TRUE)},
   monetDB_csv <- monet.read.csv(file_name[["monetDB_csv"]]),
   times = 1
@@ -171,17 +173,17 @@ knitr::kable(data.frame(file_size/10^6,
 
 |                   |  File Size (MB)|  Write Time(seconds)|  Read Time(seconds)|
 |-------------------|---------------:|--------------------:|-------------------:|
-| rds               |          1280.6|                 30.6|                31.2|
-| rds\_compressed   |            55.4|                 52.0|                31.0|
-| readr             |           703.9|                 78.3|                17.6|
-| readr\_compressed |            65.7|                127.3|                31.3|
-| fread             |           503.7|                  2.3|                 8.8|
-| feather           |           818.4|                  4.2|                13.1|
-| fst               |           988.6|                  6.5|                 4.3|
-| fst\_compressed   |           121.8|                 13.2|                 6.1|
-| sqlite            |           464.2|                 49.3|                30.4|
-| monetDB           |             NA|                 41.2|                18.0|
-| monetDB\_csv      |           503.7|                   NA|                31.8|
+| rds               |          1280.6|                 42.8|                43.6|
+| rds\_compressed   |            55.4|                 81.4|                54.5|
+| readr             |           703.9|                 66.3|                44.6|
+| readr\_compressed |            65.7|                 77.4|                49.1|
+| fread             |           503.7|                  3.2|                12.4|
+| feather           |           818.4|                  4.9|                12.0|
+| fst               |           988.6|                 10.9|                11.0|
+| fst\_compressed   |           121.8|                 13.0|                 8.5|
+| sqlite            |           464.2|                 58.3|                44.4|
+| monetDB           |              NA|                 42.3|                19.6|
+| monetDB\_csv      |           503.7|                   NA|                45.8|
 
 MonetDBLite was tacked on at the last minute to this blog. I'm not 100% sure I'm doing things the most efficient way. It can read a csv file, which is tested in the read. I don't think it writes a single file, it seems to write a folder. I tried to follow some examples from [here](https://statcompute.wordpress.com/2018/05/09/mimicking-sqldf-with-monetdblite/).
 
@@ -199,8 +201,6 @@ All that's well and good, but there are many instances in our "biggish" data pro
 Here's what we're trying to get:
 
 ``` r
-library(dplyr)
-
 smallish <- readRDS("test.rds") %>%
   filter(bytes > 100000,
          grepl("00060",parametercds)) %>%
@@ -241,14 +241,12 @@ smallish_fst_compressed <- db_fst[,c("bytes","requested_date","parametercds")] %
 smallish_fread <- fread(file_name[["fread"]], 
                       select = c("bytes","requested_date","parametercds")) %>%
   filter(bytes > 100000,
-         grepl("00060",parametercds)) 
+         grepl("00060",parametercds))
 ```
 
 ### SQLite
 
 ``` r
-library(dbplyr)
-
 sqldb <- dbConnect(SQLite(), dbname=file_name[["sqlite"]])
 
 smallish_sqlite <- tbl(sqldb,"test") %>%
@@ -263,9 +261,7 @@ dbDisconnect(sqldb)
 ### MonetDBLite
 
 ``` r
-library(dbplyr)
-
-con <- dbConnect(MonetDBLite::MonetDBLite(), dbname=file_name[["monetDB"]])
+con <- dbConnect(MonetDBLite(), dbname=file_name[["monetDB"]])
 
 smallish_monet <- tbl(con,"test") %>%
   select(bytes, requested_date, parametercds) %>%
@@ -279,11 +275,8 @@ dbDisconnect(con, shutdown=TRUE)
 ### Comparisons
 
 ``` r
-library(dplyr)
-library(dbplyr)
-
-sqldb <- dbConnect(SQLite(), dbname=file_name[["sqlite"]])
-con <- dbConnect(MonetDBLite(), dbname=file_name[["monetDB"]])
+sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
+con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
 
 partial_read <- microbenchmark(
   rds = {smallish <- readRDS(file_name[["rds"]]) %>%
@@ -329,13 +322,13 @@ knitr::kable(data.frame(names(summary(partial_read$expr)),
 
 |                 |  Read Time (seconds)|
 |-----------------|--------------------:|
-| rds             |                 34.3|
-| fread           |                  3.0|
-| feather         |                  2.1|
-| fst             |                  2.1|
-| fst\_compressed |                  1.6|
-| sqlite          |                 13.7|
-| monetDB         |                  1.6|
+| rds             |                 40.2|
+| fread           |                  4.1|
+| feather         |                  2.5|
+| fst             |                  2.5|
+| fst\_compressed |                  2.2|
+| sqlite          |                 13.5|
+| monetDB         |                  1.8|
 
 Note that only sqlite and monetDB actually filtered out rows before collecting the data. The other options in this table only filtered out columns on the collection. If the data is even bigger than this "biggish" dataframe, that will be important.
 
