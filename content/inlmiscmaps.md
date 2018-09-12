@@ -18,9 +18,7 @@ keywords:
   - inlmisc
   - leaflet
 description: Using the R-package inlmisc to create static and dynamic maps.
-draft: True
 ---
-
 
 
 ## Introduction
