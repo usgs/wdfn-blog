@@ -1,29 +1,22 @@
 ---
 author: David L Blodgett
-date: 2018-09-19
+date: 2018-09-21
 slug: furthest-water
-draft: True
 title: Furthest Water
 type: post
 categories: Data Science
 image: static/furthest-water/furthest-water-thumb.png
-author_twitter: D\_Blodgett
+author_twitter: d_blodgett
 author_github: dblodgett-usgs
  
  
 author_staff: david-l-blodgett
 author_email: <dblodgett@usgs.gov>
-
 tags: 
   - R
-  - R
- 
 description: An analysis showing to find the US furthest place from water.
 keywords:
   - R
-  - R
- 
- 
  
 ---
 Finding the Location Furthest from Water in the Conterminous United States
@@ -261,7 +254,8 @@ Variables created here are:
 ``` r
 library(sf)
 library(dplyr)
-
+# to install nhdplusTools
+# devtools::install_github("dblodgett-usgs/nhdplusTools")
 # First we will use a nhdplusTools to load up the national seamless geodatabase.
 nhdplusTools::nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
 staged_data <- nhdplusTools::stage_national_data(include = "flowline", 
