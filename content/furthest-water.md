@@ -29,25 +29,26 @@ keywords:
 Finding the Location Furthest from Water in the Conterminous United States
 --------------------------------------------------------------------------
 
-The idea for this blog post came a few months back when I recieved an
-email that started, “I am a writer and teacher and am reaching out to
-you with a question related to a piece I would like to write about the
-place in the United States that is furthest from a natural body of
-surface water. My question is, in short, might you know where this
-theoretical place is located?”
+The idea for this post came a few months back when I received an email
+that started, “I am a writer and teacher and am reaching out to you with
+a question related to a piece I would like to write about the place in
+the United States that is furthest from a natural body of surface water.
+My question is, in short, might you know where this theoretical place is
+located?”
 
-As someone who works on the [National Water
-Census](https://water.usgs.gov/watercensus/) and [national hydrogrologic
-data](https://www.usgs.gov/core-science-systems/ngp/national-hydrography),
-this question peaked my interest. I also had an idea of one way to
-answer the question that would use some tools and techniques I’ve been
-developing in R recently. What follows is just that, **one** way that
-this question might be answered. The code I used to find the solution is
-presented in detail after the solution to the question.
+As someone who works on the
+<a href="https://water.usgs.gov/watercensus/" target="_blank">National Water Census</a>
+and
+<a href="https://www.usgs.gov/core-science-systems/ngp/national-hydrography" target="_blank">National hydrography data</a>,
+this question piqued my interest. I also had an idea of one way to
+answer the question that would use some tools and techniques I’ve
+recently been developing in R. What follows is just that, **one** way
+that this question might be answered. The code I used to find the
+solution is presented in detail after the solution to the question.
 
 The solution graphics shown below were generated with the following
-code: The `furthest_water.R` script can be [found
-here](https://github.com/USGS-OWI/owi-blog/tree/master/content/static/furthest-water).
+code: The `furthest_water.R` script can be
+<a href="https://github.com/USGS-OWI/owi-blog/tree/master/content/static/furthest-water" target="_blank">found here</a>.
 
 ``` r
 source("furthest_water.R")
@@ -62,47 +63,49 @@ Method
 ------
 
 To answer the question, “where is the furthest place from a natural body
-of water?” I first had to decide what all the places I might want to
-check are. To do this, I first built a search box around the south-west
-US to limit the data volume I had to process. I then created a grid of
-points 5km apart within the search box and the US coastline. This set of
-points, pictured below, will stand in for all the places we might want
-to look. Note that there are actually about 150k points on this image,
-but they draw as one area because their symbols overlap.
+of water?”, I first had to decide where all the places I might want to
+check are. To do this, I first built a search box around the
+southwestern US to limit the data volume I had to process. I then
+created a grid of points 5km apart within the search box and the US
+coastline. This set of points, pictured below, will stand in for all the
+places we might want to look. Note that there are actually about 150k
+points on this image, but they draw as one area because their symbols
+overlap.
 
 ![All Search
 Points](/static/furthest-water/all_search_points.png "All locations searched")
-With all possible places defined, I needed all the waterbodies. The
+With all possible places defined, I needed all the water bodies. The
 National Hydrography Dataset contains data used to map rivers and lakes
 across the country. As a bonus, there is a dataset known as the “NHDPlus
 v2.1 National Seamless” that is available as a single geospatial
-database for the whole conterminous US. See [this EPA
-page](https://www.epa.gov/waterdata/get-data) for lots of helpful
-documentation and data downloads. The NHDPlus contains a few million
-river segments and almost a half million water bodies. The NHDPlus also
-has some useful attributes that categorize waterbodies as ephemeral
-(sometimes dry) or perennial (always wet) and modeled estimates of mean
-flow by month of the year for rivers. Geospatial data representing
-rivers and bodies of water like lakes along with the attribtues about
-how likely they are to be wet is just what I needed. Maps showing how
-dense the river and water body is are shown below.
+database for the whole conterminous US. See
+<a href="https://www.epa.gov/waterdata/get-data" target="_blank">this EPA page</a>
+for lots of helpful documentation and data downloads. The NHDPlus
+contains a few million river segments and almost a half million water
+bodies mapped at 1:100,000-scale. The NHDPlus also has some useful
+attributes that categorize waterbodies as ephemeral (sometimes dry) or
+perennial (always wet) and modeled estimates of mean flow by month of
+the year for rivers. Geospatial data representing rivers and bodies of
+water like lakes along with the attributes about how likely they are to
+be wet is just what I needed. The maps below show how dense the rivers
+and water bodies in the NHDPlus are.
 
 ![All flow lines](/static/furthest-water/flowlines.png "All flow lines")
 ![All water
 bodies](/static/furthest-water/waterbodies.png "All water bodies")
 
 The algorithm I used to figure out which of the search locations is
-furthest from water uses a nearest neighbor search implemented in an [R
-package called RANN](https://cran.r-project.org/web/packages/RANN/). The
-nearest neighbor search implemented in RANN allowed me to find which
-points are within a given distance of a flowline or water body. By
-starting with a small distance and incrementing to larger and larger
-distances, removing as I went, I was able to narrow down to one point
-that was further than any other from all the water bodies. The marvel of
-this technique is that it’s not just 150k points and a few million
-rivers and lakes. To make it work, I converted the lines and polygons
-that represent rivers and water bodies to more than 30 million
-individual points that make up all the geometry!
+furthest from water uses a nearest neighbor search implemented in an
+<a href="https://cran.r-project.org/web/packages/RANN/" target="_blank">R package called RANN</a>
+which allowed me to find which points are within a given distance of a
+flowline or water body. By starting with a small distance and
+incrementing to larger and larger distances, removing locations as I
+went, I was able to narrow down to one point that was further than any
+other from all the water bodies. The marvel of this technique is that
+it’s not just 150k points and a few million rivers and lakes. To make it
+work, I converted the lines and polygons that represent rivers and water
+bodies to more than 30 million individual points that make up all the
+geometry!
 
 In each of the three scenarios below, there are two graphics. The first,
 is a simple visual showing where the location is relative to rivers and
@@ -115,9 +118,9 @@ Furthest from where there might be water
 
 In the first scenario, I included everything in the NHDPlus that might
 be a water body. This includes lakes and rivers that are categorized as
-ephemeral and rivers with attributes that say they are usually dry one
+ephemeral and rivers with attributes that show they are usually dry one
 or more months a year. As you can see below, the location is in the
-Bonneville solt flats. The irony is that, while not categorized as a
+Bonneville salt flats. The irony is that, while not categorized as a
 water body in the NHD, this picture taken from I-80 shows that the salt
 flats do get filled with water periodically!
 
@@ -129,8 +132,7 @@ flats do get filled with water periodically!
 BY-SA 3.0</a>,
 <a href="https://commons.wikimedia.org/w/index.php?curid=30988413" target="_blank">Link</a>
 </p>
-[*Explore this place in google
-maps.*](https://www.google.com/maps/place/32%C2%B016'52.9%22N+113%C2%B059'03.0%22W/@32.2813555,-113.9863557,705m/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d32.2813509!4d-113.9841667)
+<a href="https://www.google.com/maps/place/32%C2%B016&#39;52.9%22N+113%C2%B059&#39;03.0%22W/@32.2813555,-113.9863557,705m/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d32.2813509!4d-113.9841667" target="_blank"><em>Explore this place in google maps.</em></a>
 
 ![Furthest from where there might be
 water](/static/furthest-water/furthest_water_scenario_1.png "Furthest from where there might be water")
@@ -142,22 +144,22 @@ Furthest from modeled water
 
 The place we say is the furthest from water shouldn’t be a dry lake bed,
 should it? Let’s look at another scenario. In this one, I used the
-monthly average flow estimates from the NHDPlus. These estimates use the
-“Enhanced Runoff Method” or EROM. You can find documentation [about the
-method here.](https://www.epa.gov/waterdata/learn-more) The EROM
-estimates are available for each month of the year, providing a normal
-monthly-mean flow estimate for the period of the analysis (1971 to
-2000). For this scenario, I removed any flowline that had a monthly-mean
-flow estimate of zero for any month. As can be seen below, I came up
-with a location almost on the US-Mexico boarder in the desert in far
-south west Arizona.
+monthly average flow estimates from the NHDPlus. These estimates are
+calculated using the “Enhanced Runoff Method” or EROM. You can find
+documentation
+<a href="https://www.epa.gov/waterdata/learn-more" target="_blank">about the method here.</a>
+The EROM estimates are available for each month of the year, providing a
+normal monthly-mean flow estimate for the period of the analysis (1971
+to 2000). For this scenario, I removed any flowline that had a
+monthly-mean flow estimate of zero for any month. As can be seen below,
+I came up with a location almost on the US-Mexico border in the desert
+in far south west Arizona.
 
 This is a place I would believe is actually the furthest from a natural
 body of water but I noticed that there were some small waterbodies in
-the desert that almost certainly dry out in the summer time.
+the desert that almost certainly dry out in the summer.
 
-[*Explore this place in google
-maps*](https://www.google.com/maps/place/32%C2%B016'52.9%22N+113%C2%B059'03.0%22W/@32.2813555,-113.9863557,705m/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d32.2813509!4d-113.9841667)
+<a href="https://www.google.com/maps/place/32%C2%B016&#39;52.9%22N+113%C2%B059&#39;03.0%22W/@32.2813555,-113.9863557,705m/data=!3m2!1e3!4b1!4m6!3m5!1s0x0:0x0!7e2!8m2!3d32.2813509!4d-113.9841667" target="_blank"><em>Explore this place in google maps</em></a>
 
 ![Furthest from modeled
 water](/static/furthest-water/furthest_water_scenario_2.png "Furthest from modeled water")
@@ -172,38 +174,37 @@ remove rivers that probably dry out for a month or more a year and I
 removed flowlines and water bodies that were categorized as ephemeral.
 This removed many water body polygons in the desert that are only wet
 part of the year. As can be seen below, now we are in the Sonoran desert
-west of Pheonix. By the looks of things, this really may be the furthest
-from a natural body of surface water in the US (over 72km/45mi) –
-especially after a long period with no rain.
+west of Phoenix, AZ. By the looks of things, this really may be the
+furthest from a natural body of surface water in the US (over 72km/45mi)
+– especially after a long period with no rain.
 
-[*Explore this place in google
-maps*](https://www.google.com/maps/place/33%C2%B032'40.5%22N+113%C2%B041'36.6%22W/@33.5445945,-113.6956887,695m/data=!3m2!1e3!4b1!4m5!3m4!1s0x0:0x0!8m2!3d33.54459!4d-113.6935)
+<a href="https://www.google.com/maps/place/33%C2%B032&#39;40.5%22N+113%C2%B041&#39;36.6%22W/@33.5445945,-113.6956887,695m/data=!3m2!1e3!4b1!4m5!3m4!1s0x0:0x0!8m2!3d33.54459!4d-113.6935" target="_blank"><em>Explore this place in google maps</em></a>
 
 ![Furthest from modeled and non-ephemeral
 water](/static/furthest-water/furthest_water_scenario_3.png "Furthest from modeled and non-ephemeral water")
 ![Furthest from modeled and non-ephemeral water
 animation](/static/furthest-water/animation_scenario_3.gif "Furthest from modeled and non-ephemeral water animation")
 
-On the right day, the location found really may be the furthest from a
-natural body of surface water in the US. However, as the variety of
-results given different inputs shows, this question doesn’t necessarily
-have one answer. It depends what we assume a body of water is and how
-often that body of water needs to be wet. The factors at play that
-determine if a river or water body is wet are diverse and highly
-inter-related. Ranging from the obvious, like how much [it’s rained
-recently](https://water.weather.gov/precip/), to less obvious, like how
-much [groundwater is flowing into or out of a
-river](https://water.usgs.gov/edu/rivers-contain-groundwater.html).
-Ecosystems have a role to play too. In desert environments, [some plants
-depend on groundwater](https://pubs.usgs.gov/wsp/1423/report.pdf) which
-can actually draw down groundwater around rivers, reducing flows or even
-causing surface flow to cease even though groundwater may continue to be
-available just under the surface. This is just a brief discussion of the
-complexities of the natural water cycle and the natural features that
-arise from it. For more, the [USGS Water Science
-School](https://water.usgs.gov/edu/watercycle.html) has a wealth of
-information and all [USGS publications](https://pubs.er.usgs.gov/) and
-[data](https://data.usgs.gov/datacatalog/#fq=dataType%3A(collection%20OR%20non-collection)&fq=keywords%3A%22NWIS%22&q=*%3A*)
+As the variety of results given different inputs shows, this question
+doesn’t necessarily have one answer. It depends what we assume a body of
+water is and how often that body of water needs to be wet. The factors
+at play that determine if a river or water body is wet are diverse and
+highly interrelated. Ranging from the obvious, like how much
+<a href="https://water.weather.gov/precip/" target="_blank">it’s rained recently</a>,
+to less obvious, like how much
+<a href="https://water.usgs.gov/edu/rivers-contain-groundwater.html" target="_blank">groundwater is flowing into or out of a river</a>.
+Ecosystems have a role to play too. In desert environments,
+<a href="https://pubs.usgs.gov/wsp/1423/report.pdf" target="_blank">some plants depend on groundwater</a>
+which can actually draw down groundwater around rivers, reducing flows
+or even causing surface flow to cease even though groundwater may
+continue to be available just under the surface. This is just a brief
+discussion of the complexities of the natural water cycle and the
+natural features that arise from it. For more, the
+<a href="https://water.usgs.gov/edu/watercycle.html" target="_blank">USGS Water Science School</a>
+has a wealth of information and all
+<a href="https://pubs.er.usgs.gov/" target="_blank">USGS publications</a>
+and
+<a href="https://data.usgs.gov/datacatalog/#fq=dataType%3A(collection%20OR%20non-collection)&amp;fq=keywords%3A%22NWIS%22&amp;q=*%3A*" target="_blank">data</a>
 are free and available for everyone.
 
 Code Explanation
@@ -212,33 +213,60 @@ Code Explanation
 The three scenarios above were run using a function that executes the
 code described below. There is a mix of comments and summary text
 written outside the code. To execute this, you will need to install the
-required poackages and download the [NHDPlus National Seamless
-Database](https://www.epa.gov/waterdata/nhdplus-national-data) and a
-[states outline layer available
-here.](https://www.arcgis.com/home/item.html?id=b07a9393ecbd430795a6f6218443dccc)
+required packages and download the
+<a href="https://www.epa.gov/waterdata/nhdplus-national-data" target="_blank">NHDPlus National Seamless Database</a>
+and a
+<a href="https://www.arcgis.com/home/item.html?id=b07a9393ecbd430795a6f6218443dccc" target="_blank">state boundaries layer available here.</a>
 These two datasets are referenced in the code.
 
-### Load Data
+### Load Packages and Data
 
-In this first step, I load up all the data we need. Variables created
-here are: - `flines`: NHDPlus flowlines with lots of attributes. Loaded
-with [`nhdplusTools`](https://dblodgett-usgs.github.io/nhdplusTools/) as
-a helper. - `water_bodies`: NHDPlus waterbodies loaded directly from the
-National Seamless using [`sf`](https://r-spatial.github.io/sf/). -
-`min_monthlies`: Minimum of the twelve monthly flow estimates for each
-flowline. Calculated by applying the `min` function to all the monthly
-flow collumns from the `flines` attributes. - `remove_fcodes`: NHDPlus
-feature codes that should be removed. - `crs`: A coordinate reference
-system to perform the analysis in. - `states`: A set of US state
-boundaries loaded from shapefile with `sf`. - `bbox`: A bounding box to
-limit the analysis to less than the whole country. Created in the `sf`
-bbox format then converted in an `sfc` geometry.
+In this first step, I load all the packages and data I need.
+
+Packages include:
+
+-   <a href="https://r-spatial.github.io/sf/" target="_blank"><code>sf</code></a>
+-   <a href="https://dplyr.tidyverse.org/" target="_blank"><code>dplyr</code></a>
+-   <a href="https://cran.r-project.org/web/packages/RANN/index.html" target="_blank"><code>RANN</code></a>
+-   <a href="https://dblodgett-usgs.github.io/nhdplusTools/" target="_blank"><code>nhdplusTools</code></a>
+-   <a href="https://r-quantities.github.io/units/" target="_blank"><code>units</code></a>
+-   <a href="https://stringr.tidyverse.org/" target="_blank"><code>stringr</code></a>
+-   <a href="https://cran.r-project.org/web/packages/gifski/index.html" target="_blank"><code>gifski</code></a>
+-   <a href="https://cran.r-project.org/web/packages/ggmap/" target="_blank"><code>ggmap</code></a>
+
+Note that `sf` and `dplyr` do the vast majority of the work and they are
+loaded with a `library()` command. All other packages are accessed using
+the `package::function()` syntax
+
+Variables created here are:
+
+-   `flowlines`: NHDPlus flowlines with lots of attributes. Loaded with
+    <a href="https://dblodgett-usgs.github.io/nhdplusTools/" target="_blank"><code>nhdplusTools</code></a>
+    as a helper.
+-   `water_bodies`: NHDPlus waterbodies loaded directly from the
+    National Seamless using
+    <a href="https://r-spatial.github.io/sf/" target="_blank"><code>sf</code></a>
+    `read_sf()`.
+-   `min_monthlies`: Minimum of the twelve monthly flow estimates for
+    each flowline. Calculated by applying the `min` function to all the
+    monthly flow collumns from the `flowlines` attributes.
+-   `remove_fcodes`: NHDPlus feature codes that should be removed.
+-   `crs`: A coordinate reference system to perform the analysis in.
+-   `states`: A set of US state boundaries loaded from shapefile with
+    `sf`.
+-   `bbox`: A bounding box to limit the analysis to less than the whole
+    country. Created in the `sf` bbox format then converted in an `sfc`
+    geometry.
 
 ``` r
+library(sf)
+library(dplyr)
+
 # First we will use a nhdplusTools to load up the national seamless geodatabase.
-nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
-staged_data <- stage_national_data(include = "flowline", output_path = "nhdplus_data")
-flines <- readRDS(staged_data$flowline)
+nhdplusTools::nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
+staged_data <- nhdplusTools::stage_national_data(include = "flowline", 
+                                                 output_path = "nhdplus_data/")
+flowlines <- readRDS(staged_data$flowline)
 
 # Now lets read in the waterbodies directly from the national seamless database.
 if("waterbodies" %in% scenario) {
@@ -246,8 +274,8 @@ if("waterbodies" %in% scenario) {
 }
 
 if("filter_monthly_flow" %in% scenario) {
-  monthlies <- which(grepl("QA_[0-1][0-9]", names(flines)))
-  min_monthlies <- apply(st_set_geometry(flines, NULL)[monthlies], 1, min)
+  monthlies <- which(grepl("QA_[0-1][0-9]", names(flowlines)))
+  min_monthlies <- apply(st_set_geometry(flowlines, NULL)[monthlies], 1, min)
 }
 
 if("remove_intermittent" %in% scenario) {
@@ -275,7 +303,7 @@ In this next step, I transform all the data into a consistent coordinate
 reference system and get everything filtered. This is all the data I
 want to use for the actual nearest neighbor search. Processing includes:
 - `states`: Transform to analysis coordinate system and remove small
-islands. - `flines` and `water_bodies`: Filter out flowlines with min
+islands. - `flowlines` and `water_bodies`: Filter out flowlines with min
 monthly flow of 0 and feature codes indicating intermittent. Transform
 to analysis coordinate system and intersect with analysis bounds and
 simplify geometry to remove un-needed data and precision.
@@ -295,17 +323,17 @@ states <- states %>%
   select(-AREA)
 
 if("filter_monthly_flow" %in% scenario) {
-  flines <- flines[which(min_monthlies !=0 ), ]
+  flowlines <- flowlines[which(min_monthlies !=0 ), ]
 }
 
 if("remove_intermittent" %in% scenario) {
-  flines <- flines[which(!flines$FCODE %in% remove_fcodes$FCode), ] 
+  flowlines <- flowlines[which(!flowlines$FCODE %in% remove_fcodes$FCode), ] 
   if("waterbodies" %in% scenario) {
     water_bodies <- water_bodies[which(!water_bodies$FCODE %in% remove_fcodes$FCode), ]
   }
 }
 
-flines <- flines %>%
+flowlines <- flowlines %>%
   st_transform(crs) %>%
   st_simplify(1000) %>%
   st_intersection(bbox)
@@ -319,7 +347,7 @@ if("waterbodies" %in% scenario) {
 }
 
 # Save some intermediate artifacts that we'll read back in later.
-saveRDS(flines, "temp_flines.rds")
+saveRDS(flowlines, "temp_flowlines.rds")
 if("waterbodies" %in% scenario) saveRDS(water_bodies, "temp_water_bodies.rds")
 ```
 
@@ -341,11 +369,11 @@ or flowline in particular that I end up with at the end.
 
 ``` r
 if("waterbodies" %in% scenario) wb_COMID <- water_bodies$COMID
-fl_COMID <- flines$COMID
+fl_COMID <- flowlines$COMID
 
-# Now turn both flines and water_bodies into coordinate pairs only
-flines <-
-  st_cast(flines, "MULTILINESTRING") %>%
+# Now turn both flowlines and water_bodies into coordinate pairs only
+flowlines <-
+  st_cast(flowlines, "MULTILINESTRING") %>%
   st_coordinates()
 if("waterbodies" %in% scenario) {
   water_bodies <-
@@ -354,7 +382,7 @@ if("waterbodies" %in% scenario) {
 }
 
 # Extract the identifier of features from the coordinates
-flines <- flines[,c(1,2,4)] %>%
+flowlines <- flowlines[,c(1,2,4)] %>%
   data.frame() %>%
   rename(ID = L2)
 if("waterbodies" %in% scenario) {
@@ -367,24 +395,24 @@ if("waterbodies" %in% scenario) {
 if("waterbodies" %in% scenario) {
   water_bodies[["COMID"]] <- wb_COMID[water_bodies[["ID"]]]
 }
-flines[["COMID"]] <- fl_COMID[flines[["ID"]]]
+flowlines[["COMID"]] <- fl_COMID[flowlines[["ID"]]]
 
 # Bind together into one huge set of coordinates.
 if("waterbodies" %in% scenario) {
-  coords <- rbind(water_bodies, flines) %>%
-    dplyr::select(-ID)
-  rm(flines, water_bodies)
+  coords <- rbind(water_bodies, flowlines) %>%
+    select(-ID)
+  rm(flowlines, water_bodies)
 } else {
-  coords <- flines %>%
-    dplyr::select(-ID)
-  rm(flines)
+  coords <- flowlines %>%
+    select(-ID)
+  rm(flowlines)
 }
 ```
 
 ### Search Points
 
 In this short step, I create my set of all points using the function
-[`expand.grid()`](https://www.rdocumentation.org/packages/base/versions/3.5.1/topics/expand.grid)
+<a href="https://www.rdocumentation.org/packages/base/versions/3.5.1/topics/expand.grid" target="_blank"><code>expand.grid()</code></a>
 and the extents of the bounding box I created above. Using the complete
 grid of locations, I convert it to as `sf` `data.frame` and remove all
 the points outside the analysis box and outside the states. I then
@@ -412,7 +440,7 @@ In order to create the animated gif, I needed to be able to create a
 similar plot over and over. So I created a function to do the job. This
 function creates an output file name, sets up a png, gets the data ready
 to plot, then plots a few layers using base R graphics and
-[`plot.sf`](https://r-spatial.github.io/sf/reference/plot.html).
+<a href="https://r-spatial.github.io/sf/reference/plot.html" target="_blank"><code>plot.sf</code></a>.
 
 ``` r
 # Function to plot results in a .png
@@ -434,7 +462,7 @@ plot_result <- function(search, radius, crs, bbox, states) {
 Finally, we are ready to run the analysis. To me, while loops are the
 forbidden fruit of software development, but sometimes you just don’t
 know how many times you need to run a loop! In this case, we run the
-[`RANN::nn2()`](https://www.rdocumentation.org/packages/RANN/versions/2.6/topics/nn2)
+<a href="https://www.rdocumentation.org/packages/RANN/versions/2.6/topics/nn2" target="_blank"><code>RANN::nn2()</code></a>
 function which returns the index of the matching nearest neighbor
 (`nn.idx`), if one is found. If no nearest neighbor is found in the
 search radius, it returns `nn.idx` of 0. So in every loop, I only keep
@@ -445,7 +473,7 @@ radius as we approach only one location left to avoid overshooting and
 missing the last one!
 
 Once the while loop finishes, I pass the list of pngs created to
-[`gifski`](https://www.rdocumentation.org/packages/gifski/versions/0.8.3/topics/gifski)
+<a href="https://www.rdocumentation.org/packages/gifski/versions/0.8.3/topics/gifski" target="_blank"><code>gifski</code></a>
 a great little package for creating animated gifs. Finally I printed out
 the lat/lon of the location found so I could go look at the location in
 google.
@@ -485,7 +513,7 @@ gifski::gifski(list.files(pattern = "*0.png"))
 
 # Where in the world is the result?
 result <- st_as_sf(search, coords = c("X", "Y"), crs = crs)
-print(sf::st_transform(result$geometry, 4326))
+print(st_transform(result$geometry, 4326))
 ```
 
 ### Plot the result location
@@ -505,7 +533,7 @@ I wrote to disk.
 
 ``` r
 # Load geospatial data again.
-flines <- readRDS("temp_flines.rds")
+flowlines <- readRDS("temp_flowlines.rds")
 if("waterbodies" %in% scenario) water_bodies <- readRDS("temp_water_bodies.rds")
 
 # Set up a plot area around our result.
@@ -529,7 +557,7 @@ if("waterbodies" %in% scenario) {
     st_simplify(1000) %>%
     st_transform(plot_proj)
 }
-local_flines <- st_intersection(flines, data_area) %>%
+local_flowlines <- st_intersection(flowlines, data_area) %>%
   st_simplify(5000) %>%
   st_transform(plot_proj)
 
@@ -545,14 +573,14 @@ par(omi = c(0,0,0,0), mai = c(0,0,0,0))
 plot(plot_area, col = NA, border = NA, xaxs = 'i', yaxs = 'i', bgMap = bgmap)
 plot(st_transform(states$geometry, plot_proj), add = TRUE)
 plot(st_transform(result$geometry, plot_proj), col = "red", cex = 3, lwd = 4, add = TRUE)
-plot(local_flines$Shape, add = TRUE, col = "blue")
+plot(local_flowlines$Shape, add = TRUE, col = "blue")
 if("waterbodies" %in% scenario) plot(local_water$Shape, add = TRUE, col = "azure2")
 dev.off()
 
 unlink("temp_water_bodies.rds", force = TRUE)
-unlink("temp_flines.rds", force = TRUE)
+unlink("temp_flowlines.rds", force = TRUE)
 unlink(list.files(pattern = "*0.png"), force = TRUE)
 ```
 
-Thats it! If you made it this far, thanks for taking the time! I hope
-this was helpful one way or another.s
+That’s it! If you made it this far, thanks for taking the time! I hope
+this was helpful one way or another.

@@ -1,13 +1,13 @@
 library(sf)
 library(nhdplusTools)
 library(dplyr)
-library(RANN)
 
 furthest_water <- function(scenario) {
   # First we will use a nhdplusTools to load up the national seamless geodatabase.
-  nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
-  staged_data <- stage_national_data(include = "flowline", output_path = "nhdplus_data")
-  flines <- readRDS(staged_data$flowline)
+  nhdplusTools::nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
+  staged_data <- nhdplusTools::stage_national_data(include = "flowline", 
+                                                   output_path = "nhdplus_data")
+  flowlines <- readRDS(staged_data$flowline)
   
   # Now lets read in the waterbodies directly from the national seamless database.
   if("waterbodies" %in% scenario) {
@@ -15,8 +15,8 @@ furthest_water <- function(scenario) {
   }
   
   if("filter_monthly_flow" %in% scenario) {
-    monthlies <- which(grepl("QA_[0-1][0-9]", names(flines)))
-    min_monthlies <- apply(st_set_geometry(flines, NULL)[monthlies], 1, min)
+    monthlies <- which(grepl("QA_[0-1][0-9]", names(flowlines)))
+    min_monthlies <- apply(st_set_geometry(flowlines, NULL)[monthlies], 1, min)
   }
   
   if("remove_intermittent" %in% scenario) {
@@ -49,17 +49,17 @@ furthest_water <- function(scenario) {
     select(-AREA)
   
   if("filter_monthly_flow" %in% scenario) {
-    flines <- flines[which(min_monthlies !=0 ), ]
+    flowlines <- flowlines[which(min_monthlies !=0 ), ]
   }
   
   if("remove_intermittent" %in% scenario) {
-    flines <- flines[which(!flines$FCODE %in% remove_fcodes$FCode), ] 
+    flowlines <- flowlines[which(!flowlines$FCODE %in% remove_fcodes$FCode), ] 
     if("waterbodies" %in% scenario) {
       water_bodies <- water_bodies[which(!water_bodies$FCODE %in% remove_fcodes$FCode), ]
     }
   }
   
-  flines <- flines %>%
+  flowlines <- flowlines %>%
     st_transform(crs) %>%
     st_simplify(1000) %>%
     st_intersection(bbox)
@@ -73,17 +73,17 @@ furthest_water <- function(scenario) {
   }
   
   # Save some intermediate artifacts that we'll read back in later.
-  saveRDS(flines, "temp_flines.rds")
+  saveRDS(flowlines, "temp_flowlines.rds")
   if("waterbodies" %in% scenario) saveRDS(water_bodies, "temp_water_bodies.rds")
   
   # Convert data to raw coordinates and set up search points.
   #####
   if("waterbodies" %in% scenario) wb_COMID <- water_bodies$COMID
-  fl_COMID <- flines$COMID
+  fl_COMID <- flowlines$COMID
   
-  # Now turn both flines and water_bodies into coordinate pairs only
-  flines <-
-    st_cast(flines, "MULTILINESTRING") %>%
+  # Now turn both flowlines and water_bodies into coordinate pairs only
+  flowlines <-
+    st_cast(flowlines, "MULTILINESTRING") %>%
     st_coordinates()
   if("waterbodies" %in% scenario) {
     water_bodies <-
@@ -97,7 +97,7 @@ furthest_water <- function(scenario) {
       data.frame() %>%
       rename(ID = L3)
   }
-  flines <- flines[,c(1,2,4)] %>%
+  flowlines <- flowlines[,c(1,2,4)] %>%
     data.frame() %>%
     rename(ID = L2)
   
@@ -105,17 +105,17 @@ furthest_water <- function(scenario) {
   if("waterbodies" %in% scenario) {
     water_bodies[["COMID"]] <- wb_COMID[water_bodies[["ID"]]]
   }
-  flines[["COMID"]] <- fl_COMID[flines[["ID"]]]
+  flowlines[["COMID"]] <- fl_COMID[flowlines[["ID"]]]
   
   # Bind together into one huge set of coordinates.
   if("waterbodies" %in% scenario) {
-    coords <- rbind(water_bodies, flines) %>%
+    coords <- rbind(water_bodies, flowlines) %>%
       dplyr::select(-ID)
-    rm(flines, water_bodies)
+    rm(flowlines, water_bodies)
   } else {
-    coords <- flines %>%
+    coords <- flowlines %>%
       dplyr::select(-ID)
-    rm(flines)
+    rm(flowlines)
   }
   
   # Create a set of search locations
@@ -184,7 +184,7 @@ furthest_water <- function(scenario) {
   print(sf::st_transform(result$geometry, 4326))
   
   # Load geospatial data again.
-  flines <- readRDS("temp_flines.rds")
+  flowlines <- readRDS("temp_flowlines.rds")
   if("waterbodies" %in% scenario) water_bodies <- readRDS("temp_water_bodies.rds")
   
   # Set up a plot area around our result.
@@ -210,7 +210,7 @@ furthest_water <- function(scenario) {
       st_transform(plot_proj)
   }
   
-  local_flines <- st_intersection(flines,
+  local_flowlines <- st_intersection(flowlines,
                                   data_area) %>%
     st_simplify(5000) %>%
     st_transform(plot_proj)
@@ -227,11 +227,11 @@ furthest_water <- function(scenario) {
   plot(plot_area, col = NA, border = NA, xaxs = 'i', yaxs = 'i', bgMap = bgmap)
   plot(st_transform(states$geometry, plot_proj), add = TRUE)
   plot(st_transform(result$geometry, plot_proj), col = "red", cex = 3, lwd = 4, add = TRUE)
-  plot(local_flines$Shape, add = TRUE, col = "blue")
+  plot(local_flowlines$Shape, add = TRUE, col = "blue")
   if("waterbodies" %in% scenario) plot(local_water$Shape, add = TRUE, col = "azure2")
   dev.off()
   
   unlink("temp_water_bodies.rds", force = TRUE)
-  unlink("temp_flines.rds", force = TRUE)
+  unlink("temp_flowlines.rds", force = TRUE)
   unlink(list.files(pattern = "*0.png"), force = TRUE)
 }
