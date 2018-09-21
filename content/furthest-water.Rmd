@@ -2,7 +2,7 @@
 title: "Furthest Water"
 author: "David L Blodgett"
 slug: "furthest-water "
-date: "2018-09-19"
+date: "2018-09-21"
 description: "An analysis showing to find the US furthest place from water."
 image: "static/furthest-water/furthest-water-thumb.png"
 tag1: "R"
@@ -11,7 +11,7 @@ keyword3: ""
 output: USGSmarkdowntemplates::hugo
 author_email: "dblodgett@usgs.gov"
 author_github: "dblodgett-usgs"
-author_twitter: "D_Blodgett"
+author_twitter: "d_blodgett"
 author_staff: "david-l-blodgett"
 ---
 
@@ -120,7 +120,8 @@ Variables created here are:
 ```{r load_data, eval = FALSE}
 library(sf)
 library(dplyr)
-
+# to install nhdplusTools
+# devtools::install_github("dblodgett-usgs/nhdplusTools")
 # First we will use a nhdplusTools to load up the national seamless geodatabase.
 nhdplusTools::nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
 staged_data <- nhdplusTools::stage_national_data(include = "flowline", 
