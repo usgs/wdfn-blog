@@ -14,7 +14,7 @@ author_staff: david-l-blodgett
 author_email: <dblodgett@usgs.gov>
 tags: 
   - R
-description: An analysis showing to find the US furthest place from water.
+description: An analysis showing how to find the place in the US furthest from water.
 keywords:
   - R
  
