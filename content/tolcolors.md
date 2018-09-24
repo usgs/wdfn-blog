@@ -1,6 +1,6 @@
 ---
 author: Jason C Fisher
-date: 2018-09-12
+date: 2018-09-24
 slug: tolcolors
 title: Tol Color Schemes
 type: post
@@ -16,7 +16,6 @@ keywords:
   - R
   - inlmisc
 description: Qualitative, diverging, and sequential color schemes by Paul Tol.
-draft: True
 ---
 
 
