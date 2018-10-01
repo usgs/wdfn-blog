@@ -6,7 +6,7 @@ type: post
 title: EGRET plotFlowConc using ggplot2
 categories: Data Science
 image: static/plotFlowConc/plotFlowConc-1.png
-tags: 
+tags:
   - R
   - EGRET
 description: Using the R packages, ggplot and EGRET, a new function plotFlowConc shows a new way to visualize the changes between flow and concentration.
@@ -17,19 +17,19 @@ keywords:
 ---
 
 * Marcus Beck (USEPA)
-<a href="mailto:beck.marcus@epa.gov"><i class="fa fa-envelope-square fa-2x"></i></a>
-<a href="https://twitter.com/fawda123"><i class="fa fa-twitter-square fa-2x"></i></a>
-<a href="https://github.com/fawda123"><i class="fa fa-github-square fa-2x"></i></a>
+<a href="mailto:beck.marcus@epa.gov"><i class="fas fa-envelope-square fa-2x"></i></a>
+<a href="https://twitter.com/fawda123"><i class="fab fa-twitter-square fa-2x"></i></a>
+<a href="https://github.com/fawda123"><i class="fab fa-github-square fa-2x"></i></a>
 <a href="https://scholar.google.com/citations?user=9ZDDQ_8AAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
 <a href="https://www.researchgate.net/profile/Marcus_Beck"><i class="ai ai-researchgate-square ai-2x"></i></a>
 
 * Laura DeCicco (USGS-OWI)
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x"></i></a>
+<a href="mailto:ldecicco@usgs.gov"><i class="fas fa-envelope-square fa-2x"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fab fa-twitter-square fa-2x"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fab fa-github-square fa-2x"></i></a>
 <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
 <a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x"></i></a>
-<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x"></i></a>
+<a href="https://profile.usgs.gov/ldecicco"><i class="fas fa-user fa-2x"></i></a>
 
 Introduction
 ============
@@ -57,7 +57,7 @@ Sample <- eList$Sample
 INFO <- eList$INFO
 
 Sample$cen <- factor(Sample$Uncen)
-levels(Sample$cen) <- c("Censored","Uncensored") 
+levels(Sample$cen) <- c("Censored","Uncensored")
 
 plotConcQ_gg <- ggplot(data=Sample) +
   geom_point(aes(x=Q, y=ConcAve, color = cen)) +
@@ -89,11 +89,11 @@ library(ggplot2)
 library(fields)
 
 plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red', 'green', 'blue'), ylabel = NULL, xlabel = NULL, alpha = 1, size = 1,  allflo = FALSE, ncol = NULL, grids = TRUE, scales = NULL, interp = 4, pretty = TRUE, use_bw = TRUE, fac_nms = NULL, ymin = 0){
-  
+
   localDaily <- getDaily(eList)
   localINFO <- getInfo(eList)
   localsurfaces <- getSurfaces(eList)
-  
+
   # plot title
   toplab <- with(eList$INFO, paste(shortName, paramShortName, sep = ', '))
 
@@ -105,35 +105,35 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
   surfdts <- as.Date(paste(surfyear, jday, sep = '-'), format = '%Y-%j')
   surfmos <- as.numeric(format(surfdts, '%m'))
   surfday <- as.numeric(format(surfdts, '%d'))
-   
+
   # interpolation surface
   ConcDay <- localsurfaces[,,3]
 
   # convert month vector to those present in data
   month <- month[month %in% surfmos]
   if(length(month) == 0) stop('No observable data for the chosen month')
-  
+
   # salinity/flow grid values
   flo_grd <- LogQ
 
   # get the grid
   to_plo <- data.frame(date = surfdts, year = surfyear, month = surfmos, day = surfday, t(ConcDay))
-  
+
   # reshape data frame, average by year, month for symmetry
   to_plo <- to_plo[to_plo$month %in% month, , drop = FALSE]
   names(to_plo)[grep('^X', names(to_plo))] <- paste('flo', flo_grd)
-  to_plo <- tidyr::gather(to_plo, 'flo', 'res', 5:ncol(to_plo)) %>% 
-    mutate(flo = as.numeric(gsub('^flo ', '', flo))) %>% 
+  to_plo <- tidyr::gather(to_plo, 'flo', 'res', 5:ncol(to_plo)) %>%
+    mutate(flo = as.numeric(gsub('^flo ', '', flo))) %>%
     select(-day)
 
   # smooth the grid
   if(!is.null(interp)){
-    
+
     to_interp <- to_plo
-    to_interp <- ungroup(to_interp) %>% 
-      select(date, flo, res) %>% 
+    to_interp <- ungroup(to_interp) %>%
+      select(date, flo, res) %>%
       tidyr::spread(flo, res)
-    
+
     # values to pass to interp
     dts <- to_interp$date
     fit_grd <- select(to_interp, -date)
@@ -141,25 +141,25 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
     flo_fac <- seq(min(flo_grd), max(flo_grd), length.out = flo_fac)
     yr_fac <- seq(min(dts), max(dts), length.out = length(dts) *  interp)
     to_interp <- expand.grid(yr_fac, flo_fac)
-          
+
     # bilinear interpolation of fit grid
     interps <- interp.surface(
       obj = list(
         y = flo_grd,
         x = dts,
         z = data.frame(fit_grd)
-      ), 
+      ),
       loc = to_interp
     )
 
     # format interped output
-    to_plo <- data.frame(to_interp, interps) %>% 
-      rename(date = Var1, 
-        flo = Var2, 
+    to_plo <- data.frame(to_interp, interps) %>%
+      rename(date = Var1,
+        flo = Var2,
         res = interps
-      ) %>% 
+      ) %>%
       mutate(
-        month = as.numeric(format(date, '%m')), 
+        month = as.numeric(format(date, '%m')),
         year = as.numeric(format(date, '%Y'))
       )
 
@@ -167,19 +167,19 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   # subset years to plot
   if(!is.null(years)){
- 
+
     to_plo <- to_plo[to_plo$year %in% years, ]
     to_plo <- to_plo[to_plo$month %in% month, ]
-        
+
     if(nrow(to_plo) == 0) stop('No data to plot for the date range')
-  
+
   }
-  
+
   # summarize so no duplicate flos for month/yr combos
-  to_plo <- group_by(to_plo, year, month, flo) %>% 
-      summarize(res = mean(res, na.rm = TRUE)) %>% 
+  to_plo <- group_by(to_plo, year, month, flo) %>%
+      summarize(res = mean(res, na.rm = TRUE)) %>%
       ungroup
-  
+
   # axis labels
   if(is.null(ylabel))
     ylabel <- localINFO$paramShortName
@@ -188,57 +188,57 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
 
   # constrain plots to salinity/flow limits for the selected month
   if(!allflo){
-    
+
     #min, max flow values to plot
-    lim_vals<- group_by(data.frame(localDaily), Month) %>% 
+    lim_vals<- group_by(data.frame(localDaily), Month) %>%
       summarize(
         Low = quantile(LogQ, 0.05, na.rm = TRUE),
         High = quantile(LogQ, 0.95, na.rm = TRUE)
       )
-  
+
     # month flo ranges for plot
     lim_vals <- lim_vals[lim_vals$Month %in% month, ]
     lim_vals <- rename(lim_vals, month = Month)
-    
+
     # merge limits with months
     to_plo <- left_join(to_plo, lim_vals, by = 'month')
     to_plo <- to_plo[to_plo$month %in% month, ]
-        
+
     # reduce data
-    sel_vec <- with(to_plo, 
+    sel_vec <- with(to_plo,
       flo >= Low &
       flo <= High
       )
     to_plo <- to_plo[sel_vec, !names(to_plo) %in% c('Low', 'High')]
     to_plo <- arrange(to_plo, year, month)
-    
+
   }
-  
+
   # months labels as text
   mo_lab <- data.frame(
-    num = seq(1:12), 
+    num = seq(1:12),
     txt = c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
   )
   mo_lab <- mo_lab[mo_lab$num %in% month, ]
   to_plo$month <- factor(to_plo$month, levels =  mo_lab$num, labels = mo_lab$txt)
-  
+
   # reassign facet names if fac_nms is provided
   if(!is.null(fac_nms)){
-    
-    if(length(fac_nms) != length(unique(to_plo$month))) 
+
+    if(length(fac_nms) != length(unique(to_plo$month)))
       stop('fac_nms must have same lengths as months')
-  
+
     to_plo$month <- factor(to_plo$month, labels = fac_nms)
-    
+
   }
-  
+
   # convert discharge to arithmetic scale
   to_plo$flo <- exp(to_plo$flo)
-  
+
   # make plot
-  p <- ggplot(to_plo, aes(x = flo, y = res, group = year)) + 
+  p <- ggplot(to_plo, aes(x = flo, y = res, group = year)) +
     facet_wrap(~month, ncol = ncol, scales = scales)
-  
+
   # set lower limit for y-axis if applicable
   lims <- coord_cartesian(ylim = c(ymin, max(to_plo$res, na.rm = TRUE)))
   if(!is.null(scales)){
@@ -247,42 +247,42 @@ plotFlowConc <- function(eList, month = c(1:12), years = NULL, col_vec = c('red'
     p <- p + lims
   }
 
-  
+
   # return bare bones if FALSE
   if(!pretty) return(p + geom_line())
-  
+
   # get colors
   cols <- col_vec
-  
+
   # use bw theme
   if(use_bw) p <- p + theme_bw()
 
   # log scale breaks
   brks <- c(0, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
 
-  p <- p + 
+  p <- p +
     geom_line(size = size, aes(colour = year), alpha = alpha) +
     scale_y_continuous(ylabel, expand = c(0, 0)) +
     scale_x_log10(xlabel, expand = c(0, 0), breaks = brks) +
     theme(
-      legend.position = 'top', 
-      axis.text.x = element_text(size = 8), 
+      legend.position = 'top',
+      axis.text.x = element_text(size = 8),
       axis.text.y = element_text(size = 8)
     ) +
     scale_colour_gradientn('Year', colours = cols) +
-    guides(colour = guide_colourbar(barwidth = 10)) + 
+    guides(colour = guide_colourbar(barwidth = 10)) +
     ggtitle(toplab)
-  
+
   # remove grid lines
-  if(!grids) 
-    p <- p + 
-      theme(      
+  if(!grids)
+    p <- p +
+      theme(
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()
       )
-  
+
   return(p)
-    
+
 }
 ```
 </div>

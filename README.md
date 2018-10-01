@@ -26,7 +26,7 @@ owi-blog
   type: post
   title: EGRET plotFlowConc using ggplot2
   categories: Data Science
-  tags: 
+  tags:
     - EGRET
     - R
   image: static/plotFlowConc/unnamed-chunk-4-1.png
@@ -45,30 +45,30 @@ owi-blog
   ```
 
   Important notes about header:
-  
+
   * Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
-  
+
   * Initial submission **must** include `draft: True`
-  
+
   * `slug` slug will be the name of your url after owi.usgs.gov\blog\xxx
-  
+
   * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
-  
+
   * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
-  
+
   * `tags` are more specific words, and do not need to be on a pre-approved list, these will show up on the sidebar of the blog.
-  
+
   * `description` will go into a "meta" tag that Google and other sites use
-  
+
   * `keywords` (can be the same as tags), also go in a "meta" tag to be used by Google and others.
-  
+
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
-  
+
   * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
 
 6. Submit a pull request
-7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site. 
-8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site. 
+7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site.
+8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site.
 9. A designated approver must sign off on content based on review response
 10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
 11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
@@ -89,7 +89,7 @@ To test locally, run:
 
 ```
 export HUGO_BASEURL="blog/"
-hugo server --theme=hugo_theme_robust --buildDrafts
+hugo server --buildDrafts
 ```
 
 # Instructions for R users

@@ -7,28 +7,28 @@ title: Map Stuff
 type: post
 categories: Data Science
 image: static/usMap/map-1.png
- 
- 
- 
- 
- 
- 
 
-tags: 
+
+
+
+
+
+
+tags:
   - R
   - dataRetrieval
- 
+
 description: Using the R packages dataRetrieval to discover how water-quailty has changed over time.
 keywords:
   - R
   - dataRetrieval
- 
+
   - dataRetrieval
   - Water-Quality
 ---
--   Jordan Read <a href="mailto:jread@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/jordansread" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/jread-USGS" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=geFLqWAAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://cida.usgs.gov/people/jread.html" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Jordan Read <a href="mailto:jread@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/jordansread" target="blank"><i class="fab fa-twitter-square fa-2x"></i></a> <a href="https://github.com/jread-USGS" target="blank"><i class="fab fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=geFLqWAAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://cida.usgs.gov/people/jread.html" target="blank"><i class="fas fa-user fa-2x"></i></a>
 
--   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fab fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fab fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fas fa-user fa-2x"></i></a>
 
 ``` r
 library(dataRetrieval)
@@ -39,21 +39,21 @@ failed_sites <- c()
 
 #Running this full code takes about 15 minutes:
 
-for(i in stateCd$STUSAB[c(1:51,55)]){ 
-  
+for(i in stateCd$STUSAB[c(1:51,55)]){
+
   cat("Getting:",i,"\n")
-  
+
   all_sites <- tryCatch({
-      
-    sites <- readNWISdata(service = "site", 
+
+    sites <- readNWISdata(service = "site",
                             seriesCatalogOutput=TRUE,
                             siteType="ST",hasDataTypeCd="qw",
                             stateCd = i)
-    
+
     sites_filtered <- sites %>%
       filter(data_type_cd == "qw") %>%
       filter(count_nu >= 40) %>%
-      select(site_no, station_nm, dec_lat_va, dec_long_va, 
+      select(site_no, station_nm, dec_lat_va, dec_long_va,
              begin_date, end_date) %>%
       distinct() %>%
       mutate(begin_date = as.Date(begin_date),
@@ -61,7 +61,7 @@ for(i in stateCd$STUSAB[c(1:51,55)]){
              years = (end_date - begin_date)/365.25) %>%
       filter(years > 10) %>%
       mutate(state = i)
-  
+
     bind_rows(all_sites, sites_filtered)
   },
   error=function(cond) {
@@ -105,7 +105,7 @@ shift_sp <- function(sp, scale, shift, rotate = 0, ref=sp, proj.string=NULL, row
   } else {
     proj4string(obj) <- proj.string
   }
-  
+
   if (!is.null(row.names)){
     row.names(obj) <- row.names
   }
@@ -138,14 +138,14 @@ states.out <- conus
 
 wgs84 <- "+init=epsg:4326"
 coords = cbind(unique_sites$dec_long_va, unique_sites$dec_lat_va)
-sites = SpatialPoints(coords, proj4string = CRS(wgs84)) %>% 
+sites = SpatialPoints(coords, proj4string = CRS(wgs84)) %>%
   spTransform(CRS(proj4string(states.out)))
 
 sites.df <- as.data.frame(sites)
 
 for(i in names(move_variables)){
-  shifted <- do.call(shift_sp, c(sp = stuff_to_move[[i]], 
-                                 move_variables[[i]],  
+  shifted <- do.call(shift_sp, c(sp = stuff_to_move[[i]],
+                                 move_variables[[i]],
                                  proj.string = proj4string(conus),
                                  row.names = i))
   states.out <- rbind(shifted, states.out, makeUniqueIDs = TRUE)
@@ -154,11 +154,11 @@ for(i in names(move_variables)){
                                        move_variables[[i]],
                                        proj.string = proj4string(conus),
                                        ref=stuff_to_move[[i]])) %>%
-    as.data.frame %>% 
+    as.data.frame %>%
     coordinates()
-  
+
   sites.df[unique_sites$state == i, ] <- shifted.sites
-  
+
 }
 ```
 
@@ -168,7 +168,7 @@ gsMap <- ggplot() +
   geom_polygon(aes(x = long, y = lat, group = group),
                data = states.out, fill = "grey90",
                alpha = 0.5, color = "white") +
-  geom_point(data = sites.df, 
+  geom_point(data = sites.df,
              aes(x = coords.x1, y=coords.x2),
              colour = "red", size = 0.01) +
   theme_minimal() +

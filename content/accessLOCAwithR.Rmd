@@ -45,10 +45,10 @@ opts_chunk$set(
 )
 ```
 
-<a href="mailto:dblodgett@usgs.gov "><i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://github.com/dblodgett-usgs"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://twitter.com/D_Blodgett"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+<a href="mailto:dblodgett@usgs.gov "><i class="fas fa-envelope-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://github.com/dblodgett-usgs"><i class="fab fa-github-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://twitter.com/D_Blodgett"><i class="fab fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+<a href="https://profile.usgs.gov/professional/mypage.php?rfs=y&name=dblodgett"><i class="fas fa-user fa-2x" aria-hidden="true"></i></a>
 <a href="https://www.researchgate.net/profile/David_Blodgett3"><i class="ai ai-researchgate-square ai-2x" aria-hidden="true"></i></a>
 
 # Introduction
@@ -58,7 +58,7 @@ In this example, we will use the R programming language to access LOCA data via 
 A number of other packages are required for this example. They include: `tidyr` for preparing data to plot; `ggplot2` to create the plots;  `grid` and `gridExtra` to layout multiple plots in the same figure; `jsonlite` and `leaflet` to create the simple map of a polygon; and `chron`, `climates`, and `PCICt` to calculate derived climate indices. They are all available from [CRAN](https://cran.r-project.org) except [`climates` which can be installed from github.](https://github.com/jjvanderwal/climates)
 
 ## About LOCA
-This new, feely available, statistically downscaled dataset is summarized in depth at the U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)  
+This new, feely available, statistically downscaled dataset is summarized in depth at the U.C. San Diego home web page: [Summary of Projections and Additional Documentation](http://loca.ucsd.edu/)
 
 **From the Metadata:** LOCA is a statistical downscaling technique that uses past history to add improved fine-scale detail to global climate models. We have used LOCA to downscale 32 global climate models from the CMIP5 archive at a 1/16th degree spatial resolution, covering North America from central Mexico through Southern Canada. The historical period is 1950-2005, and there are two future scenarios available: RCP 4.5 and RCP 8.5 over the period 2006-2100 (although some models stop in 2099). The variables currently available are daily minimum and maximum temperature, and daily precipitation. For more information visit: http://loca.ucsd.edu/ The LOCA data is available due to generous support from the following agencies: The California Energy Commission (CEC), USACE Climate Preparedness and Resilience Program and US Bureau of Reclamation, US Department of Interior/USGS via the Southwest Climate Science Center, NOAA RISA program through the California Nevada Applications Program (CNAP), NASA through the NASA Earth Exchange and Advanced Supercomputing (NAS) Division
 **Reference:** Pierce, D. W., D. R. Cayan, and B. L. Thrasher, 2014: Statistical downscaling using Localized Constructed Analogs (LOCA). Journal of Hydrometeorology, volume 15, page 2558-2585.
@@ -79,7 +79,7 @@ names(loca_nc$dim) # Dimensions of the ncdf4 object.
 loca_nc$nvars # How many variables are available from the ncdf4 object.
 ```
 
-From this, we can see the global variables that are available for the dataset as well as the `ncdf4` object's basic structure. Notice that the dataset has 171 variables! 
+From this, we can see the global variables that are available for the dataset as well as the `ncdf4` object's basic structure. Notice that the dataset has 171 variables!
 
 ## Point-based time series data
 
@@ -110,7 +110,7 @@ analysis_polygon<-getGDPPolygon(attribute = attribute, value = value)
 coords<-analysis_polygon$features[[1]]$geometry$coordinates[[1]][[1]]
 coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
 names(coords)<-c('lon','lat')
-leafMapLOCA <- leaflet() %>% 
+leafMapLOCA <- leaflet() %>%
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 7,) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", options=tileOptions(minZoom = 7, maxZoom = 7)) %>%
   addGeoJSON(analysis_polygon, weight = 5, color = "#ff7800", fill = FALSE) %>%
@@ -173,7 +173,7 @@ ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alph
 
 ## Areal average time series data access with the Geo Data Portal
 
-Using the method shown above, you can access any variable at any lat/lon location for your application. Next, we'll look at how to get areal statistics of the data for the Platte Drainage Basin climate division polygon shown above.  
+Using the method shown above, you can access any variable at any lat/lon location for your application. Next, we'll look at how to get areal statistics of the data for the Platte Drainage Basin climate division polygon shown above.
 
 For this, we'll need the package `geoknife`. In the code below, we setup the `webgeom` and `webdata` objects called `stencil` and `fabric` respectively. Then we make a request for one timestep to find out the `SUM` of the cell weights and the total `COUNT` of cells in the area weighted grid statistics calculation that the Geo Data Portal will perform at the request of `geoknife`. This tells us the fractional number of grid cells considered in the calculation as well as the total number of cells that will be considered for each time step.
 
@@ -198,7 +198,7 @@ result(job_onestep)
 
 ## Areal intersection calculation summary
 
-This result shows that the SUM and COUNT are 1465.039 and 1616 respectively. This tells us that of the 1616 grid cells that partially overalap the Platte Drainage Basin polygon, the sum of cell weights in the area weighted grid statistics calculation is 1465.039. The Platte Drainage Basin climate division is about 52,200 square kilometers and the LOCA grid cells are roughly 36 square kilometers (1/16th degree). Given this, we would expect about 1450 grid cells in the Platte Drainage Basin polygon which compares will with the Geo Data Portal's 1465.  
+This result shows that the SUM and COUNT are 1465.039 and 1616 respectively. This tells us that of the 1616 grid cells that partially overalap the Platte Drainage Basin polygon, the sum of cell weights in the area weighted grid statistics calculation is 1465.039. The Platte Drainage Basin climate division is about 52,200 square kilometers and the LOCA grid cells are roughly 36 square kilometers (1/16th degree). Given this, we would expect about 1450 grid cells in the Platte Drainage Basin polygon which compares will with the Geo Data Portal's 1465.
 
 ## Process time and request size analysis
 
@@ -220,12 +220,12 @@ time_per_int <- time_one_step - time_per_step
 cat('Precip time is about',as.numeric(time_per_var,units="hours"), 'hours per variable. \nTime for spatial intersection is about',as.numeric(time_per_int), 'seconds.')
 ```
 
-This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok.  
+This result shows about how long we can expect each full variable to take to process and how much of that process is made up by the spatial intersection calculations. As can be seen, the spatial intersection is insignificant compared to the time series data processing, which means running one variable at a time should be ok.
 
-In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.  
+In the case that the spatial intersection takes a lot of time and the data processing is quick, we could run many variables at a time to limit the number of spatial intersections that are performed. In this case, we can just run a single variable per request to `geoknife` and the Geo Data Portal.
 
 ## GDP run to get all the data.
-Now, lets run the GDP for the whole loca dataset. This will be 168 variables with each variable taking something like a half hour depending on server load. Assuming 30 minutes per variable, **that is 84 hours!** That may seem like a very long time, but considering that each variable is 34310 time steps, that is a throughput of about **19 time steps per second**.  
+Now, lets run the GDP for the whole loca dataset. This will be 168 variables with each variable taking something like a half hour depending on server load. Assuming 30 minutes per variable, **that is 84 hours!** That may seem like a very long time, but considering that each variable is 34310 time steps, that is a throughput of about **19 time steps per second**.
 
 The code below is designed to keep retrying until the processing result for each has been downloaded successfully. For this demonstration, the processing has been completed and all the files are available in the working directory of the script. **NOTE: This is designed to make one request at a time. Please don't make concurrent requests to the GDP, it tends to be slower than executing them in serial.**
 
@@ -305,11 +305,11 @@ for(scenario in scenarios) {
     pr <- loca_data_platte[subRows,prVars]
     tmax <- loca_data_platte[subRows,tmaxVars]
     tmin <- loca_data_platte[subRows,tminVars]
-    indices <- daily_indices(tmin = tmin, 
-                             tmax = tmax, 
-                             prec = pr, 
-                             tmean = (tmin+tmax)/2, 
-                             thresholds = thresholds, 
+    indices <- daily_indices(tmin = tmin,
+                             tmax = tmax,
+                             prec = pr,
+                             tmean = (tmin+tmax)/2,
+                             thresholds = thresholds,
                              time_PCICt = dates_pcict)
     for(thresh in 1:length(names(thresholds))) {
       pList[[scenario]][[names(thresholds)[thresh]]][gcms][year,] <- indices[,thresh]
@@ -325,12 +325,12 @@ Now we have a data in a structure that we can use to create some plots. First, w
 <p class="ToggleButton" onclick="toggle_visibility('hideMe2')">View Code</p>
 <div id="hideMe2" style="display: none">
 ```{r grid_arrange_function, echo=TRUE, toggle=TRUE, message=FALSE}
-grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
+grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
   # From https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs
   plots <- list(...)
   position <- match.arg(position)
-  g <- ggplotGrob(plots[[1]] + theme(legend.position = position, 
+  g <- ggplotGrob(plots[[1]] + theme(legend.position = position,
                                      legend.text=legend.text,
                                      legend.title=element_blank()))$grobs
   legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
@@ -338,7 +338,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1,
   lwidth <- sum(legend$width)
   gl <- lapply(plots, function(x) x + theme(legend.position="none"))
   gl <- c(gl, ncol = ncol, nrow = nrow)
-  
+
   combined <- switch(position,
                      "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
                                             legend,
@@ -395,7 +395,7 @@ for(thresh in names(plot_setup)) {
   for(scenario in scenarios) {
     datset<-pList[[scenario]][[thresh]]
     pData<-gather_(datset,'gcm','data',names(datset)[2:length(datset)])
-    plot_setup[[thresh]][[paste0("plotAll",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=gcm,group=gcm)) + 
+    plot_setup[[thresh]][[paste0("plotAll",scenario)]] <- ggplot(pData,aes(x=year,y=data,colour=gcm,group=gcm)) +
       plot_setup[[thresh]]$plottype +  ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario) + ylim(minPlot, maxPlot)
     pData<-data.frame(mean=apply(datset[names(datset)[2:length(datset)]],1,mean))
     pData['max']<-apply(datset[names(datset)[2:length(datset)]],1,max)
@@ -406,7 +406,7 @@ for(thresh in names(plot_setup)) {
       ylab(plot_setup[[thresh]]$yaxis) + xlab('Year') + ggtitle(scenario) + ylim(minPlot, maxPlot)
   }
   plot_setup[[thresh]]$plotStatsrcp45 <- plot_setup[[thresh]]$plotStatsrcp45 + theme(legend.position="none")
-  plot_setup[[thresh]]$plotStatsrcp85 <- plot_setup[[thresh]]$plotStatsrcp85 + 
+  plot_setup[[thresh]]$plotStatsrcp85 <- plot_setup[[thresh]]$plotStatsrcp85 +
     theme(axis.title.y=element_blank())
   grid_arrange_shared_legend(plot_setup[[thresh]]$plotStatsrcp45, plot_setup[[thresh]]$plotStatsrcp85,ncol=2,top=plot_setup[[thresh]]$title)
 }
@@ -414,14 +414,14 @@ for(thresh in names(plot_setup)) {
 </div>
 ## All GCM Plots
 
-Finally, to give an impression of how much data this example actually pulled in, here are the same plots with all the GCMs shown rather then the ensemble mean, min, and max. 
+Finally, to give an impression of how much data this example actually pulled in, here are the same plots with all the GCMs shown rather then the ensemble mean, min, and max.
 
 ```{r plot_lots, echo=TRUE, message=FALSE, alt.text="Graph of climate indicator showing all GCMs in the ensemble.", fig.cap="Climate Indicator Graph of All GCMs"}
 for(thresh in names(plot_setup)) {
 plot_setup[[thresh]]$plotAllrcp45 <- plot_setup[[thresh]]$plotAllrcp45
-plot_setup[[thresh]]$plotAllrcp85 <- plot_setup[[thresh]]$plotAllrcp85 + 
+plot_setup[[thresh]]$plotAllrcp85 <- plot_setup[[thresh]]$plotAllrcp85 +
                                        theme(axis.title.y=element_blank())
-grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45, 
+grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45,
                            plot_setup[[thresh]]$plotAllrcp85,
                            ncol=2, top=plot_setup[[thresh]]$title,
                            legend.text=element_text(size = 6))

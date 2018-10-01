@@ -1,40 +1,50 @@
+@import 'wdfnviz';
+
+$fa-font-path: './fonts' !default;
+@import 'fontawesome';
+@import 'brands';
+@import 'solid';
+
+@import 'academicons';
+
+
 /*
  * #eceff1
  * #b0bec5
  * #78909c
  */
- 
+
  aside.site header{
    color:#003366;
  }
- 
+
  .author{
    font-size:.8rem;
  }
- 
+
  #owiLogo{
    width:45px;
    margin:-12px 5px 0 0;
  }
- 
+
  table tr{
    border-right:1px solid rgb(190,190,190);
    border-left:1px solid rgb(190,190,190);
  }
- 
+
  table tr th{
   padding:10px;
   border-bottom:1px solid rgb(190,190,190);
   border-top:1px solid rgb(190,190,190);
  }
- 
+
  table tr td{
    padding:10px;
    border-bottom:1px solid rgb(190,190,190);
    border-top:1px solid rgb(190,190,190);
    word-break: keep-all;
  }
- 
+
  @media screen and (min-width:768px){
    .sideBySide{
     width:49% !important;
@@ -135,7 +145,7 @@ li{
     top: 3px;
     left:0;
   }
-  
+
   /*========usgs-header========*/
   #usgscolorband {
     font: 14px Verdana, Arial, Helvetica, sans-serif;
@@ -147,7 +157,7 @@ li{
     z-index: 20002;
     display: block;
   }
-  
+
   #banner{
     width:300px;
   }
@@ -194,7 +204,7 @@ li{
     margin-left: 4px;
     text-decoration: none;
   }
-  
+
   /*========usgs-footer========*/
   #usgsfooter {
     background: #fff;
@@ -207,7 +217,7 @@ li{
     text-align:left;
     margin-top:10px;
   }
-  
+
   #usgsfooter img{
     width:100px;
   }
@@ -381,7 +391,7 @@ h5 { font-size: 1rem; line-height: 1rem; }
   background: #fff;
   width: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  
+
 }
 .p-logo ul a {
   color: #003366;

@@ -7,19 +7,19 @@ title: Tropical Storm Colin Discharge Plot R Code
 type: post
 categories: Data Science
 image: static/ts-colin-discharge/mainPlot-1.png
-tags: 
+tags:
   - R
   - dataRetrieval
- 
+
 description: Using dataRetrieval to plot streamflow discharge measurements during
 keywords:
   - R
   - dataRetrieval
- 
+
   - plotting precipitation
   - data visualization
 ---
-<a href="mailto:wwatkins@usgs.gov "><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://github.com/wdwatkins"><i class="fa fa-github-square fa-2x"></i></a>
+<a href="mailto:wwatkins@usgs.gov "><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://github.com/wdwatkins"><i class="fab fa-github-square fa-2x"></i></a>
 
 The first piece retrieves the discharge data for Anclote River site, and makes the main plot.
 
@@ -38,8 +38,8 @@ siteData <- renameNWISColumns(siteData)
 loc <- attr(siteData,'siteInfo') #get site lat/lon
 
 #main plot
- 
-plot(x=siteData$dateTime,y=siteData$Flow_Inst, type="l", 
+
+plot(x=siteData$dateTime,y=siteData$Flow_Inst, type="l",
      col="blue", xlab = "Day", ylab = "Discharge (cfs)",lwd=4,cex.lab=1.5,cex.axis=1.25)
 title(loc$station_nm,line=1)
 mtext("Tropical Storm Colin 6/4/2016-6/10/2016")
@@ -47,14 +47,14 @@ abline(v=as.POSIXct("2016-06-06 03:00:00 UTC",tz="UTC"),col="red",lwd=1.5)
 text(x=as.POSIXct("2016-06-06 02:00:00 UTC",tz="UTC"),y=70,label="Precipitation begins early Monday",srt=90,pos=3)
 
 #inset
-par(plt=c(0.7,0.9,0.2,0.4),new=TRUE)  
+par(plt=c(0.7,0.9,0.2,0.4),new=TRUE)
 #axis limits for the inset:
-plot.window(xlim=c(-88.5,-80),ylim=c(24.5,31))  
+plot.window(xlim=c(-88.5,-80),ylim=c(24.5,31))
 map('state',regions="FL",lwd=1.5,
     xlim=c(-88.5,-80),ylim=c(24.5,31),add=TRUE)
 #stream gage location
 points(loc$dec_lon_va[1],loc$dec_lat_va[1],
-       bg='red',col='red',pch=22,cex=1) 
+       bg='red',col='red',pch=22,cex=1)
 box(lwd=1.5)
 ```
 

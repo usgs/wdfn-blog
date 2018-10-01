@@ -9,21 +9,21 @@ image: static/earthquake/earthquake.png
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
- 
+
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
 
-tags: 
+tags:
   - R
   - dataRetrieval
- 
+
 description: Using ggplot2 to inspect water levels affected by earthquake.
 keywords:
   - R
   - dataRetrieval
- 
- 
- 
+
+
+
 ---
 What happened?
 ==============
@@ -65,8 +65,8 @@ sites <- c("402411077374801",
            "401804074432601",
            "292618099165901")
 
-gw_data <- readNWISuv(sites, 
-                      parameterCd = "72019", 
+gw_data <- readNWISuv(sites,
+                      parameterCd = "72019",
                       startDate = "2017-09-07",
                       endDate = "2017-09-08")
 ```
@@ -90,7 +90,7 @@ Now, we can do a bit of filtering so that we will only plot the 24 hours of on S
 gw_data_sub <- gw_data %>%
             filter(dateTime > as.POSIXct("2017-09-07 00:00:00", tz="UTC"),
                    dateTime < as.POSIXct("2017-09-09 00:00:00", tz="UTC")) %>%
-  mutate(site_no = factor(site_no, 
+  mutate(site_no = factor(site_no,
                           levels = south_to_north$site_no))
 ```
 
@@ -111,7 +111,7 @@ depth_plot <- ggplot(data = gw_data_sub) +
   xlab(label = "UTC time") +
   theme(strip.background = element_blank(),
         strip.text.y = element_text(angle = 0),
-        panel.grid.major = element_blank(), 
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
 depth_plot
@@ -160,7 +160,7 @@ sites_names <- select(unique_sites, dec_lon_va, dec_lat_va, site_no)
 coordinates(sites_names) <- c(1,2)
 proj4string(sites_names) <- CRS(wgs84)
 
-sites_names = sites_names %>% 
+sites_names = sites_names %>%
   spTransform(CRS(proj4string(conus)))
 sites_names.df <- as.data.frame(sites_names)
 
@@ -168,13 +168,13 @@ gsMap <- ggplot() +
   geom_polygon(aes(x = long, y = lat, group = group),
                data = conus, fill = "grey90",
                color = "white")+
-  geom_point(data = sites_names.df, 
+  geom_point(data = sites_names.df,
              aes(x = dec_lon_va, y=dec_lat_va, color = site_no),
              size = 2) +
   scale_color_manual(values = cbValues) +
   theme_minimal() +
   theme(panel.grid = element_blank(),
-        panel.background = element_rect(fill = 'white', 
+        panel.background = element_rect(fill = 'white',
                                         colour = 'black'),
         axis.text = element_blank(),
         axis.title = element_blank(),
@@ -190,7 +190,7 @@ The initial line graphs needed to be updated with those colors and dropping the 
 
 ``` r
 depth_plot <- ggplot(data = gw_data_sub) +
-  geom_line(aes(x = dateTime, y = X_72019_00000, 
+  geom_line(aes(x = dateTime, y = X_72019_00000,
                 color = site_no), size = 1.5) +
   theme_bw() +
   scale_y_continuous(trans = "reverse") +
@@ -200,7 +200,7 @@ depth_plot <- ggplot(data = gw_data_sub) +
   scale_color_manual(values = cbValues) +
   theme(strip.background = element_blank(),
         strip.text = element_blank(),
-        panel.grid.major = element_blank(), 
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         legend.position="none",
         panel.spacing.y=unit(0.04, "lines"))
@@ -210,7 +210,7 @@ Finally, the graphs were combined using the `viewport` function from the `grid` 
 
 ``` r
 library(grid)
-vp <- viewport(width = 0.35, height = 0.22, 
+vp <- viewport(width = 0.35, height = 0.22,
                x = 0.26, y = 0.87)
 
 png("static/earthquake/earthquake.png",width = 8, height = 8, units = "in", res = 200)
@@ -219,7 +219,7 @@ print(gsMap, vp = vp)
 dev.off()
 ```
 
-    ## png 
+    ## png
     ##   2
 
 <img src='/static/earthquake/earthquake.png'/ title='Water levels in US affected by Mexico earthquake' alt='Water levels in US affected by Mexico earthquake' />
@@ -240,14 +240,14 @@ The frequency of data in these plots varies -- some are collected every minute, 
 Have Questions on Groundwater?
 ------------------------------
 
--   Rodney A. Sheets <a href="mailto:rasheets@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/rodney-a-sheets" target="blank"><i class="fa fa-user fa-2x"></i></a>
--   Charles Schalk <a href="mailto:cwschalk@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/charles-schalk" target="blank"><i class="fa fa-user fa-2x"></i></a>
--   Leonard Orzol <a href="mailto:llorzol@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/leonard-orzol" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Rodney A. Sheets <a href="mailto:rasheets@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/rodney-a-sheets" target="blank"><i class="fas fa-user fa-2x"></i></a>
+-   Charles Schalk <a href="mailto:cwschalk@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/charles-schalk" target="blank"><i class="fas fa-user fa-2x"></i></a>
+-   Leonard Orzol <a href="mailto:llorzol@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/leonard-orzol" target="blank"><i class="fas fa-user fa-2x"></i></a>
 
 Have Questions on NWIS?
 -----------------------
 
--   Brad Garner <a href="mailto:bdgarner@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/bradley-garner" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Brad Garner <a href="mailto:bdgarner@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/bradley-garner" target="blank"><i class="fas fa-user fa-2x"></i></a>
 
 Have Questions on the R package: dataRetrieval?
 -----------------------------------------------

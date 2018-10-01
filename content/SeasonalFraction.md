@@ -6,7 +6,7 @@ title: Seasonal Analysis in EGRET
 type: post
 categories: Data Science
 image: static/seasonal-analysis/unnamed-chunk-8-1.png
-tags: 
+tags:
   - R
   - EGRET
 description: Using the R-packages EGRET and EGRETci, investigate seasonal analysis.
@@ -39,14 +39,14 @@ To start with lets look at the results calculated for complete water years.
 tableResults(eList)
 ```
 
-    ## 
-    ##    Choptank River 
+    ##
+    ##    Choptank River
     ##    Inorganic nitrogen (nitrate and nitrite)
-    ##    Water Year 
-    ## 
+    ##    Water Year
+    ##
     ##    Year   Discharge    Conc    FN_Conc     Flux    FN_Flux
-    ##              cms            mg/L             10^6 kg/yr 
-    ## 
+    ##              cms            mg/L             10^6 kg/yr
+    ##
     ##    1980      4.25     0.949     1.003    0.1154     0.106
     ##    1981      2.22     1.035     0.999    0.0675     0.108
     ##    1982      3.05     1.036     0.993    0.0985     0.110
@@ -78,14 +78,14 @@ Now lets view our results when we are focusing on the winter season.
 tableResults(eList)
 ```
 
-    ## 
-    ##    Choptank River 
+    ##
+    ##    Choptank River
     ##    Inorganic nitrogen (nitrate and nitrite)
-    ##    Season Consisting of Dec Jan Feb 
-    ## 
+    ##    Season Consisting of Dec Jan Feb
+    ##
     ##    Year   Discharge    Conc    FN_Conc     Flux    FN_Flux
-    ##              cms            mg/L             10^6 kg/yr 
-    ## 
+    ##              cms            mg/L             10^6 kg/yr
+    ##
     ##    1980     4.220      1.10      1.11    0.1403     0.156
     ##    1981     1.960      1.20      1.13    0.0735     0.161
     ##    1982     5.057      1.16      1.15    0.1764     0.165
@@ -116,18 +116,18 @@ eList <- setPA(eList, paStart = 10, paLong = 12)
 tableChange(eList, yearPoints = c(1990,2010))
 ```
 
-    ## 
-    ##    Choptank River 
+    ##
+    ##    Choptank River
     ##    Inorganic nitrogen (nitrate and nitrite)
-    ##    Water Year 
-    ## 
+    ##    Water Year
+    ##
     ##            Concentration trends
     ##    time span       change     slope    change     slope
     ##                      mg/L   mg/L/yr        %       %/yr
-    ## 
+    ##
     ##  1990  to  2010      0.31     0.016        28       1.4
-    ## 
-    ## 
+    ##
+    ##
     ##                  Flux Trends
     ##    time span          change        slope       change        slope
     ##                   10^6 kg/yr    10^6 kg/yr /yr      %         %/yr
@@ -138,18 +138,18 @@ eList <- setPA(eList, paStart = 12, paLong = 3)
 tableChange(eList, yearPoints = c(1990,2010))
 ```
 
-    ## 
-    ##    Choptank River 
+    ##
+    ##    Choptank River
     ##    Inorganic nitrogen (nitrate and nitrite)
-    ##    Season Consisting of Dec Jan Feb 
-    ## 
+    ##    Season Consisting of Dec Jan Feb
+    ##
     ##            Concentration trends
     ##    time span       change     slope    change     slope
     ##                      mg/L   mg/L/yr        %       %/yr
-    ## 
+    ##
     ##  1990  to  2010      0.24     0.012        18      0.89
-    ## 
-    ## 
+    ##
+    ##
     ##                  Flux Trends
     ##    time span          change        slope       change        slope
     ##                   10^6 kg/yr    10^6 kg/yr /yr      %         %/yr
@@ -171,22 +171,22 @@ library(dplyr)
 
 setupSeasons <- function(eList){
   Daily <- eList$Daily
-  
-  SeasonResults <- setupYearsPlus(Daily, 
-                                  paLong = eList$INFO$paLong, 
+
+  SeasonResults <- setupYearsPlus(Daily,
+                                  paLong = eList$INFO$paLong,
                                   paStart = eList$INFO$paStart)
-  AnnualResults <- setupYearsPlus(Daily, 
-                                  paLong = 12, 
+  AnnualResults <- setupYearsPlus(Daily,
+                                  paLong = 12,
                                   paStart = eList$INFO$paStart) %>%
     filter(Counts >= 365) #To make sure we are getting full years
-  
+
   divideBy <- 1000000
-  
+
   annualPctResults <- AnnualResults %>%
     mutate(FluxYear = Flux*Counts/divideBy,
            FNFluxYear = FNFlux*Counts/divideBy) %>%
     select(FluxYear, FNFluxYear, Year)
-  
+
   seasonPctResults <- SeasonResults %>%
     mutate(FluxSeason = Flux*Counts/divideBy,
            FNFluxSeason = FNFlux*Counts/divideBy) %>%
@@ -196,7 +196,7 @@ setupSeasons <- function(eList){
     select(-Q, -Conc, -Flux, -FNFlux, -FNConc, -Counts) %>%
     rename(seasonStart = paStart,
            seasonLong = paLong)
-  
+
   return(seasonPctResults)
 }
 
@@ -204,9 +204,9 @@ setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
 
   monthsToUse <- seq(paStart, length=paLong)
   monthsToUse[monthsToUse > 12] <- monthsToUse[monthsToUse > 12] - 12
-  
+
   crossesYear <- paLong + (paStart - 1) > 12
-  
+
   AnnualResults <- Daily %>%
     mutate(Year =  as.integer(format(Date, "%Y"))) %>%
     filter(Month %in% monthsToUse) %>%
@@ -224,10 +224,10 @@ setupYearsPlus <- function (Daily, paLong = 12, paStart = 10){
                 FNFlux = mean(FNFlux, na.rm = TRUE),
                 Counts = sum(!is.na(ConcDay))) %>%
     mutate(paLong = paLong,
-           paStart = paStart) 
-      
+           paStart = paStart)
+
   return(AnnualResults)
-  
+
 }
 ```
 
@@ -306,7 +306,7 @@ We can make a graph showing the percentage flux (estimated annual and flow norma
 ``` r
 plotTitle = paste("Seasonal Flux as a Percent of Annual Flux\n",
                   eList$INFO$shortName, eList$INFO$paramShortName,
-                  "\nSolid line is percentage of flow normalized flux") 
+                  "\nSolid line is percentage of flow normalized flux")
 par(mar=c(5,6,4,2) + 0.1,mgp=c(3,1,0))
 plot(seasonPctResults$DecYear, seasonPctResults$pctFlux,pch=20,
      yaxs="i",ylim = c(0,100),las=1,tck=.01,
@@ -336,7 +336,7 @@ Keep in mind, the way we are defining "year" is what year the ending year of the
 years00_10 <- filter(seasonPctResults, Year >= 2000, Year <= 2010)
 
 sumYears <- sum(years00_10$FluxYear)
- 
+
 sumSeasons <- sum(years00_10$FluxSeason)
 
 avePct <- 100 * sumSeasons / sumYears
@@ -358,15 +358,15 @@ c("sumYears" = sum(years00_10$FluxYear),
 "avePct" = 100 * sumSeasons / sumYears)
 ```
 
-    ##   sumYears sumSeasons     avePct 
+    ##   sumYears sumSeasons     avePct
     ##  1.7297595  0.6099614 35.2627852
 
 Questions
 ---------
 
--   Robert M. Hirsch <a href="mailto:rhirsch@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Robert_Hirsch3" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/robert-hirsch" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Robert M. Hirsch <a href="mailto:rhirsch@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a> <a href="https://www.researchgate.net/profile/Robert_Hirsch3" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a> <a href="https://www.usgs.gov/staff-profiles/robert-hirsch" target="blank"><i class="fas fa-user fa-2x"></i></a>
 
--   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fa fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fa fa-user fa-2x"></i></a>
+-   Laura DeCicco <a href="mailto:ldecicco@usgs.gov" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a> <a href="https://twitter.com/DeCiccoDonk" target="blank"><i class="fab fa-twitter-square fa-2x"></i></a> <a href="https://github.com/ldecicco-usgs" target="blank"><i class="fab fa-github-square fa-2x"></i></a> <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x" target="blank"></i></a> <a href="https://www.usgs.gov/staff-profiles/laura-decicco" target="blank"><i class="fas fa-user fa-2x"></i></a>
 
 Information on USGS-R packages used in this post:
 

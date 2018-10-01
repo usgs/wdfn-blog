@@ -41,33 +41,33 @@
           <section>
             <div>
               <div class="p-share">
-                <a href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-facebook"></i></a>
-                <a  rel="nofollow" target="_blank" href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><i class="fa fa-twitter"></i></a>
-                <a href="https://plus.google.com/share?url={{ .Permalink }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-google-plus"></i></a>
-                <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a>
+                <a href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-facebook"></i></a>
+                <a  rel="nofollow" target="_blank" href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><i class="fab fa-twitter"></i></a>
+                <a href="https://plus.google.com/share?url={{ .Permalink }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-google-plus"></i></a>
+                <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
               </div>
             </div>
           </section>
         </aside>
-        
+
         <div class="body">
-          
+
         <h1>{{ .Title }}</h1>
 
 		    <h3> {{ .Params.author }}  </h3>
-          
+
         {{ range .Params.authors }}
         <h3> {{ . }}  </h3>
         {{ end }}
-          
+
             {{ if .Params.author_email }}
-<a href="mailto:{{.Params.author_email}}" target="blank"><i class="fa fa-envelope-square fa-2x"></i></a>
-            {{ end }}  
+<a href="mailto:{{.Params.author_email}}" target="blank"><i class="fas fa-envelope-square fa-2x"></i></a>
+            {{ end }}
             {{ if .Params.author_github }}
-            <a href="https://github.com/{{.Params.author_github }}" target="blank"><i class="fa fa-github-square fa-2x"></i></a>
+            <a href="https://github.com/{{.Params.author_github }}" target="blank"><i class="fab fa-github-square fa-2x"></i></a>
             {{ end }}
             {{ if .Params.author_twitter }}
-            <a href="https://twitter.com/{{.Params.author_twitter }}" target="blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+            <a href="https://twitter.com/{{.Params.author_twitter }}" target="blank"><i class="fab fa-twitter-square fa-2x"></i></a>
             {{ end }}
             {{ if .Params.author_gs }}
             <a href="https://scholar.google.com/citations?hl=en&user={{ .Params.author_gs}}" target="blank"><i class="ai ai-google-scholar-square ai-2x"></i></a>
@@ -76,26 +76,26 @@
 <a href="https://www.researchgate.net/profile/{{.Params.author_researchgate}}" target="blank"><i class="ai ai-researchgate-square ai-2x"></i></a>
             {{ end }}
             {{ if .Params.author_staff }}
-<a href="https://www.usgs.gov/staff-profiles/{{.Params.author_staff}}" target="blank"><i class="fa fa-user fa-2x"></i></a>
-            {{ end }}            
-            
+<a href="https://www.usgs.gov/staff-profiles/{{.Params.author_staff}}" target="blank"><i class="fas fa-user fa-2x"></i></a>
+            {{ end }}
+
           {{ .Content }}
-          
+
         </div>
 
         <aside>
-          
+
           <section>
             <div>
               <div class="p-share">
-                <a href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><i class="fa fa-twitter"></i></a>
-                <a href="https://plus.google.com/share?url={{ .Permalink }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-google-plus"></i></a>
-                <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a>
+                <a href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><i class="fab fa-twitter"></i></a>
+                <a href="https://plus.google.com/share?url={{ .Permalink }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-google-plus"></i></a>
+                <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
               </div>
             </div>
           </section>
-          
+
           {{ if and (ne .Site.Params.comment false) (ne .Params.comment false) }}
           {{ with .Site.Params.disqusShortname }}
           <section>

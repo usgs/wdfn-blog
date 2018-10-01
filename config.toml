@@ -4,4 +4,4 @@ name = ["Laura DeCicco"]
 email = ["r_admin@usgs.gov"]
 preserveTaxonomyNames = true
 paginate = 100
-theme = "hugo_theme_robust"
+theme = "wdfn_theme"

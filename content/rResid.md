@@ -6,7 +6,7 @@ title: Using Random Residuals for Censored Data in EGRET
 type: post
 categories: Data Science
 image: static/rResid/unnamed-chunk-7-2.png
-tags: 
+tags:
   - R
   - EGRET
 description: Using random residuals for censored data in EGRET, and R package. Exploration and Graphics for RivEr Trends (EGRET) is an R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS).
@@ -128,16 +128,16 @@ Questions
 Please direct any questions or comments on `EGRET` to: <https://github.com/USGS-R/EGRET/issues>
 
 * Robert Hirsch
-<a href="mailto:rhirsch@usgs.gov "><i class="fa fa-envelope-square fa-2x"></i></a>
+<a href="mailto:rhirsch@usgs.gov "><i class="fas fa-envelope-square fa-2x"></i></a>
 <a href="https://scholar.google.com/citations?user=Jt5I-0gAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
 <a href="https://www.researchgate.net/profile/Robert_Hirsch3"><i class="ai ai-researchgate-square ai-2x"></i></a>
-<a href="https://profile.usgs.gov/rhirsch"><i class="fa fa-user fa-2x"></i></a>
+<a href="https://profile.usgs.gov/rhirsch"><i class="fas fa-user fa-2x"></i></a>
 
 * Laura DeCicco
-<a href="mailto:ldecicco@usgs.gov"><i class="fa fa-envelope-square fa-2x"></i></a>
-<a href="https://twitter.com/DeCiccoDonk"><i class="fa fa-twitter-square fa-2x"></i></a>
-<a href="https://github.com/ldecicco-usgs"><i class="fa fa-github-square fa-2x"></i></a>
+<a href="mailto:ldecicco@usgs.gov"><i class="fas fa-envelope-square fa-2x"></i></a>
+<a href="https://twitter.com/DeCiccoDonk"><i class="fab fa-twitter-square fa-2x"></i></a>
+<a href="https://github.com/ldecicco-usgs"><i class="fab fa-github-square fa-2x"></i></a>
 <a href="https://scholar.google.com/citations?hl=en&user=jXd0feEAAAAJ"><i class="ai ai-google-scholar-square ai-2x"></i></a>
 <a href="https://www.researchgate.net/profile/Laura_De_Cicco"><i class="ai ai-researchgate-square ai-2x"></i></a>
-<a href="https://profile.usgs.gov/ldecicco"><i class="fa fa-user fa-2x"></i></a>
+<a href="https://profile.usgs.gov/ldecicco"><i class="fas fa-user fa-2x"></i></a>
 
