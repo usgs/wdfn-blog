@@ -6,7 +6,6 @@ const path = require('path');
 
 const alias = require('rollup-plugin-alias');
 const buble = require('rollup-plugin-buble');
-const commonjs = require('rollup-plugin-commonjs');
 const resolve = require('rollup-plugin-node-resolve');
 const { uglify } = require('rollup-plugin-uglify');
 
@@ -39,7 +38,6 @@ module.exports = {
             // pkg.browser will be ignored
             browser: false  // Default: false
         }),
-        commonjs(),
         buble({
             objectAssign: 'Object.assign',
             transforms: {

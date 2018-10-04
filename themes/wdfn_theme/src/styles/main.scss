@@ -1,11 +1,11 @@
-@import 'wdfnviz';
+@import '../../node_modules/wdfn-viz/dist/sass/wdfnviz';
 
 $fa-font-path: './fonts' !default;
 @import 'fontawesome';
 @import 'brands';
 @import 'solid';
 
-@import 'academicons';
+@import './academicons';
 
 
 /*
