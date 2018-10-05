@@ -8,10 +8,10 @@ module.exports = ctx => ({
     map: Object.assign({}, ctx.options.map, {inline: false}),
     parser: ctx.options.parser,
     plugins: {
-        autoprefixer: autoprefixerOptions,
+        autoprefixer: autoprefixerBrowsers,
         cssnano: {
             autoprefixer: {
-                browsers: autoprefixerOptions
+                browsers: autoprefixerBrowsers
             }
         },
         'css-mqpacker': {

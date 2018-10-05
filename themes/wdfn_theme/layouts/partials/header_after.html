@@ -7,77 +7,23 @@
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   ga('create', '{{ .Site.GoogleAnalytics }}', 'usgs.gov');
   ga('send', 'pageview');
-
 </script>
-
 <script type="application/javascript" src="https://www2.usgs.gov/scripts/analytics/usgs-analytics.js"></script>
 
 <script>
-  function toggle_visibility(id) {
+    function toggle_visibility(id) {
         var e = document.getElementById(id);
         if (e.style.display == 'block' || e.style.display=='') e.style.display = 'none';
         else e.style.display = 'block';
-  }
+    }
 </script>
 
 </head>
 
-<!-- BEGIN USGS Header Template -->
-
-			<div id="usgscolorband">
-
-				<div id="usgsheader">
-
-					<div id="usgsidentifier">
-						<a href="http://www.usgs.gov/" target="_blank"><img src="{{ $.Site.BaseURL }}images/usgslogo.jpg" alt="USGS - science for a changing world" title="U.S. Geological Survey Home Page"/></a>
-					</div><!--usgsidentifier-->
-
-					<img id="banner" src="{{ $.Site.BaseURL }}images/banner.png" alt="banner"/>
-
-					<div id="usgsccsabox">
-
-						<div id="usgsccsa">
-							<a href="http://www.usgs.gov/">USGS Home</a>
-							<br /><a href="http://answers.usgs.gov/cgi-bin/gsanswers?tmplt=2">Contact USGS</a>
-							<br /><a href="http://search.usgs.gov/">Search USGS</a>
-							<br />
-						</div><!--usgsccsa-->
-
-					</div><!--usgsccsabox-->
-
-				</div><!--usgsheader-->
-			</div><!--colorband-->
-
-			<!-- END USGS Header Template -->
-
-<header class="l-header">
-
-  <div class="p-logo">
-    <div class="navContent">
-        <div id="menu">
-            Menu
-        </div>
-       <ul id="navigation">
-           <a id="people" href="https://owi.usgs.gov/people/"><li>People</li></a>
-           <a href="https://owi.usgs.gov/products/"><li>Products</li></a>
-           <a href="https://owi.usgs.gov/partners/"><li>Partners</li></a>
-           <a href="https://owi.usgs.gov/datascience/"><li>Data Science</li></a>
-           <a href="https://owi.usgs.gov/vizlab/"><li>Vizlab</li></a>
-           <a href="https://owi.usgs.gov/careers/"><li>Careers</li></a>
-           <a id="owiCurrent" href="{{ $.Site.BaseURL }}"><li>Blog</li></a>
-       </ul>
-        <a href="https://owi.usgs.gov/">
-            <img id="owiLogoSmall" src="{{ $.Site.BaseURL }}images/owi-mobile.png" alt="OWI logo"/>
-        </a>
-   </div>
-  </div>
-
-  {{ if .RSSLink }}
+{{ if .RSSLink }}
   <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
   <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
-  {{ end }}
-
-</header>
+{{ end }}
 
 <script src="{{ $.Site.BaseURL }}scripts/bundle.js"   crossorigin="anonymous"></script>
 <script type="text/javascript">

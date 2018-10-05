@@ -100,11 +100,6 @@ li{
   color:#fff;
 }
 
-.navContent{
-  height:40px;
-  position:relative;
-}
-
 #owiLogoSmall{
     position:absolute;
     left:10px;
@@ -126,18 +121,7 @@ li{
     cursor:pointer;
 }
 
-#usgsfooter,
-#usgscolorband{
-  display:none;
-}
-
 @media screen and (min-width:768px){
-  .navContent {
-    position: relative;
-    width: 768px;
-    height: 40px;
-    margin: 0 auto;
-  }
   #owiLogoSmall {
     display: block;
     width: 47px;
@@ -145,126 +129,7 @@ li{
     top: 3px;
     left:0;
   }
-
-  /*========usgs-header========*/
-  #usgscolorband {
-    font: 14px Verdana, Arial, Helvetica, sans-serif;
-    width: 100%;
-    height: 5.14em;
-    min-height: 72px;
-    background: #000;
-    position: relative;
-    z-index: 20002;
-    display: block;
-  }
-
-  #banner{
-    width:300px;
-  }
-  #usgsbanner {
-    width: 100%;
-    height: 72px;
-  }
-  #usgsidentifier {
-    background-color: black;
-    width: 178px;
-    height: 5.14em;
-    float: left;
-  }
-  #usgsidentifier img {
-    border: none;
-  }
-  #usgsccsabox {
-    float: right;
-    background-color: #000000;
-    min-height: 72px;
-    width: 120px;
-  }
-  #usgsccsa {
-    font: 1em/0.5em Verdana, Arial, Helvetica, sans-serif;
-    height: 63px;
-    padding-top: 9px;
-  }
-  #usgsccsa a:link,
-  #usgsccsa a:visited {
-    font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif;
-    color: #ffffff;
-    margin-left: 4px;
-    text-decoration: none;
-  }
-  #usgsccsa a:hover {
-    font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif;
-    color: #ffffff;
-    text-decoration: underline;
-    margin-left: 4px;
-  }
-  #usgsccsa a:active {
-    font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif;
-    color: #ffffff;
-    margin-left: 4px;
-    text-decoration: none;
-  }
-
-  /*========usgs-footer========*/
-  #usgsfooter {
-    background: #fff;
-    padding-bottom: 5px;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: small;
-    clear: both;
-    margin: 0;
-    display: block;
-    text-align:left;
-    margin-top:10px;
-  }
-
-  #usgsfooter img{
-    width:100px;
-  }
-  #usgsfooterbar {
-    background-color: #666666;
-    padding: 4px;
-    margin: 0;
-  }
-  #usgsfooterbar a:link,
-  #usgsfooterbar a:visited {
-    margin-right: 40px;
-    color: #ffffff;
-    text-decoration: none;
-  }
-  #usgsfooterbar a:hover {
-    margin-right: 40px;
-    color: #ffffff;
-    text-decoration: underline;
-  }
-  #usgsfooterbar a:active {
-    margin-right: 40px;
-    color: #ffffff;
-    text-decoration: none;
-  }
-  #usgsfootertext {
-    padding: 4px;
-    margin: 0;
-  }
-  #usgsfootertext img {
-    border: none;
-    float: right;
-    margin-right: 5px;
-  }
 }
-
-@media screen and (min-width: 1025px) {
-  .navContent {
-    width: 970px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .navContent {
-    width: 1130px;
-  }
-}
-
 
 /* Reset */
 html {
@@ -273,7 +138,7 @@ html {
 }
 
 body {
-  font-family:Roboto, Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  //font-family:Roboto, Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: inherit;
   color: #000;
   line-height: 1rem;
@@ -352,71 +217,6 @@ h5 { font-size: 1rem; line-height: 1rem; }
 #TableOfContents>ul ul ul {
   padding-left: 1rem;
   list-style: none;
-}
-
-/* Layouts */
-.l-header {
-  background-color: #fff;
-  margin-bottom: 2rem;
-  border-bottom:1px solid #bebebe;
-  height:40px;
-}
-
-.l-footer {
-  margin-top: 4rem;
-  padding: 1rem 0;
-  font-size: .8rem;
-  color: #b0bec5;
-  text-align: center;
-}
-
-.l-footer a {
-  color: #78909c;
-}
-
-/* Parts:logo */
-.p-logo{
-  border-bottom:1px solid rgb(190,190,190);
-  height: 40px;
-  position: relative;
-  z-index: 10000;
-}
-
-.p-logo ul {
-  display:none;
-  list-style: none;
-  position: absolute;
-  top: 40px;
-  padding:0;
-  background: #fff;
-  width: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-
-}
-.p-logo ul a {
-  color: #003366;
-  display: inline-block;
-  height: 40px;
-  width: 100%;
-  font-size:1em;
-  padding:8px 0 0 0;
-}
-.p-logo ul a:hover {
-  background: #003366;
-  color: #fff;
-}
-.p-logo ul a li {
-  border-bottom: 1px solid #bebebe;
-  padding:0 10px;
-  height:32px;
-}
-
-
-.p-logo a {
-  font-size: 1.5em;
-  display:inline-block;
-  height:40px;
-  padding-top:12px;
 }
 
 /* Parts:menu */
@@ -541,7 +341,7 @@ article.grid {
   height: 340px;
   max-height: 24rem;
   overflow: hidden;
-  border:1px solid #bebebe;
+  border: 1px solid #bebebe;
   border-radius:10px;
 }
 
@@ -566,6 +366,7 @@ article.grid .summary {
 
 article.grid footer {
   padding: 1rem;
+  background-color: white;
 }
 
 /* Parts:article:single */

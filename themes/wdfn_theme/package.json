@@ -10,7 +10,7 @@
     "build": "npm run clean && run-p build:* && npm run hash-assets",
     "build:css": "node-sass --include-path node_modules/wdfn-viz/src/stylesheets --include-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/main.css && postcss static/main.css -o static/main.css",
     "build:fonts": "mkdir -p static/fonts && cp src/fonts/* static/fonts && cp -r node_modules/wdfn-viz/dist/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/fonts",
-    "build:images": "mkdir -p static/images && cp -r src/images/* static/images && cp -r node_modules/wdfn-viz/dist/img/* static/images",
+    "build:images": "mkdir -p static/img && cp -r src/images/* static/img && cp -r node_modules/wdfn-viz/dist/img/* static/img",
     "build:js": "mkdir -p static/scripts && rollup -c --environment NODE_ENV:production",
     "hash-assets": "gulp --gulpfile ./gulpfile.js revall",
     "watch": "run-p watch:*",
