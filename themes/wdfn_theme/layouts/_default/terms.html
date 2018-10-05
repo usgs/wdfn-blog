@@ -1,17 +1,15 @@
 {{ define "main" }}
-  <main>
-    <div class="grid-row">
-      <div class="tablet:grid-col-9">
-        <h1 class="p-page-title">{{ .Title }}</h1>
+  <div class="grid-row">
+    <div class="tablet:grid-col-9">
+      <h1 class="p-page-title">{{ .Title }}</h1>
 
-        <ul class="h-inline">
-          {{ range $key, $value := .Data.Terms }}<li><a href="/{{ $.Data.Plural }}/{{ $key | urlize }}/" class="{{ $.Data.Singular }}">{{ $key }}</a></li>{{ end }}
-        </ul>
-      </div>
-
-      <div class="tablet:grid-col-3">
-        {{ partial "sidebar.html" . }}
-      </div>
+      <ul class="h-inline">
+        {{ range $key, $value := .Data.Terms }}<li><a href="/{{ $.Data.Plural }}/{{ $key | urlize }}/" class="{{ $.Data.Singular }}">{{ $key }}</a></li>{{ end }}
+      </ul>
     </div>
-  </main>
+
+    <div class="tablet:grid-col-3">
+      {{ partial "sidebar.html" . }}
+    </div>
+  </div>
 {{ end }}
