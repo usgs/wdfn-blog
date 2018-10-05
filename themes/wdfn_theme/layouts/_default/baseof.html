@@ -69,15 +69,6 @@
     {{ end }}
 
     <script async src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
-    <script type="text/javascript">
-      $(document).on('click', function(){
-        $('#navigation').hide();
-      });
-      $('#menu').on('click', function(e){
-          e.stopPropagation();
-         $('#navigation').toggle();
-      });
-    </script>
   </head>
 
   <body>

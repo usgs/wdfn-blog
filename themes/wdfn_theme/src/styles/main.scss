@@ -62,44 +62,6 @@ p, h1, h2, h4, li {
   word-break: keep-all;
 }
 
-/*NAV CSS*/
-
-#owiCurrent {
-  background: #003366;
-  color: #fff;
-}
-
-#owiLogoSmall {
-  position: absolute;
-  left: 10px;
-  top: 3px;
-  display: block;
-  width: 47px;
-}
-
-#menu {
-  background: #003366;
-  width: 80px;
-  padding: 5px 0;
-  text-align: center;
-  position: absolute;
-  right: 10px;
-  top: 5px;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-}
-
-@media screen and (min-width: 768px) {
-  #owiLogoSmall {
-    display: block;
-    width: 47px;
-    position: absolute;
-    top: 3px;
-    left: 0;
-  }
-}
-
 /* Reset */
 
 html {
@@ -108,14 +70,9 @@ html {
 }
 
 body {
-  //font-family:Roboto, Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: inherit;
   color: #000;
   background-color: #fff;
-}
-
-p {
-  margin: 0;
 }
 
 ul, ol {
@@ -128,36 +85,6 @@ main {
   padding-top: 1em;
   img {
     width: 100%;
-  }
-}
-
-/* Override */
-
-#TableOfContents {
-  font-size: .8rem;
-  line-height: 1.5rem;
-  a {
-    display: block;
-  }
-  ul ul a {
-    text-decoration: none;
-  }
-  > ul {
-    padding-left: 0;
-    list-style: none;
-    > li {
-      font-weight: 900;
-      margin-bottom: 1rem;
-    }
-    ul {
-      padding-left: 0;
-      font-weight: normal;
-      list-style: none;
-      ul {
-        padding-left: 1rem;
-        list-style: none;
-      }
-    }
   }
 }
 
