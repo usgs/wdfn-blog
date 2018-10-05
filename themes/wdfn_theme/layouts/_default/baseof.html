@@ -6,6 +6,7 @@
     {{ .Hugo.Generator }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"-->
+    <link rel="icon" href="{{ $.Site.BaseURL }}img/main/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/{{ with .Site.Params.SyntaxHighlightTheme }}{{ . }}{{ else  }}solarized_dark.min.css{{ end }}">
     <link rel="stylesheet" href="{{ .Site.BaseURL }}main.css">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ .Site.BaseURL }}index.xml">
@@ -42,3 +43,59 @@
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:image" name="twitter:image" content="{{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}img/USGS_logo.svg{{ end }}">
     <meta name="keywords" content="{{ with .Keywords }}{{ delimit . ", " }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
+
+    {{ block "extra_meta" . }}{{ end }}
+
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', "{{ .Site.GoogleAnalytics }}", 'auto');
+      ga('set', 'contentGroup1', 'wdfn_tng');
+      ga('send', 'pageview');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'eventTracker');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+    <script>
+      function toggle_visibility(id) {
+          var e = document.getElementById(id);
+          if (e.style.display == 'block' || e.style.display=='') e.style.display = 'none';
+          else e.style.display = 'block';
+      }
+    </script>
+
+    {{ if .RSSLink }}
+      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{ end }}
+
+    <script async src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
+    <script type="text/javascript">
+      $(document).on('click', function(){
+        $('#navigation').hide();
+      });
+      $('#menu').on('click', function(e){
+          e.stopPropagation();
+         $('#navigation').toggle();
+      });
+    </script>
+  </head>
+
+  <body>
+    {{ partial "header.html" . }}
+    <main>
+      <div class="grid-row grid-gap-lg">
+        <div class="tablet:grid-col-9 desktop-lg:grid-col-11">
+          {{ block "main" . }}{{ end }}
+        </div>
+        <div class="tablet:grid-col-3 desktop-lg:grid-col-1">
+          {{ partial "sidebar.html" . }}
+        </div>
+      </div>
+    </main>
+    {{ partial "footer.html" . }}
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

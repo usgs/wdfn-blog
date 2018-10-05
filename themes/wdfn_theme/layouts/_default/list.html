@@ -1,31 +1,15 @@
-{{ partial "header_before.html" . }}
-{{ partial "header_after.html" . }}
-{{ partial "header.html" . }}
+{{ define "main" }}
+  <main class="container">
+    <h1 class="p-page-title">{{ .Title }}</h1>
 
-<main class="container">
-  <div class="row">
-    <div class="col-md-9">
-
-      <h1 class="p-page-title">{{ .Title }}</h1>
-
-      <div class="row">
-        {{ range (.Paginate .Data.Pages).Pages }}
-        <div class="col-sm-4">
+    <div class="grid-row">
+      {{ range (.Paginate .Data.Pages).Pages }}
+        <div class="tablet:grid-col-4">
           {{ .Render "grid" }}
         </div>
-        {{ end }}
-      </div>
-
-      {{ partial "pagination.html" . }}
-
+      {{ end }}
     </div>
 
-    <div class="col-md-3">
-      {{ partial "sidebar.html" . }}
-    </div>
-
-  </div>
-
-</main>
-
-{{ partial "footer.html" . }}
+    {{ partial "pagination.html" . }}
+  </main>
+{{ end }}

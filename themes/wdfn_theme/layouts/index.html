@@ -1,21 +1,14 @@
-{{ partial "header_before.html" . }}
-{{ partial "header_after.html" . }}
-{{ partial "header.html" . }}
-
-<main>
-  <div class="grid-row">
-    {{ range $key, $value := .Paginator.Pages }}
-      {{ if ge $value.Date.Unix 100 }}
-        <div class="mobile-lg:grid-col-6 tablet:grid-col-4 desktop:grid-col-3">
-          {{ .Render "grid" }}
-        </div>
+{{ define "main" }}
+  <main>
+    <div class="grid-row">
+      {{ range $key, $value := .Paginator.Pages }}
+        {{ if ge $value.Date.Unix 100 }}
+          <div class="mobile-lg:grid-col-6 tablet:grid-col-4 desktop:grid-col-3">
+            {{ .Render "grid" }}
+          </div>
+        {{ end }}
       {{ end }}
-    {{ end }}
-    {{ partial "pagination.html" . }}
-  </div>
-  <div class="col-md-3">
-    {{ partial "sidebar.html" . }}
-  </div>
-</main>
-
-{{ partial "footer.html" . }}
+      {{ partial "pagination.html" . }}
+    </div>
+  </main>
+{{ end }}

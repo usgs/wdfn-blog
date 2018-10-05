@@ -1,25 +1,17 @@
-{{ partial "header_before.html" . }}
-{{ partial "header_after.html" . }}
-{{ partial "header.html" . }}
+{{ define "main" }}
+  <main>
+    <div class="grid-row">
+      <div class="tablet:grid-col-9">
+        <h1 class="p-page-title">{{ .Title }}</h1>
 
-<main class="container">
-  <div class="row">
-    <div class="col-md-9">
+        <ul class="h-inline">
+          {{ range $key, $value := .Data.Terms }}<li><a href="/{{ $.Data.Plural }}/{{ $key | urlize }}/" class="{{ $.Data.Singular }}">{{ $key }}</a></li>{{ end }}
+        </ul>
+      </div>
 
-      <h1 class="p-page-title">{{ .Title }}</h1>
-
-      <ul class="h-inline">
-        {{ range $key, $value := .Data.Terms }}<li><a href="/{{ $.Data.Plural }}/{{ $key | urlize }}/" class="{{ $.Data.Singular }}">{{ $key }}</a></li>{{ end }}
-      </ul>
-
+      <div class="tablet:grid-col-3">
+        {{ partial "sidebar.html" . }}
+      </div>
     </div>
-
-    <div class="col-md-3">
-      {{ partial "sidebar.html" . }}
-    </div>
-
-  </div>
-
-</main>
-
-{{ partial "footer.html" . }}
+  </main>
+{{ end }}
