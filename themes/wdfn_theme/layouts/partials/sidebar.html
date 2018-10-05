@@ -1,4 +1,4 @@
-<aside class="site">
+<aside class="sidebar">
   {{ if ne (len .Site.Menus) 0 }}
     <section>
       <header>Menu</header>
@@ -10,7 +10,7 @@
                 {{ if .HasChildren }}
                   <li>
                     <a href="#">{{ .Pre }} {{ .Name }}</a>
-                    <ul>
+                    <ul class="usa-unstyled-list">
                       {{ range .Children }}
                         <li><a href="{{ .URL }}">{{ .Name }}</a></li>
                       {{ end }}

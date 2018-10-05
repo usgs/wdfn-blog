@@ -14,10 +14,6 @@ $fa-font-path: './fonts' !default;
  * #78909c
  */
 
-aside.site header {
-  color: #003366;
-}
-
 .author {
   font-size: .8rem;
 }
@@ -132,16 +128,7 @@ body {
   //font-family:Roboto, Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: inherit;
   color: #000;
-  line-height: 1rem;
   background-color: #fff;
-}
-
-a {
-  color: #003366;
-  &:hover, &:focus, &:active {
-    color: #000;
-    text-decoration: none;
-  }
 }
 
 p {
@@ -153,47 +140,11 @@ ul, ol {
   padding-left: 1.5rem;
 }
 
-li {
-  line-height: 1.5rem;
-}
-
-img {
-  width: 100%;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: normal;
-}
-
-h1 {
-  font-size: 1.6rem;
-  line-height: 2rem;
-}
-
-h2 {
-  font-size: 1.3rem;
-  line-height: 2rem;
-}
-
-h3 {
-  font-size: 1.1rem;
-  line-height: 2rem;
-}
-
-h4, h5 {
-  font-size: 1rem;
-  line-height: 1rem;
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.4rem;
-    line-height: 1.5rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-    line-height: 1.5rem;
+main {
+  margin-top: 0;
+  padding-top: 1em;
+  img {
+    width: 100%;
   }
 }
 
@@ -251,6 +202,8 @@ h4, h5 {
 
 .p-share {
   text-align: center;
+  display: inline-block;
+  margin: 1em 0;
   a {
     display: inline-block;
     width: 2rem;
@@ -282,7 +235,6 @@ h4, h5 {
 /* Parts:section */
 
 section {
-  margin-bottom: 2rem;
   > {
     header {
       margin-bottom: .5rem;
@@ -334,80 +286,36 @@ article {
   }
   &.grid {
     margin-bottom: 2rem;
-    background-color: #fff;
-    height: 340px;
-    max-height: 24rem;
+    background-color: #f0f0f0;
+    height: 26em;
     overflow: hidden;
-    border: 1px solid #bebebe;
-    border-radius: 10px;
+    border: solid 1px rgb(219, 222, 225);
     .image {
-      min-height: 13rem;
+      min-height: 13em;
       margin-bottom: 15px;
     }
     .title {
-      margin-bottom: .5rem;
-      font-size: .95rem;
-      line-height: 1.5rem;
-      max-height: 4.5rem;
+      @include h3;
+      text-decoration: none;
+      line-height: 1.5em;
+      max-height: 4.5em;
       overflow: hidden;
     }
     .summary {
       color: #333;
       max-height: 4rem;
+      padding: 1rem;
       overflow: hidden;
     }
     footer {
       padding: 1rem;
-      background-color: white;
+      background-color: transparent;
     }
   }
   &.single {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
     background-color: #fff;
     .image {
       min-height: 24rem;
-    }
-    aside {
-      padding: 0 1rem;
-    }
-    .body {
-      margin: 0 auto;
-      margin-bottom: 2rem;
-      padding: 0 2rem;
-      a {
-        color: #78909c;
-        text-decoration: underline;
-      }
-      p {
-        margin: 1rem 0;
-        line-height: 1.5rem;
-      }
-      pre {
-        margin: 1rem -2rem;
-        border-radius: 0;
-        padding: 0;
-        border: none;
-        font-size: .7rem;
-        line-height: 1rem;
-        code {
-          padding: 1rem 2rem;
-        }
-      }
-      p > code {
-        font-size: .8rem;
-        line-height: 1rem;
-        background-color: #eceff1;
-        color: #78909c;
-      }
-      h1, h2 {
-        margin: 2rem 0;
-        font-weight: 700;
-      }
-      h3 {
-        margin: 1rem 0;
-        font-weight: 700;
-      }
     }
   }
 }
@@ -463,5 +371,21 @@ ul.h-inline, ol.h-inline {
   &:hover {
     background: #fff;
     color: #003366;
+  }
+}
+
+.usa-header {
+  background-color: white;
+}
+
+.sidebar {
+  section {
+    margin: 2em 0;
+  }
+  i {
+    margin: 0 .5em 0 0;
+  }
+  ul {
+    @include unstyled-list;
   }
 }

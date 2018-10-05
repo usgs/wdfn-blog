@@ -2,13 +2,11 @@
   <a href="{{ .Permalink }}">
     <!--<div class="image" style="background-image: url({{ $.Site.BaseURL }}images/{{ with .Params.image }}{{ . }}{{ else }}default.jpg{{ end }});"></div>-->
     <footer>
-      <div class="date">
-        <time>{{ with .Site.Params.DateForm }}{{ $.Date.Format . }}{{ else }}{{ $.Date.Format "Mon, Jan 2, 2006" }}{{ end }}</time>
-      </div>
+      <time>{{ with .Site.Params.DateForm }}{{ $.Date.Format . }}{{ else }}{{ $.Date.Format "Mon, Jan 2, 2006" }}{{ end }}</time>
+      <div class="author">{{ .Params.author }}</div>
       <h2 class="title">{{ .Title }}</h2>
-      <div class="image" style="background-image: url({{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}images/owi-mobile.png{{ end }});"></div>
-      <h4 class="author">{{ .Params.author }}</h4>
-      <!--<div class="summary">{{ .Summary }}</div>-->
+      <div class="image" style="background-image: url({{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}img/owi-mobile.png{{ end }});"></div>
     </footer>
   </a>
+  <!--div class="summary">{{ .Summary }}</div-->
 </article>
