@@ -1,14 +1,12 @@
 {{ define "main" }}
-  <main>
-    <div class="grid-row grid-gap-md">
-      {{ range $key, $value := .Paginator.Pages }}
-        {{ if ge $value.Date.Unix 100 }}
-          <div class="mobile-lg:grid-col-6 tablet:grid-col-4 desktop:grid-col-3">
-            {{ .Render "grid" }}
-          </div>
-        {{ end }}
+  <div class="grid-row grid-gap-md">
+    {{ range $key, $value := .Paginator.Pages }}
+      {{ if ge $value.Date.Unix 100 }}
+        <div class="mobile-lg:grid-col-6 tablet:grid-col-4 desktop:grid-col-3">
+          {{ .Render "grid" }}
+        </div>
       {{ end }}
-      {{ partial "pagination.html" . }}
-    </div>
-  </main>
+    {{ end }}
+    {{ partial "pagination.html" . }}
+  </div>
 {{ end }}

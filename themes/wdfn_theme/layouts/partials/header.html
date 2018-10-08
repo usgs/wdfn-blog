@@ -51,23 +51,20 @@
   </div>
 </div>
 
-<header class="usa-header usa-header-basic content-container" role="banner">
-  <nav role="navigation" class="usa-nav">
-    <div class="usa-nav-inner">
-      <button class="usa-nav-close">
-          <img src="/assets/img/close.svg" alt="close">
-      </button>
+<header class="usgs-header usa-header usa-header-basic" role="banner">
+  <div class="usgs-banner-container content-container usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo">
+        <em class="usa-logo-text"><a href="/" title="Home" aria-label="Home">Water Data For The Nation News</a></em>
+      </div>
+      <button class="usa-menu-btn">Menu</button>
+    </div>
+    <nav role="navigation" class="usa-nav">
+      <button class="usa-nav-close"><img src="/assets/img/close.svg" alt="close"></button>
       <ul class="usa-nav-primary usa-accordion">
-        <li class="usa-nav-primary-item">
-          <a class="usa-nav-link" href="{{ $.Site.BaseURL}}">
-            <span>Water Data For The Nation News</span>
-          </a>
-        </li>
         {{ range $key, $value := .Site.Taxonomies }}
           <li class="usa-nav-primary-item">
-            <button class="usa-accordion-button usa-nav-link" aria-expanded="false" aria-controls="section-{{ $key }}">
-              <span>{{ $key | title }}</span>
-            </button>
+            <button class="usa-accordion-button usa-nav-link" aria-expanded="false" aria-controls="section-{{ $key }}"><span>{{ $key | title }}</span></button>
             <ul id="section-{{ $key }}" class="usa-nav-submenu">
               {{ range first 10 $value.ByCount }}
                 <li class="usa-nav-submenu-item">
@@ -77,17 +74,7 @@
             </ul>
           </li>
         {{ end }}
-        <li class="usa-nav-primary-item">
-          <button class="usa-accordion-button usa-nav-link" aria-expanded="false" aria-controls="section-about">
-            <span>About Us</span>
-          </button>
-          <ul id="section-about" class="usa-nav-submenu">
-            <li class="usa-nav-submenu-item">
-              <a href="{{ $.Site.BaseURL}}">About Us</a>
-            </li>
-          </ul>
-        </li>
       </ul>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>

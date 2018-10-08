@@ -1,15 +1,13 @@
 {{ define "main" }}
-  <main class="container">
-    <h1 class="p-page-title">{{ .Title }}</h1>
+  <h1 class="p-page-title">{{ .Title }}</h1>
 
-    <div class="grid-row">
-      {{ range (.Paginate .Data.Pages).Pages }}
-        <div class="tablet:grid-col-4">
-          {{ .Render "grid" }}
-        </div>
-      {{ end }}
-    </div>
+  <div class="grid-row grid-gap-md">
+    {{ range (.Paginate .Data.Pages).Pages }}
+      <div class="tablet:grid-col-4">
+        {{ .Render "grid" }}
+      </div>
+    {{ end }}
+  </div>
 
-    {{ partial "pagination.html" . }}
-  </main>
+  {{ partial "pagination.html" . }}
 {{ end }}

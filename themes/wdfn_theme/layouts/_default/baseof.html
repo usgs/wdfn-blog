@@ -74,9 +74,7 @@
   <body>
     {{ partial "header.html" . }}
     <main>
-      <div class="grid-row grid-gap-lg">
-        {{ block "main" . }}{{ end }}
-      </div>
+      {{ block "main" . }}{{ end }}
     </main>
     <!--main>
       <div class="grid-row grid-gap-lg">

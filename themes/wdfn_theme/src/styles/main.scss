@@ -286,6 +286,26 @@ ul.h-inline, ol.h-inline {
 
 .usa-header {
   background-color: white;
+  .usa-nav-container {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.usgs-header {
+  .usgs-banner-container {
+    a {
+      color: color('ink');
+    }
+  }
+}
+
+.usa-logo {
+  @include at-media($theme-navigation-width) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .sidebar {
