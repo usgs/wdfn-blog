@@ -75,6 +75,24 @@ owi-blog
 12. Assuming all looks good, push to prod
 
 
+## Theme building
+
+The theme, located in [`themes/wdfn_theme`](themes/wdfn_theme), is built with `node.js` tooling.
+
+To make changes to the theme, you may run a development task which rebuilds the theme on file-system changes:
+
+```bash
+cd themes/wdfn_theme
+npm run watch
+```
+
+If you are not developing changes to the theme, you must nonetheless build it before running a Hugo development server:
+
+```bash
+cd themes/wdfn_theme
+npm run build
+```
+
 ## Hugo Installation
 
 [**Download/installation instructions**](https://gohugo.io/overview/installing/)
@@ -87,7 +105,7 @@ Shows how to build a simple example Hugo site.  On the left sidebar there are li
 
 To test locally, run:
 
-```
+```bash
 export HUGO_BASEURL="blog/"
 hugo server --buildDrafts
 ```
@@ -96,7 +114,7 @@ hugo server --buildDrafts
 
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
-```
+```r
 install.packages("USGSmarkdowntemplates", repos=c("https://owi.usgs.gov/R",getOption("repos")))
 ```
 
@@ -104,7 +122,7 @@ This will add `draft: True` to the markdown header (not rmarkdown file). It is u
 
 To add 2 figures side by side, add `class="sideBySide"`, for example:
 
-```
+```html
 <img class="sideBySide" src='/fig1.png'/ alt='/ggplot2'/>
 <img class="sideBySide" src='/fig2.png'/ alt='/EGRET'/>
 ```
