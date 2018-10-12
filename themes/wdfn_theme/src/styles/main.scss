@@ -85,26 +85,6 @@ main {
   }
 }
 
-/* Parts:menu */
-
-.p-menu {
-  line-height: 1.5rem;
-  a {
-    display: block;
-  }
-  ul {
-    font-size: .8em;
-    list-style: none;
-    padding-left: 0;
-    a {
-      text-decoration: none;
-    }
-    ul {
-      padding-left: 1rem;
-    }
-  }
-}
-
 /* Parts:share */
 
 .p-share {
@@ -299,17 +279,5 @@ ul.h-inline, ol.h-inline {
   @include at-media($theme-navigation-width) {
     margin-top: 1rem;
     margin-bottom: 1rem;
-  }
-}
-
-.sidebar {
-  section {
-    margin: 2em 0;
-  }
-  i {
-    margin: 0 .5em 0 0;
-  }
-  ul {
-    @include unstyled-list;
   }
 }
