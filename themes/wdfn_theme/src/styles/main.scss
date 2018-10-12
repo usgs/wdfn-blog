@@ -15,7 +15,7 @@ $fa-font-path: '../fonts' !default;
  */
 
 .author {
-  font-size: .8rem;
+  font-size: .8em;
 }
 
 table {
@@ -31,7 +31,6 @@ table {
 .hljs {
   background: #f7f7f7 !important;
   color: #000;
-  font-size: 1.2em;
   line-height: 1.5em;
 }
 
@@ -65,12 +64,10 @@ p, h1, h2, h4, li {
 /* Reset */
 
 html {
-  font-size: 16px;
   word-break: keep-all;
 }
 
 body {
-  font-size: inherit;
   color: #000;
   background-color: #fff;
 }
@@ -96,7 +93,7 @@ main {
     display: block;
   }
   ul {
-    font-size: .8rem;
+    font-size: .8em;
     list-style: none;
     padding-left: 0;
     a {
@@ -151,9 +148,6 @@ section {
       text-transform: uppercase;
       font-weight: 700;
     }
-    div {
-      font-size: .8rem;
-    }
   }
 }
 
@@ -170,7 +164,7 @@ article {
     background-repeat: no-repeat;
   }
   .date {
-    font-size: .8rem;
+    font-size: .8em;
   }
   &.li {
     margin-bottom: .5rem;
@@ -186,10 +180,10 @@ article {
       padding-left: .5rem;
     }
     .date {
-      font-size: .7rem;
+      font-size: .7em;
     }
     .title {
-      font-size: .8rem;
+      font-size: .8em;
       line-height: 1rem;
       font-weight: 700;
     }
