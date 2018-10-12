@@ -79,6 +79,13 @@ owi-blog
 
 The theme, located in [`themes/wdfn_theme`](themes/wdfn_theme), is built with `node.js` tooling.
 
+To install the node depedencies, run:
+
+```bash
+cd themes/wdfn_theme
+npm install
+```
+
 To make changes to the theme, you may run a development task which rebuilds the theme on file-system changes:
 
 ```bash
