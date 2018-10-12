@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "USGS Water Data For The Nation Blog",
   "module": "src/js/main.js",
-  "sass": "src/stylesheets/wdfnviz.scss",
+  "sass": "src/styles/main.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf static && mkdir static",
