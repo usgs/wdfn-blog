@@ -1,13 +1,13 @@
-owi-blog
-----------
+wdfn-updates
+------------
 
-*Blog posts from the USGS Office of Water Information*
+*Blog posts from USGS Water Data For The Nation*
 
 # Guidelines for submission
 1. Applicable/useful to a greater audience.
 2. Content provides additional information not available elsewhere.
 3. Relevant to USGS employees or USGS data users
-4. Showcases databases, applications, software, or common practices associated with OWI or within the OWI portfolio.
+4. Showcases databases, applications, software, or common practices associated with USGS WMA or within the USGS WMA portfolio.
 
 # Submitting blog post
 
@@ -50,7 +50,7 @@ owi-blog
 
   * Initial submission **must** include `draft: True`
 
-  * `slug` slug will be the name of your url after owi.usgs.gov\blog\xxx
+  * `slug` slug will be the name of your url after waterdata.usgs.gov/updates/xxx
 
   * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
 
