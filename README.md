@@ -75,46 +75,46 @@ wdfn-updates
 12. Assuming all looks good, push to prod
 
 
-## Theme building
+# Build and develop with Docker
 
-The theme, located in [`themes/wdfn_theme`](themes/wdfn_theme), is built with `node.js` tooling.
+A Dockerfile and Docker Compose configuration is provided that is capable of running a development server and building the deployable static site.
 
-To install the node depedencies, run:
+## Local development
+
+Using `docker-compose`, you may run a development server on http://localhost:1313:
 
 ```bash
-cd themes/wdfn_theme
-npm install
+docker-compose up
 ```
 
-To make changes to the theme, you may run a development task which rebuilds the theme on file-system changes:
+The default server instance will include draft articles.
+
+## Build static site
+
+Using `docker-compose`, the site may be built using the `build` command provided by the container:
 
 ```bash
-cd themes/wdfn_theme
-npm run watch
+docker-compose run hugo build
 ```
 
-If you are not developing changes to the theme, you must nonetheless build it before running a Hugo development server:
+The base URL is specified with the `HUGO_BASEURL` environment variable:
 
 ```bash
-cd themes/wdfn_theme
-npm run build
+docker-compose run -e HUGO_BASEURL=http://dev-owi.usgs.gov/blog/ hugo build
 ```
 
-## Hugo Installation
-
-[**Download/installation instructions**](https://gohugo.io/overview/installing/)
-
-Essentially, the Hugo executable just needs to sit in a directory referenced in the shell $PATH variable
-
-[**Quick start guide for Hugo**](https://gohugo.io/overview/quickstart/)
-
-Shows how to build a simple example Hugo site.  On the left sidebar there are links to more in-depth documentation.
-
-To test locally, run:
+Additional arguments may be passed to the [**Hugo**](https://gohugo.io/) binary as the last argument:
 
 ```bash
-export HUGO_BASEURL="blog/"
-hugo server --buildDrafts
+docker-compose run hugo build --buildDrafts
+```
+
+## Debugging the container
+
+If the need arises, you may get a bash prompt in the container:
+
+```bash
+docker-compose run hugo bash
 ```
 
 # Instructions for R users
