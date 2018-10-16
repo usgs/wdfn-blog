@@ -8,16 +8,16 @@ categories: Data Science
 image: static/furthest-water/furthest-water-thumb.png
 author_twitter: d_blodgett
 author_github: dblodgett-usgs
- 
- 
+
+
 author_staff: david-l-blodgett
 author_email: <dblodgett@usgs.gov>
-tags: 
+tags:
   - R
 description: An analysis showing how to find the place in the US furthest from water.
 keywords:
   - R
- 
+
 ---
 Finding the Location Furthest from Water in the Conterminous United States
 --------------------------------------------------------------------------
@@ -41,7 +41,7 @@ solution is presented in detail after the solution to the question.
 
 The solution graphics shown below were generated with the following
 code: The `furthest_water.R` script can be
-<a href="https://github.com/USGS-OWI/owi-blog/tree/master/content/static/furthest-water" target="_blank">found here</a>.
+<a href="https://github.com/usgs/wdfn-updates/tree/master/content/static/furthest-water" target="_blank">found here</a>.
 
 ``` r
 source("furthest_water.R")
@@ -258,7 +258,7 @@ library(dplyr)
 # devtools::install_github("dblodgett-usgs/nhdplusTools")
 # First we will use a nhdplusTools to load up the national seamless geodatabase.
 nhdplusTools::nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
-staged_data <- nhdplusTools::stage_national_data(include = "flowline", 
+staged_data <- nhdplusTools::stage_national_data(include = "flowline",
                                                  output_path = "nhdplus_data/")
 flowlines <- readRDS(staged_data$flowline)
 
@@ -321,7 +321,7 @@ if("filter_monthly_flow" %in% scenario) {
 }
 
 if("remove_intermittent" %in% scenario) {
-  flowlines <- flowlines[which(!flowlines$FCODE %in% remove_fcodes$FCode), ] 
+  flowlines <- flowlines[which(!flowlines$FCODE %in% remove_fcodes$FCode), ]
   if("waterbodies" %in% scenario) {
     water_bodies <- water_bodies[which(!water_bodies$FCODE %in% remove_fcodes$FCode), ]
   }
@@ -443,7 +443,7 @@ plot_result <- function(search, radius, crs, bbox, states) {
   png(fname,
       width = 1000, height = 800)
   result <- st_as_sf(search, coords = c("X", "Y"), crs = crs)
-  
+
   plot(bbox, main = paste("Distance to nearest water:", radius, "meters"))
   plot(states$geometry, add = TRUE)
   plot(result$geometry, pch = 19, add = TRUE)
@@ -478,7 +478,7 @@ num_left <- nrow(search)
 
 while(num_left > 1) {
   num_left <- nrow(search)
-  
+
   # This is where the magic happens.
   matched <- RANN::nn2(coords[,1:2],
                        search,
@@ -486,12 +486,12 @@ while(num_left > 1) {
                        searchtype = "radius",
                        radius = radius) %>%
     data.frame()
-  
+
   # This while loop is destructive. Only keep unmatched.
   search <- filter(search, matched$nn.idx == 0)
-  
+
   plot_result(search, radius, crs, bbox, states)
-  
+
   if(num_left > 50) {
     radius <- radius + 1000
   } else if (num_left > 3) {

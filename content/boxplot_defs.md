@@ -9,23 +9,23 @@ image: static/boxplots/visualizeBox-1.png
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
- 
+
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
 
-tags: 
+tags:
   - R
- 
- 
+
+
 description: Identifying boxplot limits and styles in ggplot2.
 keywords:
   - R
- 
- 
+
+
   - boxplot
   - ggplot2
 ---
-Boxplots are often used to show data distributions, and `ggplot2` is often used to visualize data. A question that comes up is what exactly do the box plots represent? The `ggplot2` box plots follow standard Tukey representations, and there are many references of this online and in standard statistical text books. The base R function to calculate the box plot limits is `boxplot.stats`. The help file for this function is very informative, but it's often non-R users asking what exactly the plot means. Therefore, this blog post breaks down the calculations into (hopefully!) easy-to-follow chunks of code for you to make your own box plot legend if necessary. Some additional goals here are to create boxplots that come *close* to USGS style. Features in this blog post take advantage of enhancements to `ggplot2` in version 3.0.0 or later.
+Boxplots are often used to show data distributions, and `ggplot2` is often used to visualize data. A question that comes up is what exactly do the box plots represent? The `ggplot2` box plots follow standard Tukey representations, and there are many references of this online and in standard statistical text books. The base R function to calculate the box plot limits is `boxplot.stats`. The help file for this function is very informative, but it's often non-R users asking what exactly the plot means. Therefore, this  post breaks down the calculations into (hopefully!) easy-to-follow chunks of code for you to make your own box plot legend if necessary. Some additional goals here are to create boxplots that come *close* to USGS style. Features in this post take advantage of enhancements to `ggplot2` in version 3.0.0 or later.
 
 First, let's get some data that might be typically plotted in a USGS report using a boxplot. Here we'll use chloride data (parameter code "00940") measured at a USGS station on the Fox River in Green Bay, WI (station ID "04085139"). We'll use the package `dataRetrieval` to get the data (see [this tutorial](https://owi.usgs.gov/R/dataRetrieval.html) for more information on `dataRetrieval`), and plot a simple boxplot by month using `ggplot2`:
 
@@ -42,7 +42,7 @@ chloride$month <- factor(chloride$month, labels = month.abb)
 cl_name <- attr(chloride, "variableInfo")[["parameter_nm"]]
 cl_site <- attr(chloride, "siteInfo")[["station_nm"]]
 # Create basic ggplot graph:
-ggplot(data = chloride, 
+ggplot(data = chloride,
        aes(x = month, y = result_va)) +
   geom_boxplot() +
   xlab("Month") +
@@ -107,13 +107,13 @@ Is that graph great? YES! And for presentations and/or journal publications, tha
 <td>Adjust <code>geom_text</code> defaults</td>
 </tr>
 <tr class="odd">
-<td>Change font (we'll use &quot;serif&quot; in this blog, although that is not the official USGS font)</td>
+<td>Change font (we'll use &quot;serif&quot; in this post, although that is not the official USGS font)</td>
 <td>Adjust <code>geom_text</code> defaults</td>
 </tr>
 </tbody>
 </table>
 
-As you can see, it will not be as simple as creating a single custom ggplot theme to comply with the requirements. However, we can string together ggplot commands in a list for easy re-use. This blog is *not* going to get you perfect compliance with the USGS standards, but it will get much closer. Also, while these style adjustments are tailored to USGS requirements, the process described here may be useful for other graphic guidelines as well.
+As you can see, it will not be as simple as creating a single custom ggplot theme to comply with the requirements. However, we can string together ggplot commands in a list for easy re-use. This post is *not* going to get you perfect compliance with the USGS standards, but it will get much closer. Also, while these style adjustments are tailored to USGS requirements, the process described here may be useful for other graphic guidelines as well.
 
 So, let's skip to the exciting conclusion and use some code that will be described later (`boxplot_framework` and `ggplot_box_legend`) to create the same plot, now closer to those USGS style requirements:
 
@@ -122,18 +122,18 @@ library(cowplot)
 
 # NOTE! This is a preview of the FUTURE!
 # We'll create the functions ggplot_box_legend and boxplot_framework
-# later in this blog post. 
+# later in this post.
 # So....by the end of this post, you will be able to:
 legend_plot <- ggplot_box_legend()
 
-chloride_plot <- ggplot(data = chloride, 
+chloride_plot <- ggplot(data = chloride,
        aes(x = month, y = result_va)) +
-  boxplot_framework(upper_limit = 70) + 
+  boxplot_framework(upper_limit = 70) +
   xlab(label = "Month") +
   ylab(label = cl_name) +
   labs(title = cl_site)
 
-plot_grid(chloride_plot, 
+plot_grid(chloride_plot,
           legend_plot,
           nrow = 1, rel_widths = c(.6,.4))
 ```
@@ -154,7 +154,7 @@ theme_USGS_box <- function(base_family = "serif", ...){
     panel.grid = element_blank(),
     plot.title = element_text(size = 8),
     axis.ticks.length = unit(-0.05, "in"),
-    axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")), 
+    axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
     axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
     axis.ticks.x = element_blank(),
     aspect.ratio = 1,
@@ -166,8 +166,8 @@ theme_USGS_box <- function(base_family = "serif", ...){
 Next, we can change the defaults of the geom\_text to a smaller size and font.
 
 ``` r
-update_geom_defaults("text", 
-                   list(size = 3, 
+update_geom_defaults("text",
+                   list(size = 3,
                         family = "serif"))
 ```
 
@@ -179,17 +179,17 @@ n_fun <- function(x){
                     label = length(x)))
 }
 
-ggplot(data = chloride, 
+ggplot(data = chloride,
        aes(x = month, y = result_va)) +
   stat_boxplot(geom ='errorbar', width = 0.6) +
   geom_boxplot(width = 0.6, fill = "lightgrey") +
   stat_summary(fun.data = n_fun, geom = "text", hjust = 0.5) +
   expand_limits(y = 0) +
   theme_USGS_box() +
-  scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+  scale_y_continuous(sec.axis = dup_axis(label = NULL,
                                          name = NULL),
                      expand = expand_scale(mult = c(0, 0)),
-                     breaks = pretty(c(0,70), n = 5), 
+                     breaks = pretty(c(0,70), n = 5),
                      limits = c(0,70))
 ```
 
@@ -278,10 +278,10 @@ n_fun <- function(x){
 prettyLogs <- function(x){
   pretty_range <- range(x[x > 0])
   pretty_logs <- 10^(-10:10)
-  log_index <- which(pretty_logs < pretty_range[2] & 
+  log_index <- which(pretty_logs < pretty_range[2] &
                        pretty_logs > pretty_range[1])
   log_index <- c(log_index[1]-1,log_index, log_index[length(log_index)]+1)
-  pretty_logs_new <-  pretty_logs[log_index] 
+  pretty_logs_new <-  pretty_logs[log_index]
   return(pretty_logs_new)
 }
 
@@ -293,15 +293,15 @@ fancyNumbers <- function(n){
 
   base <- ifelse(exponents == 0, "1", ifelse(exponents == 1, "10","10^"))
   exponents[base == "1" | base == "10"] <- ""
-  textNums <- rep(NA, length(n))  
+  textNums <- rep(NA, length(n))
   textNums[!is.na(n)] <- paste0(base,exponents)
-  
+
   textReturn <- parse(text=textNums)
   return(textReturn)
 }
 
 
-phos_plot <- ggplot(data = phos_data, 
+phos_plot <- ggplot(data = phos_data,
        aes(x = month, y = result_va)) +
   stat_boxplot(geom ='errorbar', width = 0.6) +
   geom_boxplot(width = 0.6, fill = "lightgrey") +
@@ -314,7 +314,7 @@ phos_plot <- ggplot(data = phos_data,
   annotation_logticks(sides = c("rl")) +
   xlab("Month") +
   ylab(phos_name) +
-  labs(title = phos_site) 
+  labs(title = phos_site)
 
 phos_plot
 ```
@@ -369,18 +369,18 @@ library(dplyr)
 # Get water temperature data for a variety of USGS stations
 temp_q_data <- readNWISuv(siteNumbers = c("04026561", "04063700",
                                           "04082400", "05427927"),
-                          parameterCd = '00010', 
-                          startDate = "2018-06-01", 
+                          parameterCd = '00010',
+                          startDate = "2018-06-01",
                           endDate = "2018-06-03")
 
 temperature_name <- attr(temp_q_data, "variableInfo")[["variableName"]]
 
 # add an hour of day to create groups (daytime or nighttime)
-temp_q_data <- temp_q_data %>% 
+temp_q_data <- temp_q_data %>%
   renameNWISColumns() %>%
   mutate(hourOfDay = as.numeric(format(dateTime, "%H")),
          timeOfDay = case_when(hourOfDay < 20 & hourOfDay > 6 ~ "daytime",
-                               TRUE ~ "nighttime" # catchall 
+                               TRUE ~ "nighttime" # catchall
   ))
 
 n_fun <- function(x){
@@ -388,18 +388,18 @@ n_fun <- function(x){
                     label = length(x)))
 }
 
-temperature_plot <- ggplot(data = temp_q_data, 
+temperature_plot <- ggplot(data = temp_q_data,
        aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
   stat_boxplot(geom ='errorbar', width = 0.6) +
   geom_boxplot(width = 0.6) +
-  stat_summary(fun.data = n_fun, geom = "text", 
+  stat_summary(fun.data = n_fun, geom = "text",
                aes(group=timeOfDay),
                hjust = 0.5, position = position_dodge(0.6)) +
   expand_limits(y = 0) +
-  scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+  scale_y_continuous(sec.axis = dup_axis(label = NULL,
                                          name = NULL),
                      expand = expand_scale(mult = c(0, 0)),
-                     breaks = pretty(c(10,30), n = 5), 
+                     breaks = pretty(c(10,30), n = 5),
                      limits = c(10,30)) +
   theme_USGS_box() +
   xlab("Station ID") +
@@ -445,11 +445,11 @@ Additionally, the parameter name that comes back from `dataRetrieval` could use 
 
 ``` r
 unescape_html <- function(str){
-  fancy_chars <- regmatches(str, gregexpr("&#\\d{3};",str)) 
+  fancy_chars <- regmatches(str, gregexpr("&#\\d{3};",str))
 
   unescaped <- xml2::xml_text(xml2::read_html(paste0("<x>", fancy_chars, "</x>")))
 
-  fancy_chars <- gsub(pattern = "&#\\d{3};", 
+  fancy_chars <- gsub(pattern = "&#\\d{3};",
                       replacement = unescaped, x = str)
 
   fancy_chars <- gsub("Â","", fancy_chars)
@@ -462,56 +462,56 @@ We'll use this function in the next section.
 Framework function
 ------------------
 
-Finally, we can bring all of those elements together into a single list for `ggplot2` to use. While we're at it, we can create a function that is flexible for both linear and logarithmic scales, as well as grouped boxplots. It's a bit clunky because you need to specify the upper and lower limits of the plot. Much of the USGS style requirements depend on specific upper and lower limits, so I decided this was an acceptable solution for this blog post. There's almost certainly a slicker way to do that, but for now, it works:
+Finally, we can bring all of those elements together into a single list for `ggplot2` to use. While we're at it, we can create a function that is flexible for both linear and logarithmic scales, as well as grouped boxplots. It's a bit clunky because you need to specify the upper and lower limits of the plot. Much of the USGS style requirements depend on specific upper and lower limits, so I decided this was an acceptable solution for this post. There's almost certainly a slicker way to do that, but for now, it works:
 
 ``` r
-boxplot_framework <- function(upper_limit, 
+boxplot_framework <- function(upper_limit,
                               family_font = "serif",
-                              lower_limit = 0, 
-                              logY = FALSE, 
+                              lower_limit = 0,
+                              logY = FALSE,
                               fill_var = NA,
                               fill = "lightgrey", width = 0.6){
-  
-  update_geom_defaults("text", 
-                     list(size = 3, 
+
+  update_geom_defaults("text",
+                     list(size = 3,
                           family = family_font))
-  
+
   n_fun <- function(x, lY = logY){
     return(data.frame(y = ifelse(logY, 0.95*log10(upper_limit), 0.95*upper_limit),
                       label = length(x)))
   }
-  
+
   prettyLogs <- function(x){
     pretty_range <- range(x[x > 0])
     pretty_logs <- 10^(-10:10)
-    log_index <- which(pretty_logs < pretty_range[2] & 
+    log_index <- which(pretty_logs < pretty_range[2] &
                          pretty_logs > pretty_range[1])
     log_index <- c(log_index[1]-1,log_index,
                    log_index[length(log_index)]+1)
-    pretty_logs_new <-  pretty_logs[log_index] 
+    pretty_logs_new <-  pretty_logs[log_index]
     return(pretty_logs_new)
   }
-  
+
   fancyNumbers <- function(n){
     nNoNA <- n[!is.na(n)]
     x <-gsub(pattern = "1e",replacement = "10^",
              x = format(nNoNA, scientific = TRUE))
     exponents <- as.numeric(sapply(strsplit(x, "\\^"), function(j) j[2]))
-  
+
     base <- ifelse(exponents == 0, "1", ifelse(exponents == 1, "10","10^"))
     exponents[base == "1" | base == "10"] <- ""
-    textNums <- rep(NA, length(n))  
+    textNums <- rep(NA, length(n))
     textNums[!is.na(n)] <- paste0(base,exponents)
-    
+
     textReturn <- parse(text=textNums)
     return(textReturn)
   }
-  
+
   if(!is.na(fill_var)){
       basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
                             geom_boxplot(width = width),
-                            stat_summary(fun.data = n_fun, 
-                                         geom = "text", 
+                            stat_summary(fun.data = n_fun,
+                                         geom = "text",
                                          position = position_dodge(width),
                                          hjust =0.5,
                                          aes_string(group=fill_var)),
@@ -520,26 +520,26 @@ boxplot_framework <- function(upper_limit,
   } else {
       basic_elements <- list(stat_boxplot(geom ='errorbar', width = width),
                             geom_boxplot(width = width, fill = fill),
-                            stat_summary(fun.data = n_fun, 
+                            stat_summary(fun.data = n_fun,
                                          geom = "text", hjust =0.5),
                             expand_limits(y = lower_limit),
                             theme_USGS_box())
   }
-  
+
   if(logY){
     return(c(basic_elements,
               scale_y_log10(limits = c(lower_limit, upper_limit),
                   expand = expand_scale(mult = c(0, 0)),
                   labels=fancyNumbers,
                   breaks=prettyLogs),
-              annotation_logticks(sides = c("rl"))))      
+              annotation_logticks(sides = c("rl"))))
   } else {
     return(c(basic_elements,
-              scale_y_continuous(sec.axis = dup_axis(label = NULL, 
+              scale_y_continuous(sec.axis = dup_axis(label = NULL,
                                                      name = NULL),
                                  expand = expand_scale(mult = c(0, 0)),
-                                 breaks = pretty(c(lower_limit,upper_limit), n = 5), 
-                                 limits = c(lower_limit,upper_limit))))    
+                                 breaks = pretty(c(lower_limit,upper_limit), n = 5),
+                                 limits = c(lower_limit,upper_limit))))
   }
 }
 ```
@@ -552,28 +552,28 @@ Let's see if it works! Let’s build the last set of example figures using our n
 ``` r
 legend_plot <- ggplot_box_legend()
 
-chloride_plot <- ggplot(data = chloride, 
+chloride_plot <- ggplot(data = chloride,
        aes(x = month, y = result_va)) +
-  boxplot_framework(upper_limit = 70) + 
+  boxplot_framework(upper_limit = 70) +
   xlab(label = "Month") +
   ylab(label = cl_name) +
   labs(title = cl_site)
 
-phos_plot <- ggplot(data = phos_data, 
+phos_plot <- ggplot(data = phos_data,
        aes(x = month, y = result_va)) +
   boxplot_framework(upper_limit = 50,
                     lower_limit = 0.001,
                     logY = TRUE) +
   xlab(label = "Month") +
   #Shortened label since the graph area is smaller
-  ylab(label = "Phosphorus in milligraphs per liter") + 
-  labs(title = phos_site) 
+  ylab(label = "Phosphorus in milligraphs per liter") +
+  labs(title = phos_site)
 
-temperature_plot <- ggplot(data = temp_q_data, 
+temperature_plot <- ggplot(data = temp_q_data,
        aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
-  boxplot_framework(upper_limit = 30, 
-                    lower_limit = 10, 
-                    fill_var = "timeOfDay") + 
+  boxplot_framework(upper_limit = 30,
+                    lower_limit = 10,
+                    fill_var = "timeOfDay") +
   xlab(label = "Station ID") +
   ylab(label = unescape_html(temperature_name)) +
   labs(title = "Daytime vs Nighttime Temperature Distribution") +
@@ -581,7 +581,7 @@ temperature_plot <- ggplot(data = temp_q_data,
   theme(legend.position = c(0.225, 0.72),
         legend.title =  element_text(size = 7))
 
-plot_grid(chloride_plot, 
+plot_grid(chloride_plot,
           phos_plot,
           temperature_plot,
           legend_plot,
@@ -611,19 +611,19 @@ Next, we'll create a function that calculates the necessary values for the boxpl
 
 ``` r
 ggplot2_boxplot <- function(x){
-  
-  quartiles <- as.numeric(quantile(x, 
+
+  quartiles <- as.numeric(quantile(x,
                                    probs = c(0.25, 0.5, 0.75)))
-  
-  names(quartiles) <- c("25th percentile", 
+
+  names(quartiles) <- c("25th percentile",
                         "50th percentile\n(median)",
                         "75th percentile")
-  
+
   IQR <- diff(quartiles[c(1,3)])
 
   upper_whisker <- max(x[x < (quartiles[3] + 1.5 * IQR)])
   lower_whisker <- min(x[x > (quartiles[1] - 1.5 * IQR)])
-    
+
   upper_dots <- x[x > (quartiles[3] + 1.5*IQR)]
   lower_dots <- x[x < (quartiles[1] - 1.5*IQR)]
 
@@ -658,7 +658,7 @@ base_R_output <- boxplot.stats(sample_df$values)
 # Some checks:
 
 # Outliers:
-all(c(ggplot_output[["upper_dots"]], 
+all(c(ggplot_output[["upper_dots"]],
       ggplot_output[["lowerdots"]]) %in%
     c(base_R_output[["out"]]))
 ```
@@ -690,7 +690,7 @@ Show/Hide Code
 
 ``` r
 ggplot_box_legend <- function(family = "serif"){
-  
+
   # Create data to use in the boxplot legend:
   set.seed(100)
 
@@ -701,25 +701,25 @@ ggplot_box_legend <- function(family = "serif"){
   sample_df$values[1:100] <- 701:800
   # Make sure there's only 1 lower outlier:
   sample_df$values[1] <- -350
-  
+
   # Function to calculate important values:
   ggplot2_boxplot <- function(x){
-  
-    quartiles <- as.numeric(quantile(x, 
+
+    quartiles <- as.numeric(quantile(x,
                                      probs = c(0.25, 0.5, 0.75)))
-    
-    names(quartiles) <- c("25th percentile", 
+
+    names(quartiles) <- c("25th percentile",
                           "50th percentile\n(median)",
                           "75th percentile")
-    
+
     IQR <- diff(quartiles[c(1,3)])
-  
+
     upper_whisker <- max(x[x < (quartiles[3] + 1.5 * IQR)])
     lower_whisker <- min(x[x > (quartiles[1] - 1.5 * IQR)])
-      
+
     upper_dots <- x[x > (quartiles[3] + 1.5*IQR)]
     lower_dots <- x[x < (quartiles[1] - 1.5*IQR)]
-  
+
     return(list("quartiles" = quartiles,
                 "25th percentile" = as.numeric(quartiles[1]),
                 "50th percentile\n(median)" = as.numeric(quartiles[2]),
@@ -730,21 +730,21 @@ ggplot_box_legend <- function(family = "serif"){
                 "upper_dots" = upper_dots,
                 "lower_dots" = lower_dots))
   }
-  
+
   # Get those values:
   ggplot_output <- ggplot2_boxplot(sample_df$values)
-  
+
   # Lots of text in the legend, make it smaller and consistent font:
-  update_geom_defaults("text", 
-                     list(size = 3, 
+  update_geom_defaults("text",
+                     list(size = 3,
                           hjust = 0,
                           family = family))
   # Labels don't inherit text:
-  update_geom_defaults("label", 
-                     list(size = 3, 
+  update_geom_defaults("label",
+                     list(size = 3,
                           hjust = 0,
                           family = family))
-  
+
   # Create the legend:
   # The main elements of the plot (the boxplot, error bars, and count)
   # are the easy part.
@@ -755,46 +755,46 @@ ggplot_box_legend <- function(family = "serif"){
                  aes(x = parameter, y=values),
                  geom ='errorbar', width = 0.3) +
     geom_boxplot(data = sample_df,
-                 aes(x = parameter, y=values), 
+                 aes(x = parameter, y=values),
                  width = 0.3, fill = "lightgrey") +
     geom_text(aes(x = 1, y = 950, label = "500"), hjust = 0.5) +
     geom_text(aes(x = 1.17, y = 950,
                   label = "Number of values"),
               fontface = "bold", vjust = 0.4) +
     theme_minimal(base_size = 5, base_family = family) +
-    geom_segment(aes(x = 2.3, xend = 2.3, 
-                     y = ggplot_output[["25th percentile"]], 
+    geom_segment(aes(x = 2.3, xend = 2.3,
+                     y = ggplot_output[["25th percentile"]],
                      yend = ggplot_output[["75th percentile"]])) +
-    geom_segment(aes(x = 1.2, xend = 2.3, 
-                     y = ggplot_output[["25th percentile"]], 
+    geom_segment(aes(x = 1.2, xend = 2.3,
+                     y = ggplot_output[["25th percentile"]],
                      yend = ggplot_output[["25th percentile"]])) +
-    geom_segment(aes(x = 1.2, xend = 2.3, 
-                     y = ggplot_output[["75th percentile"]], 
+    geom_segment(aes(x = 1.2, xend = 2.3,
+                     y = ggplot_output[["75th percentile"]],
                      yend = ggplot_output[["75th percentile"]])) +
-    geom_text(aes(x = 2.4, y = ggplot_output[["50th percentile\n(median)"]]), 
+    geom_text(aes(x = 2.4, y = ggplot_output[["50th percentile\n(median)"]]),
               label = "Interquartile\nrange", fontface = "bold",
               vjust = 0.4) +
-    geom_text(aes(x = c(1.17,1.17), 
+    geom_text(aes(x = c(1.17,1.17),
                   y = c(ggplot_output[["upper_whisker"]],
-                        ggplot_output[["lower_whisker"]]), 
+                        ggplot_output[["lower_whisker"]]),
                   label = c("Largest value within 1.5 times\ninterquartile range above\n75th percentile",
                             "Smallest value within 1.5 times\ninterquartile range below\n25th percentile")),
                   fontface = "bold", vjust = 0.9) +
-    geom_text(aes(x = c(1.17), 
-                  y =  ggplot_output[["lower_dots"]], 
-                  label = "Outside value"), 
+    geom_text(aes(x = c(1.17),
+                  y =  ggplot_output[["lower_dots"]],
+                  label = "Outside value"),
               vjust = 0.5, fontface = "bold") +
-    geom_text(aes(x = c(1.9), 
-                  y =  ggplot_output[["lower_dots"]], 
-                  label = "-Value is >1.5 times and"), 
+    geom_text(aes(x = c(1.9),
+                  y =  ggplot_output[["lower_dots"]],
+                  label = "-Value is >1.5 times and"),
               vjust = 0.5) +
-    geom_text(aes(x = 1.17, 
-                  y = ggplot_output[["lower_dots"]], 
-                  label = "<3 times the interquartile range\nbeyond either end of the box"), 
+    geom_text(aes(x = 1.17,
+                  y = ggplot_output[["lower_dots"]],
+                  label = "<3 times the interquartile range\nbeyond either end of the box"),
               vjust = 1.5) +
-    geom_label(aes(x = 1.17, y = ggplot_output[["quartiles"]], 
+    geom_label(aes(x = 1.17, y = ggplot_output[["quartiles"]],
                   label = names(ggplot_output[["quartiles"]])),
-              vjust = c(0.4,0.85,0.4), 
+              vjust = c(0.4,0.85,0.4),
               fill = "white", label.size = 0) +
     ylab("") + xlab("") +
     theme(axis.text = element_blank(),
@@ -805,8 +805,8 @@ ggplot_box_legend <- function(family = "serif"){
     coord_cartesian(xlim = c(1.4,3.1), ylim = c(-600, 900)) +
     labs(title = "EXPLANATION")
 
-  return(explain_plot) 
-  
+  return(explain_plot)
+
 }
 
 ggplot_box_legend()
@@ -832,7 +832,7 @@ explain_plot_DL <- ggplot_box_legend() +
            linetype="dashed") +
   geom_text(aes(y = -650, x = 1.8, label = "Reporting Limit"))
 
-plot_grid(phos_plot_with_DL, 
+plot_grid(phos_plot_with_DL,
           explain_plot_DL,
           nrow = 1, rel_widths = c(.6,.4))
 ```

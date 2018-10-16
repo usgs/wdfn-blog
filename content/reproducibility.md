@@ -5,7 +5,7 @@ slug: Reproducibility
 title: The case for reproducibility
 type: post
 categories: Data Science
-tags: 
+tags:
   - R
 description: Explanation of reproducibility and resources to start practicing it
 keywords:
@@ -51,7 +51,7 @@ Next, try to script just one piece of your analysis. Pick a set of tasks that ne
 
 Reproducibility can go beyond your local files. Maybe your plots and tables are scripted, but you're still having to copy and paste into slides or a manuscript. [R Markdown](http://rmarkdown.rstudio.com/) can automate the process of inserting figures and tables into PDFs, Word documents, and slides.
 
-Shuffling around files between contributors and peer reviewers is time consuming and can get confusing quickly. Version control is a way to avoid this mess - it tracks every deletion, every addition, and every contributor that interacts with your code. It is especially useful when there are multiple contributors because you never have to pass around files at varying stages through email. In fact, this blog is created using version control. Our group uses [Git](https://git-scm.com/) and [GitHub](https://github.com/) as version control tools, but that's not the only choice.
+Shuffling around files between contributors and peer reviewers is time consuming and can get confusing quickly. Version control is a way to avoid this mess - it tracks every deletion, every addition, and every contributor that interacts with your code. It is especially useful when there are multiple contributors because you never have to pass around files at varying stages through email. In fact, this post is created using version control. Our group uses [Git](https://git-scm.com/) and [GitHub](https://github.com/) as version control tools, but that's not the only choice.
 
 And finally, encourage colleagues and collaborators to strive for reproducible science!
 

@@ -67,7 +67,7 @@ To start with lets look at the results calculated for complete water years.
 tableResults(eList)
 ```
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year.  Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year.  Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. Note that some lines (1984-2005) were removed from this post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 
@@ -293,5 +293,3 @@ Information on USGS-R packages used in this post:
 |-------------|----------------------------------------------------|
 |<a href="https://github.com/USGS-R/EGRET" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a> | <a href="https://github.com/USGS-R/EGRET/issues" target="_blank">EGRET</a>: Exploration and Graphics for RivEr Trends: An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS) |
 |<a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a> | <a href="https://github.com/USGS-R/dataRetrieval/issues" target="_blank">dataRetrieval</a>: This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services. |
-
-

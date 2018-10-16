@@ -54,9 +54,9 @@ library(sbtools)
 library(dataRetrieval)
 library(sf)
 
-item_file_download(sb_id = "5a83025ce4b00f54eb32956b", 
-                   names = "huc8_05010007_example.zip", 
-                   destinations = "huc8_05010007_example.zip", 
+item_file_download(sb_id = "5a83025ce4b00f54eb32956b",
+                   names = "huc8_05010007_example.zip",
+                   destinations = "huc8_05010007_example.zip",
                    overwrite_file = TRUE)
 unzip('huc8_05010007_example.zip', overwrite = TRUE)
 #note st_read takes the folder, not a particular file
@@ -71,14 +71,14 @@ huc_gages <- whatNWISdata(huc = "05010007", parameterCd = "00060", service="uv")
 head(huc_gages)
 ```
 
-The `huc_poly` object is a new type of object that we haven't seen --- it has classes `sf` as well as `data.frame`.  Looking inside the object with the `str` command, we can see it is structured very much like a `data.frame` with several factor columns, except for the `geometry` column, which is of type `sfc_POLYGON`.  `sf` provides various functions to extract useful information from this kind object, generally prefixed with `st_`.  `st_geometry` extracts the entire geometry part of the object; `st_bbox` extracts the bounding box from the geometry; and `st_crs` extracts the coordinate reference system.  There are others, but we will use these three to get the parts of the `sf` object we need for plotting.    
+The `huc_poly` object is a new type of object that we haven't seen --- it has classes `sf` as well as `data.frame`.  Looking inside the object with the `str` command, we can see it is structured very much like a `data.frame` with several factor columns, except for the `geometry` column, which is of type `sfc_POLYGON`.  `sf` provides various functions to extract useful information from this kind object, generally prefixed with `st_`.  `st_geometry` extracts the entire geometry part of the object; `st_bbox` extracts the bounding box from the geometry; and `st_crs` extracts the coordinate reference system.  There are others, but we will use these three to get the parts of the `sf` object we need for plotting.
 
 Now that we understand this new object, let's make some maps.
 
 ## Raster map example
-For the raster map, we will use the `ggmap` package to create a road and satellite basemaps for the HUC.  Since the basemaps that `ggmap` uses are quite detailed, they are too large to include with the package and must be retrieved from the web with the `get_map` function.  For the `location` argument, we are getting the bbox from the `huc_poly` object.  `st_bbox` returns the bbox in the format we need, except for the names, which we add   with `setNames`.  The `ggmap` function is analogous to the `ggplot` function in the `ggplot2` package that you have likely already used.  It creates the base map, which we can then add things to.  Many of the commands used here are from the `ggplot2` package (`ggmap` imports them), and others could be used to further customize this map.  
+For the raster map, we will use the `ggmap` package to create a road and satellite basemaps for the HUC.  Since the basemaps that `ggmap` uses are quite detailed, they are too large to include with the package and must be retrieved from the web with the `get_map` function.  For the `location` argument, we are getting the bbox from the `huc_poly` object.  `st_bbox` returns the bbox in the format we need, except for the names, which we add   with `setNames`.  The `ggmap` function is analogous to the `ggplot` function in the `ggplot2` package that you have likely already used.  It creates the base map, which we can then add things to.  Many of the commands used here are from the `ggplot2` package (`ggmap` imports them), and others could be used to further customize this map.
 
-Note that `ggmap` is probably not a good choice if you need your data to be in a particular projection.  Compared to base plotting, it provides simplicity at the cost of control.  
+Note that `ggmap` is probably not a good choice if you need your data to be in a particular projection.  Compared to base plotting, it provides simplicity at the cost of control.
 
 ```{r, raster_map_base, alt.text = "plain base maps", fig.cap = c("street base map","satellite base map")}
 library(ggmap)
@@ -87,7 +87,7 @@ bbox <- setNames(st_bbox(huc_poly), c("left", "bottom", "right", "top"))
 #setting zoom to 9 gives us a bit of padding around the bounding box
 basemap_streets <- get_map(maptype = "roadmap", location = bbox, zoom = 9)
 basemap_satellite <- get_map(maptype = "satellite", location = bbox, zoom = 9)
-street_map <- ggmap(basemap_streets) 
+street_map <- ggmap(basemap_streets)
 satellite_map <- ggmap(basemap_satellite)
 print(street_map)
 print(satellite_map)
@@ -95,14 +95,14 @@ print(satellite_map)
 
 Now we can start adding to our maps. First, we convert the `huc_gages` data.frame to an `sf` object using `st_as_sf`, assigning it the same coordinate reference system as `huc_poly` using `st_crs`.  `ggplot` functions like `geom_sf` and `geom_text` add to your base map.
 
-```{r raster_map_add, alt.text = "base maps with HUC and gages", fig.cap = c("satellite map with HUC and gages","street map with HUC and gages")} 
-huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"), 
+```{r raster_map_add, alt.text = "base maps with HUC and gages", fig.cap = c("satellite map with HUC and gages","street map with HUC and gages")}
+huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"),
                          crs = st_crs(huc_poly), remove = FALSE)
 satellite_map + geom_sf(data = huc_poly,
                         inherit.aes = FALSE,
                         color = "white", fill = NA) +
   geom_sf(data = huc_gages_sf, inherit.aes = FALSE, color = "red") +
-  geom_text(data = huc_gages_sf, 
+  geom_text(data = huc_gages_sf,
             aes(label = site_no, x = dec_long_va, y = dec_lat_va),
             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 
@@ -131,10 +131,10 @@ title("Conemaugh Subbasin")
 
 ```
 
-Similarly, we can create a map zoomed in to the HUC polygon.  Note that we set the x and y limits of the map by extracting the limits of the `bbox` object we created earlier.  We can use the names `left`, `right`, etc. because `bbox` is a named vector.  
+Similarly, we can create a map zoomed in to the HUC polygon.  Note that we set the x and y limits of the map by extracting the limits of the `bbox` object we created earlier.  We can use the names `left`, `right`, etc. because `bbox` is a named vector.
 
 ```{r poly_map_zoomed_in, fig.cap = "Polygon map zoomed to HUC", alt.text = "Polygon map zoomed to HUC"}
-  map(database = 'county', regions = 'Pennsylvania', col = "lightgray", 
+  map(database = 'county', regions = 'Pennsylvania', col = "lightgray",
       xlim = bbox[c('left', 'right')], ylim = bbox[c('bottom', 'top')])
  plot(st_geometry(huc_poly), col = "dodgerblue", border = NA, add = TRUE)
   box()
@@ -151,6 +151,6 @@ Like plotting in R, there are endless intricacies to making maps, and we are onl
 - [raster](https://cran.r-project.org/web/packages/raster/index.html): For working with your own raster data
 - [sp](https://cran.r-project.org/web/packages/sp/index.html): The original workhorse package for handling spatial data.  `sf` is largely replacing it, but you will see it a lot when Googling things.
 - [geoknife](https://cran.r-project.org/web/packages/geoknife/index.html): A USGS package that utilizes the [Geo Data Portal](https://cida.usgs.gov/gdp/how-to-gdp/) for processing gridded data.  Covered in the [packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
- - [inlmisc](https://cran.r-project.org/web/packages/inlmisc/index.html): Another USGS package for creating high-level graphics, [demonstrated in this blog post by Jason Fisher](https://owi.usgs.gov/blog/inlmiscmaps/).
- 
+ - [inlmisc](https://cran.r-project.org/web/packages/inlmisc/index.html): Another USGS package for creating high-level graphics, [demonstrated in this post by Jason Fisher](https://waterdata.usgs.gov/updates/inlmiscmaps/).
+
  Also, check out our [additional topics in R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum/Additional/) page for links to some other tutorials.

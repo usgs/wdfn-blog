@@ -10,7 +10,7 @@ author_twitter: LindsayRCarr
 author_github: lindsaycarr
 author_staff: lindsay-r-carr
 author_email: <lcarr@usgs.gov>
-tags: 
+tags:
   - R
   - Beyond Basic R
 description: Resources for plotting, plus short examples for using ggplot2 for common use-cases and adding USGS style.
@@ -18,7 +18,7 @@ keywords:
   - R
   - Beyond Basic R
   - ggplot2
- 
+
 ---
 R can create almost any plot imaginable and as with most things in R if you don’t know where to start, try Google. The [Introduction to R curriculum](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) summarizes some of the most used plots, but cannot begin to expose people to the breadth of plot options that exist.There are existing resources that are great references for plotting in R:
 
@@ -38,7 +38,7 @@ In ggplot2:
 -   [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 -   [ggplot2 reference guide](http://ggplot2.tidyverse.org/reference/)
 
-In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) class, we have switched to teaching ggplot2 because it works nicely with other tidyverse packages (dplyr, tidyr), and can create interesting and powerful graphics with little code. While `ggplot2` has many useful features, this blog post will explore how to create figures with multiple `ggplot2` plots.
+In the [Introduction to R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum) class, we have switched to teaching ggplot2 because it works nicely with other tidyverse packages (dplyr, tidyr), and can create interesting and powerful graphics with little code. While `ggplot2` has many useful features, this post will explore how to create figures with multiple `ggplot2` plots.
 
 You may have already heard of ways to put multiple R plots into a single figure - specifying `mfrow` or `mfcol` arguments to `par`, `split.screen`, and `layout` are all ways to do this. However, there are other methods to do this that are optimized for `ggplot2` plots.
 
@@ -58,21 +58,21 @@ library(tidyr) # for `gather`
 library(ggplot2)
 
 # Get the data by giving site numbers and parameter codes
-# 00060 = stream flow, 00530 = total suspended solids, 00631 = concentration of inorganic nitrogen 
+# 00060 = stream flow, 00530 = total suspended solids, 00631 = concentration of inorganic nitrogen
 wi_daily_wq <- readNWISdv(siteNumbers = c("05430175", "05427880", "05427927"),
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names + move data into long format
-wi_daily_wq <- renameNWISColumns(wi_daily_wq, 
+wi_daily_wq <- renameNWISColumns(wi_daily_wq,
                                  p00530 = "TSS",
-                                 p00631 = "InorganicN") %>% 
-  select(-ends_with("_cd")) %>% 
+                                 p00631 = "InorganicN") %>%
+  select(-ends_with("_cd")) %>%
   gather(key = "parameter", value = "value", -site_no, -Date)
 
 # Setup plot without facets
-p <- ggplot(data = wi_daily_wq, aes(x = Date, y = value)) + 
-  geom_point(aes(color = site_no)) + 
+p <- ggplot(data = wi_daily_wq, aes(x = Date, y = value)) +
+  geom_point(aes(color = site_no)) +
   theme_bw()
 
 # Now, we can look at the plot and see how it looks before we facet
@@ -119,7 +119,7 @@ There are still other things you can do with facets, such as using `space = "fre
 Using `cowplot` to create multiple plots in one figure
 ------------------------------------------------------
 
-When you are creating multiple plots and they do not share axes or do not fit into the facet framework, you could use the packages `cowplot` or `patchwork` (very new!), or the `grid.arrange` function from `gridExtra`. In this blog post, we will show how to use `cowplot`, but you can explore the features of `patchwork` [here](https://github.com/thomasp85/patchwork).
+When you are creating multiple plots and they do not share axes or do not fit into the facet framework, you could use the packages `cowplot` or `patchwork` (very new!), or the `grid.arrange` function from `gridExtra`. In this post, we will show how to use `cowplot`, but you can explore the features of `patchwork` [here](https://github.com/thomasp85/patchwork).
 
 The package called `cowplot` has nice wrapper functions for ggplot2 plots to have shared legends, put plots into a grid, annotate plots, and more. Below is some code that shows how to use some of these helpful `cowplot` functions to create a figure that has three plots and a shared title.
 
@@ -133,29 +133,29 @@ library(ggplot2)
 library(cowplot)
 
 # Get the data
-yahara_daily_wq <- readNWISdv(siteNumbers = "05430175", 
+yahara_daily_wq <- readNWISdv(siteNumbers = "05430175",
                           parameterCd = c("00060", "00530", "00631"),
                           startDate = "2017-08-01", endDate = "2017-08-31")
 
 # Clean up data to have human-readable names
-yahara_daily_wq <- renameNWISColumns(yahara_daily_wq, 
+yahara_daily_wq <- renameNWISColumns(yahara_daily_wq,
                                      p00530 = "TSS",
                                      p00631 = "InorganicN")
 
 # Create the three different plots
-flow_timeseries <- ggplot(yahara_daily_wq, aes(x=Date, y=Flow)) + 
+flow_timeseries <- ggplot(yahara_daily_wq, aes(x=Date, y=Flow)) +
   geom_point() + theme_bw()
 
 yahara_daily_wq_long <- gather(yahara_daily_wq, Nutrient, Nutrient_va, TSS, InorganicN)
 nutrient_boxplot <- ggplot(yahara_daily_wq_long, aes(x=Nutrient, y=Nutrient_va)) +
   geom_boxplot() + theme_bw()
 
-tss_flow_plot <- ggplot(yahara_daily_wq, aes(x=Flow, y=TSS)) + 
+tss_flow_plot <- ggplot(yahara_daily_wq, aes(x=Flow, y=TSS)) +
   geom_point() + theme_bw()
 
 # Create Flow timeseries plot that spans the grid by making one plot_grid
-#   and then nest it inside of a second. Also, include a title at the top 
-#   for the whole figure. 
+#   and then nest it inside of a second. Also, include a title at the top
+#   for the whole figure.
 title <- ggdraw() + draw_label("Conditions for site 05430175", fontface='bold')
 bottom_row <- plot_grid(nutrient_boxplot, tss_flow_plot, ncol = 2, labels = "AUTO")
 plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
