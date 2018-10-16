@@ -12,7 +12,7 @@ RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y update
 RUN apt-get install -y nodejs
 
-ADD . /src
+COPY . /src
 WORKDIR /src
 
 ARG HUGO_BASEURL="http://localhost:1313"
