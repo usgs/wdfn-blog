@@ -113,8 +113,7 @@ Shows how to build a simple example Hugo site.  On the left sidebar there are li
 To test locally, run:
 
 ```bash
-export HUGO_BASEURL="updates/"
-hugo server --buildDrafts
+docker-compose run hugo bash
 ```
 
 # Instructions for R users
