@@ -18,7 +18,7 @@ WORKDIR /src
 ARG HUGO_BASEURL="http://localhost:1313"
 ENV HUGO_BASEURL ${BUILD_COMMAND}
 
-# The entrypoint script supports commands "build", "server", or "bash".
+# The entrypoint script supports commands "build", "server", or pass-through to sh.
 ENTRYPOINT ["/src/entrypoint.sh"]
 
 # Default operation

@@ -111,10 +111,10 @@ docker-compose run hugo build --buildDrafts
 
 ## Debugging the container
 
-If the need arises, you may get a bash prompt in the container:
+If the need arises, you may run arbitrary commands in the container, such as a bash shell:
 
 ```bash
-docker-compose run hugo bash
+docker-compose run hugo bash -l
 ```
 
 # Instructions for R users
