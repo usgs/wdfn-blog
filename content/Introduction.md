@@ -33,7 +33,7 @@ Just to get it out of the way, yes, the "pre-populated" nature of this site beli
 What we will be posting about
 ==========
 
-This page will have posts in 3 broad categories of posts: Applications, Data Science and Software Development.
+This page will have posts in 3 broad categories of posts: Applications, Data Science, and Software Development.
 
 Applications
 ----------------
@@ -54,10 +54,12 @@ Data science is an emerging field both inside and outside the USGS. Data scienti
 
 The development of these tools is closely coordinated with USGS enterprise information systems providing convenient access to USGS monitoring data within various data analysis environments.
 
-Other ways to hear from The USGS Resources Water Mission Area
+Other ways to hear from The USGS Water Mission Area
 ==========
 
-There are several ways beyond this page to keep up to date on the work that is done at at the Water Resources Mission Area, and to provide feedback.
+There are several ways beyond this page to keep up to date on the work that is done at at the Water Mission Area, and to provide feedback.
+
+For news, updates, and resources for the Water Mission Area as a whole, please visit the new [Water Mission Area homepage](https://www.usgs.gov/science/mission-areas/water-resources).
 
 |Twitter|Github|
 |-----------|------------|
@@ -70,7 +72,7 @@ Technical Details
 
 A few details concerning the updates page itself. It is produced using [Hugo](https://gohugo.io/). The basic "robust" theme was used as a base, but then we layered on the [U.S. Federal Design System](https://designsystem.digital.gov), with modifications to meet USGS visual ID requirements. The development and collaboration on blog posts is done via Github at <https://github.com/USGS/wdfn-updates>.
 
-Each post is created in a simple markdown format. Posts are deployed to a development Amazon S3 bucket using the continuous integration tool Jenkins. When a pull request is merged on github, a Jenkin's job pulls the github repository, builds the Hugo site, and pushes the generated static files from the "public" folder to the development S3 bucket. Once the post has been reviewed for style and content, the status `draft: true` is removed. A production deployment is also done via Jenkins.
+Each post is created in a simple markdown format. Posts are deployed to a development Amazon S3 bucket using the continuous integration tool Jenkins. When a pull request is merged on Github, a Jenkins job pulls the github repository, builds the Hugo site, and pushes the generated static files from the "public" folder to the development S3 bucket. Once the post has been reviewed for style and content, the status `draft: true` is removed. A production deployment is also done via Jenkins.
 
 Questions
 ==========
