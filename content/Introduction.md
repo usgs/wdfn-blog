@@ -30,15 +30,15 @@ So why did we create this part of waterdata.usgs.gov?
 
 Just to get it out of the way, yes, the "pre-populated" nature of this site belies its origins in a previous, similar project that came out of the now defunct USGS Office of Water Information at owi.usgs.gov.  We kept the relevent posts, and updated others.
 
-Categories
+What we will be posting about
 ==========
 
-There are currently 3 categories: Data Science, Applications, and Software Development.
+This page will have posts in 3 broad categories of posts: Applications, Data Science and Software Development.
 
 Applications
 ----------------
 
-The USGS Water Mission Area runs around 40 different public-facing applications, from enterprise scale data assimilation, management, and dissemination systems including the [National Water Information System](http://waterdata.usgs.gov/) to project-scale data analysis tools that serve more specialized needs.
+The USGS Water Mission Area runs around 30 different public-facing applications, from enterprise scale data assimilation, management, and dissemination systems including the [National Water Information System](http://waterdata.usgs.gov/) to project-scale data analysis tools that serve more specialized needs.
 
 Posts in this category will provide updates, interesting applications, user-stories, or other information on the various applications produced and maintained by the USGS Water Mission Area.
 
@@ -54,33 +54,16 @@ Data science is an emerging field both inside and outside the USGS. Data scienti
 
 The development of these tools is closely coordinated with USGS enterprise information systems providing convenient access to USGS monitoring data within various data analysis environments.
 
-Communication
+Other ways to hear from The USGS Resources Water Mission Area
 ==========
 
-There are several ways to keep up to date on the work that is done at OWI, and to provide feedback.
+There are several ways beyond this page to keep up to date on the work that is done at at the Water Resources Mission Area, and to provide feedback.
 
 |Twitter|Github|
 |-----------|------------|
 |<a href="https://twitter.com/USGS_WaterData" class="twitter-follow-button" data-show-count="false">Follow @USGS_WaterData</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>|[https://github.com/USGS](https://github.com/USGS)|
 |<a href="https://twitter.com/USGS_R" class="twitter-follow-button" data-show-count="false">Follow @USGS_R</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>|[https://github.com/USGS-R](https://github.com/USGS-R)|
 |<a href="https://twitter.com/USGS_GDP" class="twitter-follow-button" data-show-count="false">Follow @USGS_GDP</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>|[https://github.com/USGS](https://github.com/USGS)|
-
-Links
--------
-|Description|Link|
-|-----------|------------|
-|Main USGS page|[https://www.usgs.gov/](https://www.usgs.gov/)|
-|USGS Wter Resources Mission Area|[https://www.usgs.gov/science/water-resources](https://www.usgs.gov/science/water-resources)|
-|USGS Water Services|[https://waterservices.usgs.gov/](https://waterservices.usgs.gov/)|
-|USGS Water Data for the Nation|[https://waterdata.usgs.gov/](https://waterdata.usgs.gov/)|
-|USGS Water Watch|[https://waterwatch.usgs.gov](https://waterwatch.usgs.gov)
-|Water Quality Portal|[https://www.waterqualitydata.us/](https://www.waterqualitydata.us/)|
-|USGS Publications Warehouse|[https://pubs.er.usgs.gov/](https://pubs.er.usgs.gov/)|
-|National Water Census - Data Portal|[https://cida.usgs.gov/nwc/](https://cida.usgs.gov/nwc/)|
-|USGS Geo Data Portal|[https://cida.usgs.gov/gdp/](https://cida.usgs.gov/gdp/)|
-|National Ground-Water Monitoring Network Portal|[https://cida.usgs.gov/ngwmn/](https://cida.usgs.gov/ngwmn/)|
-|USGS Coastal Change Hazards Portal|[https://marine.usgs.gov/coastalchangehazardsportal/](https://marine.usgs.gov/coastalchangehazardsportal/)|
-|Environmental Data Discovery and Transformation|[https://cida.usgs.gov/enddat/](https://cida.usgs.gov/enddat/)|
 
 Technical Details
 =================
