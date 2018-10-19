@@ -33,21 +33,17 @@
 
 {{ define "main" }}
   <article class="single">
-    <aside>
-      <section>
-        <div>
-          <div class="p-share">
-            <a href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-facebook"></i></a>
-            <a  rel="nofollow" target="_blank" href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><i class="fab fa-twitter"></i></a>
-            <a href="https://plus.google.com/share?url={{ .Permalink }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-google-plus"></i></a>
-            <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </section>
-    </aside>
     <div class="body">
-      <h1>{{ .Title }}</h1>
-	    <h3>{{ .Params.author }}</h3>
+      <div class="p-share">
+        <a href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-facebook"></i></a>
+        <a  rel="nofollow" target="_blank" href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><i class="fab fa-twitter"></i></a>
+        <a href="https://plus.google.com/share?url={{ .Permalink }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-google-plus"></i></a>
+        <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
+      </div>
+      <div class="byline">
+        <h1>{{ .Title }}</h1>
+        <h3>{{ .Params.author }}</h3>
+      </div>
 
       {{ range .Params.authors }}
         <h3> {{ . }}  </h3>

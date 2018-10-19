@@ -104,6 +104,14 @@ main {
   }
 }
 
+@include at-media('tablet') {
+  .body {
+    .p-share {
+      float: right;
+    }
+  }
+}
+
 /* Parts:page-title */
 
 .p-page-title {
