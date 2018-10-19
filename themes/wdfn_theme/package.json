@@ -1,7 +1,7 @@
 {
   "name": "wdfn_theme",
   "version": "1.0.0",
-  "description": "USGS Water Data For The Nation Blog",
+  "description": "USGS Water Data For The Nation Updates",
   "module": "src/js/main.js",
   "sass": "src/styles/main.scss",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/USGS-OWI/owi-blog.git"
+    "url": "git+https://github.com/usgs/wdfn-updates.git"
   },
   "keywords": [
     "blog",
@@ -36,9 +36,9 @@
   "author": "USGS",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/USGS-OWI/owi-blog/issues"
+    "url": "https://github.com/usgs/wdfn-updates/issues"
   },
-  "homepage": "https://github.com/USGS-OWI/owi-blog#readme",
+  "homepage": "https://github.com/usgs/wdfn-updates#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
     "wdfn-viz": "^0.1.3"

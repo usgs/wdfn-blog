@@ -9,10 +9,10 @@ image: static/beyond-basic-mapping/poly-map-state-1.png
 author_github: wdwatkins
 author_staff: william-d-watkins
 author_email: <wwatkins@usgs.gov>
-tags: 
+tags:
   - R
   - Beyond Basic R
- 
+
 description: Basic mapping in R with the maps and ggmap package
 keywords:
   - R
@@ -35,9 +35,9 @@ library(sbtools)
 library(dataRetrieval)
 library(sf)
 
-item_file_download(sb_id = "5a83025ce4b00f54eb32956b", 
-                   names = "huc8_05010007_example.zip", 
-                   destinations = "huc8_05010007_example.zip", 
+item_file_download(sb_id = "5a83025ce4b00f54eb32956b",
+                   names = "huc8_05010007_example.zip",
+                   destinations = "huc8_05010007_example.zip",
                    overwrite_file = TRUE)
 ```
 
@@ -88,7 +88,7 @@ str(huc_poly)
 st_geometry(huc_poly)
 ```
 
-    ## Geometry set for 1 feature 
+    ## Geometry set for 1 feature
     ## geometry type:  POLYGON
     ## dimension:      XY
     ## bbox:           xmin: -79.45512 ymin: 39.91875 xmax: -78.55573 ymax: 40.77377
@@ -99,7 +99,7 @@ st_geometry(huc_poly)
 st_bbox(huc_poly)
 ```
 
-    ##      xmin      ymin      xmax      ymax 
+    ##      xmin      ymin      xmax      ymax
     ## -79.45512  39.91875 -78.55573  40.77377
 
 ``` r
@@ -107,7 +107,7 @@ st_crs(huc_poly)
 ```
 
     ## Coordinate Reference System:
-    ##   EPSG: 4326 
+    ##   EPSG: 4326
     ##   proj4string: "+proj=longlat +datum=WGS84 +no_defs"
 
 ``` r
@@ -169,7 +169,7 @@ bbox <- setNames(st_bbox(huc_poly), c("left", "bottom", "right", "top"))
 #setting zoom to 9 gives us a bit of padding around the bounding box
 basemap_streets <- get_map(maptype = "roadmap", location = bbox, zoom = 9)
 basemap_satellite <- get_map(maptype = "satellite", location = bbox, zoom = 9)
-street_map <- ggmap(basemap_streets) 
+street_map <- ggmap(basemap_streets)
 satellite_map <- ggmap(basemap_satellite)
 print(street_map)
 ```
@@ -185,13 +185,13 @@ print(satellite_map)
 Now we can start adding to our maps. First, we convert the `huc_gages` data.frame to an `sf` object using `st_as_sf`, assigning it the same coordinate reference system as `huc_poly` using `st_crs`. `ggplot` functions like `geom_sf` and `geom_text` add to your base map.
 
 ``` r
-huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"), 
+huc_gages_sf <- st_as_sf(huc_gages, coords = c("dec_long_va", "dec_lat_va"),
                          crs = st_crs(huc_poly), remove = FALSE)
 satellite_map + geom_sf(data = huc_poly,
                         inherit.aes = FALSE,
                         color = "white", fill = NA) +
   geom_sf(data = huc_gages_sf, inherit.aes = FALSE, color = "red") +
-  geom_text(data = huc_gages_sf, 
+  geom_text(data = huc_gages_sf,
             aes(label = site_no, x = dec_long_va, y = dec_lat_va),
             hjust = 0, size=2.5, nudge_x = 0.02, col = "yellow")
 ```
@@ -231,7 +231,7 @@ title("Conemaugh Subbasin")
 Similarly, we can create a map zoomed in to the HUC polygon. Note that we set the x and y limits of the map by extracting the limits of the `bbox` object we created earlier. We can use the names `left`, `right`, etc. because `bbox` is a named vector.
 
 ``` r
-  map(database = 'county', regions = 'Pennsylvania', col = "lightgray", 
+  map(database = 'county', regions = 'Pennsylvania', col = "lightgray",
       xlim = bbox[c('left', 'right')], ylim = bbox[c('bottom', 'top')])
  plot(st_geometry(huc_poly), col = "dodgerblue", border = NA, add = TRUE)
   box()
@@ -252,6 +252,6 @@ Like plotting in R, there are endless intricacies to making maps, and we are onl
 -   [raster](https://cran.r-project.org/web/packages/raster/index.html): For working with your own raster data
 -   [sp](https://cran.r-project.org/web/packages/sp/index.html): The original workhorse package for handling spatial data. `sf` is largely replacing it, but you will see it a lot when Googling things.
 -   [geoknife](https://cran.r-project.org/web/packages/geoknife/index.html): A USGS package that utilizes the [Geo Data Portal](https://cida.usgs.gov/gdp/how-to-gdp/) for processing gridded data. Covered in the [packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
--   [inlmisc](https://cran.r-project.org/web/packages/inlmisc/index.html): Another USGS package for creating high-level graphics, [demonstrated in this blog post by Jason Fisher](https://owi.usgs.gov/blog/inlmiscmaps/).
+-   [inlmisc](https://cran.r-project.org/web/packages/inlmisc/index.html): Another USGS package for creating high-level graphics, [demonstrated in this post by Jason Fisher](https://waterdata.usgs.gov/updates/inlmiscmaps/).
 
 Also, check out our [additional topics in R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum/Additional/) page for links to some other tutorials.

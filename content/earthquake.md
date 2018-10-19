@@ -38,7 +38,7 @@ While the NWIS site allowed a very easy way to observe the data, it was not quit
 
 [Affected Groundwater Levels](https://waterdata.usgs.gov/nwis/uv?cb_72019=on&format=gif_default&sites&site_no=402411077374801&site_no=364818094185302&site_no=405215084335400&site_no=370812080261901&site_no=393851077343001&site_no=444302070252401&site_no=324307117063502&site_no=401804074432601&site_no=292618099165901&site_no=421157075535401&site_no=373904118570701&site_no=343457096404501&period=&begin_date=2017-09-07&end_date=2017-09-08)
 
-The challenge was on: could we very quickly get a graph out that aggregates this data, unifies the time zones, and visualize the information in an intuitive way for the general population? This blog documents the process of rapidly creating the plot in order to get the information out to social media in a timely manner. The final plot could certainly be improved, but with the limited resources and time constraints, it still managed to be a fun and interesting graphic.
+The challenge was on: could we very quickly get a graph out that aggregates this data, unifies the time zones, and visualize the information in an intuitive way for the general population? This post documents the process of rapidly creating the plot in order to get the information out to social media in a timely manner. The final plot could certainly be improved, but with the limited resources and time constraints, it still managed to be a fun and interesting graphic.
 
 Aggregate USGS Data
 -------------------
@@ -227,7 +227,7 @@ dev.off()
 What does the plot mean?
 ------------------------
 
-While this blog is primarily focused on the process used to create the plot, far more effort was expended by others in understanding and describing the data. The following information was released with the graph, initially as a Facebook post [USGSNaturalHazards](https://www.facebook.com/USGSNaturalHazards/posts/136010120350602):
+While this post is primarily focused on the process used to create the plot, far more effort was expended by others in understanding and describing the data. The following information was released with the graph, initially as a Facebook post [USGSNaturalHazards](https://www.facebook.com/USGSNaturalHazards/posts/136010120350602):
 
 Did you know? We often see a response to large (and sometimes not so large) earthquakes in groundwater levels in wells. The USGS maintains a network of wells for monitoring various things like natural variability in water levels and response to pumping and climate change across the U.S. The well network can be seen here: <https://groundwaterwatch.usgs.gov/> The M8.1 earthquake that took place 9-8-2017 in the Pacific region offshore Chiapas, Mexico was observed across the U.S. in confined aquifer wells within the network. The wells in this plot are available from the National Water Information System (NWIS) web are from: TX, CA (southern), OK, MO, VA, CA (central), MD, NJ, PA, OH, NY and ME (from south to north). This is just a small sampling of the wells. USGS hydrologists are poring over the data from other states to see what the full extent of response might have been.
 

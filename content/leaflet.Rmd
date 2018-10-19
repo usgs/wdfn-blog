@@ -1,5 +1,5 @@
 ---
-title: "Using Leaflet and htmlwidgets in a Hugo blog post"
+title: "Using Leaflet and htmlwidgets in a Hugo post"
 author: "Laura DeCicco"
 date: "2016-08-23"
 slug: "leaflet"
@@ -11,12 +11,12 @@ author_github: "ldecicco-usgs"
 author_gs: "jXd0feEAAAAJ"
 author_staff: "laura-decicco"
 author_email: "ldecicco@usgs.gov"
-description: "Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo blogpost is explained."
+description: "Using the R packages dataRetrieval, leaflet, and htmlwidgets, the workflow for a Hugo post is explained."
 keyword1: "Leaflet"
 keyword2: "Interactive map"
 ---
 
-We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future blog posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet)  map in our Hugo-generated blog post.
+We are excited to use many of the JavaScript data visualizations in R using the [`htmlwidgets`](http://www.htmlwidgets.org/) package in future posts. Having decided on using [Hugo](https://gohugo.io/), one of our first tasks was to figure out a fairly straightforward way to incorporate these widgets. This post describes the basic process to get a basic [`leaflet`](https://cran.r-project.org/package=leaflet)  map in our Hugo-generated post.
 
 In this example, we are looking for phosphorus measured throughout Wisconsin with the [`dataRetrieval`](https://cran.r-project.org/package=dataRetrieval) package. Using [`dplyr`](https://cran.r-project.org/package=dplyr), we filter the data to sites that have records longer than 15 years, and more than 50 measurements.
 
@@ -38,7 +38,7 @@ Plot the sites on a map:
 
 ```{r echo=TRUE, eval=TRUE}
 library(leaflet)
-leafMap <- leaflet(data=phos.wi) %>% 
+leafMap <- leaflet(data=phos.wi) %>%
   addProviderTiles("CartoDB.Positron") %>%
   addCircleMarkers(~dec_long_va,~dec_lat_va,
                    color = "red", radius=3, stroke=FALSE,
@@ -47,7 +47,7 @@ leafMap <- leaflet(data=phos.wi) %>%
 
 ```
 
-Next, we use the `htmlwidgets` package to save a self-contained html file. The following code could be generally hid from the reader using `echo=FALSE`. 
+Next, we use the `htmlwidgets` package to save a self-contained html file. The following code could be generally hid from the reader using `echo=FALSE`.
 
 
 ```{r echo=TRUE, eval=TRUE}
@@ -63,7 +63,7 @@ setwd(currentWD)
 ```
 
 
-The html that was saved with the `saveWidget` function can be called with the `iframe` html tag. 
+The html that was saved with the `saveWidget` function can be called with the `iframe` html tag.
 
 ```{r echo=TRUE, eval=FALSE}
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500"></iframe>
@@ -71,9 +71,9 @@ The html that was saved with the `saveWidget` function can be called with the `i
 
 <iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500"></iframe>
 
-When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html". 
+When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html".
 
-One issue for our Hugo theme was that the created widget page is included in the overall blog index. The was fixed by adding a line to the overall index.html layout page to only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
+One issue for our Hugo theme was that the created widget page is included in the overall updates section index. The was fixed by adding a line to the overall index.html layout page to only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
 
 ```{r eval=FALSE}
 {{ if ge $value.Date.Unix 0 }}
@@ -84,7 +84,7 @@ One issue for our Hugo theme was that the created widget page is included in the
 
 ```
 
-A screenshot of the map was taken to use for the thumbnail in the blog index.
+A screenshot of the map was taken to use for the thumbnail in the updates section index.
 
 # Questions
 
