@@ -73,19 +73,6 @@ body {
   background-color: #fff;
 }
 
-ul, ol {
-  padding: 0;
-  padding-left: 1.5rem;
-}
-
-main {
-  margin-top: 0;
-  padding-top: 1em;
-  img {
-    width: 100%;
-  }
-}
-
 /* Parts:share */
 
 .p-share {
@@ -101,6 +88,14 @@ main {
     border-radius: 100%;
     color: #eceff1;
     margin: 0 .5rem;
+  }
+}
+
+@include at-media('tablet') {
+  .body {
+    .p-share {
+      float: right;
+    }
   }
 }
 
@@ -138,6 +133,10 @@ article {
   word-break: break-all;
   > a {
     display: block;
+  }
+  ul, ol {
+    padding: 0;
+    padding-left: 1.5rem;
   }
   .image {
     background-size: contain;
