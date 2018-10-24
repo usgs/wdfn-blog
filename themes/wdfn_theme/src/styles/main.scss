@@ -73,19 +73,6 @@ body {
   background-color: #fff;
 }
 
-ul, ol {
-  padding: 0;
-  padding-left: 1.5rem;
-}
-
-main {
-  margin-top: 0;
-  padding-top: 1em;
-  img {
-    width: 100%;
-  }
-}
-
 /* Parts:share */
 
 .p-share {
@@ -146,6 +133,13 @@ article {
   word-break: break-all;
   > a {
     display: block;
+  }
+  img {
+    width: 100%;
+  }
+  ul, ol {
+    padding: 0;
+    padding-left: 1.5rem;
   }
   .image {
     background-size: contain;
