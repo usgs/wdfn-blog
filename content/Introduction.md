@@ -2,7 +2,7 @@
 date: 2018-10-25
 slug: introduction
 type: post
-title: Introducing Water Data for the Nation Updates!
+title: Water Data for the Nation Updates Introduction
 categories:
   - Data Science
   - Software Development
