@@ -19,7 +19,7 @@ author_staff: "david-l-blodgett"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width=6, 
+  fig.width=6,
   fig.height=4
 )
 options(scipen = 9999)
@@ -29,10 +29,10 @@ options(scipen = 9999)
 
 The idea for this post came a few months back when I received an email that started, "I am a writer and teacher and am reaching out to you with a question related to a piece I would like to write about the place in the United States that is furthest from a natural body of surface water. My question is, in short, might you know where this theoretical place is located?"
 
-As someone who works on the [National Water Census](https://water.usgs.gov/watercensus/){target="_blank"} and [National hydrography data](https://www.usgs.gov/core-science-systems/ngp/national-hydrography){target="_blank"}, this question piqued my interest. I also had an idea of one way to answer the question that would use some tools and techniques I've recently been developing in R. What follows is just that, _*one*_ way that this question might be answered. The code I used to find the solution is presented in detail after the solution to the question. 
+As someone who works on the [National Water Census](https://water.usgs.gov/watercensus/){target="_blank"} and [National hydrography data](https://www.usgs.gov/core-science-systems/ngp/national-hydrography){target="_blank"}, this question piqued my interest. I also had an idea of one way to answer the question that would use some tools and techniques I've recently been developing in R. What follows is just that, _*one*_ way that this question might be answered. The code I used to find the solution is presented in detail after the solution to the question.
 
 The solution graphics shown below were generated with the following code:
-The `furthest_water.R` script can be [found here](https://github.com/USGS-OWI/owi-blog/tree/master/content/static/furthest-water){target="_blank"}.
+The `furthest_water.R` script can be [found here](https://github.com/usgs/wdfn-updates/tree/master/content/static/furthest-water){target="_blank"}.
 ```{r load_function, echo=TRUE, eval=FALSE}
 source("furthest_water.R")
 furthest_water(scenario = "waterbodies")
@@ -93,7 +93,7 @@ As the variety of results given different inputs shows, this question doesn't ne
 The three scenarios above were run using a function that executes the code described below. There is a mix of comments and summary text written outside the code. To execute this, you will need to install the required packages and download the [NHDPlus National Seamless Database](https://www.epa.gov/waterdata/nhdplus-national-data){target="_blank"} and a [state boundaries layer available here.](https://www.arcgis.com/home/item.html?id=b07a9393ecbd430795a6f6218443dccc){target="_blank"} These two datasets are referenced in the code.
 
 ### Load Packages and Data
-In this first step, I load all the packages and data I need. 
+In this first step, I load all the packages and data I need.
 
 Packages include:
 
@@ -106,7 +106,7 @@ Packages include:
 * [`gifski`](https://cran.r-project.org/web/packages/gifski/index.html){target="_blank"}
 * [`ggmap`](https://cran.r-project.org/web/packages/ggmap/){target="_blank"}
 
-Note that `sf` and `dplyr` do the vast majority of the work and they are loaded with a `library()` command. All other packages are accessed using the `package::function()` syntax 
+Note that `sf` and `dplyr` do the vast majority of the work and they are loaded with a `library()` command. All other packages are accessed using the `package::function()` syntax
 
 Variables created here are:
 
@@ -124,7 +124,7 @@ library(dplyr)
 # devtools::install_github("dblodgett-usgs/nhdplusTools")
 # First we will use a nhdplusTools to load up the national seamless geodatabase.
 nhdplusTools::nhdplus_path("nhdplus_data/NHDPlusV21_National_Seamless.gdb")
-staged_data <- nhdplusTools::stage_national_data(include = "flowline", 
+staged_data <- nhdplusTools::stage_national_data(include = "flowline",
                                                  output_path = "nhdplus_data/")
 flowlines <- readRDS(staged_data$flowline)
 
@@ -179,7 +179,7 @@ if("filter_monthly_flow" %in% scenario) {
 }
 
 if("remove_intermittent" %in% scenario) {
-  flowlines <- flowlines[which(!flowlines$FCODE %in% remove_fcodes$FCode), ] 
+  flowlines <- flowlines[which(!flowlines$FCODE %in% remove_fcodes$FCode), ]
   if("waterbodies" %in% scenario) {
     water_bodies <- water_bodies[which(!water_bodies$FCODE %in% remove_fcodes$FCode), ]
   }
@@ -268,7 +268,7 @@ search <- st_as_sf(data.frame(search), coords = c("Var1", "Var2"), crs = crs) %>
 
 ### Plot function
 
-In order to create the animated gif, I needed to be able to create a similar plot over and over. So I created a function to do the job. This function creates an output file name, sets up a png, gets the data ready to plot, then plots a few layers using base R graphics and [`plot.sf`](https://r-spatial.github.io/sf/reference/plot.html){target="_blank"}. 
+In order to create the animated gif, I needed to be able to create a similar plot over and over. So I created a function to do the job. This function creates an output file name, sets up a png, gets the data ready to plot, then plots a few layers using base R graphics and [`plot.sf`](https://r-spatial.github.io/sf/reference/plot.html){target="_blank"}.
 
 ```{r plot}
 # Function to plot results in a .png
@@ -277,7 +277,7 @@ plot_result <- function(search, radius, crs, bbox, states) {
   png(fname,
       width = 1000, height = 800)
   result <- st_as_sf(search, coords = c("X", "Y"), crs = crs)
-  
+
   plot(bbox, main = paste("Distance to nearest water:", radius, "meters"))
   plot(states$geometry, add = TRUE)
   plot(result$geometry, pch = 19, add = TRUE)
@@ -287,7 +287,7 @@ plot_result <- function(search, radius, crs, bbox, states) {
 
 ### Run the nearest neighbor search
 
-Finally, we are ready to run the analysis. To me, while loops are the forbidden fruit of software development, but sometimes you just don't know how many times you need to run a loop! In this case, we run the [`RANN::nn2()`](https://www.rdocumentation.org/packages/RANN/versions/2.6/topics/nn2){target="_blank"} function which returns the index of the matching nearest neighbor (`nn.idx`), if one is found. If no nearest neighbor is found in the search radius, it returns `nn.idx` of 0. So in every loop, I only keep matches where `nn.idx` == 0 returns true. I plot the filtered set to a png and increment the radius up for the next loop. The if/else block at the bottom of this step just slows down the rate of increase of the radius as we approach only one location left to avoid overshooting and missing the last one! 
+Finally, we are ready to run the analysis. To me, while loops are the forbidden fruit of software development, but sometimes you just don't know how many times you need to run a loop! In this case, we run the [`RANN::nn2()`](https://www.rdocumentation.org/packages/RANN/versions/2.6/topics/nn2){target="_blank"} function which returns the index of the matching nearest neighbor (`nn.idx`), if one is found. If no nearest neighbor is found in the search radius, it returns `nn.idx` of 0. So in every loop, I only keep matches where `nn.idx` == 0 returns true. I plot the filtered set to a png and increment the radius up for the next loop. The if/else block at the bottom of this step just slows down the rate of increase of the radius as we approach only one location left to avoid overshooting and missing the last one!
 
 Once the while loop finishes, I pass the list of pngs created to [`gifski`](https://www.rdocumentation.org/packages/gifski/versions/0.8.3/topics/gifski){target="_blank"} a great little package for creating animated gifs. Finally I printed out the lat/lon of the location found so I could go look at the location in google.
 
@@ -297,7 +297,7 @@ num_left <- nrow(search)
 
 while(num_left > 1) {
   num_left <- nrow(search)
-  
+
   # This is where the magic happens.
   matched <- RANN::nn2(coords[,1:2],
                        search,
@@ -305,12 +305,12 @@ while(num_left > 1) {
                        searchtype = "radius",
                        radius = radius) %>%
     data.frame()
-  
+
   # This while loop is destructive. Only keep unmatched.
   search <- filter(search, matched$nn.idx == 0)
-  
+
   plot_result(search, radius, crs, bbox, states)
-  
+
   if(num_left > 50) {
     radius <- radius + 1000
   } else if (num_left > 3) {
@@ -332,12 +332,12 @@ print(st_transform(result$geometry, 4326))
 ### Plot the result location
 
 Finally, I plot up the results at a local scale. Steps for this include:
-- I want the original data I started with, so I just load it back from disk. 
-- I set up an area for the plot by buffering around the result location by 150km and converting the result to a simple box. 
-- Increasingly, I like using the web mercator projection for visualization because it's familiar and compatible with web-map tiles. 
+- I want the original data I started with, so I just load it back from disk.
+- I set up an area for the plot by buffering around the result location by 150km and converting the result to a simple box.
+- Increasingly, I like using the web mercator projection for visualization because it's familiar and compatible with web-map tiles.
 - I project all the data to my plotting projection and subset it and simplify the geometry to speed things up and not overwhelm `plot()` with data for the whole country.
-- I grab a background map from google with ggmap::getmap to be passed to the `bgMap` input of `plot.sf()`. 
-- I plot each layer I want into a png. 
+- I grab a background map from google with ggmap::getmap to be passed to the `bgMap` input of `plot.sf()`.
+- I plot each layer I want into a png.
 - Finally I delete the png files and temporary geometry I wrote to disk.
 ```{r plot_result, eval=FALSE}
 # Load geospatial data again.

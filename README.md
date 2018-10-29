@@ -1,7 +1,7 @@
 wdfn-updates
 ------------
 
-*Blog posts from USGS Water Data For The Nation*
+*Updates from USGS Water Data For The Nation*
 
 # Guidelines for submission
 1. Applicable/useful to a greater audience.
@@ -9,12 +9,12 @@ wdfn-updates
 3. Relevant to USGS employees or USGS data users
 4. Showcases databases, applications, software, or common practices associated with USGS WMA or within the USGS WMA portfolio.
 
-# Submitting blog post
+# Submitting an update
 
 1. Fork repo
 2. Create a markdown file (.md)
 3. Add to `content` folder
-4. Include static images in `static\name-of-blog`. Images *must* include alt and title text
+4. Include static images in `static\name-of-post`. Images *must* include alt and title text
 5. Add a header similar to:
 
   ```
@@ -46,17 +46,17 @@ wdfn-updates
 
   Important notes about header:
 
-  * Date format has to be "YYYY-MM-DD" for the blogs to be organized properly.
+  * Date format has to be "YYYY-MM-DD" for the updates to be organized properly.
 
   * Initial submission **must** include `draft: True`
 
   * `slug` slug will be the name of your url after waterdata.usgs.gov/updates/xxx
 
-  * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic OWI image will be included.
+  * `image` is not required, but will improve the look of the main "update" page. Without an image, a generic USGS image will be included.
 
   * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
 
-  * `tags` are more specific words, and do not need to be on a pre-approved list, these will show up on the sidebar of the blog.
+  * `tags` are more specific words, and do not need to be on a pre-approved list, these will show up on the navigation of the post.
 
   * `description` will go into a "meta" tag that Google and other sites use
 
@@ -67,7 +67,7 @@ wdfn-updates
   * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
 
 6. Submit a pull request
-7. Wait for the pull request to get merged (blog maintainers will do that), it will then appear on the dev site.
+7. Wait for the pull request to get merged (wdfn-updates maintainers will do that), it will then appear on the dev site.
 8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site.
 9. A designated approver must sign off on content based on review response
 10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
@@ -75,46 +75,46 @@ wdfn-updates
 12. Assuming all looks good, push to prod
 
 
-## Theme building
+# Build and develop with Docker
 
-The theme, located in [`themes/wdfn_theme`](themes/wdfn_theme), is built with `node.js` tooling.
+A Dockerfile and Docker Compose configuration is provided that is capable of running a development server and building the deployable static site.
 
-To install the node depedencies, run:
+## Local development
+
+Using `docker-compose`, you may run a development server on http://localhost:1313:
 
 ```bash
-cd themes/wdfn_theme
-npm install
+docker-compose up
 ```
 
-To make changes to the theme, you may run a development task which rebuilds the theme on file-system changes:
+The default server instance will include draft articles.
+
+## Build static site
+
+Using `docker-compose`, the site may be built using the `build` command provided by the container:
 
 ```bash
-cd themes/wdfn_theme
-npm run watch
+docker-compose run hugo build
 ```
 
-If you are not developing changes to the theme, you must nonetheless build it before running a Hugo development server:
+The base URL is specified with the `HUGO_BASEURL` environment variable:
 
 ```bash
-cd themes/wdfn_theme
-npm run build
+docker-compose run -e HUGO_BASEURL=http://dev-owi.usgs.gov/blog/ hugo build
 ```
 
-## Hugo Installation
-
-[**Download/installation instructions**](https://gohugo.io/overview/installing/)
-
-Essentially, the Hugo executable just needs to sit in a directory referenced in the shell $PATH variable
-
-[**Quick start guide for Hugo**](https://gohugo.io/overview/quickstart/)
-
-Shows how to build a simple example Hugo site.  On the left sidebar there are links to more in-depth documentation.
-
-To test locally, run:
+Additional arguments may be passed to the [**Hugo**](https://gohugo.io/) binary as the last argument:
 
 ```bash
-export HUGO_BASEURL="blog/"
-hugo server --buildDrafts
+docker-compose run hugo build --buildDrafts
+```
+
+## Debugging the container
+
+If the need arises, you may run arbitrary commands in the container, such as a bash shell:
+
+```bash
+docker-compose run hugo bash -l
 ```
 
 # Instructions for R users

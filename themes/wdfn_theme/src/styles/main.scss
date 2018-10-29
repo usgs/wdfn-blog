@@ -1,3 +1,4 @@
+$theme-site-max-width: 'desktop';
 @import '../../node_modules/wdfn-viz/dist/sass/wdfnviz';
 
 $fa-font-path: '../fonts' !default;
@@ -72,19 +73,6 @@ body {
   background-color: #fff;
 }
 
-ul, ol {
-  padding: 0;
-  padding-left: 1.5rem;
-}
-
-main {
-  margin-top: 0;
-  padding-top: 1em;
-  img {
-    width: 100%;
-  }
-}
-
 /* Parts:share */
 
 .p-share {
@@ -100,6 +88,14 @@ main {
     border-radius: 100%;
     color: #eceff1;
     margin: 0 .5rem;
+  }
+}
+
+@include at-media('tablet') {
+  .body {
+    .p-share {
+      float: right;
+    }
   }
 }
 
@@ -137,6 +133,10 @@ article {
   word-break: break-all;
   > a {
     display: block;
+  }
+  ul, ol {
+    padding: 0;
+    padding-left: 1.5rem;
   }
   .image {
     background-size: contain;
@@ -255,29 +255,5 @@ ul.h-inline, ol.h-inline {
   &:hover {
     background: #fff;
     color: #003366;
-  }
-}
-
-.usa-header {
-  background-color: white;
-  .usa-nav-container {
-    max-width: none;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-.usgs-header {
-  .usgs-banner-container {
-    a {
-      color: color('ink');
-    }
-  }
-}
-
-.usa-logo {
-  @include at-media($theme-navigation-width) {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
   }
 }

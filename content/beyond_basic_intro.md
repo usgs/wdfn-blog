@@ -8,24 +8,24 @@ categories: Data Science
 image: static/beyond-basic-intro/usgs-r-logo.png
 author_twitter: LindsayRCarr
 author_github: lindsaycarr
- 
- 
+
+
 author_staff: lindsay-r-carr
 author_email: <lcarr@usgs.gov>
 
-tags: 
+tags:
   - R
   - Beyond Basic R
- 
-description: Brief introduction to the series of blog posts about next steps after learning basic R, plus some tips on best practices for scripting in R.
+
+description: Brief introduction to the series of posts about next steps after learning basic R, plus some tips on best practices for scripting in R.
 keywords:
   - R
   - Beyond Basic R
- 
- 
- 
+
+
+
 ---
-We queried more than 60 people who have taken the [USGS Introduction to R](http://owi.usgs.gov/R/training-curriculum/intro-curriculum) class over the last two years to understand what other skills and techniques are desired, but not covered in the course. Though many people have asked for an intermediate level class, we believe that many of the skills could be best taught through existing online materials. Instead of creating a stand-alone course, we invested our time into compiling the results of the survey, creating short examples, and linking to the necessary resources within a series of blog posts. This is the first in a series of 5 posts called ***Beyond basic R***.
+We queried more than 60 people who have taken the [USGS Introduction to R](http://owi.usgs.gov/R/training-curriculum/intro-curriculum) class over the last two years to understand what other skills and techniques are desired, but not covered in the course. Though many people have asked for an intermediate level class, we believe that many of the skills could be best taught through existing online materials. Instead of creating a stand-alone course, we invested our time into compiling the results of the survey, creating short examples, and linking to the necessary resources within a series of posts. This is the first in a series of 5 posts called ***Beyond basic R***.
 
 Other posts that will be released during the next month include:
 
@@ -34,7 +34,7 @@ Other posts that will be released during the next month include:
 -   Mapping
 -   Version control via Git
 
-You can see all blogs in this series by clicking the tag “Beyond Basic R” or follow [this link](http://owi.usgs.gov/blog/tags/beyond-basic-r/).
+You can see all posts in this series by clicking the tag “Beyond Basic R” or follow [this link](http://waterdata.usgs.gov/updates/tags/beyond-basic-r/).
 
 Best practices for writing reproducible R scripts
 =================================================

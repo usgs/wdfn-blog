@@ -59,7 +59,7 @@ tableResults(eList)
     ##    2010      7.19     1.323     1.438    0.2236     0.149
     ##    2011      5.24     1.438     1.457    0.1554     0.148
 
-Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. Note that some lines (1984-2005) were removed from this blog post simply to save space.
+Looking at the last column of these results we see that, for example, the flow normalized flux in water year 2010 is estimated to be 0.149 10<sup>6</sup> kg/year. Now, let's say we had a particular interest in the winter season which we define here as the months of December, January, and February. Note that some lines (1984-2005) were removed from this post simply to save space.
 
 The next step is to establish what season you are interested in looking at. All functions in `EGRET` can be done on the "water year" (Oct-Sept), the calendar year (Jan-Dec), or any set of sequential months. To define what period of analysis (PA) to use, there is a function `setPA`. The `setPA` function has two arguments:
 

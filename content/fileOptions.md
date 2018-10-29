@@ -10,25 +10,25 @@ image: static/formats/visualizeBox-1.png
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
- 
+
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
 
-tags: 
+tags:
   - R
- 
- 
+
+
 description: Exploring file format options in R.
 keywords:
   - R
- 
- 
+
+
   - files
   - io
 ---
-In the group that I work with <https://owi.usgs.gov/datascience/>, the vast majority of the projects use flat files for data storage. Sometimes, the files get a bit large, so we create a set of files...but basically we've been fine without wading into the world of databases. Recently however, the data involved in our projects are creeping up to be bigger and bigger. We're still not anywhere in the "BIG DATA (TM)" realm, but big enough to warrant exploring options. This blog explores the options: csv (both from `readr` and `data.table`), RDS, fst, sqlite, feather, monetDB. One of the takeaways I've learned was that there is not a single right answer. This post will attempt to lay out the options and summarize the pros and cons.
+In the group that I work with <https://owi.usgs.gov/datascience/>, the vast majority of the projects use flat files for data storage. Sometimes, the files get a bit large, so we create a set of files...but basically we've been fine without wading into the world of databases. Recently however, the data involved in our projects are creeping up to be bigger and bigger. We're still not anywhere in the "BIG DATA (TM)" realm, but big enough to warrant exploring options. This explores the options: csv (both from `readr` and `data.table`), RDS, fst, sqlite, feather, monetDB. One of the takeaways I've learned was that there is not a single right answer. This post will attempt to lay out the options and summarize the pros and cons.
 
-In a blog post that laid out similar work: [sqlite-feather-and-fst](https://kbroman.org/blog/2017/04/30/sqlite-feather-and-fst/) and continued [here](https://kbroman.org/blog/2017/05/11/reading/writing-biggish-data-revisited/), Karl Broman discusses his journey from flat files to "big-ish data". I've taken some of his workflow, added more robust for `fst` and `monetDB`, and used my own data.
+In a post that laid out similar work: [sqlite-feather-and-fst](https://kbroman.org/blog/2017/04/30/sqlite-feather-and-fst/) and continued [here](https://kbroman.org/blog/2017/05/11/reading/writing-biggish-data-revisited/), Karl Broman discusses his journey from flat files to "big-ish data". I've taken some of his workflow, added more robust for `fst` and `monetDB`, and used my own data.
 
 First question: should we set up a shared database?
 
@@ -113,12 +113,12 @@ write_times <- microbenchmark(
   fst = write_fst(biggish, file_name[["fst"]], compress = 0),
   fst_compressed = write_fst(biggish, file_name[["fst_compressed"]], compress = 100),
   sqlite = {sqldb <- dbConnect(SQLite(), dbname = file_name[["sqlite"]])
-  dbWriteTable(sqldb,name =  "test", biggish, 
+  dbWriteTable(sqldb,name =  "test", biggish,
              row.names=FALSE, overwrite=TRUE,
              append=FALSE, field.types=NULL)
   dbDisconnect(sqldb)
   },
-  monetDB_write = { 
+  monetDB_write = {
     con <- dbConnect(MonetDBLite(), dbname = file_name[["monetDB"]])
     dbWriteTable(con, name = "test", biggish,
                  row.names=FALSE, overwrite=TRUE,
@@ -132,7 +132,7 @@ monet.read.csv <- function(file) {
   suppressMessages(MonetDBLite::monetdb.read.csv(monet.con, file, "file", sep = ",",best.effort = TRUE))
   result <- DBI::dbReadTable(monet.con, "file")
   DBI::dbDisconnect(monet.con, shutdown = T)
-  return(result)  
+  return(result)
 }
 
 read_times <- microbenchmark(
@@ -167,7 +167,7 @@ file_size[file_size == 0] <- NA
 
 knitr::kable(data.frame(file_size/10^6,
                         c(summary(write_times)$median,NA),
-                        summary(read_times)$median), 
+                        summary(read_times)$median),
              digits = c(1,1,1),col.names = c("File Size (MB)","Write Time(seconds)", "Read Time(seconds)"))
 ```
 
@@ -185,7 +185,7 @@ knitr::kable(data.frame(file_size/10^6,
 | monetDB           |              NA|                 42.3|                19.6|
 | monetDB\_csv      |           503.7|                   NA|                45.8|
 
-MonetDBLite was tacked on at the last minute to this blog. I'm not 100% sure I'm doing things the most efficient way. It can read a csv file, which is tested in the read. I don't think it writes a single file, it seems to write a folder. I tried to follow some examples from [here](https://statcompute.wordpress.com/2018/05/09/mimicking-sqldf-with-monetdblite/).
+MonetDBLite was tacked on at the last minute to this post. I'm not 100% sure I'm doing things the most efficient way. It can read a csv file, which is tested in the read. I don't think it writes a single file, it seems to write a folder. I tried to follow some examples from [here](https://statcompute.wordpress.com/2018/05/09/mimicking-sqldf-with-monetdblite/).
 
 Note! I didn't explore adjusting the `nThread` argument in `fread`/`fwrite`. I also didn't include a compressed version of `fread`/`fwrite`. Our crew is a hog-pog of Windows, Mac, and Linux, and we try to make our code work on any OS. Many of the solutions for combining compression with `data.table` functions looked fragile on the different OS. For the same reason, I didn't try compressing the `feather` format. Both `data.table` and `feather` have open GitHub issues to support compression in the future. It may be worth updating this script once those features are added.
 
@@ -204,7 +204,7 @@ Here's what we're trying to get:
 smallish <- readRDS("test.rds") %>%
   filter(bytes > 100000,
          grepl("00060",parametercds)) %>%
-  select(bytes, requested_date, parametercds) 
+  select(bytes, requested_date, parametercds)
 ```
 
 Here's how I figured out how to load that data in other ways. I would be happy to hear if there are other methods I've missed!
@@ -238,7 +238,7 @@ smallish_fst_compressed <- db_fst[,c("bytes","requested_date","parametercds")] %
 ### fread
 
 ``` r
-smallish_fread <- fread(file_name[["fread"]], 
+smallish_fread <- fread(file_name[["fread"]],
                       select = c("bytes","requested_date","parametercds")) %>%
   filter(bytes > 100000,
          grepl("00060",parametercds))
@@ -283,7 +283,7 @@ partial_read <- microbenchmark(
               filter(bytes > 100000,
                      grepl("00060",parametercds)) %>%
               select(bytes, requested_date, parametercds) },
-  fread = {smallish_fread <- fread(file_name[["fread"]], 
+  fread = {smallish_fread <- fread(file_name[["fread"]],
               select = c("bytes","requested_date","parametercds")) %>%
               filter(bytes > 100000,
                      grepl("00060",parametercds)) },
@@ -371,7 +371,7 @@ download_times <- microbenchmark(
 )
 
 knitr::kable(data.frame(summary(upload_times)$median,
-                        summary(download_times)$median), 
+                        summary(download_times)$median),
              digits = c(1,1,1),col.names = c("Upload Time", "Download Time"))
 ```
 
