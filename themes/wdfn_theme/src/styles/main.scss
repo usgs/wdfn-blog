@@ -9,6 +9,17 @@ $fa-font-path: '../fonts' !default;
 @import './academicons';
 
 
+// Workaround for css specificity problem on usa-navbar.
+.usgs-header.usa-header-extended {
+  .usa-navbar {
+    @include at-media($theme-navigation-width) {
+      padding-left: units(4);
+      padding-right: units(4);
+    }
+  }
+}
+
+
 /*
  * #eceff1
  * #b0bec5

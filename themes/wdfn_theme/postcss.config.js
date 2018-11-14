@@ -15,7 +15,7 @@ module.exports = ctx => ({
             }
         },
         'css-mqpacker': {
-            sort: false
+            sort: true
         },
         'postcss-flexbugs-fixes': {}
     }
