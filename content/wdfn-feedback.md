@@ -3,7 +3,7 @@ author: Emily K Read
 date: 2018-12-03
 slug: wdfn-feedback
 type: post
-title: USGS Water Data for the Nation Approach to Feedback
+title: Approach to Feedback
 author_github: eread-usgs
 author_staff: emily-k-read
 author_email: <eread@usgs.gov>
