@@ -26,7 +26,9 @@ Don’t worry: the existing pages you have come to rely upon will not be altered
 
 <img src='/static/wdfn-tng/hi_res_new_pages.png'/ title='Mobile-friendly new real time data page' alt='Mobile-friendly new real time data page' />
 
-If you’re interested in the specifics of development releases, you can follow our software change log here: https://github.com/usgs/waterdataui/blob/master/CHANGELOG.md. We hope you will will try these new pages out and offer feedback.  User feedback is essential to our development process. We’ll be listening closely to comments and watching how the new pages are used. Find out more about how feedback is incorporated into future development here: [https://waterdata.usgs.gov/blog/wdfn-feedback](https://waterdata.usgs.gov/blog/wdfn-feedback)
+If you’re interested in the specifics of development releases, you can follow our software change log here: https://github.com/usgs/waterdataui/blob/master/CHANGELOG.md. 
+
+We hope you will will try these new pages out and offer feedback.  User feedback is essential to our development process. We’ll be listening closely to comments and watching how the new pages are used. Find out more about how feedback is incorporated into future development here: [https://waterdata.usgs.gov/blog/wdfn-feedback](https://waterdata.usgs.gov/blog/wdfn-feedback)
 
 Have more questions? See answers to Frequently Asked Questions here: [https://waterdata.usgs.gov/blog/FAQ](https://waterdata.usgs.gov/blog/wdfn-faq).
 We believe these new pages hold much promise.  USGS is looking to our future, but holding close our long tradition of water-data presenttion on the web. We were there at the start of the Web and we are here again, building the 21st century’s water data for a great Nation.

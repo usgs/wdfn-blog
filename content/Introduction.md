@@ -18,11 +18,11 @@ Welcome to the U.S. Geological Survey Water Mission Area’s Water Data Blog. Wa
 
 
 So why was this part of waterdata.usgs.gov created?
--   Communicate to users about new data access and analytical features as they come out
--   Raise awareness of new software development and  data science at USGS
--   Engage with the public and other agencies in water resources science
--   Share ideas and get feedback
--   Get more in-depth than Twitter, but share faster than apps & websites
+* Communicate to users about new data access and analytical features as they come out
+* Raise awareness of new software development and  data science at USGS
+* Engage with the public and other agencies in water resources science
+* Share ideas and get feedback
+* Get more in-depth than Twitter, but share faster than apps & websites
 
 Prior to 2018, a similar project from the former USGS Office of Water Information existed at [owi.usgs.gov/blog](https://owi.usgs.gov/blog). Today, the Water Data for the Nation blog is curated by the USGS Water Mission Area Integrated Information Dissemination Division. Feedback on the blog can be directed [here](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E).
 
