@@ -18,11 +18,11 @@ New real-time data pages released
 
 The USGS is pleased to announce the redesigned real-time data pages on waterdata.usgs.gov, our flagship Water Data for the Nation website. These pages are being developed with the latest web technology and usability techniques. The new pages can be accessed through an announcement at the top of existing pages:
 
-<img src='/static/wdfn-tng/img/main/nwisweb6_tng_hyperlink.png'/ title='How to link to new pages from NWISWeb' alt='Screenshot of how to link to new pages from NWISWeb' />
+<img src='/static/wdfn-tng/nwisweb6_tng_hyperlink.png'/ title='How to link to new pages from NWISWeb' alt='Screenshot of how to link to new pages from NWISWeb' />
 
 Don’t worry: the existing pages you have come to rely upon will not be altered or decommissioned for some time —- not until we’re certain we’ve conserved all essential functionality.
 
-[Here is an example new page](https://waterdata.usgs.gov/monitoring-location/09380000/), designed to be modern and mobile-friendly, and to enhance discoverability, accessibility, and integration across data delivery platforms. And this is only the beginning — we will continue to add new features and improvements over time.  
+[Here is an example new page](https://waterdata.usgs.gov/monitoring-location/09380000/), designed to be modern and mobile-friendly, and to enhance discoverability, accessibility, and integration across data delivery platforms. And this is only the beginning — we will continue to add new features and improvements over time.
 
 <img src='/static/wdfn-tng/hi_res_new_pages.png'/ title='Mobile-friendly new real time data page' alt='Mobile-friendly new real time data page' />
 
@@ -32,7 +32,7 @@ We hope you will will try these new pages out and offer feedback.  User feedback
 
 Have more questions? See answers to Frequently Asked Questions here: [https://waterdata.usgs.gov/blog/FAQ](https://waterdata.usgs.gov/blog/wdfn-faq).
 We believe these new pages hold much promise.  USGS is looking to our future, but holding close our long tradition of water-data presenttion on the web. We were there at the start of the Web and we are here again, building the 21st century’s water data for a great Nation.
- 
+
 
 
 Questions
