@@ -60,14 +60,14 @@ For news, updates, and resources for the Water Mission Area, please visit the [W
 How blogs get published
 =================
 
-The blogs page itself is produced using [Hugo](https://gohugo.io/). The basic “robust” theme was used as a base, but then we layered on the [U.S. Federal Design System](https://designsystem.digital.gov), with modifications to meet USGS visual ID requirements. The development and collaboration on blog posts is done via Github at <https://github.com/USGS/wdfn-updates>.
+The blogs page itself is produced using [Hugo](https://gohugo.io/). The basic “robust” theme was used as a base, but then we layered on the [U.S. Federal Design System](https://designsystem.digital.gov), with modifications to meet USGS visual ID requirements. The development and collaboration on blog posts is done via Github at <https://github.com/USGS/wdfn-blog>.
 
 Each post is created in a simple markdown format. Posts are deployed to a development Amazon S3 bucket using the continuous integration tool Jenkins. When a pull request is merged on Github, a Jenkins job pulls the github repository, builds the Hugo site, and pushes the generated static files from the “public” folder to the development S3 bucket. Once the post has been reviewed for style and content, the status draft: true is removed. A production deployment is also done via Jenkins.
 
 
 Questions
 ==========
-Please direct any questions or comments about the blogs [here.](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E) or open an issue on Github at [wdfn-updates](https://github.com/usgs/wdfn-updates)
+Please direct any questions or comments about the blogs [here.](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Blog%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E) or open an issue on Github at [wdfn-blog](https://github.com/usgs/wdfn-blog)
 
 Disclaimer
 ==========

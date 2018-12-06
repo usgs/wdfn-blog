@@ -32,7 +32,7 @@ The idea for this post came a few months back when I received an email that star
 As someone who works on the [National Water Census](https://water.usgs.gov/watercensus/){target="_blank"} and [National hydrography data](https://www.usgs.gov/core-science-systems/ngp/national-hydrography){target="_blank"}, this question piqued my interest. I also had an idea of one way to answer the question that would use some tools and techniques I've recently been developing in R. What follows is just that, _*one*_ way that this question might be answered. The code I used to find the solution is presented in detail after the solution to the question.
 
 The solution graphics shown below were generated with the following code:
-The `furthest_water.R` script can be [found here](https://github.com/usgs/wdfn-updates/tree/master/content/static/furthest-water){target="_blank"}.
+The `furthest_water.R` script can be [found here](https://github.com/usgs/wdfn-blog/tree/master/content/static/furthest-water){target="_blank"}.
 ```{r load_function, echo=TRUE, eval=FALSE}
 source("furthest_water.R")
 furthest_water(scenario = "waterbodies")

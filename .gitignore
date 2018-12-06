@@ -9,3 +9,4 @@ owi-blog.Rproj
 *.sublime-workspace
 themes/wdfn_theme/node_modules
 themes/wdfn_theme/static
+*.json-e

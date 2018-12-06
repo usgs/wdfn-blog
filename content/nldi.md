@@ -161,7 +161,7 @@ Screenshots of NLDI data loaded into QGIS.
 Using the NLDI in R.
 --------------------
 
-Starting from the [recent post](https://waterdata.usgs.gov/updates/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created in the National Map basemap post was wrapped up into the `get_base_map()` function called in the code shown below.
+Starting from the [recent post](https://waterdata.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, we can map some data retrieved from the NLDI in R. In the code below, the leaflet object `map` created in the National Map basemap post was wrapped up into the `get_base_map()` function called in the code shown below.
 
 ``` r
 GetURL <- function(service, host = "basemap.nationalmap.gov") {
@@ -300,7 +300,7 @@ This final map illustrates a very important detail about the NLDI if you zoom in
 
 ### Using the NLDI to discover linked observations data.
 
-The two sources of linked data shown above, `nwissite` and `wqp`, are both queryable from [the dataRetrieval package.](https://waterdata.usgs.gov/updates/tags/dataretrieval/) The "siteNumber" input of the dataRetrieval functions that start with "readNWIS" can be found by removing "USGS-" from the "identifier" attribute of features found using `nwissite` as the `{dataSource}` input. The following code shows the NLDI identifiers and how to use them with the dataRetrieval function **readNWISdv**.
+The two sources of linked data shown above, `nwissite` and `wqp`, are both queryable from [the dataRetrieval package.](https://waterdata.usgs.gov/blog/tags/dataretrieval/) The "siteNumber" input of the dataRetrieval functions that start with "readNWIS" can be found by removing "USGS-" from the "identifier" attribute of features found using `nwissite` as the `{dataSource}` input. The following code shows the NLDI identifiers and how to use them with the dataRetrieval function **readNWISdv**.
 
 ``` r
 nwis_ids <- as.character(nwis_gages@data$identifier)
@@ -362,7 +362,7 @@ Summary
 
 In this post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, ***navigation*** (and it's optional `{distance}` parameter) and ***basin*** were demonstrated. The the ***navigation*** function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.
 
-Building on the [recent post](https://waterdata.usgs.gov/updates/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal packge function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)
+Building on the [recent post](https://waterdata.usgs.gov/blog/basemaps/) showing how to use National Map basemaps with leaflet in R, downloading, parsing, and mapping NLDI data in R was demonstrated. This basic demonstration can be extended by using different NLDI inputs and there are many operations that are supported by the spatial data formats returned by the [rgdal packge function **readOGR**.](https://www.rdocumentation.org/packages/rgdal/versions/1.2-5/topics/readOGR)
 
 The post finishes by showing how to use sites found with the NLDI to download data from the National Water Information System and Water Quality portal. The potential for extending this use of the NLDI is vast. As more feature/data sources are indexed and the system evolves, the NLDI should serve as a major new discovery service for many sources of observed and modeled data.
 
