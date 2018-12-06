@@ -83,7 +83,7 @@ One issue for our Hugo theme was that the created widget page is included in the
 {{ end }}
 ```
 
-A screenshot of the map was taken to use for the thumbnail in the updates index.
+A screenshot of the map was taken to use for the thumbnail in the blog index.
 
 Questions
 =========

@@ -26,7 +26,7 @@ Don’t worry: the existing pages you have come to rely upon will not be altered
 
 <img src='/static/wdfn-tng/hi_res_new_pages.png'/ title='Mobile-friendly new real time data page' alt='Mobile-friendly new real time data page' />
 
-If you’re interested in the specifics of development releases, you can follow our software change log here: https://github.com/usgs/waterdataui/blob/master/CHANGELOG.md. 
+If you’re interested in the specifics of development releases, you can follow our software change log here: https://github.com/usgs/waterdataui/blob/master/CHANGELOG.md.
 
 We hope you will will try these new pages out and offer feedback.  User feedback is essential to our development process. We’ll be listening closely to comments and watching how the new pages are used. Find out more about how feedback is incorporated into future development here: [https://waterdata.usgs.gov/blog/wdfn-feedback](https://waterdata.usgs.gov/blog/wdfn-feedback)
 
@@ -37,7 +37,7 @@ We believe these new pages hold much promise.  USGS is looking to our future, bu
 
 Questions
 ==========
-Please direct any questions or comments about new real-time site pages [here.](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E) or open an issue on Github at [wdfn-updates](https://github.com/usgs/wdfn-updates)
+Please direct any questions or comments about new real-time site pages [here.](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E) or open an issue on Github at [wdfn-blog](https://github.com/usgs/wdfn-blog)
 
 Disclaimer
 ==========

@@ -24,11 +24,11 @@ Other posts that will be released during the next month include:
 * Mapping
 * Version control via Git
 
-You can see all posts in this series by clicking the tag “Beyond Basic R” or follow [this link](https://waterdata.usgs.gov/updates/tags/beyond-basic-r/).
+You can see all posts in this series by clicking the tag “Beyond Basic R” or follow [this link](https://waterdata.usgs.gov/blog/tags/beyond-basic-r/).
 
 # Best practices for writing reproducible R scripts
 
-Scripting can significantly increase your ability to create reproducible results, figures, or reports so that both your collaborators and future self can successfully rerun code and get the same results. However, just because you’ve put code into a script doesn’t make it reproducible. There are some general organization and code writing tips that can elevate your scripts into reproducible code. 
+Scripting can significantly increase your ability to create reproducible results, figures, or reports so that both your collaborators and future self can successfully rerun code and get the same results. However, just because you’ve put code into a script doesn’t make it reproducible. There are some general organization and code writing tips that can elevate your scripts into reproducible code.
 
 ## Code organization
 

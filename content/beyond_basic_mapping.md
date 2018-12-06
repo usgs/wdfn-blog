@@ -252,6 +252,6 @@ Like plotting in R, there are endless intricacies to making maps, and we are onl
 -   [raster](https://cran.r-project.org/web/packages/raster/index.html): For working with your own raster data
 -   [sp](https://cran.r-project.org/web/packages/sp/index.html): The original workhorse package for handling spatial data. `sf` is largely replacing it, but you will see it a lot when Googling things.
 -   [geoknife](https://cran.r-project.org/web/packages/geoknife/index.html): A USGS package that utilizes the [Geo Data Portal](https://cida.usgs.gov/gdp/how-to-gdp/) for processing gridded data. Covered in the [packages curriculum](https://owi.usgs.gov/R/training-curriculum/usgs-packages/).
--   [inlmisc](https://cran.r-project.org/web/packages/inlmisc/index.html): Another USGS package for creating high-level graphics, [demonstrated in this post by Jason Fisher](https://waterdata.usgs.gov/updates/inlmiscmaps/).
+-   [inlmisc](https://cran.r-project.org/web/packages/inlmisc/index.html): Another USGS package for creating high-level graphics, [demonstrated in this post by Jason Fisher](https://waterdata.usgs.gov/blog/inlmiscmaps/).
 
 Also, check out our [additional topics in R](https://owi.usgs.gov/R/training-curriculum/intro-curriculum/Additional/) page for links to some other tutorials.

@@ -73,7 +73,7 @@ The html that was saved with the `saveWidget` function can be called with the `i
 
 When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html".
 
-One issue for our Hugo theme was that the created widget page is included in the overall updates section index. The was fixed by adding a line to the overall index.html layout page to only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
+One issue for our Hugo theme was that the created widget page is included in the overall blog section index. The was fixed by adding a line to the overall index.html layout page to only lists pages with dates above Jan. 1, 1970 (so really, any legitimate date):
 
 ```{r eval=FALSE}
 {{ if ge $value.Date.Unix 0 }}
@@ -84,7 +84,7 @@ One issue for our Hugo theme was that the created widget page is included in the
 
 ```
 
-A screenshot of the map was taken to use for the thumbnail in the updates section index.
+A screenshot of the map was taken to use for the thumbnail in the blog section index.
 
 # Questions
 

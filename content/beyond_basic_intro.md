@@ -34,7 +34,7 @@ Other posts that will be released during the next month include:
 -   Mapping
 -   Version control via Git
 
-You can see all posts in this series by clicking the tag “Beyond Basic R” or follow [this link](http://waterdata.usgs.gov/updates/tags/beyond-basic-r/).
+You can see all posts in this series by clicking the tag “Beyond Basic R” or follow [this link](http://waterdata.usgs.gov/blog/tags/beyond-basic-r/).
 
 Best practices for writing reproducible R scripts
 =================================================

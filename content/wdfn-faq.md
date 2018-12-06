@@ -27,7 +27,7 @@ Frequently Asked Questions about the Next Generation of Water Data for the Natio
 
 **Q**: You’re calling the old NWISWeb pages “classic” or “legacy” pages.  What do you mean?
 
-**A**: A classic car can be a fine machine--forever the best of its era.  But should the evolution of cars stop because we have classic cars?  We are maintaining the old while the new is developed; and during this period, full up time and operational support of classic pages can be expected. 
+**A**: A classic car can be a fine machine--forever the best of its era.  But should the evolution of cars stop because we have classic cars?  We are maintaining the old while the new is developed; and during this period, full up time and operational support of classic pages can be expected.
 
 **Q**: You’re saying you’re conserving old pages.  Why are you using the word “conserve” instead of, say “preserve?”
 
@@ -35,16 +35,16 @@ Frequently Asked Questions about the Next Generation of Water Data for the Natio
 
 **Q**: So when will the pages of today be discontinued?
 
-**A**: We don’t know yet.  That depends on feedback, software-development effectiveness, budgets, and other elements that are difficult to predict.  It is likely both old and new pages will run in parallel for at least a couple years. 
+**A**: We don’t know yet.  That depends on feedback, software-development effectiveness, budgets, and other elements that are difficult to predict.  It is likely both old and new pages will run in parallel for at least a couple years.
 
 **Q**: I like the website as it is today.  What’s wrong with it?
 
-**A**: In one sense, not much.  It does, in fact, publish USGS water data successfully, and has maintained high levels of availability and speed for over 15 years.  But a wider view reveals that its 1999 origins are out of step with current web technology and usability standards. 
+**A**: In one sense, not much.  It does, in fact, publish USGS water data successfully, and has maintained high levels of availability and speed for over 15 years.  But a wider view reveals that its 1999 origins are out of step with current web technology and usability standards.
 
-The redesign of real-time pages is based on several sources of information: a comprehensive inventory of existing NWISWeb functionality, customization of pages by USGS Water Science Centers, user surveys, web analytics, and the [USGS Water Science Strategy](https://pubs.usgs.gov/circ/1383g/). 
+The redesign of real-time pages is based on several sources of information: a comprehensive inventory of existing NWISWeb functionality, customization of pages by USGS Water Science Centers, user surveys, web analytics, and the [USGS Water Science Strategy](https://pubs.usgs.gov/circ/1383g/).
 
-The new user interface will be more accessible for all users - especially new ones. The re-design puts data at the top of the page, is mobile ready, uses human-readable names and terms, and is built for integration with other applications and data sources. 
-The codebase and infrastructures are optimized for performance and up-time, and instrumented with auditing tools and vulnerability detection. Data integrity remains paramount. Finally, an iterative software development process will engage users early in the development process and produce frequent, meaningful improvements.   
+The new user interface will be more accessible for all users - especially new ones. The re-design puts data at the top of the page, is mobile ready, uses human-readable names and terms, and is built for integration with other applications and data sources.
+The codebase and infrastructures are optimized for performance and up-time, and instrumented with auditing tools and vulnerability detection. Data integrity remains paramount. Finally, an iterative software development process will engage users early in the development process and produce frequent, meaningful improvements.
 
 **Q**: The new real-time pages hardly do anything!  Where are my favorite features?
 
@@ -60,7 +60,7 @@ The codebase and infrastructures are optimized for performance and up-time, and 
 
 Feedback
 ==========
-Please direct any questions or comments about new real-time site pages [here.](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E) or open an issue on Github at [wdfn-updates](https://github.com/usgs/wdfn-updates)
+Please direct any questions or comments about new real-time site pages [here.](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Blog%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E) or open an issue on Github at [wdfn-blog](https://github.com/usgs/wdfn-blog)
 
 Disclaimer
 ==========

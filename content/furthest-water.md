@@ -41,7 +41,7 @@ solution is presented in detail after the solution to the question.
 
 The solution graphics shown below were generated with the following
 code: The `furthest_water.R` script can be
-<a href="https://github.com/usgs/wdfn-updates/tree/master/content/static/furthest-water" target="_blank">found here</a>.
+<a href="https://github.com/usgs/wdfn-blog/tree/master/content/static/furthest-water" target="_blank">found here</a>.
 
 ``` r
 source("furthest_water.R")
