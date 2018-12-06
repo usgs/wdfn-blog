@@ -2,7 +2,7 @@
 date: 2018-10-25
 slug: introduction
 type: post
-title: Water Data for the Nation Updates Introduction
+title: Water Data Blog Introduction
 categories:
   - Data Science
   - Software Development
@@ -24,7 +24,7 @@ So why was this part of waterdata.usgs.gov created?
 -   Share ideas and get feedback
 -   Get more in-depth than Twitter, but share faster than apps & websites
 
-Prior to 2018, a similar project from the former USGS Office of Water Information existed at [owi.usgs.gov/blog](https://owi.usgs.gov/blog). Today, the Water Data for the Nation blog is curated by the USGS Water Mission Area Integrated Information Dissemination Division. Feedback on the blog can be directed [here](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E). 
+Prior to 2018, a similar project from the former USGS Office of Water Information existed at [owi.usgs.gov/blog](https://owi.usgs.gov/blog). Today, the Water Data for the Nation blog is curated by the USGS Water Mission Area Integrated Information Dissemination Division. Feedback on the blog can be directed [here](https://water.usgs.gov/contact/gsanswers?pemail=gs-w_water_data_for_the_nation&subject=Water%20Data%20for%20the%20Nation%20Updates%20Feedback&viewnote=%3CH1%3EUSGS+WDFN+TNG+Feedback%3C/H1%3E).
 
 What we post about
 ==========
@@ -34,7 +34,7 @@ This page will have posts in 3 broad categories of posts: Applications, Data Sci
 Applications
 ----------------
 
-The USGS Water Mission Area runs around 30 different public-facing applications, from enterprise scale data assimilation, management, and dissemination systems including the [National Water Information System](http://waterdata.usgs.gov/) to project-scale data analysis tools that serve more specialized needs. Many of these systems have public data services that can be used by developers to get more direct access to data and information. 
+The USGS Water Mission Area runs around 30 different public-facing applications, from enterprise scale data assimilation, management, and dissemination systems including the [National Water Information System](http://waterdata.usgs.gov/) to project-scale data analysis tools that serve more specialized needs. Many of these systems have public data services that can be used by developers to get more direct access to data and information.
 
 Posts in this category will provide updates, interesting applications, user-stories, or other information on the various applications produced and maintained by the USGS Water Mission Area.
 
@@ -42,12 +42,12 @@ Posts in this category will provide updates, interesting applications, user-stor
 Software Development
 --------------------
 
-Software development is integral to USGS information delivery on the Web. Posts within the “Software Development” category will showcase innovative work being done on a wide variety of software engineering topics and platforms. 
+Software development is integral to USGS information delivery on the Web. Posts within the “Software Development” category will showcase innovative work being done on a wide variety of software engineering topics and platforms.
 
 Data Science
 ------------
 
-Data science is an emerging field both inside and outside the USGS. Data scientists wade through vast stores of environmental and operational data to generate actionable information or predict future outcomes. These individuals have interdisciplinary backgrounds that include data analysis, statistics, data visualization, computer science, and mathematics. Posts in this category will show how these skills can be used to analyze, predict, and visualize data using reproducible data and modeling pipelines. 
+Data science is an emerging field both inside and outside the USGS. Data scientists wade through vast stores of environmental and operational data to generate actionable information or predict future outcomes. These individuals have interdisciplinary backgrounds that include data analysis, statistics, data visualization, computer science, and mathematics. Posts in this category will show how these skills can be used to analyze, predict, and visualize data using reproducible data and modeling pipelines.
 
 Other ways to hear from The USGS Water Mission Area
 ==========
