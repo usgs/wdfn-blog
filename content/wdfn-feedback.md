@@ -1,12 +1,12 @@
 ---
-author: Emily K Read
+author: Jim Kreft and Bradley Garner
 date: 2018-12-03
 slug: wdfn-feedback
 type: post
 title: Approach to Feedback
-author_github: eread-usgs
-author_staff: emily-k-read
-author_email: <eread@usgs.gov>
+author_github: jkreft-usgs
+author_staff: james-m-kreft
+author_email: <jkreft@usgs.gov>
 categories:
   - Applications
 description: How user feedback is incorporated into development priorities for USGS Water Data for the Nation. 
