@@ -12,6 +12,8 @@ categories:
 description: Answers to frequently asked questions about the Next Generation of USGS Water Data for the Nation.
 keywords:
   - water information
+tags:
+  - Water Data for the Nation
 ---
 Frequently Asked Questions about the Next Generation of Water Data for the Nation
 =======
