@@ -12,6 +12,8 @@ categories:
 description: An introduction to The Next Generation of USGS Water Data for the Nation.
 keywords:
   - water information
+tags:
+  - Water Data for the Nation
 ---
 New real-time data pages released
 =======
@@ -41,4 +43,4 @@ Please direct any questions or comments about new real-time site pages [here.](h
 
 Disclaimer
 ==========
-"Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government."
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
