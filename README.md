@@ -50,7 +50,7 @@ wdfn-updates
 
   * Initial submission **must** include `draft: True`
 
-  * `slug` slug will be the name of your url after waterdata.usgs.gov/updates/xxx
+  * `slug` slug will be the name of your url after waterdata.usgs.gov/blog/xxx
 
   * `image` is not required, but will improve the look of the main "update" page. Without an image, a generic USGS image will be included.
 

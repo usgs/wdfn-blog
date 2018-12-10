@@ -1,7 +1,7 @@
 {
   "name": "wdfn_theme",
   "version": "1.0.0",
-  "description": "USGS Water Data For The Nation Updates",
+  "description": "USGS Water Data For The Nation Blog",
   "module": "src/js/main.js",
   "sass": "src/styles/main.scss",
   "scripts": {
