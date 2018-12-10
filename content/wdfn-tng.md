@@ -1,17 +1,19 @@
 ---
-author: Emily K Read
+author: Jim Kreft and Bradley Garner
 date: 2018-12-03
 slug: wdfn-tng
 type: post
 title: Introducing The Next Generation of USGS Water Data for the Nation
-author_github: eread-usgs
-author_staff: emily-k-read
-author_email: <eread@usgs.gov>
+author_github: jkreft-usgs
+author_staff: james-m-kreft
+author_email: <jkreft@usgs.gov>
 categories:
   - Applications
 description: An introduction to The Next Generation of USGS Water Data for the Nation.
 keywords:
   - water information
+tags:
+  - Water Data for the Nation
 ---
 New real-time data pages released
 =======
@@ -41,4 +43,4 @@ Please direct any questions or comments about new real-time site pages [here.](h
 
 Disclaimer
 ==========
-"Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government."
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
