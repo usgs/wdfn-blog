@@ -2,6 +2,7 @@
 author: Emily K Read
 date: 2018-12-03
 slug: wdfn-feedback
+draft: True
 type: post
 title: Approach to Feedback
 author_github: eread-usgs
@@ -9,7 +10,7 @@ author_staff: emily-k-read
 author_email: <eread@usgs.gov>
 categories:
   - Applications
-description: How user feedback is incorporated into development priorities for USGS Water Data for the Nation. 
+description: How user feedback is incorporated into development priorities for USGS Water Data for the Nation.
 keywords:
   - water information
 ---
@@ -18,7 +19,7 @@ Approach to Feedback for Water Data for the Nation
 
 Next-generation Water Data for the Nation is characterized by always being production-ready—new software is ready to be released at any time. When issues with the system are identified, there is a process for evaluating and prioritizing changes.
 
-Next-generation development priorities of Water Data for the Nation are designed to support goals of the [USGS Water Science Strategy](https://pubs.usgs.gov/circ/1383g/). Specific projects to improve data delivery, such as for the development of new real-time water data pages, are proposed, planned, and approved by USGS Water Mission Area governance. In addition, user feedback informs development priorities, and is built into the software development process. 
+Next-generation development priorities of Water Data for the Nation are designed to support goals of the [USGS Water Science Strategy](https://pubs.usgs.gov/circ/1383g/). Specific projects to improve data delivery, such as for the development of new real-time water data pages, are proposed, planned, and approved by USGS Water Mission Area governance. In addition, user feedback informs development priorities, and is built into the software development process.
 
 Feedback on new real-time water data pages is being consolidated on this publicly viewable GitHub project board. Feedback is evaluated and triaged using these categories:
 

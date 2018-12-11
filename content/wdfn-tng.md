@@ -2,6 +2,7 @@
 author: Emily K Read
 date: 2018-12-03
 slug: wdfn-tng
+draft: True
 type: post
 title: Introducing The Next Generation of USGS Water Data for the Nation
 author_github: eread-usgs
