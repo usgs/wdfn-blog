@@ -2,7 +2,7 @@
 author: Emily K Read
 date: 2018-12-03
 slug: wdfn-feedback
-draft: True
+draft: False
 type: post
 title: Approach to Feedback
 author_github: eread-usgs
