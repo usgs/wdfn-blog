@@ -2,7 +2,7 @@
 author: Jim Kreft and Bradley Garner
 date: 2018-12-03
 slug: wdfn-faq
-draft: True
+draft: False
 type: post
 title: USGS Water Data for the Nation Frequently Asked Questions
 author_github: jkreft-usgs

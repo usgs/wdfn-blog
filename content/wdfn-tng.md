@@ -2,7 +2,7 @@
 author: Jim Kreft and Bradley Garner
 date: 2018-12-03
 slug: wdfn-tng
-draft: True
+draft: False
 type: post
 title: Introducing The Next Generation of USGS Water Data for the Nation
 author_github: jkreft-usgs

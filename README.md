@@ -1,7 +1,7 @@
-wdfn-updates
+wdfn-blog
 ------------
 
-*Updates from USGS Water Data For The Nation*
+*The blog for USGS Water Data For The Nation*
 
 # Guidelines for submission
 1. Applicable/useful to a greater audience.
