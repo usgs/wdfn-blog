@@ -1,18 +1,25 @@
 ---
+<<<<<<< HEAD
 author: Emily K Read
 date: 2019-02-11
+=======
+author: Jim Kreft and Bradley Garner
+date: 2018-12-03
+>>>>>>> upstream/master
 slug: wdfn-faq
 draft: False
 type: post
 title: USGS Water Data for the Nation Frequently Asked Questions
-author_github: eread-usgs
-author_staff: emily-k-read
-author_email: <eread@usgs.gov>
+author_github: jkreft-usgs
+author_staff: james-m-kreft
+author_email: <jkreft@usgs.gov>
 categories:
   - Applications
 description: Answers to frequently asked questions about the Next Generation of USGS Water Data for the Nation.
 keywords:
   - water information
+tags:
+  - Water Data for the Nation
 ---
 Frequently Asked Questions about the Next Generation of Water Data for the Nation
 =======
