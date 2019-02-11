@@ -1,6 +1,6 @@
 ---
 author: Jim Kreft and Bradley Garner
-date: 2018-12-03
+date: 2019-02-11
 slug: wdfn-feedback
 draft: False
 type: post
@@ -15,7 +15,7 @@ keywords:
   - water information
 tags:
   - Water Data for the Nation
-  
+
 ---
 Approach to Feedback for Water Data for the Nation
 =======
