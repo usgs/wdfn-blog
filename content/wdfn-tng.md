@@ -1,13 +1,9 @@
 ---
-<<<<<<< HEAD
-author: Emily K Read
-date: 2019-02-11
-=======
 author: Jim Kreft and Bradley Garner
-date: 2018-12-03
->>>>>>> upstream/master
+date: 2019-02-11
 slug: wdfn-tng
 draft: False
+image: static/wdfn-tng/thumb_new_pages.png
 type: post
 title: Introducing The Next Generation of USGS Water Data for the Nation
 author_github: jkreft-usgs
