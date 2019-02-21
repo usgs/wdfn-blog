@@ -29,7 +29,282 @@ keywords:
 TLDR!
 =====
 
-This blog post discusses our thought process for picking out file formats and when/if to use a database. It was interesting for me to write, I learned a lot, but if I'm honest...you are just here for the final table. I get it...your time is precious. So, here's the final results. If you want the longer explainations or the code examples that generated the table...continue reading.
+This blog post discusses the thought process for picking out file formats and when/if to use a database. It was interesting for me to write, I learned a lot, but if I'm honest...you are just here for the final table. I get that, your time is precious. So, here's the final results. If you want the longer explanations or the code examples that generated the table...continue reading. The table lists all of the packages that were tested, and the time it took to read (in a few ways) data, the time it took to write the data, and the file size. The timing was measured using the `microbenchmark` package. The R code used to generate equivalent data frames within is included for each package.
+
+
+<table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+Read Time (sec)
+
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:center;">
+File Format
+</th>
+<th style="text-align:center;">
+Read<br>Method
+</th>
+<th style="text-align:center;">
+Complete
+</th>
+<th style="text-align:center;">
+Filter
+</th>
+<th style="text-align:center;">
+Group &<br>Summarize
+</th>
+<th style="text-align:center;">
+Write Time<br>(sec)
+</th>
+<th style="text-align:center;">
+File Size<br>(MB)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+rds
+</td>
+<td style="text-align:center;">
+bulk
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+rds compression
+</td>
+<td style="text-align:center;">
+bulk
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+readr
+</td>
+<td style="text-align:center;">
+bulk
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+readr compression
+</td>
+<td style="text-align:center;">
+bulk
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+fread
+</td>
+<td style="text-align:center;">
+limited partial
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b8f4b8">504</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+feather
+</td>
+<td style="text-align:center;">
+limited partial
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+fst
+</td>
+<td style="text-align:center;">
+limited partial
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+fst compression
+</td>
+<td style="text-align:center;">
+limited partial
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">122</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+sqlite
+</td>
+<td style="text-align:center;">
+partial
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+MonetDB
+</td>
+<td style="text-align:center;">
+partial
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ccf7cc">719</span>
+</td>
+</tr>
+</tbody>
+</table>
 
 Introduction
 ============
@@ -61,7 +336,7 @@ All great points! In the majority of our data science projects, the focus is not
 
 OK, so we don't need to buy an Oracle license. We still want to make a smart choice in the way we save and access the data. We usually have one to many file(s) that we share between a few people. So, we'll want to minimize the file size to reduce that transfer time (we have used Google drive and S3 buckets to store files to share historically). We'd also like to minimize the time to read and write the files. Maintaining attributes such as column types is also ideal.
 
-I will be using a large, wide, data frame to test `data.table`,`readr`, `fst`, `feather`, `sqlite`, and `MonetDBLite` data import functions. Late in the game, I tried to incorporate `sparklyr` into this analysis. `sparklyr` looks and sounds like an appealing option especially for "really big data". However, I was not able to get my standard examples presented here to work. The dependency on a specific version of Java made me nervous (at least, at the time of writing this blog post). So, while it might be an attractive solution, there was a bit too much of a learning curve for the needs of our group.
+I will be using a large, wide, data frame to test `data.table`,`readr`, `fst`, `feather`, `sqlite`, and `MonetDBLite` data import functions. Late in the game, I tried to incorporate `sparklyr` into this analysis. `sparklyr` looks and sounds like an appealing option especially for "really big data". However, I was not able to get my standard examples presented here to work. The dependency on a specific version of Java made me nervous (at least, at the time of writing this blog post). So, while it might be an attractive solution, there was a bit too much of a learning curve for the needs of our group. `vroom` is another package on the horizon, but at the time of writing the blog, it was still very much in development.
 
 What is in the data frame is not important to this analysis. Keep in mind that your own personal "biggish" data frame and your hardware might have different results. Let's start by loading the whole file into memory. The columns are a mix of factors, characters, numerics, dates, and logicals.
 
@@ -252,7 +527,7 @@ read_filter_readr <- read_csv(file_name) %>%
          grepl(!!param_cd, parametercds)) %>%
   select(bytes, requested_date, parametercds)
 
-attr(read_filter_rdr$requested_date, "tzone") <- "America/New_York"
+attr(read_filter_readr$requested_date, "tzone") <- "America/New_York"
 
 # Read and Group and Summarize:
 read_group_summary_readr <- read_csv(file_name) %>%
@@ -374,7 +649,7 @@ fwrite(biggish, file = file_name)
 # Read:
 fread_df <- fread(file_name, 
                   data.table = FALSE, 
-                  na.strings = "",) %>%
+                  na.strings = "") %>%
   mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York"))
 ```
 
@@ -436,16 +711,16 @@ Read & Group & Summarize
 fread
 </td>
 <td style="text-align:right;">
-6.8
+11.7
 </td>
 <td style="text-align:right;">
-2.5
+23.3
 </td>
 <td style="text-align:right;">
-3.8
+4.7
 </td>
 <td style="text-align:right;">
-1.7
+2.7
 </td>
 </tr>
 </tbody>
@@ -883,21 +1158,13 @@ Comparison
 </th>
 <th style="border-bottom:hidden" colspan="1">
 </th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+Read Time (sec)
+
+</th>
 <th style="border-bottom:hidden" colspan="1">
 </th>
 <th style="border-bottom:hidden" colspan="1">
-</th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
-Read &
-
-</th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
-Read &
-
-</th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
-File Size
-
 </th>
 </tr>
 <tr>
@@ -905,22 +1172,22 @@ File Size
 File Format
 </th>
 <th style="text-align:center;">
-Read Method
+Read<br>Method
 </th>
 <th style="text-align:center;">
-Read
-</th>
-<th style="text-align:center;">
-Write
+Complete
 </th>
 <th style="text-align:center;">
 Filter
 </th>
 <th style="text-align:center;">
-Group & Summarize
+Group &<br>Summarize
 </th>
 <th style="text-align:center;">
-(MB)
+Write Time<br>(sec)
+</th>
+<th style="text-align:center;">
+File Size<br>(MB)
 </th>
 </tr>
 </thead>
@@ -932,20 +1199,20 @@ rds
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;">
-35.1
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
 </td>
-<td style="text-align:center;">
-38.5
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
 </td>
-<td style="text-align:center;">
-32.8
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
 </td>
-<td style="text-align:center;">
-34.5
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
 </td>
-<td style="text-align:center;">
-1280.6
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
 </td>
 </tr>
 <tr>
@@ -955,20 +1222,20 @@ rds compression
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;">
-27.9
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
 </td>
-<td style="text-align:center;">
-44.8
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
 </td>
-<td style="text-align:center;">
-28.0
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
 </td>
-<td style="text-align:center;">
-26.5
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
 </td>
-<td style="text-align:center;">
-55.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
 </td>
 </tr>
 <tr>
@@ -978,20 +1245,20 @@ readr
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;">
-15.3
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
 </td>
-<td style="text-align:center;">
-52.1
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
 </td>
-<td style="text-align:center;">
-14.6
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
 </td>
-<td style="text-align:center;">
-16.0
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
 </td>
-<td style="text-align:center;">
-703.9
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
 <tr>
@@ -1001,20 +1268,20 @@ readr compression
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;">
-22.2
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
 </td>
-<td style="text-align:center;">
-68.0
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
 </td>
-<td style="text-align:center;">
-23.7
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
 </td>
-<td style="text-align:center;">
-24.0
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
 </td>
-<td style="text-align:center;">
-65.7
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
 </td>
 </tr>
 <tr>
@@ -1024,20 +1291,20 @@ fread
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;">
-6.8
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
 </td>
-<td style="text-align:center;">
-2.5
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
 </td>
-<td style="text-align:center;">
-3.8
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
 </td>
-<td style="text-align:center;">
-1.7
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
 </td>
-<td style="text-align:center;">
-503.7
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b8f4b8">504</span>
 </td>
 </tr>
 <tr>
@@ -1047,20 +1314,20 @@ feather
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;">
-9.1
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
 </td>
-<td style="text-align:center;">
-3.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
-<td style="text-align:center;">
-1.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
-<td style="text-align:center;">
-0.3
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
 </td>
-<td style="text-align:center;">
-818.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
 </td>
 </tr>
 <tr>
@@ -1070,20 +1337,20 @@ fst
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;">
-3.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
 </td>
-<td style="text-align:center;">
-5.9
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
-<td style="text-align:center;">
-1.3
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
-<td style="text-align:center;">
-0.3
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
 </td>
-<td style="text-align:center;">
-988.6
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
 </td>
 </tr>
 <tr>
@@ -1093,20 +1360,20 @@ fst compression
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;">
-6.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
 </td>
-<td style="text-align:center;">
-11.9
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
-<td style="text-align:center;">
-1.7
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
 </td>
-<td style="text-align:center;">
-0.4
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
 </td>
-<td style="text-align:center;">
-123.5
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">122</span>
 </td>
 </tr>
 <tr>
@@ -1116,20 +1383,20 @@ sqlite
 <td style="text-align:center;">
 partial
 </td>
-<td style="text-align:center;">
-23.1
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
 </td>
-<td style="text-align:center;">
-31.1
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
 </td>
-<td style="text-align:center;">
-2.6
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
 </td>
-<td style="text-align:center;">
-1.1
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
 </td>
-<td style="text-align:center;">
-464.2
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
 </td>
 </tr>
 <tr>
@@ -1139,27 +1406,25 @@ MonetDB
 <td style="text-align:center;">
 partial
 </td>
-<td style="text-align:center;">
-4.0
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
 </td>
-<td style="text-align:center;">
-29.2
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
-<td style="text-align:center;">
-1.6
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
 </td>
-<td style="text-align:center;">
-1.2
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
 </td>
-<td style="text-align:center;">
-359.9
+<td style="text-align:center;width: 3cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ccf7cc">719</span>
 </td>
 </tr>
 </tbody>
 </table>
-All timing in seconds.
-
-Note that `sqlite` and `MonetDB` are the only formats here that allow careful filtering and calculate summaries without loading the whole data set. So if our "pretty big data" gets "really big", those will formats will rise to the top. If you can read in all the rows without crashing R, `fread`, `feather`, and `fst` are fast!
+Note that `sqlite` and `MonetDB` are the only formats here that allow careful filtering and calculate summaries without loading the whole data set (classified as a "partial" read method). So if our "pretty big data" gets "really big", those will formats will rise to the top. If you can read in all the rows without crashing R, `fread`, `feather`, and `fst` are fast!
 
 Another consideration, who are your collaborators? If everyone's using R exclusively, this table on its own is a fine way to judge what format to pick. If your collaborators are half R, half Python...you might favor `feather` since that format works well in both systems.
 
