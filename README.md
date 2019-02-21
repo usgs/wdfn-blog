@@ -89,6 +89,14 @@ docker-compose up
 
 The default server instance will include draft articles.
 
+
+To test without docker, you must have Hugo installed. Then, from the terminal you can run:
+
+```
+export HUGO_BASEURL="blog/"
+hugo server --theme=wdfn-updates --buildDrafts
+```
+
 ## Build static site
 
 Using `docker-compose`, the site may be built using the `build` command provided by the container:
