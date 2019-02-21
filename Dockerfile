@@ -5,7 +5,7 @@ RUN apt-get install -y \
     build-essential \
     curl \
     gnupg \
-    hugo=0.47.1-2
+    hugo=0.54.0-1
 
 # Install node.js 8.x (LTS at time of writing) from official package.
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
