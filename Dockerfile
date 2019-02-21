@@ -1,11 +1,15 @@
-FROM debian:buster-slim
+FROM debian:stretch-slim
 
 RUN apt-get update
 RUN apt-get install -y \
     build-essential \
     curl \
-    gnupg \
-    hugo=0.54.0-1
+    gnupg 
+
+# Install Hugo from tar distribution to /usr/local/bin
+RUN curl --silent --location https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_0.54.0_Linux-64bit.tar.gz > hugo.tar.gz
+RUN tar xzf hugo.tar.gz -C /usr/local/bin
+
 
 # Install node.js 8.x (LTS at time of writing) from official package.
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
