@@ -90,10 +90,13 @@ docker-compose up
 The default server instance will include draft articles.
 
 
-To test without docker, you must have Hugo installed. Then, from the terminal you can run:
+To test without docker, you must have Hugo and node.js installed. Then, from the terminal you can run:
 
 ```
 export HUGO_BASEURL="blog/"
+cd themes/wdfn_theme/
+npm install
+npm run build
 hugo server --theme=wdfn_theme --buildDrafts
 ```
 
