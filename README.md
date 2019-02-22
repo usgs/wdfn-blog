@@ -94,7 +94,7 @@ To test without docker, you must have Hugo installed. Then, from the terminal yo
 
 ```
 export HUGO_BASEURL="blog/"
-hugo server --theme=wdfn-updates --buildDrafts
+hugo server --theme=wdfn_theme --buildDrafts
 ```
 
 ## Build static site
