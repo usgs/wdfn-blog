@@ -1,6 +1,6 @@
 ---
 author: Laura DeCicco
-date: 2019-02-20
+date: 2019-02-25
 slug: formats
 draft: True
 title: Working with pretty big data in R
@@ -26,12 +26,15 @@ keywords:
   - files
   - io
 ---
+Introduction
+============
+
+The vast majority of the projects that my data science team works on use flat files for data storage. Sometimes, the files get a bit large, so we create a set of files...but basically we've been fine without wading into the world of databases. Recently however, the data involved in our projects are creeping up to be bigger and bigger. We're still not anywhere in the "BIG DATA (TM)" realm, but big enough to warrant exploring options. This blog explores the options: csv (both from `readr` and `data.table`), RDS, fst, sqlite, feather, monetDB. One of the takeaways I've learned was that there is not a single right answer. This post will attempt to lay out the options and summarize the pros and cons.
+
+In a blog post that laid out similar work: [sqlite-feather-and-fst](https://kbroman.org/blog/2017/04/30/sqlite-feather-and-fst/) and continued [here](https://kbroman.org/blog/2017/05/11/reading/writing-biggish-data-revisited/), Karl Broman discusses his journey from flat files to "big-ish data". I've taken some of his workflow, added more robust analysis for `fst` and `monetDB`, and used my own data.
+
 TLDR!
 =====
-
-This blog post discusses the thought process for picking out file formats and when/if to use a database. It was interesting for me to write, I learned a lot, but if I'm honest...you are just here for the final table. I get that, your time is precious. So, here's the final results. If you want the longer explanations or the code examples that generated the table...continue reading. The table lists all of the packages that were tested, and the time it took to read (in a few ways) data, the time it took to write the data, and the file size. The timing was measured using the `microbenchmark` package. The R code used to generate equivalent data frames within is included for each package.
-
-
 <table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -80,19 +83,19 @@ rds
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
 </td>
 </tr>
@@ -103,19 +106,19 @@ rds compression
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
 </td>
 </tr>
@@ -126,19 +129,19 @@ readr
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
@@ -149,19 +152,19 @@ readr compression
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
 </td>
 </tr>
@@ -172,19 +175,19 @@ fread
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b8f4b8">504</span>
 </td>
 </tr>
@@ -195,19 +198,19 @@ feather
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
 </td>
 </tr>
@@ -218,19 +221,19 @@ fst
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
 </td>
 </tr>
@@ -241,20 +244,20 @@ fst compression
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">122</span>
+<td style="text-align:center;width: 3.25cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">123</span>
 </td>
 </tr>
 <tr>
@@ -264,19 +267,19 @@ sqlite
 <td style="text-align:center;">
 partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
 </td>
 </tr>
@@ -287,36 +290,31 @@ MonetDB
 <td style="text-align:center;">
 partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ccf7cc">719</span>
+<td style="text-align:center;width: 3.25cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #abf2ab">360</span>
 </td>
 </tr>
 </tbody>
 </table>
+"Too long...didn't read" summary:
 
-Introduction
-============
-
-The vast majority of the projects that my data science team works on use flat files for data storage. Sometimes, the files get a bit large, so we create a set of files...but basically we've been fine without wading into the world of databases. Recently however, the data involved in our projects are creeping up to be bigger and bigger. We're still not anywhere in the "BIG DATA (TM)" realm, but big enough to warrant exploring options. This blog explores the options: csv (both from `readr` and `data.table`), RDS, fst, sqlite, feather, monetDB. One of the takeaways I've learned was that there is not a single right answer. This post will attempt to lay out the options and summarize the pros and cons.
-
-In a blog post that laid out similar work: [sqlite-feather-and-fst](https://kbroman.org/blog/2017/04/30/sqlite-feather-and-fst/) and continued [here](https://kbroman.org/blog/2017/05/11/reading/writing-biggish-data-revisited/), Karl Broman discusses his journey from flat files to "big-ish data". I've taken some of his workflow, added more robust analysis for `fst` and `monetDB`, and used my own data.
-
-First question: should we set up a shared database?
-
+There are a lot of useful code examples below, but if you want to jump ahead to the final results, look no further. This table lists all of the packages that were tested, the time it took to read and write some sample data, and the file size.
 Shared Database
 ===============
+
+First question: should we set up a shared database?
 
 A database is probably many data scientist's go-to tool for data storage and access. There are many database options, and discussing the pros and cons of each can fill a semester-long college course. This post will not cover those topics.
 
@@ -334,11 +332,16 @@ If a single file can be easily passed around to coworkers, and loaded entirely i
 
 All great points! In the majority of our data science projects, the focus is not on creating and maintaining complex data systems...it's using large amounts of data. Most if not all of that data already come from other databases (usually through web services). So...the big hurdles involved in setting up a shared database for our projects at the moment seems unnecessary.
 
+Flat Files
+===============
+
 OK, so we don't need to buy an Oracle license. We still want to make a smart choice in the way we save and access the data. We usually have one to many file(s) that we share between a few people. So, we'll want to minimize the file size to reduce that transfer time (we have used Google drive and S3 buckets to store files to share historically). We'd also like to minimize the time to read and write the files. Maintaining attributes such as column types is also ideal.
 
-I will be using a large, wide, data frame to test `data.table`,`readr`, `fst`, `feather`, `sqlite`, and `MonetDBLite` data import functions. Late in the game, I tried to incorporate `sparklyr` into this analysis. `sparklyr` looks and sounds like an appealing option especially for "really big data". However, I was not able to get my standard examples presented here to work. The dependency on a specific version of Java made me nervous (at least, at the time of writing this blog post). So, while it might be an attractive solution, there was a bit too much of a learning curve for the needs of our group. `vroom` is another package on the horizon, but at the time of writing the blog, it was still very much in development.
+I will be using a large, wide, data frame to test the `data.table`, `readr`, `fst`, `feather`, `sqlite`, and `MonetDBLite` data import functions. 
 
-What is in the data frame is not important to this analysis. Keep in mind that your own personal "biggish" data frame and your hardware might have different results. Let's start by loading the whole file into memory. The columns are a mix of factors, characters, numerics, dates, and logicals.
+I also considered the `sparklyr` and `vroom` packages. `sparklyr` looks and sounds like an appealing option especially for "really big data". However, I was not able to get my standard examples presented here to work. The dependency on a specific version of Java made me nervous (at least, at the time of writing this blog post). So, while it might be an attractive solution, there was a bit too much of a learning curve for the needs of our group. At the time of writing this blog, `vroom` was still very much in development, and I found there to be a few bugs still being worked out.
+
+The sample data I used was from an Apache server log. The columns are a mix of factors, characters, numerics, dates, and logicals. Keep in mind that your own personal "biggish" data frame and your hardware might have different results. Let's start by loading the whole file into memory. 
 
 ``` r
 biggish <- readRDS("test.rds")
@@ -711,16 +714,16 @@ Read & Group & Summarize
 fread
 </td>
 <td style="text-align:right;">
-11.7
+8.2
 </td>
 <td style="text-align:right;">
-23.3
+14.4
 </td>
 <td style="text-align:right;">
-4.7
+4.4
 </td>
 <td style="text-align:right;">
-2.7
+2.3
 </td>
 </tr>
 </tbody>
@@ -1199,19 +1202,19 @@ rds
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
 </td>
 </tr>
@@ -1222,19 +1225,19 @@ rds compression
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
 </td>
 </tr>
@@ -1245,19 +1248,19 @@ readr
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
@@ -1268,19 +1271,19 @@ readr compression
 <td style="text-align:center;">
 bulk
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
 </td>
 </tr>
@@ -1291,19 +1294,19 @@ fread
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b8f4b8">504</span>
 </td>
 </tr>
@@ -1314,19 +1317,19 @@ feather
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
 </td>
 </tr>
@@ -1337,19 +1340,19 @@ fst
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
 </td>
 </tr>
@@ -1360,20 +1363,20 @@ fst compression
 <td style="text-align:center;">
 limited partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">122</span>
+<td style="text-align:center;width: 3.25cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">123</span>
 </td>
 </tr>
 <tr>
@@ -1383,19 +1386,19 @@ sqlite
 <td style="text-align:center;">
 partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
 </td>
 </tr>
@@ -1406,20 +1409,20 @@ MonetDB
 <td style="text-align:center;">
 partial
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
+<td style="text-align:center;width: 3.25cm; ">
 <span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
 </td>
-<td style="text-align:center;width: 3cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ccf7cc">719</span>
+<td style="text-align:center;width: 3.25cm; ">
+<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #abf2ab">360</span>
 </td>
 </tr>
 </tbody>
