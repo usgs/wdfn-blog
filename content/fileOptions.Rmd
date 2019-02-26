@@ -2,7 +2,7 @@
 title: "Working with pretty big data in R"
 slug: "formats"
 author: "Laura DeCicco"
-date: "2019-02-25"
+date: "2019-02-26"
 always_allow_html: yes
 image: "static/comparison.jpg"
 keyword1: files
@@ -56,7 +56,7 @@ Copy final table here!!!!
 ####################
 "Too long...didn't read" summary:
 
-There are a lot of useful code examples below, but if you want to jump ahead to the final results, look no further. This table lists all of the packages that were tested, the time it took to read and write some sample data, and the file size. 
+There are a lot of useful code examples below, but if you want to jump ahead to the final results, this table summarizes the results. This table lists all of the packages that were tested, the time it took to read and write some sample data, and the file size. 
 
 # Shared Database
 
@@ -191,6 +191,22 @@ get_seconds <- function(timing, format){
         summarize = summary(timing)$mean[4]/1000,
         stringsAsFactors = FALSE
       )    
+    } else if (unit == "nanoseconds"){
+      read_write <- data.frame(
+        format = format,
+        read = summary(timing)$mean[2]/1e9,
+        write = summary(timing)$mean[1]/1e9,
+        filter = summary(timing)$mean[3]/1e9,
+        summarize = summary(timing)$mean[4]/1e9,
+        stringsAsFactors = FALSE  )    
+    } else if (unit == "microseconds"){
+      read_write <- data.frame(
+        format = format,
+        read = summary(timing)$mean[2]/1000000,
+        write = summary(timing)$mean[1]/1000000,
+        filter = summary(timing)$mean[3]/1000000,
+        summarize = summary(timing)$mean[4]/1000000,
+        stringsAsFactors = FALSE  )      
     }
   } else {
     read_write <- data.frame(
@@ -284,7 +300,7 @@ file_name <- "test.csv"
 # Write:
 write_csv(biggish, path = file_name)
 # Read:
-readr_df <- read_csv(file_name)
+readr_df <- read_csv(file_name, progress = FALSE)
 attr(readr_df$requested_date, "tzone") <- "America/New_York"
 ```
 
@@ -297,7 +313,7 @@ group_col <- "statecd"
 service <- "dv"
 
 # Read and Filter:
-read_filter_readr <- read_csv(file_name) %>%
+read_filter_readr <- read_csv(file_name, progress = FALSE) %>%
   filter(bytes > !!min_bytes,
          grepl(!!param_cd, parametercds)) %>%
   select(bytes, requested_date, parametercds)
@@ -305,7 +321,7 @@ read_filter_readr <- read_csv(file_name) %>%
 attr(read_filter_readr$requested_date, "tzone") <- "America/New_York"
 
 # Read and Group and Summarize:
-read_group_summary_readr <- read_csv(file_name) %>%
+read_group_summary_readr <- read_csv(file_name, progress = FALSE) %>%
   filter(service == !!service, 
          !is.na(!!sym(group_col)),
          requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -323,11 +339,11 @@ file_name <- "test.csv"
 timing <- microbenchmark(
   write = write_csv(biggish, path = file_name),
   read = {
-    readr_df <- read_csv(file_name)
+    readr_df <- read_csv(file_name, progress = FALSE)
     attr(readr_df$requested_date, "tzone") <- "America/New_York"
   },
   filter = {
-    partial_data_rdr <- read_csv(file_name) %>%
+    partial_data_rdr <- read_csv(file_name, progress = FALSE) %>%
       filter(bytes > !!min_bytes,
              grepl(!!param_cd, parametercds)) %>%
       select(bytes, requested_date, parametercds)
@@ -335,7 +351,7 @@ timing <- microbenchmark(
     attr(partial_data_rdr$requested_date, "tzone") <- "America/New_York"
   },
   summarize = {
-    group_summary_rdr <- read_csv(file_name) %>%
+    group_summary_rdr <- read_csv(file_name, progress = FALSE) %>%
       filter(service == !!service, 
              !is.na(!!sym(group_col)),
              requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -368,7 +384,7 @@ file_name <- "test_readr.csv.gz"
 # Write:
 write_csv(biggish,  path = file_name)
 # Read:
-readr_compressed_df <- read_csv(file_name)
+readr_compressed_df <- read_csv(file_name, progress = FALSE)
 ```
 
 The "Read and Filter" data files will be the same process as "readr No Compression".
@@ -379,11 +395,11 @@ file_name <- "test_readr.csv.gz"
 timing <- microbenchmark(
   write = write_csv(biggish, path = file_name),
   read = {
-    readr_df <- read_csv(file_name)
+    readr_df <- read_csv(file_name, progress = FALSE)
     attr(readr_df$requested_date, "tzone") <- "America/New_York"
   },
   filter = {
-    partial_data_rdr <- read_csv(file_name) %>%
+    partial_data_rdr <- read_csv(file_name, progress = FALSE) %>%
       filter(bytes > !!min_bytes,
              grepl(!!param_cd, parametercds)) %>%
       select(bytes, requested_date, parametercds)
@@ -391,7 +407,7 @@ timing <- microbenchmark(
     attr(partial_data_rdr$requested_date, "tzone") <- "America/New_York"
   },
   summarize = {
-    group_summary_rdr <- read_csv(file_name) %>%
+    group_summary_rdr <- read_csv(file_name, progress = FALSE) %>%
       filter(service == !!service, 
              !is.na(!!sym(group_col)),
              requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -1023,7 +1039,7 @@ read_write <- read_write %>%
          summarize = color_tile("lightgreen","white")(round(summarize, digits = 1)),
          read = color_tile("lightgreen","white")(round(read, digits = 0)),
          write = color_tile("lightgreen","white")(round(write, digits = 0)),
-         method = ifelse(format %in% c("fread","feather","fst","fst compression"),
+         method = ifelse(format %in% c("fread","feather","fst","fst compression","vroom"),
                          "limited partial",
                          ifelse(format %in% c("MonetDB","sqlite"), "partial", "bulk")))%>%
   # kable_styling("hover", full_width = F) %>%

@@ -1,8 +1,7 @@
 ---
 author: Laura DeCicco
-date: 2019-02-25
+date: 2019-02-26
 slug: formats
-draft: True
 title: Working with pretty big data in R
 type: post
 categories: Data Science
@@ -10,31 +9,43 @@ image: static/comparison.jpg
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
- 
 author_staff: laura-decicco
-author_email: <ldecicco@usgs.gov>
-
+author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov</a>
 tags: 
   - R
- 
  
 description: Exploring file format options in R.
 keywords:
   - R
- 
- 
   - files
   - io
 ---
 Introduction
 ============
 
-The vast majority of the projects that my data science team works on use flat files for data storage. Sometimes, the files get a bit large, so we create a set of files...but basically we've been fine without wading into the world of databases. Recently however, the data involved in our projects are creeping up to be bigger and bigger. We're still not anywhere in the "BIG DATA (TM)" realm, but big enough to warrant exploring options. This blog explores the options: csv (both from `readr` and `data.table`), RDS, fst, sqlite, feather, monetDB. One of the takeaways I've learned was that there is not a single right answer. This post will attempt to lay out the options and summarize the pros and cons.
+The vast majority of the projects that my data science team works on use
+flat files for data storage. Sometimes, the files get a bit large, so we
+create a set of files…but basically we’ve been fine without wading into
+the world of databases. Recently however, the data involved in our
+projects are creeping up to be bigger and bigger. We’re still not
+anywhere in the “BIG DATA (TM)” realm, but big enough to warrant
+exploring options. This blog explores the options: csv (both from
+`readr` and `data.table`), RDS, fst, sqlite, feather, monetDB. One of
+the takeaways I’ve learned was that there is not a single right answer.
+This post will attempt to lay out the options and summarize the pros and
+cons.
 
-In a blog post that laid out similar work: [sqlite-feather-and-fst](https://kbroman.org/blog/2017/04/30/sqlite-feather-and-fst/) and continued [here](https://kbroman.org/blog/2017/05/11/reading/writing-biggish-data-revisited/), Karl Broman discusses his journey from flat files to "big-ish data". I've taken some of his workflow, added more robust analysis for `fst` and `monetDB`, and used my own data.
+In a blog post that laid out similar work:
+[sqlite-feather-and-fst](https://kbroman.org/blog/2017/04/30/sqlite-feather-and-fst/)
+and continued
+[here](https://kbroman.org/blog/2017/05/11/reading/writing-biggish-data-revisited/),
+Karl Broman discusses his journey from flat files to “big-ish data”.
+I’ve taken some of his workflow, added more robust analysis for `fst`
+and `monetDB`, and used my own data.
 
 TLDR!
 =====
+
 <table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -43,6 +54,7 @@ TLDR!
 <th style="border-bottom:hidden" colspan="1">
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
 Read Time (sec)
 
 </th>
@@ -84,19 +96,24 @@ rds
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
 </td>
 </tr>
 <tr>
@@ -107,19 +124,24 @@ rds compression
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
 </td>
 </tr>
 <tr>
@@ -130,19 +152,24 @@ readr
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
 <tr>
@@ -153,19 +180,24 @@ readr compression
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
 </td>
 </tr>
 <tr>
@@ -176,19 +208,24 @@ fread
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b8f4b8">504</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
 <tr>
@@ -199,19 +236,24 @@ feather
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
 </td>
 </tr>
 <tr>
@@ -222,19 +264,24 @@ fst
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
 </td>
 </tr>
 <tr>
@@ -245,19 +292,24 @@ fst compression
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">123</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">123</span>
 </td>
 </tr>
 <tr>
@@ -268,19 +320,24 @@ sqlite
 partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
 </td>
 </tr>
 <tr>
@@ -291,57 +348,122 @@ MonetDB
 partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #abf2ab">360</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #abf2ab">360</span>
 </td>
 </tr>
 </tbody>
 </table>
-"Too long...didn't read" summary:
 
-There are a lot of useful code examples below, but if you want to jump ahead to the final results, look no further. This table lists all of the packages that were tested, the time it took to read and write some sample data, and the file size.
+“Too long…didn’t read” summary:
+
+There are a lot of useful code examples below, but if you want to jump
+ahead to the final results, this table summarizes the results. This table lists all of the
+packages that were tested, the time it took to read and write some
+sample data, and the file size.
+
 Shared Database
 ===============
 
 First question: should we set up a shared database?
 
-A database is probably many data scientist's go-to tool for data storage and access. There are many database options, and discussing the pros and cons of each can fill a semester-long college course. This post will not cover those topics.
+A database is probably many data scientist’s go-to tool for data storage
+and access. There are many database options, and discussing the pros and
+cons of each can fill a semester-long college course. This post will not
+cover those topics.
 
-Our initial question was: when should we even *consider* going through the process of setting up a shared database? There's overhead involved, and our group would either need a spend a fair amount of time getting over the initial learning-curve or spend a fair amount of our limited resources on access to skilled database administrators. None of these hurdles are insurmountable, but we want to make sure our project and data needs are worth those investments.
+Our initial question was: when should we even *consider* going through
+the process of setting up a shared database? There’s overhead involved,
+and our group would either need a spend a fair amount of time getting
+over the initial learning-curve or spend a fair amount of our limited
+resources on access to skilled database administrators. None of these
+hurdles are insurmountable, but we want to make sure our project and
+data needs are worth those investments.
 
-If a single file can be easily passed around to coworkers, and loaded entirely in memory directly in R, there doesn't seem to be any reason to consider a shared database. Maybe the data can be logically chunked into several files (or 100's....or 1,000's) that make collaborating on the same data easier. What conditions warrant our "R-flat-file-happy" group to consider a database? I asked and got great advice from members of the [rOpenSci](https://ropensci.org/) community. This is what I learned:
+If a single file can be easily passed around to coworkers, and loaded
+entirely in memory directly in R, there doesn’t seem to be any reason to
+consider a shared database. Maybe the data can be logically chunked into
+several files (or 100’s….or 1,000’s) that make collaborating on the same
+data easier. What conditions warrant our “R-flat-file-happy” group to
+consider a database? I asked and got great advice from members of the
+[rOpenSci](https://ropensci.org/) community. This is what I learned:
 
--   "Identify how much CRUD (create, read, update, delete) you need to do over time and how complicated your conceptual model is. If you need people to be interacting and changing data a shared database can help add change tracking and important constraints to data inputs. If you have multiple things that interact like sites, species, field people, measurement classes, complicated requested\_date concepts etc then the db can help." [Steph Locke](https://twitter.com/TheStephLocke)
+-   “Identify how much CRUD (create, read, update, delete) you need to
+    do over time and how complicated your conceptual model is. If you
+    need people to be interacting and changing data a shared database
+    can help add change tracking and important constraints to data
+    inputs. If you have multiple things that interact like sites,
+    species, field people, measurement classes, complicated
+    requested\_date concepts etc then the db can help.” [Steph
+    Locke](https://twitter.com/TheStephLocke)
 
--   "One thing to consider is whether the data are updated and how, and by single or multiple processes." [Elin Waring](https://twitter.com/ElinWaring)
+-   “One thing to consider is whether the data are updated and how, and
+    by single or multiple processes.” [Elin
+    Waring](https://twitter.com/ElinWaring)
 
--   "I encourage people towards databases when/if they need to make use of all the validation logic you can put into databases. If they just need to query, a pattern I like is to keep the data in a text-based format like CSV/TSV and load the data into sqlite for querying." [Bryce Mecum](https://twitter.com/brycem)
+-   “I encourage people towards databases when/if they need to make use
+    of all the validation logic you can put into databases. If they just
+    need to query, a pattern I like is to keep the data in a text-based
+    format like CSV/TSV and load the data into sqlite for querying.”
+    [Bryce Mecum](https://twitter.com/brycem)
 
--   "I suppose another criterion is whether multiple people need to access the same data or just a solo user. Concurrency afforded by DBs is nice in that regard." [James Balamuta](https://twitter.com/axiomsofxyz)
+-   “I suppose another criterion is whether multiple people need to
+    access the same data or just a solo user. Concurrency afforded by
+    DBs is nice in that regard.” [James
+    Balamuta](https://twitter.com/axiomsofxyz)
 
-All great points! In the majority of our data science projects, the focus is not on creating and maintaining complex data systems...it's using large amounts of data. Most if not all of that data already come from other databases (usually through web services). So...the big hurdles involved in setting up a shared database for our projects at the moment seems unnecessary.
+All great points! In the majority of our data science projects, the
+focus is not on creating and maintaining complex data systems…it’s using
+large amounts of data. Most if not all of that data already come from
+other databases (usually through web services). So…the big hurdles
+involved in setting up a shared database for our projects at the moment
+seems unnecessary.
 
 Flat Files
-===============
+==========
 
-OK, so we don't need to buy an Oracle license. We still want to make a smart choice in the way we save and access the data. We usually have one to many file(s) that we share between a few people. So, we'll want to minimize the file size to reduce that transfer time (we have used Google drive and S3 buckets to store files to share historically). We'd also like to minimize the time to read and write the files. Maintaining attributes such as column types is also ideal.
+OK, so we don’t need to buy an Oracle license. We still want to make a
+smart choice in the way we save and access the data. We usually have one
+to many file(s) that we share between a few people. So, we’ll want to
+minimize the file size to reduce that transfer time (we have used Google
+drive and S3 buckets to store files to share historically). We’d also
+like to minimize the time to read and write the files. Maintaining
+attributes such as column types is also ideal.
 
-I will be using a large, wide, data frame to test the `data.table`, `readr`, `fst`, `feather`, `sqlite`, and `MonetDBLite` data import functions. 
+I will be using a large, wide, data frame to test the `data.table`,
+`readr`, `fst`, `feather`, `sqlite`, and `MonetDBLite` data import
+functions.
 
-I also considered the `sparklyr` and `vroom` packages. `sparklyr` looks and sounds like an appealing option especially for "really big data". However, I was not able to get my standard examples presented here to work. The dependency on a specific version of Java made me nervous (at least, at the time of writing this blog post). So, while it might be an attractive solution, there was a bit too much of a learning curve for the needs of our group. At the time of writing this blog, `vroom` was still very much in development, and I found there to be a few bugs still being worked out.
+I also considered the `sparklyr` and `vroom` packages. `sparklyr` looks
+and sounds like an appealing option especially for “really big data”.
+However, I was not able to get my standard examples presented here to
+work. The dependency on a specific version of Java made me nervous (at
+least, at the time of writing this blog post). So, while it might be an
+attractive solution, there was a bit too much of a learning curve for
+the needs of our group. At the time of writing this blog, `vroom` was
+still very much in development, and I found there to be a few bugs still
+being worked out.
 
-The sample data I used was from an Apache server log. The columns are a mix of factors, characters, numerics, dates, and logicals. Keep in mind that your own personal "biggish" data frame and your hardware might have different results. Let's start by loading the whole file into memory. 
+The sample data I used was from an Apache server log. The columns are a
+mix of factors, characters, numerics, dates, and logicals. Keep in mind
+that your own personal “biggish” data frame and your hardware might have
+different results. Let’s start by loading the whole file into memory.
 
 ``` r
 biggish <- readRDS("test.rds")
@@ -360,16 +482,35 @@ ncol(biggish)
 Read, write, and files size
 ---------------------------
 
-Using the "biggish" data frame, I'm going to write and read the files completely in memory to start. Because we are often shuffling files around (one person pushes up to an S3 bucket and another pulls them down for example), I also want to compare compressed files vs not compressed when possible.
+Using the “biggish” data frame, I’m going to write and read the files
+completely in memory to start. Because we are often shuffling files
+around (one person pushes up to an S3 bucket and another pulls them down
+for example), I also want to compare compressed files vs not compressed
+when possible.
 
-If you can read in all your data at once, read/write time and file size should be enough to help you choose your file format. There are many instances in our "biggish" data projects that we don't always need nor want ALL the data ALL the time. I will also compare how long it takes to pull a subset of the data by pulling out a date, numeric, and string, and then do some filtering. Some of the functions to read in data (`fst`, `fread`, `feather`) can read in specific columns without loading the whole file initially. These functions will read and filter/summarize the data much quicker since less data is in memory from the start. The true database options (`sqlite`, `monetDB`) will rely on the databases to do the processing outside of R (so, they also will ultimately read in less data).
+If you can read in all your data at once, read/write time and file size
+should be enough to help you choose your file format. There are many
+instances in our “biggish” data projects that we don’t always need nor
+want ALL the data ALL the time. I will also compare how long it takes to
+pull a subset of the data by pulling out a date, numeric, and string,
+and then do some filtering. Some of the functions to read in data
+(`fst`, `fread`, `feather`) can read in specific columns without loading
+the whole file initially. These functions will read and filter/summarize
+the data much quicker since less data is in memory from the start. The
+true database options (`sqlite`, `monetDB`) will rely on the databases
+to do the processing outside of R (so, they also will ultimately read in
+less data).
 
-First, I'll show individually how to do each of these operations. The end of this post will include a table summarizing all the information. It is generated using the `microbenchmark` package.
+First, I’ll show individually how to do each of these operations. The
+end of this post will include a table summarizing all the information.
+It is generated using the `microbenchmark` package.
 
 RDS No Compression
 ------------------
 
-We'll start with the basic R binary file, the "RDS" file. `saveRDS` has an argument "compress" that defaults to `TRUE`. Not compressing the files results in a bigger file size, but quicker read and write times.
+We’ll start with the basic R binary file, the “RDS” file. `saveRDS` has
+an argument “compress” that defaults to `TRUE`. Not compressing the
+files results in a bigger file size, but quicker read and write times.
 
 ``` r
 library(dplyr)
@@ -381,7 +522,11 @@ saveRDS(biggish, file = file_name, compress = FALSE)
 rds_df <- readRDS(file_name)
 ```
 
-RDS files must be read entirely in memory so the "Read & Filter" and "Read & Group & Summarize" times will be driven by the "Read" timing. However, I will use 2 examples throughout to test the timings. The examples are deliberately set up to test some `dplyr` basic verbs and various data types, as well as tricky situations like timezones.
+RDS files must be read entirely in memory so the “Read & Filter” and
+“Read & Group & Summarize” times will be driven by the “Read” timing.
+However, I will use 2 examples throughout to test the timings. The
+examples are deliberately set up to test some `dplyr` basic verbs and
+various data types, as well as tricky situations like timezones.
 
 ``` r
 min_bytes <- 100000
@@ -432,20 +577,21 @@ Read & Group & Summarize
 rds
 </td>
 <td style="text-align:right;">
-35.1
+25.7
 </td>
 <td style="text-align:right;">
-38.5
+33
 </td>
 <td style="text-align:right;">
-32.8
+25.4
 </td>
 <td style="text-align:right;">
-34.5
+25.1
 </td>
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
 RDS Compression
@@ -459,7 +605,8 @@ saveRDS(biggish, file = file_name, compress = TRUE)
 rds_compressed_df <- readRDS(file_name)
 ```
 
-The "Read and Filter" data files will be the same process as "RDS No Compression".
+The “Read and Filter” data files will be the same process as “RDS No
+Compression”.
 
 <table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -501,6 +648,7 @@ rds compression
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
 readr No Compression
@@ -512,11 +660,15 @@ file_name <- "test.csv"
 # Write:
 write_csv(biggish, path = file_name)
 # Read:
-readr_df <- read_csv(file_name)
+readr_df <- read_csv(file_name, progress = FALSE)
 attr(readr_df$requested_date, "tzone") <- "America/New_York"
 ```
 
-`readr` also must be read entirely in memory so "Read and Filter" times are mostly driven by "Read". If there's a known, continuous set of rows, you can use the arguments "skip" and "n\_max" to pull just what you need. However, that is not flexible enough for most of our needs, so I am not including that in this evaluation.
+`readr` also must be read entirely in memory so “Read and Filter” times
+are mostly driven by “Read”. If there’s a known, continuous set of rows,
+you can use the arguments “skip” and “n\_max” to pull just what you
+need. However, that is not flexible enough for most of our needs, so I
+am not including that in this evaluation.
 
 ``` r
 min_bytes <- 100000
@@ -525,7 +677,7 @@ group_col <- "statecd"
 service <- "dv"
 
 # Read and Filter:
-read_filter_readr <- read_csv(file_name) %>%
+read_filter_readr <- read_csv(file_name, progress = FALSE) %>%
   filter(bytes > !!min_bytes,
          grepl(!!param_cd, parametercds)) %>%
   select(bytes, requested_date, parametercds)
@@ -533,7 +685,7 @@ read_filter_readr <- read_csv(file_name) %>%
 attr(read_filter_readr$requested_date, "tzone") <- "America/New_York"
 
 # Read and Group and Summarize:
-read_group_summary_readr <- read_csv(file_name) %>%
+read_group_summary_readr <- read_csv(file_name, progress = FALSE) %>%
   filter(service == !!service, 
          !is.na(!!sym(group_col)),
          requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -541,6 +693,36 @@ read_group_summary_readr <- read_csv(file_name) %>%
   group_by(.dots = c(group_col, "requested_date")) %>%
   summarize(MB = sum(as.numeric(bytes), na.rm = TRUE)/10^6)
 ```
+
+    ## Warning: 659499 parsing failures.
+    ##   row        col           expected                                        actual       file
+    ## 11895 bbox       1/0/T/F/TRUE/FALSE -93.8012695,29.3941408,-89.4506836,31.5153373 'test.csv'
+    ## 11895 sitestatus 1/0/T/F/TRUE/FALSE active                                        'test.csv'
+    ## 11895 sitetype   1/0/T/F/TRUE/FALSE oc,oc-co,es,lk,st,st-ca,st-dch,st-ts          'test.csv'
+    ## 12694 indent     1/0/T/F/TRUE/FALSE on                                            'test.csv'
+    ## 12695 indent     1/0/T/F/TRUE/FALSE on                                            'test.csv'
+    ## ..... .......... .................. ............................................. ..........
+    ## See problems(...) for more details.
+
+    ## Warning: 659499 parsing failures.
+    ##   row        col           expected                                        actual       file
+    ## 11895 bbox       1/0/T/F/TRUE/FALSE -93.8012695,29.3941408,-89.4506836,31.5153373 'test.csv'
+    ## 11895 sitestatus 1/0/T/F/TRUE/FALSE active                                        'test.csv'
+    ## 11895 sitetype   1/0/T/F/TRUE/FALSE oc,oc-co,es,lk,st,st-ca,st-dch,st-ts          'test.csv'
+    ## 12694 indent     1/0/T/F/TRUE/FALSE on                                            'test.csv'
+    ## 12695 indent     1/0/T/F/TRUE/FALSE on                                            'test.csv'
+    ## ..... .......... .................. ............................................. ..........
+    ## See problems(...) for more details.
+
+    ## Warning: 659499 parsing failures.
+    ##   row        col           expected                                        actual       file
+    ## 11895 bbox       1/0/T/F/TRUE/FALSE -93.8012695,29.3941408,-89.4506836,31.5153373 'test.csv'
+    ## 11895 sitestatus 1/0/T/F/TRUE/FALSE active                                        'test.csv'
+    ## 11895 sitetype   1/0/T/F/TRUE/FALSE oc,oc-co,es,lk,st,st-ca,st-dch,st-ts          'test.csv'
+    ## 12694 indent     1/0/T/F/TRUE/FALSE on                                            'test.csv'
+    ## 12695 indent     1/0/T/F/TRUE/FALSE on                                            'test.csv'
+    ## ..... .......... .................. ............................................. ..........
+    ## See problems(...) for more details.
 
 <table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -568,20 +750,21 @@ Read & Group & Summarize
 readr
 </td>
 <td style="text-align:right;">
-15.3
+12.2
 </td>
 <td style="text-align:right;">
-52.1
+70.8
 </td>
 <td style="text-align:right;">
-14.6
+14.7
 </td>
 <td style="text-align:right;">
-16
+14
 </td>
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
 readr Compression
@@ -593,10 +776,41 @@ file_name <- "test_readr.csv.gz"
 # Write:
 write_csv(biggish,  path = file_name)
 # Read:
-readr_compressed_df <- read_csv(file_name)
+readr_compressed_df <- read_csv(file_name, progress = FALSE)
 ```
 
-The "Read and Filter" data files will be the same process as "readr No Compression".
+The “Read and Filter” data files will be the same process as “readr No
+Compression”.
+
+    ## Warning: 659499 parsing failures.
+    ##   row        col           expected                                        actual                file
+    ## 11895 bbox       1/0/T/F/TRUE/FALSE -93.8012695,29.3941408,-89.4506836,31.5153373 'test_readr.csv.gz'
+    ## 11895 sitestatus 1/0/T/F/TRUE/FALSE active                                        'test_readr.csv.gz'
+    ## 11895 sitetype   1/0/T/F/TRUE/FALSE oc,oc-co,es,lk,st,st-ca,st-dch,st-ts          'test_readr.csv.gz'
+    ## 12694 indent     1/0/T/F/TRUE/FALSE on                                            'test_readr.csv.gz'
+    ## 12695 indent     1/0/T/F/TRUE/FALSE on                                            'test_readr.csv.gz'
+    ## ..... .......... .................. ............................................. ...................
+    ## See problems(...) for more details.
+
+    ## Warning: 659499 parsing failures.
+    ##   row        col           expected                                        actual                file
+    ## 11895 bbox       1/0/T/F/TRUE/FALSE -93.8012695,29.3941408,-89.4506836,31.5153373 'test_readr.csv.gz'
+    ## 11895 sitestatus 1/0/T/F/TRUE/FALSE active                                        'test_readr.csv.gz'
+    ## 11895 sitetype   1/0/T/F/TRUE/FALSE oc,oc-co,es,lk,st,st-ca,st-dch,st-ts          'test_readr.csv.gz'
+    ## 12694 indent     1/0/T/F/TRUE/FALSE on                                            'test_readr.csv.gz'
+    ## 12695 indent     1/0/T/F/TRUE/FALSE on                                            'test_readr.csv.gz'
+    ## ..... .......... .................. ............................................. ...................
+    ## See problems(...) for more details.
+
+    ## Warning: 659499 parsing failures.
+    ##   row        col           expected                                        actual                file
+    ## 11895 bbox       1/0/T/F/TRUE/FALSE -93.8012695,29.3941408,-89.4506836,31.5153373 'test_readr.csv.gz'
+    ## 11895 sitestatus 1/0/T/F/TRUE/FALSE active                                        'test_readr.csv.gz'
+    ## 11895 sitetype   1/0/T/F/TRUE/FALSE oc,oc-co,es,lk,st,st-ca,st-dch,st-ts          'test_readr.csv.gz'
+    ## 12694 indent     1/0/T/F/TRUE/FALSE on                                            'test_readr.csv.gz'
+    ## 12695 indent     1/0/T/F/TRUE/FALSE on                                            'test_readr.csv.gz'
+    ## ..... .......... .................. ............................................. ...................
+    ## See problems(...) for more details.
 
 <table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -624,20 +838,21 @@ Read & Group & Summarize
 readr compression
 </td>
 <td style="text-align:right;">
-22.2
+66.5
 </td>
 <td style="text-align:right;">
-68
+71.2
 </td>
 <td style="text-align:right;">
-23.7
+66
 </td>
 <td style="text-align:right;">
-24
+70.5
 </td>
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
 fread No Compression
@@ -656,9 +871,16 @@ fread_df <- fread(file_name,
   mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York"))
 ```
 
-`fread` includes arguments "select"/"drop" to only load specific columns into memory. This improves the load time if there are many columns that aren't needed. If there's a known, continuous set of rows, you can use the arguments "skip" and "nrows" to pull just what you need. However, that is not flexible enough for most of our needs, so I am not including that in this evaluation.
+`fread` includes arguments “select”/“drop” to only load specific columns
+into memory. This improves the load time if there are many columns that
+aren’t needed. If there’s a known, continuous set of rows, you can use
+the arguments “skip” and “nrows” to pull just what you need. However,
+that is not flexible enough for most of our needs, so I am not including
+that in this evaluation.
 
-Also, I am keeping this analysis as a "data.frame" (rather than "data.table") because it is the system our group has decided to stick with.
+Also, I am keeping this analysis as a “data.frame” (rather than
+“data.table”) because it is the system our group has decided to stick
+with.
 
 ``` r
 min_bytes <- 100000
@@ -728,9 +950,17 @@ fread
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
-Note! I didn't explore adjusting the `nThread` argument in `fread`/`fwrite`. I also didn't include a compressed version of `fread`/`fwrite`. Our crew is a hodge-podge of Windows, Mac, and Linux, and we try to make our code work on any OS. Many of the solutions for combining compression with `data.table` functions looked fragile on the different OSes. The `data.table` package has an open GitHub issue to support compression in the future. It may be worth updating this script once that is added.
+Note! I didn’t explore adjusting the `nThread` argument in
+`fread`/`fwrite`. I also didn’t include a compressed version of
+`fread`/`fwrite`. Our crew is a hodge-podge of Windows, Mac, and Linux,
+and we try to make our code work on any OS. Many of the solutions for
+combining compression with `data.table` functions looked fragile on the
+different OSes. The `data.table` package has an open GitHub issue to
+support compression in the future. It may be worth updating this script
+once that is added.
 
 feather Compression
 -------------------
@@ -744,7 +974,9 @@ write_feather(biggish, path = file_name)
 feather_df <- read_feather(file_name)
 ```
 
-`read_feather` includes an argument "columns" to only load specific columns into memory. This improves the load time if there are many columns that aren't needed.
+`read_feather` includes an argument “columns” to only load specific
+columns into memory. This improves the load time if there are many
+columns that aren’t needed.
 
 ``` r
 min_bytes <- 100000
@@ -810,9 +1042,13 @@ feather
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
-For the same reason as `fread`, I didn't try compressing the `feather` format. Both `data.table` and `feather` have open GitHub issues to support compression in the future. It may be worth updating this script once those features are added.
+For the same reason as `fread`, I didn’t try compressing the `feather`
+format. Both `data.table` and `feather` have open GitHub issues to
+support compression in the future. It may be worth updating this script
+once those features are added.
 
 fst No Compression
 ------------------
@@ -891,6 +1127,7 @@ fst
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
 fst Compression
@@ -906,7 +1143,8 @@ write_fst(biggish, path = file_name, compress = 100)
 fst_df <- read_fst(file_name)
 ```
 
-The "Read and Filter" and "Read and Group and Summarize" retrievals will be the same process as in "fst No Compression".
+The “Read and Filter” and “Read and Group and Summarize” retrievals will
+be the same process as in “fst No Compression”.
 
 <table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -948,12 +1186,14 @@ fst compression
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
 SQLite
 ------
 
-SQLite does not have a storage class set aside for storing dates and/or times.
+SQLite does not have a storage class set aside for storing dates and/or
+times.
 
 ``` r
 library(RSQLite)
@@ -974,7 +1214,7 @@ sqlite_df <- tbl(sqldb,"test") %>%
                                      origin = "1970-01-01"))
 ```
 
-Things to notice here, you can't just use `grep`.
+Things to notice here, you can’t just use `grep`.
 
 ``` r
 min_bytes <- 100000
@@ -1048,9 +1288,14 @@ sqlite
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
-It is important to note that this is the first "Read and Filter" and "Read and Group and Summarize" solution that is completely done outside of R. So when you are getting data that pushes the limits (or passes the limits) of what you can load directly into R, this is the first basic solution.
+It is important to note that this is the first “Read and Filter” and
+“Read and Group and Summarize” solution that is completely done outside
+of R. So when you are getting data that pushes the limits (or passes the
+limits) of what you can load directly into R, this is the first basic
+solution.
 
 MonetDB
 -------
@@ -1147,9 +1392,15 @@ MonetDB
 </tr>
 </tbody>
 </table>
+
 Timing in seconds.
 
-Again, it is important to note that the "Read and Filter" and "Read and Group and Summarize" solutions are completely done outside of R. So when you are getting data that pushes the limits (or passes the limits) of what you can load directly into R, this is another good solution. There also appears to be a lot more flexibility in using date/times directly in MonetDB compared to SQLite.
+Again, it is important to note that the “Read and Filter” and “Read and
+Group and Summarize” solutions are completely done outside of R. So when
+you are getting data that pushes the limits (or passes the limits) of
+what you can load directly into R, this is another good solution. There
+also appears to be a lot more flexibility in using date/times directly
+in MonetDB compared to SQLite.
 
 Comparison
 ==========
@@ -1162,6 +1413,7 @@ Comparison
 <th style="border-bottom:hidden" colspan="1">
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+
 Read Time (sec)
 
 </th>
@@ -1203,19 +1455,24 @@ rds
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">35</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">33</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">34.5</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #cef7ce">39</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">1281</span>
 </td>
 </tr>
 <tr>
@@ -1226,19 +1483,24 @@ rds compression
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e6fbe6">28</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #edfced">28</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e5fbe5">26.5</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d8f9d8">45</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">55</span>
 </td>
 </tr>
 <tr>
@@ -1249,19 +1511,24 @@ readr
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b9f4b9">15</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">15</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c2f5c2">16.0</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">52</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
 <tr>
@@ -1272,19 +1539,24 @@ readr compression
 bulk
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d1f8d1">22</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dffadf">24</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #dcf9dc">24.0</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #ffffff">68</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">66</span>
 </td>
 </tr>
 <tr>
@@ -1295,19 +1567,24 @@ fread
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9df09d">7</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">4</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #94ee94">1.7</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b8f4b8">504</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #caf6ca">704</span>
 </td>
 </tr>
 <tr>
@@ -1318,19 +1595,24 @@ feather
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a4f1a4">9</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #91ee91">3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">818</span>
 </td>
 </tr>
 <tr>
@@ -1341,19 +1623,24 @@ fst
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">1</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">6</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #e4fae4">989</span>
 </td>
 </tr>
 <tr>
@@ -1364,19 +1651,24 @@ fst compression
 limited partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #9aef9a">6</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #90ee90">0.4</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #a0f0a0">12</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">123</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ee96">123</span>
 </td>
 </tr>
 <tr>
@@ -1387,19 +1679,24 @@ sqlite
 partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #d5f8d5">23</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #96ef96">3</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.1</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #c0f5c0">31</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #b5f3b5">464</span>
 </td>
 </tr>
 <tr>
@@ -1410,30 +1707,49 @@ MonetDB
 partial
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">4</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #93ee93">2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #92ee92">1.2</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #bdf4bd">29</span>
 </td>
 <td style="text-align:center;width: 3.25cm; ">
-<span style="display: block; padding: 0 4px; border-radius: 4px; background-color: #abf2ab">360</span>
+<span
+style="display: block; padding: 0 4px; border-radius: 4px; background-color: #abf2ab">360</span>
 </td>
 </tr>
 </tbody>
 </table>
-Note that `sqlite` and `MonetDB` are the only formats here that allow careful filtering and calculate summaries without loading the whole data set (classified as a "partial" read method). So if our "pretty big data" gets "really big", those will formats will rise to the top. If you can read in all the rows without crashing R, `fread`, `feather`, and `fst` are fast!
 
-Another consideration, who are your collaborators? If everyone's using R exclusively, this table on its own is a fine way to judge what format to pick. If your collaborators are half R, half Python...you might favor `feather` since that format works well in both systems.
+Note that `sqlite` and `MonetDB` are the only formats here that allow
+careful filtering and calculate summaries without loading the whole data
+set (classified as a “partial” read method). So if our “pretty big data”
+gets “really big”, those will formats will rise to the top. If you can
+read in all the rows without crashing R, `fread`, `feather`, and `fst`
+are fast!
 
-Collecting this information has been a very useful activity for helping me understand the various options for saving and reading data in R. I tried to pick somewhat complex queries to test out the capabilities, but I acknowledge I'm not an expert on databases and file formats. I would be very happy to hear more efficient ways to perform these analyses.
+Another consideration, who are your collaborators? If everyone’s using R
+exclusively, this table on its own is a fine way to judge what format to
+pick. If your collaborators are half R, half Python…you might favor
+`feather` since that format works well in both systems.
+
+Collecting this information has been a very useful activity for helping
+me understand the various options for saving and reading data in R. I
+tried to pick somewhat complex queries to test out the capabilities, but
+I acknowledge I’m not an expert on databases and file formats. I would
+be very happy to hear more efficient ways to perform these analyses.
 
 Disclaimer
 ==========
 
-Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
+Any use of trade, firm, or product names is for descriptive purposes
+only and does not imply endorsement by the U.S. Government.
