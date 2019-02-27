@@ -29,7 +29,6 @@ knit_hooks$set(plot=function(x, options) {
 
 })
 
-
 opts_chunk$set(
   echo=TRUE,
   fig.path="static/formats/",
@@ -41,6 +40,16 @@ opts_chunk$set(
   message = FALSE,
   warnings = FALSE
 )
+
+min_bytes <- 100000
+param_cd <- "00060"
+group_col <- "statecd"
+service <- "dv"
+
+library(dplyr)
+library(readr)
+library(data.table)
+
 ```
 
 
@@ -147,7 +156,7 @@ read_group_summary <- readRDS(file_name) %>%
 ```{r rds_no_timing, echo=FALSE, cache=TRUE}
 library(microbenchmark)
 library(dplyr)
-
+invisible(gc())
 times <- 1
 min_bytes <- 100000
 param_cd <- "00060"
@@ -222,18 +231,20 @@ get_seconds <- function(timing, format){
   return(read_write)
 }
 
-read_write <- get_seconds(timing_rds,"rds")
+read_write_rds <- get_seconds(timing_rds,"rds")
+
 ```
 
-```{r rds_no_timing_print, echo=FALSE, message=FALSE}
+```{r rds_no_timing_print, echo=FALSE, message=FALSE, results="asis"}
 table_col_names <- c("Format",
                      "Read",
                      "Write",
-                     "Read & Filter",
-                     "Read & Group & Summarize")
+                     "Read &<br/>Filter",
+                     "Read & Group &<br/>Summarize")
 library(kableExtra)
 
-knitr::kable(read_write, digits = 1, 
+knitr::kable(read_write_rds, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
   
@@ -256,7 +267,7 @@ The "Read and Filter" data files will be the same process as "RDS No Compression
 
 ```{r rds_compress_output, echo=FALSE, cache=TRUE}
 file_name <- "test_compressed.rds"
-
+invisible(gc())
 timing <- microbenchmark(
   write = saveRDS(biggish, file = file_name, compress = TRUE),
   read = readRDS(file_name),
@@ -281,11 +292,11 @@ timing <- microbenchmark(
 
 read_write_rds_comp <- get_seconds(timing,"rds compression")
 
-read_write <- bind_rows(read_write, read_write_rds_comp)
 ```
 
 ```{r rds_compress_output_print, echo=FALSE}
 knitr::kable(read_write_rds_comp, digits = 1,
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -293,6 +304,8 @@ knitr::kable(read_write_rds_comp, digits = 1,
 Timing in seconds.
 
 ## readr No Compression
+
+The `readr` package fits nicely in the tidyverse. 
 
 ```{r readr, eval=FALSE}
 library(readr)
@@ -304,7 +317,7 @@ readr_df <- read_csv(file_name, progress = FALSE)
 attr(readr_df$requested_date, "tzone") <- "America/New_York"
 ```
 
-`readr` also must be read entirely in memory so "Read and Filter" times are mostly driven by "Read". If there's a known, continuous set of rows, you can use the arguments "skip" and "n_max" to pull just what you need. However, that is not flexible enough for most of our needs, so I am not including that in this evaluation.
+`readr` includes arguments "col_types" and "col_names" to only load specific columns into memory. This improves the load time if there are many columns that aren't needed. If there's a known, continuous set of rows, you can use the arguments "skip" and "n_max" to pull just what you need. However, that is not flexible enough for most of our needs, so I am not including that in this evaluation. Thanks to [Jim Hester](https://twitter.com/jimhester_) for clarifying how to use the `col_types` arguments, especially in the case of using a variable "group_col".
 
 ```{r readr_partial, eval=FALSE}
 min_bytes <- 100000
@@ -313,15 +326,24 @@ group_col <- "statecd"
 service <- "dv"
 
 # Read and Filter:
-read_filter_readr <- read_csv(file_name, progress = FALSE) %>%
+read_filter_readr <- read_csv(file_name, 
+                              progress = FALSE,
+                              col_types = cols_only("bytes" = col_integer(),
+                                            "requested_date"=col_datetime(),
+                                            "parametercds"=col_character())) %>%
   filter(bytes > !!min_bytes,
-         grepl(!!param_cd, parametercds)) %>%
-  select(bytes, requested_date, parametercds)
+         grepl(!!param_cd, parametercds)) 
 
 attr(read_filter_readr$requested_date, "tzone") <- "America/New_York"
 
 # Read and Group and Summarize:
-read_group_summary_readr <- read_csv(file_name, progress = FALSE) %>%
+read_group_summary_readr <- read_csv(file_name, 
+                                     progress = FALSE,
+                                     col_types = rlang::list2(bytes = "d",
+                                        requested_date = "T",
+                                        service = "c",
+                                        !!group_col := "c",
+                                        .default = col_skip())) %>%
   filter(service == !!service, 
          !is.na(!!sym(group_col)),
          requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -334,8 +356,9 @@ read_group_summary_readr <- read_csv(file_name, progress = FALSE) %>%
 
 ```{r readr_no_output, echo=FALSE, cache=TRUE}
 library(readr)
+library(microbenchmark)
 file_name <- "test.csv"
-
+invisible(gc())
 timing <- microbenchmark(
   write = write_csv(biggish, path = file_name),
   read = {
@@ -343,15 +366,24 @@ timing <- microbenchmark(
     attr(readr_df$requested_date, "tzone") <- "America/New_York"
   },
   filter = {
-    partial_data_rdr <- read_csv(file_name, progress = FALSE) %>%
+    partial_data_rdr <- read_csv(file_name, 
+                                 progress = FALSE,
+                              col_types = cols_only("bytes" = col_integer(),
+                                            "requested_date"=col_datetime(),
+                                            "parametercds"=col_character())) %>%
       filter(bytes > !!min_bytes,
-             grepl(!!param_cd, parametercds)) %>%
-      select(bytes, requested_date, parametercds)
+             grepl(!!param_cd, parametercds))
     
     attr(partial_data_rdr$requested_date, "tzone") <- "America/New_York"
   },
   summarize = {
-    group_summary_rdr <- read_csv(file_name, progress = FALSE) %>%
+    group_summary_rdr <- read_csv(file_name, 
+                                  progress = FALSE,
+                                  col_types = rlang::list2(bytes = "d",
+                                    requested_date = "T",
+                                    service = "c",
+                                    !!group_col := "c",
+                                    .default = col_skip())) %>%
       filter(service == !!service, 
              !is.na(!!sym(group_col)),
              requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -364,12 +396,11 @@ timing <- microbenchmark(
 
 read_write_readr <- get_seconds(timing,"readr")
 
-read_write <- bind_rows(read_write, read_write_readr)
-
 ```
 
 ```{r readr_print, echo=FALSE}
 knitr::kable(read_write_readr, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -391,7 +422,7 @@ The "Read and Filter" data files will be the same process as "readr No Compressi
 
 ```{r readr_compressed_output, echo=FALSE, cache=TRUE}
 file_name <- "test_readr.csv.gz"
-
+invisible(gc())
 timing <- microbenchmark(
   write = write_csv(biggish, path = file_name),
   read = {
@@ -399,15 +430,24 @@ timing <- microbenchmark(
     attr(readr_df$requested_date, "tzone") <- "America/New_York"
   },
   filter = {
-    partial_data_rdr <- read_csv(file_name, progress = FALSE) %>%
+    partial_data_rdr <- read_csv(file_name, 
+                                 progress = FALSE,
+                              col_types = cols_only("bytes" = col_integer(),
+                                            "requested_date"=col_datetime(),
+                                            "parametercds"=col_character())) %>%
       filter(bytes > !!min_bytes,
-             grepl(!!param_cd, parametercds)) %>%
-      select(bytes, requested_date, parametercds)
+             grepl(!!param_cd, parametercds)) 
     
     attr(partial_data_rdr$requested_date, "tzone") <- "America/New_York"
   },
   summarize = {
-    group_summary_rdr <- read_csv(file_name, progress = FALSE) %>%
+    group_summary_rdr <- read_csv(file_name, 
+                                  progress = FALSE,
+                                  col_types = rlang::list2(bytes = "d",
+                                    requested_date = "T",
+                                    service = "c",
+                                    !!group_col := "c",
+                                    .default = col_skip())) %>%
       filter(service == !!service, 
              !is.na(!!sym(group_col)),
              requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
@@ -420,13 +460,12 @@ timing <- microbenchmark(
 
 read_write_readr_comp <- get_seconds(timing,"readr compression")
 
-read_write <- bind_rows(read_write, read_write_readr_comp)
-
 ```
 
 
 ```{r readr_comp_print, echo=FALSE}
 knitr::kable(read_write_readr_comp, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -486,7 +525,7 @@ read_group_summary_fread <- fread(file_name,na.strings = "",
 library(data.table)
 library(fasttime)
 file_name <- "test.csv"
-
+invisible(gc())
 timing <- microbenchmark(
   write = fwrite(biggish, file = file_name),
   read = {
@@ -522,13 +561,12 @@ timing <- microbenchmark(
 
 read_write_fread <- get_seconds(timing,"fread")
 
-read_write <- bind_rows(read_write, read_write_fread)
-
 ```
 
 
 ```{r fread_print, echo=FALSE}
 knitr::kable(read_write_fread, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -580,7 +618,7 @@ read_group_summarize_feather <- read_feather(file_name,
 ```{r feather_output, echo=FALSE, cache=TRUE}
 library(feather)
 file_name <- "test.feather"
-
+invisible(gc())
 timing <- microbenchmark(
   write = write_feather(biggish, path = file_name),
   read = {
@@ -608,12 +646,12 @@ timing <- microbenchmark(
 
 read_write_feather <- get_seconds(timing,"feather")
 
-read_write <- bind_rows(read_write, read_write_feather)
 ```
 
 
 ```{r feather_print, echo=FALSE}
 knitr::kable(read_write_feather, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered"))
 ```
@@ -664,7 +702,7 @@ read_group_summarize_fst <- read_fst(file_name,
 ```{r fst_output, echo=FALSE, cache=TRUE}
 library(fst)
 file_name <- "test.fst"
-
+invisible(gc())
 timing <- microbenchmark(
   write = write_fst(biggish, path = file_name, compress = 0),
   read = {
@@ -692,12 +730,11 @@ timing <- microbenchmark(
 
 read_write_fst <- get_seconds(timing,"fst")
 
-read_write <- bind_rows(read_write, read_write_fst)
-
 ```
 
 ```{r fst_print, echo=FALSE}
 knitr::kable(read_write_fst, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -720,7 +757,7 @@ The "Read and Filter" and "Read and Group and Summarize" retrievals will be the 
 
 ```{r fst_comp_output, echo=FALSE, cache=TRUE}
 file_name <- "test_compressed.fst"
-
+invisible(gc())
 timing <- microbenchmark(
   write = write_fst(biggish, path = file_name, compress = 100),
   read = {
@@ -748,12 +785,11 @@ timing <- microbenchmark(
 
 read_write_fst_comp <- get_seconds(timing,"fst compression")
 
-read_write <- bind_rows(read_write, read_write_fst_comp)
-
 ```
 
 ```{r fst_comp_print, echo=FALSE}
 knitr::kable(read_write_fst_comp, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -821,7 +857,7 @@ dbDisconnect(sqldb)
 
 ```{r sqlite_output, echo=FALSE, cache=TRUE}
 library(RSQLite)
-
+invisible(gc())
 file_name <- "test.sqlite"
 sqldb <- dbConnect(SQLite(), dbname=file_name)
 
@@ -870,12 +906,11 @@ dbDisconnect(sqldb)
 
 read_write_sqlite <- get_seconds(timing,"sqlite")
 
-read_write <- bind_rows(read_write, read_write_sqlite)
-
 ```
 
 ```{r sqlite_print, echo=FALSE}
 knitr::kable(read_write_sqlite, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -944,7 +979,7 @@ dbDisconnect(con, shutdown=TRUE)
 ```{r monet_output, echo=FALSE, cache=TRUE}
 library(MonetDBLite)
 library(DBI)
-
+invisible(gc())
 file_name <- "test.monet"
 
 con <- dbConnect(MonetDBLite(), dbname = file_name)
@@ -991,12 +1026,11 @@ dbDisconnect(con, shutdown=TRUE)
 
 read_write_monet <- get_seconds(timing,"MonetDB")
 
-read_write <- bind_rows(read_write, read_write_monet)
-
 ```
 
 ```{r monet_print, echo=FALSE}
 knitr::kable(read_write_monet, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
              col.names = table_col_names) %>%
   kable_styling(c("striped", "bordered")) 
 ```
@@ -1012,10 +1046,22 @@ library(kableExtra)
 library(formattable)
 library(dplyr)
 
-tested <- c("rds","rds_compressed",
-            "readr","readr_compressed",
-            "fread","feather",
-            "fst","fst_compressed",
+#Gather up cached stuff:
+read_write <- bind_rows(read_write_rds, 
+                        read_write_rds_comp, 
+                        read_write_readr,
+                        read_write_readr_comp,
+                        read_write_fread,
+                        read_write_feather,
+                        read_write_fst,
+                        read_write_fst_comp,
+                        read_write_sqlite,
+                        read_write_monet)
+
+tested <- c("rds","rds compressed",
+            "csv (readr)","csv.gz (readr)",
+            "csv (fread)","feather",
+            "fst","fst compressed",
             "sqlite","monetDB"
             )
 file_name <- setNames(c("test.rds","test_compressed.rds",
@@ -1039,13 +1085,13 @@ read_write <- read_write %>%
          summarize = color_tile("lightgreen","white")(round(summarize, digits = 1)),
          read = color_tile("lightgreen","white")(round(read, digits = 0)),
          write = color_tile("lightgreen","white")(round(write, digits = 0)),
-         method = ifelse(format %in% c("fread","feather","fst","fst compression","vroom"),
+         method = ifelse(format %in% c("readr","readr compression","fread",
+                                       "feather","fst","fst compression","vroom"),
                          "limited partial",
                          ifelse(format %in% c("MonetDB","sqlite"), "partial", "bulk")))%>%
-  # kable_styling("hover", full_width = F) %>%
   select(format, method, read, filter, summarize, write, file_size)
-  
-fixedWidth = 150
+
+read_write$format <- tested
 
 read_write_table <- read_write %>%
   kable("html", escape = FALSE,align = "c",
@@ -1067,7 +1113,7 @@ read_write_table
 ```
 
 
-Note that `sqlite` and `MonetDB` are the only formats here that allow careful filtering and calculate summaries without loading the whole data set (classified as a "partial" read method). So if our "pretty big data" gets "really big", those will formats will rise to the top. If you can read in all the rows without crashing R, `fread`, `feather`, and `fst` are fast!
+Note that `sqlite` and `MonetDB` are the only formats here that allow careful filtering and calculate summaries without loading the whole data set (classified as a "partial" read method). So if our "pretty big data" gets "really big", those will formats will rise to the top. If you can read in all the rows without crashing R, `readr`, `fread`, `feather`, and `fst` are fast!
 
 Another consideration, who are your collaborators? If everyone's using R exclusively, this table on its own is a fine way to judge what format to pick. If your collaborators are half R, half Python...you might favor `feather` since that format works well in both systems. 
 
