@@ -2,7 +2,6 @@
 author: Laura DeCicco
 date: 2019-02-26
 slug: formats
-draft: True
 title: Working with pretty big data in R
 type: post
 categories: Data Science
