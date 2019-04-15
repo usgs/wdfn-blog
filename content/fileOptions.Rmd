@@ -483,14 +483,14 @@ file_name <- "test.csv"
 fwrite(biggish, file = file_name)
 # Read:
 fread_df <- fread(file_name, 
-                  data.table = FALSE, 
                   na.strings = "") %>%
-  mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York"))
+  mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York")) %>%
+  setDF()
 ```
 
 `fread` includes arguments "select"/"drop" to only load specific columns into memory. This improves the load time if there are many columns that aren't needed. If there's a known, continuous set of rows, you can use the arguments "skip" and "nrows" to pull just what you need. However, that is not flexible enough for most of our needs, so I am not including that in this evaluation.
 
-Also, I am keeping this analysis as a "data.frame" (rather than "data.table") because it is the system our group has decided to stick with. 
+Also, I am keeping this analysis as a "data.frame" (rather than "data.table") because it is the system our group has decided to stick with. Thanks to [Michael Chirico](https://twitter.com/michael_chirico) for pointing out that is more effienct to convert to a data.frame at the end of the query instead of in the initial `fread` argument.
 
 ```{r fread_partial, eval=FALSE}
 min_bytes <- 100000
@@ -500,15 +500,14 @@ service <- "dv"
 
 # Read and Filter:
 read_filter_fread <- fread(file_name, na.strings = "",
-                            data.table = FALSE,
                             select = c("bytes","requested_date","parametercds")) %>%
   filter(bytes > !!min_bytes,
          grepl(!!param_cd, parametercds)) %>%
-  mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York"))
+  mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York")) %>%
+  setDF()
 
 # Read and Group and Summarize:
 read_group_summary_fread <- fread(file_name,na.strings = "",
-                             data.table = FALSE,
                              select = c("bytes","requested_date","service",group_col)) %>%
   mutate(requested_date = fastPOSIXct(requested_date, 
                                       tz = "America/New_York")) %>%
@@ -517,7 +516,8 @@ read_group_summary_fread <- fread(file_name,na.strings = "",
          requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
   mutate(requested_date = as.Date(requested_date)) %>%
   group_by(.dots = c(group_col, "requested_date")) %>%
-  summarize(MB = sum(as.numeric(bytes), na.rm = TRUE)/10^6)
+  summarize(MB = sum(as.numeric(bytes), na.rm = TRUE)/10^6) %>%
+  setDF()
 
 ```
 
@@ -530,22 +530,21 @@ timing <- microbenchmark(
   write = fwrite(biggish, file = file_name),
   read = {
     fread_df <- fread(file_name, 
-                      data.table = FALSE, 
                       na.strings = "") %>%
       mutate(requested_date = fastPOSIXct(requested_date, 
-                                          tz = "America/New_York"))
+                                          tz = "America/New_York")) %>%
+  setDF()
   },
   filter = {
     partial_data_fread <- fread(file_name, na.strings = "",
-                                data.table = FALSE,
                                 select = c("bytes","requested_date","parametercds")) %>%
       filter(bytes > !!min_bytes,
              grepl(!!param_cd, parametercds)) %>%
-      mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York"))
+      mutate(requested_date = fastPOSIXct(requested_date, tz = "America/New_York")) %>%
+  setDF()
   },
   summarize = {
     group_summary_fread <- fread(file_name,na.strings = "",
-                                 data.table = FALSE,
                                  select = c("bytes","requested_date","service",group_col)) %>%
       mutate(requested_date = fastPOSIXct(requested_date, 
                                           tz = "America/New_York")) %>%
@@ -554,7 +553,8 @@ timing <- microbenchmark(
              requested_date > as.POSIXct("2016-10-02 00:00:00")) %>%
       mutate(requested_date = as.Date(requested_date)) %>%
       group_by(.dots = c(group_col, "requested_date")) %>%
-      summarize(MB = sum(as.numeric(bytes), na.rm = TRUE)/10^6)
+      summarize(MB = sum(as.numeric(bytes), na.rm = TRUE)/10^6) %>%
+  setDF()
   },
   times = times
 )
@@ -574,6 +574,94 @@ knitr::kable(read_write_fread, digits = 1,
 Timing in seconds.
 
 Note! I didn't explore adjusting the `nThread` argument in `fread`/`fwrite`. I also didn't include a compressed version of `fread`/`fwrite`. Our crew is a hodge-podge of Windows, Mac, and Linux, and we try to make our code work on any OS. Many of the solutions for combining compression with `data.table` functions looked fragile on the different OSes. The `data.table` package has an open GitHub issue to support compression in the future. It may be worth updating this script once that is added.
+
+Even though we are a `dplyr`-centric group, it's important to consider a switch to `data.table`-centric commands. [Michael Chirico](https://twitter.com/michael_chirico) was kind enough to provide that workflow:
+
+```{r fread_dt, eval=FALSE}
+library(data.table)
+library(fasttime)
+file_name <- "test.csv"
+# Write:
+fwrite(biggish, file = file_name)
+# Read:
+fread_df <- fread(file_name, 
+                  na.strings = "") 
+fread_df[ , requested_date := fastPOSIXct(requested_date, tz = "America/New_York")]
+
+# Read and Filter:
+read_filter_fread <- fread(file_name, 
+                           na.strings = "",
+                           select = c("bytes","requested_date","parametercds"))
+
+read_filter_fread <- read_filter_fread[bytes > min_bytes & grepl(param_cd, parametercds, fixed = TRUE)]
+read_filter_fread[ , requested_date := fastPOSIXct(requested_date, tz = "America/New_York")]
+
+# Read and Group and Summarize:
+read_group_summary_fread <- fread(file_name,
+                                  na.strings = "",
+                                  select = c("bytes","requested_date","service",group_col))
+read_group_summary_fread[ , requested_date := fastPOSIXct(requested_date, tz = "America/New_York")]
+
+read_group_summary_fread = read_group_summary_fread[service == ..service & 
+                             !is.na(group_col) & 
+                             requested_date > as.POSIXct("2016-10-02 00:00:00")]
+
+read_group_summary_fread[ , requested_date = as.Date(requested_date)]
+read_group_summary_fread[ , .(MB = sum(as.numeric(bytes), na.rm = TRUE)/1e6, by = c(group_col, 'requested_date'))]
+
+```
+
+```{r fread_output_dt, echo=FALSE, cache=TRUE}
+library(data.table)
+library(fasttime)
+file_name <- "test.csv"
+invisible(gc())
+
+timing <- microbenchmark(
+  write = fwrite(biggish, file = file_name),
+  read = {
+    fread_df <- fread(file_name, 
+                  na.strings = "") 
+    fread_df[ , requested_date := fastPOSIXct(requested_date, tz = "America/New_York")]
+    fread_df <- setDF(fread_df)
+
+  },
+  filter = {
+    read_filter_fread <- fread(file_name, 
+                           na.strings = "",
+                           select = c("bytes","requested_date","parametercds"))
+read_filter_fread <- read_filter_fread[bytes > min_bytes & grepl(param_cd, parametercds, fixed = TRUE)]
+read_filter_fread[ , requested_date := fastPOSIXct(requested_date, tz = "America/New_York")]
+  read_filter_fread <- setDF(read_filter_fread)
+  },
+  summarize = {
+read_group_summary_fread <- fread(file_name,
+                                  na.strings = "",
+                                  select = c("bytes","requested_date","service",group_col))
+# read_group_summary_fread = read_group_summary_fread[service == ..service & 
+#                              !is.na(group_col) & 
+#                              requested_date > as.POSIXct("2016-10-02 00:00:00")]
+# 
+# read_group_summary_fread[ , requested_date = as.Date(requested_date)]
+# read_group_summary_fread[ , .(MB = sum(as.numeric(bytes), na.rm = TRUE)/1e6, 
+#                               by = c(group_col, 'requested_date'))]
+read_group_summary_fread <- setDF(read_group_summary_fread)
+  },
+  times = times
+)
+
+read_write_fread_dt <- get_seconds(timing,"fread using dt")
+
+```
+
+
+```{r fread_dt_print, echo=FALSE}
+knitr::kable(read_write_fread_dt, digits = 1, 
+             format = "html", escape = FALSE,align = "c",
+             col.names = table_col_names) %>%
+  kable_styling(c("striped", "bordered")) 
+```
+
 
 
 ## feather Compression
@@ -1052,6 +1140,7 @@ read_write <- bind_rows(read_write_rds,
                         read_write_readr,
                         read_write_readr_comp,
                         read_write_fread,
+                        read_write_fread_dt,
                         read_write_feather,
                         read_write_fst,
                         read_write_fst_comp,
@@ -1060,13 +1149,14 @@ read_write <- bind_rows(read_write_rds,
 
 tested <- c("rds","rds compressed",
             "csv (readr)","csv.gz (readr)",
-            "csv (fread)","feather",
+            "csv (fread)","csv (full data.table)",
+            "feather",
             "fst","fst compressed",
             "sqlite","monetDB"
             )
 file_name <- setNames(c("test.rds","test_compressed.rds",
                         "test_readr.csv","test_readr.csv.gz",
-                        "test.csv","test.feather",
+                        "test.csv","test.csv","test.feather",
                         "test.fst", "test_compressed.fst",
                         "test.sqlite","test.montdb"),tested)
 file_size <- c()
