@@ -2,17 +2,18 @@
 title: "Mapping Points"
 author: "Laura DeCicco"
 slug: "mapDataRetrieval"
-date: "2019-04-17"
-image: "static/usMap/plotIt-1.jpg"
-keyword1: map
-keyword2: rstats
+date: "2019-04-15"
+image: "static/usMap/plotIt-1.png"
+tag1: "dataRetrieval"
+keyword1: "ggmap"
+keyword2: "maps"
 output: USGSmarkdowntemplates::hugo
 author_email: "ldecicco@usgs.gov"
 author_github: "ldecicco-usgs"
 author_twitter: "DeCiccoDonk"
 author_gs: "jXd0feEAAAAJ"
 author_staff: "laura-decicco"
-description: "Adding USGS water sites to a map of US including Alaska, Hawaii, and Puerto Rico."
+description:  "Adding USGS water sites to a map of US including Alaska, Hawaii, and Puerto Rico."
 editor_options: 
   chunk_output_type: console
 ---
@@ -35,7 +36,7 @@ opts_chunk$set(
   fig.cap = "TODO",
   alt.text = "TODO",
   fig.width = 7,
-  fig.height = 7,
+  fig.height = 5,
   class = "",
   message = FALSE,
   warnings = FALSE

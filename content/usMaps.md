@@ -1,12 +1,12 @@
 ---
 author: Laura DeCicco
-date: 2019-04-17
+date: 2019-04-15
 slug: mapDataRetrieval
 draft: True
 title: Mapping Points
 type: post
 categories: Data Science
-image: static/usMap/plotIt-1.jpg
+image: static/usMap/plotIt-1.png
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
@@ -16,16 +16,15 @@ author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov
 
 tags: 
   - R
+  - dataRetrieval
  
- 
-description: Adding USGS water sites to a map of US including Alaska, Hawaii, and
-Puerto Rico.
+description: Adding USGS water sites to a map of US including Alaska, Hawaii, and Puerto Rico.
 keywords:
   - R
+  - dataRetrieval
  
- 
-  - map
-  - rstats
+  - ggmap
+  - maps
 ---
 We’re often tasked with plotting sites on a U.S. map that must include
 AK, HI, and PR. The following example uses the `sp`,`maps`, `maptools`,
