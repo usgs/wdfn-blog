@@ -62,6 +62,8 @@ to_sp <- function(...){
 }
 ```
 
+Next, we have a function that scales, shifts, and rotates the "sp" objects:
+
 ```{r shift}
 shift_sp <- function(sp, scale, shift, 
                      rotate = 0, ref=sp, 
@@ -93,6 +95,8 @@ shift_sp <- function(sp, scale, shift,
 
 ```
 
+For the United States, this function will get call the `shift_sp` function on the state/territory boundaries.
+
 ```{r resetstates}
 reset_states <- function(move_variables, stuff_to_move){
   states.out <- to_sp("state")
@@ -109,6 +113,8 @@ reset_states <- function(move_variables, stuff_to_move){
 }
 
 ```
+
+This function will move the points in the states/territories.
 
 ```{r resetPoints}
 reset_points <- function(x, move_variables,stuff_to_move,
@@ -173,7 +179,8 @@ plot_points_on_map <- function(x, move_variables, stuff_to_move,
     theme_minimal() +
     theme(panel.grid = element_blank(),
           axis.text = element_blank(),
-          axis.title = element_blank())
+          axis.title = element_blank()) +
+    coord_fixed()
   
   if(scale_by_color & scale_by_size){
     gsMap <- gsMap +

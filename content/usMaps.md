@@ -18,7 +18,8 @@ tags:
   - R
   - dataRetrieval
  
-description: Adding USGS water sites to a map of US including Alaska, Hawaii, and Puerto Rico.
+description: Adding USGS water sites to a map of US including Alaska, Hawaii, and
+Puerto Rico.
 keywords:
   - R
   - dataRetrieval
@@ -47,6 +48,9 @@ to_sp <- function(...){
   return(map.sp.t)
 }
 ```
+
+Next, we have a function that scales, shifts, and rotates the “sp”
+objects:
 
 ``` r
 shift_sp <- function(sp, scale, shift, 
@@ -78,6 +82,9 @@ shift_sp <- function(sp, scale, shift,
 }
 ```
 
+For the United States, this function will get call the `shift_sp`
+function on the state/territory boundaries.
+
 ``` r
 reset_states <- function(move_variables, stuff_to_move){
   states.out <- to_sp("state")
@@ -93,6 +100,8 @@ reset_states <- function(move_variables, stuff_to_move){
   return(states.out)
 }
 ```
+
+This function will move the points in the states/territories.
 
 ``` r
 reset_points <- function(x, move_variables,stuff_to_move,
@@ -160,7 +169,8 @@ plot_points_on_map <- function(x, move_variables, stuff_to_move,
     theme_minimal() +
     theme(panel.grid = element_blank(),
           axis.text = element_blank(),
-          axis.title = element_blank())
+          axis.title = element_blank()) +
+    coord_fixed()
   
   if(scale_by_color & scale_by_size){
     gsMap <- gsMap +
