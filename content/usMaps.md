@@ -1,17 +1,11 @@
 ---
-author: Laura DeCicco
-date: 2019-04-15
+date: 2019-04-26
 slug: mapDataRetrieval
 draft: True
 title: Mapping Points
 type: post
 categories: Data Science
 image: static/usMap/plotIt-1.png
-author_twitter: DeCiccoDonk
-author_github: ldecicco-usgs
-author_gs: jXd0feEAAAAJ
-author_staff: laura-decicco
-author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov</a>
 tags: 
   - R
   - dataRetrieval
@@ -30,6 +24,8 @@ points on a map. It was greatly inspired by Bob Rudis’s blog [Moving The
 Earth (well, Alaska & Hawaii) With
 R](https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/).
 
+This blog uses the `sp` package, but significant improvements have been made in geospatial R work using the `sf` package. We would welcome examples of converting this process to `sf`.
+
 First we convert the code to some reusable functions:
 
 ``` r
@@ -45,8 +41,7 @@ to_sp <- function(...){
 }
 ```
 
-Next, we have a function that scales, shifts, and rotates the “sp”
-objects:
+Next, we have a function that scales, shifts, and rotates the “sp” objects:
 
 ``` r
 shift_sp <- function(sp, scale, shift, 
@@ -78,8 +73,7 @@ shift_sp <- function(sp, scale, shift,
 }
 ```
 
-For the United States, this function will get call the `shift_sp`
-function on the state/territory boundaries.
+For the United States, this function will get call the `shift_sp` function on the state/territory boundaries.
 
 ``` r
 reset_states <- function(move_variables, stuff_to_move){
@@ -137,10 +131,7 @@ reset_points <- function(x, move_variables,stuff_to_move,
 }
 ```
 
-Then, we create a pretty generic mapping function. This is all `ggplot2`
-code, and might be more appropriate outside of a function for complete
-customization. In this case, we want the ability to create a
-“quick-and-dirty” map.
+Then, we create a pretty generic mapping function. This is all `ggplot2` code, and might be more appropriate outside of a function for complete customization. In this case, we want the ability to create a “quick-and-dirty” map.
 
 ``` r
 plot_points_on_map <- function(x, move_variables, stuff_to_move,
@@ -233,10 +224,7 @@ plot_points_on_map(x, move_variables, stuff_to_move)
 
 <img src='/static/usMap/fakePoints-1.png'/ title='US map including AK, HI, and PR with fake data to test mapping function.' alt='Sample US map including AK, HI, and PR.' />
 
-Now, let’s get some data from `dataRetrieval`. We’ll call the “site”
-service using `readNWISdata`, only pulling stream sites that have
-measured “Phosphorus, water, unfiltered, milligrams per liter as
-phosphorus” at least 100 times over at least 10 years:
+Now, let’s get some data from `dataRetrieval`. We’ll call the “site” service using `readNWISdata`, only pulling stream sites that have measured “Phosphorus, water, unfiltered, milligrams per liter as phosphorus” at least 100 times over at least 10 years:
 
 ``` r
 library(dataRetrieval)
