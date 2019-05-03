@@ -1,6 +1,5 @@
 ---
 title: "Mapping Points"
-author: "Laura DeCicco"
 slug: "mapDataRetrieval"
 date: "2019-04-15"
 image: "static/usMap/plotIt-1.png"
@@ -8,11 +7,6 @@ tag1: "dataRetrieval"
 keyword1: "ggmap"
 keyword2: "maps"
 output: USGSmarkdowntemplates::hugo
-author_email: "ldecicco@usgs.gov"
-author_github: "ldecicco-usgs"
-author_twitter: "DeCiccoDonk"
-author_gs: "jXd0feEAAAAJ"
-author_staff: "laura-decicco"
 description:  "Adding USGS water sites to a map of US including Alaska, Hawaii, and Puerto Rico."
 editor_options: 
   chunk_output_type: console
@@ -46,6 +40,8 @@ opts_chunk$set(
 ```
 
 We're often tasked with plotting sites on a U.S. map that must include AK, HI, and PR. The following example uses the `sp`,`maps`, `maptools`, `rgeos`, and `ggplot2` packages to produce the information to plot points on a map. It was greatly inspired by Bob Rudis's blog [Moving The Earth (well, Alaska & Hawaii) With R](https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/).
+
+This blog uses the `sp` package, but significant improvements have been made in geospatial R work using the `sf` package. We would welcome examples of converting this process to `sf`.
 
 First we convert the code to some reusable functions:
 
