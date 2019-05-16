@@ -6,25 +6,24 @@ draft: True
 title: Plotting water level data in R
 type: post
 categories: Data Science
-image: static/ggplot2/use-functions-1.png
  
- 
- 
- 
- 
+
+
+
+
 author_email: <bbreaker@usgs.gov>
 
-tags: 
+tags:
   - R
   - geoknife
- 
+
 description: Using ggplot2 to create the start of a UGSG theme.
 keywords:
   - R
   - geoknife
- 
- 
- 
+
+
+
 ---
 Get Started
 ===========
@@ -46,8 +45,8 @@ library(RCurl)
 
 # add USGS theme for plots
 theme_USGS <-  function(base_size = 8){theme(
-  plot.title = element_text (vjust = 3, size = 9,family="serif"), 
-  #plot.margin = unit (c(5.5, 5, 5.5, 5), "lines"), 
+  plot.title = element_text (vjust = 3, size = 9,family="serif"),
+  #plot.margin = unit (c(5.5, 5, 5.5, 5), "lines"),
   panel.border = element_rect (colour = "black", fill = F, size = 0.1),
   panel.grid.major = element_blank (),
   panel.grid.minor = element_blank (),
@@ -60,9 +59,9 @@ theme_USGS <-  function(base_size = 8){theme(
   legend.text = element_text (size = 8),
   axis.title.x = element_text (size = 9, family="serif"),
   axis.title.y = element_text (vjust = 1, angle = 90, size = 9, family="serif"),
-  axis.text.x = element_text (size = 8, vjust = -0.25, colour = "black", 
+  axis.text.x = element_text (size = 8, vjust = -0.25, colour = "black",
                               family="serif", margin=margin(10,5,20,5,"pt")),
-  axis.text.y = element_text (size = 8, hjust = 1, colour = "black", 
+  axis.text.y = element_text (size = 8, hjust = 1, colour = "black",
                               family="serif", margin=margin(5,10,10,5,"pt")),
   axis.ticks = element_line (colour = "black", size = 0.1),
   axis.ticks.length = unit(-0.25 , "cm"),
@@ -73,7 +72,7 @@ theme_USGS <-  function(base_size = 8){theme(
 drawTicks <- function(plots, n = 1) {
   if(n == 1) {
     p1 <- ggplot_gtable(ggplot_build(plots))
-    panel <-c(subset(p1$layout, name=="panel", se=t:r)) 
+    panel <-c(subset(p1$layout, name=="panel", se=t:r))
     rn <- which(p1$layout$name == "axis-b")
     axis.grob <- p1$grobs[[rn]]
     axisb <- axis.grob$children[[2]]  
@@ -81,15 +80,15 @@ drawTicks <- function(plots, n = 1) {
     xaxis$y = xaxis$y - unit(0.25, "cm")  
     p1 <- gtable_add_rows(p1, unit(0, "lines"), panel$t-1)
     p1 <- gtable_add_grob(p1, xaxis, l = panel$l, t = panel$t, r = panel$r, name = "ticks")
-    panel <-c(subset(p1$layout, name=="panel", se=t:r)) 
+    panel <-c(subset(p1$layout, name=="panel", se=t:r))
     rn <- which(p1$layout$name == "axis-l")
-    axis.grob <- p1$grobs[[rn]] 
+    axis.grob <- p1$grobs[[rn]]
     axisl <- axis.grob$children[[2]]  
-    yaxis = axisl$grobs[[2]] 
-    yaxis$x = yaxis$x - unit(0.25, "cm") 
-    p1 <- gtable_add_cols(p1, unit(0, "lines"), panel$r) 
+    yaxis = axisl$grobs[[2]]
+    yaxis$x = yaxis$x - unit(0.25, "cm")
+    p1 <- gtable_add_cols(p1, unit(0, "lines"), panel$r)
     p1 <- gtable_add_grob(p1, yaxis, t = panel$t, l = panel$r+1, name = "ticks")
-    p1$layout[p1$layout$name == "ticks", ]$clip = "off" 
+    p1$layout[p1$layout$name == "ticks", ]$clip = "off"
     maxWidth = unit.pmax(p1$widths[2:3])
     p1$widths[2:3] <- maxWidth
     g <- grid.arrange (p1, ncol=1)
@@ -97,7 +96,7 @@ drawTicks <- function(plots, n = 1) {
   else if(n > 1) {
     for(i in seq(1, n, 1)) {
       p0 <- ggplot_gtable(ggplot_build(get(plots[i])))
-      panel <-c(subset(p0$layout, name=="panel", se=t:r)) 
+      panel <-c(subset(p0$layout, name=="panel", se=t:r))
       rn <- which(p0$layout$name == "axis-b")
       axis.grob <- p0$grobs[[rn]]
       axisb <- axis.grob$children[[2]]  
@@ -105,15 +104,15 @@ drawTicks <- function(plots, n = 1) {
       xaxis$y = xaxis$y - unit(0.25, "cm")  
       p0 <- gtable_add_rows(p0, unit(0, "lines"), panel$t-1)
       p0 <- gtable_add_grob(p0, xaxis, l = panel$l, t = panel$t, r = panel$r, name = "ticks")
-      panel <-c(subset(p0$layout, name=="panel", se=t:r)) 
+      panel <-c(subset(p0$layout, name=="panel", se=t:r))
       rn <- which(p0$layout$name == "axis-l")
-      axis.grob <- p0$grobs[[rn]] 
+      axis.grob <- p0$grobs[[rn]]
       axisl <- axis.grob$children[[2]]  
-      yaxis = axisl$grobs[[2]] 
-      yaxis$x = yaxis$x - unit(0.25, "cm") 
-      p0 <- gtable_add_cols(p0, unit(0, "lines"), panel$r) 
+      yaxis = axisl$grobs[[2]]
+      yaxis$x = yaxis$x - unit(0.25, "cm")
+      p0 <- gtable_add_cols(p0, unit(0, "lines"), panel$r)
       p0 <- gtable_add_grob(p0, yaxis, t = panel$t, l = panel$r+1, name = "ticks")
-      p0$layout[p0$layout$name == "ticks", ]$clip = "off" 
+      p0$layout[p0$layout$name == "ticks", ]$clip = "off"
       maxWidth = unit.pmax(p0$widths[2:3])
       p0$widths[2:3] <- maxWidth
       assign(paste0("p", i), p0, envir = .GlobalEnv)
@@ -134,13 +133,13 @@ lm_eqn <- function(m, site) {
             b = format(abs(coef(m)[2]), digits = 2),
             r2 = format(summary(m)$r.squared, digits = 3),
             site = paste("USGS", site));
-  
+
   if (coef(m)[2] >= 0)  {
     eq <- substitute(italic(y) == a + b~italic(x)*","~~italic(r)^2~"="~r2*","~~site,l)
   } else {
     eq <- substitute(italic(y) == a - b~italic(x)*","~~italic(r)^2~"="~r2*","~~site,l)    
   }
-  
+
   as.character(as.expression(eq));                 
 }
 ```
@@ -169,8 +168,8 @@ Display site info
 </iframe>
 ``` r
 # merge water levels and alitudes
-gwLevs <- merge(x = gwLevs, y = infoNew, 
-                by = "site_no", 
+gwLevs <- merge(x = gwLevs, y = infoNew,
+                by = "site_no",
                 all.x = TRUE)
 
 # add msl value to data frame of readings
@@ -192,7 +191,7 @@ newPlot <- ggplot(data = subDF, aes(x = lev_dt, y = watAlt)) +
   geom_point() +
   scale_y_continuous() +
   stat_smooth(method = "lm") +
-  annotate("text", x = mean(subDF$lev_dt), y = 0.995*max(subDF$watAlt), 
+  annotate("text", x = mean(subDF$lev_dt), y = 0.995*max(subDF$watAlt),
            label=lm_eqn(lm(watAlt ~ lev_dt, subDF), sites[j]), parse=TRUE,
            family = "serif", size = 3) +
   labs(y = "Water Level Altitude,\nin feet above NAVD88", x = "Date") +
@@ -221,7 +220,7 @@ Bonus round, make a pretty map of the sites.
 ``` r
 # create a map of the site locations
 # create a vector for the bounding box
-forLocation <- c(min(info$dec_long_va) - 0.25, min(info$dec_lat_va) - 0.25, 
+forLocation <- c(min(info$dec_long_va) - 0.25, min(info$dec_lat_va) - 0.25,
                  max(info$dec_long_va) + 0.25, max(info$dec_lat_va) + 0.25)
 
 # create a base map using the lat/long coordinates in the spatialPointsDataFrame

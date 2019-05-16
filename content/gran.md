@@ -6,18 +6,18 @@ draft: True
 title: The US Geological Survey R Archive Network - GRAN
 type: post
 categories: Data Science
-image: images/USGS_R.png
+image: static/gran/usgs-r-logo.png
 
-tags: 
+tags:
   - R
   - R repository
- 
+
 description: Description of the reason and development of grantools, an R package to help with the updating of GRAN.
 keywords:
   - R
-  - R repository 
+  - R repository
   - automated builds of R repository
- 
+
 ---
 Introduction / Motivation
 -------------------------
@@ -62,7 +62,7 @@ rprofile_path = file.path(Sys.getenv("HOME"), ".Rprofile")
 write('\noptions(repos=c(getOption(\'repos\'),
     CRAN=\'https://cloud.r-project.org\',
     USGS=\'https://owi.usgs.gov/R\'))\n',
-      rprofile_path, 
+      rprofile_path,
       append =  TRUE)
 ```
 
@@ -115,7 +115,7 @@ A R repository has a perscribed format. It needs source packages (generally for 
              - packagefoo.zip
              - packagebar.zip
              - PACKAGES
-             - PACKAGES.gz 
+             - PACKAGES.gz
    - macosx
       - mavericks
          - contrib
