@@ -81,6 +81,8 @@ A Dockerfile and Docker Compose configuration is provided that is capable of run
 
 ## Local development
 
+### Local development using Docker
+
 Using `docker-compose`, you may run a development server on http://localhost:1313:
 
 ```bash
@@ -89,7 +91,15 @@ docker-compose up
 
 The default server instance will include draft articles.
 
+If the site on http://localhost:1313 is missing various static files, you may need to first run the following command to rebuild assets:
 
+```bash
+docker-compose run hugo build --buildDrafts
+```
+
+Once that is done, you can use `docker-compose up` to start the development server again.
+
+### Local development without using Docker
 To test without docker, you must have Hugo and node.js installed. Then, from the terminal you can run:
 
 Only need to do once to get node.js running:
