@@ -1,6 +1,6 @@
 ---
 author: Emily Read
-date: 2019-05-15
+date: 2019-05-21
 slug: wdfn-firstlook
 draft: True
 type: post
@@ -8,6 +8,7 @@ title: "First Look: Real-Time Data Pages Comments and Analytics"
 author_github: eread-usgs
 author_staff: emily-k-read
 author_email: <eread@usgs.gov>
+author_twitter: emilykararead
 categories:
   - Applications
 description: A summary of the feedback shared by users on the beta real-time data pages in the spring of 2019
@@ -15,6 +16,7 @@ keywords:
   - water information
 tags:
   - Water Data for the Nation
+image:static/wdfn-tng/Beta_realtime_outdoor.png
 
 Users spoke; we're listening.
 ------
