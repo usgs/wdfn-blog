@@ -4,7 +4,7 @@ date: 2019-05-21
 slug: wdfn-firstlook
 draft: True
 type: post
-title: "First Look: Real-Time Data Pages Comments and Analytics"
+title: "WDFN: Users spoke and we're listening"
 author_github: eread-usgs
 author_staff: emily-k-read
 author_email: <eread@usgs.gov>
@@ -16,9 +16,12 @@ keywords:
   - water information
 tags:
   - Water Data for the Nation
-image:static/wdfn-tng/Beta_realtime_outdoor.png
+image: static/wdfn-tng/Beta_realtime_outdoor.png
 
-Users spoke; we're listening.
+---
+
+
+First Look: Real-Time Data Pages Comments and Analytics
 ------
 
 
