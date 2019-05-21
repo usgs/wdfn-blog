@@ -45,7 +45,7 @@ Just who submitted feedback? We know that about ⅓ of comments came from USGS u
 * Hydrologist, Hydrographer, or Hydrologic Technician
 * Water Manager
 * Resident of flood-prone area
-* Fisherman
+* Angler
 * Whitewater rafting company proprietor
 * Self-described “average citizen” who monitors local river conditions
 
