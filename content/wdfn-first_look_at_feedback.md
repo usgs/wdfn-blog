@@ -1,13 +1,14 @@
 ---
 author: Emily Read
-date: 2019-05-15
+date: 2019-05-21
 slug: wdfn-firstlook
 draft: True
 type: post
-title: "First Look: Real-Time Data Pages Comments and Analytics"
+title: "WDFN: Users spoke and we're listening"
 author_github: eread-usgs
 author_staff: emily-k-read
 author_email: <eread@usgs.gov>
+author_twitter: emilykararead
 categories:
   - Applications
 description: A summary of the feedback shared by users on the beta real-time data pages in the spring of 2019
@@ -15,14 +16,20 @@ keywords:
   - water information
 tags:
   - Water Data for the Nation
+image: static/wdfn-tng/Beta_realtime_outdoor.png
 
 ---
+
+
 First Look: Real-Time Data Pages Comments and Analytics
-=======
+------
+
 
 A few months ago, the USGS launched a re-designed real-time water page on [waterdata.usgs.gov](https://waterdata.usgs.gov). [Here is an example of a new page](https://waterdata.usgs.gov/monitoring-location/09380000/).
 
 We asked for your feedback and you delivered! Thanks to all of you who visited the new pages and shared your thoughts with us.
+
+<img src='/static/wdfn-tng/Beta_realtime_outdoor.png'/ title='USGS mobile-friendly real time data page' alt='User holding mobile device showing realtime data page' />
 
 **Feedback and Usage by the Numbers**
 
@@ -41,7 +48,7 @@ Just who submitted feedback? We know that about ⅓ of comments came from USGS u
 * Hydrologist, Hydrographer, or Hydrologic Technician
 * Water Manager
 * Resident of flood-prone area
-* Fisherman
+* Angler
 * Whitewater rafting company proprietor
 * Self-described “average citizen” who monitors local river conditions
 
