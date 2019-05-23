@@ -1,8 +1,7 @@
 ---
 author: Emily Read
-date: 2019-05-21
+date: 2019-05-23
 slug: wdfn-firstlook
-draft: True
 type: post
 title: "WDFN: Users spoke and we're listening"
 author_github: eread-usgs
