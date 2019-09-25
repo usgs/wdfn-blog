@@ -15,20 +15,15 @@ keywords:
   - water information
 tags:
   - Water Data for the Nation
-image: static/wdfn-tng/Beta_realtime_outdoor.png
+image: static/wdfn-firstlook/Beta_realtime_outdoor.png
 
 ---
-
-
-First Look: Real-Time Data Pages Comments and Analytics
-------
-
 
 A few months ago, the USGS launched a re-designed real-time water page on [waterdata.usgs.gov](https://waterdata.usgs.gov). [Here is an example of a new page](https://waterdata.usgs.gov/monitoring-location/09380000/).
 
 We asked for your feedback and you delivered! Thanks to all of you who visited the new pages and shared your thoughts with us.
 
-<img src='/static/wdfn-tng/Beta_realtime_outdoor.png'/ title='USGS mobile-friendly real time data page' alt='User holding mobile device showing realtime data page' />
+<img src='/static/wdfn-firstlook/Beta_realtime_outdoor.png'/ title='USGS mobile-friendly real time data page' alt='User holding mobile device showing realtime data page' />
 
 **Feedback and Usage by the Numbers**
 
