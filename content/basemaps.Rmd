@@ -162,7 +162,7 @@ htmlwidgets::saveWidget(map, "map.html")
 setwd(wd)
 ```
 
-<iframe seamless src="/static/basemaps/map/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="/static/basemaps/map/index.html" width="100%" height="500" frameborder="0"></iframe>
 
 Some users have reported that base maps do not render correctly in the
 [RStudio](https://www.rstudio.com/) viewer.
@@ -175,6 +175,6 @@ print(map)
 
 And let's not forget the R session information.
 
-```{r echo=TRUE}
-print(utils::sessionInfo())
+```{r echo=FALSE}
+devtools::session_info()
 ```

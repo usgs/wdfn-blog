@@ -167,7 +167,7 @@ print(map)
 
 
 
-<iframe seamless src="/static/basemaps/map/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="/static/basemaps/map/index.html" width="100%" height="500" frameborder="0"></iframe>
 
 Some users have reported that base maps do not render correctly in the
 [RStudio](https://www.rstudio.com/) viewer.
@@ -182,36 +182,85 @@ print(map)
 And let's not forget the R session information.
 
 
-```r
-print(utils::sessionInfo())
 ```
-
-```
-## R version 3.3.3 (2017-03-06)
-## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 14393)
+## - Session info ----------------------------------------------------------
+##  setting  value                       
+##  version  R version 3.5.1 (2018-07-02)
+##  os       Windows 10 x64              
+##  system   x86_64, mingw32             
+##  ui       Rgui                        
+##  language (EN)                        
+##  collate  English_United States.1252  
+##  ctype    English_United States.1252  
+##  tz       America/Los_Angeles         
+##  date     2018-11-08                  
 ## 
-## locale:
-## [1] LC_COLLATE=English_United States.1252 
-## [2] LC_CTYPE=English_United States.1252   
-## [3] LC_MONETARY=English_United States.1252
-## [4] LC_NUMERIC=C                          
-## [5] LC_TIME=English_United States.1252    
+## - Packages --------------------------------------------------------------
+##  package       * version date       lib source        
+##  assertthat      0.2.0   2017-04-11 [1] CRAN (R 3.5.1)
+##  backports       1.1.2   2017-12-13 [1] CRAN (R 3.5.0)
+##  base64enc       0.1-3   2015-07-28 [1] CRAN (R 3.5.0)
+##  bindr           0.1.1   2018-03-13 [1] CRAN (R 3.5.1)
+##  bindrcpp        0.2.2   2018-03-29 [1] CRAN (R 3.5.1)
+##  callr           3.0.0   2018-08-24 [1] CRAN (R 3.5.1)
+##  cli             1.0.1   2018-09-25 [1] CRAN (R 3.5.1)
+##  crayon          1.3.4   2017-09-16 [1] CRAN (R 3.5.1)
+##  crosstalk       1.0.0   2016-12-21 [1] CRAN (R 3.5.1)
+##  curl            3.2     2018-03-28 [1] CRAN (R 3.5.1)
+##  dataRetrieval   2.7.4   2018-05-09 [1] local         
+##  debugme         1.1.0   2017-10-22 [1] CRAN (R 3.5.1)
+##  desc            1.2.0   2018-05-01 [1] CRAN (R 3.5.1)
+##  devtools        2.0.1   2018-10-26 [1] CRAN (R 3.5.1)
+##  digest          0.6.18  2018-10-10 [1] CRAN (R 3.5.1)
+##  dplyr           0.7.7   2018-10-16 [1] CRAN (R 3.5.1)
+##  evaluate        0.12    2018-10-09 [1] CRAN (R 3.5.1)
+##  fs              1.2.6   2018-08-23 [1] CRAN (R 3.5.1)
+##  glue            1.3.0   2018-07-17 [1] CRAN (R 3.5.1)
+##  hms             0.4.2   2018-03-10 [1] CRAN (R 3.5.1)
+##  htmltools       0.3.6   2017-04-28 [1] CRAN (R 3.5.1)
+##  htmlwidgets     1.3     2018-09-30 [1] CRAN (R 3.5.1)
+##  httpuv          1.4.5   2018-07-19 [1] CRAN (R 3.5.1)
+##  httr            1.3.1   2017-08-20 [1] CRAN (R 3.5.1)
+##  jsonlite        1.5     2017-06-01 [1] CRAN (R 3.5.1)
+##  knitr           1.20    2018-02-20 [1] CRAN (R 3.5.1)
+##  later           0.7.5   2018-09-18 [1] CRAN (R 3.5.1)
+##  lattice         0.20-38 2018-11-04 [1] CRAN (R 3.5.1)
+##  leaflet         2.0.2   2018-08-27 [1] CRAN (R 3.5.1)
+##  lubridate       1.7.4   2018-04-11 [1] CRAN (R 3.5.1)
+##  magrittr        1.5     2014-11-22 [1] CRAN (R 3.5.1)
+##  memoise         1.1.0   2017-04-21 [1] CRAN (R 3.5.1)
+##  mime            0.6     2018-10-05 [1] CRAN (R 3.5.1)
+##  pillar          1.3.0   2018-07-14 [1] CRAN (R 3.5.1)
+##  pkgbuild        1.0.2   2018-10-16 [1] CRAN (R 3.5.1)
+##  pkgconfig       2.0.2   2018-08-16 [1] CRAN (R 3.5.1)
+##  pkgload         1.0.2   2018-10-29 [1] CRAN (R 3.5.1)
+##  plyr            1.8.4   2016-06-08 [1] CRAN (R 3.5.1)
+##  prettyunits     1.0.2   2015-07-13 [1] CRAN (R 3.5.1)
+##  processx        3.2.0   2018-08-16 [1] CRAN (R 3.5.1)
+##  promises        1.0.1   2018-04-13 [1] CRAN (R 3.5.1)
+##  ps              1.2.1   2018-11-06 [1] CRAN (R 3.5.1)
+##  purrr           0.2.5   2018-05-29 [1] CRAN (R 3.5.1)
+##  R6              2.3.0   2018-10-04 [1] CRAN (R 3.5.1)
+##  Rcpp            1.0.0   2018-11-07 [1] CRAN (R 3.5.1)
+##  readr           1.1.1   2017-05-16 [1] CRAN (R 3.5.1)
+##  remotes         2.0.2   2018-10-30 [1] CRAN (R 3.5.1)
+##  reshape2        1.4.3   2017-12-11 [1] CRAN (R 3.5.1)
+##  rgdal           1.3-6   2018-10-16 [1] CRAN (R 3.5.1)
+##  rlang           0.3.0.1 2018-10-25 [1] CRAN (R 3.5.1)
+##  rprojroot       1.3-2   2018-01-03 [1] CRAN (R 3.5.1)
+##  sessioninfo     1.1.1   2018-11-05 [1] CRAN (R 3.5.1)
+##  shiny           1.2.0   2018-11-02 [1] CRAN (R 3.5.1)
+##  sp              1.3-1   2018-06-05 [1] CRAN (R 3.5.1)
+##  stringi         1.2.4   2018-07-20 [1] CRAN (R 3.5.1)
+##  stringr         1.3.1   2018-05-10 [1] CRAN (R 3.5.1)
+##  testthat        2.0.1   2018-10-13 [1] CRAN (R 3.5.1)
+##  tibble          1.4.2   2018-01-22 [1] CRAN (R 3.5.1)
+##  tidyselect      0.2.5   2018-10-11 [1] CRAN (R 3.5.1)
+##  usethis         1.4.0   2018-08-14 [1] CRAN (R 3.5.1)
+##  withr           2.1.2   2018-03-15 [1] CRAN (R 3.5.1)
+##  xml2            1.2.0   2018-01-24 [1] CRAN (R 3.5.1)
+##  xtable          1.8-3   2018-08-29 [1] CRAN (R 3.5.1)
+##  yaml            2.2.0   2018-07-25 [1] CRAN (R 3.5.1)
 ## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.10        xml2_1.1.1          knitr_1.15.1       
-##  [4] magrittr_1.5        hms_0.3             lattice_0.20-35    
-##  [7] xtable_1.8-2        R6_2.2.0            plyr_1.8.4         
-## [10] stringr_1.2.0       httr_1.2.1          dplyr_0.5.0        
-## [13] tools_3.3.3         rgdal_1.2-6         grid_3.3.3         
-## [16] DBI_0.6-1           htmltools_0.3.5     crosstalk_1.0.0    
-## [19] yaml_2.1.14         dataRetrieval_2.6.7 leaflet_1.1.0      
-## [22] digest_0.6.12       assertthat_0.1      tibble_1.3.0       
-## [25] shiny_1.0.1         reshape2_1.4.2      readr_1.1.0        
-## [28] htmlwidgets_0.8     curl_2.4            evaluate_0.10      
-## [31] mime_0.5            sp_1.2-4            stringi_1.1.5      
-## [34] jsonlite_1.4        lubridate_1.6.0     httpuv_1.3.3
+## [1] C:/Users/jfisher/Tools/R/R-3.5.1/library
 ```
