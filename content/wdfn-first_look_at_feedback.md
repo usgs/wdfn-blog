@@ -17,8 +17,6 @@ tags:
   - Water Data for the Nation
 
 ---
-First Look: Real-Time Data Pages Comments and Analytics
-=======
 
 A few months ago, the USGS launched a re-designed real-time water page on [waterdata.usgs.gov](https://waterdata.usgs.gov). [Here is an example of a new page](https://waterdata.usgs.gov/monitoring-location/09380000/).
 

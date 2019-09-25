@@ -1,16 +1,16 @@
 ---
 author: Jim Kreft
-date: 2019-09-12
-slug: iow_wateryear_2019_sprint_22
-draft: True
+date: 2019-09-25
+slug: release-notes-2019-09-25
+draft: False
 type: post
-title: ""
+title: "Release Notes for September 25, 2019"
 author_github: jkreft-usgs
 author_staff: james-m-kreft
 author_email: <jkreft@usgs.gov>
 categories:
   - Applications
-description: A summary of new features and tools released in this sprint
+description: A summary of new features and tools released on September 25, 2019
 keywords:
   - water information
 tags:
@@ -19,67 +19,84 @@ tags:
 
 ---
 
-# Release Notes
-
 ## What have we been up to?
 
-This is the first of regular posts that will go over newly released features of projects that are in the Internet of Water family of applications.  The team that generates Internet of Water applications is aiming to get into a pattern of regular releases- every two weeks or less, of small improvements and new features.  The applications that we have been working on include the [Water Quality Portal](https://www.waterqualitydata.us/). the [National Groundwater Monitoring Network](https://cida.usgs.gov/ngwmn/) and the [USGS Publications Warehouse](https://pubs.er.usgs.gov/).
+This is the first of a series of posts in which newly released features in the Water Data for the Nation family of applications are described. The team that generates Water Data for the Nation applications is aiming to get into a pattern of regular releases -- every two weeks or less--of small improvements and new features. In addition to core USGS water data tools on [waterdata.usgs.gov](https://waterdata.usgs.gov/nwis) and [waterservices.usgs.gov,](https://waterservices.usgs.gov/) the applications that we have or will be working on include the [Water Quality Portal](https://www.waterqualitydata.us/), the [National Groundwater Monitoring Network](https://cida.usgs.gov/ngwmn/) and the [USGS Publications Warehouse](https://pubs.er.usgs.gov/).
 
 ## New features and tools
 
 ### Monitoring Location pages
 
 #### Custom Time Ranges
-One of the most requested features of the new pages was the ability to display a custom time range, instead of the three current choices of 7 days, 30 days, and one year.  This is now possible- you can choose any time range that you would like.
 
-# screenshot of custom time ranges
+Out of the [hundreds of comments submitted by users](https://waterdata.usgs.gov/blog/wdfn-firstlook/) on the new real-time data pages, one of the most requested features of the new pages was the ability to display a custom time range, in addition to the three current choices of seven days, 30 days, and one year. This is now possible- users can choose any time range desired.
 
-This is just the beginning of this feature, and we plan to add additional features such as validation of period of record and letting users know how large of a time range that they could choose would be, as well as more effective tools to allow for navigating
+{{< figure src="/static/release-notes-2019-09-25/long-time-period.png" alt="Graph showing three years of discharge data at USGS monitoring location 05428500, Yahara River at East Main Street at Madison, WI" title="Graph showing three years of discharge data at USGS monitoring location 05428500, Yahara River at East Main Street at Madison, WI" >}}
+
+There is still a lot to do on these hydrographs, and we plan to add additional features such as validation of period of record and letting users know the maximum time range available, as well as more effective tools to allow for interacting with the plots and drilling down into the details of the data.
 
 #### Upstream and downstream monitoring locations
-Another commonly requested feature is the ability to navigate to upstream and downstream monitoring locations.  We now have this feature for every active surface water site!  if you navigate to the map, we display all monitoring locations upstream and downstream on the main stem of the stream of the current monitoring location.  
 
-# Screenshot of upstream downstream
+Another commonly requested feature is the ability to navigate along a stream to upstream and downstream monitoring locations. We now have this feature for every active surface water site! If you navigate to the map towards the bottom of a monitoring location page, we display all active monitoring locations with time series data 200 miles upstream and downstream on the main stem of the stream of the current monitoring location.
 
-This feature is made possible by a tool called the [Hydro-Network Linked Data Index](https://labs.waterdata.usgs.gov/about-nldi/) In the near future, we are expecting to extend this feature to include all upstream monitoring locations and basins (as well as basin characteristics).  
-
-#### Flipped axis for Groundwater levels
-
-Groundwater levels at the USGS are typically measured as the water level in feet below the land surface, rather than as a negative elevation.  As a result, the graphs that we have been generating for ground water sites have been effectively "upside down:" when the level of the water when down, the graph would go up- and vice-versa.  We have now taken care of this by simply following the convention of flipping the axis.   
-
-# screenshot of Groundwater before, and groundwater after
-
-Groundwater data display is an area that we expect to significantly extend in the coming months- again, this is a very first step.
-
-#### Real-time cameras at monitoring locations
-
-The USGS has been deploying cameras at monitoring locations for some time, but they have not been a clear part of the monitoring location page or the previous site pages until now.  This implementation is a clear minimum viable product, but it is absolutely a start.  
+{{< figure src="/static/release-notes-2019-09-25/upstream-downstream.png" alt="Map showing monitoring locations upstream and downstream of USGS monitoring location 05428500, Yahara River at East Main Street at Madison, WI" title="Map showing monitoring locations upstream and downstream of USGS monitoring location 05428500, Yahara River at East Main Street at Madison, WI" >}}
 
 
-Cameras are going to play a key role in the future of water data monitoring at the USGS, as we build out the next generation water observing systems.  
+This feature is made possible by a tool called the [Hydro-Network Linked Data Index](https://waterdata.usgs.gov/blog/nldi-intro/) (NLDI). In the near future, we are expecting to extend this feature to include all upstream monitoring locations and basins (as well as basin characteristics).
+
+#### Flipped axis for groundwater levels
+
+Groundwater levels at the USGS are typically measured as the water level in feet below the land surface, rather than as a negative elevation. As a result, the graphs that we have been generating for ground water sites have been effectively "upside down": when the level of the water was down with respect to the surface of the earth, the graph would go up- and vice-versa. We have now taken care of this by simply following the convention of flipping the axis.
+
+Previously, one year of data at [a site](https://waterdata.usgs.gov/monitoring-location/370812080261901/) with the data "upside down."  The level of water in the well is actually going down from March through September, not up.
+
+{{< figure src="/static/release-notes-2019-09-25/upside-down-groundwater.png" alt="One year of water levels measured as Depth to water level, feet below land surface, at USGS Monitoring Location 370812080261901, 27F 2 SOW 019, without the Y axis flipped." title="One year of water levels measured as Depth to water level, feet below land surface, at USGS Monitoring Location 370812080261901, 27F 2 SOW 019, without the Y axis flipped." >}}
+Now, the axis is flipped, the water level is "right side up", and it is easier to see the fact that the water level is going down, away from the land surface, in this well.
+
+{{< figure src="/static/release-notes-2019-09-25/right-side-up-groundwater.png" alt="One year of water levels measured as Depth to water level, feet below land surface, at USGS Monitoring Location 370812080261901, 27F 2 SOW 019, with the Y axis flipped." title="One year of water levels measured as Depth to water level, feet below land surface, at USGS Monitoring Location 370812080261901, 27F 2 SOW 019, with the Y axis flipped." >}}
+
+Groundwater data display is an area that we will significantly extend in the coming months.  For a view into the future of groundwater data display at the USGS, please take a look at the [same site](https://cida.usgs.gov/ngwmn/provider/USGS/site/370812080261901/) as above in the [National Groundwater Monitoring Network Data Porta](https://cida.usgs.gov/ngwmn/)[l](https://cida.usgs.gov/ngwmn/), another site that the USGS Water Data for the Nation development team works on. Technologies and data displays piloted in the National Groundwater Monitoring Network will be leveraged here.
 
 ### Initial roll-out of Water Data Labs
 
-_While labs will warrant another follow-up post, I will give a quick overview here._  
+*While labs will warrant another follow-up post, I will give a quick overview here.*
 
-Water Data Labs is an experimental space where the USGS Internet of Water development team is able to learn how to run new kinds of cloud-native, high performance tools that will form the basis of the future of Water Data for the Nation.  In addition to cloud experimentation, we are planning on using labs to make available a variety of other tools:
+[Water Data Labs](https://labs.waterdata.usgs.gov/) is an experimental space where the USGS Water Data for the Nation  development team is able to learn how to run new kinds of cloud-native, high performance tools that will form the basis of the future of Water Data for the Nation products. In addition to cloud experimentation, we are planning on using labs to make available a variety of other tools:
 
 * Web services that do not have a stable API
+
 * Experimental visualizations or dashboards
+
 * Data integration prototypes
+
 * Experimental datasets and data integrations
 
-To that end, we have released three initial products on [https://labs.waterdata.usgs.gov].
+To that end, we have released two initial products on [https://labs.waterdata.usgs.gov](https://labs.waterdata.usgs.gov/).
 
 #### [Tableau Data Connector](https://labs.waterdata.usgs.gov/about-connector/)
 
-A project that was written almost entirely by an internship project coordinated through the Water Resources Research Institutes, the Tableau Data Connector is a bridge between the [waterservices.usgs.gov](https://waterservices.usgs.gov)  instantaneous values service and the Tableau data analysis tool.  
+A project that was written almost entirely by an internship project coordinated through the [Water Resources Research Institutes](https://water.usgs.gov/wrri/index.php), the [Tableau Data Connector](https://labs.waterdata.usgs.gov/about-connector/) is a bridge between the [waterservices.usgs.gov](https://waterservices.usgs.gov/) instantaneous values service and the [Tableau ](https://www.tableau.com/)data analysis tool.
+{{< figure src="/static/release-notes-2019-09-25/tableau-connector.png" alt="Using the Tableau Data Connector in the Tableau Desktop program."  title="Using the Tableau Data Connector in the Tableau Desktop program." >}}
 
-#### [Graph Images API](https://https://labs.waterdata.usgs.gov/about-graph-image-api/)
+#### [Graph Images API](https://https//labs.waterdata.usgs.gov/about-graph-image-api/)
 
-A common request is to 
+A common request from the new monitoring location pages users is that we support the ability to generate an image for embedding in third-party sites. This new API is a first step in that direction.  Here is an example image, which you can see yourself with [https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060](https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060)
 
-* Multiple improvements to monitoring location pages
+{{< figure src="https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060" alt="Discharge for the past seven days at USGS Monitoring location number 09380000, Colorado River at Lees Ferry, AZ" title="Discharge for the past seven days at USGS Monitoring location number 09380000, Colorado River at Lees Ferry, AZ" >}}
+
+
+
+
+## What is coming up for next sprint
+
+* Displaying temperature data in both Celsius and Fahrenheit- a very common request!
+
+* Linking footage from USGS time lapse stream cameras into the monitoring location pages.
+
+* More sophisticated and user-friendly handling of multiple time series on the same graph.
+
+* The Hydro-Network Linked Data Index(NLDI) on labs.waterdata.usgs.gov
+
 
 
 
