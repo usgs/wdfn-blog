@@ -4,6 +4,7 @@ date: 2019-09-25
 slug: release-notes-2019-09-25
 draft: False
 type: post
+image: /static/release-notes-2019-09-25/upstream-downstream.png
 title: "Release Notes for September 25, 2019"
 author_github: jkreft-usgs
 author_staff: james-m-kreft
