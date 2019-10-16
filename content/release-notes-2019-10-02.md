@@ -22,7 +22,7 @@ tags:
 
 ## What have we been up to?
 
-This sprint, the team has been working primarily on features that are tied to the cloud version of the [USGS Publications Warehouse](https://pubs.er.usgs.gov/). Unfortunately, these features are not publicly available yet, and as such, we aren’t able to share them. But, there will be an extensive post about this work when the application makes the jump to the cloud and features become available.  In addition to that work, we have added a couple new features to the Water Data for the Nation monitoring location pages; that will be the subject of the rest of these release notes.
+This sprint, the team has been working primarily on features that are tied to the cloud version of the [USGS Publications Warehouse](https://pubs.er.usgs.gov/). Unfortunately, these features are not publicly available yet, and as such, we aren’t able to share them. But, there will be an extensive post about the Publications Warehouse work when the application makes the jump to the cloud and features become available.  In addition to that work, we have added a couple new features to the Water Data for the Nation monitoring location pages; that will be the subject of the rest of these release notes.
 
 ## User Stories
 
