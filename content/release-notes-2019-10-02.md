@@ -5,7 +5,7 @@ slug: release-notes-2019-10-16
 draft: False
 type: post
 image: /static/release-notes-2019-10-16/discharge_after.png
-title: "Release Notes for October 2, 2019"
+title: "Release Notes for October 16, 2019"
 author_github: jkreft-usgs
 author_staff: james-m-kreft
 author_email: <jkreft@usgs.gov>
