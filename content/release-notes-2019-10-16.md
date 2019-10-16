@@ -4,7 +4,7 @@ date: 2019-10-16
 slug: release-notes-2019-10-16
 draft: False
 type: post
-image: /static/release-notes-2019-10-16/discharge_after.png
+image: /static/release-notes-2019-10-16/lees_ferry_after.png
 title: "Release Notes for October 16, 2019"
 author_github: jkreft-usgs
 author_staff: james-m-kreft
@@ -50,11 +50,11 @@ Of the [hundreds of comments submitted by users](https://waterdata.usgs.gov/blog
 
 *Discharge* -- or the volume of water moving down a stream per unit of time  --  is a core time series dataset that the USGS collects. You can learn more about discharge at the [USGS Water Science School](https://www.usgs.gov/special-topic/water-science-school/science/how-streamflow-measured). Discharge is highly variable:it is not uncommon to see a site cover four orders of magnitude in less than a day. Discharge data can range from -500 cubic feet per second (cfs) in tidal rivers, up to 500,000 cfs on the Mississippi, making it is one of the hardest variables to effectively plot. In order to plot this large range of data effectively, and in an automated way,  a logarithmic (a.k.a. *log*) scale is used. Despite using a log scale, some plots still did not display properly, leaving a lot of empty space on the graph. The issue that we solved in this sprint was to choose a better lower bound. Previously, we tied the lower bound to the next lowest order of magnitude. For example, a hydrograph for a  site like Lees Ferry, AZ  that hovers around 10,000 cfs of discharge was left with a lot of empty space.
 
-{{< figure src="/static/release-notes-2019-10-16/discharge_before.png" alt="A graph showing discharge on the Colorado river as Lees Ferry. The majority of the data is in the top third of the graph" alt="A hydrograph, with an orange line showing discharge data stacked in the upper third of the graph" title="Discharge for seven days at USGS monitoring location number 09380000, Colorado River at Lees Ferry, AZ, using the older axis scaling approach" >}}
+{{< figure src="/static/release-notes-2019-10-16/lees_ferry_before.png" alt="A graph showing discharge on the Colorado river as Lees Ferry. The majority of the data is in the top third of the graph" alt="A hydrograph, with an orange line showing discharge data stacked in the upper third of the graph" title="Discharge for seven days at USGS monitoring location number 09380000, Colorado River at Lees Ferry, AZ, using the older axis scaling approach" >}}
 
 By changing the algorithm to select a lower bound less than an order of magnitude less than the average value, we were able to take advantage of all the space in the hydrograph, making it easier to make sense of the data.
 
-{{< figure src="/static/release-notes-2019-10-16/discharge_after.png" alt="A graph showing discharge on the Colorado river as Lees Ferry. The data is using most of the area of the graph" title="Discharge for seven days at USGS monitoring location number 09380000, Colorado River at Lees Ferry, AZ, using the newer axis scaling approach" >}}
+{{< figure src="/static/release-notes-2019-10-16/lees_ferry_after.png" alt="A graph showing discharge on the Colorado river as Lees Ferry. The data is using most of the area of the graph" title="Discharge for seven days at USGS monitoring location number 09380000, Colorado River at Lees Ferry, AZ, using the newer axis scaling approach" >}}
 
 #### Feature Flagged Stories
 
