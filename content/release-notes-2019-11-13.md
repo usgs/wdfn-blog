@@ -39,7 +39,7 @@ It is not uncommon to collect more than one time series with the same parameter 
 
 To address the some of the shortcomings in the current display (above), this sprint we made some improvements. Now users can interact with the hydrograph to drill into details for one time series at a time. The details for that one time series is displayed in the drop down, but also in the title of the hydrograph. All of these changes make interpretation of the data easier.
 
-{{< figure src="/static/release-notes-2019-11-07/bear_lake_after.png" alt="A graph showing temperature data as orange lines.  There is one line and many dots.  One series of dots is darker than the others" caption="**A screenshot showing temperature at monitoring location number [420407111201201](https://waterdata.usgs.gov/monitoring-location/420407111201201/), Bear Lake 3.6 miles northeast of Fish Haven, Idaho. A user can now choose a specific temperature time series, in this case seven meters below the surface.**" >}}
+{{< figure src="/static/release-notes-2019-11-13/bear_lake_after.png" alt="A graph showing temperature data as orange lines.  There is one line and many dots.  One series of dots is darker than the others" caption="**A screenshot showing temperature at monitoring location number [420407111201201](https://waterdata.usgs.gov/monitoring-location/420407111201201/), Bear Lake 3.6 miles northeast of Fish Haven, Idaho. A user can now choose a specific temperature time series, in this case seven meters below the surface.**" >}}
 
 
 
@@ -50,7 +50,7 @@ To address the some of the shortcomings in the current display (above), this spr
 
 The median daily value is a valuable tool to understand if a given instantaneous value is higher or lower than past values. However, it can also be confusing to a user who just wants to understand what is happening right now. Therefore, the median display can be selected by users at the lower right of the hydrograph, rather than displayed all the time.
 
-{{< figure src="/static/release-notes-2019-11-07/l_arkansas_median.png" alt="A graph showing discharge data as solid orange line.  There is a dotted orange line that is the median line" caption="**A screenshot showing discharge data at [07144100](https://waterdata.usgs.gov/monitoring-location/07144100/), L ARKANSAS R NR SEDGWICK, KS. The median data is selected, which shows that the current discharge is higher than the median discharge for historical records of this day of the year.**" >}}
+{{< figure src="/static/release-notes-2019-11-13/l_arkansas_median.png" alt="A graph showing discharge data as solid orange line.  There is a dotted orange line that is the median line" caption="**A screenshot showing discharge data at [07144100](https://waterdata.usgs.gov/monitoring-location/07144100/), L ARKANSAS R NR SEDGWICK, KS. The median data is selected, which shows that the current discharge is higher than the median discharge for historical records of this day of the year.**" >}}
 
 #### Monitoring location cameras
 
