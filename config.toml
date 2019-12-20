@@ -5,3 +5,5 @@ email = ["r_admin@usgs.gov"]
 preserveTaxonomyNames = true
 paginate = 100
 theme = "wdfn_theme"
+[markup.goldmark.renderer]
+  unsafe= true
