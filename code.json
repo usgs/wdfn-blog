@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Water Data for the Nation Blog",
+    "organization": "U.S. Geological Survey",
+    "description": "Water Data for the Nation Blog which provides updates on what is happening in USGS Water."
+    "version": "1.0.0",
+    "status": "Development",
+
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://github.com/usgs/wdfn-blog/blob/master/LICENSE.md"
+        }
+      ]
+    },
+
+    "homepageURL": "https://github.com/usgs/wdfn-blog",
+    "downloadURL": "https://github.com/usgs/wdfn-blog/archive/master.zip",
+    "disclaimerURL": "https://github.com/usgs/wdfn-blog/blob/master/LICENSE.md",
+    "repositoryUrl": "https://github.com/usgs/wdfn-blog.git",
+    "vcs": "git",
+
+    "laborHours": null,
+
+    "tags": [
+      "water data"
+    ],
+
+    "languages": [
+      "hugo",
+      "javascript",
+      "markdown",
+      "html",
+      "sass"
+    ],
+
+    "contact": {
+      "name": "Mary Bucknell",
+      "email": "mbucknell@usgs.gov"
+    },
+
+    "date": {
+      "metadataLastUpdated": "2019-12-30"
+    }
+  }
+]
