@@ -10,213 +10,93 @@ $fa-font-path: '../fonts' !default;
 
 @import './academicons';
 
-
-/*
- * #eceff1
- * #b0bec5
- * #78909c
- */
-
-.author {
-  font-size: .8em;
-}
-
 table {
-  @extend %usa-table;
+  @extend .usa-table;
 }
 
-@media screen and (min-width: 768px) {
-  .sideBySide {
-    width: 49% !important;
+
+.sideBySide {
+  @include at-media(tablet) {
+     @include grid-col(6);
   }
 }
 
-body {
-  color: #000;
-  background-color: #fff;
-}
-
-/* Parts:share */
-
+/* Social media icons */
 .p-share {
+  @include at-media('tablet') {
+    float: right;
+  }
   text-align: center;
   display: inline-block;
-  margin: 1em 0;
+  margin: units(2) 0;
   a {
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
-    background-color: #263238;
+    width: units(4);
+    height: units(4);
+    line-height: units(4);
+    background-color: color('blue-80');
     border-radius: 100%;
-    color: #eceff1;
-    margin: 0 .5rem;
+    color: color('gray-2');
+    margin: 0 units(0.5);
   }
 }
 
-@include at-media('tablet') {
-  .body {
-    .p-share {
-      float: right;
-    }
-  }
-}
+/* Blog entry grid */
+.blog-post-summary {
+  margin-bottom: units(3);
+  background-color: color('gray-cool-3');
+  height: units('mobile-lg');
+  overflow: hidden;
+  border: solid units('1px') color('gray-cool-10');
 
-/* Parts:page-title */
-
-.p-page-title {
-  margin-bottom: 2rem;
-}
-
-/* Parts:paging */
-
-.p-paging a {
-  display: inline-block;
-  line-height: 2rem;
-  padding: 0 1rem;
-  background-color: #b0bec5;
-  margin-right: .5rem;
-}
-
-/* Parts:section */
-
-section {
-  > {
-    header {
-      margin-bottom: .5rem;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-  }
-}
-
-/* Parts:article */
-
-article {
-  word-break: break-all;
-  > a {
-    display: block;
-  }
-  ul, ol {
-    padding: 0;
-    padding-left: 1.5rem;
-  }
-  .image {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .date {
-    font-size: .8em;
-  }
-  &.li {
-    margin-bottom: .5rem;
+  .summary-body {
+    padding: units(2);
+    background-color: transparent;
     .image {
-      float: left;
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-    footer {
-      display: table-cell;
-      height: 2.5rem;
-      vertical-align: middle;
-      padding-left: .5rem;
-    }
-    .date {
-      font-size: .7em;
+      min-height: units('card-lg');
+      margin-bottom: units(2);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
     .title {
-      font-size: .8em;
-      line-height: 1rem;
-      font-weight: 700;
-    }
-  }
-  &.blog-post-summary{
-    margin-bottom: 2rem;
-    background-color: color('gray-cool-3');
-    height: 26em;
-    overflow: hidden;
-    border: solid 1px rgb(219, 222, 225);
-    .image {
-      min-height: 13em;
-      margin-bottom: 15px;
-    }
-    .title {
-      @include h3;
       text-decoration: none;
-      line-height: 1.5em;
-      max-height: 4.5em;
+      max-height: units(15);
       overflow: hidden;
     }
-    .summary {
-      color: #333;
-      max-height: 4rem;
-      padding: 1rem;
-      overflow: hidden;
-    }
-    footer {
-      padding: 1rem;
-      background-color: transparent;
-    }
-  }
-  &.single {
-    background-color: #fff;
-    .image {
-      min-height: 24rem;
+
+    .author {
+      font-size: size('body', '3xs');
     }
   }
 }
 
-/* Parts:article:li */
+/* Styles for R code */
+.hljs {
+  background: #f7f7f7 !important;
+  color: #000;
+  line-height: 1.5em;
+}
 
-/* Parts:article:grid */
+.hljs-number {
+  color: #aa5146  !important;
+}
 
-/* Parts:article:single */
-
-@media (max-width: 768px) {
-  article.single .image {
-    min-height: 12rem;
+.hljs-preprocessor {
+  > .hljs-title {
+    color: #586e75;
   }
+  color: #586e75;
 }
 
-@media (max-width: 768px) {
-  article.single .body {
-    padding: 0 1rem;
-  }
+.hljs-comment {
+  color: #586e75;
 }
 
-@media (max-width: 768px) {
-  article.single .body pre {
-    margin: 1rem -1rem;
-    code {
-      padding: 1rem 1rem;
-    }
-  }
+.hljs-value, .hljs-string {
+  color: #183691  !important;
 }
 
-/* Helpers */
-
-ul.h-inline, ol.h-inline {
-  padding-left: 0;
-}
-
-.h-inline li {
-  display: inline-block;
-  margin-right: .5rem;
-}
-
-.ToggleButton {
-  width: 150px;
-  height: 35px;
-  padding: 8px 10px;
-  margin: 10px 0 20px 0;
-  text-align: center;
-  border-radius: 5px;
-  background: #003366;
-  color: #fff;
-  border: 1px solid #003366;
-  &:hover {
-    background: #fff;
-    color: #003366;
-  }
+.hljs-class > .hljs-title, .nginx > .hljs-title, .hljs-title, .css > .hljs-tag, .hljs-tag, .hljs-keyword, .hljs-variable, .hljs-attribute, .hljs-attr_selector, .hljs-built_in {
+  color: #000;
 }
