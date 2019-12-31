@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8">
-    {{ .Hugo.Generator }}
+    {{ hugo.Generator }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel="icon" href="{{ $.Site.BaseURL }}img/main/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/{{ with .Site.Params.SyntaxHighlightTheme }}{{ . }}{{ else  }}solarized_dark.min.css{{ end }}">
@@ -11,7 +11,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ .Site.BaseURL }}index.xml">
     <link rel="alternate" type="application/atom+xml" title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}index.xml">
 
-    {{ if eq .URL "/" }}
+    {{ if eq .RelPermalink "/" }}
       <title>{{ .Title }}</title>
       <meta property='og:title' content="{{ .Title }}">
       <meta property="og:type" content="website">
@@ -68,7 +68,7 @@
       <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
     {{ end }}
 
-    <script async src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
+    <script src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
   </head>
 
   <body>

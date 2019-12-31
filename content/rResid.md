@@ -25,11 +25,11 @@ Introduction
 
 When censored data are present in a water quality data set, depicting them in any type of scatter plot is a challenge. This applies to the problem of plotting the actual data values or plotting the residuals. What follows is an example that shows the problem.
 
-<img src='/static/rResid/unnamed-chunk-2-1.png'/ title='plotConcTime problem' alt='plotConcTime issue' class=''/>
+{{< figure src="/static/rResid/unnamed-chunk-2-1.png" title="plotConcTime problem" >}}
 
 The solid vertical lines, which represent the range of values that a given censored value could be, is very distracting in terms of getting a picture of the overall behavior of the data. We can see this even more if we try to look at the relationship of concentration to discharge.
 
-<img src='/static/rResid/unnamed-chunk-3-1.png'/ title='plotConcQ problem' alt='plotConcQ issue' class=''/>
+{{< myshortcode >}}<img src='/static/rResid/unnamed-chunk-3-1.png'/ title='plotConcQ problem' alt='plotConcQ issue' class=''/>{{< /myshortcode >}}
 
 It is difficult to see the relationship between ammonia concentration and discharge. If we look at residuals from a fitted WRTDS model and discharge we also find it difficult to see if the pattern looks reasonable (a horizontal cloud of points centered on the zero residual line) or if there is some substantial curvature to the relationship.
 
