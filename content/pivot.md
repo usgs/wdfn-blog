@@ -1,35 +1,31 @@
 ---
 author: 
-date: 2019-11-22
+date: 2020-01-02
 slug: pivot
 draft: True
-title: Using R to prepare your Excel file
+title: Using R to pivot wide water-quality data
 type: post
 categories: Data Science
- 
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
- 
 author_staff: laura-decicco
-author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov</a>
-
+author_email: <ldecicco@usgs.gov>
 tags: 
   - R
  
- 
-description: Convert wide water quality data wide to long.
+description: Convert wide water quality data wide to long with new tidyverse
+convention.
 keywords:
   - R
- 
- 
   - tidyr
  
 ---
-This article will walk through prepping your data and exporting it to a
-Microsoft™ Excel file using R. This article will focus on using
-functions and techniques from the “tidyverse” collection of R packages
-(`dplyr` + `tidyr` + many others…).
+This article will walk through prepping water-quality chemistry data
+formatted in a “wide” configuration and exporting it to a Microsoft™
+Excel “long” file using R. This article will focus on using functions
+and techniques from the “tidyverse” collection of R packages (`dplyr` +
+`tidyr` + others…).
 
 Pivot from wide to long
 -----------------------
@@ -37,7 +33,7 @@ Pivot from wide to long
 It is very common for environmental chemistry data to come back from the
 laboratory in a “wide” format. A wide format typically has a few
 “header” columns such as site and date with additional columns
-representing a sigle chemical per column and possibly a remark code for
+representing a single chemical per column and possibly a remark code for
 each chemical as a separate column. The remark column could indicate
 censored data (ie “below detection limit”) or some information about the
 sampling conditions. We can use the `tidyr` package to “pivot” this data
@@ -56,14 +52,14 @@ df_simple <- data.frame(
   b = c(4:1),
   stringsAsFactors = FALSE
 )
-df_simple
 ```
 
-    ##   site       date a b
-    ## 1    A 2019-11-22 1 4
-    ## 2    A 2019-11-21 2 3
-    ## 3    B 2019-11-20 3 2
-    ## 4    B 2019-11-19 4 1
+| site | date       |    a|    b|
+|:-----|:-----------|----:|----:|
+| A    | 2020-01-02 |    1|    4|
+| A    | 2020-01-01 |    2|    3|
+| B    | 2019-12-31 |    3|    2|
+| B    | 2019-12-30 |    4|    1|
 
 The “long” version of this data frame will still have the “site” and
 “date” columns, but instead of “a”, “b” (and potentially many many
@@ -78,18 +74,18 @@ df_simple_long <- df_simple %>%
   pivot_longer(cols = c(-site, -date),
                names_to = "Chemical",
                values_to = "Value")
-head(df_simple_long)
 ```
 
-    ## # A tibble: 6 x 4
-    ##   site  date       Chemical Value
-    ##   <chr> <date>     <chr>    <int>
-    ## 1 A     2019-11-22 a            1
-    ## 2 A     2019-11-22 b            4
-    ## 3 A     2019-11-21 a            2
-    ## 4 A     2019-11-21 b            3
-    ## 5 B     2019-11-20 a            3
-    ## 6 B     2019-11-20 b            2
+The top 6 rows are now:
+
+| site | date       | Chemical |  Value|
+|:-----|:-----------|:---------|------:|
+| A    | 2020-01-02 | a        |      1|
+| A    | 2020-01-02 | b        |      4|
+| A    | 2020-01-01 | a        |      2|
+| A    | 2020-01-01 | b        |      3|
+| B    | 2019-12-31 | a        |      3|
+| B    | 2019-12-31 | b        |      2|
 
 The “names\_to” argument is the name given to the column that is
 populated from the wide column names (so, the chemical names). The
@@ -110,14 +106,14 @@ df_with_rmks <- data.frame(
   b_rmk = c("","","","<"),
   stringsAsFactors = FALSE
 )
-df_with_rmks
 ```
 
-    ##   site       date a_value a_rmk b_value b_rmk
-    ## 1    A 2019-11-22       1     <       4      
-    ## 2    A 2019-11-21       2             3      
-    ## 3    B 2019-11-20       3             2      
-    ## 4    B 2019-11-19       4             1     <
+| site | date       |  a\_value| a\_rmk |  b\_value| b\_rmk |
+|:-----|:-----------|---------:|:-------|---------:|:-------|
+| A    | 2020-01-02 |         1| \<     |         4|        |
+| A    | 2020-01-01 |         2|        |         3|        |
+| B    | 2019-12-31 |         3|        |         2|        |
+| B    | 2019-12-30 |         4|        |         1| \<     |
 
 We can use the “pivot\_longer” function again to make this into a long
 data frame with the columns: site, date, Chemical, value, remark:
@@ -128,19 +124,18 @@ df_long_with_rmks <- df_with_rmks %>%
   pivot_longer(cols = c(-site, -date), 
                names_to = c("Chemical", ".value"),
                names_pattern = "(.+)_(.+)")
-
-head(df_long_with_rmks)
 ```
 
-    ## # A tibble: 6 x 5
-    ##   site  date       Chemical value rmk  
-    ##   <chr> <date>     <chr>    <int> <chr>
-    ## 1 A     2019-11-22 a            1 <    
-    ## 2 A     2019-11-22 b            4 ""   
-    ## 3 A     2019-11-21 a            2 ""   
-    ## 4 A     2019-11-21 b            3 ""   
-    ## 5 B     2019-11-20 a            3 ""   
-    ## 6 B     2019-11-20 b            2 ""
+The top 6 rows are now:
+
+| site | date       | Chemical |  value| rmk |
+|:-----|:-----------|:---------|------:|:----|
+| A    | 2020-01-02 | a        |      1| \<  |
+| A    | 2020-01-02 | b        |      4|     |
+| A    | 2020-01-01 | a        |      2|     |
+| A    | 2020-01-01 | b        |      3|     |
+| B    | 2019-12-31 | a        |      3|     |
+| B    | 2019-12-31 | b        |      2|     |
 
 This time, the “names\_to” argument is a vector. Since it’s going to
 produce more than a simple name/value combination, we need to tell it
@@ -171,14 +166,14 @@ data_example2 <- data.frame(
   c_rmk = rep("",4),
   stringsAsFactors = FALSE
 )
-data_example2
 ```
 
-    ##   site       date a a_rmk b b_rmk c c_rmk
-    ## 1    A 2019-11-22 1     < 4       3      
-    ## 2    A 2019-11-21 2       3       4      
-    ## 3    B 2019-11-20 3       2       5      
-    ## 4    B 2019-11-19 4       1     < 6
+| site | date       |    a| a\_rmk |    b| b\_rmk |    c| c\_rmk |
+|:-----|:-----------|----:|:-------|----:|:-------|----:|:-------|
+| A    | 2020-01-02 |    1| \<     |    4|        |    3|        |
+| A    | 2020-01-01 |    2|        |    3|        |    4|        |
+| B    | 2019-12-31 |    3|        |    2|        |    5|        |
+| B    | 2019-12-30 |    4|        |    1| \<     |    6|        |
 
 The easiest way to do that would be to add that “\_value”. Keeping in
 the “tidyverse” (acknowledging there are other base-R ways that work
@@ -194,19 +189,18 @@ data_wide2 <- data_example2 %>%
   pivot_longer(cols = c(-site, -date), 
                names_to = c("Chemical", ".value"),
                names_pattern = "(.+)_(.+)")
-
-head(data_wide2)
 ```
 
-    ## # A tibble: 6 x 5
-    ##   site  date       Chemical value rmk  
-    ##   <chr> <date>     <chr>    <int> <chr>
-    ## 1 A     2019-11-22 a            1 <    
-    ## 2 A     2019-11-22 b            4 ""   
-    ## 3 A     2019-11-22 c            3 ""   
-    ## 4 A     2019-11-21 a            2 ""   
-    ## 5 A     2019-11-21 b            3 ""   
-    ## 6 A     2019-11-21 c            4 ""
+The top 6 rows are now:
+
+| site | date       | Chemical |  value| rmk |
+|:-----|:-----------|:---------|------:|:----|
+| A    | 2020-01-02 | a        |      1| \<  |
+| A    | 2020-01-02 | b        |      4|     |
+| A    | 2020-01-02 | c        |      3|     |
+| A    | 2020-01-01 | a        |      2|     |
+| A    | 2020-01-01 | b        |      3|     |
+| A    | 2020-01-01 | c        |      4|     |
 
 Opening the file
 ----------------
@@ -216,7 +210,7 @@ different configurations of Excel files possible.
 
 As one example, let’s say the lab returned the data looking like this:
 
-<img src='/static/pivot/tabIMAGE-1.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
+<figure src='/static/pivot/tabIMAGE-1.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
 
 Let’s break down the issues:
 
@@ -298,18 +292,18 @@ cleaned_long <- data_no_header %>%
   pivot_longer(cols = c(-SiteID, -`Sample Date`), 
                names_to = c("Chemical", ".value"),
                names_pattern = "(.+)_(.+)") 
-head(cleaned_long)
 ```
 
-    ## # A tibble: 6 x 5
-    ##   SiteID   `Sample Date`       Chemical                 code    Value
-    ##   <chr>    <dttm>              <chr>                    <chr>   <dbl>
-    ## 1 Upstream 2016-08-01 10:00:00 Atrazine                 <NA>  0.0183 
-    ## 2 Upstream 2016-08-01 10:00:00 Thiabendazole            <     0.00410
-    ## 3 Upstream 2016-08-01 10:00:00 1,7-Dimethylxanthine     <     0.0877 
-    ## 4 Upstream 2016-08-01 10:00:00 10-Hydroxy-amitriptyline <     0.0083 
-    ## 5 Upstream 2017-09-07 10:00:00 Atrazine                 <NA>  0.0666 
-    ## 6 Upstream 2017-09-07 10:00:00 Thiabendazole            <     0.011
+The top 6 rows are now:
+
+| SiteID   | Sample Date         | Chemical                 | code |   Value|
+|:---------|:--------------------|:-------------------------|:-----|-------:|
+| Upstream | 2016-08-01 10:00:00 | Atrazine                 | NA   |  0.0183|
+| Upstream | 2016-08-01 10:00:00 | Thiabendazole            | \<   |  0.0041|
+| Upstream | 2016-08-01 10:00:00 | 1,7-Dimethylxanthine     | \<   |  0.0877|
+| Upstream | 2016-08-01 10:00:00 | 10-Hydroxy-amitriptyline | \<   |  0.0083|
+| Upstream | 2017-09-07 10:00:00 | Atrazine                 | NA   |  0.0666|
+| Upstream | 2017-09-07 10:00:00 | Thiabendazole            | \<   |  0.0110|
 
 Save to Excel
 -------------
@@ -328,13 +322,6 @@ write.xlsx(to_Excel,
 
 Disclaimer
 ==========
-
-This information is preliminary or provisional and is subject to
-revision. It is being provided to meet the need for timely best science.
-The information has not received final approval by the U.S. Geological
-Survey (USGS) and is provided on the condition that neither the USGS nor
-the U.S. Government shall be held liable for any damages resulting from
-the authorized or unauthorized use of the information.
 
 Any use of trade, firm, or product names is for descriptive purposes
 only and does not imply endorsement by the U.S. Government.
