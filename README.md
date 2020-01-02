@@ -12,7 +12,7 @@ wdfn-blog
 # Submitting an update
 
 1. Fork repo
-2. Create a markdown file (.md)
+2. Create a markdown file (.md). This should be all lowercase and dashes (e.g. `name-of-post`)
 3. Add to `content` folder
 4. Include static images in `static\name-of-post`. Images *must* include alt and title text
 5. Add a header similar to:
@@ -73,6 +73,25 @@ wdfn-blog
 10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
 11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
 12. Assuming all looks good, push to prod
+
+# Tips to writing content
+1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.
+1. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place
+two images side by side.
+1. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
+1. Use the following markup to implement the ability to Show/Hide code sections:
+```html
+<button class="toggle-button" onclick="toggle_visibility(this, 'hideMe1')">Show Code</button>
+<div id="hideMe1" style="display:none">
+
+``` r
+library(jsonlite) 
+.
+.
+.
+
+</div>
+```
 
 
 # Build and develop with Docker
