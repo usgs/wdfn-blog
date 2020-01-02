@@ -14,8 +14,7 @@ author_email: <ldecicco@usgs.gov>
 tags: 
   - R
  
-description: Convert wide water quality data wide to long with new tidyverse
-convention.
+description: Convert wide water quality data wide to long with new tidyverse convention.
 keywords:
   - R
   - tidyr
