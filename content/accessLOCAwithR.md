@@ -121,7 +121,7 @@ leafMapLOCA <- leaflet() %>%
 ```
 </div>
 
-<iframe seamless src="/static/locadownscaling/leafmaploca/index.html" width="100%" height="500">
+<iframe seamless src="/static/leaflet/leafmaploca/index.html" width="100%" height="500">
 </iframe>
 
 Get time series data for a single cell.
