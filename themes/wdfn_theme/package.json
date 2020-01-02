@@ -11,7 +11,7 @@
     "build:css": "mkdirp static/css && node-sass --include-path node_modules/wdfn-viz/src/stylesheets --include-path node_modules/uswds/src/stylesheets --include-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/css/main.css && postcss static/css/main.css -o static/css/main.css",
     "build:fonts": "mkdirp static/fonts && cp src/fonts/* static/fonts && cp -r node_modules/uswds/src/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/fonts",
     "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/uswds/src/img/* static/img && cp -r node_modules/wdfn-viz/src/img/* static/img",
-    "build:js": "mkdirp static/scripts && rollup -c --environment NODE_ENV:debug",
+    "build:js": "mkdirp static/scripts && rollup -c --environment NODE_ENV:production",
     "hash-assets": "gulp --gulpfile ./gulpfile.js revall",
     "watch": "run-p watch:*",
     "watch:css": "nodemon -w src/styles -e scss -x \"npm run build:css\"",
