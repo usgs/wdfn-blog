@@ -210,7 +210,7 @@ different configurations of Excel files possible.
 
 As one example, let’s say the lab returned the data looking like this:
 
-<img src='/static/pivot/tabIMAGE-1.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
+<figure src='/static/pivot/tabIMAGE-1.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
 
 Let’s break down the issues:
 
