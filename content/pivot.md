@@ -6,24 +6,16 @@ draft: True
 title: Using R to pivot wide water-quality data
 type: post
 categories: Data Science
- 
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
- 
 author_staff: laura-decicco
-author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov</a>
-
+author_email: <ldecicco@usgs.gov>
 tags: 
   - R
- 
- 
-description: Convert wide water quality data wide to long with new tidyverse
-convention.
+description: Convert wide water quality data wide to long with new tidyverse convention.
 keywords:
   - R
- 
- 
   - tidyr
  
 ---
