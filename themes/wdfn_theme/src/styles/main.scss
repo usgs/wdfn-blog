@@ -23,9 +23,6 @@ table {
 
 /* Social media icons */
 .p-share {
-  @include at-media('tablet') {
-    float: right;
-  }
   text-align: center;
   display: inline-block;
   margin: units(2) 0;
@@ -38,6 +35,11 @@ table {
     border-radius: 100%;
     color: color('gray-2');
     margin: 0 units(0.5);
+  }
+}
+.blog-entry-body .p-share {
+  @include at-media('tablet') {
+    float: right;
   }
 }
 
