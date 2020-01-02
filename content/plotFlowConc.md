@@ -68,7 +68,7 @@ plotConcQ_gg
 plotConcQ(eList)
 ```
 
-<img src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot' alt='ggplot vs EGRET' class='sideBySide'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot' alt='ggplot vs EGRET' class='sideBySide'/>
+<img src='/static/plotFlowConc/plotConcQ-1.png'/ title='ggplot2 Concentration Flow plot' alt='ggplot vs EGRET' class='side-by-side'/><img src='/static/plotFlowConc/plotConcQ-2.png'/ title='EGRET Concentration Flow plot' alt='ggplot vs EGRET' class='side-by-side'/>
 
 plotFlowConc
 ============

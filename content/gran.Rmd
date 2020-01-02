@@ -101,7 +101,7 @@ install.packages("smwrData", repos=c("https://owi.usgs.gov/R",getOption("repos")
 
 Updating GRAN and CRAN packages is a snap too:
 
-<img src='/static/gran/update.png'/ title='Update all packages.' alt='Update all packages' class='sideBySide'/>
+<img src='/static/gran/update.png'/ title='Update all packages.' alt='Update all packages' class='side-by-side'/>
 
 ## GRAN Submissions
 
