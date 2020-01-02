@@ -173,7 +173,8 @@ To open an Excel file in R, use the `readxl` package. There are many different c
 
 As one example, let’s say the lab returned the data looking like this:
 
-<figure src='/static/pivot/messyData.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' >
+{{< figure src="/static/pivot/messyData.png" title="Wide data that needs to be converted to a long format." alt="Screen shot of Excel spreadsheet." >}}
+
 
 Let’s break down the issues:
 

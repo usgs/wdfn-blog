@@ -18,7 +18,7 @@ editor_options:
 library(knitr)
 
 knit_hooks$set(plot=function(x, options) {
-  sprintf("<figure src='/%s%s-%d.%s'/ title='%s' alt='%s' />",
+  sprintf("{{<figure src='/%s%s-%d.%s' title='%s' alt='%s' >}}",
           options$fig.path, options$label,
           options$fig.cur, options$fig.ext,
           options$fig.cap, options$alt.text)
@@ -183,7 +183,7 @@ To open an Excel file in R, use the `readxl` package. There are many different c
 
 As one example, let's say the lab returned the data looking like this:
 
-<figure src='/static/pivot/messyData.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' >
+{{< figure src="/static/pivot/messyData.png" title="Wide data that needs to be converted to a long format." alt="Screen shot of Excel spreadsheet." >}}
 
 Let's break down the issues:
 
