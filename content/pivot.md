@@ -19,27 +19,14 @@ keywords:
   - tidyr
  
 ---
-This article will walk through prepping water-quality chemistry data
-formatted in a “wide” configuration and exporting it to a Microsoft™
-Excel “long” file using R. This article will focus on using functions
-and techniques from the “tidyverse” collection of R packages (`dplyr` +
-`tidyr` + others…).
+This article will walk through prepping water-quality chemistry data formatted in a “wide” configuration and exporting it to a Microsoft™ Excel “long” file using R. This article will focus on using functions and techniques from the “tidyverse” collection of R packages (`dplyr` + `tidyr` + others…).
 
 Pivot from wide to long
 -----------------------
 
-It is very common for environmental chemistry data to come back from the
-laboratory in a “wide” format. A wide format typically has a few
-“header” columns such as site and date with additional columns
-representing a single chemical per column and possibly a remark code for
-each chemical as a separate column. The remark column could indicate
-censored data (ie “below detection limit”) or some information about the
-sampling conditions. We can use the `tidyr` package to “pivot” this data
-to the required long format used in `toxEval`.
+It is very common for environmental chemistry data to come back from the laboratory in a “wide” format. A wide format typically has a few “header” columns such as site and date with additional columns representing a single chemical per column and possibly a remark code for each chemical as a separate column. The remark column could indicate censored data (ie “below detection limit”) or some information about the sampling conditions. We can use the `tidyr` package to “pivot” this data to the required long format used in `toxEval`.
 
-Let’s start with the most simple case, a wide data frame with no remark
-codes. In this simple example, column “a” represents the measured value
-of “a” and column “b” represents the measured value of “b”:
+Let’s start with the most simple case, a wide data frame with no remark codes. In this simple example, column “a” represents the measured value of “a” and column “b” represents the measured value of “b”:
 
 ``` r
 df_simple <- data.frame(
@@ -59,10 +46,7 @@ df_simple <- data.frame(
 | B    | 2019-12-31 |    3|    2|
 | B    | 2019-12-30 |    4|    1|
 
-The “long” version of this data frame will still have the “site” and
-“date” columns, but instead of “a”, “b” (and potentially many many
-more…), it will now have “Chemical” and “Value”. To do this
-programatically, we can use the `pivot_longer` function in `tidyr`:
+The “long” version of this data frame will still have the “site” and “date” columns, but instead of “a”, “b” (and potentially many many more…), it will now have “Chemical” and “Value”. To do this programatically, we can use the `pivot_longer` function in `tidyr`:
 
 ``` r
 library(tidyr)
@@ -86,12 +70,9 @@ The top 6 rows are now:
 | B    | 2019-12-31 | b        |      2|
 
 The “names\_to” argument is the name given to the column that is
-populated from the wide column names (so, the chemical names). The
-“values\_to” is the column name for the values populated from the
-chemical columns.
+populated from the wide column names (so, the chemical names). The “values\_to” is the column name for the values populated from the chemical columns.
 
-Let’s make a more complicated wide data that now has the “a” and “b”
-measured values, but also has “a” and “b” remark codes:
+Let’s make a more complicated wide data that now has the “a” and “b” measured values, but also has “a” and “b” remark codes:
 
 ``` r
 df_with_rmks <- data.frame(
@@ -113,8 +94,7 @@ df_with_rmks <- data.frame(
 | B    | 2019-12-31 |         3|        |         2|        |
 | B    | 2019-12-30 |         4|        |         1| \<     |
 
-We can use the “pivot\_longer” function again to make this into a long
-data frame with the columns: site, date, Chemical, value, remark:
+We can use the “pivot\_longer” function again to make this into a long data frame with the columns: site, date, Chemical, value, remark:
 
 ``` r
 library(tidyr)
@@ -135,21 +115,9 @@ The top 6 rows are now:
 | B    | 2019-12-31 | a        |      3|     |
 | B    | 2019-12-31 | b        |      2|     |
 
-This time, the “names\_to” argument is a vector. Since it’s going to
-produce more than a simple name/value combination, we need to tell it
-how to make the name/value/remark combinations. We do that using the
-“names\_pattern” argument. In this case, `tidyr` is going to look at the
-column names (excluding site and date…since we negate those in the
-“cols” argument), and try to split the names by the “\_” separator. This
-is a very powerful tool…in this case we are saying anything in the first
-group (on the left of the “\_”) is the “Chemical” and every matching
-group on the right of the “\_” creates new value columns. So with the
-columns are: a\_value, a\_rmk, b\_value, b\_rmk - we get a column of
-chemicals (a & b), a column of “rmk” values, and a column of “value”
-values.
+This time, the “names\_to” argument is a vector. Since it’s going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the “names\_pattern” argument. In this case, `tidyr` is going to look at the column names (excluding site and date…since we negate those in the “cols” argument), and try to split the names by the “\_” separator. This is a very powerful tool…in this case we are saying anything in the first group (on the left of the “\_”) is the “Chemical” and every matching group on the right of the “\_” creates new value columns. So with the columns are: a\_value, a\_rmk, b\_value, b\_rmk - we get a column of chemicals (a & b), a column of “rmk” values, and a column of “value” values.
 
-What if the column names didn’t have the "\_value" prepended? This is
-more common in our raw data:
+What if the column names didn’t have the "\_value" prepended? This is more common in our raw data:
 
 ``` r
 data_example2 <- data.frame(
@@ -173,9 +141,7 @@ data_example2 <- data.frame(
 | B    | 2019-12-31 |    3|        |    2|        |    5|        |
 | B    | 2019-12-30 |    4|        |    1| \<     |    6|        |
 
-The easiest way to do that would be to add that “\_value”. Keeping in
-the “tidyverse” (acknowledging there are other base-R ways that work
-well too for the column renames):
+The easiest way to do that would be to add that “\_value”. Keeping in the “tidyverse” (acknowledging there are other base-R ways that work well too for the column renames):
 
 ``` r
 library(dplyr)
@@ -203,12 +169,11 @@ The top 6 rows are now:
 Opening the file
 ----------------
 
-To open an Excel file in R, use the `readxl` package. There are many
-different configurations of Excel files possible.
+To open an Excel file in R, use the `readxl` package. There are many different configurations of Excel files possible.
 
 As one example, let’s say the lab returned the data looking like this:
 
-<figure src='/static/pivot/messyData.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
+<figure src='/static/pivot/messyData.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' >
 
 Let’s break down the issues:
 
@@ -219,9 +184,7 @@ Let’s break down the issues:
 -   The data starts in row 5, in a “wide” format
 -   The date format is unusual
 
-In this example, we’ll work through these spacing and header issues to
-get us to a wide data frame that we can then pivot to a long data frame
-as described in the next section.
+In this example, we’ll work through these spacing and header issues to get us to a wide data frame that we can then pivot to a long data frame as described in the next section.
 
 First, let’s just get the data with no column names:
 
@@ -232,9 +195,7 @@ data_no_header <- read_xlsx("static/pivot/Wide data example.xlsx",
                             skip = 4, col_names = FALSE)
 ```
 
-`data_no_header` is now a data frame with accurate types (except for
-dates…we’ll get that later!), but no column names. We know the first 2
-columns are site and date, so we can name those easily:
+`data_no_header` is now a data frame with accurate types (except for dates…we’ll get that later!), but no column names. We know the first 2 columns are site and date, so we can name those easily:
 
 ``` r
 names(data_no_header)[1:2] <- c("SiteID", "Sample Date")
@@ -250,10 +211,7 @@ headers <- read_xlsx("static/pivot/Wide data example.xlsx",
 headers <- headers[,-1:-2]
 ```
 
-It would be nice to use the first row as the column names in
-“data\_no\_header”, but then it would be very confusing what “Code”
-means (since it’s repeated). So, let’s remove the “Code”, and just
-repeat the chemical names:
+It would be nice to use the first row as the column names in “data\_no\_header”, but then it would be very confusing what “Code” means (since it’s repeated). So, let’s remove the “Code”, and just repeat the chemical names:
 
 ``` r
 headers <- headers[,which(as.character(headers[1,]) != "Code")]
@@ -275,8 +233,7 @@ Now, we can assign the “column\_names” to the “data\_no\_header”:
 names(data_no_header)[-1:-2] <- column_names
 ```
 
-Before we pivot this data to the long format (as described above), let’s
-transform the “Sample Date” column to an R date time format:
+Before we pivot this data to the long format (as described above), let’s transform the “Sample Date” column to an R date time format:
 
 ``` r
 data_no_header$`Sample Date` <- as.POSIXct(data_no_header$`Sample Date`, 
@@ -306,9 +263,7 @@ The top 6 rows are now:
 Save to Excel
 -------------
 
-The package `openxlsx` can be used to export Excel files. Create a named
-list in R, and each of those parts of the list become a Worksheet in
-Excel:
+The package `openxlsx` can be used to export Excel files. Create a named list in R, and each of those parts of the list become a Worksheet in Excel:
 
 ``` r
 to_Excel <- list(Data = cleaned_long)
@@ -321,5 +276,4 @@ write.xlsx(to_Excel,
 Disclaimer
 ==========
 
-Any use of trade, firm, or product names is for descriptive purposes
-only and does not imply endorsement by the U.S. Government.
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
