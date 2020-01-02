@@ -55,19 +55,6 @@
     </script>
     <script async src="https://www.google-analytics.com/analytics.js"></script>
 
-    <script>
-      function toggle_visibility(id) {
-          var e = document.getElementById(id);
-          if (e.style.display == 'block' || e.style.display=='') {
-            e.style.display = 'none';
-            this.html = 'Show'
-          } else {
-            e.style.display = 'block';
-            this.html = 'Hide';
-          }
-      }
-    </script>
-
     {{ if .OutputFormats.Get "RSS" }}
       <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
       <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
