@@ -77,9 +77,7 @@ One of the things the WRTDS statistical model provides is a characterization of 
 
 The `plotContours`, `plotDiffContours`, `plotConcQSmooth`, and `plotConcTimeSmooth` functions in `EGRET` are all designed to help the user explore various aspects of the model. Because of the multivariate character of the model it is helpful to have a variety of ways to view it to aid in making interpretations about the nature of the changes that have taken place. Another approach is one developed by Marcus Beck of US EPA that makes very effective use of color and multiple panel graphs to help visualize these evolving conditions. This new function `plotFlowConc` which uses the packages `ggplot2`, `dplyr`, and `tidyr` is a wonderful new way to visualize these changes.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
-Show/Hide Code
-</p>
+<button class="toggle-button" onclick="toggle_visibility(this, 'hideMe')">Hide Code</button>
 <div id="hideMe">
 
 ``` r

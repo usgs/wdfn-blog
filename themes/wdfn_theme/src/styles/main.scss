@@ -14,8 +14,12 @@ table {
   @extend .usa-table;
 }
 
+.toggle-button {
+  @extend .usa-button;
+}
 
-.sideBySide {
+
+.side-by-side {
   @include at-media(tablet) {
      @include grid-col(6);
   }
