@@ -6,17 +6,24 @@ draft: True
 title: Using R to pivot wide water-quality data
 type: post
 categories: Data Science
+ 
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
+ 
 author_staff: laura-decicco
-author_email: <ldecicco@usgs.gov>
+author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov</a>
+
 tags: 
   - R
  
-description: Convert wide water quality data wide to long with new tidyverse convention.
+ 
+description: Convert wide water quality data wide to long with new tidyverse
+convention.
 keywords:
   - R
+ 
+ 
   - tidyr
  
 ---
@@ -209,7 +216,7 @@ different configurations of Excel files possible.
 
 As one example, let’s say the lab returned the data looking like this:
 
-<figure src='/static/pivot/tabIMAGE-1.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
+<figure src='/static/pivot/messyData.png'/ title='Wide data that needs to be converted to a long format.' alt='Screen shot of Excel spreadsheet.' />
 
 Let’s break down the issues:
 
