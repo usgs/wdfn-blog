@@ -259,7 +259,7 @@ Have Questions on the R package: dataRetrieval?
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
+<td><a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/img/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
 <td><a href="https://github.com/USGS-R/dataRetrieval/issues" target="_blank">dataRetrieval</a>: This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services.</td>
 </tr>
 </tbody>

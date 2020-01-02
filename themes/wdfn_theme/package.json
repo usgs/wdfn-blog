@@ -8,9 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf static && mkdirp static",
     "build": "npm run clean && run-p build:* && npm run hash-assets",
-    "build:css": "mkdirp static/css && node-sass --include-path node_modules/wdfn-viz/src/stylesheets --include-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/css/main.css && postcss static/css/main.css -o static/css/main.css",
-    "build:fonts": "mkdirp static/fonts && cp src/fonts/* static/fonts && cp -r node_modules/wdfn-viz/dist/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/fonts",
-    "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/wdfn-viz/dist/img/* static/img",
+    "build:css": "mkdirp static/css && node-sass --include-path node_modules/wdfn-viz/src/stylesheets --include-path node_modules/uswds/src/stylesheets --include-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/css/main.css && postcss static/css/main.css -o static/css/main.css",
+    "build:fonts": "mkdirp static/fonts && cp src/fonts/* static/fonts && cp -r node_modules/uswds/src/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/fonts",
+    "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/uswds/src/img/* static/img && cp -r node_modules/wdfn-viz/src/img/* static/img",
     "build:js": "mkdirp static/scripts && rollup -c --environment NODE_ENV:production",
     "hash-assets": "gulp --gulpfile ./gulpfile.js revall",
     "watch": "run-p watch:*",
@@ -41,7 +41,7 @@
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.3.1",
-    "wdfn-viz": "0.1.9"
+    "wdfn-viz": "1.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.3",
@@ -60,6 +60,9 @@
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-uglify": "^6.0.4"
+    "rollup-plugin-uglify": "^6.0.4",
+    "stylelint": "^12.0.1",
+    "stylelint-config-recommended-scss": "^4.1.0",
+    "stylelint-scss": "^3.13.0"
   }
 }
