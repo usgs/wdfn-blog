@@ -206,7 +206,7 @@ newPlot <- ggplot(data = subDF, aes(x = lev_dt, y = watAlt)) +
 drawTicks(newPlot)
 ```
 
-<img src='/static/ggplot2/unnamed-chunk-5-1.png'/ title='TODO' alt='TODO' />
+{{< figure src="/static/ggplot2/unnamed-chunk-5-1.png" title="TODO" alt="TODO" >}}
 
 ``` r
   # save the plot with ticks on all 4 sides as pdf
@@ -248,7 +248,7 @@ map <- ggmap(baseMap) +
 drawTicks(map)
 ```
 
-<img src='/static/ggplot2/unnamed-chunk-6-1.png'/ title='TODO' alt='TODO' />
+{{< figure src="/static/ggplot2/unnamed-chunk-6-1.png" title="TODO" alt="TODO" >}}
 
 Questions
 =========

@@ -20,8 +20,19 @@ table {
 
 
 .side-by-side {
+  margin: 0;
   @include at-media(tablet) {
-     @include grid-col(6);
+      @include grid-col(6);
+  }
+  padding-right: units(1);
+}
+
+figure {
+  figcaption{
+    text-align: center;
+    h4 {
+      margin-top: 0;
+    }
   }
 }
 

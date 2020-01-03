@@ -117,7 +117,7 @@ depth_plot <- ggplot(data = gw_data_sub) +
 depth_plot
 ```
 
-<img src='/static/earthquake/first_try-1.png'/ title='Initial plot of water levels' alt='Initial water level plot' />
+{{< figure src="/static/earthquake/first_try-1.png" title="Initial plot of water levels" alt="Initial water level plot" >}}
 
 The `site_no` column (the unique site identification numbers) are not terribly useful for a general audience, so we decided to eliminate those facet labels on the right and add a map as a legend. Also, we wanted to use consistent colors across the map and lines.
 
@@ -184,7 +184,7 @@ gsMap <- ggplot() +
 gsMap
 ```
 
-<img src='/static/earthquake/map-1.png'/ title='Site locations on US map' alt='Initial map work' />
+{{> figure src="/static/earthquake/map-1.png" title="Site locations on US map" alt="Initial map work" >}}
 
 The initial line graphs needed to be updated with those colors and dropping the facet labels:
 
@@ -222,7 +222,7 @@ dev.off()
     ## png
     ##   2
 
-<img src='/static/earthquake/earthquake.png'/ title='Water levels in US affected by Mexico earthquake' alt='Water levels in US affected by Mexico earthquake' />
+{{< figure src="/static/earthquake/earthquake.png" title="Water levels in US affected by Mexico earthquake" alt="Water levels in US affected by Mexico earthquake" >}}
 
 What does the plot mean?
 ------------------------

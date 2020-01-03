@@ -194,7 +194,7 @@ legend("bottom", label.text, horiz = TRUE,
 box()
 ```
 
-<img src='/static/moving-averages/unnamed-chunk-4-1.png'/ title='Simple 30-day moving average daily flow plot using base R' alt='TODO' class=''/>
+{{< figure src="/static/moving-averages/unnamed-chunk-4-1.png" title="Simple 30-day moving average daily flow plot using base R" alt="TODO" >}}
 
 Plot using ggplot2
 ------------------
@@ -216,7 +216,7 @@ simple.plot <- ggplot(data = summaryQ, aes(x = day.of.year)) +
 simple.plot
 ```
 
-<img src='/static/moving-averages/unnamed-chunk-5-1.png'/ title='Simple 30-day moving average daily flow plot using ggplot2' alt='30-day moving average daily flow plot, no effort on style' class=''/>
+{{< figure src="/static/moving-averages/unnamed-chunk-5-1.png" title="Simple 30-day moving average daily flow plot using ggplot2" alt="30-day moving average daily flow plot, no effort on style" >}}
 
 Next, we can play with various options to do a better job to imitate the style:
 
@@ -246,7 +246,7 @@ styled.plot <- simple.plot+
 styled.plot
 ```
 
-<img src='/static/moving-averages/unnamed-chunk-6-1.png'/ title='Detailed 30-day moving average daily flow plot' alt='30-day moving average daily flow plot' class=''/>
+{{< figure src="/static/moving-averages/unnamed-chunk-6-1.png" title="Detailed 30-day moving average daily flow plot" alt="30-day moving average daily flow plot" >}}
 
 Questions
 ---------

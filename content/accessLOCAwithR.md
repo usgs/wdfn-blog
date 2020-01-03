@@ -184,7 +184,7 @@ ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alph
   theme(plot.title = element_text(face="bold"))
 ```
 
-<img src='/static/locadownscaling/plot_the_data-1.png'/ title='Graph of projected daily maximum temperature.' alt='Graph of a full time series from two scenarios for one cell of data showing projected daily maximum temperature.' class=''/>
+{{< figure src="/static/LOCAdownscaling/plot_the_data-1.png" title="Graph of projected daily maximum temperature." alt="Graph of a full time series from two scenarios for one cell of data showing projected daily maximum temperature." >}}
 
 Areal average time series data access with the Geo Data Portal
 --------------------------------------------------------------
@@ -445,7 +445,7 @@ for(thresh in names(plot_setup)) {
 ```
 </div>
 
-<img src='/static/locadownscaling/plot_it-1.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/locadownscaling/plot_it-2.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/locadownscaling/plot_it-3.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/locadownscaling/plot_it-4.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/locadownscaling/plot_it-5.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/>
+{{< figure src="/static/locadownscaling/plot_it-1.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_it-2.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_it-3.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble.">}}{{< figure src="/static/LOCAdownscaling/plot_it-4.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_it-5.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}
 
 All GCM Plots
 -------------
@@ -464,4 +464,4 @@ grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45,
   }
 ```
 
-<img src='/static/locadownscaling/plot_lots-1.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/locadownscaling/plot_lots-2.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/locadownscaling/plot_lots-3.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/locadownscaling/plot_lots-4.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/locadownscaling/plot_lots-5.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/>
+{{< figure src="/static/LOCAdownscaling/plot_lots-1.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble.">}}{{< figure src="/static/LOCAdownscaling/plot_lots-2.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble" >}}{{< figure src="/static/LOCAdownscaling/plot_lots-3.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_lots-4.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_lots-5.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble" >}}
