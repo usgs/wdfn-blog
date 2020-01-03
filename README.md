@@ -77,7 +77,7 @@ wdfn-blog
 # Tips to writing content
 1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.
 1. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place
-two images side by side. You should wrap them in a <div> tag with the class set to "grid-col". Example below:
+two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
 <div class="grid-row">
 {< figure src="/static/nldi-intro/upstream.png" title="Title" alt="Description class="side-by-side" >}}
