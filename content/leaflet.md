@@ -66,10 +66,10 @@ setwd(currentWD)
 The html that was saved with the `saveWidget` function can be called with the `iframe` html tag.
 
 ``` r
-<iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500"></iframe>
+<iframe seamless src="/static/leaflet/leafmap/index.html" width="100%" height="500"></iframe>
 ```
 
-<iframe seamless src="/static/leaflet/leafMap/index.html" width="100%" height="500">
+<iframe seamless src="/static/leaflet/leafmap/index.html" width="100%" height="500">
 </iframe>
 When building the site, Hugo converts the "leafMap.html" to "leafMap/index.html".
 
