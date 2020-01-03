@@ -50,7 +50,7 @@ ggplot(data = chloride,
   labs(title = cl_site)
 ```
 
-<img src='/static/boxplots/getChoride-1.png'/ title='ggplot2 defaults for boxplots.' alt='ggplot2 defaults for boxplots.' />
+{{< figure src="/static/boxplots/getChoride-1.png" title="ggplot2 defaults for boxplots." alt="ggplot2 defaults for boxplots." >}}
 
 Is that graph great? YES! And for presentations and/or journal publications, that graph might be appropriate. However, for an official USGS report, USGS employees need to get the graphics approved to assure they follow specific style guidelines. The approving officer would probably come back from the review with the following comments:
 
@@ -138,7 +138,7 @@ plot_grid(chloride_plot,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-<img src='/static/boxplots/chlorideWithLegend-1.png'/ title='Chloride by month styled.' alt='Chloride by month, styled.' />
+{{< figure src="/static/boxplots/chlorideWithLegend-1.png" title="Chloride by month styled." alt="Chloride by month, styled." >}}
 
 As can be seen in the code chunk, we are now using a function `ggplot_box_legend` to make a legend, `boxplot_framework` to accommodate all of the style requirements, and the `cowplot` package to plot them together.
 
@@ -319,7 +319,7 @@ phos_plot <- ggplot(data = phos_data,
 phos_plot
 ```
 
-<img src='/static/boxplots/phosDistribution-1.png'/ title='Phosphorus distribution by month.' alt='Phosphorus distribution by month.' />
+{{< figure src="/static/boxplots/phosDistribution-1.png" title="Phosphorus distribution by month." alt="Phosphorus distribution by month." >}}
 
 What are the new features we have to consider for log scales?
 
@@ -410,7 +410,7 @@ temperature_plot <- ggplot(data = temp_q_data,
 temperature_plot
 ```
 
-<img src='/static/boxplots/groupPlot1-1.png'/ title='Grouped boxplots.' alt='Grouped boxplots' />
+{{< figure src="/static/boxplots/groupPlot1-1.png" title="Grouped boxplots." alt="Grouped boxplots" >}}
 
 What are the new features we have to consider for log scales?
 
@@ -588,7 +588,7 @@ plot_grid(chloride_plot,
           nrow = 2)
 ```
 
-<img src='/static/boxplots/comboGraph-1.png'/ title='Combining boxplots using framework function and cowplot's plot_grid.' alt='Combining boxplots using framework function and cowplot's plot_grid.' />
+{{< figure src="/static/boxplots/comboGraph-1.png" title="Combining boxplots using framework function and cowplot's plot_grid." alt="Combining boxplots using framework function and cowplot's plot_grid." >}}
 
 `ggplot_box_legend`: What is a boxplot?
 =======================================
@@ -814,7 +814,7 @@ ggplot_box_legend()
 
 </div>
 
-<img src='/static/boxplots/visualizeBox-1.png'/ title='ggplot2 box plot with explanation.' alt='ggplot2 box plot with explanation.' />
+{{< figure src="/static/boxplots/visualizeBox-1.png" title="ggplot2 box plot with explanation." alt="ggplot2 box plot with explanation." >}}
 
 Bring it together
 =================
@@ -837,6 +837,6 @@ plot_grid(phos_plot_with_DL,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-<img src='/static/boxplots/picsWithDL-1.png'/ title='Boxplot with additional ggplot2 features.' alt='Boxplot with additional ggplot2 features.' />
+{{< figure src="/static/boxplots/picsWithDL-1.png" title="Boxplot with additional ggplot2 features." alt="Boxplot with additional ggplot2 features." >}}
 
 I hoped you like my "deep dive" into `ggplot2` boxplots. Many of the techniques here can be used to modify other `ggplot2` plots.

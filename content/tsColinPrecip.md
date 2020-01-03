@@ -106,7 +106,7 @@ precipMap(precipData,
           endDate = endTSColin)
 ```
 
-<img src='/static/ts-colin-precip/use-functions-1.png'/ title='Map of precipitation' alt='Map of precipitation' />
+{{< figure src="/static/ts-colin-precip/use-functions-1.png" title="Map of precipitation" alt="Map of precipitatio" >}}
 
 Questions
 =========

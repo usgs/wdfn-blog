@@ -317,7 +317,7 @@ axis(3, labels = FALSE,tck=.01)
 axis(4, labels = FALSE,tck=.01)
 ```
 
-<img src='/static/seasonal-analysis/unnamed-chunk-8-1.png'/ title='Seasonal flux as a percentage of annual flux.' alt='Seasonal flux as a percentage of annual flux.' class=''/>
+{{< figure src="/static/seasonal-analysis/unnamed-chunk-8-1.png" title="Seasonal flux as a percentage of annual flux." alt="Seasonal flux as a percentage of annual flux." >}}
 
 We can interpret this example graph as follows. The winter flux of nitrate fluctuates a good deal from year to year. From a low of around 10% to a high of around 60% but the mean percentage hasn't changed much over the years. It is around 35% of the annual total flux.
 
@@ -377,11 +377,11 @@ Information on USGS-R packages used in this post:
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><a href="https://github.com/USGS-R/EGRET" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
+<td><a href="https://github.com/USGS-R/EGRET" target="_blank"><img src="/img/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
 <td><a href="https://github.com/USGS-R/EGRET/issues" target="_blank">EGRET</a>: Exploration and Graphics for RivEr Trends: An R-package for the analysis of long-term changes in water quality and streamflow, including the water-quality method Weighted Regressions on Time, Discharge, and Season (WRTDS)</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/images/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
+<td><a href="https://github.com/USGS-R/dataRetrieval" target="_blank"><img src="/img/USGS_R.png" alt="USGS-R image icon" style="width: 75px;" /></a></td>
 <td><a href="https://github.com/USGS-R/dataRetrieval/issues" target="_blank">dataRetrieval</a>: This R package is designed to obtain USGS or EPA water quality sample data, streamflow data, and metadata directly from web services.</td>
 </tr>
 </tbody>

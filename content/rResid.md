@@ -29,11 +29,11 @@ When censored data are present in a water quality data set, depicting them in an
 
 The solid vertical lines, which represent the range of values that a given censored value could be, is very distracting in terms of getting a picture of the overall behavior of the data. We can see this even more if we try to look at the relationship of concentration to discharge.
 
-<img src='/static/rResid/unnamed-chunk-3-1.png'/ title='plotConcQ problem' alt='plotConcQ issue' class=''/>
+{{< figure src="/static/rResid/unnamed-chunk-3-1.png" title="plotConcQ problem" alt="plotConcQ issue" >}}
 
 It is difficult to see the relationship between ammonia concentration and discharge. If we look at residuals from a fitted WRTDS model and discharge we also find it difficult to see if the pattern looks reasonable (a horizontal cloud of points centered on the zero residual line) or if there is some substantial curvature to the relationship.
 
-<img src='/static/rRresid/unnamed-chunk-4-1.png'/ title='plotResidQ problem' alt='plotResidQ problem' class=''/>
+{{< figure src="/static/rRresid/unnamed-chunk-4-1.png" title="plotResidQ problem" alt="plotResidQ problem" >}}
 
 Here again, the plot is not very informative. What solutions might exist to resolve this problem of the graphical representation of the censored data?
 
@@ -44,8 +44,9 @@ If we think about a fitted WRTDS model, what it is telling us is this: For some 
 
 So, what we can say about some particular censored value is that the log of the true value has a mean of **yHat** and a standard deviation of **SE**, it is normally distributed, but is constrained to be in the part of the normal distribution which is less than the log of the reporting limit. Such a random variable is known as a truncated normal random variable. Fortunately there is an R package entirely focused on the truncated normal distribution. It is called **truncnorm**. We can use **truncnorm** to generate a random number for each of the censored values and this random number will be drawn from the lower portion of normal distribution with the correct mean, standard deviation, and upper bound. The idea is to create these random values to substitute for the censored observations. We call them the **rObserved** values (the "r" denotes that they are randomly generated observations) and they reside in an augmented version of the **Sample** data frame in a column called **Sample$rObserved**. The figures below illustrate what a truncated normal distribution density function looks like. They show the density below the censoring threshold for two different examples. The **rObserved** values are samples from these density functions. The area under each density function is equal to 1.
 
-<img src='/static/rResid/unnamed-chunk-5-1.png'/ title='Truncated normal distribution density thresh +1' alt='Truncated normal distribution images' class='side-by-side'/><img src='/static/rResid/unnamed-chunk-5-2.png'/ title='Truncated normal distribution thresh -1' alt='Truncated normal distribution images' class='side-by-side'/>
-
+<div class="grid-row">
+{{< figure src="/static/rResid/unnamed-chunk-5-1.png" title="Truncated normal distribution density thresh +1" alt="Truncated normal distribution images" class="side-by-side" >}}{{< figure src="/static/rResid/unnamed-chunk-5-2.png" title="Truncated normal distribution thresh -1" alt="Truncated normal distribution images" class="side-by-side" >}}
+</div>
 What is most important to understand is that these randomly generated values are never used in any of the WRTDS computations that result in estimates of daily concentrations or fluxes, or annual average concentrations or fluxes, or any trends. These randomly generated values are created strictly to provide a more-easily interpreted set of diagonstic graphics. Here is an example of a plot of concentration versus time using this approach.
 
 The solid circles are the uncensored observations and the open circles are these **rObserved** values. One thing to note is that if these values were to be generated a second time the graph would look slightly different. There is no unique set of values that will be plotted. The random numbers used will be different if we go back to the same data set and generate them again. Below we show such a figure and then redo the graphic with a second set of random numbers. The code is shown with the graphics.
@@ -55,7 +56,7 @@ eList <- makeAugmentedSample(eList)
 plotConcQ(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-6-1.png'/ title='plotConcQ random 1' alt='plotConcQ random images' class='side-by-side'/>
+{{< figure src="/static/rResid/unnamed-chunk-6-1.png" title="plotConcQ random 1" alt="plotConcQ random images" class="side-by-side" >}}
 
 ``` r
 # now do it all over again
@@ -63,7 +64,7 @@ eList <- makeAugmentedSample(eList)
 plotConcQ(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-6-2.png'/ title='plotConcQ random 2' alt='plotConcQ random images' class='side-by-side'/>
+{{< figure src="/static/rResid/unnamed-chunk-6-2.png" title="plotConcQ random 2" alt="plotConcQ random images" class="side-by-side" >}}
 
 Careful examination of these two figures reveals that the black dots are exactly the same in both, but the open circles are different between the two. In looking at these kinds of plots we are not necessarily looking to see what actually happened on a particular day, but rather to understand the pattern of the relationship between the two variables being plotted.
 
@@ -80,13 +81,13 @@ We can look at our residuals plots in the following manner (using the second set
 plotResidTime(eList, randomCensored = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-7-1.png'/ title='plotResidTime with random censoring' alt='plotResidTime random images' class='side-by-side'/>
+{{< figure src="/static/rResid/unnamed-chunk-7-1.png" title="plotResidTime with random censoring" alt="plotResidTime random images" class="side-by-side" >}}
 
 ``` r
 plotResidQ(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-7-2.png'/ title='plotResidQ with random censoring' alt='plotResidTime random images' class='side-by-side'/>
+{{< figure src="/static/rResid/unnamed-chunk-7-2.png" title="plotResidQ with random censoring" alt="plotResidTime random images" class="side-by-side" >}}
 
 Details for how to include random residuals in your computations
 ================================================================
@@ -107,13 +108,13 @@ For example.
 multiPlotDataOverview(eList, qUnit = 4, randomCensored = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-8-1.png'/ title='multiPlotDataOverview' alt='EGRET example plots' class=''/>
+{{< figure src="/static/rResid/unnamed-chunk-8-1.png" title="multiPlotDataOverview" alt="EGRET example plots" >}}
 
 ``` r
 fluxBiasMulti(eList, qUnit = 4, fluxUnit = 9, randomCensored = TRUE)
 ```
 
-<img src='/static/rResid/unnamed-chunk-8-2.png'/ title='fluxBiasMulti' alt='EGRET example plots' class=''/>
+{{< figure src="/static/rResid/unnamed-chunk-8-2.png" title="fluxBiasMulti" alt="EGRET example plots" >}}
 
 Two final thoughts
 ==================
