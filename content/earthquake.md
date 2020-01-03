@@ -184,7 +184,7 @@ gsMap <- ggplot() +
 gsMap
 ```
 
-{{> figure src="/static/earthquake/map-1.png" title="Site locations on US map" alt="Initial map work" >}}
+{{< figure src="/static/earthquake/map-1.png" title="Site locations on US map" alt="Initial map work" >}}
 
 The initial line graphs needed to be updated with those colors and dropping the facet labels:
 

@@ -87,33 +87,6 @@ figure {
     }
   }
 }
-
-/* Styles for R code */
-.hljs {
-  background: #f7f7f7 !important;
-  color: #000;
-  line-height: 1.5em;
-}
-
-.hljs-number {
-  color: #aa5146  !important;
-}
-
-.hljs-preprocessor {
-  > .hljs-title {
-    color: #586e75;
-  }
-  color: #586e75;
-}
-
-.hljs-comment {
-  color: #586e75;
-}
-
-.hljs-value, .hljs-string {
-  color: #183691  !important;
-}
-
-.hljs-class > .hljs-title, .nginx > .hljs-title, .hljs-title, .css > .hljs-tag, .hljs-tag, .hljs-keyword, .hljs-variable, .hljs-attribute, .hljs-attr_selector, .hljs-built_in {
-  color: #000;
+pre {
+  overflow-x: scroll;
 }
