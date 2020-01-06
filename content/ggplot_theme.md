@@ -166,6 +166,7 @@ Display site info
 
 <iframe seamless src="/static/ggplot2/ggplot2/index.html" width="100%" height="500">
 </iframe>
+
 ``` r
 # merge water levels and alitudes
 gwLevs <- merge(x = gwLevs, y = infoNew,
