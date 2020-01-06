@@ -2,7 +2,7 @@
 author: Jeff Sadler
 date: 2019-12-10
 slug: cloud_data
-draft: True
+draft: False
 type: post
 title: Cloud-optimized USGS Time Series Data
 categories: Data Science
