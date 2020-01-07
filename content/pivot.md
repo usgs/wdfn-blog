@@ -22,14 +22,14 @@ keywords:
   - pivot
  
 ---
-This article will walk through prepping water-quality chemistry data formatted in a “wide” configuration and exporting it to a Microsoft™ Excel “long” file using R. This article will focus on using functions and techniques from the “tidyverse” collection of R packages (`dplyr` + `tidyr` + others…).
+This article will walk through prepping water-quality chemistry data formatted in a "wide" configuration and exporting it to a Microsoft™ Excel "long" file using R. This article will focus on using functions and techniques from the "tidyverse" collection of R packages (`dplyr` + `tidyr` + others…).
 
 Pivot from wide to long
 -----------------------
 
-It is very common for environmental chemistry data to come back from the laboratory in a “wide” format. A wide format typically has a few “header” columns such as site and date with additional columns representing a single chemical per column and possibly a remark code for each chemical as a separate column. The remark column could indicate censored data (ie “below detection limit”) or some information about the sampling conditions. We can use the `tidyr` package to “pivot” this data to the required long format used in `toxEval`.
+It is very common for environmental chemistry data to come back from the laboratory in a "wide" format. A wide format typically has a few "header" columns such as site and date with additional columns representing a single chemical per column and possibly a remark code for each chemical as a separate column. The remark column could indicate censored data (ie "below detection limit") or some information about the sampling conditions. We can use the `tidyr` package to "pivot" this data to the required long format used in `toxEval`.
 
-Let’s start with the most simple case, a wide data frame with no remark codes. In this simple example, column “Phosphorus” represents measured phosphorus values, and column “Nitrate” represents measured nitrate values:
+Let’s start with the most simple case, a wide data frame with no remark codes. In this simple example, column "Phosphorus" represents measured phosphorus values, and column "Nitrate" represents measured nitrate values:
 
 ``` r
 df_simple <- data.frame(
@@ -49,7 +49,7 @@ df_simple <- data.frame(
 | B    | 2020-01-05 |           3|        2|
 | B    | 2020-01-04 |           4|        1|
 
-The “long” version of this data frame will still have the “site” and “date” columns, but instead of “Phosphorus”, “Nitrate” (and potentially many many more…), it will now have “Chemical” and “Value”. To do this programatically, we can use the `pivot_longer` function in `tidyr`:
+The "long" version of this data frame will still have the "site" and "date" columns, but instead of "Phosphorus", "Nitrate" (and potentially many many more…), it will now have "Chemical" and "Value". To do this programatically, we can use the `pivot_longer` function in `tidyr`:
 
 ``` r
 library(tidyr)
@@ -72,9 +72,9 @@ df_simple_long <- df_simple %>%
 | B    | 2020-01-04 | Phosphorus |      4|
 | B    | 2020-01-04 | Nitrate    |      1|
 
-The “names\_to” argument is the name given to the column that is populated from the wide column names (so, the chemical names). The “values\_to” is the column name for the values populated from the chemical columns.
+The "names\_to" argument is the name given to the column that is populated from the wide column names (so, the chemical names). The "values\_to" is the column name for the values populated from the chemical columns.
 
-Let’s make a more complicated wide data that now has the “Phosphorus” and “Nitrate” measured values, but also has “Phosphorus” and “Nitrate” remark codes:
+Let’s make a more complicated wide data that now has the "Phosphorus" and "Nitrate" measured values, but also has "Phosphorus" and "Nitrate" remark codes:
 
 ``` r
 df_with_rmks <- data.frame(
@@ -96,7 +96,7 @@ df_with_rmks <- data.frame(
 | B    | 2020-01-05 |                  3|                 |               2|              |
 | B    | 2020-01-04 |                  4|                 |               1| \<           |
 
-We can use the “pivot\_longer” function again to make this into a long data frame with the columns: site, date, Chemical, value, remark:
+We can use the "pivot\_longer" function again to make this into a long data frame with the columns: site, date, Chemical, value, remark:
 
 ``` r
 library(tidyr)
@@ -117,7 +117,7 @@ df_long_with_rmks <- df_with_rmks %>%
 | B    | 2020-01-04 | Phosphorus |      4|     |
 | B    | 2020-01-04 | Nitrate    |      1| \<  |
 
-This time, the “names\_to” argument is a vector. Since it’s going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the “names\_pattern” argument. In this case, `tidyr` is going to look at the column names (excluding site and date…since we negate those in the “cols” argument), and try to split the names by the “\_” separator. This is a very powerful tool…in this case we are saying anything in the first group (on the left of the “\_”) is the “Chemical” and every matching group on the right of the “\_” creates new value columns. So with the columns are: Phosphorus\_value, Phosphorus\_rmk, Nitrate\_value, Nitrate\_rmk - we get a column of chemicals (Phosphorus & Nitrate), a column of “rmk” values, and a column of “value” values.
+This time, the "names\_to" argument is a vector. Since it’s going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the "names\_pattern" argument. In this case, `tidyr` is going to look at the column names (excluding site and date…since we negate those in the "cols" argument), and try to split the names by the "\_" separator. This is a very powerful tool…in this case we are saying anything in the first group (on the left of the "\_") is the "Chemical" and every matching group on the right of the "\_" creates new value columns. So with the columns are: Phosphorus\_value, Phosphorus\_rmk, Nitrate\_value, Nitrate\_rmk - we get a column of chemicals (Phosphorus & Nitrate), a column of "rmk" values, and a column of "value" values.
 
 What if the column names didn’t have the "\_value" prepended? This is more common in our raw data:
 
@@ -143,7 +143,7 @@ data_example2 <- data.frame(
 | B    | 2020-01-05 |     3|           |        2|              |         5|               |
 | B    | 2020-01-04 |     4|           |        1| \<           |         6|               |
 
-The easiest way to do that would be to add that “\_value”. Keeping in the “tidyverse” (acknowledging there are other base-R ways that work well too for the column renames):
+The easiest way to do that would be to add that "\_value". Keeping in the "tidyverse" (acknowledging there are other base-R ways that work well too for the column renames):
 
 ``` r
 library(dplyr)
@@ -192,7 +192,7 @@ Let’s break down the issues:
 -   2nd row basically contains the useful column headers
 -   Need to skip a random 3rd row
 -   4th row has 2 column headers for the first 2 columns
--   The data starts in row 5, in a “wide” format
+-   The data starts in row 5, in a "wide" format
 -   The date format is unusual
 
 In this example, we’ll work through these spacing and header issues to get us to a wide data frame that we can then pivot to a long data frame as described in the next section.
@@ -223,7 +223,7 @@ headers <- headers[,-1:-2]
 ```
 
 It would be nice to use the first row as the column names in
-“data\_no\_header”, but then it would be very confusing what “Code” means (since it’s repeated). So, let’s remove the “Code”, and just repeat the chemical names:
+"data\_no\_header", but then it would be very confusing what "Code" means (since it’s repeated). So, let’s remove the "Code", and just repeat the chemical names:
 
 ``` r
 headers <- headers[,which(as.character(headers[1,]) != "Code")]
@@ -239,13 +239,13 @@ head(column_names)
     ## [3] "Thiabendazole_code"         "Thiabendazole_Value"       
     ## [5] "1,7-Dimethylxanthine_code"  "1,7-Dimethylxanthine_Value"
 
-Now, we can assign the “column\_names” to the “data\_no\_header”:
+Now, we can assign the "column\_names" to the "data\_no\_header":
 
 ``` r
 names(data_no_header)[-1:-2] <- column_names
 ```
 
-Before we pivot this data to the long format (as described above), let’s transform the “Sample Date” column to an R date time format:
+Before we pivot this data to the long format (as described above), let’s transform the "Sample Date" column to an R date time format:
 
 ``` r
 data_no_header$`Sample Date` <- as.POSIXct(data_no_header$`Sample Date`, 
