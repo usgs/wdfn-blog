@@ -1,7 +1,7 @@
 ---
 title: "Using R to pivot wide water-quality data"
 slug: "pivot"
-date: "2020-01-02"
+date: "2020-01-07"
 keyword1: "tidyr"
 output: USGSmarkdowntemplates::hugo
 description:  "Convert wide water quality data wide to long with new tidyverse convention."
@@ -80,10 +80,9 @@ df_simple_long <- df_simple %>%
 
 ```
 
-The top 6 rows are now:
 
 ```{r simplePivotDisplay, echo=FALSE}
-kable(head(df_simple_long))
+kable(df_simple_long)
 ```
 
 
@@ -122,10 +121,9 @@ df_long_with_rmks <- df_with_rmks %>%
 
 ```
 
-The top 6 rows are now:
 
 ```{r pivot1Display, echo=FALSE}
-kable(head(df_long_with_rmks))
+kable(df_long_with_rmks)
 ```
 
 
@@ -138,12 +136,12 @@ data_example2 <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  Phosphorus = c(1:4),
-  Phosphorus_rmk = c("<","","",""),
+  Phos = c(1:4),
+  Phos_rmk = c("<","","",""),
   Nitrate = c(4:1),
   Nitrate_rmk = c("","","","<"),
-  Cloride = c(3:6),
-  Cloride_rmk = rep("",4),
+  Chloride = c(3:6),
+  Chloride_rmk = rep("",4),
   stringsAsFactors = FALSE
 )
 

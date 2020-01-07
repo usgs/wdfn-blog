@@ -1,6 +1,6 @@
 ---
 author: 
-date: 2020-01-02
+date: 2020-01-07
 slug: pivot
 draft: True
 title: Using R to pivot wide water-quality data
@@ -11,8 +11,10 @@ author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
+
 tags: 
   - R
+ 
 description: Convert wide water quality data wide to long with new tidyverse convention.
 keywords:
   - R
@@ -20,8 +22,7 @@ keywords:
   - pivot
  
 ---
-This article will walk through prepping water-quality chemistry data formatted in a “wide” configuration and exporting it to a Microsoft™ Excel “long” file using R. This article will focus on using functions and techniques from the “tidyverse” collection of R packages (`dplyr` +
-`tidyr` + others…).
+This article will walk through prepping water-quality chemistry data formatted in a “wide” configuration and exporting it to a Microsoft™ Excel “long” file using R. This article will focus on using functions and techniques from the “tidyverse” collection of R packages (`dplyr` + `tidyr` + others…).
 
 Pivot from wide to long
 -----------------------
@@ -60,8 +61,6 @@ df_simple_long <- df_simple %>%
                values_to = "Value")
 ```
 
-The top 6 rows are now:
-
 | site | date       | Chemical   |  Value|
 |:-----|:-----------|:-----------|------:|
 | A    | 2020-01-07 | Phosphorus |      1|
@@ -70,6 +69,8 @@ The top 6 rows are now:
 | A    | 2020-01-06 | Nitrate    |      3|
 | B    | 2020-01-05 | Phosphorus |      3|
 | B    | 2020-01-05 | Nitrate    |      2|
+| B    | 2020-01-04 | Phosphorus |      4|
+| B    | 2020-01-04 | Nitrate    |      1|
 
 The “names\_to” argument is the name given to the column that is populated from the wide column names (so, the chemical names). The “values\_to” is the column name for the values populated from the chemical columns.
 
@@ -105,8 +106,6 @@ df_long_with_rmks <- df_with_rmks %>%
                names_pattern = "(.+)_(.+)")
 ```
 
-The top 6 rows are now:
-
 | site | date       | Chemical   |  value| rmk |
 |:-----|:-----------|:-----------|------:|:----|
 | A    | 2020-01-07 | Phosphorus |      1| \<  |
@@ -115,6 +114,8 @@ The top 6 rows are now:
 | A    | 2020-01-06 | Nitrate    |      3|     |
 | B    | 2020-01-05 | Phosphorus |      3|     |
 | B    | 2020-01-05 | Nitrate    |      2|     |
+| B    | 2020-01-04 | Phosphorus |      4|     |
+| B    | 2020-01-04 | Nitrate    |      1| \<  |
 
 This time, the “names\_to” argument is a vector. Since it’s going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the “names\_pattern” argument. In this case, `tidyr` is going to look at the column names (excluding site and date…since we negate those in the “cols” argument), and try to split the names by the “\_” separator. This is a very powerful tool…in this case we are saying anything in the first group (on the left of the “\_”) is the “Chemical” and every matching group on the right of the “\_” creates new value columns. So with the columns are: Phosphorus\_value, Phosphorus\_rmk, Nitrate\_value, Nitrate\_rmk - we get a column of chemicals (Phosphorus & Nitrate), a column of “rmk” values, and a column of “value” values.
 
@@ -125,22 +126,22 @@ data_example2 <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  Phosphorus = c(1:4),
-  Phosphorus_rmk = c("<","","",""),
+  Phos = c(1:4),
+  Phos_rmk = c("<","","",""),
   Nitrate = c(4:1),
   Nitrate_rmk = c("","","","<"),
-  Cloride = c(3:6),
-  Cloride_rmk = rep("",4),
+  Chloride = c(3:6),
+  Chloride_rmk = rep("",4),
   stringsAsFactors = FALSE
 )
 ```
 
-| site | date       |  Phosphorus| Phosphorus\_rmk |  Nitrate| Nitrate\_rmk |  Cloride| Cloride\_rmk |
-|:-----|:-----------|-----------:|:----------------|--------:|:-------------|--------:|:-------------|
-| A    | 2020-01-07 |           1| \<              |        4|              |        3|              |
-| A    | 2020-01-06 |           2|                 |        3|              |        4|              |
-| B    | 2020-01-05 |           3|                 |        2|              |        5|              |
-| B    | 2020-01-04 |           4|                 |        1| \<           |        6|              |
+| site | date       |  Phos| Phos\_rmk |  Nitrate| Nitrate\_rmk |  Chloride| Chloride\_rmk |
+|:-----|:-----------|-----:|:----------|--------:|:-------------|---------:|:--------------|
+| A    | 2020-01-07 |     1| \<        |        4|              |         3|               |
+| A    | 2020-01-06 |     2|           |        3|              |         4|               |
+| B    | 2020-01-05 |     3|           |        2|              |         5|               |
+| B    | 2020-01-04 |     4|           |        1| \<           |         6|               |
 
 The easiest way to do that would be to add that “\_value”. Keeping in the “tidyverse” (acknowledging there are other base-R ways that work well too for the column renames):
 
@@ -153,12 +154,12 @@ data_renamed <- data_example2 %>%
             list(~ sprintf('%s_value', .))) 
 ```
 
-| site | date       |  Phosphorus\_value| Phosphorus\_rmk |  Nitrate\_value| Nitrate\_rmk |  Cloride\_value| Cloride\_rmk |
-|:-----|:-----------|------------------:|:----------------|---------------:|:-------------|---------------:|:-------------|
-| A    | 2020-01-07 |                  1| \<              |               4|              |               3|              |
-| A    | 2020-01-06 |                  2|                 |               3|              |               4|              |
-| B    | 2020-01-05 |                  3|                 |               2|              |               5|              |
-| B    | 2020-01-04 |                  4|                 |               1| \<           |               6|              |
+| site | date       |  Phos\_value| Phos\_rmk |  Nitrate\_value| Nitrate\_rmk |  Chloride\_value| Chloride\_rmk |
+|:-----|:-----------|------------:|:----------|---------------:|:-------------|----------------:|:--------------|
+| A    | 2020-01-07 |            1| \<        |               4|              |                3|               |
+| A    | 2020-01-06 |            2|           |               3|              |                4|               |
+| B    | 2020-01-05 |            3|           |               2|              |                5|               |
+| B    | 2020-01-04 |            4|           |               1| \<           |                6|               |
 
 ``` r
 data_long_2 <- data_renamed %>% 
@@ -169,14 +170,14 @@ data_long_2 <- data_renamed %>%
 
 The top 6 rows are now:
 
-| site | date       | Chemical   |  value| rmk |
-|:-----|:-----------|:-----------|------:|:----|
-| A    | 2020-01-07 | Phosphorus |      1| \<  |
-| A    | 2020-01-07 | Nitrate    |      4|     |
-| A    | 2020-01-07 | Cloride    |      3|     |
-| A    | 2020-01-06 | Phosphorus |      2|     |
-| A    | 2020-01-06 | Nitrate    |      3|     |
-| A    | 2020-01-06 | Cloride    |      4|     |
+| site | date       | Chemical |  value| rmk |
+|:-----|:-----------|:---------|------:|:----|
+| A    | 2020-01-07 | Phos     |      1| \<  |
+| A    | 2020-01-07 | Nitrate  |      4|     |
+| A    | 2020-01-07 | Chloride |      3|     |
+| A    | 2020-01-06 | Phos     |      2|     |
+| A    | 2020-01-06 | Nitrate  |      3|     |
+| A    | 2020-01-06 | Chloride |      4|     |
 
 Real-world example
 ------------------
@@ -221,7 +222,8 @@ headers <- read_xlsx("static/pivot/Wide data example.xlsx",
 headers <- headers[,-1:-2]
 ```
 
-It would be nice to use the first row as the column names in “data\_no\_header”, but then it would be very confusing what “Code” means (since it’s repeated). So, let’s remove the “Code”, and just repeat the chemical names:
+It would be nice to use the first row as the column names in
+“data\_no\_header”, but then it would be very confusing what “Code” means (since it’s repeated). So, let’s remove the “Code”, and just repeat the chemical names:
 
 ``` r
 headers <- headers[,which(as.character(headers[1,]) != "Code")]
