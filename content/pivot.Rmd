@@ -49,15 +49,15 @@ This article will walk through prepping water-quality chemistry data formatted i
 
 It is very common for environmental chemistry data to come back from the laboratory in a "wide" format. A wide format typically has a few "header" columns such as site and date with additional columns representing a single chemical per column and possibly a remark code for each chemical as a separate column. The remark column could indicate censored data (ie "below detection limit") or some information about the sampling conditions. We can use the `tidyr` package to "pivot" this data to the required long format used in `toxEval`.
 
-Let's start with the most simple case, a wide data frame with no remark codes. In this simple example, column "a" represents the measured value of "a" and column "b" represents the measured value of "b":
+Let's start with the most simple case, a wide data frame with no remark codes. In this simple example, column "Phosphorus" represents measured phosphorus values, and column "Nitrate" represents measured nitrate values:
 
 ```{r easyPeasy}
 df_simple <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  a = c(1:4),
-  b = c(4:1),
+  Phosphorus = c(1:4),
+  Nitrate = c(4:1),
   stringsAsFactors = FALSE
 )
 
@@ -67,7 +67,7 @@ df_simple <- data.frame(
 kable(df_simple)
 ```
 
-The "long" version of this data frame will still have the "site" and "date" columns, but instead of "a", "b" (and potentially many many more...), it will now have "Chemical" and "Value". To do this programatically, we can use the `pivot_longer` function in `tidyr`:
+The "long" version of this data frame will still have the "site" and "date" columns, but instead of "Phosphorus", "Nitrate" (and potentially many many more...), it will now have "Chemical" and "Value". To do this programatically, we can use the `pivot_longer` function in `tidyr`:
 
 ```{r simplePivot}
 library(tidyr)
@@ -89,17 +89,17 @@ kable(head(df_simple_long))
 
 The "names_to" argument is the name given to the column that is populated from the wide column names (so, the chemical names). The "values_to" is the column name for the values populated from the chemical columns.
 
-Let's make a more complicated wide data that now has the "a" and "b" measured values, but also has "a" and "b" remark codes:
+Let's make a more complicated wide data that now has the "Phosphorus" and "Nitrate" measured values, but also has "Phosphorus" and "Nitrate" remark codes:
 
 ```{r setupData}
 df_with_rmks <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  a_value = c(1:4),
-  a_rmk = c("<","","",""),
-  b_value = c(4:1),
-  b_rmk = c("","","","<"),
+  Phosphorus_value = c(1:4),
+  Phosphorus_rmk = c("<","","",""),
+  Nitrate_value = c(4:1),
+  Nitrate_rmk = c("","","","<"),
   stringsAsFactors = FALSE
 )
 
@@ -129,8 +129,7 @@ kable(head(df_long_with_rmks))
 ```
 
 
-
-This time, the "names_to" argument is a vector. Since it's going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the "names_pattern" argument. In this case, `tidyr` is going to look at the column names (excluding site and date...since we negate those in the "cols" argument), and try to split the names by the "\_" separator. This is a very powerful tool...in this case we are saying anything in the first group (on the left of the "\_") is the "Chemical" and every matching group on the right of the "\_" creates new value columns. So with the columns are: a_value, a_rmk, b_value, b_rmk - we get a column of chemicals (a & b), a column of "rmk" values, and a column of "value" values.
+This time, the "names_to" argument is a vector. Since it's going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the "names_pattern" argument. In this case, `tidyr` is going to look at the column names (excluding site and date...since we negate those in the "cols" argument), and try to split the names by the "\_" separator. This is a very powerful tool...in this case we are saying anything in the first group (on the left of the "\_") is the "Chemical" and every matching group on the right of the "\_" creates new value columns. So with the columns are: Phosphorus_value, Phosphorus_rmk, Nitrate_value, Nitrate_rmk - we get a column of chemicals (Phosphorus & Nitrate), a column of "rmk" values, and a column of "value" values.
 
 What if the column names didn't have the "_value" prepended? This is more common in our raw data:
 
@@ -139,12 +138,12 @@ data_example2 <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  a = c(1:4),
-  a_rmk = c("<","","",""),
-  b = c(4:1),
-  b_rmk = c("","","","<"),
-  c = c(3:6),
-  c_rmk = rep("",4),
+  Phosphorus = c(1:4),
+  Phosphorus_rmk = c("<","","",""),
+  Nitrate = c(4:1),
+  Nitrate_rmk = c("","","","<"),
+  Cloride = c(3:6),
+  Cloride_rmk = rep("",4),
   stringsAsFactors = FALSE
 )
 
@@ -160,10 +159,20 @@ The easiest way to do that would be to add that "\_value". Keeping in the "tidyv
 ```{r change_names}
 library(dplyr)
 
-data_wide2 <- data_example2 %>% 
+data_renamed <- data_example2 %>% 
   rename_if(!grepl("_rmk", names(.)) &
               names(.) != c("site","date"), 
-            list(~ sprintf('%s_value', .))) %>% 
+            list(~ sprintf('%s_value', .))) 
+```
+
+
+```{r changed_namesDisplay, echo=FALSE}
+kable(data_renamed)
+```
+
+
+```{r make_long_again}
+data_long_2 <- data_renamed %>% 
   pivot_longer(cols = c(-site, -date), 
                names_to = c("Chemical", ".value"),
                names_pattern = "(.+)_(.+)")
@@ -172,12 +181,12 @@ data_wide2 <- data_example2 %>%
 
 The top 6 rows are now:
 
-```{r change_namesDisplay, echo=FALSE}
-kable(head(data_wide2))
+```{r make_long_againDisplay, echo=FALSE}
+kable(head(data_long_2))
 ```
 
 
-## Opening the file
+## Real-world example
 
 To open an Excel file in R, use the `readxl` package. There are many different configurations of Excel files possible.
 

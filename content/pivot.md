@@ -16,37 +16,39 @@ tags:
 description: Convert wide water quality data wide to long with new tidyverse convention.
 keywords:
   - R
-  - tidyr
+  - tidyverse
+  - pivot
  
 ---
-This article will walk through prepping water-quality chemistry data formatted in a “wide” configuration and exporting it to a Microsoft™ Excel “long” file using R. This article will focus on using functions and techniques from the “tidyverse” collection of R packages (`dplyr` + `tidyr` + others…).
+This article will walk through prepping water-quality chemistry data formatted in a “wide” configuration and exporting it to a Microsoft™ Excel “long” file using R. This article will focus on using functions and techniques from the “tidyverse” collection of R packages (`dplyr` +
+`tidyr` + others…).
 
 Pivot from wide to long
 -----------------------
 
 It is very common for environmental chemistry data to come back from the laboratory in a “wide” format. A wide format typically has a few “header” columns such as site and date with additional columns representing a single chemical per column and possibly a remark code for each chemical as a separate column. The remark column could indicate censored data (ie “below detection limit”) or some information about the sampling conditions. We can use the `tidyr` package to “pivot” this data to the required long format used in `toxEval`.
 
-Let’s start with the most simple case, a wide data frame with no remark codes. In this simple example, column “a” represents the measured value of “a” and column “b” represents the measured value of “b”:
+Let’s start with the most simple case, a wide data frame with no remark codes. In this simple example, column “Phosphorus” represents measured phosphorus values, and column “Nitrate” represents measured nitrate values:
 
 ``` r
 df_simple <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  a = c(1:4),
-  b = c(4:1),
+  Phosphorus = c(1:4),
+  Nitrate = c(4:1),
   stringsAsFactors = FALSE
 )
 ```
 
-| site | date       |    a|    b|
-|:-----|:-----------|----:|----:|
-| A    | 2020-01-02 |    1|    4|
-| A    | 2020-01-01 |    2|    3|
-| B    | 2019-12-31 |    3|    2|
-| B    | 2019-12-30 |    4|    1|
+| site | date       |  Phosphorus|  Nitrate|
+|:-----|:-----------|-----------:|--------:|
+| A    | 2020-01-07 |           1|        4|
+| A    | 2020-01-06 |           2|        3|
+| B    | 2020-01-05 |           3|        2|
+| B    | 2020-01-04 |           4|        1|
 
-The “long” version of this data frame will still have the “site” and “date” columns, but instead of “a”, “b” (and potentially many many more…), it will now have “Chemical” and “Value”. To do this programatically, we can use the `pivot_longer` function in `tidyr`:
+The “long” version of this data frame will still have the “site” and “date” columns, but instead of “Phosphorus”, “Nitrate” (and potentially many many more…), it will now have “Chemical” and “Value”. To do this programatically, we can use the `pivot_longer` function in `tidyr`:
 
 ``` r
 library(tidyr)
@@ -60,39 +62,38 @@ df_simple_long <- df_simple %>%
 
 The top 6 rows are now:
 
-| site | date       | Chemical |  Value|
-|:-----|:-----------|:---------|------:|
-| A    | 2020-01-02 | a        |      1|
-| A    | 2020-01-02 | b        |      4|
-| A    | 2020-01-01 | a        |      2|
-| A    | 2020-01-01 | b        |      3|
-| B    | 2019-12-31 | a        |      3|
-| B    | 2019-12-31 | b        |      2|
+| site | date       | Chemical   |  Value|
+|:-----|:-----------|:-----------|------:|
+| A    | 2020-01-07 | Phosphorus |      1|
+| A    | 2020-01-07 | Nitrate    |      4|
+| A    | 2020-01-06 | Phosphorus |      2|
+| A    | 2020-01-06 | Nitrate    |      3|
+| B    | 2020-01-05 | Phosphorus |      3|
+| B    | 2020-01-05 | Nitrate    |      2|
 
-The “names\_to” argument is the name given to the column that is
-populated from the wide column names (so, the chemical names). The “values\_to” is the column name for the values populated from the chemical columns.
+The “names\_to” argument is the name given to the column that is populated from the wide column names (so, the chemical names). The “values\_to” is the column name for the values populated from the chemical columns.
 
-Let’s make a more complicated wide data that now has the “a” and “b” measured values, but also has “a” and “b” remark codes:
+Let’s make a more complicated wide data that now has the “Phosphorus” and “Nitrate” measured values, but also has “Phosphorus” and “Nitrate” remark codes:
 
 ``` r
 df_with_rmks <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  a_value = c(1:4),
-  a_rmk = c("<","","",""),
-  b_value = c(4:1),
-  b_rmk = c("","","","<"),
+  Phosphorus_value = c(1:4),
+  Phosphorus_rmk = c("<","","",""),
+  Nitrate_value = c(4:1),
+  Nitrate_rmk = c("","","","<"),
   stringsAsFactors = FALSE
 )
 ```
 
-| site | date       |  a\_value| a\_rmk |  b\_value| b\_rmk |
-|:-----|:-----------|---------:|:-------|---------:|:-------|
-| A    | 2020-01-02 |         1| \<     |         4|        |
-| A    | 2020-01-01 |         2|        |         3|        |
-| B    | 2019-12-31 |         3|        |         2|        |
-| B    | 2019-12-30 |         4|        |         1| \<     |
+| site | date       |  Phosphorus\_value| Phosphorus\_rmk |  Nitrate\_value| Nitrate\_rmk |
+|:-----|:-----------|------------------:|:----------------|---------------:|:-------------|
+| A    | 2020-01-07 |                  1| \<              |               4|              |
+| A    | 2020-01-06 |                  2|                 |               3|              |
+| B    | 2020-01-05 |                  3|                 |               2|              |
+| B    | 2020-01-04 |                  4|                 |               1| \<           |
 
 We can use the “pivot\_longer” function again to make this into a long data frame with the columns: site, date, Chemical, value, remark:
 
@@ -106,16 +107,16 @@ df_long_with_rmks <- df_with_rmks %>%
 
 The top 6 rows are now:
 
-| site | date       | Chemical |  value| rmk |
-|:-----|:-----------|:---------|------:|:----|
-| A    | 2020-01-02 | a        |      1| \<  |
-| A    | 2020-01-02 | b        |      4|     |
-| A    | 2020-01-01 | a        |      2|     |
-| A    | 2020-01-01 | b        |      3|     |
-| B    | 2019-12-31 | a        |      3|     |
-| B    | 2019-12-31 | b        |      2|     |
+| site | date       | Chemical   |  value| rmk |
+|:-----|:-----------|:-----------|------:|:----|
+| A    | 2020-01-07 | Phosphorus |      1| \<  |
+| A    | 2020-01-07 | Nitrate    |      4|     |
+| A    | 2020-01-06 | Phosphorus |      2|     |
+| A    | 2020-01-06 | Nitrate    |      3|     |
+| B    | 2020-01-05 | Phosphorus |      3|     |
+| B    | 2020-01-05 | Nitrate    |      2|     |
 
-This time, the “names\_to” argument is a vector. Since it’s going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the “names\_pattern” argument. In this case, `tidyr` is going to look at the column names (excluding site and date…since we negate those in the “cols” argument), and try to split the names by the “\_” separator. This is a very powerful tool…in this case we are saying anything in the first group (on the left of the “\_”) is the “Chemical” and every matching group on the right of the “\_” creates new value columns. So with the columns are: a\_value, a\_rmk, b\_value, b\_rmk - we get a column of chemicals (a & b), a column of “rmk” values, and a column of “value” values.
+This time, the “names\_to” argument is a vector. Since it’s going to produce more than a simple name/value combination, we need to tell it how to make the name/value/remark combinations. We do that using the “names\_pattern” argument. In this case, `tidyr` is going to look at the column names (excluding site and date…since we negate those in the “cols” argument), and try to split the names by the “\_” separator. This is a very powerful tool…in this case we are saying anything in the first group (on the left of the “\_”) is the “Chemical” and every matching group on the right of the “\_” creates new value columns. So with the columns are: Phosphorus\_value, Phosphorus\_rmk, Nitrate\_value, Nitrate\_rmk - we get a column of chemicals (Phosphorus & Nitrate), a column of “rmk” values, and a column of “value” values.
 
 What if the column names didn’t have the "\_value" prepended? This is more common in our raw data:
 
@@ -124,32 +125,43 @@ data_example2 <- data.frame(
   site = c("A","A","B","B"),
   date = as.Date(Sys.Date():(Sys.Date()-3), 
                  origin = "1970-01-01"),
-  a = c(1:4),
-  a_rmk = c("<","","",""),
-  b = c(4:1),
-  b_rmk = c("","","","<"),
-  c = c(3:6),
-  c_rmk = rep("",4),
+  Phosphorus = c(1:4),
+  Phosphorus_rmk = c("<","","",""),
+  Nitrate = c(4:1),
+  Nitrate_rmk = c("","","","<"),
+  Cloride = c(3:6),
+  Cloride_rmk = rep("",4),
   stringsAsFactors = FALSE
 )
 ```
 
-| site | date       |    a| a\_rmk |    b| b\_rmk |    c| c\_rmk |
-|:-----|:-----------|----:|:-------|----:|:-------|----:|:-------|
-| A    | 2020-01-02 |    1| \<     |    4|        |    3|        |
-| A    | 2020-01-01 |    2|        |    3|        |    4|        |
-| B    | 2019-12-31 |    3|        |    2|        |    5|        |
-| B    | 2019-12-30 |    4|        |    1| \<     |    6|        |
+| site | date       |  Phosphorus| Phosphorus\_rmk |  Nitrate| Nitrate\_rmk |  Cloride| Cloride\_rmk |
+|:-----|:-----------|-----------:|:----------------|--------:|:-------------|--------:|:-------------|
+| A    | 2020-01-07 |           1| \<              |        4|              |        3|              |
+| A    | 2020-01-06 |           2|                 |        3|              |        4|              |
+| B    | 2020-01-05 |           3|                 |        2|              |        5|              |
+| B    | 2020-01-04 |           4|                 |        1| \<           |        6|              |
 
 The easiest way to do that would be to add that “\_value”. Keeping in the “tidyverse” (acknowledging there are other base-R ways that work well too for the column renames):
 
 ``` r
 library(dplyr)
 
-data_wide2 <- data_example2 %>% 
+data_renamed <- data_example2 %>% 
   rename_if(!grepl("_rmk", names(.)) &
               names(.) != c("site","date"), 
-            list(~ sprintf('%s_value', .))) %>% 
+            list(~ sprintf('%s_value', .))) 
+```
+
+| site | date       |  Phosphorus\_value| Phosphorus\_rmk |  Nitrate\_value| Nitrate\_rmk |  Cloride\_value| Cloride\_rmk |
+|:-----|:-----------|------------------:|:----------------|---------------:|:-------------|---------------:|:-------------|
+| A    | 2020-01-07 |                  1| \<              |               4|              |               3|              |
+| A    | 2020-01-06 |                  2|                 |               3|              |               4|              |
+| B    | 2020-01-05 |                  3|                 |               2|              |               5|              |
+| B    | 2020-01-04 |                  4|                 |               1| \<           |               6|              |
+
+``` r
+data_long_2 <- data_renamed %>% 
   pivot_longer(cols = c(-site, -date), 
                names_to = c("Chemical", ".value"),
                names_pattern = "(.+)_(.+)")
@@ -157,24 +169,21 @@ data_wide2 <- data_example2 %>%
 
 The top 6 rows are now:
 
-| site | date       | Chemical |  value| rmk |
-|:-----|:-----------|:---------|------:|:----|
-| A    | 2020-01-02 | a        |      1| \<  |
-| A    | 2020-01-02 | b        |      4|     |
-| A    | 2020-01-02 | c        |      3|     |
-| A    | 2020-01-01 | a        |      2|     |
-| A    | 2020-01-01 | b        |      3|     |
-| A    | 2020-01-01 | c        |      4|     |
+| site | date       | Chemical   |  value| rmk |
+|:-----|:-----------|:-----------|------:|:----|
+| A    | 2020-01-07 | Phosphorus |      1| \<  |
+| A    | 2020-01-07 | Nitrate    |      4|     |
+| A    | 2020-01-07 | Cloride    |      3|     |
+| A    | 2020-01-06 | Phosphorus |      2|     |
+| A    | 2020-01-06 | Nitrate    |      3|     |
+| A    | 2020-01-06 | Cloride    |      4|     |
 
-Opening the file
-----------------
+Real-world example
+------------------
 
-To open an Excel file in R, use the `readxl` package. There are many different configurations of Excel files possible.
+To open an Excel file in R, use the `readxl` package. There are many different configurations of Excel files possible. As one example, let’s say the lab returned the data looking like this:
 
-As one example, let’s say the lab returned the data looking like this:
-
-{{< figure src="/static/pivot/messyData.png" title="Wide data that needs to be converted to a long format." alt="Screen shot of Excel spreadsheet." >}}
-
+{{\< figure src=“/static/pivot/messyData.png” title=“Wide data that needs to be converted to a long format.” alt=“Screen shot of Excel spreadsheet.” \>}}
 
 Let’s break down the issues:
 
