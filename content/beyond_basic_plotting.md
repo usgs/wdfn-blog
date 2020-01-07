@@ -80,7 +80,7 @@ p <- ggplot(data = wi_daily_wq, aes(x = Date, y = value)) +
 p
 ```
 
-<img src='/static/beyond-basic-plotting/nofacetplot-1.png'/ title='ggplot2 setup before faceting' alt='Basic ggplot2 timeseries with 3 parameters represented in one: inorganic N, TSS, and flow.' class=''/>
+{{< figure src="/static/beyond-basic-plotting/nofacetplot-1.png" title="ggplot2 setup before faceting" alt="Basic ggplot2 timeseries with 3 parameters represented in one: inorganic N, TSS, and flow." >}}
 
 Now, we know that we can't keep these different parameters on the same plot. We could have written code to filter the data frame to the appropriate values and make a plot for each of them, but we can also take advantage of `facet_grid`. Since the resulting three plots that we want will all share an x axis (Date), we can imagine slicing up the figure in the vertical direction so that the x axis remains in-tact but we end up with three different y axes. We can do this using `facet_grid` and a formula syntax, `y ~ x`. So, if you want to divide the figure along the y axis, you put variable in the data that you want to use to decide which plot data goes into as the first entry in the formula. You can use a `.` if you do not want to divide the plot in the other direction.
 
@@ -89,7 +89,7 @@ Now, we know that we can't keep these different parameters on the same plot. We 
 p + facet_grid(parameter ~ .)
 ```
 
-<img src='/static/beyond-basic-plotting/verticalfacetplot-1.png'/ title='ggplot2 basic vertical facet' alt='Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three different facets along the y axis.' class=''/>
+{{< figure src="/static/beyond-basic-plotting/verticalfacetplot-1.png" title="ggplot2 basic vertical facet" alt="Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three different facets along the y axis." >}}
 
 The result is a figure divided along the y axis based on the unique values of the `parameter` column in the data.frame. So, we have three plots in one figure. They still all share the same axes, which works for the x axis but not for the y axes. We can change that by letting the y axes scale freely to the data that appears just on that facet. Add the argument `scales` to `facet_grid` and specify that they should be "free" rather than the default "fixed".
 
@@ -98,7 +98,7 @@ The result is a figure divided along the y axis based on the unique values of th
 p + facet_grid(parameter ~ ., scales = "free_y")
 ```
 
-<img src='/static/beyond-basic-plotting/verticalfacetplotfreescale-1.png'/ title='ggplot2 with freely scaled, vertical facets' alt='Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three individually scaled facets along the y axis.' class=''/>
+{{< figure src="/static/beyond-basic-plotting/verticalfacetplotfreescale-1.png" title="ggplot2 with freely scaled, vertical facets" alt="Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three individually scaled facets along the y axis." >}}
 
 From here, there might be a few things you want to change about how it's labelling the facets. We would probably want the y axis labels to say the parameter and units on the left side. So, we can adjust how the facets are labeled and styled to become our y axis labels.
 
@@ -112,7 +112,7 @@ p + facet_grid(parameter ~ ., scales = "free_y",
         strip.placement = "outside") # put labels to the left of the axis text
 ```
 
-<img src='/static/beyond-basic-plotting/verticalfacetplotfixedlabels-1.png'/ title='ggplot2 with facet labels as the y axis labels' alt='Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three individually scaled facets along the y axis, and appropriately labeled axes.' class=''/>
+{{< figure src="/static/beyond-basic-plotting/verticalfacetplotfixedlabels-1.png" title="ggplot2 with facet labels as the y axis labels" alt="Basic ggplot2 timeseries with inorganic N, TSS, and flow represented in three individually scaled facets along the y axis, and appropriately labeled axes." >}}
 
 There are still other things you can do with facets, such as using `space = "free"`. The [Cookbook for R facet examples](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/) have even more to explore!
 
@@ -162,4 +162,4 @@ plot_grid(title, bottom_row, flow_timeseries, nrow = 3, labels = c("", "", "C"),
           rel_heights = c(0.2, 1, 1))
 ```
 
-<img src='/static/beyond-basic-plotting/cowplotmulti-1.png'/ title='Multi-plot figure generated using cowplot.' alt='Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph.' class=''/>
+{{< figure src="/static/beyond-basic-plotting/cowplotmulti-1.png" title="Multi-plot figure generated using cowplot" alt="Three plots in one figure: boxplot of inorganic N & TSS, TSS vs flow, and hydrograph." >}}

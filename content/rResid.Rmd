@@ -84,7 +84,7 @@ If we think about a fitted WRTDS model, what it is telling us is this:  For some
 
 So, what we can say about some particular censored value is that the log of the true value has a mean of **yHat** and a standard deviation of **SE**, it is normally distributed, but is constrained to be in the part of the normal distribution which is less than the log of the reporting limit.  Such a random variable is known as a truncated normal random variable.  Fortunately there is an R package entirely focused on the truncated normal distribution.  It is called **truncnorm**.  We can use **truncnorm** to generate a random number for each of the censored values and this random number will be drawn from the lower portion of normal distribution with the correct mean, standard deviation, and upper bound.  The idea is to create these random values to substitute for the censored observations.  We call them the **rObserved** values (the "r" denotes that they are randomly generated observations) and they reside in an augmented version of the **Sample** data frame in a column called **Sample$rObserved**.  The figures below illustrate what a truncated normal distribution density function looks like.  They show the density below the censoring threshold for two different examples.  The **rObserved** values are samples from these density functions.  The area under each density function is equal to 1.  
 
-```{r,echo=FALSE, fig.cap=c("Truncated normal distribution density thresh +1","Truncated normal distribution thresh -1"), alt.text="Truncated normal distribution images", class = 'sideBySide'}
+```{r,echo=FALSE, fig.cap=c("Truncated normal distribution density thresh +1","Truncated normal distribution thresh -1"), alt.text="Truncated normal distribution images", class = 'side-by-side'}
 par(las = 1, tck = 0.02, xaxs = "i", yaxs = "i")
 library(truncnorm)
 x <- seq(-8,1,0.01)
@@ -111,7 +111,7 @@ What is most important to understand is that these randomly generated values are
 
 The solid circles are the uncensored observations and the open circles are these **rObserved** values.  One thing to note is that if these values were to be generated a second time the graph would look slightly different.  There is no unique set of values that will be plotted.  The random numbers used will be different if we go back to the same data set and generate them again.  Below we show such a figure and then redo the graphic with a second set of random numbers.  The code is shown with the graphics.
 
-```{r fig.cap=c("plotConcQ random 1", "plotConcQ random 2"), alt.text = "plotConcQ random images", class="sideBySide"}
+```{r fig.cap=c("plotConcQ random 1", "plotConcQ random 2"), alt.text = "plotConcQ random images", class="side-by-side"}
 eList <- makeAugmentedSample(eList)
 plotConcQ(eList, qUnit = 4, randomCensored = TRUE)
 # now do it all over again
@@ -129,7 +129,7 @@ rResid = rObserved - predicted value.  All three variables in this equation are 
 
 We can look at our residuals plots in the following manner (using the second set of rObserved values computed above).
 
-```{r, fig.cap=c("plotResidTime with random censoring","plotResidQ with random censoring"), alt.text = "plotResidTime random images", class="sideBySide"}
+```{r, fig.cap=c("plotResidTime with random censoring","plotResidQ with random censoring"), alt.text = "plotResidTime random images", class="side-by-side"}
 plotResidTime(eList, randomCensored = TRUE)
 plotResidQ(eList, qUnit = 4, randomCensored = TRUE)
 ```

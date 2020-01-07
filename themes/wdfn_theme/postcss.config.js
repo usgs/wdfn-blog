@@ -1,5 +1,5 @@
-const autoprefixerBrowsers = [
-    '> 1%',
+const autoprefixerOptions = [
+    '> 2%',
     'Last 2 versions',
     'IE 11'
 ];
@@ -8,10 +8,10 @@ module.exports = ctx => ({
     map: Object.assign({}, ctx.options.map, {inline: false}),
     parser: ctx.options.parser,
     plugins: {
-        autoprefixer: autoprefixerBrowsers,
+        autoprefixer: autoprefixerOptions,
         cssnano: {
             autoprefixer: {
-                browsers: autoprefixerBrowsers
+                browsers: autoprefixerOptions
             }
         },
         'css-mqpacker': {

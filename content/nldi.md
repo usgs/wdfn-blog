@@ -231,8 +231,10 @@ screenshots were rendered by loading the data into QGIS, turning on a
 base map with the OpenLayers Plugin, and applying a little styling to
 the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" />
-<img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />
+<div class="grid-row">
+{{< figure src="/static/nldi-intro/upstream.png" title="Upstream Navigation Results" alt="Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites." class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/downstream.png" title="Downstream Navigation Results" alt="Image of downstream navigation results. Main stem, water quality sites." class="side-by-side" >}}
+</div>
 
 Screenshots of NLDI data loaded into QGIS.
 
@@ -419,7 +421,7 @@ plot(dv_data$Date, dv_data$X_00060_00003,
      main = paste("Daily Streamflow for", nwis_gages$name[1]), xlab = "", ylab = "Daily Streamflow (CFS)")
 ```
 
-<img src="static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" />
+{{< figure src="/static/nldi-intro/dv-1.png" alt="Daily Streamflow Plot" width="672" >}}
 <p class="caption">
 Daily Streamflow Plot
 </p>

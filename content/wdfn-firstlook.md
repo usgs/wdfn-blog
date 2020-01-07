@@ -23,7 +23,7 @@ A few months ago, the USGS launched a re-designed real-time water page on [water
 
 We asked for your feedback and you delivered! Thanks to all of you who visited the new pages and shared your thoughts with us.
 
-<img src='/static/wdfn-firstlook/Beta_realtime_outdoor.png'/ title='USGS mobile-friendly real time data page' alt='User holding mobile device showing realtime data page' />
+{{< figure src="/static/wdfn-firstlook/Beta_realtime_outdoor.png" title="USGS mobile-friendly real time data page" alt="User holding mobile device showing realtime data page" >}}
 
 **Feedback and Usage by the Numbers**
 

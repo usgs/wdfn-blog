@@ -166,6 +166,7 @@ Display site info
 
 <iframe seamless src="/static/ggplot2/ggplot2/index.html" width="100%" height="500">
 </iframe>
+
 ``` r
 # merge water levels and alitudes
 gwLevs <- merge(x = gwLevs, y = infoNew,
@@ -206,7 +207,7 @@ newPlot <- ggplot(data = subDF, aes(x = lev_dt, y = watAlt)) +
 drawTicks(newPlot)
 ```
 
-<img src='/static/ggplot2/unnamed-chunk-5-1.png'/ title='TODO' alt='TODO' />
+{{< figure src="/static/ggplot2/unnamed-chunk-5-1.png" title="TODO" alt="TODO" >}}
 
 ``` r
   # save the plot with ticks on all 4 sides as pdf
@@ -248,7 +249,7 @@ map <- ggmap(baseMap) +
 drawTicks(map)
 ```
 
-<img src='/static/ggplot2/unnamed-chunk-6-1.png'/ title='TODO' alt='TODO' />
+{{< figure src="/static/ggplot2/unnamed-chunk-6-1.png" title="TODO" alt="TODO" >}}
 
 Questions
 =========
