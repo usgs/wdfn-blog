@@ -100,13 +100,9 @@ library(jsonlite)
 ```
 
 
-# Build and develop with Docker
+# Local development with Docker
 
 A Dockerfile and Docker Compose configuration is provided that is capable of running a development server and building the deployable static site.
-
-## Local development
-
-### Local development using Docker
 
 Using `docker-compose`, you may run a development server on http://localhost:1313:
 
@@ -124,24 +120,32 @@ docker-compose run hugo build --buildDrafts
 
 Once that is done, you can use `docker-compose up` to start the development server again.
 
-### Local development without using Docker
-To test without docker, you must have Hugo and node.js installed. Then, from the terminal you can run:
+## Debugging the container
 
-Only need to do once to get node.js running:
-In the "wdfn_theme" directory:
+If the need arises, you may run arbitrary commands in the container, such as a bash shell:
+
+```bash
+docker-compose run hugo bash -l
+```
+
+# Local development without using Docker
+To test without docker, you must have Hugo and node.js installed. You should install the latest HUGO and the latest LTS for node, 
+although for node any version > 8.x.x should work.  Then, from the terminal you can run:
+
 ```bash
 cd themes/wdfn_theme/
+rm -rf node_modules
 npm install
 npm run build
 ```
-
-In the home directory:
+You will only need to do the previous steps, when you start a new branch or you have merged the latest changes from the canonical repo. Then 
+in the home directory:
 ```bash
 export HUGO_BASEURL="blog/"
 hugo server --theme=wdfn_theme --buildDrafts
 ```
 
-## Build static site
+# Build static site using Docker
 
 Using `docker-compose`, the site may be built using the `build` command provided by the container:
 
@@ -161,13 +165,6 @@ Additional arguments may be passed to the [**Hugo**](https://gohugo.io/) binary 
 docker-compose run hugo build --buildDrafts
 ```
 
-## Debugging the container
-
-If the need arises, you may run arbitrary commands in the container, such as a bash shell:
-
-```bash
-docker-compose run hugo bash -l
-```
 
 # Instructions for R users
 
