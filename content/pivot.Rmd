@@ -1,5 +1,6 @@
 ---
 title: "Using R to pivot wide water-quality data"
+author: "Laura DeCicco"
 slug: "pivot"
 date: "2020-01-07"
 keyword1: "tidyr"
