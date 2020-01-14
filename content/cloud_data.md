@@ -1,6 +1,6 @@
 ---
 author: Jeff Sadler
-date: 2019-12-10
+date: 2020-01-08
 slug: cloud_data
 draft: False
 type: post
@@ -44,7 +44,7 @@ For the first comparison, we first needed to gather the discharge data from all 
 ### Subset of basins
 To do the comparison between the file formats we selected the Schuylkill River Basin, a sub-basin of the Delaware River Basin. Recently, the USGS initiated a program for the Next Generation Water Observation System ([NGWOS](https://www.usgs.gov/mission-areas/water-resources/science/usgs-next-generation-water-observing-system-ngwos?qt-science_center_objects=0#qt-science_center_objects)) in the Delaware River Basin. NGWOS will provide denser, less expensive, and more rapid water quality and quantity data than what is currently being offered by the USGS and the DRB is the first basin to pilot the new systems. 
 
-![Delaware and Schuylkill River Basins](static/cloud_data/drb_gauges1.png)
+{{< figure src="/static/cloud_data/drb_gauges1.png" title="Delaware and Schuylkill River Basins" alt="A map of sites in the Delaware River Basin" >}}
 
 ### Comparison 1: Data retrieval and formatting (Zarr vs. NWIS web services)
 We recorded the time it took to retrieve and format data using the NWIS web services and then from Zarr.  We did the retrieval and formatting for one station (the overall outlet) and for all 23 stations in the sub-basin. We intended this comparison to answer the question: "If we have a bunch of sites in a data base (NWIS) or if we have a bunch of sites in a Zarr store, which one performs better at retrieving a relevant subset?"

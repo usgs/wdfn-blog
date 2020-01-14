@@ -1,8 +1,8 @@
 ---
-author: 
-date: 2020-01-07
+author: Laura DeCicco
+date: 2020-01-08
 slug: pivot
-draft: True
+image: static/pivot/messyData.png
 title: Using R to pivot wide water-quality data
 type: post
 categories: Data Science
@@ -11,7 +11,6 @@ author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
-
 tags: 
   - R
  
