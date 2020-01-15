@@ -3,7 +3,7 @@
     <div class="grid-row grid-gap">
       {{ range $key, $value := .Paginator.Pages }}
         {{ if ge $value.Date.Unix 100 }}
-          <div class="mobile-lg:grid-col-6 tablet:grid-col-4 desktop:grid-col-3">
+          <div class="mobile-lg:grid-col-8 tablet:grid-col-6 desktop:grid-col-4">
             {{ .Render "grid" }}
           </div>
         {{ end }}
