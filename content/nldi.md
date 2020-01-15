@@ -72,7 +72,7 @@ data from the NLDI starts from a given network linked feature.
 
 Available network linked feature sources (`{featureSource}`s) can be
 found from the [*getDataSources*
-request.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getDataSourcesUsingGET)
+request.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#/linked-data-controller/getDataSourcesUsingGET)
 (hint: Click the “try it out” button on the swagger page!) These are the
 collections of network linked features the NLDI knows about. Think of
 them as watershed outlets that can be used as a starting point. For this
@@ -98,7 +98,7 @@ river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Gra
 ### Indexed Features
 
 We can use the
-[*getRegisteredFeature*](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET)
+[*getRegisteredFeature*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#/linked-data-controller/getRegisteredFeatureUsingGET)
 request to see this feature. Enter `nwissite` and `USGS-08279500` in the
 `{featureSource}` and `{featureID}`, respectively, in the [swagger demo
 page.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#/linked-data-controller/getRegisteredFeatureUsingGET)
