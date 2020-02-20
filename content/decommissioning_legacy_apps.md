@@ -26,7 +26,7 @@ The WARP application displays data from  WARP models for pesticides, which were 
 
 <div class="grid-row">
     <div class="grid-col-8 grid-offset-2">
-    {{< figure src="/static/decommissioning-legacy-apps/image1_small.png" title="A screenshot of Watershed Regressions for Pesticides (WARP) showing predicted CONUS-wide concentrations over an estimated maximum 4-day moving-average for the pesticide 2,4D in the year 2012." alt="A screenshot of Watershed Regressions for Pesticides (WARP) showing predicted CONUS-wide concentrations over an estimated maximum 4-day moving-average for the pesticide 2,4D in the year 2012." >}}
+    {{< figure src="/static/decommissioning-legacy-apps/image1.png" title="A screenshot of Watershed Regressions for Pesticides (WARP) showing predicted CONUS-wide concentrations over an estimated maximum 4-day moving-average for the pesticide 2,4D in the year 2012." alt="A screenshot of Watershed Regressions for Pesticides (WARP) showing predicted CONUS-wide concentrations over an estimated maximum 4-day moving-average for the pesticide 2,4D in the year 2012." >}}
     </div>
 </div>
 
