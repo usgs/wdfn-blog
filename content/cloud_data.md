@@ -59,13 +59,13 @@ Once we retrieved the data subset, we wrote this subset to a new Zarr store, a P
 ### Comparison 1: Data retrieval and formatting
 
 #### Table 1. Time in seconds to retrieve and format 10 days of data
-| | Zarr | NWIS|
+| | Zarr | NWIS web services|
 |---|---|---|
 |Schuylkill outlet (sec)| 5.9 | 1.04| 
 |all stations in Schuylkill basin (sec)| 6.1 | 19.7|  
 
 #### Table 2. Time in seconds to retrieve and format 40 years of data 
-| | Zarr | NWIS|
+| | Zarr | NWIS web services|
 |---|---|---|
 |Schuylkill outlet (sec)| 5.8 | 29.8 | 
 |all stations in Schuylkill basin (sec)| 6.3 | 830 |  
