@@ -1,8 +1,8 @@
 ---
 author: Charlotte Snow
-date: 2020-02-11
+date: 2020-02-26
 slug: decommissioning-legacy-apps
-draft: True
+draft: False
 image: 
 type: post
 title: Decommissioning of legacy WMA water-quality data applications
