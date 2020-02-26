@@ -10,7 +10,7 @@ author_staff: charlotte-m-snow
 author_email: <csnow@usgs.gov>
 categories:
   - Applications
-description: A post explaining and answering questions about decommissioning a few legacy water applications
+description: A post explaining and answering questions about decommissioning three legacy water applications
 keywords:
   - water information
 tags:
