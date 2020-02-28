@@ -1,14 +1,13 @@
 ---
-author: Jim Kreft
+author: Charlotte Snow and Jim Kreft
 date: 2020-02-28
 slug: release-notes-2020-01-03
 draft: True
 type: post
 image: /static/release_notes-2020-02-28/image2.png
 title: "Release Notes for February 28th, 2020"
-author_github: jkreft-usgs
-author_staff: james-m-kreft
-author_email: <jkreft@usgs.gov>
+author_staff: charlotte-m-snow
+author_email: <csnow@usgs.gov>
 categories:
   - Applications
 description: A summary of new features and tools released on or before February 28, 2020
