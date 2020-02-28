@@ -1,7 +1,7 @@
 ---
 author: Charlotte Snow and Jim Kreft
 date: 2020-02-28
-slug: release-notes-2020-01-03
+slug: release-notes-2020-02-28
 draft: True
 type: post
 image: /static/release_notes-2020-02-28/image2.png
@@ -64,7 +64,6 @@ The new brush and zoom capability allows the user to easily select any part of t
     </div>
 </div>
 
-Hydrograph animation showing a select sub-range (in gray) of streamflow for monitoring location 05427948, (Pheasant Branch at Middleton, WI)[https://waterdata.usgs.gov/monitoring-location/05427948/]>
 
 ## Other new features and tools
 
