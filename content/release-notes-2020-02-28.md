@@ -60,7 +60,7 @@ The new brush and zoom capability allows the user to easily select any part of t
 
 <div class="grid-row">
     <div class="grid-col-8 grid-offset-2">
-    {{< figure src="/static/release_notes-2020-02-28/brush.gif" caption="Hydrograph animation showing a select sub-range (in gray) of streamflow for monitoring location 05427948, (Pheasant Branch at Middleton, WI)[https://waterdata.usgs.gov/monitoring-location/05427948/]" alt="Hydrograph animation showing a select sub-range (in gray) of streamflow for monitoring location 05427948, Pheasant Branch at Middleton, WI" >}}
+    {{< figure src="/static/release_notes-2020-02-28/brush.gif" caption="Hydrograph animation showing a select sub-range (in gray) of streamflow for monitoring location 05427948, [Pheasant Branch at Middleton, WI](https://waterdata.usgs.gov/monitoring-location/05427948/)." alt="Hydrograph animation showing a select sub-range (in gray) of streamflow for monitoring location 05427948, Pheasant Branch at Middleton, WI." >}}
     </div>
 </div>
 
