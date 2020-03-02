@@ -1,8 +1,8 @@
 ---
 author: Charlotte Snow and Jim Kreft
-date: 2020-02-28
+date: 2020-03-02
 slug: release-notes-2020-02-28
-draft: True
+draft: False
 type: post
 image: /static/release_notes-2020-02-28/image2.png
 title: "Release Notes for February 28th, 2020"
