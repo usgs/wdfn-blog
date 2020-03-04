@@ -1,5 +1,5 @@
 ---
-author: Joe Neilsen
+author: Joe Nielsen
 date: 2020-03-02
 slug: 25-years-of-water-data-on-the-web
 draft: True
@@ -27,3 +27,9 @@ A few weeks ago, on February 14, 2020, the USGS celebrated the 25th anniversary 
 </div>
 
 A few months ago, on December 18, 2019, another milestone in USGS information delivery was reached that is likely to have similar positive repercussions for both the USGS and the nation in the years ahead - the release of a new [water availability mapper](https://labs.waterdata.usgs.gov/estimated-availability/#/). While only a concept prototype, for the first time the USGS is delivering a daily product that integrates our active monitoring with continuous modeling. Just as rt_www started the process of freeing us from data delivery latency, so the release of the new mapper has started the process of freeing us from reporting water information only where we are doing active monitoring. Rather than reporting on a few thousand sites nationally, we can now look to report on 100,000 or more. Just as the release of `rt_www` expanded historical users and uses without changing them, so the release of new modeled products will only further extend the range of what is possible. As with `rt_www`, it will take many steps over years to fully realize our plans for more types of data, more informative delivery products, and more robust data access, and there are no doubt good ideas we have not thought of yet, but we’re very excited by the first small step and look forward to the coming efforts.
+
+<div class="grid-row">
+    <div class="grid-col-8 grid-offset-2">
+    {{< figure src="/static/25_years_waterdata_web/Water_storage_november_small.gif" caption="The [National Integrated Water Availability Assessments concept map](https://labs.waterdata.usgs.gov/estimated-availability/#/) compares current natural water storage to daily historical values. This animation shows the effects of a number of different events on natural water storage in November of 2019." alt="An animation highlighting different parts of the country uning a map that ranges from dark blue (High natural water storage) to dark brown (Low natural water storage). . November 6th, 2019: Unusually Wet conditions prevail in the upper midwest (Upper midewest is highlighted and dark blue).  November 12, 2019: Unusually Dry conditions conditions throughout california Coincide with widespread wildfires (California is light brown).  November 21, 2019: Remmnants of Tropical Storm Raymond usher in unusually wet conditions (The Southwest part of the United States is highlighted and dark blue). The animation ends with a USGS Logo and the text National Integrated Water Availability Assessments" >}}
+    </div>
+</div>
