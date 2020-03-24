@@ -44,7 +44,7 @@
     "wdfn-viz": "1.4.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.7.5",
     "gulp": "^4.0.2",
     "gulp-rev-all": "^2.0.2",
     "mkdirp": "^1.0.3",
