@@ -59,7 +59,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.4",
     "sass": "^1.26.3",
-    "stylelint": "^13.3.0",
+    "stylelint": "^13.3.2",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.16.0"
   }
