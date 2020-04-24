@@ -320,8 +320,10 @@ order we add them determines the order the layers are drawn. You can
 zoom in on the map shown and click the water quality sites to get a
 popup containing a link to the site’s landing page.
 
+**[The `get_base_map()` function is described here](https://waterdata.usgs.gov/blog/basemaps/)** and can be seen in the source [code of this blog post.](https://github.com/usgs/wdfn-blog/blob/master/content/nldi.Rmd)
+
 ``` r
-map <- get_base_map() # the function described above.
+map <- get_base_map()
 
 map <- leaflet::addPolygons(map, 
                             data=nldi_data$basin_boundary, 
@@ -403,6 +405,8 @@ input. The following code shows the NLDI identifiers and how to use them
 with the dataRetrieval function **readNWISdv**.
 
 ``` r
+nwis_gage_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
+nwis_gages <- sf::read_sf(nwis_gage_url)
 nwis_ids <- as.character(nwis_gages$identifier)
 print(paste("The NLDI ID for:", nwis_gages$name, "is", nwis_ids))
 ```
