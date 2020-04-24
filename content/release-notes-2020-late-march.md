@@ -2,7 +2,7 @@
 author: Charlotte Snow and Jim Kreft
 date: 2020-04-10
 slug: release-notes-2020-march
-draft: True
+draft: False
 type: post
 image: /static/release-notes-2020-late-march/image2.png
 title: "Release Notes for late March 2020"
