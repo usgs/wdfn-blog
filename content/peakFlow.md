@@ -50,7 +50,7 @@ pBuffaloPks <- ggplot(data = buffaloPks, aes(x = peak_dt, y = peak_va)) +
 pBuffaloPks
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-2-1.png'/ title='Annual peak discharge over time' alt='Annual peak discharge over time' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-2-1.png" title="Annual peak discharge over time" alt="Annual peak discharge over time" >}}
 
 The records for data from the 3 upstream sites for 2009-2013 looks like it could use a second look....
 
@@ -75,7 +75,7 @@ pAmitePks <- ggplot(data = amitePks, aes(x = peak_dt, y = peak_va, label = as.ch
 pAmitePks
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-3-1.png'/ title='Peak discharge over time, Amite River' alt='Peak discharge over time, Amite River' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-3-1.png" title="Peak discharge over time, Amite River" alt="Peak discharge over time, Amite River" >}}
 
 Buffalo River
 -------------
@@ -93,7 +93,7 @@ pBuffaloMmts <- ggplot(data = buffaloMmts, aes(x = measurement_dateTime, y = dis
 pBuffaloMmts
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-4-1.png'/ title='Discharge over time for Buffalo rivers.' alt='Discharge over time for Buffalo rivers.' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-4-1.png" title="Discharge over time for Buffalo rivers." alt="Discharge over time for Buffalo rivers." >}}
 
 Here we figure out what the "bankfull" discharge is for the sites based off of the peak flow files. We will use the 2-yr recurrence interval or probability of 0.5.
 
@@ -151,7 +151,7 @@ pBuffaloMmtsBnkFll <- ggplot(data = bnkfllMmts, aes(x = measurement_dateTime, y 
 pBuffaloMmtsBnkFll
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-5-1.png'/ title='Frequency analysis' alt='Frequency analysis' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-5-1.png" title="Frequency analysis" alt="Frequency analysis" >}}
 
 How many measurements per year?
 
@@ -174,7 +174,7 @@ pbuffaloMmtsPerYear <- ggplot(data = buffaloMmts.tally, aes(x = as.numeric(Yr), 
 pbuffaloMmtsPerYear
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-6-1.png'/ title='Number of measurements per year' alt='Number of measurements per year.' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-6-1.png" title="Number of measurements per year" alt="Number of measurements per year." >}}
 
 Create a base stage-discharge rating for one of the sites on the Buffalo River.
 -------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ pMmts5680 <- pMmts5680 +
 pMmts5680
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-7-1.png'/ title='Discharge vs gage height' alt='Discharge vs gage height' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-7-1.png" title="Discharge vs gage height" alt="Discharge vs gage height" >}}
 
 Compute annual means and yields for discharge from the DV data.
 ===============================================================
@@ -225,7 +225,7 @@ pAllDVs <- ggplot(data = datAllDVs, aes(x = Date, y = Flow)) +
 pAllDVs
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-8-1.png'/ title='Daily discharge over time.' alt='Daily discharge over time.' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-8-1.png" title="Daily discharge over time." alt="Daily discharge over time." >}}
 
 Compute annual means:
 =====================
@@ -249,7 +249,7 @@ pAnnMean <- ggplot(data = annMean, aes(x = Yr, y = annMean)) +
 pAnnMean
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-9-1.png'/ title='Annual mean' alt='Annual mean' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-9-1.png" title="Annual mean" alt="Annual mean" >}}
 
 Get drainage area and calculate yield
 
@@ -275,7 +275,7 @@ pAnnYield <- ggplot(data = annMean, aes(x = Yr, y = Yield)) +
 pAnnYield
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-10-1.png'/ title='Annual Yield' alt='Annual yield' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-10-1.png" title="Annual Yield" alt="Annual yield" >}}
 
 Estimate missing data
 ---------------------
@@ -389,7 +389,7 @@ pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
 pLmEst
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-16-1.png'/ title='TODO' alt='TODO' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-16-1.png" title="TODO" alt="TODO" >}}
 
 ``` r
 #estimates for July look reasonable, look at another method, MOVE.2 with log10 distribution
@@ -427,7 +427,7 @@ pLmEst <- ggplot(data = comp5680, aes(x = Date)) +
 pLmEst
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-17-1.png'/ title='TODO' alt='TODO' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-17-1.png" title="TODO" alt="TODO" >}}
 
 ``` r
 #create a function to "smooth" the estimated data for July, 2015 by the first and last residual
@@ -466,7 +466,7 @@ pLmSmooth <- ggplot(data = forSmooth, aes(x = Date)) +
 pLmSmooth
 ```
 
-<img src='/static/peak-flow-analysis/unnamed-chunk-18-1.png'/ title='TODO' alt='TODO' class=''/>
+{{< figure src="/static/peak-flow-analysis/unnamed-chunk-18-1.png" title="TODO" alt="TODO" >}}
 
 Questions
 ---------

@@ -222,7 +222,7 @@ x <- data.frame(dec_long_va = c(-89,-156.3,-148.6,-66.5),
 plot_points_on_map(x, move_variables, stuff_to_move)
 ```
 
-<img src='/static/usMap/fakePoints-1.png'/ title='US map including AK, HI, and PR with fake data to test mapping function.' alt='Sample US map including AK, HI, and PR.' />
+{{< figure src="/static/usMap/fakePoints-1.png" title="US map including AK, HI, and PR with fake data to test mapping function." alt="Sample US map including AK, HI, and PR." >}}
 
 Now, let’s get some data from `dataRetrieval`. We’ll call the “site” service using `readNWISdata`, only pulling stream sites that have measured “Phosphorus, water, unfiltered, milligrams per liter as phosphorus” at least 100 times over at least 10 years:
 
@@ -277,4 +277,4 @@ for(i in stateCd$STUSAB[c(1:51,55)]){
 plot_points_on_map(all_sites, move_variables, stuff_to_move, pt_size = 2, scale_by_color = TRUE)
 ```
 
-<img src='/static/usMap/plotIt-1.png'/ title='US map including AK, HI, and PR with USGS sites that have measured phosphorus.' alt='US map including AK, HI, and PR with USGS sites.' />
+{{< figure src="/static/usMap/plotIt-1.png" title="US map including AK, HI, and PR with USGS sites that have measured phosphorus." alt="US map including AK, HI, and PR with USGS sites." >}}

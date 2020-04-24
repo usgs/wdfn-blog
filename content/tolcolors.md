@@ -101,7 +101,7 @@ A `plot` method is provided for the Tol class that displays the palette of color
 plot(cols)
 ```
 
-<img src='/static/tolcolors/plot-1.png'/ title='Display colors in palette.' alt='Display colors in palette.' class=''/>
+{{< figure src="/static/tolcolors/plot-1.png" title="Display colors in palette." alt="Display colors in palette." >}}
 
 The main title for the plot will always indicate the `n` and `scheme` argument values used to create the palette.
 Where `scheme` is the name of the color scheme, its default value is `"smooth rainbow"`.
@@ -227,7 +227,7 @@ plot(inlmisc::GetTolColors(9, scheme = "light"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/qualitative-1.png'/ title='Qualitative color schemes' alt='Qualitative color schemes' class=''/>
+{{< figure src="/static/tolcolors/qualitative-1.png" title="Qualitative color schemes" alt="Qualitative color schemes" >}}
 
 And the `"ground cover"` scheme is a color-blind safe version of the
 [AVHRR](http://glcf.umd.edu/data/landcover/data.shtml)
@@ -240,7 +240,7 @@ plot(inlmisc::GetTolColors(14, scheme = "ground cover"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/cover-1.png'/ title='Land cover color scheme' alt='Land cover color scheme' class=''/>
+{{< figure src="/static/tolcolors/cover-1.png" title="Land cover color scheme" alt="Land cover color scheme" >}}
 
 Note that schemes `"pale"`, `"dark"`, and `"ground cover"` are intended to be accessed
 in their entirety and subset using vector element names.
@@ -262,7 +262,7 @@ plot(inlmisc::GetTolColors(256, scheme = "PRGn"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/diverging-1.png'/ title='Diverging color schemes' alt='Diverging color schemes' class=''/>
+{{< figure src="/static/tolcolors/diverging-1.png" title="Diverging color schemes" alt="Diverging color schemes" >}}
 
 ### Sequential
 
@@ -280,7 +280,7 @@ plot(inlmisc::GetTolColors(256, scheme = "smooth rainbow"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/sequential-1.png'/ title='Sequential color schemes' alt='Sequential color schemes' class=''/>
+{{< figure src="/static/tolcolors/sequential-1.png" title="Sequential color schemes" alt="Sequential color schemes" >}}
 
 
 ## Alpha Transparency
@@ -299,7 +299,7 @@ plot(inlmisc::GetTolColors(34, alpha = 0.2))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/alpha-1.png'/ title='Adjust alpha transparency of colors.' alt='Adjust alpha transparency of colors.' class=''/>
+{{< figure src="/static/tolcolors/alpha-1.png" title="Adjust alpha transparency of colors." alt="Adjust alpha transparency of colors." >}}
 
 ## Color Levels
 
@@ -318,7 +318,7 @@ plot(inlmisc::GetTolColors(256, start = 0.3, end = 0.9))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/levels-1.png'/ title='Adjust starting and ending color levels.' alt='Adjust starting and ending color levels.' class=''/>
+{{< figure src="/static/tolcolors/levels-1.png" title="Adjust starting and ending color levels." alt="Adjust starting and ending color levels." >}}
 
 ## Interpolation Bias
 
@@ -339,7 +339,7 @@ plot(inlmisc::GetTolColors(256, bias = 1.6))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/bias-1.png'/ title='Adjust interpolation bias.' alt='Adjust interpolation bias.' class=''/>
+{{< figure src="/static/tolcolors/bias-1.png" title="Adjust interpolation bias." alt="Adjust interpolation bias." >}}
 
 ## Reverse Colors
 
@@ -353,7 +353,7 @@ plot(inlmisc::GetTolColors(10, reverse = TRUE))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/reverse-1.png'/ title='Reverse colors in palette.' alt='Reverse colors in palette.' class=''/>
+{{< figure src="/static/tolcolors/reverse-1.png" title="Reverse colors in palette." alt="Reverse colors in palette." >}}
 
 ## Color Blindness
 
@@ -372,7 +372,7 @@ plot(inlmisc::GetTolColors(34, blind = "monochromacy"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/blind-1.png'/ title='Adjust for color blindness.' alt='Adjust for color blindness.' class=''/>
+{{< figure src="/static/tolcolors/blind-1.png" title="Adjust for color blindness." alt="Adjust for color blindness." >}}
 
 With the exception of total-color blindness,
 the `"smooth rainbow"` scheme is well suited for the variants of color-vision deficiency.
@@ -394,7 +394,7 @@ plot(inlmisc::GetTolColors(5, "muted",   gray = TRUE, blind = "m"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/gray-1.png'/ title='Prepare qualitative schemes for gray-scale conversion.' alt='Prepare qualitative schemes for gray-scale conversion.' class=''/>
+{{< figure src="/static/tolcolors/gray-1.png" title="Prepare qualitative schemes for gray-scale conversion." alt="Prepare qualitative schemes for gray-scale conversion." >}}
 
 Note that the sequential scheme `"YlOrBr"` works well for conversion to gray scale.
 
@@ -406,7 +406,7 @@ plot(inlmisc::GetTolColors(256, "YlOrBr", blind = "monochromacy"))
 graphics::par(op)
 ```
 
-<img src='/static/tolcolors/ylorbr-1.png'/ title='Prepare YlOrBr scheme for gray-scale conversion.' alt='Prepare YlOrBr scheme for gray-scale conversion.' class=''/>
+{{< figure src="/static/tolcolors/ylorbr-1.png" title="Prepare YlOrBr scheme for gray-scale conversion." alt="Prepare YlOrBr scheme for gray-scale conversion." >}}
 
 ## References Cited
 

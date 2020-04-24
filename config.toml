@@ -5,3 +5,15 @@ email = ["r_admin@usgs.gov"]
 preserveTaxonomyNames = true
 paginate = 100
 theme = "wdfn_theme"
+[markup]
+  [markup.highlight]
+    codeFences = true
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "manni"
+    tabWidth = 4
+  [markup.goldmark.renderer]
+    unsafe= true

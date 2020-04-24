@@ -7,12 +7,12 @@ RUN apt-get install -y \
     gnupg 
 
 # Install Hugo from tar distribution to /usr/local/bin
-RUN curl --silent --location https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_0.54.0_Linux-64bit.tar.gz > hugo.tar.gz
+RUN curl --silent --location https://github.com/gohugoio/hugo/releases/download/v0.61.0/hugo_0.61.0_Linux-64bit.tar.gz > hugo.tar.gz
 RUN tar xzf hugo.tar.gz -C /usr/local/bin
 
 
-# Install node.js 8.x (LTS at time of writing) from official package.
-RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
+# Install node.js 10.x (LTS at time of writing) from official package.
+RUN curl --silent --location https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get -y update
 RUN apt-get install -y nodejs
 

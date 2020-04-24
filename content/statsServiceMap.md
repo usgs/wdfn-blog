@@ -152,7 +152,7 @@ text("*Other percentiles not available for these sites", cex=0.75,
      y=grconvertY(-0.08, "npc"))
 ```
 
-<img src='/static/stats-service-map/plot-1.png'/ title='Map discharge percentiles' alt='TODO' class=''/>
+{{< figure src="/static/stats-service-map/plot-1.png" title="Map discharge percentiles" alt="TODO" >}}
 
 Make an interactive plot
 ------------------------
@@ -182,7 +182,7 @@ leafMapStat <- addLegend(leafMapStat,
         opacity = 0.8)
 ```
 
-<iframe seamless src="/static/stats-service-map/leafMapStat/index.html" width="100%" height="500">
+<iframe seamless src="/static/stats-service-map/leafmapstat/index.html" width="100%" height="500">
 </iframe>
 **Disclaimer**: The NWIS stats web service that `dataRetrieval`accesses here is in beta, and its output could change in the future.
 

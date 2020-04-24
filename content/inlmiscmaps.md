@@ -80,7 +80,7 @@ inlmisc::AddGradientLegend(breaks, Pal, at = breaks,
                            strip.dim = c(2, 20))
 ```
 
-<img src='/static/inlmiscmaps/plot_meuse-1.png'/ title='Static map of meuse data set.' alt='Static map of meuse data set.' class=''/>
+{{< figure src="/static/inlmiscmaps/plot_meuse-1.png" title="Static map of meuse data set." alt="Static map of meuse data set." >}}
 
 For the next example, transform Auckland's Maunga Whau volcano data set into a static map.
 First define a georeferenced raster layer object for the volcano's topographic information.
@@ -107,7 +107,7 @@ inlmisc::PlotMap(r, xlim = range(x), ylim = range(y), extend.z = TRUE,
                  useRaster = TRUE)
 ```
 
-<img src='/static/inlmiscmaps/plot_volcano-1.png'/ title='Static map of valcano data set.' alt='Static map of valcano data set.' class=''/>
+{{< figure src="/static/inlmiscmaps/plot_volcano-1.png" title="Static map of valcano data set." alt="Static map of valcano data set." >}}
 
 One thing you may have noticed is the white space drawn above and below the raster image.
 White space that results from plotting to a graphics device
@@ -144,7 +144,7 @@ cat(sprintf("width = %s, height = %s", din[1], din[2]))
 Replotting the map using the returned device dimensions results in
 a figure that is void of extraneous white space.
 
-<img src='/static/inlmiscmaps/plot_volcano_din-1.png'/ title='Static map of valcano data set with improved device dimensions.' alt='Static map of valcano data set with improved device dimensions.' class=''/>
+{{< figure src="/static/inlmiscmaps/plot_volcano_din-1.png" title="Static map of valcano data set with improved device dimensions." alt="Static map of valcano data set with improved device dimensions." >}}
 
 ## Dynamic Maps
 

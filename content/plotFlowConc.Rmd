@@ -84,7 +84,7 @@ Please note there are a lot of nuances that are captured in the `EGRET` plotting
 
 ## plotConcQ
 
-```{r plotConcQ, message=FALSE, fig.show='hold', out.width=c('300px', '300px'), fig.cap=c("ggplot2 Concentration Flow plot","EGRET Concentration Flow plot"), alt.text='ggplot vs EGRET', class = 'sideBySide'}
+```{r plotConcQ, message=FALSE, fig.show='hold', out.width=c('300px', '300px'), fig.cap=c("ggplot2 Concentration Flow plot","EGRET Concentration Flow plot"), alt.text='ggplot vs EGRET', class = 'side-by-side'}
 library(EGRET)
 library(ggplot2)
 

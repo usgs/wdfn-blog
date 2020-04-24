@@ -88,10 +88,9 @@ Point-based time series data
 
 For this example, we'll look at the dataset in the Colorado Platte Drainage Basin climate division which includes Denver and North Central Colorado. For the examples that use a point, well use 40.2 degrees north latitude and 105 degrees west longitude, along I25 between Denver and Fort Collins.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe1')">
-View Code
-</p>
+<button class="toggle-button" onclick="toggle_visibility(this, 'hideMe1')">Show Code</button>
 <div id="hideMe1" style="display:none">
+
 ``` r
 library(jsonlite)
 library(leaflet)
@@ -122,8 +121,9 @@ leafMapLOCA <- leaflet() %>%
 ```
 </div>
 
-<iframe seamless src="/static/leaflet/leafMapLOCA/index.html" width="100%" height="500">
+<iframe seamless src="/static/leaflet/leafmaploca/index.html" width="100%" height="500">
 </iframe>
+
 Get time series data for a single cell.
 ---------------------------------------
 
@@ -184,7 +184,7 @@ ggplot(pData,aes(x=dates,y=data,colour=Pathway,group=Pathway)) + geom_point(alph
   theme(plot.title = element_text(face="bold"))
 ```
 
-<img src='/static/LOCAdownscaling/plot_the_data-1.png'/ title='Graph of projected daily maximum temperature.' alt='Graph of a full time series from two scenarios for one cell of data showing projected daily maximum temperature.' class=''/>
+{{< figure src="/static/LOCAdownscaling/plot_the_data-1.png" title="Graph of projected daily maximum temperature." alt="Graph of a full time series from two scenarios for one cell of data showing projected daily maximum temperature." >}}
 
 Areal average time series data access with the Geo Data Portal
 --------------------------------------------------------------
@@ -286,10 +286,9 @@ Derivative calculations
 
 Now that we have all the data downloaded and it has been parsed into a list we can work with, we can do something interesting with it. The code below shows an example that uses the `climates` package, [available on github](https://github.com/jjvanderwal/climates) to generate some annual indices of the daily data we accessed. For this example, we'll look at all the data and 5 derived quantities.
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe2')">
-View Code
-</p>
+<button class="toggle-button" onclick="toggle_visibility(this, 'hideMe2')">Show Code</button>
 <div id="hideMe2" style="display:none">
+
 ``` r
 library(climates)
 library(PCICt)
@@ -349,10 +348,10 @@ Plot setup
 
 Now we have a data in a structure that we can use to create some plots. First, we define a function from the [ggplot2 wiki that allows multiple plots to share a legend.](https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs)
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe3')">
-View Code
-</p>
+<button class="toggle-button" onclick="toggle_visibility(this, 'hideMe3')">Show Code</button>
+
 <div id="hideMe3" style="display:none">
+
 ``` r
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)), nrow = 1, 
                                        position = c("bottom", "right"), top = NULL, legend.text = NULL) {
@@ -389,10 +388,10 @@ Summary Plots
 
 Now we can create a set of plot configuration options and a set of comparitive plots looking at the RCP45 (aggressive emmisions reduction) and RCP85 (business as usual).
 
-<p class="ToggleButton" onclick="toggle_visibility('hideMe4')">
-View Code
-</p>
+<button class="toggle-button" onclick="toggle_visibility(this, 'hideMe4')">Show Code</button>
+
 <div id="hideMe4" style="display:none">
+
 ``` r
 library(grid)
 library(gridExtra)
@@ -446,7 +445,7 @@ for(thresh in names(plot_setup)) {
 ```
 </div>
 
-<img src='/static/LOCAdownscaling/plot_it-1.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-2.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-3.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-4.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_it-5.png'/ title='Climate Indicator Summary Graph' alt='Graph of climate indicator showing min mean and max of GCM ensemble.' class=''/>
+{{< figure src="/static/LOCAdownscaling/plot_it-1.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_it-2.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_it-3.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble.">}}{{< figure src="/static/LOCAdownscaling/plot_it-4.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_it-5.png" title="Climate Indicator Summary Graph" alt="Graph of climate indicator showing min mean and max of GCM ensemble." >}}
 
 All GCM Plots
 -------------
@@ -465,4 +464,4 @@ grid_arrange_shared_legend(plot_setup[[thresh]]$plotAllrcp45,
   }
 ```
 
-<img src='/static/LOCAdownscaling/plot_lots-1.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-2.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-3.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-4.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/><img src='/static/LOCAdownscaling/plot_lots-5.png'/ title='Climate Indicator Graph of All GCMs' alt='Graph of climate indicator showing all GCMs in the ensemble.' class=''/>
+{{< figure src="/static/LOCAdownscaling/plot_lots-1.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble.">}}{{< figure src="/static/LOCAdownscaling/plot_lots-2.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble" >}}{{< figure src="/static/LOCAdownscaling/plot_lots-3.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_lots-4.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble." >}}{{< figure src="/static/LOCAdownscaling/plot_lots-5.png" title="Climate Indicator Graph of All GCMs" alt="Graph of climate indicator showing all GCMs in the ensemble" >}}
