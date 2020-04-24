@@ -405,7 +405,7 @@ input. The following code shows the NLDI identifiers and how to use them
 with the dataRetrieval function **readNWISdv**.
 
 ``` r
-nwis_gage_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
+nwis_gage_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
 nwis_gages <- sf::read_sf(nwis_gage_url)
 nwis_ids <- as.character(nwis_gages$identifier)
 print(paste("The NLDI ID for:", nwis_gages$name, "is", nwis_ids))

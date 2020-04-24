@@ -64,9 +64,9 @@ opts_chunk$set(
 
 ## Introduction
 
-The Hydro [Network-Linked Data Index (NLDI)](https://cida.usgs.gov/nldi/about) is a system that can index data to [NHDPlus V2](http://www.horizon-systems.com/NHDPlus/V2NationalData.php) catchments and offers a search service to discover indexed information. Data linked to the NLDI includes [active NWIS stream gages](https://waterdata.usgs.gov/nwis/rt), [water quality portal sites](https://www.waterqualitydata.us/), and [outlets of HUC12 watersheds](https://www.sciencebase.gov/catalog/item/5762b664e4b07657d19a71ea). The NLDI is a core product of the [Open Water Data Initiative](http://acwi.gov/spatial/owdi/) and is being developed as [an open source project.](https://github.com/ACWI-SSWD) coordinated through the [Advisory Committee on Water Information (ACWI) Subcommittee on Spatial Water Data](http://acwi.gov/spatial).
+The Hydro [Network-Linked Data Index (NLDI)](https://labs.waterdata.usgs.gov/api/nldi/linked-data/about) is a system that can index data to [NHDPlus V2](http://www.horizon-systems.com/NHDPlus/V2NationalData.php) catchments and offers a search service to discover indexed information. Data linked to the NLDI includes [active NWIS stream gages](https://waterdata.usgs.gov/nwis/rt), [water quality portal sites](https://www.waterqualitydata.us/), and [outlets of HUC12 watersheds](https://www.sciencebase.gov/catalog/item/5762b664e4b07657d19a71ea). The NLDI is a core product of the [Open Water Data Initiative](http://acwi.gov/spatial/owdi/) and is being developed as [an open source project.](https://github.com/ACWI-SSWD) coordinated through the [Advisory Committee on Water Information (ACWI) Subcommittee on Spatial Water Data](http://acwi.gov/spatial).
 
-In this blog post, we introduce the basic functions of the NLDI and show how to use it as a data discovery and access tool in R. The first section describes the operations available from the [NLDI's Web API](https://cida.usgs.gov/nldi/swagger-ui.html). The second section shows how to map NLDI data and how to use the NLDI to discover data to be accessed with [the dataRetrieval package.](https://owi.usgs.gov/R/dataRetrieval.html)
+In this blog post, we introduce the basic functions of the NLDI and show how to use it as a data discovery and access tool in R. The first section describes the operations available from the [NLDI's Web API](https://labs.waterdata.usgs.gov/api/nldi/linked-data/swagger-ui.html). The second section shows how to map NLDI data and how to use the NLDI to discover data to be accessed with [the dataRetrieval package.](https://owi.usgs.gov/R/dataRetrieval.html)
  
 Below, text highlighting is used in six ways:
 
@@ -79,19 +79,19 @@ Below, text highlighting is used in six ways:
 
 ## The NLDI Web API
 
-The NLDI's Web API follows a loosely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://cida.usgs.gov/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.  
+The NLDI's Web API follows a loosely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.  
 
 ### Feature Sources
-Available network linked feature sources (`{featureSource}`s) can be found from the [_getDataSources_ request.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getDataSourcesUsingGET) (hint: Click the "try it out" button on the swagger page!) These are the collections of network linked features the NLDI knows about. Think of them as watershed outlets that can be used as a starting point. For this demo, we'll use NWIS Stream Gages as the `{featureSource}`. As a note for later, `{featureSource}` here is the same as the `{dataSource}` described below.   
+Available network linked feature sources (`{featureSource}`s) can be found from the [_getDataSources_ request.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getDataSourcesUsingGET) (hint: Click the "try it out" button on the swagger page!) These are the collections of network linked features the NLDI knows about. Think of them as watershed outlets that can be used as a starting point. For this demo, we'll use NWIS Stream Gages as the `{featureSource}`. As a note for later, `{featureSource}` here is the same as the `{dataSource}` described below.   
 
 ### Feature IDs
-For now, the particular `{featureID}` to be accessed from a given `{featureSource}` needs to be found outside the NLDI, so the [_getFeatures_](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getFeaturesUsingGET_1) request doesn't return anything. So let's use a [well known NWIS Streamgage](https://www.usgs.gov/news/first-usgs-streamgage-records-125-years-measuring-new-mexico%E2%80%99s-vital-water-resources) on the [Rio Grande at Embudo NM](https://waterdata.usgs.gov/nwis/inventory/?site_no=08279500&agency_cd=USGS) as our starting point. 
+For now, the particular `{featureID}` to be accessed from a given `{featureSource}` needs to be found outside the NLDI, so the [_getFeatures_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getFeaturesUsingGET_1) request doesn't return anything. So let's use a [well known NWIS Streamgage](https://www.usgs.gov/news/first-usgs-streamgage-records-125-years-measuring-new-mexico%E2%80%99s-vital-water-resources) on the [Rio Grande at Embudo NM](https://waterdata.usgs.gov/nwis/inventory/?site_no=08279500&agency_cd=USGS) as our starting point. 
 
 ![Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Grande at Embudo")
 
 ### Indexed Features
-We can use the [_getRegisteredFeature_](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:  
-[https://cida.usgs.gov/nldi/nwissite/USGS-08279500](https://cida.usgs.gov/nldi/nwissite/USGS-08279500)  
+We can use the [_getRegisteredFeature_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:  
+[https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500)  
 The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
 ```
 {
@@ -113,7 +113,7 @@ The response contains the location of the feature, is in [geojson](http://geojso
         "name": "RIO GRANDE AT EMBUDO, NM",
         "uri": "https://waterdata.usgs.gov/nwis/inventory?agency_code=USGS&site_no=08279500",
         "comid": "17864756",
-        "navigation": "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate"
+        "navigation": "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate"
       }
     }
   ]
@@ -121,10 +121,10 @@ The response contains the location of the feature, is in [geojson](http://geojso
 ```
 
 ```{r example_setup, echo=FALSE, message=FALSE, warning=FALSE}
-site_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500"
-main_stem_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150"
-nwis_gage_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
-basin_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin"
+site_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500"
+main_stem_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM?distance=150"
+nwis_gage_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
+basin_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin"
 
 site <- sf::read_sf(site_url)
 main_stem <- sf::read_sf(main_stem_url)
@@ -159,20 +159,20 @@ setwd(wd)
 <iframe seamless src="/static/nldi-intro/map_1/index.html" width="80%" height="500"></iframe>
 
 ### Navigation
-The _**navigation**_ property of the returned feature is a url for the [_getNavigationTypes_](https://cida.usgs.gov/nldi/swagger-ui.html#!/lookup-controller/getNavigationTypesUsingGET) request. This request provides four _**navigation**_ options as shown below. Each of these URLs returns the NHDPlus flowlines for the navigation type.
+The _**navigation**_ property of the returned feature is a url for the [_getNavigationTypes_](https://labs.waterdata.usgs.gov/api/nldi/linked-data/swagger-ui.html#!/lookup-controller/getNavigationTypesUsingGET) request. This request provides four _**navigation**_ options as shown below. Each of these URLs returns the NHDPlus flowlines for the navigation type.
 
 ```
 {
-  "upstreamMain": "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM",
-  "upstreamTributaries": "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT",
-  "downstreamMain": "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM",
-  "downstreamDiversions": "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DD"
+  "upstreamMain": "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM",
+  "upstreamTributaries": "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UT",
+  "downstreamMain": "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/DM",
+  "downstreamDiversions": "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/DD"
 }
 ```
 
 ### Get Flowlines from Navigation
-Each of the URLs found via the _getNavigationTypes_ request is a complete [_getFlowlines_](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like:  
-[https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM?distance=150)
+Each of the URLs found via the _getNavigationTypes_ request is a complete [_getFlowlines_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/linked-data-controller/getFlowlinesUsingGET) request. This request has some optional input parameters. The most useful being `{distance}`, which allows specification of a distance to navigate in km. So, for example, we can use this to retrieve 150km of upstream mainstem flowlines from the NWIS gage 08279500 with a request like:  
+[https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM?distance=150](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM?distance=150)
 
 ```{r map_2, echo=FALSE, message=FALSE, warning=FALSE, eval=TRUE}
 map <- get_base_map(options = leaflet::leafletOptions(zoomControl = FALSE, 
@@ -199,8 +199,8 @@ setwd(wd)
 Notice that the flowline goes downstream of the gage because the NLDI is referenced to whole NHDPlus catchments, not to precise network locations.
 
 ### Get Linked Data from Navigation
-Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the _**navigate**_ operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `150`km, we can use the [_getFeatures_](https://cida.usgs.gov/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a _getFeatures_ request, is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like:  
-[https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150)  
+Now that we have a `{featureSource}` = `nwissite`, a `{featureID}` = `USGS-082795001`, the _**navigate**_ operation on the feature, and the `{navigationMode}` = `UM` with `{distance}` = `150`km, we can use the [_getFeatures_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/linked-data-controller/getFeaturesUsingGET) request to discover features from any `{featureSource}` which, in the context of a _getFeatures_ request, is called a `{dataSource}`. Setting the `{dataSource}` = `nwissite`, we can see if there are any active NWIS streamgages 150km upstream on the main stem with a request that looks like:  
+[https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150)  
 Note that we could enter `wqp` in place of `nwissite` after `UM` here to get [water quality portal](https://www.waterqualitydata.us/) sites instead of NWIS sites. An example of this is shown later in this post.
 
 ```{r map_3, echo=FALSE, message=FALSE, warning=FALSE}
@@ -221,8 +221,8 @@ setwd(wd)
 Note: Click the black NWIS gage points to see a pop up and link!
 
 ### Get the Upstream Basin Boundary
-So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the _**navigate**_ option, `{navigationMode}` and `{distance}`. In addition to the _**navigate**_ option, the NLDI offers a _**basin**_ option for any `{featureSource}`/`{featureID}`. The [_getBasin_](https://cida.usgs.gov/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage looks like:  
-[https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin](https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin).
+So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the _**navigate**_ option, `{navigationMode}` and `{distance}`. In addition to the _**navigate**_ option, the NLDI offers a _**basin**_ option for any `{featureSource}`/`{featureID}`. The [_getBasin_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage looks like:  
+[https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin).
 
 ```{r map_4, echo=FALSE, message=FALSE, warning=FALSE}
 map <- get_base_map(options = leaflet::leafletOptions(zoomControl = FALSE, 
@@ -263,15 +263,15 @@ setwd(wd)
 There are a few other options available from the NLDI that are not covered here. One, that is coming soon, will make catchment (local incremental NHDPlus catchment) and basin (upstream accumulation) landscape characteristics available. This functionality and data is available but is preliminary and subject to change.  
 
 Bringing together all the operations summarized above, we can get:  
-1) The NWIS site: https://cida.usgs.gov/nldi/nwissite/USGS-08279500  
-2) The basin upstream of the site: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin  
-3) All upstream with tributaries flowlines: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT  
-4) The upstream mainstem flowlines: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM  
-5) The downstream mainstem flowlines: https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM  
+1) The NWIS site: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500  
+2) The basin upstream of the site: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin  
+3) All upstream with tributaries flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UT  
+4) The upstream mainstem flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM  
+5) The downstream mainstem flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/DM  
 6) The water quality observation sites in upstream catchments:  
-https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp  
+https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UT/wqp  
 7) The water quality observations in downstream catchments:  
-https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp  
+https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/DM/wqp  
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
@@ -284,13 +284,13 @@ Screenshots of NLDI data loaded into QGIS.
 First, we get all our URLs into a list and use **read_sf** from the [sf](https://r-spatial.github.io/sf/) package to download and read all the data into spatial data types. The end of this code block creates html for popup text with a web link tag that we'll use later.
 
 ```{r load_data, echo=TRUE, message=FALSE, warning=FALSE}
-nldiURLs <- list(site_data = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500",
-             basin_boundary = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/basin",
-             UT = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT",
-             UM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM",
-             DM = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM",
-             UTwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UT/wqp",
-             DMwqp = "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/DM/wqp")
+nldiURLs <- list(site_data = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500",
+             basin_boundary = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin",
+             UT = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UT",
+             UM = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM",
+             DM = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/DM",
+             UTwqp = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UT/wqp",
+             DMwqp = "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/DM/wqp")
 
 nldi_data <- list()
 
@@ -390,7 +390,7 @@ This final map illustrates a very important detail about the NLDI if you zoom in
 The two sources of linked data shown above, `nwissite` and `wqp`, are both queryable from [the dataRetrieval package.](https://owi.usgs.gov/blog/tags/dataretrieval/) The "siteNumber" input of the dataRetrieval functions that start with "readNWIS" can be found by removing "USGS-" from the "identifier" attribute of features found using `nwissite` as the `{dataSource}` input. The following code shows the NLDI identifiers and how to use them with the dataRetrieval function **readNWISdv**.
 
 ```{r dv, fig.cap="Daily Streamflow Plot", alt.text = "Plot of daily streamflow derived from the National Water Information system", echo=TRUE, message=FALSE, warning=FALSE}
-nwis_gage_url <- "https://cida.usgs.gov/nldi/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
+nwis_gage_url <- "https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigate/UM/nwissite?distance=150"
 nwis_gages <- sf::read_sf(nwis_gage_url)
 nwis_ids <- as.character(nwis_gages$identifier)
 print(paste("The NLDI ID for:", nwis_gages$name, "is", nwis_ids))
@@ -414,7 +414,7 @@ print(paste0("Got ", ncol(wqp_data), " samples beween ", min(wqp_data$ActivitySt
 
 ## Summary
 
-In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://cida.usgs.gov/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, _**navigation**_ (and it's optional `{distance}` parameter) and _**basin**_ were demonstrated. The the _**navigation**_ function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.  
+In this blog post, we summarized the NLDI's Web API through links to the system's [Swagger](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html) documentation. The primary API parameters, `{featureSource}` and `{featureID}`, were described. Two functions that operate with any `{featureID}`, _**navigation**_ (and it's optional `{distance}` parameter) and _**basin**_ were demonstrated. The the _**navigation**_ function's `{dataSource}` parameter, which can be any `{featureSource}`, was shown by retrieving NWIS (`nwissite`) and WQP (`wqp`) sites upstream and downstream of an NWIS site.  
 
 The post finishes by showing how to use sites found with the NLDI to download data from the National Water Information System and Water Quality portal. The potential for extending this use of the NLDI is vast. As more feature/data sources are indexed and the system evolves, the NLDI should serve as a major new discovery service for many sources of observed and modeled data.  
 
