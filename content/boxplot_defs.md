@@ -10,7 +10,7 @@ author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
-tags: 
+tags:
   - R
 description: Identifying boxplot limits and styles in ggplot2.
 keywords:
@@ -18,26 +18,9 @@ keywords:
   - boxplot
   - ggplot2
 ---
-Boxplots are often used to show data distributions, and `ggplot2` is
-often used to visualize data. A question that comes up is what exactly
-do the box plots represent? The `ggplot2` box plots follow standard
-Tukey representations, and there are many references of this online and
-in standard statistical text books. The base R function to calculate the
-box plot limits is `boxplot.stats`. The help file for this function is
-very informative, but it’s often non-R users asking what exactly the
-plot means. Therefore, this post breaks down the calculations into
-(hopefully!) easy-to-follow chunks of code for you to make your own box
-plot legend if necessary. Some additional goals here are to create
-boxplots that come *close* to USGS style. Features in this post take
-advantage of enhancements to `ggplot2` in version 3.0.0 or later.
+Boxplots are often used to show data distributions, and `ggplot2` is often used to visualize data. A question that comes up is what exactly do the box plots represent? The `ggplot2` box plots follow standard Tukey representations, and there are many references of this online and in standard statistical text books. The base R function to calculate the box plot limits is `boxplot.stats`. The help file for this function is very informative, but it's often non-R users asking what exactly the plot means. Therefore, this  post breaks down the calculations into (hopefully!) easy-to-follow chunks of code for you to make your own box plot legend if necessary. Some additional goals here are to create boxplots that come *close* to USGS style. Features in this post take advantage of enhancements to `ggplot2` in version 3.0.0 or later.
 
-First, let’s get some data that might be typically plotted in a USGS
-report using a boxplot. Here we’ll use chloride data (parameter code
-“00940”) measured at a USGS station on the Fox River in Green Bay, WI
-(station ID “04085139”). We’ll use the package `dataRetrieval` to get
-the data (see [this tutorial](https://owi.usgs.gov/R/dataRetrieval.html)
-for more information on `dataRetrieval`), and plot a simple boxplot by
-month using `ggplot2`:
+First, let's get some data that might be typically plotted in a USGS report using a boxplot. Here we'll use chloride data (parameter code "00940") measured at a USGS station on the Fox River in Green Bay, WI (station ID "04085139"). We'll use the package `dataRetrieval` to get the data (see [this tutorial](https://owi.usgs.gov/R/dataRetrieval.html) for more information on `dataRetrieval`), and plot a simple boxplot by month using `ggplot2`:
 
 ``` r
 library(dataRetrieval)
@@ -60,22 +43,18 @@ ggplot(data = chloride,
   labs(title = cl_site)
 ```
 
-<img src='/static/boxplots/getChoride-1.png'/ title='ggplot2 defaults for boxplots.' alt='ggplot2 defaults for boxplots.' />
+{{< figure src="/static/boxplots/getChoride-1.png" title="ggplot2 defaults for boxplots." alt="ggplot2 defaults for boxplots." >}}
 
-Is that graph great? YES! And for presentations and/or journal
-publications, that graph might be appropriate. However, for an official
-USGS report, USGS employees need to get the graphics approved to assure
-they follow specific style guidelines. The approving officer would
-probably come back from the review with the following comments:
+Is that graph great? YES! And for presentations and/or journal publications, that graph might be appropriate. However, for an official USGS report, USGS employees need to get the graphics approved to assure they follow specific style guidelines. The approving officer would probably come back from the review with the following comments:
 
 <table>
 <colgroup>
-<col style="width: 51%" />
-<col style="width: 48%" />
+<col width="51%" />
+<col width="48%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Reviewer’s Comments</th>
+<th>Reviewer's Comments</th>
 <th><code>ggplot2</code> element to modify</th>
 </tr>
 </thead>
@@ -121,23 +100,15 @@ probably come back from the review with the following comments:
 <td>Adjust <code>geom_text</code> defaults</td>
 </tr>
 <tr class="odd">
-<td>Change font (we’ll use “serif” in this post, although that is not the official USGS font)</td>
+<td>Change font (we'll use &quot;serif&quot; in this post, although that is not the official USGS font)</td>
 <td>Adjust <code>geom_text</code> defaults</td>
 </tr>
 </tbody>
 </table>
 
-As you can see, it will not be as simple as creating a single custom
-ggplot theme to comply with the requirements. However, we can string
-together ggplot commands in a list for easy re-use. This post is *not*
-going to get you perfect compliance with the USGS standards, but it will
-get much closer. Also, while these style adjustments are tailored to
-USGS requirements, the process described here may be useful for other
-graphic guidelines as well.
+As you can see, it will not be as simple as creating a single custom ggplot theme to comply with the requirements. However, we can string together ggplot commands in a list for easy re-use. This post is *not* going to get you perfect compliance with the USGS standards, but it will get much closer. Also, while these style adjustments are tailored to USGS requirements, the process described here may be useful for other graphic guidelines as well.
 
-So, let’s skip to the exciting conclusion and use some code that will be
-described later (`boxplot_framework` and `ggplot_box_legend`) to create
-the same plot, now closer to those USGS style requirements:
+So, let's skip to the exciting conclusion and use some code that will be described later (`boxplot_framework` and `ggplot_box_legend`) to create the same plot, now closer to those USGS style requirements:
 
 ``` r
 library(cowplot)
@@ -160,20 +131,14 @@ plot_grid(chloride_plot,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-<img src='/static/boxplots/chlorideWithLegend-1.png'/ title='Chloride by month styled.' alt='Chloride by month, styled.' />
+{{< figure src="/static/boxplots/chlorideWithLegend-1.png" title="Chloride by month styled." alt="Chloride by month, styled." >}}
 
-As can be seen in the code chunk, we are now using a function
-`ggplot_box_legend` to make a legend, `boxplot_framework` to accommodate
-all of the style requirements, and the `cowplot` package to plot them
-together.
+As can be seen in the code chunk, we are now using a function `ggplot_box_legend` to make a legend, `boxplot_framework` to accommodate all of the style requirements, and the `cowplot` package to plot them together.
 
 `boxplot_framework`: Styling the boxplot
 ========================================
 
-Let’s get our style requirements figured out. First, we can set some
-basic plot elements for a theme. We can start with the `theme_bw` and
-add to that. Here we remove the grid, set the size of the title, bring
-the y-ticks inside the plotting area, and remove the x-ticks:
+Let's get our style requirements figured out. First, we can set some basic plot elements for a theme. We can start with the `theme_bw` and add to that. Here we remove the grid, set the size of the title, bring the y-ticks inside the plotting area, and remove the x-ticks:
 
 ``` r
 theme_USGS_box <- function(base_family = "serif", ...){
@@ -191,8 +156,7 @@ theme_USGS_box <- function(base_family = "serif", ...){
 }
 ```
 
-Next, we can change the defaults of the geom\_text to a smaller size and
-font.
+Next, we can change the defaults of the geom\_text to a smaller size and font.
 
 ``` r
 update_geom_defaults("text",
@@ -200,8 +164,7 @@ update_geom_defaults("text",
                         family = "serif"))
 ```
 
-We also need to figure out what other `ggplot2` functions need to be
-added. The basic ggplot code for the chloride plot would be:
+We also need to figure out what other `ggplot2` functions need to be added. The basic ggplot code for the chloride plot would be:
 
 ``` r
 n_fun <- function(x){
@@ -227,26 +190,26 @@ Breaking that code down:
 
 <table>
 <colgroup>
-<col style="width: 41%" />
-<col style="width: 58%" />
+<col width="41%" />
+<col width="58%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Function</th>
-<th>What’s happening?</th>
+<th>What's happening?</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>stat_boxplot(geom =‘errorbar’)</td>
-<td>The “errorbars” are used to make the horizontal lines on the upper and lower whiskers. This needs to happen first so it is in the back of the plot.</td>
+<td>stat_boxplot(geom ='errorbar')</td>
+<td>The &quot;errorbars&quot; are used to make the horizontal lines on the upper and lower whiskers. This needs to happen first so it is in the back of the plot.</td>
 </tr>
 <tr class="even">
 <td>geom_boxplot</td>
 <td>Regular boxplot</td>
 </tr>
 <tr class="odd">
-<td>stat_summary(fun.data = n_fun, geom = “text”, hjust = 0.5)</td>
+<td>stat_summary(fun.data = n_fun, geom = &quot;text&quot;, hjust = 0.5)</td>
 <td>The <code>stat_summary</code> function is very powerful for adding specific summary statistics to the plot. In this case, we are adding a <code>geom_text</code> that is calculated with our custom <code>n_fun</code>. That function comes back with the count of the boxplot, and puts it at 95% of the hard-coded upper limit.</td>
 </tr>
 <tr class="even">
@@ -259,7 +222,7 @@ Breaking that code down:
 </tr>
 <tr class="even">
 <td>scale_y_continuous</td>
-<td>A tricky part of the USGS requirements involve 4 parts: Add ticks to the right side, have at least 4 “pretty” labels on the left axis, remove padding, and have the labels start and end at the beginning and end of the plot. Breaking that down further:</td>
+<td>A tricky part of the USGS requirements involve 4 parts: Add ticks to the right side, have at least 4 &quot;pretty&quot; labels on the left axis, remove padding, and have the labels start and end at the beginning and end of the plot. Breaking that down further:</td>
 </tr>
 <tr class="odd">
 <td>scale_y_continuous(sec.axis = dup_axis</td>
@@ -280,16 +243,12 @@ Breaking that code down:
 </tbody>
 </table>
 
-Let’s look at a few other common boxplots to see if there are other
-ggplot2 elements that would be useful in a common `boxplot_framework`
-function.
+Let's look at a few other common boxplots to see if there are other ggplot2 elements that would be useful in a common `boxplot_framework` function.
 
 Logrithmic boxplot
 ------------------
 
-For another example, we might need to make a boxplot with a logarithm
-scale. This data is for phosphorus measurements on the Pheasant Branch
-Creek in Middleton, WI.
+For another example, we might need to make a boxplot with a logarithm scale. This data is for phosphorus measurements on the Pheasant Branch Creek in Middleton, WI.
 
 ``` r
 site <- "05427948"
@@ -343,8 +302,8 @@ phos_plot <- ggplot(data = phos_data,
   theme_USGS_box() +
   scale_y_log10(limits = c(0.001, 50),
                 expand = expand_scale(mult = c(0, 0)),
-                labels = fancyNumbers,
-                breaks = prettyLogs) +
+                labels=fancyNumbers,
+                breaks=prettyLogs) +
   annotation_logticks(sides = c("rl")) +
   xlab("Month") +
   ylab(phos_name) +
@@ -353,19 +312,19 @@ phos_plot <- ggplot(data = phos_data,
 phos_plot
 ```
 
-<img src='/static/boxplots/phosDistribution-1.png'/ title='Phosphorus distribution by month.' alt='Phosphorus distribution by month.' />
+{{< figure src="/static/boxplots/phosDistribution-1.png" title="Phosphorus distribution by month." alt="Phosphorus distribution by month." >}}
 
 What are the new features we have to consider for log scales?
 
 <table>
 <colgroup>
-<col style="width: 41%" />
-<col style="width: 58%" />
+<col width="41%" />
+<col width="58%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Function</th>
-<th>What’s happening?</th>
+<th>What's happening?</th>
 </tr>
 </thead>
 <tbody>
@@ -378,8 +337,8 @@ What are the new features we have to consider for log scales?
 <td>This is used instead of <code>scale_y_continuous</code>.</td>
 </tr>
 <tr class="odd">
-<td>annotation_logticks(sides = c(“rl”))</td>
-<td>Adds nice log ticks to the right (“r”) and left (“l”) side.</td>
+<td>annotation_logticks(sides = c(&quot;rl&quot;))</td>
+<td>Adds nice log ticks to the right (&quot;r&quot;) and left (&quot;l&quot;) side.</td>
 </tr>
 <tr class="even">
 <td>prettyLogs</td>
@@ -395,11 +354,7 @@ What are the new features we have to consider for log scales?
 Grouped boxplots
 ----------------
 
-We might also want to make grouped boxplots. In ggplot, it’s pretty easy
-to add a “fill” to the `aes` argument. Here we’ll plot temperature
-distributions at 4 USGS stations. We’ll group the measurements by a
-“daytime” and “nighttime” factor. Temperature might be a parameter that
-would not be required to start at 0.
+We might also want to make grouped boxplots. In ggplot, it's pretty easy to add a "fill" to the `aes` argument. Here we'll plot temperature distributions at 4 USGS stations. We'll group the measurements by a "daytime" and "nighttime" factor. Temperature might be a parameter that would not be required to start at 0.
 
 ``` r
 library(dplyr)
@@ -444,27 +399,23 @@ temperature_plot <- ggplot(data = temp_q_data,
   ylab(temperature_name) +
   scale_fill_discrete(name = "EXPLANATION") +
   theme(legend.position = c(0.175, 0.78))
-```
 
-    ## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
-
-``` r
 temperature_plot
 ```
 
-<img src='/static/boxplots/groupPlot1-1.png'/ title='Grouped boxplots.' alt='Grouped boxplots' />
+{{< figure src="/static/boxplots/groupPlot1-1.png" title="Grouped boxplots." alt="Grouped boxplots" >}}
 
 What are the new features we have to consider for log scales?
 
 <table>
 <colgroup>
-<col style="width: 41%" />
-<col style="width: 58%" />
+<col width="41%" />
+<col width="58%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Function</th>
-<th>What’s happening?</th>
+<th>What's happening?</th>
 </tr>
 </thead>
 <tbody>
@@ -483,9 +434,7 @@ What are the new features we have to consider for log scales?
 </tbody>
 </table>
 
-Additionally, the parameter name that comes back from `dataRetrieval`
-could use some formatting. The following function can fix that for both
-`ggplot2` and base R graphics:
+Additionally, the parameter name that comes back from `dataRetrieval` could use some formatting. The following function can fix that for both `ggplot2` and base R graphics:
 
 ``` r
 unescape_html <- function(str){
@@ -501,19 +450,12 @@ unescape_html <- function(str){
 }
 ```
 
-We’ll use this function in the next section.
+We'll use this function in the next section.
 
 Framework function
 ------------------
 
-Finally, we can bring all of those elements together into a single list
-for `ggplot2` to use. While we’re at it, we can create a function that
-is flexible for both linear and logarithmic scales, as well as grouped
-boxplots. It’s a bit clunky because you need to specify the upper and
-lower limits of the plot. Much of the USGS style requirements depend on
-specific upper and lower limits, so I decided this was an acceptable
-solution for this post. There’s almost certainly a slicker way to do
-that, but for now, it works:
+Finally, we can bring all of those elements together into a single list for `ggplot2` to use. While we're at it, we can create a function that is flexible for both linear and logarithmic scales, as well as grouped boxplots. It's a bit clunky because you need to specify the upper and lower limits of the plot. Much of the USGS style requirements depend on specific upper and lower limits, so I decided this was an acceptable solution for this post. There's almost certainly a slicker way to do that, but for now, it works:
 
 ``` r
 boxplot_framework <- function(upper_limit,
@@ -581,8 +523,8 @@ boxplot_framework <- function(upper_limit,
     return(c(basic_elements,
               scale_y_log10(limits = c(lower_limit, upper_limit),
                   expand = expand_scale(mult = c(0, 0)),
-                  labels = fancyNumbers,
-                  breaks = prettyLogs),
+                  labels=fancyNumbers,
+                  breaks=prettyLogs),
               annotation_logticks(sides = c("rl"))))
   } else {
     return(c(basic_elements,
@@ -598,10 +540,7 @@ boxplot_framework <- function(upper_limit,
 Examples with our framework
 ===========================
 
-Let’s see if it works! Let’s build the last set of example figures using
-our new function `boxplot_framework`. I’m also going to use the
-‘cowplot’ package to print them all together. I’ll also include the
-`ggplot_box_legend` which will be described in the next section.
+Let's see if it works! Let’s build the last set of example figures using our new function `boxplot_framework`. I'm also going to use the 'cowplot' package to print them all together. I'll also include the `ggplot_box_legend` which will be described in the next section.
 
 ``` r
 legend_plot <- ggplot_box_legend()
@@ -612,11 +551,7 @@ chloride_plot <- ggplot(data = chloride,
   xlab(label = "Month") +
   ylab(label = cl_name) +
   labs(title = cl_site)
-```
 
-    ## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
-
-``` r
 phos_plot <- ggplot(data = phos_data,
        aes(x = month, y = result_va)) +
   boxplot_framework(upper_limit = 50,
@@ -626,11 +561,7 @@ phos_plot <- ggplot(data = phos_data,
   #Shortened label since the graph area is smaller
   ylab(label = "Phosphorus in milligraphs per liter") +
   labs(title = phos_site)
-```
 
-    ## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
-
-``` r
 temperature_plot <- ggplot(data = temp_q_data,
        aes(x=site_no, y=Wtemp_Inst, fill=timeOfDay)) +
   boxplot_framework(upper_limit = 30,
@@ -642,11 +573,7 @@ temperature_plot <- ggplot(data = temp_q_data,
   scale_fill_discrete(name = "EXPLANATION") +
   theme(legend.position = c(0.225, 0.72),
         legend.title =  element_text(size = 7))
-```
 
-    ## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
-
-``` r
 plot_grid(chloride_plot,
           phos_plot,
           temperature_plot,
@@ -654,19 +581,12 @@ plot_grid(chloride_plot,
           nrow = 2)
 ```
 
-\<img src=‘/static/boxplots/comboGraph-1.png’/ title=‘Combining boxplots
-using framework function and cowplot’s plot\_grid.’ alt=‘Combining
-boxplots using framework function and cowplot’s plot\_grid.’ /\>
+{{< figure src="/static/boxplots/comboGraph-1.png" title="Combining boxplots using framework function and cowplot's plot_grid." alt="Combining boxplots using framework function and cowplot's plot_grid." >}}
 
 `ggplot_box_legend`: What is a boxplot?
 =======================================
 
-A non-trivial requirement to the USGS boxplot style guidelines is to
-make a detailed, prescribed legend. In this section we’ll first verify
-that `ggplot2` boxplots use the same definitions for the lines and dots,
-and then we’ll make a function that creates the prescribed legend. To
-start, let’s set up random data using the R function `sample` and then
-create a function to calculate each value.
+A non-trivial requirement to the USGS boxplot style guidelines is to make a detailed, prescribed legend. In this section we'll first verify that `ggplot2` boxplots use the same definitions for the lines and dots, and then we'll make a function that creates the prescribed legend. To start, let's set up random data using the R function `sample` and then create a function to calculate each value.
 
 ``` r
 set.seed(100)
@@ -680,8 +600,7 @@ sample_df$values[1:100] <- 701:800
 sample_df$values[1] <- -350
 ```
 
-Next, we’ll create a function that calculates the necessary values for
-the boxplots:
+Next, we'll create a function that calculates the necessary values for the boxplots:
 
 ``` r
 ggplot2_boxplot <- function(x){
@@ -718,17 +637,12 @@ ggplot_output <- ggplot2_boxplot(sample_df$values)
 What are those calculations?
 
 -   Quartiles (25, 50, 75 percentiles), 50% is the median
--   Interquartile range is the difference between the 75th and 25th
-    percentiles
--   The upper whisker is the maximum value of the data that is within
-    1.5 times the interquartile range over the 75th percentile.
--   The lower whisker is the minimum value of the data that is within
-    1.5 times the interquartile range under the 25th percentile.
--   Outlier values are considered any values over 1.5 times the
-    interquartile range over the 75th percentile or any values under 1.5
-    times the interquartile range under the 25th percentile.
+-   Interquartile range is the difference between the 75th and 25th percentiles
+-   The upper whisker is the maximum value of the data that is within 1.5 times the interquartile range over the 75th percentile.
+-   The lower whisker is the minimum value of the data that is within 1.5 times the interquartile range under the 25th percentile.
+-   Outlier values are considered any values over 1.5 times the interquartile range over the 75th percentile or any values under 1.5 times the interquartile range under the 25th percentile.
 
-Let’s check that the output matches `boxplot.stats`:
+Let's check that the output matches `boxplot.stats`:
 
 ``` r
 # Using base R:
@@ -760,13 +674,9 @@ ggplot_output[["lower_whisker"]] == base_R_output[["stats"]][1]
 Boxplot Legend
 --------------
 
-Let’s use this information to generate a legend, and make the code
-reusable by creating a standalone function that we used in earlier code
-(`ggplot_box_legend`). There is a *lot* of `ggplot2` code to digest
-here. Most of it is style adjustments to approximate the USGS style
-guidelines for a boxplot legend.
+Let’s use this information to generate a legend, and make the code reusable by creating a standalone function that we used in earlier code (`ggplot_box_legend`). There is a *lot* of `ggplot2` code to digest here. Most of it is style adjustments to approximate the USGS style guidelines for a boxplot legend.
 
-<p class="ToggleButton" onclick="toggle_visibility(&#39;hideMe&#39;)">
+<p class="ToggleButton" onclick="toggle_visibility('hideMe')">
 Show/Hide Code
 </p>
 <div id="hideMe">
@@ -895,15 +805,14 @@ ggplot_box_legend <- function(family = "serif"){
 ggplot_box_legend()
 ```
 
-<img src='/static/boxplots/visualizeBox-1.png'/ title='ggplot2 box plot with explanation.' alt='ggplot2 box plot with explanation.' />
+</div>
+
+{{< figure src="/static/boxplots/visualizeBox-1.png" title="ggplot2 box plot with explanation." alt="ggplot2 box plot with explanation." >}}
 
 Bring it together
 =================
 
-What’s nice about leaving this in the world of `ggplot2` is that it is
-still possible to use other `ggplot2` elements on the plot. For example,
-let’s add a reporting limit as horizontal lines to the phosphorous
-graph:
+What's nice about leaving this in the world of `ggplot2` is that it is still possible to use other `ggplot2` elements on the plot. For example, let's add a reporting limit as horizontal lines to the phosphorous graph:
 
 ``` r
 phos_plot_with_DL <- phos_plot +
@@ -921,7 +830,6 @@ plot_grid(phos_plot_with_DL,
           nrow = 1, rel_widths = c(.6,.4))
 ```
 
-<img src='/static/boxplots/picsWithDL-1.png'/ title='Boxplot with additional ggplot2 features.' alt='Boxplot with additional ggplot2 features.' />
+{{< figure src="/static/boxplots/picsWithDL-1.png" title="Boxplot with additional ggplot2 features." alt="Boxplot with additional ggplot2 features." >}}
 
-I hoped you like my “deep dive” into `ggplot2` boxplots. Many of the
-techniques here can be used to modify other `ggplot2` plots.
+I hoped you like my "deep dive" into `ggplot2` boxplots. Many of the techniques here can be used to modify other `ggplot2` plots.
