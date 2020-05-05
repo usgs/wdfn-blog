@@ -10,7 +10,6 @@ output: USGSmarkdowntemplates::hugo
 author_email: "ldecicco@usgs.gov"
 author_github: "ldecicco-usgs"
 author_twitter: "DeCiccoDonk"
-author_gs: "jXd0feEAAAAJ"
 author_staff: "laura-decicco"
 description: "Identifying boxplot limits and styles in ggplot2."
 ---
@@ -229,7 +228,7 @@ library(ggplot2)
 chloride <- readNWISqw("04085139", "00940")
 # Add a month column:
 chloride$month <- month.abb[as.numeric(format(chloride$sample_dt, "%m"))]
-chloride$month <- factor(chloride$month, labels = month.abb)
+chloride$month <- factor(chloride$month, levels = month.abb)
 # Pull out the official parameter and site names for labels:
 cl_name <- attr(chloride, "variableInfo")[["parameter_nm"]]
 cl_site <- attr(chloride, "siteInfo")[["station_nm"]]
@@ -369,7 +368,7 @@ pCode <- "00665"
 phos_data <- readNWISqw(site, pCode)
 # Create a month column:
 phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
-phos_data$month <- factor(phos_data$month, labels = month.abb)
+phos_data$month <- factor(phos_data$month, levels = month.abb)
 # Get site name and paramter name for labels:
 phos_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
 phos_site <- attr(phos_data, "siteInfo")[["station_nm"]]
@@ -413,8 +412,8 @@ phos_plot <- ggplot(data = phos_data,
   theme_USGS_box() +
   scale_y_log10(limits = c(0.001, 50),
                 expand = expand_scale(mult = c(0, 0)),
-                labels=fancyNumbers,
-                breaks=prettyLogs) +
+                labels = fancyNumbers,
+                breaks = prettyLogs) +
   annotation_logticks(sides = c("rl")) +
   xlab("Month") +
   ylab(phos_name) +
@@ -587,8 +586,8 @@ boxplot_framework <- function(upper_limit,
     return(c(basic_elements,
               scale_y_log10(limits = c(lower_limit, upper_limit),
                   expand = expand_scale(mult = c(0, 0)),
-                  labels=fancyNumbers,
-                  breaks=prettyLogs),
+                  labels = fancyNumbers,
+                  breaks = prettyLogs),
               annotation_logticks(sides = c("rl"))))
   } else {
     return(c(basic_elements,

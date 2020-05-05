@@ -8,20 +8,13 @@ categories: Data Science
 image: static/boxplots/visualizeBox-1.png
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
-author_gs: jXd0feEAAAAJ
-
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
-
 tags:
   - R
-
-
 description: Identifying boxplot limits and styles in ggplot2.
 keywords:
   - R
-
-
   - boxplot
   - ggplot2
 ---
@@ -37,7 +30,7 @@ library(ggplot2)
 chloride <- readNWISqw("04085139", "00940")
 # Add a month column:
 chloride$month <- month.abb[as.numeric(format(chloride$sample_dt, "%m"))]
-chloride$month <- factor(chloride$month, labels = month.abb)
+chloride$month <- factor(chloride$month, levels = month.abb)
 # Pull out the official parameter and site names for labels:
 cl_name <- attr(chloride, "variableInfo")[["parameter_nm"]]
 cl_site <- attr(chloride, "siteInfo")[["station_nm"]]
@@ -265,7 +258,7 @@ pCode <- "00665"
 phos_data <- readNWISqw(site, pCode)
 # Create a month column:
 phos_data$month <- month.abb[as.numeric(format(phos_data$sample_dt, "%m"))]
-phos_data$month <- factor(phos_data$month, labels = month.abb)
+phos_data$month <- factor(phos_data$month, levels = month.abb)
 # Get site name and paramter name for labels:
 phos_name <- attr(phos_data, "variableInfo")[["parameter_nm"]]
 phos_site <- attr(phos_data, "siteInfo")[["station_nm"]]

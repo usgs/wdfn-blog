@@ -8,7 +8,6 @@ type: post
 categories: Data Science
 author_twitter: DeCiccoDonk
 author_github: ldecicco-usgs
-author_gs: jXd0feEAAAAJ
 author_staff: laura-decicco
 author_email: <ldecicco@usgs.gov>
 tags: 
