@@ -2,7 +2,7 @@
 author: Charlotte Snow and Jim Kreft
 date: 2020-05-29
 slug: release-notes-2020-05-29
-draft: False
+draft: True
 type: post
 image: /static/release_notes-2020-05-29/image1.jpg
 title: "Release Notes for May 29th, 2020"
