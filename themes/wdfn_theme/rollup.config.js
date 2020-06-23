@@ -14,7 +14,7 @@ const ENV = process.env.NODE_ENV || 'development';
 module.exports = {
     input: 'src/scripts/index.js',
     plugins: [
-        resolve({
+        resolve.nodeResolve({
             mainFields: ['module']
         }),
         buble({
