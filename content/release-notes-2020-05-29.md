@@ -1,16 +1,16 @@
 ---
 author: Charlotte Snow and Jim Kreft
-date: 2020-05-29
-slug: release-notes-2020-05-29
+date: 2020-07-21
+slug: release-notes-2020-07-21
 draft: True
 type: post
-image: /static/release_notes-2020-05-29/image1.jpg
-title: "Release Notes for May 29th, 2020"
+image: 
+title: "Release Notes for July 21st, 2020"
 author_staff: charlotte-m-snow
 author_email: <csnow@usgs.gov>
 categories:
   - Applications
-description: A summary of new features and tools released on or before May 29, 2020
+description: A summary of new features and tools released on or before July 21, 2020
 keywords:
   - water information
 tags:
@@ -66,7 +66,7 @@ move, including:
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/release-notes-2020-05-29/image1.jpg" caption="Screenshot of the USGS Publications Warehouse homepage." alt="Screenshot of the USGS Publications Warehouse homepage" >}}
+    {{< figure src="/static/release-notes-2020-05-29/image1.jpeg" caption="Screenshot of the USGS Publications Warehouse homepage." alt="Screenshot of the USGS Publications Warehouse homepage" >}}
     </div>
 </div>
 
