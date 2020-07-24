@@ -2,7 +2,7 @@
 author: Charlotte Snow and Jim Kreft
 date: 2020-07-21
 slug: release-notes-2020-07-21
-draft: True
+draft: False
 type: post
 image: 
 title: "Release Notes for July 21st, 2020"

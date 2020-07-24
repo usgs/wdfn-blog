@@ -2,7 +2,7 @@
 author: Charlotte Snow
 date: 2020-07-22
 slug: National Water Census - Data Portal
-draft: True
+draft: False
 type: post
 image: /static/decommissioning_of_NWC-DP/image1.png
 title: "Decommissioning of the National Water Census - Data Portal"
