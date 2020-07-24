@@ -26,10 +26,7 @@ delivery.
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/WQ-Listening-Session/FacebookCover.png" caption="Tyson Hatch and Fletcher Brinkerhoff sampling suspended-sediment
-concentration upstream of the Buckman Diversion for the city of Santa Fe
-on the Rio Grande (08313150 Rio Grande above Buckman Diversion, near
-White Rock, NM)." alt="Two USGS employees, in a duckie boat, sampling suspended sediment concentration in the Rio Grande River" >}}
+    {{< figure src="/static/WQ-Listening-Session/FacebookCover.png" caption="Tyson Hatch and Fletcher Brinkerhoff sampling suspended-sediment concentration upstream of the Buckman Diversion for the city of Santa Fe on the Rio Grande (08313150 Rio Grande above Buckman Diversion, near White Rock, NM)." alt="Two USGS employees, in a duckie boat, sampling suspended sediment concentration in the Rio Grande River" >}}
     </div>
 </div>
 
@@ -40,11 +37,7 @@ Why are you doing this? 
 
 In 2020, our team [decommissioned three
 applications](https://waterdata.usgs.gov/blog/decommissioning-legacy-apps/)
-that were instrumental in serving USGS water-quality data. Some
-functionality from those applications will be brought forward in future
-versions of Water Data for the Nation
-(<https://waterdata.usgs.gov/blog/wdfn-tng/>), and it is important for
-us to understand what is important to our users.
+that were instrumental in serving USGS water-quality data. Some functionality from those applications will be brought forward in future versions of [Water Data for the Nation](<https://waterdata.usgs.gov/blog/wdfn-tng/>), and it is important for us to understand what is important to our users.
 
 As we look to redesign our data flow and web presence, we must
 understand who will be using our products and how they expect our
@@ -67,8 +60,7 @@ How can I give feedback? 
 -------------------------
 
 First and foremost, we want as many people as possible to fill out our
-[survey]
-(<https://forms.office.com/Pages/ResponsePage.aspx?id=urWTBhhLe02TQfMvQApUlJP6YsKBCWFFs5dPG4HZbEJUQUJaSkFDVURYV0hPME5HTVA3SEJPU01ZNi4u>).
+[survey](<https://forms.office.com/Pages/ResponsePage.aspx?id=urWTBhhLe02TQfMvQApUlJP6YsKBCWFFs5dPG4HZbEJUQUJaSkFDVURYV0hPME5HTVA3SEJPU01ZNi4u>).
 This will help us to understand who our users are, their satisfaction
 with our current system, and how they ultimately use our data. The
 survey also gives users the opportunity to give more detailed feedback
