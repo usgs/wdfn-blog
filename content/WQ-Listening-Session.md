@@ -18,7 +18,7 @@ tags:
 
 ---
 Water Quality Data Delivery Listening Sessions
-
+=============================================
 Starting on August 3, 2020, the WDFN Team will be conducting a month of
 activities aimed at gathering input from both internal and external
 users to help guide development activities related to water-quality data
@@ -26,7 +26,7 @@ delivery.
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/WQ-Listening-Session/FacebookCover.png" caption="Tyson Hatch and Fletcher Brinkerhoff sampling suspended-sediment concentration upstream of the Buckman Diversion for the city of Santa Fe on the Rio Grande (08313150 Rio Grande above Buckman Diversion, near White Rock, NM)." alt="Two USGS employees, in a duckie boat, sampling suspended sediment concentration in the Rio Grande River" >}}
+    {{< figure src="/static/WQ-Listening-Session/FacebookCover.png" caption="Tyson Hatch and Fletcher Brinkerhoff sampling suspended-sediment concentration upstream of the Buckman Diversion for the city of Santa Fe on the Rio Grande (08313150 Rio Grande above Buckman Diversion, near White Rock, NM)." alt="Two USGS employees, in a boat, sampling suspended sediment concentration in the Rio Grande River" >}}
     </div>
 </div>
 
