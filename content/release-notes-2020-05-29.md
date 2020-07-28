@@ -48,11 +48,10 @@ favor of shared, standards-based approaches for functions like
 authorization and authentication. There are a number of benefits to this
 move, including:
 
--   Reducing the licensing burden for closed-source database systems
+-   Reducing the USGS licensing burden for closed-source database systems
 
 -   Reducing the operational burden of the on-site infrastructure team
-    by cutting the traffic to that infrastructure by 93% (from \~2.2
-    million visits a year to \~155,000 visits a year)
+    by cutting traffic to that infrastructure by over 2 million visits a year.
 
 -   Allowing the retirement of a legacy, custom
     authentication/authorization application
