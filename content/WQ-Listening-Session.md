@@ -2,7 +2,7 @@
 author: Candice Hopkins, Charlotte Snow
 date: 2020-07-28
 slug: Water-quality
-draft: True
+draft: False
 type: post
 image: /static/WQ-Listening-Session/FacebookCover.png
 title: "Water Quality Data Delivery Listening Sessions"
