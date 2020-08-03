@@ -36,8 +36,8 @@ Why are you doing this? 
 ------------------------
 
 The USGS Water Resources Mission Area is seeking input from water
-quality data users of [[Water Data for the
-Nation]{.underline}](https://waterdata.usgs.gov/blog/wdfn-tng/). Our
+quality data users of [Water Data for the
+Nation](https://waterdata.usgs.gov/blog/wdfn-tng/). Our
 objective is to inform users of the status and plans for
 modernizing water quality data delivery, and to better understand our
 users' needs for future water quality delivery systems. To accomplish
