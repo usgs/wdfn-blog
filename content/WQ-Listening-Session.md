@@ -22,7 +22,7 @@ Water Quality Data Delivery Listening Sessions
 Starting on August 3, 2020, the WDFN Team will be conducting a month of
 activities aimed at gathering input from both internal and external
 users to help guide development activities related to water-quality data
-delivery.
+delivery. 
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
