@@ -22,7 +22,7 @@ Water Quality Data Delivery Listening Sessions
 Starting on August 3, 2020, the WDFN Team will be conducting a month of
 activities aimed at gathering input from both internal and external
 users to help guide development activities related to water-quality data
-delivery.
+delivery. 
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
@@ -35,9 +35,14 @@ delivery.
 Why are you doing this? 
 ------------------------
 
-In 2020, our team [decommissioned three
-applications](https://waterdata.usgs.gov/blog/decommissioning-legacy-apps/)
-that were instrumental in serving USGS water-quality data. Some functionality from those applications will be brought forward in future versions of [Water Data for the Nation](<https://waterdata.usgs.gov/blog/wdfn-tng/>), and it is important for us to understand what is important to our users.
+The USGS Water Resources Mission Area is seeking input from water
+quality data users of [Water Data for the
+Nation](https://waterdata.usgs.gov/blog/wdfn-tng/). Our
+objective is to inform users of the status and plans for
+modernizing water quality data delivery, and to better understand our
+users' needs for future water quality delivery systems. To accomplish
+these goals, a listening session and user survey will take place in
+August 2020.
 
 As we look to redesign our data flow and web presence, we must
 understand who will be using our products and how they expect our
