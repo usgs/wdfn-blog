@@ -17,7 +17,9 @@ tags:
   - Water Data for the Nation 
 
 ---
-5 New Things
+\#5NewThings
+-----------
+
 The Water Resources Mission Area is spotlighting five newly available features on our [next-gen](https://waterdata.usgs.gov/blog/wdfn-tng/) monitoring location pages this week! To compliment this blog post, we will show off our work on Instagram and Twitter, using the hashtag
 \#5NewThings. These improvements showcase our adoption of modern web technologies as we update our data delivery paradigm.
 
