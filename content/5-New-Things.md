@@ -17,13 +17,10 @@ tags:
   - Water Data for the Nation 
 
 ---
-\#5NewThings
------------
+
 
 The Water Resources Mission Area is spotlighting five newly available features on our [next-gen](https://waterdata.usgs.gov/blog/wdfn-tng/) monitoring location pages this week! To compliment this blog post, we will show off our work on Instagram and Twitter, using the hashtag
 \#5NewThings. These improvements showcase our adoption of modern web technologies as we update our data delivery paradigm.
-
-Please work!
 
 \#1 Flood benchmarks 
 --------------------
@@ -44,7 +41,7 @@ which a rise in water surface level begins to create a hazard to lives,
 property, or commerce. The issuance of **flood advisories** or
 **warnings** is linked to flood stage.
 
-**Moderate Flooding **is defined to have some inundation of structures
+**Moderate Flooding** - is defined to have some inundation of structures
 and roads near the stream. Some evacuations of people and/or transfer of
 property to higher elevations may be necessary. A **flood
 warning** should be issued if moderate flooding is expected during the
@@ -52,7 +49,7 @@ event. In remote areas with few specific impacts, floods with 15-40 year
 recurrence interval would be assumed to be causing moderate flooding on
 streams in the area.
 
-**Major Flooding **is defined to have extensive inundation of structures
+**Major Flooding** - is defined to have extensive inundation of structures
 and roads. Significant evacuations of people and/or transfer of property
 to higher elevations are necessary. A **flood warning** should be issued
 if major flooding is expected during the event. In remote areas with few
@@ -61,7 +58,7 @@ assumed to be causing major flooding on streams in the area.
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/5-new-things-pt1/image1.png" caption="A hydrograph during a flooding event displaying the flood stage benchmarks at Elm River at Westport, South Dakota.<https://waterdata.usgs.gov/monitoring-location/06471500/?agency_cd=USGS#parameterCode=00065&startDT=2020-07-10&endDT=2020-08-05>." alt="Screenshot of a hydrograph showing floodbenchmarks at Elm River at Westport, South Dakota" >}}
+    {{< figure src="/static/5-new-things-pt1/image1.png" caption="A hydrograph during a flooding event displaying the flood stage benchmarks at Elm River at Westport, South Dakota. <https://waterdata.usgs.gov/monitoring-location/06471500/?agency_cd=USGS#parameterCode=00065&startDT=2020-07-10&endDT=2020-08-05>." alt="Screenshot of a hydrograph showing floodbenchmarks at Elm River at Westport, South Dakota" >}}
     </div>
 </div>
 
@@ -100,6 +97,7 @@ active stream site has an upstream basin in NLDI, as you can see here:
 
 
 \#4 Brush & Zoom
+----------------
 
 The brush and zoom capability allows the user to easily select any part
 of the hydrograph for closer examination. On the lower hydrograph, the
@@ -126,6 +124,6 @@ a detailed view of the data behind the hydrograph. 
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/5-new-things-pt1/image4.png" caption="Table of discharge (streamflow) data at Monitoring location 02246500, the St. Johns River in Jacksonville, FL <https://waterdata.usgs.gov/monitoring-location/02246500/?agency_cd=USGS#parameterCode=00060>" >}}
+    {{< figure src="/static/5-new-things-pt1/image4.png" caption="Table of discharge (streamflow) data at Monitoring location 02246500, the St. Johns River in Jacksonville, FL <https://waterdata.usgs.gov/monitoring-location/02246500/?agency_cd=USGS#parameterCode=00060>." >}}
     </div>
 </div>
