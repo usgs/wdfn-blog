@@ -98,6 +98,7 @@ active stream site has an upstream basin in NLDI, as you can see here:
 
 
 \#4 Brush & Zoom
+----------------
 
 The brush and zoom capability allows the user to easily select any part
 of the hydrograph for closer examination. On the lower hydrograph, the
@@ -107,7 +108,7 @@ handles are big enough for use on mobile devices.
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/    {{< figure src="/static/5-new-things-pt1/image3.gif" caption="An animation of the brush and zoom capability." alt="An animation of the brush and zoom capability" >}}
+    {{< figure src="/static/5-new-things-pt1/image3.gif" caption="An animation of the brush and zoom capability." alt="An animation of the brush and zoom capability" >}}
     </div>
 </div>
 
@@ -124,7 +125,7 @@ a detailed view of the data behind the hydrograph. 
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/5-new-things-pt1/image4.png" caption="Table of discharge (streamflow) data at Monitoring location 02246500, the St. Johns River in Jacksonville, FL <https://waterdata.usgs.gov/monitoring-location/02246500/?agency_cd=USGS#parameterCode=00060>" >}}
+    {{< figure src="/static/5-new-things-pt1/image4.png" caption="Table of discharge (streamflow) data at Monitoring location 02246500, the St. Johns River in Jacksonville, FL <https://waterdata.usgs.gov/monitoring-location/02246500/?agency_cd=USGS#parameterCode=00060>." >}}
     </div>
 </div>
 
