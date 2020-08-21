@@ -60,9 +60,7 @@ assumed to be causing major flooding on streams in the area.
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/5-new-things-pt1/image1.png" caption="A hydrograph during a flooding event displaying the flood stage
-benchmarks at Elm River at Westport, South Dakota.
-<https://waterdata.usgs.gov/monitoring-location/06471500/?agency_cd=USGS#parameterCode=00065&startDT=2020-07-10&endDT=2020-08-05>." alt="Screenshot of a hydrograph showing floodbenchmarks at Elm River at Westport, South Dakota" >}}
+    {{< figure src="/static/5-new-things-pt1/image1.png" caption="A hydrograph during a flooding event displaying the flood stage benchmarks at Elm River at Westport, South Dakota.<https://waterdata.usgs.gov/monitoring-location/06471500/?agency_cd=USGS#parameterCode=00065&startDT=2020-07-10&endDT=2020-08-05>." alt="Screenshot of a hydrograph showing floodbenchmarks at Elm River at Westport, South Dakota" >}}
     </div>
 </div>
 
