@@ -22,7 +22,7 @@ features on our [next-gen](https://waterdata.usgs.gov/blog/wdfn-tng/)
 monitoring location pages this week! To compliment this blog post, we
 will show off our work on Instagram and Twitter, using the hashtag
 \#5NewThings. These improvements showcase our adoption of modern web
-technologies as we update our data delivery paradigm.
+technologies as we update our data delivery paradigm....
 
 \#1 Flood benchmarks 
 --------------------
