@@ -92,9 +92,7 @@ active stream site has an upstream basin in NLDI, as you can see here:
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/5-new-things-pt1/image2.png" caption="Screenshot of the upstream basin for monitoring location
-05370000, [Yahara River at East Main Street at Madison, WI](https://waterdata.usgs.gov/monitoring-location/05428500/#parameterCode=00060)." alt="Screenshot of the upstream basin, shown as a grey overlay, for monitoring location
-05370000, [Yahara River at East Main Street at Madison, WI]" >}}
+    {{< figure src="/static/5-new-things-pt1/image2.png" caption="Screenshot of the upstream basin for monitoring location05370000, [Yahara River at East Main Street at Madison, WI](https://waterdata.usgs.gov/monitoring-location/05428500/#parameterCode=00060)." alt="Screenshot of the upstream basin, shown as a grey overlay, for monitoring location05370000, [Yahara River at East Main Street at Madison, WI]" >}}
     </div>
 </div>
 
@@ -109,8 +107,7 @@ handles are big enough for use on mobile devices.
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/    {{< figure src="/static/5-new-things-pt1/image3.gif" caption="An animation of the brush and zoom capability"
- alt="An animation of the brush and zoom capability" >}}
+    {{< figure src="/static/    {{< figure src="/static/5-new-things-pt1/image3.gif" caption="An animation of the brush and zoom capability." alt="An animation of the brush and zoom capability" >}}
     </div>
 </div>
 
@@ -127,8 +124,7 @@ a detailed view of the data behind the hydrograph. 
 
 <div class="grid-row">
     <div class="grid-col-14 grid-offset-0">
-    {{< figure src="/static/5-new-things-pt1/image4.png" caption="Table of discharge (streamflow) data at Monitoring location 02246500,
-the St. Johns River in Jacksonville, FL <https://waterdata.usgs.gov/monitoring-location/02246500/?agency_cd=USGS#parameterCode=00060>" >}}
+    {{< figure src="/static/5-new-things-pt1/image4.png" caption="Table of discharge (streamflow) data at Monitoring location 02246500, the St. Johns River in Jacksonville, FL <https://waterdata.usgs.gov/monitoring-location/02246500/?agency_cd=USGS#parameterCode=00060>" >}}
     </div>
 </div>
 
