@@ -10,14 +10,13 @@ author_staff: charlotte-m-snow
 author_email: <csnow@usgs.gov>
 categories:
   - Applications
-description: A description of the user-centeric research
+description: An update of next-gen monitoring location page features
 keywords:
   - water information
 tags:
-  - Water Data for the Nation
-  \#5NewThings
-============
+  - Water Data for the Nation 
 
+---
 The Water Resources Mission Area is spotlighting five newly available
 features on our [next-gen](https://waterdata.usgs.gov/blog/wdfn-tng/)
 monitoring location pages this week! To compliment this blog post, we
@@ -102,8 +101,6 @@ active stream site has an upstream basin in NLDI, as you can see here:
 </div>
 
 
-
-
 \#4 Brush & Zoom
 
 The brush and zoom capability allows the user to easily select any part
@@ -118,7 +115,6 @@ handles are big enough for use on mobile devices.
  alt="An animation of the brush and zoom capability" >}}
     </div>
 </div>
-
 
 
 \#5 Table of hydrograph data 
