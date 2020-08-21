@@ -4,7 +4,7 @@ date: 2020-08-21
 slug: 5-New-Things
 draft: True
 type: post
-image: /static/5-new-things-pt1/image1.png
+image: /static/5-new-things-pt1/image3.gif
 title: "#5NewThings"
 author_staff: charlotte-m-snow
 author_email: <csnow@usgs.gov>
