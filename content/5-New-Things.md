@@ -2,7 +2,7 @@
 author: Charlotte Snow
 date: 2020-08-21
 slug: 5-New-Things
-draft: True
+draft: False
 type: post
 image: /static/5-new-things-pt1/image3.gif
 title: "#5NewThings"
