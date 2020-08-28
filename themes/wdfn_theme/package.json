@@ -41,7 +41,7 @@
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.14.0",
-    "wdfn-viz": "1.7.0"
+    "wdfn-viz": "1.7.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
@@ -53,7 +53,7 @@
     "postcss-cli": "^7.1.1",
     "postcss-csso": "^4.0.0",
     "postcss-flexbugs-fixes": "^4.2.1",
-    "rollup": "^2.25.0",
+    "rollup": "^2.26.7",
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "rollup-plugin-uglify": "^6.0.4",
