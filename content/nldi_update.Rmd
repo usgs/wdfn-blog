@@ -13,7 +13,6 @@ author_staff: david-l-blodgett
 editor_options: 
   chunk_output_type: console
 ---
-
 ```{r setup, include=FALSE}
 library(knitr)
 knit_hooks$set(plot=function(x, options) {
@@ -111,7 +110,111 @@ Only selected catchment characteristics from the source data release are include
 
 ## Python Client Application
 
-lorum ipsum
+```{python, echo=FALSE}
+import warnings
+warnings.filterwarnings("ignore")
+```
+
+Let's use [PyNHD](https://github.com/cheginit/pynhd) to demonstrate new NLDI's capabilities. Based on a topologically sorted river network `pynhd.vector_accumulation` function computes the accumulation of an attribute in the network. We use the upstream river network of USGS-01031500 station as an example. This station is located in a natural watershed and is located in Piscataquis County, Maine with a drainage area of 298 square miles. First, lets use NLDI's navigation end-point to get all its upstream NHDPlus Common Identifiers (ComIDs).
+
+```{python}
+from pynhd import NLDI, WaterData
+import pynhd as nhd
+
+nldi = NLDI()
+comids = nldi.navigate_byid(
+    fsource="nwissite",
+    fid="USGS-01031500",
+    navigation="upstreamTributaries",
+    source="flowlines",
+    distance=1000,
+).nhdplus_comid.to_list()
+```
+
+Then, we use [WaterData](https://labs.waterdata.usgs.gov/geoserver/index.html) GeoServer to get all the NHDPlus attributes of the these ComIDs.
+
+```{python}
+wd = WaterData("nhdflowline_network")
+flw = wd.byid("comid", comids)
+flw = nhd.prepare_nhdplus(flw, 0, 0, purge_non_dendritic=False)
+```
+
+Next, we should sort the ComIDs topologically.
+
+```{python}
+flw = nhd.prepare_nhdplus(flw, 0, 0, purge_non_dendritic=False)
+```
+
+The available characteristic IDs for any of the three characteristic types (`local`, `tot`, `div`) can be found using `get_validchars` method of `NLDI` class. For example, let's take a look at the `local` characteristic type:
+
+```{python}
+char_ids = nldi.get_validchars("local")
+print(char_ids.head(5))
+```
+
+Let's pick `CAT_RECHG` attribute which is Mean Annual Groundwater Recharge in mm/yr, and carry out the accumulation.
+
+```{python}
+char = "CAT_RECHG"
+area = "areasqkm"
+
+local = nldi.getcharacteristic_byid(comids, "local", char_ids=char)
+flw = flw.merge(local[char], left_on="comid", right_index=True)
+
+def runoff_acc(qin, q, a):
+    return qin + q * a
+
+flw_r = flw[["comid", "tocomid", char, area]]
+runoff = nhd.vector_accumulation(flw_r, runoff_acc, char, [char, area])
+
+def area_acc(ain, a):
+    return ain + a
+
+flw_a = flw[["comid", "tocomid", area]]
+areasqkm = nhd.vector_accumulation(flw_a, area_acc, area, [area])
+
+runoff /= areasqkm
+```
+
+For plotting the results we need to get the catchments' geometries since these attributes are catchment-scale.
+
+```{python}
+wd = WaterData("catchmentsp")
+catchments = wd.byid("featureid", comids)
+
+c_local = catchments.merge(local, left_on="featureid", right_index=True)
+c_acc = catchments.merge(runoff, left_on="featureid", right_index=True)
+```
+Upon merging the accumulated attributes with the catchments dataframe, we can plot the results.
+
+```{python}
+import cmocean.cm as cmo
+import matplotlib.pyplot as plt
+
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8), dpi=100)
+cmap = cmo.deep
+norm = plt.Normalize(vmin=c_local.CAT_RECHG.min(), vmax=c_acc.acc_CAT_RECHG.max())
+
+c_local.plot(ax=ax1, column=char, cmap=cmap, norm=norm)
+flw.plot(ax=ax1, column="streamorde", cmap="Blues", scheme='fisher_jenks')
+ax1.set_title("Groundwater Recharge (mm/yr)");
+
+c_acc.plot(ax=ax2, column=f"acc_{char}", cmap=cmap, norm=norm)
+flw.plot(ax=ax2, column="streamorde", cmap="Blues", scheme='fisher_jenks')
+ax2.set_title("Accumulated Groundwater Recharge (mm/yr)")
+
+cax = fig.add_axes([
+    ax2.get_position().x1 + 0.01,
+    ax2.get_position().y0,
+    0.02,
+    ax2.get_position().height
+])
+sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+fig.colorbar(sm, cax=cax)
+
+plt.show()
+```
 
 ## R client Application
 
