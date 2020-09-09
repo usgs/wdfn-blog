@@ -267,7 +267,7 @@ we can plot the results.
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     fig.colorbar(sm, cax=cax)
 
-    ## <matplotlib.colorbar.Colorbar object at 0x7fa83bbc0eb8>
+    ## <matplotlib.colorbar.Colorbar object at 0x7f9aaa167978>
 
     plt.show()
 
