@@ -185,6 +185,7 @@ catchments = wd.byid("featureid", comids)
 c_local = catchments.merge(local, left_on="featureid", right_index=True)
 c_acc = catchments.merge(runoff, left_on="featureid", right_index=True)
 ```
+
 Upon merging the accumulated attributes with the catchments dataframe, we can plot the results.
 
 ```{python}
@@ -222,6 +223,8 @@ plt.show()
 options("rgdal_show_exportToProj4_warnings"="none")
 ```
 
+First, we will retrieve some data and build a simple plot of our area of interest using [`plot_nhdplus()`](https://usgs-r.github.io/nhdplusTools/reference/plot_nhdplus.html) from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
+
 ```{r}
 library(dplyr)
 library(sf)
@@ -233,7 +236,11 @@ nldi_feature <- list(featureSource = "nwissite",
 outlet_comid <- discover_nhdplus_id(nldi_feature = nldi_feature)
 
 data <- plot_nhdplus(nldi_feature, flowline_only = FALSE)
+```
 
+Now we can use [`discover_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/discover_nldi_characteristics.html) to find out what characteristics are available from the NLDI and get them for the outlet of our area of interest with [`get_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/get_nldi_characteristics.html)
+
+```{r}
 chars <- discover_nldi_characteristics()
 
 outlet_total <- get_nldi_characteristics(nldi_feature, type = "total")
@@ -243,7 +250,6 @@ outlet_total <- left_join(outlet_total$total, chars$total,
 
 outlet_total <- outlet_total %>%
   select(ID = characteristic_id, 
-                       Dataset = dataset_label,
                        Description = characteristic_description, 
                        Value = characteristic_value,
                        Units = units,
@@ -252,6 +258,10 @@ outlet_total <- outlet_total %>%
 
 knitr::kable(outlet_total)
 ```
+
+Now, for the sake of demonstration, we will run get_nldi_characteristics for all the catchments in our area of interest. 
+
+**NOTE: This will be slow for large collections of characteristics. For large collections, download the characteristics [directly from the source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
 
 ```{r}
 characteristic <- "CAT_RECHG"
@@ -273,6 +283,8 @@ cat <- right_join(data$catchment, local_characteristic, by = c("FEATUREID" = "CO
 
 plot(cat[characteristic])
 ```
+
+Now that we have the local characteristics, we can run a downstream accumulation with an internal `nhdplusTools` function `accumulate_downstream()`. The plot at the bottom here shows the accumulated characteristic and the output values atthe bottom show that we get the same answer from locally-calculated accumulation or the total accumulated pre-calculated characteristic! So that's good.
 
 ```{r}
 net <- prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic = FALSE)
@@ -296,6 +308,7 @@ cat <- right_join(data$catchment,
 
 plot(cat[tot_char], reset = FALSE)
 plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
+
 filter(outlet_total, ID == tot_char)$Value
 
 filter(cat, FEATUREID == outlet_comid)[[tot_char]]

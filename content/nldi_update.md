@@ -267,12 +267,17 @@ we can plot the results.
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     fig.colorbar(sm, cax=cax)
 
-    ## <matplotlib.colorbar.Colorbar object at 0x7f9aaa167978>
+    ## <matplotlib.colorbar.Colorbar object at 0x7ff9298a4668>
 
     plt.show()
 
 R client Application
 --------------------
+
+First, we will retrieve some data and build a simple plot of our area of
+interest using
+[`plot_nhdplus()`](https://usgs-r.github.io/nhdplusTools/reference/plot_nhdplus.html)
+from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
 
     library(dplyr)
     library(sf)
@@ -289,6 +294,12 @@ R client Application
 <figure src='/static/nldi_update/unnamed-chunk-10-1.png' title='TODO' alt='TODO' >
 }}
 
+Now we can use
+[`discover_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/discover_nldi_characteristics.html)
+to find out what characteristics are available from the NLDI and get
+them for the outlet of our area of interest with
+[`get_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/get_nldi_characteristics.html)
+
     chars <- discover_nldi_characteristics()
 
     outlet_total <- get_nldi_characteristics(nldi_feature, type = "total")
@@ -298,7 +309,6 @@ R client Application
 
     outlet_total <- outlet_total %>%
       select(ID = characteristic_id, 
-                           Dataset = dataset_label,
                            Description = characteristic_description, 
                            Value = characteristic_value,
                            Units = units,
@@ -310,16 +320,14 @@ R client Application
 <table>
 <colgroup>
 <col width="4%" />
-<col width="2%" />
-<col width="65%" />
+<col width="66%" />
 <col width="1%" />
 <col width="5%" />
-<col width="20%" />
+<col width="21%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left">ID</th>
-<th align="left">Dataset</th>
 <th align="left">Description</th>
 <th align="left">Value</th>
 <th align="left">Units</th>
@@ -329,7 +337,6 @@ R client Application
 <tbody>
 <tr class="odd">
 <td align="left">TOT_BFI</td>
-<td align="left"></td>
 <td align="left">Base Flow Index (BFI), The BFI is a ratio of base flow to total streamflow, expressed as a percentage and ranging from 0 to 100. Base flow is the sustained, slowly varying component of streamflow, usually attributed to ground-water discharge to a stream.</td>
 <td align="left">46</td>
 <td align="left">percent</td>
@@ -337,7 +344,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_CONTACT</td>
-<td align="left"></td>
 <td align="left">Subsurface flow contact time index. The subsurface contact time index estimates the number of days that infiltrated water resides in the saturated subsurface zone of the basin before discharging into the stream.</td>
 <td align="left">137.57</td>
 <td align="left">days</td>
@@ -345,7 +351,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_ET</td>
-<td align="left"></td>
 <td align="left">Mean-annual actual evapotranspiration (ET), estimated using regression equation of Sanford and Selnick (2013)</td>
 <td align="left">468</td>
 <td align="left">mm/year</td>
@@ -353,7 +358,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_EWT</td>
-<td align="left"></td>
 <td align="left">Average depth to water table relatice to the land surface(meters)</td>
 <td align="left">-21.62</td>
 <td align="left">meters</td>
@@ -361,7 +365,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_HGA</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group A soil. -9999 denotes NODATA, usually water. Hydrologic group A soils have high infiltration rates. Soils are deep and well drained and, typically, have high sand and gravel content.</td>
 <td align="left">4.47</td>
 <td align="left">percent</td>
@@ -369,7 +372,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_HGAC</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group AC soil. -9999 denotes NODATA, usually water. Hydrologic group AC soils have group A characteristics (high infiltration rates) when artificially drained and have group C characteristics (slow infiltration rates) when not drained.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -377,7 +379,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_HGAD</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group AD soil. -9999 denotes NODATA, usually water. Hydrologic group AD soils have group A characteristics (high infiltration rates) when artificially drained and have group D characteristics (very slow infiltration rates) when not drained.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -385,7 +386,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_HGB</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group B soil. -9999 denotes NODATA, usually water. Hydrologic group B soils have moderate infiltration rates. Soils are moderately deep, moderately well drained, and moderately coarse in texture.</td>
 <td align="left">14.2</td>
 <td align="left">percent</td>
@@ -393,7 +393,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_HGBC</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group BC soil. -9999 denotes NODATA, usually water. Hydrologic group BC soils have group B characteristics (moderate infiltration rates) when artificially drained and have group C characteristics (slow infiltration rates) when not drained.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -401,7 +400,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_HGBD</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group BD soil. -9999 denotes NODATA, usually water. Hydrologic group BD soils have group B characteristics (moderate infiltration rates) when artificially drained and have group D characteristics (very slow infiltration rates) when not drained.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -409,7 +407,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_HGC</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group C soil. -9999 denotes NODATA, usually water. Hydrologic group C soils have slow soil infiltration rates. The soil profiles include layers impeding downward movement of water and, typically, have moderately fine or fine texture.</td>
 <td align="left">41.66</td>
 <td align="left">percent</td>
@@ -417,7 +414,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_HGCD</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group CD soil. -9999 denotes NODATA, usually water. Hydrologic group CD soils have group C characteristics (slow infiltration rates) when artificially drained and have group D characteristics (very slow infiltration rates) when not drained.</td>
 <td align="left">16.84</td>
 <td align="left">percent</td>
@@ -425,7 +421,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_HGD</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group D soil. -9999 denotes NODATA, usually water. Hydrologic group D soils have very slow infiltration rates. Soils are clayey, have a high water table, or have a shallow impervious layer.</td>
 <td align="left">22.83</td>
 <td align="left">percent</td>
@@ -433,7 +428,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_HGVAR</td>
-<td align="left"></td>
 <td align="left">Percentage of Hydrologic Group VAR soil. -9999 denotes NODATA, usually water. Hydrologic group VAR soils have variable drainage characteristics.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -441,7 +435,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_IEOF</td>
-<td align="left"></td>
 <td align="left">Percentage of Horton overland flow as a percent</td>
 <td align="left">2.29</td>
 <td align="left">percent</td>
@@ -449,7 +442,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_OLSON_PERM</td>
-<td align="left"></td>
 <td align="left">Rock hydraulic conductivity (10^-6 m/s).</td>
 <td align="left">0.12</td>
 <td align="left">10^-6 m/s</td>
@@ -457,7 +449,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_PEST219</td>
-<td align="left"></td>
 <td align="left">Estimate of agricultural pesticide application (219 types), kg/sq km, from Census of Ag 1997, based on county-wide sales and percent agricultural land cover in watershed</td>
 <td align="left">2.32</td>
 <td align="left">kg/sqkm</td>
@@ -465,7 +456,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_PET</td>
-<td align="left"></td>
 <td align="left">Mean-annual potential evapotranspiration (PET), estimated using the Hamon (1961) equation.</td>
 <td align="left">512.18</td>
 <td align="left">mm/year</td>
@@ -473,7 +463,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_PPT7100_ANN</td>
-<td align="left"></td>
 <td align="left">Mean annual precip (mm) for the watershed, from 800m PRISM data. 30 years period of record 1971-2000.</td>
 <td align="left">1180.7</td>
 <td align="left">mm/year</td>
@@ -481,7 +470,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_RECHG</td>
-<td align="left"></td>
 <td align="left">Mean annual natural ground-water recharge in millimeters per year</td>
 <td align="left">336.26</td>
 <td align="left">mm/yr</td>
@@ -489,7 +477,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_RH</td>
-<td align="left"></td>
 <td align="left">Watershed average relative humidity (percent), from 2km PRISM, derived from 30 years of record (1961-1990).</td>
 <td align="left">68.48</td>
 <td align="left">percent</td>
@@ -497,7 +484,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_ROCKTYPE_100</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Unconsolidated sand and gravel aquifers.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -505,7 +491,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_ROCKTYPE_200</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Semiconsolidated sand aquifers.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -513,7 +498,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_ROCKTYPE_300</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Sandstone aquifers.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -521,7 +505,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_ROCKTYPE_400</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Carbonate-rock aquifers.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -529,7 +512,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_ROCKTYPE_500</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Sandstone and carbonate-rock aquifers.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -537,7 +519,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_ROCKTYPE_600</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Igneous and metamorphic-rock aquifers.</td>
 <td align="left">0</td>
 <td align="left">percent</td>
@@ -545,7 +526,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_ROCKTYPE_999</td>
-<td align="left"></td>
 <td align="left">Estimated percent of catchment that is underlain by the Principal Aquifer rock type, Other rocks.</td>
 <td align="left">100</td>
 <td align="left">percent</td>
@@ -553,7 +533,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_RUN7100</td>
-<td align="left"></td>
 <td align="left">Estimated 30-year (1971-2000) average annual runoff in millimeters per year</td>
 <td align="left">738.61</td>
 <td align="left">millimeters per year</td>
@@ -561,7 +540,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_SATOF</td>
-<td align="left"></td>
 <td align="left">Percentage of Dunne overland flow as a percent</td>
 <td align="left">3.3</td>
 <td align="left">percent</td>
@@ -569,7 +547,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_TAV7100_ANN</td>
-<td align="left"></td>
 <td align="left">Watershed average of monthly air temperature (degrees C) from 800m PRISM, derived from 30 years of record (1971-2000).</td>
 <td align="left">4.13</td>
 <td align="left">degrees C</td>
@@ -577,7 +554,6 @@ R client Application
 </tr>
 <tr class="even">
 <td align="left">TOT_TWI</td>
-<td align="left"></td>
 <td align="left">Topographic wetness index, ln(a/S); where ln is the natural log, a is the upslope area per unit contour length and S is the slope at that point. See <a href="http://ks.water.usgs.gov/Kansas/pubs/reports/wrir.99-4242.html" class="uri">http://ks.water.usgs.gov/Kansas/pubs/reports/wrir.99-4242.html</a> and Wolock and McCabe, 1995 for more detail</td>
 <td align="left">11.55</td>
 <td align="left">ln(m)</td>
@@ -585,7 +561,6 @@ R client Application
 </tr>
 <tr class="odd">
 <td align="left">TOT_WB5100_ANN</td>
-<td align="left"></td>
 <td align="left">unknown</td>
 <td align="left">643.08</td>
 <td align="left">unknown</td>
@@ -593,6 +568,14 @@ R client Application
 </tr>
 </tbody>
 </table>
+
+Now, for the sake of demonstration, we will run
+get\_nldi\_characteristics for all the catchments in our area of
+interest.
+
+\*\*NOTE: This will be slow for large collections of characteristics.
+For large collections, download the characteristics [directly from the
+source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
 
     characteristic <- "CAT_RECHG"
     tot_char <- "TOT_RECHG"
@@ -614,8 +597,15 @@ R client Application
     plot(cat[characteristic])
 
 {{
-<figure src='/static/nldi_update/unnamed-chunk-11-1.png' title='TODO' alt='TODO' >
+<figure src='/static/nldi_update/unnamed-chunk-12-1.png' title='TODO' alt='TODO' >
 }}
+
+Now that we have the local characteristics, we can run a downstream
+accumulation with an internal `nhdplusTools` function
+`accumulate_downstream()`. The plot at the bottom here shows the
+accumulated characteristic and the output values atthe bottom show that
+we get the same answer from locally-calculated accumulation or the total
+accumulated pre-calculated characteristic! So that's good.
 
     net <- prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic = FALSE)
 
@@ -650,7 +640,7 @@ R client Application
     plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
 
 {{
-<figure src='/static/nldi_update/unnamed-chunk-12-1.png' title='TODO' alt='TODO' >
+<figure src='/static/nldi_update/unnamed-chunk-13-1.png' title='TODO' alt='TODO' >
 }}
 
     filter(outlet_total, ID == tot_char)$Value
