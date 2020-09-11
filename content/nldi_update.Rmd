@@ -176,6 +176,16 @@ areasqkm = nhd.vector_accumulation(flw_a, area_acc, area, [area])
 runoff /= areasqkm
 ```
 
+Note that for large number of ComIDs it's faster to get the whole database for the characteristic type
+and ID of interest using `nldi.characteristics_dataframe` function then subset it based on the ComIDs.
+For example, we can get the same data that `nldi.getcharacteristic_byid` method returned (the `local` variable)
+using `nldi.characteristics_dataframe` as follows:
+
+```{python}
+char_df = nldi.characteristics_dataframe("local", "CAT_RECHG", "RECHG_CONUS.zip")
+local = char_df[char_df.COMID.isin(comids)].set_index("COMID")
+```
+
 For plotting the results we need to get the catchments' geometries since these attributes are catchment-scale.
 
 ```{python}

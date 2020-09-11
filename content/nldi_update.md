@@ -224,6 +224,16 @@ Recharge in mm/yr, and carry out the accumulation.
 
     runoff /= areasqkm
 
+Note that for large number of ComIDs it's faster to get the whole
+database for the characteristic type and ID of interest using
+`nldi.characteristics_dataframe` function then subset it based on the
+ComIDs. For example, we can get the same data that
+`nldi.getcharacteristic_byid` method returned (the `local` variable)
+using `nldi.characteristics_dataframe` as follows:
+
+    char_df = nldi.characteristics_dataframe("local", "CAT_RECHG", "RECHG_CONUS.zip")
+    local = char_df[char_df.COMID.isin(comids)].set_index("COMID")
+
 For plotting the results we need to get the catchments' geometries since
 these attributes are catchment-scale.
 
@@ -267,7 +277,7 @@ we can plot the results.
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     fig.colorbar(sm, cax=cax)
 
-    ## <matplotlib.colorbar.Colorbar object at 0x7ff9298a4668>
+    ## <matplotlib.colorbar.Colorbar object at 0x7fa84a14dd30>
 
     plt.show()
 
@@ -291,7 +301,7 @@ from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
     data <- plot_nhdplus(nldi_feature, flowline_only = FALSE)
 
 {{
-<figure src='/static/nldi_update/unnamed-chunk-10-1.png' title='TODO' alt='TODO' >
+<figure src='/static/nldi_update/unnamed-chunk-11-1.png' title='TODO' alt='TODO' >
 }}
 
 Now we can use
@@ -597,7 +607,7 @@ source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
     plot(cat[characteristic])
 
 {{
-<figure src='/static/nldi_update/unnamed-chunk-12-1.png' title='TODO' alt='TODO' >
+<figure src='/static/nldi_update/unnamed-chunk-13-1.png' title='TODO' alt='TODO' >
 }}
 
 Now that we have the local characteristics, we can run a downstream
@@ -640,7 +650,7 @@ accumulated pre-calculated characteristic! So that's good.
     plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
 
 {{
-<figure src='/static/nldi_update/unnamed-chunk-13-1.png' title='TODO' alt='TODO' >
+<figure src='/static/nldi_update/unnamed-chunk-14-1.png' title='TODO' alt='TODO' >
 }}
 
     filter(outlet_total, ID == tot_char)$Value
