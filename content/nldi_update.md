@@ -7,9 +7,8 @@ type: post
 title: Network Linked Data Index Update and Client Applications
 categories: Data Science
 tags:
-  - EGRET
   - R
-image: ...
+image: static/nldi_update/plot_4-1.png
 description: An update on the Network Linked Data Index Web Application Programming Interface and Client Applications
 keywords:
   - NHDPlus
@@ -17,9 +16,8 @@ keywords:
   - Web API
 author_twitter: D_Blodgett
 author_github: dblodgett-usgs
-author_gs: jXd0feEAAAAJ
 author_staff: david-l-blodgett
-author_email: <dblodgett@usgs.gov>
+author_email: dblodgett@usgs.gov
 ---
 
 In August 2020, the Hydro Network Linked Data Index (NLDI) was updated
@@ -325,9 +323,7 @@ we can plot the results.
 
     plt.show()
 
-{{
-<figure src='static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumuation' alt='Python catchment characteristics accumuation' >
-}}
+<img src='static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumuation' alt='Python catchment characteristics accumuation' >
 
 R client Application
 --------------------
@@ -348,9 +344,7 @@ from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
 
     data <- plot_nhdplus(nldi_feature, flowline_only = FALSE)
 
-{{
-<figure src='static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
-}}
+<img src='static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
 
 Now we can use
 [`discover_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/discover_nldi_characteristics.html)
@@ -654,9 +648,7 @@ source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
 
     plot(cat[characteristic])
 
-{{
-<figure src='static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
-}}
+<img src='static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
 
 Now that we have the local characteristics, we can run a downstream
 accumulation with an internal `nhdplusTools` function
@@ -687,9 +679,7 @@ accumulated pre-calculated characteristic! So that's good.
     plot(cat[tot_char], reset = FALSE)
     plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
 
-{{
-<figure src='static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
-}}
+<img src='static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
 
     filter(outlet_total, ID == tot_char)$Value
 
