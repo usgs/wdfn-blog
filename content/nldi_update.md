@@ -189,11 +189,20 @@ in a github issue
 [here](https://github.com/ACWI-SSWD/nldi-services/issues) to request
 additional characteristics be added.
 
+Client Applications
+-------------------
+
+The examples below show two example client applications that work with the NLDI. 
+
+[PyNHD](https://github.com/cheginit/pynhd) and [nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
+
+This post was generated using a Docker-based workflow ([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv)) environment that helps work with both these client applications.
+
 Python Client Application
 -------------------------
 
 **Contributed by [Taher
-Chegini](https://web.eng.fiu.edu/arleon/People_Taher.html). Thanks!!**
+Chegini](https://github.com/cheginit). Thanks!!**
 
 Let's use [PyNHD](https://github.com/cheginit/pynhd) to demonstrate new
 NLDI's capabilities. Based on a topologically sorted river network
@@ -688,3 +697,5 @@ accumulated pre-calculated characteristic! So that's good.
     filter(cat, FEATUREID == outlet_comid)[[tot_char]]
 
     ## [1] 336.2556
+    
+They match! So that's good.

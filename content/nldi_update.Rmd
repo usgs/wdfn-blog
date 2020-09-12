@@ -118,9 +118,18 @@ An endpoint to lookup metadata for specific characteristics is available here:
 
 Only selected catchment characteristics from the source data release are included at this time. More may be added in the future. Please reach out in a github issue [here](https://github.com/ACWI-SSWD/nldi-services/issues) to request additional characteristics be added.
 
+## Client Applications
+
+The examples below show two example client applications that work with the NLDI. 
+
+[PyNHD](https://github.com/cheginit/pynhd) and [nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
+
+This post was generated using a Docker-based workflow ([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv)) environment that helps work with both these client applications.
+
 ## Python Client Application
 
-**Contributed by [Taher Chegini](https://web.eng.fiu.edu/arleon/People_Taher.html). Thanks!!**
+**Contributed by [Taher
+Chegini](https://github.com/cheginit). Thanks!!**
 
 ```{python, echo=FALSE}
 import warnings
@@ -335,3 +344,4 @@ filter(outlet_total, ID == tot_char)$Value
 
 filter(cat, FEATUREID == outlet_comid)[[tot_char]]
 ```
+They match! So that's good.
