@@ -10,8 +10,6 @@ author_email: dblodgett@usgs.gov
 author_github: dblodgett-usgs
 author_twitter: D_Blodgett
 author_staff: david-l-blodgett
-editor_options: 
-  chunk_output_type: console
 ---
 ```{r setup, include=FALSE}
 library(knitr)
@@ -212,7 +210,7 @@ c_acc = catchments.merge(runoff, left_on="featureid", right_index=True)
 
 Upon merging the accumulated attributes with the catchments dataframe, we can plot the results.
 
-```{python}
+```{python plot_1}
 import cmocean.cm as cmo
 import matplotlib.pyplot as plt
 
@@ -249,7 +247,7 @@ options("rgdal_show_exportToProj4_warnings"="none")
 
 First, we will retrieve some data and build a simple plot of our area of interest using [`plot_nhdplus()`](https://usgs-r.github.io/nhdplusTools/reference/plot_nhdplus.html) from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
 
-```{r}
+```{r plot_2}
 library(dplyr)
 library(sf)
 library(nhdplusTools)
@@ -287,7 +285,7 @@ Now, for the sake of demonstration, we will run get_nldi_characteristics for all
 
 **NOTE: This will be slow for large collections of characteristics. For large collections, download the characteristics [directly from the source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
 
-```{r}
+```{r plot_3}
 characteristic <- "CAT_RECHG"
 tot_char <- "TOT_RECHG"
 
@@ -310,8 +308,8 @@ plot(cat[characteristic])
 
 Now that we have the local characteristics, we can run a downstream accumulation with an internal `nhdplusTools` function `accumulate_downstream()`. The plot at the bottom here shows the accumulated characteristic and the output values at the bottom show that we get the same answer from locally-calculated accumulation or the total accumulated pre-calculated characteristic! So that's good.
 
-```{r}
-net <- prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic = FALSE)
+```{r plot_4}
+net <- prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic = FALSE, warn = FALSE)
 
 net <- select(net, ID = COMID, toID = toCOMID) %>%
   left_join(select(st_drop_geometry(data$flowline), COMID, AreaSqKM), 
