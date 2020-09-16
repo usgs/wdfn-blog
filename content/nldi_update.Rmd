@@ -40,9 +40,10 @@ If you are new to the NLDI, visit the [nldi-intro](https://waterdata.usgs.gov/bl
 
 The new functionality added to the NLDI retrieves local or accumulated catchment characteristics for any `featureSource`. A selection of characteristics from the this USGS data release are included:
 
-Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select Attributes for NHDPlus Version 2.1 Reach Catchments and Modified Network Routed Upstream Watersheds for the Conterminous United States (ver. 2.0, November 2019): U.S. Geological Survey data release, https://doi.org/10.5066/F7765D7V. 
+> Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select Attributes for NHDPlus Version 2.1 Reach Catchments and Modified Network Routed Upstream Watersheds for the Conterminous United States (ver. 2.0, November 2019): U.S. Geological Survey data release, https://doi.org/10.5066/F7765D7V. 
 
 API changes are backward compatible but significant.
+
 - If using a web-browser, `?f=json` needs to be appended to requests to see JSON content.
 - The `navigate` endpoint is deprecated in favor of a `navigation` end point with modified behavior.
 -- Previously, a `navigate/{navigationMode}` request would return flowline geometry. The `navigation/{navigationMode}` endpoint now returns available `dataSources`, treating flowline geometry as a data source.
@@ -58,15 +59,27 @@ The API updates were tracked in a [github release here.](https://github.com/ACWI
 
 Previous to the recent release, the NLDI only supported JSON responses. This caused problems in a browser when an unsuspecting person accessed an API request that returned a large JSON document in a Web browser. To protect against this, any request from with Accept headers preferring text/html content (e.g. from a Web browser) is provided an HTML response containing a link to the JSON content. An Accept header override -- `?f=json` -- is used for this behavior. If requests are made without an Accept header, JSON content is returned.
 
-This behavior can be seen at any endpoint exposed by the NLDI. e.g. open the following url in a browser. https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700
+This behavior can be seen at any endpoint exposed by the NLDI. e.g. open the following url in a browser:
+
+https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700
 
 ### Navigation end point.
 
 The original NLDI `.../navigate` end point had a design inconsistency and behavior that led to needless high-cost queries. `.../navigate` has been deprecated and a `.../navigation` endpoint has been introduced in its place. 
 
-The most significant change is the resource returned from a particular navigation mode endpoint. e.g. https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700/navigation/UM is now a JSON document listing available data sources that can be accessed for the upstream main navigation from the featureID USGS-05429700 from the nwissite featureSource. In contrast, the `.../navigate/UM` returns GeoJSON containing flowlines for the upstream main navigation. The same flowlines GeoJSON is now a dataSource listed along side the others available for the `.../navigation/UM` end point.
+#### Flowlines are now a dataSource
 
-The other significant difference between the `.../navigate` and `.../navigation` endpoints is that the `distance` (in km) query parameter is now required. Previously, the internal default was set to 9999 which resulted in many very large requests that may or may not have been desired. There is no upper limit to the value of the `distance` parameter, but it must be provided for the navigation end point to trigger a query to the NLDI's database. Client developers are encouraged to choose a sensible default such that naive users will not accidentally trigger very large queries and be aware that the NLDI is capable of producing result sets with hundreds of thousands of features. 
+The most significant change is the resource returned from a particular navigation mode endpoint. 
+
+e.g. https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700/navigation/UM 
+
+is now a JSON document listing available data sources that can be accessed for the upstream main navigation from the featureID USGS-05429700 from the nwissite `featureSource`. In contrast, the `.../navigate/UM` returns GeoJSON containing flowlines for the upstream main navigation. The same flowlines GeoJSON is now a dataSource listed along side the others available for the `.../navigation/UM` end point.
+
+#### `distance` is now a required query parameter
+
+The other significant difference between the `.../navigate` and `.../navigation` endpoints is that the `distance` (in km) query parameter is now required. Previously, the internal default was set to 9999 which resulted in many very large requests that may or may not have been desired. There is no upper limit to the value of the `distance` parameter, but it must be provided for the navigation end point to trigger a query to the NLDI's database. 
+
+Client developers are encouraged to choose a sensible default such that naive users will not accidentally trigger very large queries and be aware that the NLDI is capable of producing result sets with hundreds of thousands of features. 
 
 ### Feature Source Access
 
@@ -110,7 +123,7 @@ provide exactly the same content.
 
 Documentation for the source dataset and creation methods can be found here.
 
-Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select Attributes for NHDPlus Version 2.1 Reach Catchments and Modified Network Routed Upstream Watersheds for the Conterminous United States (ver. 2.0, November 2019): U.S. Geological Survey data release, https://doi.org/10.5066/F7765D7V. 
+> Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select Attributes for NHDPlus Version 2.1 Reach Catchments and Modified Network Routed Upstream Watersheds for the Conterminous United States (ver. 2.0, November 2019): U.S. Geological Survey data release, https://doi.org/10.5066/F7765D7V. 
 
 An endpoint to lookup metadata for specific characteristics is available here:
 
