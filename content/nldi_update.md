@@ -360,9 +360,13 @@ we can plot the results.
 
     plt.show()
 ```
-{{
-<figure src='/static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumulation' alt='Python catchment characteristics accumulation' >
-}}
+
+<figure>
+<img src='/static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumulation' alt='Python catchment characteristics accumulation' >
+<figcaption>Python catchment characteristics accumulation</figcaption>
+</figure>
+
+
 
 R client Application
 --------------------
@@ -385,9 +389,12 @@ from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
     data <- plot_nhdplus(nldi_feature, flowline_only = FALSE)
 ```
 
-{{
-<figure src='/static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
-}}
+
+<figure> 
+ <img src='/static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
+ <figcaption>Preview map of watershed</figcaption>
+</figure>
+
 
 Now we can use
 [`discover_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/discover_nldi_characteristics.html)
@@ -695,9 +702,11 @@ source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
     plot(cat[characteristic])
 ```
 
-{{
-<figure src='/static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
-}}
+
+<figure>
+  <img src='/static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
+  <figcaption>Plot of catchments with local characteristic values</figcaption>
+</figure>
 
 Now that we have the local characteristics, we can run a downstream
 accumulation with an internal `nhdplusTools` function
@@ -733,10 +742,13 @@ accumulated pre-calculated characteristic! So that's good.
     plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
 ```
 
-{{
-<figure src='/static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
-}}
+<figure> 
+    <img src='/static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
+    <figcaption>Plot of accumulated characteristic</figcaption>
+</figure>
 
+
+```r
     filter(outlet_total, ID == tot_char)$Value
 
     ## [1] "336.26"
@@ -744,5 +756,5 @@ accumulated pre-calculated characteristic! So that's good.
     filter(cat, FEATUREID == outlet_comid)[[tot_char]]
 
     ## [1] 336.2556
-
+```
 They match! So that's good.
