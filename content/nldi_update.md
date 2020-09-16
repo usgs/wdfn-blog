@@ -37,27 +37,31 @@ The new functionality added to the NLDI retrieves local or accumulated
 catchment characteristics for any `featureSource`. A selection of
 characteristics from the this USGS data release are included:
 
-Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select
-Attributes for NHDPlus Version 2.1 Reach Catchments and Modified Network
-Routed Upstream Watersheds for the Conterminous United States (ver. 2.0,
-November 2019): U.S. Geological Survey data release,
-<https://doi.org/10.5066/F7765D7V>.
+> Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select
+> Attributes for NHDPlus Version 2.1 Reach Catchments and Modified
+> Network Routed Upstream Watersheds for the Conterminous United States
+> (ver. 2.0, November 2019): U.S. Geological Survey data release,
+> <https://doi.org/10.5066/F7765D7V>.
 
-API changes are backward compatible but significant. - If using a
-web-browser, `?f=json` needs to be appended to requests to see JSON
-content. - The `navigate` endpoint is deprecated in favor of a
-`navigation` end point with modified behavior. -- Previously, a
-`navigate/{navigationMode}` request would return flowline geometry. The
-`navigation/{navigationMode}` endpoint now returns available
-`dataSources`, treating flowline geometry as a data source. -- All
-`navigationMode`s now require the `distance` query parameter.
-Unconstrained navigation queries (the default from the `navigate`
-endpoint) were causing system performance problems. Client applications
-must now explicitly request very large upstream-with-tributaries. - All
-features in a `featureSource` can now be accessed at the `featureSource`
-endpoint. This will allow clients to easily create map-based selection
-interfaces. - A `featureSource` can now be queried with a lat/lon point
-encoded in `WKT` format.
+API changes are backward compatible but significant.
+
+-   If using a web-browser, `?f=json` needs to be appended to requests
+    to see JSON content.
+-   The `navigate` endpoint is deprecated in favor of a `navigation` end
+    point with modified behavior. -- Previously, a
+    `navigate/{navigationMode}` request would return flowline geometry.
+    The `navigation/{navigationMode}` endpoint now returns available
+    `dataSources`, treating flowline geometry as a data source. -- All
+    `navigationMode`s now require the `distance` query parameter.
+    Unconstrained navigation queries (the default from the `navigate`
+    endpoint) were causing system performance problems. Client
+    applications must now explicitly request very large
+    upstream-with-tributaries.
+-   All features in a `featureSource` can now be accessed at the
+    `featureSource` endpoint. This will allow clients to easily create
+    map-based selection interfaces.
+-   A `featureSource` can now be queried with a lat/lon point encoded in
+    `WKT` format.
 
 API Updates Detail
 ------------------
@@ -80,8 +84,9 @@ containing a link to the JSON content. An Accept header override --
 Accept header, JSON content is returned.
 
 This behavior can be seen at any endpoint exposed by the NLDI. e.g. open
-the following url in a browser.
-<https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700>
+the following url in a browser:
+
+`https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700`
 
 ### Navigation end point.
 
@@ -90,15 +95,22 @@ and behavior that led to needless high-cost queries. `.../navigate` has
 been deprecated and a `.../navigation` endpoint has been introduced in
 its place.
 
+#### Flowlines are now a `dataSource`
+
 The most significant change is the resource returned from a particular
-navigation mode endpoint. e.g.
-<https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700/navigation/UM>
+navigation mode endpoint.
+
+e.g.
+`https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700/navigation/UM`
+
 is now a JSON document listing available data sources that can be
 accessed for the upstream main navigation from the featureID
-USGS-05429700 from the nwissite featureSource. In contrast, the
+USGS-05429700 from the nwissite `featureSource`. In contrast, the
 `.../navigate/UM` returns GeoJSON containing flowlines for the upstream
 main navigation. The same flowlines GeoJSON is now a dataSource listed
 along side the others available for the `.../navigation/UM` end point.
+
+#### `distance` is now a required query parameter
 
 The other significant difference between the `.../navigate` and
 `.../navigation` endpoints is that the `distance` (in km) query
@@ -106,15 +118,17 @@ parameter is now required. Previously, the internal default was set to
 9999 which resulted in many very large requests that may or may not have
 been desired. There is no upper limit to the value of the `distance`
 parameter, but it must be provided for the navigation end point to
-trigger a query to the NLDI's database. Client developers are encouraged
-to choose a sensible default such that naive users will not accidentally
-trigger very large queries and be aware that the NLDI is capable of
-producing result sets with hundreds of thousands of features.
+trigger a query to the NLDI's database.
+
+Client developers are encouraged to choose a sensible default such that
+naive users will not accidentally trigger very large queries and be
+aware that the NLDI is capable of producing result sets with hundreds of
+thousands of features.
 
 ### Feature Source Access
 
 Prior to this release, end points such as:
-<https://labs.waterdata.usgs.gov/api/nldi/linked-data/huc12pp> did not
+`https://labs.waterdata.usgs.gov/api/nldi/linked-data/huc12pp` did not
 return a resource. This made it difficult to discover available feature
 sources. This `featureSource` end point now returns a GeoJSON document
 containing all features from the requested feature source. These are
@@ -172,11 +186,11 @@ provide exactly the same content.
 Documentation for the source dataset and creation methods can be found
 here.
 
-Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select
-Attributes for NHDPlus Version 2.1 Reach Catchments and Modified Network
-Routed Upstream Watersheds for the Conterminous United States (ver. 2.0,
-November 2019): U.S. Geological Survey data release,
-<https://doi.org/10.5066/F7765D7V>.
+> Wieczorek, M.E., Jackson, S.E., and Schwarz, G.E., 2018, Select
+> Attributes for NHDPlus Version 2.1 Reach Catchments and Modified
+> Network Routed Upstream Watersheds for the Conterminous United States
+> (ver. 2.0, November 2019): U.S. Geological Survey data release,
+> <https://doi.org/10.5066/F7765D7V>.
 
 An endpoint to lookup metadata for specific characteristics is available
 here:
@@ -192,17 +206,21 @@ additional characteristics be added.
 Client Applications
 -------------------
 
-The examples below show two example client applications that work with the NLDI. 
+The examples below show two example client applications that work with
+the NLDI.
 
-[PyNHD](https://github.com/cheginit/pynhd) and [nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
+[PyNHD](https://github.com/cheginit/pynhd) and
+[nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
 
-This post was generated using a Docker-based workflow ([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv)) environment that helps work with both these client applications.
+This post was generated using a Docker-based workflow
+([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv))
+environment that helps work with both these client applications.
 
 Python Client Application
 -------------------------
 
-**Contributed by [Taher
-Chegini](https://github.com/cheginit). Thanks!!**
+**Contributed by [Taher Chegini](https://github.com/cheginit).
+Thanks!!**
 
 Let's use [PyNHD](https://github.com/cheginit/pynhd) to demonstrate new
 NLDI's capabilities. Based on a topologically sorted river network
@@ -213,6 +231,7 @@ natural watershed and is located in Piscataquis County, Maine with a
 drainage area of 298 square miles. First, lets use NLDI's navigation
 end-point to get all its upstream NHDPlus Common Identifiers (ComIDs).
 
+```python
     from pynhd import NLDI, WaterData
     import pynhd as nhd
 
@@ -224,24 +243,30 @@ end-point to get all its upstream NHDPlus Common Identifiers (ComIDs).
         source="flowlines",
         distance=1000,
     ).nhdplus_comid.to_list()
+```
 
 Then, we use
 [WaterData](https://labs.waterdata.usgs.gov/geoserver/index.html)
 GeoServer to get all the NHDPlus attributes of the these ComIDs.
 
+```python
     wd = WaterData("nhdflowline_network")
     flw = wd.byid("comid", comids)
     flw = nhd.prepare_nhdplus(flw, 0, 0, purge_non_dendritic=False)
+```
 
 Next, we should sort the ComIDs topologically.
 
+```python
     flw = nhd.prepare_nhdplus(flw, 0, 0, purge_non_dendritic=False)
+```
 
 The available characteristic IDs for any of the three characteristic
 types (`local`, `tot`, `div`) can be found using `get_validchars` method
 of `NLDI` class. For example, let's take a look at the `local`
 characteristic type:
 
+```python
     char_ids = nldi.get_validchars("local")
     print(char_ids.head(5))
 
@@ -251,12 +276,14 @@ characteristic type:
     ## CAT_ET       Mean-annual actual evapotranspiration (ET), es...  ...     localCatch_name
     ## CAT_EWT      Average depth to water table relatice to the l...  ...     localCatch_name
     ## CAT_HGA      Percentage of Hydrologic Group A soil. -9999 d...  ...     localCatch_name
-    ## 
+    ##
     ## [5 rows x 7 columns]
+```
 
 Let's pick `CAT_RECHG` attribute which is Mean Annual Groundwater
 Recharge in mm/yr, and carry out the accumulation.
 
+```python
     char = "CAT_RECHG"
     area = "areasqkm"
 
@@ -276,6 +303,7 @@ Recharge in mm/yr, and carry out the accumulation.
     areasqkm = nhd.vector_accumulation(flw_a, area_acc, area, [area])
 
     runoff /= areasqkm
+```
 
 Note that for large number of ComIDs it's faster to get the whole
 database for the characteristic type and ID of interest using
@@ -284,24 +312,28 @@ ComIDs. For example, we can get the same data that
 `nldi.getcharacteristic_byid` method returned (the `local` variable)
 using `nldi.characteristics_dataframe` as follows:
 
+```python
     char_df = nldi.characteristics_dataframe("local", "CAT_RECHG", "RECHG_CONUS.zip")
     local = char_df[char_df.COMID.isin(comids)].set_index("COMID")
+```
 
 For plotting the results we need to get the catchments' geometries since
 these attributes are catchment-scale.
 
+```python
     wd = WaterData("catchmentsp")
     catchments = wd.byid("featureid", comids)
 
     c_local = catchments.merge(local, left_on="featureid", right_index=True)
     c_acc = catchments.merge(runoff, left_on="featureid", right_index=True)
+```
 
 Upon merging the accumulated attributes with the catchments dataframe,
 we can plot the results.
 
+```python
     import cmocean.cm as cmo
     import matplotlib.pyplot as plt
-
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8), dpi=100)
     cmap = cmo.deep
@@ -310,14 +342,10 @@ we can plot the results.
     c_local.plot(ax=ax1, column=char, cmap=cmap, norm=norm)
     flw.plot(ax=ax1, column="streamorde", cmap="Blues", scheme='fisher_jenks')
 
-    ## <AxesSubplot:>
-
     ax1.set_title("Groundwater Recharge (mm/yr)");
 
     c_acc.plot(ax=ax2, column=f"acc_{char}", cmap=cmap, norm=norm)
     flw.plot(ax=ax2, column="streamorde", cmap="Blues", scheme='fisher_jenks')
-
-    ## <AxesSubplot:>
 
     ax2.set_title("Accumulated Groundwater Recharge (mm/yr)")
 
@@ -331,8 +359,10 @@ we can plot the results.
     fig.colorbar(sm, cax=cax)
 
     plt.show()
-
-<img src='static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumuation' alt='Python catchment characteristics accumuation' >
+```
+{{
+<figure src='/static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumulation' alt='Python catchment characteristics accumulation' >
+}}
 
 R client Application
 --------------------
@@ -342,18 +372,22 @@ interest using
 [`plot_nhdplus()`](https://usgs-r.github.io/nhdplusTools/reference/plot_nhdplus.html)
 from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
 
+```r
     library(dplyr)
     library(sf)
     library(nhdplusTools)
 
-    nldi_feature <- list(featureSource = "nwissite", 
+    nldi_feature <- list(featureSource = "nwissite",
                          featureID = "USGS-01031500")
 
     outlet_comid <- discover_nhdplus_id(nldi_feature = nldi_feature)
 
     data <- plot_nhdplus(nldi_feature, flowline_only = FALSE)
+```
 
-<img src='static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
+{{
+<figure src='/static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
+}}
 
 Now we can use
 [`discover_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/discover_nldi_characteristics.html)
@@ -361,22 +395,24 @@ to find out what characteristics are available from the NLDI and get
 them for the outlet of our area of interest with
 [`get_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/get_nldi_characteristics.html)
 
+```r
     chars <- discover_nldi_characteristics()
 
     outlet_total <- get_nldi_characteristics(nldi_feature, type = "total")
 
-    outlet_total <- left_join(outlet_total$total, chars$total, 
+    outlet_total <- left_join(outlet_total$total, chars$total,
                               by = "characteristic_id")
 
     outlet_total <- outlet_total %>%
-      select(ID = characteristic_id, 
-                           Description = characteristic_description, 
+      select(ID = characteristic_id,
+                           Description = characteristic_description,
                            Value = characteristic_value,
                            Units = units,
                            link = dataset_url) %>%
       mutate(link = paste0('<a href="', link, '">link</a>'))
 
     knitr::kable(outlet_total)
+```
 
 <table>
 <colgroup>
@@ -638,16 +674,17 @@ interest.
 For large collections, download the characteristics [directly from the
 source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
 
+```r
     characteristic <- "CAT_RECHG"
     tot_char <- "TOT_RECHG"
 
     all_local <- sapply(data$flowline$COMID, function(x, char) {
       chars <- get_nldi_characteristics(
-        list(featureSource = "comid", featureID = as.character(x)), 
+        list(featureSource = "comid", featureID = as.character(x)),
         type = "local")
-      
+
       filter(chars$local, characteristic_id == char)$characteristic_value
-      
+
     }, char = characteristic)
 
     local_characteristic <- data.frame(COMID = data$flowline$COMID)
@@ -656,8 +693,11 @@ source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
     cat <- right_join(data$catchment, local_characteristic, by = c("FEATUREID" = "COMID"))
 
     plot(cat[characteristic])
+```
 
-<img src='static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
+{{
+<figure src='/static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
+}}
 
 Now that we have the local characteristics, we can run a downstream
 accumulation with an internal `nhdplusTools` function
@@ -666,10 +706,14 @@ accumulated characteristic and the output values at the bottom show that
 we get the same answer from locally-calculated accumulation or the total
 accumulated pre-calculated characteristic! So that's good.
 
+```r
     net <- prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic = FALSE, warn = FALSE)
 
+    ## Warning in prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic =
+    ## FALSE, : Got NHDPlus data without a Terminal catchment. Attempting to find it.
+
     net <- select(net, ID = COMID, toID = toCOMID) %>%
-      left_join(select(st_drop_geometry(data$flowline), COMID, AreaSqKM), 
+      left_join(select(st_drop_geometry(data$flowline), COMID, AreaSqKM),
                 by = c("ID" = "COMID")) %>%
       left_join(local_characteristic, by = c("ID" = "COMID"))
 
@@ -681,14 +725,17 @@ accumulated pre-calculated characteristic! So that's good.
 
     net[[tot_char]] <- net[[tot_char]] / net$DenTotDASqKM
 
-    cat <- right_join(data$catchment, 
-                      select(net, -temp_col, -toID, -DenTotDASqKM), 
+    cat <- right_join(data$catchment,
+                      select(net, -temp_col, -toID, -DenTotDASqKM),
                       by = c("FEATUREID" = "ID"))
 
     plot(cat[tot_char], reset = FALSE)
     plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
+```
 
-<img src='static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
+{{
+<figure src='/static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
+}}
 
     filter(outlet_total, ID == tot_char)$Value
 
@@ -697,5 +744,5 @@ accumulated pre-calculated characteristic! So that's good.
     filter(cat, FEATUREID == outlet_comid)[[tot_char]]
 
     ## [1] 336.2556
-    
+
 They match! So that's good.
