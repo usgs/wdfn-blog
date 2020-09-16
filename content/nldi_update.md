@@ -1,25 +1,3 @@
----
-author: David Blodgett
-date: 2020-09-12
-slug: nldi_update
-draft: True
-type: post
-title: Network Linked Data Index Update and Client Applications
-categories: Data Science
-tags:
-  - R
-image: static/nldi_update/plot_4-1.png
-description: An update on the Network Linked Data Index Web Application Programming Interface and Client Applications
-keywords:
-  - NHDPlus
-  - nldi
-  - Web API
-author_twitter: D_Blodgett
-author_github: dblodgett-usgs
-author_staff: david-l-blodgett
-author_email: dblodgett@usgs.gov
----
-
 In August 2020, the Hydro Network Linked Data Index (NLDI) was updated
 with new functionality and some changes to the existing Web Application
 Programming Interface (API). This post summarizes these changes and
@@ -192,17 +170,21 @@ additional characteristics be added.
 Client Applications
 -------------------
 
-The examples below show two example client applications that work with the NLDI. 
+The examples below show two example client applications that work with
+the NLDI.
 
-[PyNHD](https://github.com/cheginit/pynhd) and [nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
+[PyNHD](https://github.com/cheginit/pynhd) and
+[nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
 
-This post was generated using a Docker-based workflow ([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv)) environment that helps work with both these client applications.
+This post was generated using a Docker-based workflow
+([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv))
+environment that helps work with both these client applications.
 
 Python Client Application
 -------------------------
 
-**Contributed by [Taher
-Chegini](https://github.com/cheginit). Thanks!!**
+**Contributed by [Taher Chegini](https://github.com/cheginit).
+Thanks!!**
 
 Let's use [PyNHD](https://github.com/cheginit/pynhd) to demonstrate new
 NLDI's capabilities. Based on a topologically sorted river network
@@ -330,9 +312,9 @@ we can plot the results.
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     fig.colorbar(sm, cax=cax)
 
-    plt.show()
+    ## <matplotlib.colorbar.Colorbar object at 0x7f65958b3208>
 
-<img src='static/nldi_update/plot_1-1.png' title='Python catchment characteristics accumuation' alt='Python catchment characteristics accumuation' >
+    plt.show()
 
 R client Application
 --------------------
@@ -353,7 +335,9 @@ from [`nhdplusTools`](https://usgs-r.github.io/nhdplusTools/index.html).
 
     data <- plot_nhdplus(nldi_feature, flowline_only = FALSE)
 
-<img src='static/nldi_update/plot_2-1.png' title='Preview Map' alt='Preview map of watershed' >
+{{
+<figure src='/static/nldi_update/plot_2-1.png' title='TODO' alt='TODO' >
+}}
 
 Now we can use
 [`discover_nldi_characteristics()`](https://usgs-r.github.io/nhdplusTools/reference/discover_nldi_characteristics.html)
@@ -657,7 +641,9 @@ source.](https://www.sciencebase.gov/catalog/item/5669a79ee4b08895842a1d47)
 
     plot(cat[characteristic])
 
-<img src='static/nldi_update/plot_3-1.png' title='Plot of catchments with local characteristic values' alt='plot of catchments with local characteristic values' >
+{{
+<figure src='/static/nldi_update/plot_3-1.png' title='TODO' alt='TODO' >
+}}
 
 Now that we have the local characteristics, we can run a downstream
 accumulation with an internal `nhdplusTools` function
@@ -667,6 +653,9 @@ we get the same answer from locally-calculated accumulation or the total
 accumulated pre-calculated characteristic! So that's good.
 
     net <- prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic = FALSE, warn = FALSE)
+
+    ## Warning in prepare_nhdplus(data$flowline, 0, 0, 0, purge_non_dendritic =
+    ## FALSE, : Got NHDPlus data without a Terminal catchment. Attempting to find it.
 
     net <- select(net, ID = COMID, toID = toCOMID) %>%
       left_join(select(st_drop_geometry(data$flowline), COMID, AreaSqKM), 
@@ -688,7 +677,9 @@ accumulated pre-calculated characteristic! So that's good.
     plot(cat[tot_char], reset = FALSE)
     plot(st_geometry(data$flowline), add = TRUE, lwd = data$flowline$StreamOrde, col = "lightblue")
 
-<img src='static/nldi_update/plot_4-1.png' title='Plot of accumulated characteristic' alt='Plot of accumulated characteristic' >
+{{
+<figure src='/static/nldi_update/plot_4-1.png' title='TODO' alt='TODO' >
+}}
 
     filter(outlet_total, ID == tot_char)$Value
 
@@ -697,5 +688,5 @@ accumulated pre-calculated characteristic! So that's good.
     filter(cat, FEATUREID == outlet_comid)[[tot_char]]
 
     ## [1] 336.2556
-    
+
 They match! So that's good.
