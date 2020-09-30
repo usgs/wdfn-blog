@@ -1,8 +1,8 @@
 ---
 author: David Blodgett
-date: 2020-09-12
+date: 2020-09-30
 slug: nldi_update
-draft: True
+draft: False
 type: post
 title: Network Linked Data Index Update and Client Applications
 categories: Data Science
@@ -77,9 +77,9 @@ in some detail.
 Previous to the recent release, the NLDI only supported JSON responses.
 This caused problems in a browser when an unsuspecting person accessed
 an API request that returned a large JSON document in a Web browser. To
-protect against this, any request from with Accept headers preferring
-text/html content (e.g. from a Web browser) is provided an HTML response
-containing a link to the JSON content. An Accept header override --
+protect against this, any request from with `Accept` headers preferring
+text/html content (e.g. from a Web browser) is provided an HTML response indicating that an html format is not available and
+containing a link to the JSON content. An `Accept` header override --
 `?f=json` -- is used for this behavior. If requests are made without an
 Accept header, JSON content is returned.
 
@@ -104,7 +104,7 @@ e.g.
 `https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700/navigation/UM`
 
 is now a JSON document listing available data sources that can be
-accessed for the upstream main navigation from the featureID
+accessed for the upstream mainstem (UM) navigation from the featureID
 USGS-05429700 from the nwissite `featureSource`. In contrast, the
 `.../navigate/UM` returns GeoJSON containing flowlines for the upstream
 main navigation. The same flowlines GeoJSON is now a dataSource listed
@@ -140,7 +140,7 @@ queries against the feature sources.
 
 [NHDPlusV2](https://www.epa.gov/waterdata/nhdplus-national-hydrography-dataset-plus)
 forms the underlying network used by the Network Linked Data Index.
-NHDPlusV2 catchment polygons are used behind the API to allow discovery
+NHDPlusV2 catchment polygons are used behind the API to allow a client application to discovery
 of a catchment id (comid) by providing a lat/lon. The format uses the
 WKT syntax and is interpreted as NAD83 Lon/Lat.
 
@@ -151,20 +151,20 @@ Requests will look like:
 Catchment Characteristics
 -------------------------
 
-The relationship between `featureSources` and NHDPlusV2 catchments is
-important to understand for the catchment characteristics functionality.
+The relationship between `featureSources` that can be accessed in the NLDI and NHDPlusV2 catchments is
+important in understanding how the new catchment characteristics functionality works.
 
 All navigation requests resolve to the nearest catchment and an
 equivalent query can be made directly to the comid that a feature source
 is indexed to. e.g.
 
-`https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700/navigation/`
+`https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-05429700`
 
-is equivalent to:
+is indexed to comid 13297194:
 
-`https://labs.waterdata.usgs.gov/api/nldi/linked-data/comid/13297194/navigation/`
+`https://labs.waterdata.usgs.gov/api/nldi/linked-data/comid/13297194`
 
-because `nwissite/USGS-05429700` is indexed to `comid/13297194`.
+so navigation requests starting from either the `nwissite` or the `comid` will be equivalent.
 
 Given this, we can access catchment characteristics for a catchment or
 an indexed feature with the `local`, `tot`, or `div` end points. e.g.
@@ -212,9 +212,10 @@ the NLDI.
 [PyNHD](https://github.com/cheginit/pynhd) and
 [nhdplusTools](https://usgs-r.github.io/nhdplusTools/index.html)
 
-This post was generated using a Docker-based workflow
-([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv))
-environment that helps work with both these client applications.
+> NOTE: This post was rendered from "R Markdown" into what you are
+> reading using a Docker-based R / Python environment
+> ([hydrogeoenv](https://github.com/dblodgett-usgs/hydrogeoenv))
+> that contains dependencies for both these client applications.
 
 Python Client Application
 -------------------------
@@ -247,15 +248,16 @@ end-point to get all its upstream NHDPlus Common Identifiers (ComIDs).
 
 Then, we use
 [WaterData](https://labs.waterdata.usgs.gov/geoserver/index.html)
-GeoServer to get all the NHDPlus attributes of the these ComIDs.
+GeoServer, which has the same version of the NHD as the NLDI,
+to get all the NHDPlus attributes of the these ComIDs.
 
 ```python
     wd = WaterData("nhdflowline_network")
     flw = wd.byid("comid", comids)
-    flw = nhd.prepare_nhdplus(flw, 0, 0, purge_non_dendritic=False)
 ```
 
-Next, we should sort the ComIDs topologically.
+Next, we should sort the ComIDs topologically to get ready for \
+later accumulation functions.
 
 ```python
     flw = nhd.prepare_nhdplus(flw, 0, 0, purge_non_dendritic=False)
@@ -263,7 +265,7 @@ Next, we should sort the ComIDs topologically.
 
 The available characteristic IDs for any of the three characteristic
 types (`local`, `tot`, `div`) can be found using `get_validchars` method
-of `NLDI` class. For example, let's take a look at the `local`
+of the `NLDI` class. For example, let's take a look at the `local`
 characteristic type:
 
 ```python
@@ -305,8 +307,8 @@ Recharge in mm/yr, and carry out the accumulation.
     runoff /= areasqkm
 ```
 
-Note that for large number of ComIDs it's faster to get the whole
-database for the characteristic type and ID of interest using
+Note that for a large number of ComIDs it's faster to get the whole
+database (all ComIDs) for the characteristic type and ID of interest using
 `nldi.characteristics_dataframe` function then subset it based on the
 ComIDs. For example, we can get the same data that
 `nldi.getcharacteristic_byid` method returned (the `local` variable)
