@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "5.14.0",
+    "@fortawesome/fontawesome-free": "5.15.1",
     "wdfn-viz": "1.7.1"
   },
   "devDependencies": {
