@@ -64,7 +64,7 @@ opts_chunk$set(
 
 ## Introduction
 
-**updated 11-2-2020 after per updates [described here](https://waterdata.usgs.gov/blog/nldi_update/).**
+**updated 11-2-2020 after updates [described here](https://waterdata.usgs.gov/blog/nldi_update/).**
 
 The Hydro [Network-Linked Data Index (NLDI)](https://labs.waterdata.usgs.gov/about-nldi) is a system that can index data to [NHDPlus V2](http://www.horizon-systems.com/NHDPlus/V2NationalData.php) catchments and offers a search service to discover indexed information. Data linked to the NLDI includes [active NWIS stream gages](https://waterdata.usgs.gov/nwis/rt), [water quality portal sites](https://www.waterqualitydata.us/), and [outlets of HUC12 watersheds](https://www.sciencebase.gov/catalog/item/5762b664e4b07657d19a71ea). The NLDI is a core product of the [Open Water Data Initiative](http://acwi.gov/spatial/owdi/) and is being developed as [an open source project.](https://github.com/ACWI-SSWD).
 
@@ -76,7 +76,7 @@ Below, text highlighting is used in six ways:
 2) Example values of API parameters such as: `USGS-08279500`  
 3) API operation names: _**navigation**_ and _**basin**_  
 4) API request names such as: _getDataSources_  
-5) R functions such as: **readOGR**  
+5) R functions such as: **read_sf**  
 6) Other specific strings such as "siteNumber"  
 
 ## The NLDI Web API
@@ -84,15 +84,15 @@ Below, text highlighting is used in six ways:
 The NLDI's Web API follows a loosely RESTful design and is documented with [swagger](http://swagger.io/) documentation which can [be found here.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html) Every request to get data from the NLDI starts from a given network linked feature.  
 
 ### Feature Sources
-Available network linked feature sources (`{featureSource}`s) can be found from the [_getDataSources_ request.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getDataSourcesUsingGET) (hint: Click the "try it out" button on the swagger page!) These are the collections of network linked features the NLDI knows about. Think of them as watershed outlets that can be used as a starting point. For this demo, we'll use NWIS Stream Gages as the `{featureSource}`. As a note for later, `{featureSource}` here is the same as the `{dataSource}` described below.   
+Available network linked feature sources (`{featureSource}`s) can be found from the [_getDataSources_ request.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getDataSources) (hint: Click the "try it out" button on the swagger page!) These are the collections of network linked features the NLDI knows about. Think of them as watershed outlets that can be used as a starting point. For this demo, we'll use NWIS Stream Gages as the `{featureSource}`. As a note for later, `{featureSource}` here is the same as the `{dataSource}` described below.   
 
 ### Feature IDs
-All `{featureID}`s that can be accessed from a given `{featureSource}` can be accessed with the [_getFeatures_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getFeaturesUsingGET_1) request. No filtering options are available. For this demo, we use a [well known NWIS Streamgage](https://www.usgs.gov/news/first-usgs-streamgage-records-125-years-measuring-new-mexico%E2%80%99s-vital-water-resources) on the [Rio Grande at Embudo NM](https://waterdata.usgs.gov/nwis/inventory/?site_no=08279500&agency_cd=USGS) as our starting point. 
+All `{featureID}`s that can be accessed from a given `{featureSource}` can be accessed with the [_getFeatures_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getFeatures_1) request. No filtering options are available. For this demo, we use a [well known NWIS Streamgage](https://www.usgs.gov/news/first-usgs-streamgage-records-125-years-measuring-new-mexico%E2%80%99s-vital-water-resources) on the [Rio Grande at Embudo NM](https://waterdata.usgs.gov/nwis/inventory/?site_no=08279500&agency_cd=USGS) as our starting point. 
 
 ![Image of streamgage on the Rio Grande at Embudo. Gage house made of local stone, cableway for measureing flow, riffles, and kayaker in river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Grande at Embudo")
 
 ### Indexed Features
-We can use the [_getRegisteredFeature_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET) You can also see this in your browser at this url:  
+We can use the [_getRegisteredFeature_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getRegisteredFeature) request to see this feature. Enter `nwissite` and `USGS-08279500` in the `{featureSource}` and `{featureID}`, respectively, in the [swagger demo page.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getRegisteredFeature) You can also see this in your browser at this url:  
 [https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500)  
 The response contains the location of the feature, is in [geojson](http://geojson.org/), and looks like:
 ```
@@ -224,7 +224,7 @@ setwd(wd)
 Note: Click the black NWIS gage points to see a pop up and link!
 
 ### Get the Upstream Basin Boundary
-So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the _**navigate**_ option, `{navigationMode}` and `{distance}`. In addition to the _**navigate**_ option, the NLDI offers a _**basin**_ option for any `{featureSource}`/`{featureID}`. The [_getBasin_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET) operation doesn't require any additional parameters, so a request to get the basin for our stream gage looks like:  
+So far, we've covered four parameters of the NLDI Web API. The two base parameters, `{featureSource}` and `{featureID}`, and two that apply to the _**navigate**_ option, `{navigationMode}` and `{distance}`. In addition to the _**navigate**_ option, the NLDI offers a _**basin**_ option for any `{featureSource}`/`{featureID}`. The [_getBasin_](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getBasin) operation doesn't require any additional parameters, so a request to get the basin for our stream gage looks like:  
 [https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin).
 
 ```{r map_4, echo=FALSE, message=FALSE, warning=FALSE}
@@ -278,7 +278,10 @@ https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navi
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" />  <img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />
+<div class="grid-row">
+{{< figure src="/static/nldi-intro/upstream.png" title="Upstream Navigation Results" alt="Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites." class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/downstream.png" title="Downstream Navigation Results" alt="Image of downstream navigation results. Main stem, water quality sites." class="side-by-side" >}}
+</div>
 
 Screenshots of NLDI data loaded into QGIS.
 

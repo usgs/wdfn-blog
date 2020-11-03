@@ -2,7 +2,7 @@
 author: David Blodgett
 date: 2020-11-02
 slug: nldi-intro
-draft: True
+draft: False
 title: The Hydro Network-Linked Data Index
 type: post
 categories: Data Science
@@ -29,7 +29,7 @@ keywords:
 Introduction
 ------------
 
-**updated 11-2-2020 after per updates [described
+**updated 11-2-2020 after updates [described
 here](https://waterdata.usgs.gov/blog/nldi_update/).**
 
 The Hydro [Network-Linked Data Index
@@ -59,7 +59,7 @@ Below, text highlighting is used in six ways:
 2.  Example values of API parameters such as: `USGS-08279500`  
 3.  API operation names: ***navigation*** and ***basin***  
 4.  API request names such as: *getDataSources*  
-5.  R functions such as: **readOGR**  
+5.  R functions such as: **read_sf**  
 6.  Other specific strings such as “siteNumber”
 
 The NLDI Web API
@@ -75,7 +75,7 @@ feature.
 
 Available network linked feature sources (`{featureSource}`s) can be
 found from the [*getDataSources*
-request.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getDataSourcesUsingGET)
+request.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getDataSources)
 (hint: Click the “try it out” button on the swagger page!) These are the
 collections of network linked features the NLDI knows about. Think of
 them as watershed outlets that can be used as a starting point. For this
@@ -87,7 +87,7 @@ described below.
 
 All `{featureID}`s that can be accessed from a given `{featureSource}`
 can be accessed with the
-[*getFeatures*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getFeaturesUsingGET_1)
+[*getFeatures*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getFeatures_1)
 request. No filtering options are available. For this demo, we use a
 [well known NWIS
 Streamgage](https://www.usgs.gov/news/first-usgs-streamgage-records-125-years-measuring-new-mexico%E2%80%99s-vital-water-resources)
@@ -102,10 +102,10 @@ river.](/static/nldi-intro/first_streamgage.jpeg "First USGS Stream Gage Rio Gra
 ### Indexed Features
 
 We can use the
-[*getRegisteredFeature*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET)
+[*getRegisteredFeature*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getRegisteredFeature)
 request to see this feature. Enter `nwissite` and `USGS-08279500` in the
 `{featureSource}` and `{featureID}`, respectively, in the [swagger demo
-page.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/lookup-controller/getRegisteredFeatureUsingGET)
+page.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getRegisteredFeature)
 You can also see this in your browser at this url:  
 <https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500>  
 The response contains the location of the feature, is in
@@ -203,7 +203,7 @@ parameters, `{featureSource}` and `{featureID}`, and two that apply to
 the ***navigate*** option, `{navigationMode}` and `{distance}`. In
 addition to the ***navigate*** option, the NLDI offers a ***basin***
 option for any `{featureSource}`/`{featureID}`. The
-[*getBasin*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui.html#!/characteristics-controller/getBasinUsingGET)
+[*getBasin*](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html?configUrl=/api/nldi/v3/api-docs/swagger-config#/linked-data-controller/getBasin)
 operation doesn’t require any additional parameters, so a request to get
 the basin for our stream gage looks like:  
 <https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin>.
@@ -241,8 +241,10 @@ screenshots were rendered by loading the data into QGIS, turning on a
 base map with the OpenLayers Plugin, and applying a little styling to
 the NLDI layers. No local files needed!
 
-<img src='/static/nldi-intro/upstream.png'/ title='Upstream Navigation Results' alt='Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites.' width="54%" />
-<img src='/static/nldi-intro/downstream.png'/ title='Downstream Navigation Results' alt='Image of downstream navigation results. Main stem, water quality sites.' width="44%" />
+<div class="grid-row">
+{{< figure src="/static/nldi-intro/upstream.png" title="Upstream Navigation Results" alt="Image of upstream navigation results. Basin boundary, flowlines, main stem, water quality sites." class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/downstream.png" title="Downstream Navigation Results" alt="Image of downstream navigation results. Main stem, water quality sites." class="side-by-side" >}}
+</div>
 
 Screenshots of NLDI data loaded into QGIS.
 
