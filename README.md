@@ -171,7 +171,7 @@ docker-compose run hugo build --buildDrafts
 [**Templates for R markdowns**](https://github.com/USGS-R/USGSmarkdowntemplates)
 
 ```r
-install.packages("USGSmarkdowntemplates", repos=c("https://owi.usgs.gov/R",getOption("repos")))
+remotes::install_github('usgs-r/USGSmarkdowntemplates')
 ```
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
