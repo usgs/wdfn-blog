@@ -54,12 +54,12 @@ getPrecip <- function(states, startDate, endDate){
     mutate(fips = sprintf('%05d', fips)) %>% # fips need 5 digits to join w/ geoknife result
     filter(statename %in% states) 
   
-  stencil <- webgeom(geom = 'derivative:US_Counties',
+  stencil <- webgeom(geom = 'sample:Counties',
                      attribute = 'FIPS',
                      values = counties_fips$fips)
   
-  fabric <- webdata(url = 'http://cida.usgs.gov/thredds/dodsC/stageiv_combined', 
-                    variables = "Total_precipitation_surface_1_Hour_Accumulation", 
+  fabric <- webdata(url = 'https://cida.usgs.gov/thredds/dodsC/UofIMETDATA', 
+                    variables = "precipitation_amount",
                     times = c(startDate, endDate))
   
   job <- geoknife(stencil, fabric, wait = TRUE, REQUIRE_FULL_COVERAGE=FALSE)

@@ -6,21 +6,35 @@ title: Visualizing Tropical Storm Colin Precipitation using geoknife
 type: post
 categories: Data Science
 image: static/ts-colin-precip/use-functions-1.png
+ 
 author_github: lindsaycarr
-author_email: <lcarr@usgs.gov>
+ 
+ 
+ 
+author_email: <a href="mailto:lcarr@usgs.gov" class="email">lcarr@usgs.gov</a>
+
 tags: 
   - R
   - geoknife
+ 
 description: Using the R package geoknife to plot precipitation by county during Tropical Strom Colin.
 keywords:
   - R
   - geoknife
+ 
+ 
+ 
 ---
-Tropical Storm Colin (TS Colin) made landfall on June 6 in western Florida. The storm moved up the east coast, hitting Georgia, South Carolina, and North Carolina. We can explore the impacts of TS Colin using open data and R. Using the USGS-R `geoknife` package, we can pull precipitation data by county.
+Tropical Storm Colin (TS Colin) made landfall on June 6 in western
+Florida. The storm moved up the east coast, hitting Georgia, South
+Carolina, and North Carolina. We can explore the impacts of TS Colin
+using open data and R. Using the USGS-R `geoknife` package, we can pull
+precipitation data by county.
 
 ### First, we created two functions. One to fetch data and one to map data.
 
-Function to retrieve precip data using [`geoknife`](https://github.com/USGS-R/geoknife):
+Function to retrieve precip data using
+[`geoknife`](https://github.com/USGS-R/geoknife):
 
 ``` r
 getPrecip <- function(states, startDate, endDate){
@@ -32,12 +46,12 @@ getPrecip <- function(states, startDate, endDate){
     mutate(fips = sprintf('%05d', fips)) %>% # fips need 5 digits to join w/ geoknife result
     filter(statename %in% states) 
   
-  stencil <- webgeom(geom = 'derivative:US_Counties',
+  stencil <- webgeom(geom = 'sample:Counties',
                      attribute = 'FIPS',
                      values = counties_fips$fips)
   
-  fabric <- webdata(url = 'http://cida.usgs.gov/thredds/dodsC/stageiv_combined', 
-                    variables = "Total_precipitation_surface_1_Hour_Accumulation", 
+  fabric <- webdata(url = 'https://cida.usgs.gov/thredds/dodsC/UofIMETDATA', 
+                    variables = "precipitation_amount",
                     times = c(startDate, endDate))
   
   job <- geoknife(stencil, fabric, wait = TRUE, REQUIRE_FULL_COVERAGE=FALSE)
@@ -84,7 +98,10 @@ precipMap <- function(precipData, startDate, endDate){
 
 ### Now, we can use those functions to fetch data for specific counties and time periods.
 
-TS Colin made landfall on June 6th and moved into open ocean on June 7th. Use these dates as the start and end times in our function (need to account for timezone, +5 UTC). We can visualize the path of the storm by mapping cumulative precipitation for each county.
+TS Colin made landfall on June 6th and moved into open ocean on June
+7th. Use these dates as the start and end times in our function (need to
+account for timezone, +5 UTC). We can visualize the path of the storm by
+mapping cumulative precipitation for each county.
 
 ``` r
 library(dplyr)
@@ -106,11 +123,16 @@ precipMap(precipData,
           endDate = endTSColin)
 ```
 
-{{< figure src="/static/ts-colin-precip/use-functions-1.png" title="Map of precipitation" alt="Map of precipitatio" >}}
+{{< figure src="/static/ts-colin-precip/use-functions-1.png" title="Map of precipitation" alt="Map of precipitation" >}}
 
 Questions
 =========
 
-Please direct any questions or comments on `geoknife` to: <https://github.com/USGS-R/geoknife/issues>
+Please direct any questions or comments on `geoknife` to:
+<https://github.com/USGS-R/geoknife/issues>
 
-*Edited on 11/23. Works with geoknife v1.4.0 on CRAN. Changes to fips retrieval to use US Census data based on changes for [this geoknife issue](https://github.com/USGS-R/geoknife/issues/278).*
+*Edited on 11/23/2018. Works with geoknife v1.4.0 on CRAN. Changes to fips
+retrieval to use US Census data based on changes for [this geoknife
+issue](https://github.com/USGS-R/geoknife/issues/278).*
+
+*Edited on 11/09/2020 to update data source and county data*
