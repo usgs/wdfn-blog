@@ -54,7 +54,9 @@
     <div class="usgs-header-container">
         <div class="usa-navbar">
             <div class="usa-logo" id="extended-logo">
-                <img alt="USGS Home" src="{{ $.Site.BaseURL }}img/USGS_logo.svg" />
+                <a href="https://www.usgs.gov">
+                    <img alt="USGS Home" src="{{ $.Site.BaseURL }}img/USGS_logo.svg" />
+                </a>
             </div>
             <button class="usa-menu-btn">Menu</button>
         </div>
@@ -82,6 +84,16 @@
                   <a class="usa-nav__link" href="{{ $.Site.BaseURL }}introduction/">About</a>
               </li>
             </ul>
+            <div class="usa-nav__secondary">
+              <ul class="usa-nav__secondary-links">
+                  <li class="usa-nav__secondary-item">
+                      <a href="https://www.usgs.gov/mission-areas/water-resources">Water Resources</a>
+                  </li>
+                  <li class="usa-nav__secondary-item">
+                      <a href="https://dashboard.waterdata.usgs.gov/">Water Dashboard</a>
+                  </li>
+              </ul>
+            </div>
         </div>
    </nav>
 </header>
