@@ -58,7 +58,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "rollup": "^2.34.0",
     "rollup-plugin-uglify": "^6.0.4",
-    "sass": "^1.29.0",
+    "sass": "^1.30.0",
     "stylelint": "^13.8.0",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.18.0"
