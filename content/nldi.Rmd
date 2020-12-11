@@ -268,13 +268,13 @@ There are a few other options available from the NLDI that are not covered here.
 Bringing together all the operations summarized above, we can get:  
 1) The NWIS site: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500  
 2) The basin upstream of the site: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin  
-3) All upstream with tributaries flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT  
-4) The upstream mainstem flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UM  
-5) The downstream mainstem flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM  
+3) All upstream with tributaries flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/flowlines?distance=999  
+4) The upstream mainstem flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UM/flowlines?distance=999  
+5) The downstream mainstem flowlines: https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/flowlines?distance=999  
 6) The water quality observation sites in upstream catchments:  
-https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/wqp  
+https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/wqp?distance=999  
 7) The water quality observations in downstream catchments:  
-https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/wqp  
+https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/wqp?distance=999  
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs directly in the "Add Vector Layer" dialogue. The following two screenshots were rendered by loading the data into QGIS, turning on a base map with the OpenLayers Plugin, and applying a little styling to the NLDI layers. No local files needed!
 
