@@ -225,15 +225,15 @@ Bringing together all the operations summarized above, we can get:
 2) The basin upstream of the site:
 <a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/basin</a>  
 3) All upstream with tributaries flowlines:
-<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT</a>  
+<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/flowlines?distance=999" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/flowlines?distance=999</a>  
 4) The upstream mainstem flowlines:
-<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UM" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UM</a>  
+<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UM/flowlines?distance=999" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UM/flowlines?distance=999</a>  
 5) The downstream mainstem flowlines:
-<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM</a>  
+<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/flowlines?distance=999" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/flowlines?distance=999</a>  
 6) The water quality observation sites in upstream catchments:  
-<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/wqp" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/wqp</a>  
+<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/wqp?distance=999" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/UT/wqp?distance=999</a>  
 7) The water quality observations in downstream catchments:  
-<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/wqp" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/wqp</a>
+<a href="https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/wqp?distance=999" class="uri">https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-08279500/navigation/DM/wqp?distance=999</a>
 
 For [QGIS](http://qgis.org/en/site/) users, you can use the NLDI URLs
 directly in the “Add Vector Layer” dialogue. The following two
