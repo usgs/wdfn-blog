@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
-    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
     "autoprefixer": "^10.0.4",
     "gulp": "^4.0.2",
     "gulp-rev-all": "^2.0.3",
