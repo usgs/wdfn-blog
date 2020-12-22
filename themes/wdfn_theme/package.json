@@ -7,20 +7,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf static && mkdirp static",
-    "build": "npm run clean && run-p build:* && npm run hash-assets",
+    "build": "npm run clean && run-p build:*",
     "build:css": "mkdirp static/css && sass --load-path node_modules/wdfn-viz/src/stylesheets --load-path node_modules/uswds/src/stylesheets --load-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/css/main.css && postcss static/css/main.css -o static/css/main.css",
     "build:fonts": "mkdirp static/fonts && cp src/fonts/* static/fonts && cp -r node_modules/uswds/src/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/fonts",
     "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/uswds/src/img/* static/img && cp -r node_modules/wdfn-viz/src/img/* static/img",
     "build:js": "mkdirp static/scripts && rollup -c --environment NODE_ENV:production",
-    "hash-assets": "gulp --gulpfile ./gulpfile.js revall",
+    "build:uswdsinit": "mkdirp static/scripts && cp -r node_modules/uswds/dist/js/uswds-init.min.* static/scripts",
     "watch": "run-p watch:*",
     "watch:css": "nodemon -w src/styles -e scss -x \"npm run build:css\"",
     "watch:fonts": "npm run build:fonts",
     "watch:images": "npm run build:images",
-    "watch:js": "rollup -c --watch"
+    "watch:js": "rollup -c --watch",
+    "watch:uswdsinit": "npm run build:uswdsinit"
   },
   "engines": {
-    "node": "10.18.0"
+    "node": "14.15.3"
   },
   "repository": {
     "type": "git",
@@ -41,26 +42,25 @@
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.1",
-    "wdfn-viz": "1.8.0"
+    "wdfn-viz": "1.9.0"
   },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
-    "@rollup/plugin-node-resolve": "^11.0.0",
-    "autoprefixer": "^10.0.4",
-    "gulp": "^4.0.2",
-    "gulp-rev-all": "^2.0.3",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "autoprefixer": "^10.1.0",
     "mkdirp": "^1.0.4",
     "nodemon": "^2.0.6",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.1.10",
-    "postcss-cli": "^8.3.0",
+    "postcss": "^8.2.1",
+    "postcss-cli": "^8.3.1",
     "postcss-csso": "^5.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "rollup": "^2.34.0",
-    "rollup-plugin-uglify": "^6.0.4",
-    "sass": "^1.29.0",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.30.0",
     "stylelint": "^13.8.0",
     "stylelint-config-recommended-scss": "^4.2.0",
-    "stylelint-scss": "^3.18.0"
+    "stylelint-scss": "^3.18.0",
+    "terser": "^5.5.1"
   }
 }

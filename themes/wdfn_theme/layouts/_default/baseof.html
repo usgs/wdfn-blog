@@ -1,73 +1,79 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta charset="utf-8">
     {{ hugo.Generator }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel="icon" href="{{ $.Site.BaseURL }}img/main/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/{{ with .Site.Params.SyntaxHighlightTheme }}{{ . }}{{ else  }}solarized_dark.min.css{{ end }}">
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/{{ with .Site.Params.SyntaxHighlightTheme }}{{ . }}{{ else  }}solarized_dark.min.css{{ end }}">
+    <script src="{{ $.Site.BaseURL }}scripts/uswds-init.min.js"></script>
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/main.css">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ .Site.BaseURL }}index.xml">
     <link rel="alternate" type="application/atom+xml" title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}index.xml">
 
     {{ if eq .RelPermalink "/" }}
-      <title>{{ .Title }}</title>
-      <meta property='og:title' content="{{ .Title }}">
-      <meta property="og:type" content="website">
-      <meta property='twitter:title' content="{{ .Title }}">
+    <title>{{ .Title }}</title>
+    <meta property='og:title' content="{{ .Title }}">
+    <meta property="og:type" content="website">
+    <meta property='twitter:title' content="{{ .Title }}">
     {{ else }}
-      <title>{{ .Title }} - {{ .Site.Title }}</title>
-      <meta property='og:title' content="{{ .Title }} - {{ .Site.Title }}">
+    <title>{{ .Title }} - {{ .Site.Title }}</title>
+    <meta property='og:title' content="{{ .Title }} - {{ .Site.Title }}">
 
-      {{ with .Params.image }}
-        <meta property="og:type" content="summary_large_image">
-      {{ else }}
-        <meta property="og:type" content="article">
-      {{ end }}
+    {{ with .Params.image }}
+    <meta property="og:type" content="summary_large_image">
+    {{ else }}
+    <meta property="og:type" content="article">
+    {{ end }}
 
-      <meta property='twitter:title' content="{{ .Title }} - {{ .Site.Title }}">
+    <meta property='twitter:title' content="{{ .Title }} - {{ .Site.Title }}">
     {{ end }}
 
     {{ with .Description }}
-      <meta name="description" content="{{ . }}">
-      <meta name="twitter:description" content="{{ . }}">
+    <meta name="description" content="{{ . }}">
+    <meta name="twitter:description" content="{{ . }}">
     {{ else }}
-      <meta name="description" content="Blog of new development for USGS_WaterData">
-      <meta name="twitter:description" content="Blog of new development for USGS_WaterData">
+    <meta name="description" content="Blog of new development for USGS_WaterData">
+    <meta name="twitter:description" content="Blog of new development for USGS_WaterData">
     {{ end }}
 
-    <meta name="twitter:summary_large_image" content="summary" />
-    <meta name="twitter:site" content="@USGS_WaterData" />
-    <meta property="og:url" content="{{ .Permalink }}" />
-    <meta property="og:image" name="twitter:image" content="{{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}img/USGS_logo.svg{{ end }}">
+    <meta name="twitter:summary_large_image" content="summary"/>
+    <meta name="twitter:site" content="@USGS_WaterData"/>
+    <meta property="og:url" content="{{ .Permalink }}"/>
+    <meta property="og:image" name="twitter:image"
+          content="{{ $.Site.BaseURL }}{{ with .Params.image }}{{ . }}{{ else }}img/USGS_logo.svg{{ end }}">
     <meta name="keywords" content="{{ with .Keywords }}{{ delimit . ", " }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
 
     {{ block "extra_meta" . }}{{ end }}
 
     <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', "{{ .Site.GoogleAnalytics }}", 'auto');
-      ga('set', 'contentGroup1', 'wdfn_tng');
-      ga('send', 'pageview');
-      ga('require', 'outboundLinkTracker');
-      ga('require', 'eventTracker');
+        window.ga = window.ga || function () {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', "{{ .Site.GoogleAnalytics }}", 'auto');
+        ga('set', 'contentGroup1', 'wdfn_tng');
+        ga('send', 'pageview');
+        ga('require', 'outboundLinkTracker');
+        ga('require', 'eventTracker');
     </script>
     <script async src="https://www.google-analytics.com/analytics.js"></script>
 
     {{ if .OutputFormats.Get "RSS" }}
-      <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-      <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}"/>
+    <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}"/>
     {{ end }}
 
     <script src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
-  </head>
+</head>
 
-  <body>
-    {{ partial "header.html" . }}
-    <main>
-      {{ block "main" . }}{{ end }}
-    </main>
-    {{ partial "footer.html" . }}
-  </body>
+<body>
+{{ partial "header.html" . }}
+<main>
+    {{ block "main" . }}{{ end }}
+</main>
+{{ partial "footer.html" . }}
+</body>
 </html>

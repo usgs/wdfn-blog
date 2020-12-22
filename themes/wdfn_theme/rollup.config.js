@@ -6,7 +6,7 @@ const path = require('path');
 
 const buble = require('@rollup/plugin-buble');
 const resolve = require('@rollup/plugin-node-resolve');
-const { uglify } = require('rollup-plugin-uglify');
+const {terser} = require('rollup-plugin-terser');
 
 
 const ENV = process.env.NODE_ENV || 'development';
@@ -23,9 +23,8 @@ module.exports = {
                 dangerousForOf: true
             }
         }),
-        ENV === 'production' && uglify({
+        ENV === 'production' && terser({
             compress: {
-                dead_code: true,
                 drop_console: true
             }
         })
