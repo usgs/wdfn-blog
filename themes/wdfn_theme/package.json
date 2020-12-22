@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf static && mkdirp static",
-    "build": "npm run clean && run-p build:* && npm run hash-assets",
+    "build": "npm run clean && run-p build:*",
     "build:css": "mkdirp static/css && sass --load-path node_modules/wdfn-viz/src/stylesheets --load-path node_modules/uswds/src/stylesheets --load-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/css/main.css && postcss static/css/main.css -o static/css/main.css",
     "build:fonts": "mkdirp static/fonts && cp src/fonts/* static/fonts && cp -r node_modules/uswds/src/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/fonts",
     "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/uswds/src/img/* static/img && cp -r node_modules/wdfn-viz/src/img/* static/img",
