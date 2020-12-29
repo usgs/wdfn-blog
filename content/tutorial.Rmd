@@ -1,7 +1,7 @@
 ---
-title: "dataRetrieval Tutorial"
+title: "dataRetrieval Tutorial - Using R to Discover Data"
 slug: "dataRetrieval"
-date: "2020-12-22"
+date: "2020-12-29"
 image: "static/dataRetrieval/unnamed-chunk-23-1.png"
 tag1: "dataRetrieval"
 keyword1: "dataRetrieval"
@@ -13,13 +13,18 @@ author_twitter: "DeCiccoDonk"
 author_staff: "laura-decicco"
 tags:
   - R
-description:  "Basic dataRetrieva tutorial."
+description:  "Basic dataRetrieval tutorial for USGS water data in R."
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(ggplot2)
+library(ggsn)
+library(sf)
+library(dplyr)
+options(dplyr.summarise.inform = FALSE)
 
 knit_hooks$set(plot=function(x, options) {
   paste0('<figure><img src="/',options$fig.path,options$label,
@@ -43,19 +48,17 @@ opts_chunk$set(
 
 ```
 
+R is an open-source programming language. It is known for extensive statistical capabilities, and also has powerful graphical capabilities. Another benefit of R is the large and generally helpful user-community. This includes R-package developers who create packages that can be easily installed to enhance the basic R capabilities. This article will describe the R-package "dataRetrieval" which simplifies the process of finding and retrieving water from the U.S. Geological Survey (USGS) and other agencies.
+
+
+It is increasingly common for large-scale `dataRetrieval` requests. Geographically-large requests can be done by looping through either state codes (`stateCd$STATE`) or hydrologic unit codes (HUCs). BUT without careful planning, those requests could be too large to complete. This article will describe some tips to make those queries manageable.
+
 # Package Overview
 
-`dataRetrieval` is available on the CRAN repository. The CRAN version is the most stable and user-tested:
+`dataRetrieval` is available on Comprehensive R Archive Network (CRAN).
 
 ```{r eval=FALSE}
 install.packages("dataRetrieval")
-```
-
-The cutting-edge version of `dataRetrieval` can be installed using the `remotes` package which pulls from GitHub. This version will have newer changes than what is on CRAN, but potentially more fragile.
-
-```{r eval=FALSE}
-library(remotes)
-install_github("USGS-R/dataRetrieval")
 ```
 
 Once the `dataRetrieval` package has been installed, it needs to be loaded in order to use any of the functions:
@@ -88,9 +91,9 @@ USGS data comes from the National Water Information System (NWIS). There are man
 
 ```{r echo=FALSE, eval = TRUE}
 df <- data.frame(Type = c("Unit", "Daily", "Discrete"),
-                 Description = c("Regular frequency data reported from a sensor (e.g. 15 minute interval)",
-                                   "Data aggregated to a daily statistic such as mean, min, or max",
-                                   "Data collected at non-regular times"),
+                 Description = c("Regular frequency data reported from a sensor (e.g. 15 minute interval). This data can include 'real-time' data.",
+                                   "Data aggregated to a daily statistic such as mean, min, or max.",
+                                   "Data collected at non-regular times."),
                  service = c("uv", "dv", 
                                "water quality (qw), groundwater (gwlevel), rating curves (rating), peak flow (peak), surfacewater (meas)"))
 
@@ -107,15 +110,14 @@ The USGS uses various codes for basic retrievals. These codes can have leading z
 * Site ID (often 8 or 15-digits)
 * Parameter Code (5 digits)
     + Full list:
-    + [http://help.waterdata.usgs.gov/code/parameter_cd_query?fmt=rdb&inline=true&group_cd=%](http://help.waterdata.usgs.gov/code/parameter_cd_query?fmt=rdb&inline=true&group_cd=%)
-    + Alternatively use `readNWISpCode()`
+    + [https://nwis.waterdata.usgs.gov/usa/nwis/pmcodes](https://nwis.waterdata.usgs.gov/usa/nwis/pmcodes)
+    + Alternatively use `readNWISpCode("all")`
 * Statistic Code (for daily values)
     + Full list:
     + [http://help.waterdata.usgs.gov/code/stat_cd_nm_query?stat_nm_cd=%25&fmt=html](http://help.waterdata.usgs.gov/code/stat_cd_nm_query?stat_nm_cd=%25&fmt=html)
 
 
 Here are some examples of a few codes:
-
 
 ```{r echo=FALSE}
 library(knitr)
@@ -265,12 +267,47 @@ knitr::include_graphics("static/dataRetrieval/waterservices.png")
 
 ```
 
-Available geographic filters are individual site(s), a single state, a bounding box, or a HUC (hydrologic unit code). For example, let's see which sites ever measured phosphorus in Arizona:
+Available geographic filters are individual site(s), a single state, a bounding box, or a HUC (hydrologic unit code). See examples for those services by looking at the help page for the `readNWISdata` function:
+
+```{r eval=FALSE}
+?readNWISdata
+````
+
+Here are a few examples:
+
+```{r eval=FALSE}
+# Daily temperature in Ohio
+dataTemp <- readNWISdata(stateCd = "OH", 
+                         parameterCd = "00010",
+                         service="dv") 
+
+# Real-time discharge at a site
+instFlow <- readNWISdata(sites = "05114000",
+                         service = "iv", 
+                         parameterCd = "00060", 
+                         startDate = "2014-05-01T00:00Z",
+                         endDate = "2014-05-01T12:00Z",
+                         tz = "America/Chicago") 
+
+# Temperature within a bounding box:
+bBoxEx <- readNWISdata(bBox = c(-83,36.5,-81,38.5),
+                       parameterCd = "00010")
+
+# Groundwater levels within a HUC:
+groundwaterHUC <- readNWISdata(huc="02070010",
+                               service="gwlevels")
+
+```
+  
+
+### Arizona Example
+
+For example, let's see which sites ever measured phosphorus in Arizona:
 
 
 ```{r az}
 AZ_sites <- whatNWISsites(stateCd = "AZ", 
-                parameterCd = "00665")
+                          parameterCd = "00665")
 nrow(AZ_sites)
 names(AZ_sites)
 
@@ -283,7 +320,6 @@ library(ggplot2)
 library(ggsn)
 library(sf)
 library(dplyr)
-options(dplyr.summarise.inform = FALSE)
 
 usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE),
                   crs = 4269)
@@ -306,32 +342,31 @@ ggplot() +
         
 ```
 
-Now let's see what we get back from the `whatNWISdata` function:
+If instead of using the `whatNWISsite` function, we instead use the `whatNWISdata` function:
 
 ```{r azdata}
 AZ_data <- whatNWISdata(stateCd = "AZ", 
                          parameterCd = "00665")
+names(AZ_data)
 
 ```
+
+We get many more columns returned. For discovering useful data, the last 3 columns of this return are especially helpful. "begin_date", "end_date", and "count_nu" give a good indication of how much data of a particular "parm_cd"/"stat_cd"/"data_type_cd" was collected.
 
 
 ###  Additional NWIS discovery tools
 
-Point-and-click mappers (good for general overviews):
-NWIS Mapper:
+Our team is actively working on making our data more discoverable. For now, we encourage you to use interactive mappers such as:
+
+The NWIS Mapper:
 [http://maps.waterdata.usgs.gov/mapper/index.html](http://maps.waterdata.usgs.gov/mapper/index.html)
 
-New NWIS dashboard:
-[https://dashboard.waterdata.usgs.gov/app/nwd/?region=lower48](https://dashboard.waterdata.usgs.gov/app/nwd/?region=lower48)
+The National Water Dashboard:
+[https://dashboard.waterdata.usgs.gov/app/nwd](https://dashboard.waterdata.usgs.gov/app/nwd)
 
+### Wisconsin Example
 
-See how to use those services by looking at the help page for the `readNWISdata` function:
-
-```{r eval=FALSE}
-?readNWISdata
-````
-
-Let's do one more example, we'll look for long-term USGS phosphorous data in Wisconsin:
+Let's do one more example, we'll look for long-term USGS phosphorous data in Wisconsin. This time, we will take the information from the `whatNWISdata` function, filter down the sites to exactly our interest, and then get the data. Let's say we want data from sites that have been collecting data for at least 15 years and have at least 300 measurements:
 
 ```{r }
 pCode <- c("00665")
@@ -393,46 +428,10 @@ ggplot() +
 ```
 
     
-##  Flexible data retrieval: readNWISdata 
+  
+# Multi-Agency Water Quality Data from the Water Quality Portal (WQP)
 
-We can use the function `readNWISdata` to get the data from more complicated data requests. The help page for this function has many examples.
-
-You can request data for individual sites, states, a bounding box, HUC:
-
-```{r eval=FALSE}
-
-dataTemp <- readNWISdata(stateCd = "OH", 
-                         parameterCd = "00010",
-                         service="dv")
-
-instFlow <- readNWISdata(sites = "05114000",
-                         service = "iv", 
-                         parameterCd = "00060", 
-                         startDate = "2014-05-01T00:00Z",
-                         endDate = "2014-05-01T12:00Z",
-                         tz = "America/Chicago")
-
-bBoxEx <- readNWISdata(bBox = c(-83,36.5,-81,38.5),
-                       parameterCd = "00010")
-
-groundwaterHUC <- readNWISdata(huc="02070010",
-                               service="gwlevels")
-
-```
-    
-# Water Quality Portal (WQP)
-
-[Water Quality Portal](http://www.waterqualitydata.us/)
-
-* Multiple agencies
-    + USGS data comes from the NWIS database
-    + EPA data comes from the STORET database (this includes many state, tribal, NGO, and academic groups)
-
-* WQP brings data from all these organizations together and provides it in a single format
-
-* More verbose output than NWIS
-
-* To get non-NWIS data, need to use CharacteristicName instead of parameter code.
+`dataRetrieval` also allows users to access data from the [Water Quality Portal](http://www.waterqualitydata.us/). The WQP houses data from multiple agencies; while USGS data comes from the NWIS database, EPA data comes from the STORET database (this includes many state, tribal, NGO, and academic groups). The WQP brings data from all these organizations together and provides it in a single format that has a more verbose output than NWIS. To get non-NWIS data, need to use CharacteristicName instead of parameter code.
 
 
 ## WQP Basic Retrievals
@@ -459,9 +458,9 @@ nrow(wqpQW)
 
 ## Data Discovery: WQP
 
-The value of the Water Quality Portal is to explore water quality data from different sources. 
+The value of the Water Quality Portal is the ability to explore water quality data from different sources. 
 
-The following function returns sites that have collected phosphorus data in Wisconsin. There's no way to know if that site has collected one sample, or thousands. This function is pretty fast, but only reports what sites have data.
+The following function returns sites that have collected phosphorus data in Wisconsin. There's no way to know if that site has collected one sample, or thousands. This function is pretty fast, but only reports which sites have data.
 
 ```{r eval=FALSE}
 
@@ -489,7 +488,7 @@ phosData <- readWQPdata(siteNumbers = phos_data_sites_to_get$MonitoringLocationI
 
 ```
 
-With data coming from many different agencies, it will be important to look carefully at the returned data. For instance, this "Phosphorus" data comes back with many different units. It will be important to make smart decisions on how and if the total data can be used together.
+With data coming from many different agencies, it will be important to carefully review the returned data. For instance, this "Phosphorus" data comes back with many different units. It will be important to make smart decisions on how and if the queried data can be used together.
 
 
 ```{r echo=FALSE}
@@ -560,20 +559,17 @@ ggplot() +
 
 # Large Data Requests
 
-It is increasingly common for R users to be interested in large-scale `dataRetrieval` analysis. A few tips to make those queries managable:
+It is increasingly common for R users to be interested in large-scale `dataRetrieval` analysis. You can use a loop of either state codes (`stateCd$STATE`) or HUCs to make large requests. BUT without careful planning, those requests could be too large to complete. Here are a few tips to make those queries manageable:
 
 * Please do NOT use multi-thread processes and simultaneously request hundreds or thousands of queries.
 
-* You can use a loop of either state codes (`stateCd$STATE`) or HUCs to make large requests. BUT without careful planning, those requests could be too large to complete. 
+* Take advantage of the `whatWQPdata` and `whatNWISdata` functions to filter out sites you don't need before requesting the data. Use what you can from these faster requests to filter the full data request as much as possible. 
 
+* Think about using `tryCatch`, saving the data after each iteration of the loop, and/or using a make-like data pipeline (for example, see the `drake` package). This way if a single query fails, you do not need to start over.
 
-+ Take advantage of the `whatWQPdata` and `whatNWISdata` functions to filter out sites you don't need before requesting the data. Use what you can from these faster requests to filter the full data request as much as possible. 
+* The WQP doesn't always perform that well when there are a lot of filtering arguments in the request. Even though those filters would reduce the amount of data needed to transfer, that sometimes causes the pre-processing of the request to take so long that it times-out before returning *any* data. It's a bit counterintuitive, but if you are having trouble getting your large requests to complete, remove arguments such as Sample Media, Site Type, these are things that can be filtered in a post-processing script. Another example: sometimes it is slower and error-prone requesting data year-by-year instead of requesting the entire period of record. 
 
-+ Think about using `tryCatch`, saving the data after each iteration of the loop, and/or using a make-like data pipeline (for example, see the `drake` package). This way if a single query fails, you do not need to start over.
-
-+ The WQP doesn't always perform that well when there are a lot of filtering arguments in the request. Even though those filters would reduce the amount of data needed to transfer, that sometimes causes the pre-processing of the request to take so long that it times-out before returning *any* data. It's a bit counterintuitive, but if you are having trouble getting your large requests to complete, remove arguments such as Sample Media, Site Type, these are things that can be filtered in a post-processing script. Another example: sometimes it is slower and error-prone requesting data year-by-year instead of requesting the entire period of record. 
-
-Pick a single state/HUC/bbox to practice your data retrievals before looping through larger sets, and optimize ahead of time as much as possible.
+* Pick a single state/HUC/bbox to practice your data retrievals before looping through larger sets, and optimize ahead of time as much as possible.
 
 
 # But wait, there's more!
@@ -582,16 +578,18 @@ There are two services that also have functions in `dataRetrieval`, the National
 
 ## National Groundwater Monitoring Network (NGWMN)
 
-Similar to WQP, it brings groundwater data from multiple sources into a single database. There are currently a few `dataRetrieval` functions included:
+Similar to WQP, the NGWMN brings groundwater data from multiple sources into a single location. There are currently a few `dataRetrieval` functions included:
 
 
 *  `readNGWMNsites()`
 *  `readNGWMNlevels()`
-*  `readNGWMNdata()`.
+*  `readNGWMNdata()`
 
 ## Network Linked Data Index (NLDI)
 
 The NLDI provides a information backbone to navigate the NHDPlusV2 network and discover features indexed to the network. For an overview of the NLDI, see: [http://usgs-r.github.io/dataRetrieval/articles/nldi.html](http://usgs-r.github.io/dataRetrieval/articles/nldi.html)
+
+There is currently one function in dataRetrieval for NLDI: 
 
 
 `findNLDI()`
