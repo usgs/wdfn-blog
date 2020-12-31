@@ -25,7 +25,7 @@ The NLDI is a search engine that uses the river network as it's index. Like a se
 
 Previous waterdata blog posts ([here](https://waterdata.usgs.gov/blog/nldi-intro/) and [here](https://waterdata.usgs.gov/blog/nldi_update/)) describe what the Network Linked Data Index (NLDI) is and what it can do in detail.
 
-This post announces new USGS gage locations available from the NLDI and describes how it fits between data systems like https://waterdata.usgs.gov and environmental data registries like https://geoxonnex.us.
+This post announces new USGS gage locations available from the NLDI and describes how it fits between data systems like https://waterdata.usgs.gov and environmental data registries like https://geoconnex.us.
 
 The post closes with information about an in-development project to establish a community sourced set of reference stream gage locations. This project aims to establish reference gage locations for many organizations to reference their own monitoring locations to.
 
@@ -37,7 +37,7 @@ The NLDI (currently) has two methods of indexing data:
 1) it can use NHDPlus catchment polygons to determine a catchment index for a point and
 2) it can take pre-determined network locations in the form of a "reachcode" and "measure" hydrographic address.
 
-*Reachcode* and *measure* are attributes used by the National Hydrography Dataset in a way that is analogous to a street name and house number. These are commonly referred to as "hydrographic addresses".
+*Reachcode* and *measure* are attributes used by the National Hydrography Dataset in a way that is analogous to a street name and house number. These are commonly referred to as "hydrographic addresses". For more about hydrographic addressing, see [this page.](https://www.usgs.gov/core-science-systems/ngp/national-hydrography/hydrographic-addressing-conceptual-model-tools)
 
 A new USGS project, the National Hydrologic Geospatial Fabric, recently updated the addresses for all NWIS sites in the NLDI to include reachcode and measure locations. Before this update, only active USGS sites were included and they were indexed with the comparatively inaccurate catchment indexing method.
 
@@ -62,9 +62,11 @@ https://waterdata.usgs.gov/monitoring-location/08279500/
 
 This provides a stable identifier that can be used in places where persistence is important, such as structured metadata and knowledge management. Because the redirect can change, it allows people implementing web services and systems to change domain and/or URL path structure while allowing persistent and robust indexing of the information in question. For more on the design of this arrangement, see the [first](https://docs.opengeospatial.org/per/18-097.html) and [second](https://docs.ogc.org/per/20-067.html) Environmental Linked Features Interoperability Experiment outcomes.
 
-Q: How does the NLDI and hydrographic addressing relate to geoconnes.ux?
+Q: How does the NLDI and hydrographic addressing relate to geoconnex.us?
 
 A: On the internet, a hydrographic address can be expressed as a link between a hydrographic feature and a located feature (such as a stream gage). Identifiers for both hydrographic and located features can be registered with geoconnex.us and indexed and discovered with the NLDI.
+
+For more on geoconnex, [this demo](https://geoconnex.us/demo) is a good place to start.
 
 Scope note
 -------------------------------
@@ -85,7 +87,9 @@ A river can only be monitored in so many places. This is true at a basic level b
 
 However, each organization may have different identifiers and different spatial information about what is actually the same real-world location. Given that identifiers and spatial descriptions are different, it can be surprisingly difficult to determine if two monitoring locations are the same. The community reference gage locations discussed here are intended to provide a common identifier and reference location to fill this gap.
 
-The project is just getting started so only includes USGS gages so far, but expect the dataset to grow and mature going forward. Code to create the dataset is hosted at [this preliminary repository](https://github.com/dblodgett-usgs/ref_gages). An index of reference gages by state [can be seen here.](https://dblodgett-usgs.github.io/ref_gages/) The reference gages can also be found through the https://info.geoconnex.us service [here](https://info.geoconnex.us/collections/gages).
+NOTE: For the time being, "reference gages" are any location where information is collected along a river. As the project progresses, further definition of what kind of monitoring may be used to refine the definition of "gage".
+
+The project is just getting started so only includes USGS gages so far, but expect the dataset to grow and mature going forward. Code to create the dataset is hosted at [this preliminary repository](https://github.com/dblodgett-usgs/ref_gages). An index of reference gages by state [can be seen here.](https://dblodgett-usgs.github.io/ref_gages/) The reference gages can also be found through the https://info.geoconnex.us [OGC API](https://ogcapi.ogc.org/) service [here](https://info.geoconnex.us/collections/gages).
 
 For example, say we wanted to find reference gages in a particular place. We could use the https://info.geoconnex.us service with a bbox query like:
 
