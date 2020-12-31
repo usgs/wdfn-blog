@@ -37,7 +37,7 @@ The NLDI (currently) has two methods of indexing data:
 1) it can use NHDPlus catchment polygons to determine a catchment index for a point and
 2) it can take pre-determined network locations in the form of a "reachcode" and "measure" hydrographic address.
 
-*Reachcode* and *measure* are attributes used by the National Hydrography Dataset in a way that is analogous to a street name and house number. These are commonly referred to as "hydrographic addresses".
+*Reachcode* and *measure* are attributes used by the National Hydrography Dataset in a way that is analogous to a street name and house number. These are commonly referred to as "hydrographic addresses". For more about hydrographic addressing, see [this page.](https://www.usgs.gov/core-science-systems/ngp/national-hydrography/hydrographic-addressing-conceptual-model-tools)
 
 A new USGS project, the National Hydrologic Geospatial Fabric, recently updated the addresses for all NWIS sites in the NLDI to include reachcode and measure locations. Before this update, only active USGS sites were included and they were indexed with the comparatively inaccurate catchment indexing method.
 
