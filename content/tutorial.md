@@ -261,7 +261,7 @@ ts
 ```
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-14-1.png" title = "TODO" >
+<img src="/static/dataRetrieval/unnamed-chunk-14-1.png" title = "Flow vs time, no styling." >
 </figure>
 
 Then use the attributes attached to the data frame to create better
@@ -299,7 +299,7 @@ how flexible the USGS web services are is to click on the links and see
 all of the filtering options: <http://waterservices.usgs.gov/>
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-16-1.png" title = "TODO" >
+<img src="/static/dataRetrieval/unnamed-chunk-16-1.png" title = "Flow versus time with pretty labels and official NWIS station name." >
 </figure>
 
 Available geographic filters are individual site(s), a single state, a
