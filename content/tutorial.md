@@ -1,8 +1,8 @@
 ---
 author: Laura DeCicco
-date: 2020-12-29
+date: 2021-01-04
 slug: dataRetrieval
-draft: True
+draft: False
 title: dataRetrieval Tutorial - Using R to Discover Data
 type: post
 categories: Data Science
@@ -29,11 +29,7 @@ describe the R-package “dataRetrieval” which simplifies the process of
 finding and retrieving water from the U.S. Geological Survey (USGS) and
 other agencies.
 
-It is increasingly common for large-scale `dataRetrieval` requests.
-Geographically-large requests can be done by looping through either
-state codes (`stateCd$STATE`) or hydrologic unit codes (HUCs). BUT
-without careful planning, those requests could be too large to complete.
-This article will describe some tips to make those queries manageable.
+It is increasingly common for scientific users to make large-scale `dataRetrieval` requests. Geographically-large requests can be done by looping through either state codes (`stateCd$STATE`) or hydrologic unit codes (HUCs). BUT without careful planning, those requests could be too large to complete. This article will describe some tips to make those queries manageable.
 
 Package Overview
 ================
