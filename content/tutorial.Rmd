@@ -1,7 +1,7 @@
 ---
 title: "dataRetrieval Tutorial - Using R to Discover Data"
 slug: "dataRetrieval"
-date: "2020-12-29"
+date: "2021-01-04"
 image: "static/dataRetrieval/unnamed-chunk-23-1.png"
 tag1: "dataRetrieval"
 keyword1: "dataRetrieval"
@@ -29,7 +29,7 @@ options(dplyr.summarise.inform = FALSE)
 knit_hooks$set(plot=function(x, options) {
   paste0('<figure><img src="/',options$fig.path,options$label,
          "-", options$fig.cur,".",options$fig.ext,'" title = "',
-         options$fig.cap, '" ></figure>')
+         options$fig.cap, '" alt = "', options$alt.text,'" ></figure>')
 
 })
 
@@ -50,8 +50,7 @@ opts_chunk$set(
 
 R is an open-source programming language. It is known for extensive statistical capabilities, and also has powerful graphical capabilities. Another benefit of R is the large and generally helpful user-community. This includes R-package developers who create packages that can be easily installed to enhance the basic R capabilities. This article will describe the R-package "dataRetrieval" which simplifies the process of finding and retrieving water from the U.S. Geological Survey (USGS) and other agencies.
 
-
-It is increasingly common for large-scale `dataRetrieval` requests. Geographically-large requests can be done by looping through either state codes (`stateCd$STATE`) or hydrologic unit codes (HUCs). BUT without careful planning, those requests could be too large to complete. This article will describe some tips to make those queries manageable.
+It is increasingly common for scientific users to make large-scale `dataRetrieval` requests. Geographically-large requests can be done by looping through either state codes (`stateCd$STATE`) or hydrologic unit codes (HUCs). BUT without careful planning, those requests could be too large to complete. This article will describe some tips to make those queries manageable.
 
 # Package Overview
 
@@ -227,7 +226,7 @@ url
 
 Make a simple plot to see the data:
 
-```{r fig.height=3.5, title="Simple plot of flow over time."}
+```{r fig.height=3.5, fig.cap="Simple plot of flow over time.", alt.text = "A simple plot of flow vs time in a basic ggplot2 theme."}
 library(ggplot2)
 ts <- ggplot(data = pheasant,
              aes(dateTime, Flow_Inst)) +
@@ -238,7 +237,7 @@ ts
 Then use the attributes attached to the data frame to create better labels:
 
 
-```{r fig.height=3.5, fig.cap="Flow versus time with pretty labels."}
+```{r fig.height=3.5, fig.cap="Flow versus time with pretty labels.", alt.text = "The same image as the previous plot, but using automatically generated labels."}
 parameterInfo <- attr(pheasant, "variableInfo")
 siteInfo <- attr(pheasant, "siteInfo")
   
@@ -262,10 +261,10 @@ There are 2 `dataRetrieval` functions that help:
 There are several ways to specify the requests. The best way to discover how flexible the USGS web services are is to click on the links and see all of the filtering options:
 [http://waterservices.usgs.gov/](http://waterservices.usgs.gov/)
 
-```{r echo=FALSE}
-knitr::include_graphics("static/dataRetrieval/waterservices.png")
 
-```
+<figure>
+<img src="/static/dataRetrieval/waterservices.png" title = "Screen shot of NWIS water services." alt = "Screen shot showing the important links in waterservices.gov." >
+</figure>
 
 Available geographic filters are individual site(s), a single state, a bounding box, or a HUC (hydrologic unit code). See examples for those services by looking at the help page for the `readNWISdata` function:
 
@@ -315,7 +314,7 @@ names(AZ_sites)
 
 Check out the sites on a map:
 
-```{r fig.height=4, fig.cap="Map of Arizona with phosphorus."}
+```{r fig.height=4, fig.cap="Map of Arizona with phosphorus.", alt.text = "A static map of Arizona, with circular dots where phosphorous measurments were reported."}
 library(ggplot2)
 library(ggsn)
 library(sf)
@@ -401,7 +400,7 @@ phos_summary <- phos_WI_data %>%
 ```
 
 Then map it:
-```{r echo=FALSE, fig.cap="Wisconsin phosphorous map."}
+```{r echo=FALSE, fig.cap="Wisconsin phosphorous map.", alt.text = "Static map of Wisconsin with dots representing locations of phosphorus measurements."}
 
 
 sf_wi <- st_as_sf(phos_summary, 
@@ -519,7 +518,7 @@ wiSummary <- phosData %>%
 ```
 
 
-```{r echo=FALSE, fig.cap = "Wisconsin phosphorous sites via WQP."}
+```{r echo=FALSE, fig.cap = "Wisconsin phosphorous sites via WQP.", alt.text = "Static map of Wisconsin with sites generated from the WQP."}
 
 sf_wi_wqp <- st_as_sf(wiSummary, 
                   coords = c("dec_lon_va", "dec_lat_va"),
@@ -594,5 +593,11 @@ There is currently one function in dataRetrieval for NLDI:
 
 `findNLDI()`
 
+# Questions?
 
+Interested in the Rmarkdown code used to generate this document? See here:
+[https://github.com/usgs/wdfn-blog/blob/master/content/tutorial.Rmd](https://github.com/usgs/wdfn-blog/blob/master/content/tutorial.Rmd)
+
+Questions on `dataRetrieval`? Create an issue here:
+[https://github.com/USGS-R/dataRetrieval/issues](https://github.com/USGS-R/dataRetrieval/issues)
 

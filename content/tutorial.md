@@ -1,8 +1,8 @@
 ---
-author: Laura DeCicco
-date: 2020-12-29
+author: 
+date: 2021-01-04
 slug: dataRetrieval
-draft: True
+draft: false
 title: dataRetrieval Tutorial - Using R to Discover Data
 type: post
 categories: Data Science
@@ -29,11 +29,12 @@ describe the R-package “dataRetrieval” which simplifies the process of
 finding and retrieving water from the U.S. Geological Survey (USGS) and
 other agencies.
 
-It is increasingly common for large-scale `dataRetrieval` requests.
-Geographically-large requests can be done by looping through either
-state codes (`stateCd$STATE`) or hydrologic unit codes (HUCs). BUT
-without careful planning, those requests could be too large to complete.
-This article will describe some tips to make those queries manageable.
+It is increasingly common for scientific users to make large-scale
+`dataRetrieval` requests. Geographically-large requests can be done by
+looping through either state codes (`stateCd$STATE`) or hydrologic unit
+codes (HUCs). BUT without careful planning, those requests could be too
+large to complete. This article will describe some tips to make those
+queries manageable.
 
 Package Overview
 ================
@@ -265,7 +266,7 @@ ts
 ```
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-14-1.png" title = "TODO" >
+<img src="/static/dataRetrieval/unnamed-chunk-14-1.png" title = "Simple plot of flow over time." alt = "A simple plot of flow vs time in a basic ggplot2 theme." >
 </figure>
 
 Then use the attributes attached to the data frame to create better
@@ -283,7 +284,7 @@ ts
 ```
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-15-1.png" title = "Flow versus time with pretty labels." >
+<img src="/static/dataRetrieval/unnamed-chunk-15-1.png" title = "Flow versus time with pretty labels." alt = "The same image as the previous plot, but using automatically generated labels." >
 </figure>
 
 Discover Data: NWIS
@@ -303,7 +304,7 @@ how flexible the USGS web services are is to click on the links and see
 all of the filtering options: <http://waterservices.usgs.gov/>
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-16-1.png" title = "TODO" >
+<img src="/static/dataRetrieval/waterservices.png" title = "Screen shot of NWIS water services." alt = "Screen shot showing the important links in waterservices.gov." >
 </figure>
 
 Available geographic filters are individual site(s), a single state, a
@@ -387,7 +388,7 @@ ggplot() +
 ```
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-19-1.png" title = "Map of Arizona with phosphorus." >
+<img src="/static/dataRetrieval/unnamed-chunk-18-1.png" title = "Map of Arizona with phosphorus." alt = "A static map of Arizona, with circular dots where phosphorous measurments were reported." >
 </figure>
 
 If instead of using the `whatNWISsite` function, we instead use the
@@ -461,7 +462,7 @@ phos_summary <- phos_WI_data %>%
 
 Then map it:
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-22-1.png" title = "Wisconsin phosphorous map." >
+<img src="/static/dataRetrieval/unnamed-chunk-21-1.png" title = "Wisconsin phosphorous map." alt = "Static map of Wisconsin with dots representing locations of phosphorus measurements." >
 </figure>
 
 Multi-Agency Water Quality Data from the Water Quality Portal (WQP)
@@ -575,7 +576,7 @@ wiSummary <- phosData %>%
 ```
 
 <figure>
-<img src="/static/dataRetrieval/unnamed-chunk-31-1.png" title = "Wisconsin phosphorous sites via WQP." >
+<img src="/static/dataRetrieval/unnamed-chunk-30-1.png" title = "Wisconsin phosphorous sites via WQP." alt = "Static map of Wisconsin with sites generated from the WQP." >
 </figure>
 
 Time/Time zone discussion
@@ -674,3 +675,13 @@ the NLDI, see:
 There is currently one function in dataRetrieval for NLDI:
 
 `findNLDI()`
+
+Questions?
+==========
+
+Interested in the Rmarkdown code used to generate this document? See
+here:
+<https://github.com/usgs/wdfn-blog/blob/master/content/tutorial.Rmd>
+
+Questions on `dataRetrieval`? Create an issue here:
+<https://github.com/USGS-R/dataRetrieval/issues>
