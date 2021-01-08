@@ -1,7 +1,8 @@
 ---
 title: "dataRetrieval Tutorial - Using R to Discover Data"
+author: "Laura DeCicco"
 slug: "dataRetrieval"
-date: "2021-01-04"
+date: "2021-01-08"
 image: "static/dataRetrieval/unnamed-chunk-23-1.png"
 tag1: "dataRetrieval"
 keyword1: "dataRetrieval"

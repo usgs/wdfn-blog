@@ -1,6 +1,6 @@
 ---
-author: 
-date: 2021-01-04
+author: Laura DeCicco
+date: 2021-01-08
 slug: dataRetrieval
 draft: false
 title: dataRetrieval Tutorial - Using R to Discover Data
