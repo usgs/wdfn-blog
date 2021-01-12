@@ -1,3 +1,32 @@
+---
+title: Improving Monitoring Pages with User Feedback
+author: Candice Hopkins
+date: '2021-01-11'
+slug: ImprovingMonitoringPages
+categories:
+  - Software Development
+  - water information
+tags:
+  - Water Data for the Nation
+draft: True
+type: post
+description: Improvements to next-generation monitoring pages in response to user feedback
+keywords: 
+  - water data
+  - water information
+  - web page
+  - monitoring data
+author_staff: candice-hopkins
+author_email: <chopkins@usgs.gov>
+image: /static/ImprovingMonitoringPages/Gif.gif
+---
+
+
+
+
+
+
+
 User feedback is a vital part of our design process. We’ve asked users
 to provide feedback on our
 [next-gen](https://waterdata.usgs.gov/blog/wdfn-tng/) monitoring
@@ -24,45 +53,45 @@ Users asked us to improve the map in a few ways and we responded:
     basin to make it easier to see features under the map layer. The
     upstream basin is now projected in a much lighter shade.
 
-<center>
-![](/static/ImprovingMonitoringPages/image1.png) **Screenshot of new
-improved base map and upstream basin shading for monitoring location
-[07016500](https://waterdata.usgs.gov/monitoring-location/07016500/#parameterCode=00065),
-Bourbeuse River at Union, MO**
-</center>
+
+
+{{< figure src="/static/ImprovingMonitoringPages/image1.jpg" 
+caption="Screenshot of new improved basemap and upstream basin shading for montitoring location [07016500](https://waterdata.usgs.gov/monitoring-location/07016500/#parameterCode=00065), Bourbeuse River at Union, MO"  alt="Screenshot of new improved basemap and upstream basin shading for montitoring location 07016500, Bourbeuse River at Union, MO" >}}
+
+
+
 
 ### 
 
 # Get a snapshot of what data are available at a site
 
-Users wanted to know what data was available on which dates. We added a
+Users wanted to know what data were available on which dates. We added a
 section to monitoring location pages that summarizes data availability
 for each site. The “Summary of All Available Data” section shows the
 start and end date of available data at each site. We grouped parameters
 into categories to make the available data easier to understand.
 
-<center>
-![](/static/ImprovingMonitoringPages/image2.png) **A screenshot of a
-data summary section from monitoring location
-[07019130](https://waterdata.usgs.gov/monitoring-location/07019130/#parameterCode=00065),
-Meramec River at Valley Park, MO **
-</center>
+{{< figure src="/static/ImprovingMonitoringPages/image2.jpg" 
+caption="A screenshot of a data summary section from monitoring location [07019130](https://waterdata.usgs.gov/monitoring-location/07019130/#parameterCode=00065), Meramec River at Valley Park, MO"  alt=" screenshot of a data summary section from monitoring location 07019130, Meramec River at Valley Park, MO" >}}
+
+
+
+
+###
 
 The period of record is also now displayed on the monitoring location
 pages for instantaneous values of each parameter, making it easier to
 request a custom time period to display on the hydrograph.
 
-<center>
+{{< figure src="/static/ImprovingMonitoringPages/image3.jpg" 
+caption="A screenshot showing the period of record for instantaneous values at monitoring location [07019130](https://waterdata.usgs.gov/monitoring-location/07019130/#parameterCode=00065), Meramec River at Valley Park, MO"  alt="A screenshot showing the period of record for instantaneous values at monitoring location 07019130, Meramec River at Valley Park, MO" >}}
 
-![](/static/ImprovingMonitoringPages/image3.png)
 
-**A screenshot showing the period of record for instantaneous values at
-monitoring location
-[07019130](https://waterdata.usgs.gov/monitoring-location/07019130/#parameterCode=00065),
-Meramec River at Valley Park, MO **
-</center>
+
 
 ### 
+
+
 
 # Make the hydrograph easier to view and manipulate
 
@@ -70,14 +99,19 @@ Meramec River at Valley Park, MO **
     displayed on the hydrograph. Our team improved the ways users
     interact with dates by incorporating the [U.S. Web Design System
     date
-    picke](https://designsystem.digital.gov/form-controls/05-date-picker/)r
+    picker](https://designsystem.digital.gov/form-controls/05-date-picker/)
     in the “Custom” date section. Users can now select a custom date
     frame by choosing dates on a calendar or typing dates.
 
-<center>
-![](/static/ImprovingMonitoringPages/image4.png) **Screen shot of
-updated date picker for hydrograph display**
-</center>
+###
+
+
+{{< figure src="/static/ImprovingMonitoringPages/image4.jpg" 
+caption="A screenshot of updated date picker for hydrograph display"  alt="A screenshot of updated date picker for hydrograph display" >}}
+
+
+
+###
 
 -   They asked for easier ways to switch between parameters, especially
     on mobile devices. Our team changed the way that parameters are
@@ -91,15 +125,22 @@ updated date picker for hydrograph display**
     referred to as “p-codes”) into tool tips, which users access by
     hovering over the icon at the end of the parameter name.
 
-<center>
-![](/static/ImprovingMonitoringPages/image5.png) **Example of WaterAlert
-Subscription Form for monitoring location
-[01458500](https://waterdata.usgs.gov/monitoring-location/01458500/),
-Delaware River at Frenchtown, NJ**
-</center>
+###
+
+
+
+{{< figure src="/static/ImprovingMonitoringPages/Gif.gif" 
+caption="Example of how to switch between parameters at monitoring location [09405500](https://waterdata.usgs.gov/monitoring-location/09405500/#parameterCode=00065), North Fork Virgin River near Springdale, UT" alt="xample of how to switch between parameters at monitoring location 09405500, North Fork Virgin River near Springdale, UT" >}}
+
+
+
+
+
+
+###
 
 -   Others requested that we switch the colors on the hydrograph so that
-    historic and statistical data are easier to view. Our team also
+    historic and statistical data are easier to view. Our team made these changes and also
     improved how the hydrograph looks on the page. We changed the color
     and thickness of median data and historic data so that they are
     easier to view.
@@ -116,14 +157,11 @@ Delaware River at Frenchtown, NJ**
     subscription form for the site where they set notification
     thresholds.
 
-<center>
+###
 
-![](/static/ImprovingMonitoringPages/Gif.gif)
-
-**Example of XXXXX
-[01458500](https://waterdata.usgs.gov/monitoring-location/01458500/),
-Delaware River at Frenchtown, NJ**
-</center>
+{{< figure src="/static/ImprovingMonitoringPages/image5.jpg" 
+caption="Example of WaterAlert Subscription Form for monitoring locaiton [01458500](https://waterdata.usgs.gov/monitoring-location/01458500/#parameterCode=00065), Delaware River at Frenchtown, NJ" alt="Example of WaterAlert Subscription Form" >}}
+###
 
 -   Users wanted to be able to download data. We added links to
     different methods for downloading data. These links point to data
@@ -132,9 +170,9 @@ Delaware River at Frenchtown, NJ**
     users to use the dataRetrieval package in R, which allows users to
     access an expanded data set for each site.
 
-<center>
 
-![](/static/ImprovingMonitoringPages/image6.png) **Screen capture of
-data download section**
+{{< figure src="/static/ImprovingMonitoringPages/image6.jpg" 
+title="Screen capture of data download section" alt="Screen capture of data download section" >}}
+
 
 ### 
