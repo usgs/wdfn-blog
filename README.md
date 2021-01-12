@@ -80,8 +80,8 @@ wdfn-blog
 two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
 <div class="grid-row">
-{< figure src="/static/nldi-intro/upstream.png" title="Title" alt="Description class="side-by-side" >}}
-{{< figure src="/static/nldi-intro/downstream.png" title="Title" alt="Description" class="side-by-side" >}}
+{< figure src="/static/nldi-intro/upstream.png" caption="Title" alt="Description class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/downstream.png" caption="Title" alt="Description" class="side-by-side" >}}
 </div>
 ```
 1. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
@@ -129,7 +129,7 @@ docker-compose run hugo bash -l
 ```
 
 # Local development without using Docker
-To test without docker, you must have Hugo and node.js installed. You should install the latest HUGO and the latest LTS for node, 
+To test without docker, you must have Hugo, Go, and node.js installed. You should install the latest HUGO and the latest LTS for node, 
 although for node any version > 8.x.x should work.  Then, from the terminal you can run:
 
 ```bash
@@ -175,6 +175,10 @@ remotes::install_github('usgs-r/USGSmarkdowntemplates')
 ```
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
+
+Make sure to format your blog a .md file, not a .Rmd file (which is the deafult if using a package such as blogdown).There are some simple functions for converting between the two if using R. 
+
+When setting up a new project in RStudio, there are many ways to connect to the project. One is by starting a new project, then choose version control, select Git and use the URL "https://github.com/username/wdfn-blog.git". This should allow you to use Git push, pull, and merge code within RStudio.
 
 
 Disclaimer
