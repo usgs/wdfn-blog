@@ -80,8 +80,8 @@ wdfn-blog
 two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
 <div class="grid-row">
-{< figure src="/static/nldi-intro/upstream.png" title="Title" alt="Description class="side-by-side" >}}
-{{< figure src="/static/nldi-intro/downstream.png" title="Title" alt="Description" class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/upstream.png" caption="caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/downstream.png" caption="other caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
 </div>
 ```
 1. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.

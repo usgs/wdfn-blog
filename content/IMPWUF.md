@@ -1,14 +1,14 @@
 ---
 title: Improving Monitoring Pages with User Feedback
 author: Candice Hopkins
-date: '2021-01-11'
+date: '2021-01-12'
 slug: ImprovingMonitoringPages
 categories:
   - Software Development
   - water information
 tags:
   - Water Data for the Nation
-draft: True
+draft: False
 type: post
 description: Improvements to next-generation monitoring pages in response to user feedback
 keywords: 
