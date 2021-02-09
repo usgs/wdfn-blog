@@ -56,7 +56,7 @@ Users asked us to improve the map in a few ways and we responded:
 
 
 {{< figure src="/static/ImprovingMonitoringPages/image1.jpg" 
-caption="Screenshot of new improved basemap and upstream basin shading for montitoring location [07016500](https://waterdata.usgs.gov/monitoring-location/07016500/#parameterCode=00065), Bourbeuse River at Union, MO"  alt="Screenshot of new improved basemap and upstream basin shading for montitoring location 07016500, Bourbeuse River at Union, MO" >}}
+caption="Screenshot of new improved basemap and upstream basin shading for montitoring location [07016500](https://waterdata.usgs.gov/monitoring-location/07016500/#parameterCode=00065), Bourbeuse River at Union, MO"  alt="Screenshot of new improved basemap and upstream basin shading for monitoring location 07016500, Bourbeuse River at Union, MO" >}}
 
 
 
