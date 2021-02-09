@@ -20,6 +20,7 @@ tags:
 
 The USGS Water Mission Area has recently completed a migration of groundwater field visit data from a legacy data system to a new, centralized datastore. Alongside this work, we have been building a new modernized dataflow (technical blog post coming on that soon) as well as bringing the display of groundwater field visit data on the monitoring location pages.
 
+
 {{< figure src="/static/groundwater_display/414240072033201_hydrograph.png" caption="Image of hydrograph from  [CT-SC 22 SCOTLAND, a well in Windham County, CN](https://waterdata.usgs.gov/monitoring-location/414240072033201/#parameterCode=72019&startDT=1984-10-01&endDT=2021-02-09) containing field visit and instrumented groundwater level data"  alt="Screenshot of a graph showing field visit data as red circles along with instantaneous values which are charted as a blue and orange line" >}}
 
 
