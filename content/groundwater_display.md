@@ -3,15 +3,16 @@ author: Jim Kreft and Candice Hopkins
 date: 2021-02-09
 slug: groundwater-field-visits-monitoring-location-pages
 draft: False
-image: /static/groundwater_display/image1.png
+image: /static/groundwater_display/414240072033201_hydrograph.png
 type: post
 title: Groundwater Field Visit Data on Monitoring Location Pages
 author_staff: james-m-kreft
 author_email: <jkreft@usgs.gov>
-description: Details on the new groundwater levels field visit data display
+description: An overview of new features tied to the modernization of groundwater levels field visit data display.
 categories:
   - Applications
   - water information
+  - groundwater
 tags:
   - Water Data for the Nation
 ---
