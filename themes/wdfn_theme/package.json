@@ -61,6 +61,6 @@
     "stylelint": "^13.9.0",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.18.0",
-    "terser": "^5.5.1"
+    "terser": "^5.6.0"
   }
 }
