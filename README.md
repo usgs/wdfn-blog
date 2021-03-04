@@ -12,8 +12,8 @@ wdfn-blog
 # Submitting an update
 
 1. Fork repo
-2. Create a markdown file (.md). This should be all lowercase and dashes (e.g. `name-of-post`)
-3. Add to `content` folder
+2. Create a markdown file in (.md). This should be all lowercase and dashes (e.g. `name-of-post`)
+3. Add your markdown file to the `content` folder
 4. Include static images in `static\name-of-post`. Images *must* include alt and title text
 5. Add a header similar to:
 
