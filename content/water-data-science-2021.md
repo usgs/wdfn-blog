@@ -4,7 +4,7 @@ date: 2021-03-04
 slug: water-data-science-2021
 draft: True
 type: post
-image: /static/FY21DataSci/image3.gif
+image: /static/FY21DataSci/pgdl_flubber_small.gif
 title: "Water Data Science in 2021"
 author_staff: Jordan-S-Read
 author_email: <jread@usgs.gov>
@@ -25,7 +25,7 @@ tags:
 
 ---
 
-Where data science in USGS is headed in 2021 
+Where the USGS water data science branch is headed in 2021 
 --------------------
 It is an exciting time to be a data science practitioner in environmental science. In the last five years, we’ve seen massive data growth, modeling improvements, new more inclusive definitions of “impact” in science, and new jobs and duties. The title of “data scientist” has even been formally added as an official job title by the federal government.
 
