@@ -2,7 +2,7 @@
 author: Jordan S Read (he/him)
 date: 2021-03-05
 slug: water-data-science-2021
-draft: True
+draft: False
 type: post
 image: /static/FY21DataSci/pgdl_flubber_small.gif
 title: "Water Data Science in 2021"
