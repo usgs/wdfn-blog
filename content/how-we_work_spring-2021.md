@@ -67,7 +67,7 @@ about how we work:
         - code quality using tools like [Codacy](https://www.codacy.com/) and [SonarQube](https://www.sonarqube.org/)
         - Peer review of all code and all configuration
         - Continous integration using tools like [Jenkins](https://www.jenkins.io/) and [Gitlab CI](https://docs.gitlab.com/ee/ci/)
-        - Regular deploys with a long-term goal of continous deployment.
+        - Regular deploys with a long-term goal of continous deployment. 
         - working toward a culture of devsecops
         
         so that our products will be more maintainable and easier to
