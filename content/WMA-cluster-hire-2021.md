@@ -2,7 +2,7 @@
 author: Jordan S Read (he/him)
 date: 2021-03-08
 slug: hiring-spring-2021
-draft: True
+draft: False
 type: post
 image: /static/hiring-2021/hiring_thumb.png
 title: "2021 Cluster Hires"
@@ -94,10 +94,6 @@ Three GS 12 Term Product Managers positions are opening up in the USGS Water Web
 Additional Information 
 --------------------
 
-### Why Tuscaloosa?
-USGS is building a new advanced hydrologic instrumentation facility and modeling center on the campus of the University of Alabama, in Tuscaloosa, AL. This new building will open in 2023 and host dozens of USGS staff focused on innovating how we monitor and model water in the U.S. Until the doors open on this new USGS facility, staff will be stationed at the NOAA National Water Center (also located on campus in Tuscaloosa) and begin to forge cross-agency collaborations with NOAA on the mutual priority of advancing water prediction. Several of the positions closely tied to modeling will be advertised with Tuscaloosa duty stations in order to bring new modeling talent into this innovation. 
-
-
 ### The Process 
 
 We’re here to answer any questions you have about what we do and how to navigate the application process. HR’s application window will be tight – only 5 days between March 15th and March 19th – which is why we’re letting you know now. Plus, we have some information that will hopefully help you navigate the process of applying to a federal job.  It can get confusing, but you’re awesome and we want to get to know you! 
@@ -114,7 +110,7 @@ We’re here to answer any questions you have about what we do and how to naviga
 #### Applying for the job
 > **Creating a USA Jobs account -** All of these federal positions will be posted and filled using public vacancy announcements on [usajobs.gov](https://www.usajobs.gov/). If you are remotely interested in applying to any of the positions mentioned here or elsewhere, get ahead by creating an account as soon as you can. Having an active account will allow you to set up job filters and get a jump start on getting your application materials together. 
 
-> **Qualifying for GS 11 or 12 -** These grades are a high bar, requiring a PhD **_or_** a masters degree and work experience **_or_** multiple years of experience with a Bachelor's degree. We recognize that people with lots of different experiences will be able to excel at these jobs. That said, federal pay grades have requirements that applicants must meet for the system to pass you on to the pool that we can then review. We **CAN'T STRESS THIS ENOUGH**: see [USGS tips for combining graduate education and experience](https://www.usgs.gov/about/organization/science-support/human-capital/combining-graduate-education-and#11) and spell out who . We will be advertising a combination of  [Biologist](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/0400/general-natural-resources-management-and-biological-sciences-series-0401/), [Physical Scientist](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/1300/general-physical-science-series-1301/), and [Mathematical Statistician](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/1500/mathematical-statistics-series-1529/) job series. 
+> **Qualifying for GS 11 or 12 -** These grades are a high bar, requiring a PhD **_or_** a masters degree and work experience **_or_** multiple years of experience with a Bachelor's degree. We recognize that people with lots of different experiences will be able to excel at these jobs. That said, federal pay grades have requirements that applicants must meet for the system to pass you on to the pool that we can then review. We **CAN'T STRESS THIS ENOUGH**: see [USGS tips for combining graduate education and experience](https://www.usgs.gov/about/organization/science-support/human-capital/combining-graduate-education-and#11) and spell out how you meet the grade and job series qualifications. I've seen people attach an additional document to the hiring package that makes this math clear to HR. We will be advertising a combination of  [Biologist](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/0400/general-natural-resources-management-and-biological-sciences-series-0401/), [Physical Scientist](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/1300/general-physical-science-series-1301/), and [Mathematical Statistician](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/1500/mathematical-statistics-series-1529/) job series. 
 
 > **Specialized experience -** We're using [USGS's direct hire authority](https://www.usgs.gov/about/organization/science-support/human-capital/direct-hire-authorities) (DHA) to post public positions and see a wide candidate pool. We expect a lot of applications and are planning on interviewing lots of people. By using DHA we will be able to consider any candidate who meets the minimum educational and work experience for the job series (see above) and also _Specialized Experience_ that we've defined for the role. _Specialized Experience_ includes the demonstration of specific skills for a minimum of one year, so make sure to be explicit about how you've met these requirements on your resume. 
 
