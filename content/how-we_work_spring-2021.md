@@ -30,7 +30,7 @@ and APIs to make these data publicly available. We call our data
 delivery product line *Water Data for the Nation* (WDFN). Here's our
 product vision:
 
-> **Water Data for the Nation makes high quality water information discoverable, accessible, and usable for everyone.**
+> **Water Data for the Nation makes high-quality water information discoverable, accessible, and usable for everyone.**
 
 We use a principled approach to accomplishing our goals. Here's more
 about how we work:
@@ -62,12 +62,24 @@ about how we work:
         methods](https://methods.18f.gov/) frequently in our work.
 
     -   Software engineering. Our team is not locked into particular
-        frameworks, but we do insist [on code quality, peer review,
-        testing, and continuous integration and continuous
-        deployment](https://labs.waterdata.usgs.gov/repositories/index.html),
+        frameworks, but we do insist on
+        - doing our work in the open using [Github](https://github.com/usgs/waterdataui) and [self-hosted tools](https://code.usgs.gov/water)
+        - code quality using tools like [Codacy](https://www.codacy.com/) and [SonarQube](https://www.sonarqube.org/)
+        - Peer review of all code and all configuration
+        - Continous integration using tools like [Jenkins](https://www.jenkins.io/) and [Gitlab CI](https://docs.gitlab.com/ee/ci/)
+        - Regular deploys with a long-term goal of continous deployment.
+        - working toward a culture of devsecops
+        
         so that our products will be more maintainable and easier to
-        evolve. We use [shared
-        tooling](https://designsystem.digital.gov/) when available.
+        evolve. While we do a lot of custom software development, we stand on the shoulders of giants, and build on best of breed open source tools such as: 
+        - The [US Web Design System](https://designsystem.digital.gov/) 
+        - [D3.js](https://d3js.org/) for visualizations and charting
+        - [Leaflet](https://leafletjs.com/) and [GeoServer](http://geoserver.org/) for web mapping
+        - The [Flask](https://flask.palletsprojects.com/en/1.1.x/) web server microframework
+        - The [Spring](https://spring.io/) Framework for Java based APIs
+        - The [Serverless Framework](https://www.serverless.com/) for cloud-native, serverless deployment
+        
+        when available.
 
     -   Agile methodology and its cadences and ceremonies bring together
         product, design, and engineering activities to delivery value to
@@ -94,7 +106,9 @@ pages](https://waterdata.usgs.gov/blog/groundwater-field-visits-monitoring-locat
 features to
 users.](https://waterdata.usgs.gov/blog/improvingmonitoringpages/)
 
-Our legacy powerhouse: <https://waterdata.usgs.gov/nwis>.
+Our legacy data access application: <https://waterdata.usgs.gov/nwis>.
+
+Our legacy data access services: <https://waterservices.usgs.gov>
 
 Modern monitoring location pages:
 <https://waterdata.usgs.gov/monitoring-location/05428500/#parameterCode=00065>
