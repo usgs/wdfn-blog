@@ -33,7 +33,7 @@ tags:
   
 
 ---
-{{< figure src="/static/hiring-2021/usgsDataSci-jobs-jread2.jpg" alt="USGS visualization laboratory (VIZLAB) banner, which depicts a stream gage and a collection of water visuals in the background" caption="U.S.Geological Survey's VIZLAB (credit E Bechtel)">}}
+{{< figure src="/static/hiring-2021/usgsDataSci-jobs-jread2.jpg" alt="hiring flier image which contains a graphic of data assimilation modeled and observed data uncertainty distributions as well as large text 'We are hiring' and additional details about the job openings, all of which are included in the text below. In brief, there are multiple positions for machine learning specialists, data scientists, and water information product managers. Email jread@usgs.gov with question and/or attend informational Session 1: March 12th at 1pm EST on MS Teams. Join at: http://bit.ly/3uWjqt9 or informational Session 2: March 15th at 1:30pm EST on MS Teams. Join at: http://bit.ly/3kLVsfz. Image credit E Bechtel">}}
 
 
 The U.S. Geological Survey Water Mission Area is hiring multiple Data Scientists, Machine Learning Specialists, and Water Information Product Managers. Apply online at USA Jobs, where the positions will open and applications will be accepted March 15-19th.  For all positions, an unofficial transcript and detailed resume summarizing job qualifications and relevant skills is needed. 
