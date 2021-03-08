@@ -5,7 +5,7 @@ slug: hiring
 draft: True
 type: post
 image: /static/hiring-2021/hiring_thumb.png
-title: "USGS Water Mission Area 2021 Cluster Hires "
+title: "2021 Cluster Hires"
 author_staff: Jordan-S-Read
 author_email: <jread@usgs.gov>
 author_twitter: jordansread
