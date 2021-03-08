@@ -36,6 +36,15 @@ tags:
 {{< figure src="/static/hiring-2021/usgsDataSci-jobs-jread2.jpg" alt="hiring flier image which contains a graphic of data assimilation modeled and observed data uncertainty distributions as well as large text 'We are hiring' and additional details about the job openings, all of which are included in the text below. In brief, there are multiple positions for machine learning specialists, data scientists, and water information product managers. Email jread@usgs.gov with question and/or attend informational Session 1: March 12th at 1pm EST on MS Teams. Join at: http://bit.ly/3uWjqt9 or informational Session 2: March 15th at 1:30pm EST on MS Teams. Join at: http://bit.ly/3kLVsfz. Image credit E Bechtel">}}
 
 
+For additional information, please follow the [USGS Data Science Twitter](https://twitter.com/USGS_Datasci) feed or attend the following informational sessions: 
+
+
+- Informational Session 1: March 12th at 1pm EST on MS Teams. Join at: http://bit.ly/3uWjqt9 
+- Informational Session 2: March 15th at 1:30pm EST on MS Teams. Join at: http://bit.ly/3kLVsfz 
+
+
+USGS Water Mission Area 2021 Cluster Hires
+--------------------
 The U.S. Geological Survey Water Mission Area is hiring multiple Data Scientists, Machine Learning Specialists, and Water Information Product Managers. Apply online at USA Jobs, where the positions will open and applications will be accepted March 15-19th.  For all positions, an unofficial transcript and detailed resume summarizing job qualifications and relevant skills is needed. 
 
 (We will continue to update this page with information, including direct links to the vacancies as soon as they are available.) 
@@ -75,12 +84,4 @@ Three GS 12 Term Product Managers positions are opening up in the USGS Water Web
 
  
 
-Additional Information 
---------------------
-For additional information, please attend the following informational sessions or follow the [USGS Data Science Twitter](https://twitter.com/USGS_Datasci) feed: 
 
-Informational Session 1: March 12th at 1pm EST on MS Teams. Join at: http://bit.ly/3uWjqt9 
-Informational Session 2: March 15th at 1:30pm EST on MS Teams. Join at: http://bit.ly/3kLVsfz 
-USGS Data Science Twitter: USGS Data Science ([@USGS_DataSci](https://twitter.com/USGS_Datasci)) / Twitter 
-
- 
