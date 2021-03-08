@@ -37,7 +37,7 @@ about how we work:
 
 -   Public service orientation. Our team is dedicated to transforming
     Federal water data delivery and using [technical
-    innovations](https://labs.waterdata.usgs.gov/index.html) to do so.  We 
+    innovations](https://labs.waterdata.usgs.gov/index.html) to do so. 
 
 -   Working in the open. We make our [data and code
     available](https://github.com/usgs), so that others can see it, use
@@ -48,8 +48,8 @@ about how we work:
     software engineering to accomplish our work:
 
     -   Product management. Cyd Harrell's definition of product
-        management, as stated in The Civic Technologist's Practice
-        Guide, is useful: Product management is "*the strategic
+        management, as stated in [The Civic Technologist's Practice
+        Guide](https://cydharrell.com/book/), is useful: Product management is "*the strategic
         discipline of uniting a team around a product vision and making
         trade-offs across technical, design, and business domains to
         determine how to invest and when to ship."* Enough said.
