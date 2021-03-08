@@ -1,8 +1,8 @@
 ---
 author: Jordan S Read (he/him)
 date: 2021-03-08
-slug: hiring
-draft: True
+slug: hiring-spring-2021
+draft: False
 type: post
 image: /static/hiring-2021/hiring_thumb.png
 title: "2021 Cluster Hires"
