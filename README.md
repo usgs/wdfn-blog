@@ -52,7 +52,7 @@ wdfn-blog
 
   * `slug` slug will be the name of your url after waterdata.usgs.gov/blog/xxx
 
-  * `image` is not required, but will improve the look of the main "update" page. Without an image, a generic USGS image will be included.
+  * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic USGS image will be included.
 
   * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
 
@@ -75,7 +75,10 @@ wdfn-blog
 12. Assuming all looks good, push to prod
 
 # Tips to writing content
-1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.
+1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.   There are a few required tags:
+   * caption: The caption of the image.  Will be displayed.  Markdown within the caption will be rendered.
+   * alt: alt text, for accessibility.  Aim for text that actaully discribes in the image or gif, not just the caption text again.
+   * src: path to the image that you want to display.
 1. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place
 two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
@@ -117,6 +120,7 @@ If the site on http://localhost:1313 is missing various static files, you may ne
 ```bash
 docker-compose run hugo build --buildDrafts
 ```
+If you haven't set things up on the right cert bundle, it may be easier to run this command outside the USGS VPN.
 
 Once that is done, you can use `docker-compose up` to start the development server again.
 
