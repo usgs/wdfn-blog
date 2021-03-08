@@ -2,7 +2,7 @@
 author: Jordan S Read (he/him)
 date: 2021-03-08
 slug: hiring-spring-2021
-draft: True
+draft: False
 type: post
 image: /static/hiring-2021/hiring_thumb.png
 title: "2021 Cluster Hires"
@@ -93,10 +93,6 @@ Three GS 12 Term Product Managers positions are opening up in the USGS Water Web
 
 Additional Information 
 --------------------
-
-### Why Tuscaloosa?
-USGS is building a new advanced hydrologic instrumentation facility and modeling center on the campus of the University of Alabama, in Tuscaloosa, AL. This new building will open in 2023 and host dozens of USGS staff focused on innovating how we monitor and model water in the U.S. Until the doors open on this new USGS facility, staff will be stationed at the NOAA National Water Center (also located on campus in Tuscaloosa) and begin to forge cross-agency collaborations with NOAA on the mutual priority of advancing water prediction. Several of the positions closely tied to modeling will be advertised with Tuscaloosa duty stations in order to bring new modeling talent into this innovation. 
-
 
 ### The Process 
 
