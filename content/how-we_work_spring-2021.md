@@ -112,3 +112,5 @@ Our legacy data access services: <https://waterservices.usgs.gov>
 
 Modern monitoring location pages:
 <https://waterdata.usgs.gov/monitoring-location/05428500/#parameterCode=00065>
+
+_Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government._
