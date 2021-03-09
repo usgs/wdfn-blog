@@ -1,8 +1,8 @@
 ---
 author: Emily K Read
-date: 2021-03-08
+date: 2021-03-09
 slug: how-we-work-spring-2021
-draft: True
+draft: False
 type: post
 title: "How we work on the Water Data for the Nation Team"
 author_github: eread-usgs
