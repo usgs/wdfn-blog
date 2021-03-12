@@ -38,7 +38,7 @@ tags:
 
 
 
-USGS Water Mission Area 2021 Cluster Hires (_updated 3/11_)
+USGS Water Mission Area 2021 Cluster Hires (_updated 3/12_)
 --------------------
 The U.S. Geological Survey Water Mission Area is hiring multiple Data Scientists, Machine Learning Specialists, and Water Information Product Managers. Apply online at USA Jobs, where the positions will open and applications will be accepted March 15-19th.  For all positions, an unofficial transcript and detailed resume summarizing job qualifications and relevant skills is needed. _We will continue to update this page with information, including direct links to the vacancies as soon as they are available._
 
