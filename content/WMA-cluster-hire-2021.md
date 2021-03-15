@@ -38,7 +38,7 @@ tags:
 
 
 
-USGS Water Mission Area 2021 Cluster Hires (_updated 3/12_)
+USGS Water Mission Area 2021 Cluster Hires (_updated 3/15_)
 --------------------
 The U.S. Geological Survey Water Mission Area is hiring multiple Data Scientists, Machine Learning Specialists, and Water Information Product Managers. Apply online at USA Jobs, where the positions will open and applications will be accepted March 15-19th.  For all positions, an unofficial transcript and detailed resume summarizing job qualifications and relevant skills is needed. _We will continue to update this page with information, including direct links to the vacancies as soon as they are available._
 
@@ -49,12 +49,13 @@ For additional information, please follow the [USGS Data Science Twitter](https:
 - Informational Session 1: March 12th at 1pm EST on MS Teams. Join at: http://bit.ly/3uWjqt9 
 - Informational Session 2: March 15th at 1:30pm EST on MS Teams. Join at: http://bit.ly/3kLVsfz 
 
-[USAjobs](https://www.usajobs.gov/) Announcement numbers (will share links when these are active):
-- USGS-SAC-21-11044201-DHA-BC **Water Information Product Owner**; _any_ duty station
-- USGS-SAC-21-11044192-DHA-BC **Data Scientist**; _Tuscaloosa, AL_ duty station
-- USGS-SAC-21-11057397-DHA-BC **Data Scientist**; _any_ duty station
-- USGS-SAC-21-11059332-DHA-BC **Machine Learning Specialist**; _Tuscaloosa, AL_ duty station
-- USGS-SAC-21-11059333-DHA-BC **Machine Learning Specialist**; _any_ duty station
+** JOBS ARE NOW ACTIVE **
+[USAjobs](https://www.usajobs.gov/) Job links and announcement numbers:
+- [USGS-SAC-21-11044201-DHA-BC **Water Information Product Owner**; _any_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595099400)
+- [USGS-SAC-21-11044192-DHA-BC **Data Scientist**; _Tuscaloosa, AL_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595098500)
+- [USGS-SAC-21-11057397-DHA-BC **Data Scientist**; _any_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595099000)
+- [USGS-SAC-21-11059332-DHA-BC **Machine Learning Specialist**; _Tuscaloosa, AL_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595097400)
+- [USGS-SAC-21-11059333-DHA-BC **Machine Learning Specialist**; _any_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595095600)
 
 ### Our Commitment to Diversity, Inclusion, and Transparency 
 
