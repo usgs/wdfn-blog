@@ -517,7 +517,9 @@ ffmpeg_command <- sprintf(
 system(ffmpeg_command) # Run command
 ```
 
-<insert VIDEO>
+<video autosize=TRUE controls>
+  <source src="static/us-river-conditions/animation_2020_10_01_2020_10_31.mp4" type="video/mp4">
+</video>
 
 Optimizing for various platforms  {#optimize}
 --------------------------------
