@@ -39,36 +39,28 @@ Background on the animation series {#background}
 
 The U.S. River Conditions animation series ([visit the full portfolio of USGS Vizlab
 products to see examples)](https://www.usgs.gov/mission-areas/water-resources/science/water-data-visualizations) was inspired by the USGS streamflow conditions website,
-[WaterWatch](https://waterwatch.usgs.gov/?id=ww_current). To make the content more accessible to non-technical audiences, we deviated from WaterWatch by 1) adding context to the data by including callout text, 2)
+[WaterWatch](https://waterwatch.usgs.gov/?id=ww_current). WaterWatch depicts national streamflow conditions by coloring a gage’s daily streamflow value to be high or low relative to *that day’s* record of streamflow values. Hydrologists and other water data experts use this nuanced metric to inform their daily decision-making.
+
+In contrast to WaterWatch, the U.S. River Conditions animation series was intended to target a new audience of users who may be unfamiliar with the USGS streamgaging network. To make the content more accessible to non-technical audiences, we deviated from WaterWatch by 1) adding context to the data by including callout text, 2)
 building a file type that can be directly embedded on social media
 platforms (e.g Twitter, Facebook, Instagram), and 3) using streamflow metrics that
-were informative but not too complex<sup>1</sup>. 
+were not as complex. To make the streamflow metrics less complex, we reinforced knowledge that lots of people already have (e.g. seasonal patterns with wet springs
+and dry summers) and build on that to introduce the streamflow data.
+With this non-hydrologist audience in mind, the animation series uses each
+gage’s daily streamflow as high or low relative to the gage’s **entire**
+record of streamflow values (not the individual day's record as WaterWatch does). 
 
 Since it is rebuilt every three months, the entire visualization is
-coded in R and the only manual required is to update the dates and
-configure the text for hydrologic events. This whole
-visualization pipeline is reproducible, but does use a custom, internal
+coded in R and the only manual effort required is to update the dates and
+configure the text for hydrologic events. You can see the code for this visualization
+[here on GitHub](https://github.com/USGS-VIZLAB/gage-conditions-gif). 
+While the entire visualization pipeline is reproducible, it uses a custom, internal
 pipelining tool built off of the R package, `remake` (very powerful, but
 almost like learning a new language). The purpose of this blog is to teach
 the main tips and tricks of how we create these U.S. River Conditions 
 animations in R independent of the pipeline tool. The workflow below will 
 not recreate them exactly, but it should give you the tools to make similar 
 video and gif animations from R.
-
-----
-
-<sup>1</sup> *WaterWatch shows a gage’s daily streamflow value as high
-or low relative to *that day’s* record of streamflow values. This is a
-useful way to look at streamflow for hydrologists, who are able to make
-decisions using this daily information, and apply their underlying
-knowledge of streamflow seasonality. However, it adds an additional
-layer of complexity for non-hydrologists who may be seeing streamflow
-data for the first time. For non-hydrologists, we want to reinforce
-knowledge they may already have (e.g. seasonal patterns with wet springs
-and dry summers) and build on that to introduce the streamflow data.
-With this non-hydrologist audience in mind, these animations depict each
-gage’s daily streamflow as high or low relative to the gage’s *entire*
-record of streamflow values.*
 
 First, configs and packages. {#setup}
 ----------------------------
