@@ -92,8 +92,8 @@ viz_states <- c("AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
 viz_proj <- "+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"
 
 # Configs that could be changed ...
-param_cd <- "00060" # This is the streamflow parameter code. See `dataRetrieval::parameterCdFile` for more.
-service_cd <- "dv" # This is the daily value service. See `https://waterservices.usgs.gov/rest/` for more info about services available.
+param_cd <- "00060" # Parameter code for streamflow . See `dataRetrieval::parameterCdFile` for more.
+service_cd <- "dv" # means "daily value". See `https://waterservices.usgs.gov/rest/` for more info.
 
 ```
 
@@ -269,9 +269,9 @@ I like to separate visual configurations, such as frame dimensions and symbol co
 viz_width <- 2048 # in pixels 
 viz_height <- 1024 # in pixels
 
-# Style configs for plotting
+# Style configs for plotting (all are listed in the same order as the categories)
 viz_categories <- c("High", "Normal", "Low", "Missing")  
-category_col <- c("#00126099", "#EAEDE9FF", "#601200FF", "#7f7f7fFF") # Colors in order of categories (hex color codes + alpha code)
+category_col <- c("#00126099", "#EAEDE9FF", "#601200FF", "#7f7f7fFF") # Colors (hex + alpha code)
 category_pch <- c(16, 19, 1, 4) # Point types in order of categories
 category_cex <- c(1.5, 1, 2, 0.75) # Point sizes in order of categories
 category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
@@ -458,8 +458,9 @@ gif_delay <- round(100 / fps) # 100 is an ImageMagick default (see that link abo
 frame_str <- paste(frames, collapse = " ")
 
 # Create the ImageMagick command to convert the files into a GIF
-magick_command <- sprintf('convert -define registry:temporary-path=%s -limit memory 24GiB -delay %s -loop 0 %s %s',
-                          tmp_dir, gif_delay, frame_str, gif_file_out)
+magick_command <- sprintf(
+  'convert -define registry:temporary-path=%s -limit memory 24GiB -delay %s -loop 0 %s %s',
+  tmp_dir, gif_delay, frame_str, gif_file_out)
 
 # If you are on a Windows machine, you will need to have `magick` added before the command
 if(Sys.info()[['sysname']] == "Windows") {
