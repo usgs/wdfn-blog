@@ -64,7 +64,7 @@ animations in R (independent of the pipeline tool). The workflow below will
 not recreate them exactly, but it should give you the tools to make similar 
 video and gif animations from R.
 
-Setup your workflow. {#setup}
+Setup your workflow {#setup}
 ----------------------------
 
 This code is set up to operate based on all CONUS states. You should be
@@ -105,7 +105,7 @@ package, `dataRetrieval`. To learn more about how to use these functions and dis
 capabilities of the package, see Laura DeCicco's blog post: [dataRetrieval Tutorial - Using R to Discover Data](https://waterdata.usgs.gov/blog/dataretrieval/). You can also
 explore our online, self-paced course [here](https://owi.usgs.gov/R/training-curriculum/usgs-packages/dataRetrieval-intro/).
 
-### Find the site numbers.
+### Find the site numbers
 
 Find the gages that have data for your states and time period. 
 
@@ -131,7 +131,7 @@ for(s in viz_states) {
 }
 ```
 
-### Next, get the statistics data.
+### Next, get the statistics data
 
 The biggest processing hurdle for the U.S. River Conditions animation is
 to fetch and process EVERY streamflow data point in the entire NWIS
