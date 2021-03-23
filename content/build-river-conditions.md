@@ -27,8 +27,10 @@ streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/
 
 The workflow to recreate the U.S. River Conditions animations can be divided into these key sections:
 
-* [Code setup](#setup)
+* [Workflow setup](#setup)
 * [Get data](#fetchdata)
+* [Visual configurations](#viconfig)
+* [Prep data for mapping](#mapreadydata)
 * [Create animation frames](#makeframes)
 * [Make a gif](#creategif)
 * [Make a video](#createvideo)
@@ -93,40 +95,14 @@ viz_proj <- "+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=637099
 param_cd <- "00060" # This is the streamflow parameter code. See `dataRetrieval::parameterCdFile` for more.
 service_cd <- "dv" # This is the daily value service. See `https://waterservices.usgs.gov/rest/` for more info about services available.
 
-# Viz frame height and width. These are double the size the end video & 
-#   gifs will be. See why in the "Optimizing for various platforms" section
-viz_width <- 2048 # in pixels 
-viz_height <- 1024 # in pixels
-
-# Style configs for plotting
-viz_categories <- c("High", "Normal", "Low", "Missing")  
-category_col <- c("#00126099", "#EAEDE9FF", "#601200FF", "#7f7f7fFF") # Colors in order of categories (hex color codes + alpha code)
-category_pch <- c(16, 19, 1, 4) # Point types in order of categories
-category_cex <- c(1.5, 1, 2, 0.75) # Point sizes in order of categories
-category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
 ```
 
 Get data!  {#fetchdata}
 ---------
 
-The biggest processing hurdle for the U.S. River Conditions animation is
-to fetch and process EVERY streamflow data point in the entire NWIS
-database in order to calculate historic statistics. We have a separate
-pipeline to pull the data (see
-[`national-flow-observations`](https://github.com/USGS-R/national-flow-observations))
-and steps in the U.S. River Conditions code to calculate the quantiles
-(see [this
-script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)).
-
-For the purposes of this workflow, we will use [the `stat` service (beta)
-from NWIS](https://waterservices.usgs.gov/rest/Statistics-Service.html)
-so that we don’t need to pull down all of the historic data. This means
-that the final viz will show the values relative to that day’s historic
-values (as WaterWatch does). That is how the `stat` service works and
-greatly simplifies the processing part of this example so we can get to the
-animation!
-
 ### Find the site numbers.
+
+Find the gages that have data for your states and time period.
 
 ``` r
 # Can only query one state at a time, so need to loop through. 
@@ -151,6 +127,23 @@ for(s in viz_states) {
 ```
 
 ### Next, get the statistics data.
+
+The biggest processing hurdle for the U.S. River Conditions animation is
+to fetch and process EVERY streamflow data point in the entire NWIS
+database in order to calculate historic statistics. We have a separate
+pipeline to pull the data (see
+[`national-flow-observations`](https://github.com/USGS-R/national-flow-observations))
+and steps in the U.S. River Conditions code to calculate the quantiles
+(see [this
+script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)).
+
+For the purposes of this workflow, we will use [the `stat` service (beta)
+from NWIS](https://waterservices.usgs.gov/rest/Statistics-Service.html)
+so that we don’t need to pull down all of the historic data. This means
+that the final viz will show the values relative to that day’s historic
+values (as WaterWatch does). That is how the `stat` service works and
+greatly simplifies the processing part of this example so we can get to the
+animation!
 
 For this map, we will create a scale of 3 values from low (less than
 25th percentile), normal (between 25th and 75th percentile), and high
@@ -255,7 +248,25 @@ Build the animation frames.
 
 Now onto visualizing the data!
 
-### Get data ready for mapping
+### Setup visualization configs {#vizconfig}
+
+I like to separate visual configurations, such as frame dimensions and symbol colors/shapes, so that it is easy to find them when I want to make adjustments or reuse the code for another project.
+
+```r
+# Viz frame height and width. These are double the size the end video & 
+#   gifs will be. See why in the "Optimizing for various platforms" section
+viz_width <- 2048 # in pixels 
+viz_height <- 1024 # in pixels
+
+# Style configs for plotting
+viz_categories <- c("High", "Normal", "Low", "Missing")  
+category_col <- c("#00126099", "#EAEDE9FF", "#601200FF", "#7f7f7fFF") # Colors in order of categories (hex color codes + alpha code)
+category_pch <- c(16, 19, 1, 4) # Point types in order of categories
+category_cex <- c(1.5, 1, 2, 0.75) # Point sizes in order of categories
+category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
+```
+
+### Get data ready for mapping  {#mapreadydata}
 
 We are going to need to do two last things to our data to get it ready
 to visualize. First, add a column that becomes the color used based on
