@@ -425,9 +425,15 @@ stitch them together into a video or GIF!
 
 ### GIF {#creategif}
 
-To create GIFs, we use a software called `ImageMagick`. It is not an R
-package, but we can run commands to use it through the `system` function
-in R. For these commands to work, you will first need to install the
+To create GIFs, we use a software called `ImageMagick`. I am going to use
+the system library which is not an R package, but we can run commands to 
+use it through the `system` function in R. A colleage recently told me
+about the
+[R package `magick`](https://cran.r-project.org/web/packages/magick/vignettes/intro.html), 
+that saves you from learning the system commands, but I have not had 
+time to learn about it yet.
+
+For these commands to work, you will first need to install the
 `ImageMagick` library. Go to
 [imagemagick.org](https://imagemagick.org/script/download.php) to do so.
 Once installed, make sure you restart R if you had it open before
@@ -602,7 +608,10 @@ Social](https://sproutsocial.com/insights/social-media-image-sizes-guide/).
 Other animation options
 -----------------------
 
-In the world of R, there are tons of other animation options. If you are
+In the world of R, there are lots of other animation options. There is 
+an R package called `magick` that wraps the `ImageMagick` library we used earlier (I only recently 
+discovered this and may try to update this blog in the future using
+that package instead of the system calls). If you are
 a `ggplot2` user, there is a package called `gganimate` that will create
 animations without the need for any of the additional tools I listed
 here. I have struggled with using that package in the past (though to be
