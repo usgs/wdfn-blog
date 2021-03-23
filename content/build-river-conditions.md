@@ -20,26 +20,33 @@ tags:
   - R
   - dataRetrieval
 ---
-For the last few years, we have released quarterly animations of
-streamflow conditions at all active USGS streamflow sites. [Visit this
-link to see the most recent animation, U.S. River Conditions from
-October to December
-2020](https://www.usgs.gov/media/videos/us-river-conditions-october-december-2020).
-To see more of these quarterly animations and the water year versions,
-you can visit [the full portfolio of USGS Vizlab
-products](https://www.usgs.gov/mission-areas/water-resources/science/water-data-visualizations).
+For the last few years, we have [released quarterly animations of
+streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/media/videos/us-river-conditions-october-december-2020). Here, we walk through the steps to recreate a similar version in R.
 
-This animation series was inspired by
-[WaterWatch](https://waterwatch.usgs.gov/?id=ww_current), but we wanted
-to make the content more accessible to non-technical audiences, which
-meant we 1) added context to the data by including callout text, 2)
-built a file type that could be directly embedded on social media
-platforms (e.g Twitter, Facebook, Instagram), and 3) used metrics that
-were informative but not too complex<sup>1</sup>.
+{{< figure src="/static/us-river-conditions/blog_thumbnail.gif" alt="Map animating through time, starting October 1, 2020 and ending October 31, 2020. Points on the map show USGS stream gage locations and the points change color based on streamflow values. They are red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
 
-Since we rebuild this every three months, the entire visualization is
-coded in R and the only manual effort we make is to update the dates and
-manually pick and configure the text for hydrologic events. This whole
+Use these links to jump to the key sections:
+* [Background info](#background)
+* [Code setup](#setup)
+* [Get data](#fetchdata)
+* [Create animation frames](#makeframes)
+* [Make a gif](#creategif)
+* [Make a video](#createvideo)
+* [Optimize your animations](#optimize)
+
+Background on the animation series {#background}
+----------------------------
+
+The U.S. River Conditions animation series ([visit the full portfolio of USGS Vizlab
+products to see examples)](https://www.usgs.gov/mission-areas/water-resources/science/water-data-visualizations) was inspired by the USGS streamflow conditions website,
+[WaterWatch](https://waterwatch.usgs.gov/?id=ww_current). To make the content more accessible to non-technical audiences, we deviated from WaterWatch by 1) adding context to the data by including callout text, 2)
+building a file type that can be directly embedded on social media
+platforms (e.g Twitter, Facebook, Instagram), and 3) using streamflow metrics that
+were informative but not too complex<sup>1</sup>. 
+
+Since it is rebuilt every three months, the entire visualization is
+coded in R and the only manual required is to update the dates and
+configure the text for hydrologic events. This whole
 visualization pipeline is reproducible, but does use a custom, internal
 pipelining tool built off of the R package, `remake` (very powerful, but
 almost like learning a new language). The purpose of this blog is to teach
@@ -48,12 +55,7 @@ animations in R independent of the pipeline tool. The workflow below will
 not recreate them exactly, but it should give you the tools to make similar 
 video and gif animations from R.
 
-Use these links to jump to the key sections:
-* [Get data](#fetchdata)
-* [Create animation frames](#makeframes)
-* [Make a gif](#creategif)
-* [Make a video](#createvideo)
-* [Optimize your animations](#optimize)
+----
 
 <sup>1</sup> *WaterWatch shows a gage’s daily streamflow value as high
 or low relative to *that day’s* record of streamflow values. This is a
@@ -62,13 +64,13 @@ decisions using this daily information, and apply their underlying
 knowledge of streamflow seasonality. However, it adds an additional
 layer of complexity for non-hydrologists who may be seeing streamflow
 data for the first time. For non-hydrologists, we want to reinforce
-knowledge they may already have (e.g. seasonal patterns with wet springs
+knowledge they may already have (e.g. seasonal patterns with wet springs
 and dry summers) and build on that to introduce the streamflow data.
 With this non-hydrologist audience in mind, these animations depict each
 gage’s daily streamflow as high or low relative to the gage’s *entire*
 record of streamflow values.*
 
-First, configs and packages.
+First, configs and packages. {#setup}
 ----------------------------
 
 This code is set up to operate based on all CONUS states. You should be
