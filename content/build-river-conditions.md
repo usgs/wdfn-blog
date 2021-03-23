@@ -25,8 +25,8 @@ streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/
 
 {{< figure src="/static/us-river-conditions/blog_thumbnail.gif" alt="Map animating through time, starting October 1, 2020 and ending October 31, 2020. Points on the map show USGS stream gage locations and the points change color based on streamflow values. They are red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
 
-Use these links to jump to the key sections:
-* [Background info](#background)
+The workflow to recreate the U.S. River Conditions animations can be divided into these key sections:
+
 * [Code setup](#setup)
 * [Get data](#fetchdata)
 * [Create animation frames](#makeframes)
@@ -34,31 +34,31 @@ Use these links to jump to the key sections:
 * [Make a video](#createvideo)
 * [Optimize your animations](#optimize)
 
-Background on the animation series {#background}
+Background on the animation series
 ----------------------------
 
 The U.S. River Conditions animation series ([visit the full portfolio of USGS Vizlab
 products to see examples)](https://www.usgs.gov/mission-areas/water-resources/science/water-data-visualizations) was inspired by the USGS streamflow conditions website,
-[WaterWatch](https://waterwatch.usgs.gov/?id=ww_current). WaterWatch depicts national streamflow conditions by coloring a gage’s daily streamflow value to be high or low relative to *that day’s* record of streamflow values. Hydrologists and other water data experts use this nuanced metric to inform their daily decision-making.
+[WaterWatch](https://waterwatch.usgs.gov/?id=ww_current). WaterWatch depicts national streamflow conditions by coloring each gage's dot by how it's daily streamflow value relates to _that day’s_ record of streamflow values. Hydrologists and other water data experts use this nuanced metric to inform daily decisions.
 
 In contrast to WaterWatch, the U.S. River Conditions animation series was intended to target a new audience of users who may be unfamiliar with the USGS streamgaging network. To make the content more accessible to non-technical audiences, we deviated from WaterWatch by 1) adding context to the data by including callout text, 2)
 building a file type that can be directly embedded on social media
 platforms (e.g Twitter, Facebook, Instagram), and 3) using streamflow metrics that
-were not as complex. To make the streamflow metrics less complex, we reinforced knowledge that lots of people already have (e.g. seasonal patterns with wet springs
-and dry summers) and build on that to introduce the streamflow data.
-With this non-hydrologist audience in mind, the animation series uses each
-gage’s daily streamflow as high or low relative to the gage’s **entire**
-record of streamflow values (not the individual day's record as WaterWatch does). 
+were not as complex. To make the streamflow metrics less complex, the animation colors 
+each gage's dot by how it's daily streamflow value relates to its _entire_
+record of streamflow values (not the individual day's record as WaterWatch does). This change helps reinforce knowledge that lots of people already have about seasonal patterns (e.g. wet springs
+and dry summers) and builds on that existing framework to introduce streamflow data. 
 
-Since it is rebuilt every three months, the entire visualization is
-coded in R and the only manual effort required is to update the dates and
-configure the text for hydrologic events. You can see the code for this visualization
+We rebuild the U.S. River Conditions animation every three months to summarize the last quarter's streamflow 
+events to the public. To be able to do this efficiently and programmatically, the entire visualization is
+coded in R. The only manual effort required is to update the timeframe of interest and
+configure the text for hydrologic events. You can see the code for the visualization
 [here on GitHub](https://github.com/USGS-VIZLAB/gage-conditions-gif). 
-While the entire visualization pipeline is reproducible, it uses a custom, internal
+The visualization pipeline is completely reproducible, but does use a custom, internal
 pipelining tool built off of the R package, `remake` (very powerful, but
-almost like learning a new language). The purpose of this blog is to teach
-the main tips and tricks of how we create these U.S. River Conditions 
-animations in R independent of the pipeline tool. The workflow below will 
+almost like learning a new language). To make the processing more transparent and accessible,
+I created this blog to demonstrate the main workflow for how we create the U.S. River Conditions 
+animations in R (independent of the pipeline tool). The workflow below will 
 not recreate them exactly, but it should give you the tools to make similar 
 video and gif animations from R.
 
