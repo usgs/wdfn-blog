@@ -28,12 +28,11 @@ streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/
 The workflow to recreate the U.S. River Conditions animations can be divided into these key sections:
 
 * [Workflow setup](#setup)
-* [Get data](#fetchdata)
-* [Visual configurations](#viconfig)
-* [Prep data for mapping](#mapreadydata)
+* [Fetch data](#fetchdata)
+* [Prepare data for mapping](#preparedata)
 * [Create animation frames](#makeframes)
-* [Make a gif](#creategif)
-* [Make a video](#createvideo)
+* [Combine frames into a gif](#creategif)
+* [Combine frames into a video](#createvideo)
 * [Optimize your animations](#optimize)
 
 Background on the animation series
@@ -233,10 +232,10 @@ viz_daily_values <-  lapply(site_data_fns, readRDS) %>% bind_rows()
 nrow(viz_daily_values) # ~250,000 obs for one month of CONUS data
 ```
 
-Prepare your data
+Process and prepare your data for mapping {#preparedata}
 ---------------------------
 
-### Categorize daily values by comparing to their statistics
+### Categorize daily values by comparing to the statistics
 
 We now have all of the data! Next, we can categorize each day's data into low, normal, or high
 based on the statistics. The category is what we will use to determine how to style the points for each 
@@ -259,7 +258,7 @@ viz_daily_stats <- viz_daily_values %>%
                   NA))))
 ```
 
-### Setup visualization configs {#vizconfig}
+### Setup visualization configs 
 
 I like to separate visual configurations, such as frame dimensions and symbol colors/shapes, so that it is easy to find them when I want to make adjustments or reuse the code for another project.
 
@@ -277,7 +276,7 @@ category_cex <- c(1.5, 1, 2, 0.75) # Point sizes in order of categories
 category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
 ```
 
-### Get data ready for mapping  {#mapreadydata}
+### Get data ready for mapping
 
 We are going to need to do two last things to get our data ready
 to visualize. First, add columns to specify the style of the point called `viz_pt_color`, 
@@ -539,7 +538,7 @@ system(ffmpeg_command) # Run command
   <source src="static/us-river-conditions/animation_2020_10_01_2020_10_31.mp4" type="video/mp4">
 </video>
 
-This process of creating individual frames and then stitching together into a video or GIF 
+This process of creating individual frames and them stitching together into a video or GIF 
 will work for any set of images you have. To use this code with other frames (if you didn’t
 create the ones above), just change out the first line of the GIF or
 video code chunks that define your vector of files as the object, `frames`.
