@@ -42,11 +42,11 @@ coded in R and the only manual effort we make is to update the dates and
 manually pick and configure the text for hydrologic events. This whole
 visualization pipeline is reproducible, but does use a custom, internal
 pipelining tool built off of the R package, `remake` (very powerful, but
-almost like learning a new language). So, I created this blog so that
-others can learn the main tips and tricks of how we create these US
-River Conditions animations in R without learning the additional
-pipeline tool. This blog will not recreate them exactly, but it should
-give you the tools to make similar video and gif animations from R.
+almost like learning a new language). The purpose of this blog is to teach
+the main tips and tricks of how we create these U.S. River Conditions 
+animations in R independent of the pipeline tool. The workflow below will 
+not recreate them exactly, but it should give you the tools to make similar 
+video and gif animations from R.
 
 Use these links to jump to the key sections:
 * [Get data](#fetchdata)
@@ -71,8 +71,8 @@ record of streamflow values.*
 First, configs and packages.
 ----------------------------
 
-I have set this blog up to operate based on chosen set of states. The
-idea is that you can change the state(s), projection, and date range to
+This code is set up to operate based on all CONUS states. You should be
+able to change the state(s), projection, and date range to
 quickly generate something relevant to your area!
 
 ``` r
@@ -124,13 +124,13 @@ and steps in the U.S. River Conditions code to calculate the quantiles
 (see [this
 script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)).
 
-For the purposes of this blog, we will use [the `stat` service (beta)
+For the purposes of this workflow, we will use [the `stat` service (beta)
 from NWIS](https://waterservices.usgs.gov/rest/Statistics-Service.html)
 so that we don’t need to pull down all of the historic data. This means
 that the final viz will show the values relative to that day’s historic
 values (as WaterWatch does). That is how the `stat` service works and
-greatly simplifies the processing part of this blog so we can get to the
-animation part!
+greatly simplifies the processing part of this example so we can get to the
+animation!
 
 ### Find the site numbers.
 
@@ -530,8 +530,8 @@ For Windows users, the quality of saved PNG images is pretty low and
 results in pixelated videos. We were able to overcome this by setting
 the width and height to double the desired size and later downscaling
 the video. It will require you to adjust your point and text sizes on
-frames themselves. In this blog, I started with the width and height at
-double what I wanted to end up with, so now all I have to do is
+frames themselves. When creating the PNG files, I use a width and height
+double the size of what I wanted in the end, so now all I have to do is
 downscale! If you follow this approach, you can downscale your video to
 half the size by running the following:
 
@@ -581,7 +581,7 @@ a `ggplot2` user, there is a package called `gganimate` that will create
 animations without the need for any of the additional tools I listed
 here. I have struggled with using that package in the past (though to be
 fair since I had been using this method, I didn’t try very hard to
-learn) and found it to be very slow compared to the method explained in
-this blog.
+learn) and found it to be very slow compared to the multiframe plus ImageMagick
+or FFMPEG method.
 
 Go forth and animate!
