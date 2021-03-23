@@ -64,7 +64,7 @@ animations in R (independent of the pipeline tool). The workflow below will
 not recreate them exactly, but it should give you the tools to make similar 
 video and gif animations from R.
 
-First, configs and packages. {#setup}
+Setup your workflow. {#setup}
 ----------------------------
 
 This code is set up to operate based on all CONUS states. You should be
@@ -97,12 +97,17 @@ service_cd <- "dv" # This is the daily value service. See `https://waterservices
 
 ```
 
-Get data!  {#fetchdata}
+Fetch your data  {#fetchdata}
 ---------
+
+To fetch data for this example, will be using the USGS R 
+package, `dataRetrieval`. To learn more about how to use these functions and discover other 
+capabilities of the package, see Laura DeCicco's blog post: [dataRetrieval Tutorial - Using R to Discover Data](https://waterdata.usgs.gov/blog/dataretrieval/). You can also
+explore our online, self-paced course [here](https://owi.usgs.gov/R/training-curriculum/usgs-packages/dataRetrieval-intro/).
 
 ### Find the site numbers.
 
-Find the gages that have data for your states and time period.
+Find the gages that have data for your states and time period. 
 
 ``` r
 # Can only query one state at a time, so need to loop through. 
@@ -135,20 +140,19 @@ pipeline to pull the data (see
 [`national-flow-observations`](https://github.com/USGS-R/national-flow-observations))
 and steps in the U.S. River Conditions code to calculate the quantiles
 (see [this
-script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)).
-
-For the purposes of this workflow, we will use [the `stat` service (beta)
+script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)). 
+However, for the purposes of this workflow, we will use [the `stat` service (beta)
 from NWIS](https://waterservices.usgs.gov/rest/Statistics-Service.html)
 so that we don’t need to pull down all of the historic data. This means
 that the final viz will show the values relative to that day’s historic
-values (as WaterWatch does). That is how the `stat` service works and
-greatly simplifies the processing part of this example so we can get to the
+values (as WaterWatch does). Using the stat service will
+greatly simplify the processing part of this example so we can get to the
 animation!
 
 For this map, we will create a scale of 3 values from low (less than
 25th percentile), normal (between 25th and 75th percentile), and high
 (greater than 75th percentile). So, let’s fetch those stats for the
-sites we now have. You can visit [the stats service
+sites we found in the last code block. You can visit [the stats service
 documentation](https://waterservices.usgs.gov/rest/Statistics-Service.html#statType)
 for more on what stats are available to download.
 
@@ -156,7 +160,7 @@ for more on what stats are available to download.
 # For one month of CONUS, this took ~ 15 min
 
 # Can only pull stats for 10 sites at a time, so loop through chunks of 10
-#   sites at a time and combine into one big dataset!
+#   sites at a time and combine into one big dataset at the end!
 sites <- unique(sites_available$site_no)
 
 # Divide request into chunks of 10
@@ -178,6 +182,8 @@ for(chk_start in req_bks) {
 ```
 
 ### Now get the daily values
+
+Now that we have our sites and their statistics, we can pull the data for the timeframe of our visualization. These are the values that will be used against the site statistics to determine if our gage is experiencing low, normal, or high streamflow conditions.
 
 ``` r
 # For all of CONUS, there are 8500+ sites.
@@ -227,7 +233,14 @@ viz_daily_values <-  lapply(site_data_fns, readRDS) %>% bind_rows()
 nrow(viz_daily_values) # ~250,000 obs for one month of CONUS data
 ```
 
-### Compare daily to stats to get viz categories
+Prepare your data
+---------------------------
+
+### Categorize daily values by comparing to their statistics
+
+We now have all of the data! Next, we can categorize each day's data into low, normal, or high
+based on the statistics. The category is what we will use to determine how to style the points for each 
+frame of the animation.
 
 ``` r
 # To join with the stats data, we need to first break the dates into
@@ -235,18 +248,16 @@ nrow(viz_daily_values) # ~250,000 obs for one month of CONUS data
 viz_daily_stats <- viz_daily_values %>% 
   mutate(month_nu = as.numeric(format(dateTime, "%m")),
          day_nu = as.numeric(format(dateTime, "%d"))) %>% 
+  # Join the statistics data and match on month_nu and day_nu
   left_join(viz_stats) %>% 
+  # Compare the daily flow value to that sites statistic to 
+  # create a column that says whether the value is low, normal, or high
   mutate(viz_category = ifelse(
     Flow <= p25_va, "Low", 
     ifelse(Flow > p25_va & Flow <= p75_va, "Normal",
            ifelse(Flow > p75_va, "High",
                   NA))))
 ```
-
-Build the animation frames.
----------------------------
-
-Now onto visualizing the data!
 
 ### Setup visualization configs {#vizconfig}
 
@@ -268,9 +279,9 @@ category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
 
 ### Get data ready for mapping  {#mapreadydata}
 
-We are going to need to do two last things to our data to get it ready
-to visualize. First, add a column that becomes the color used based on
-the category. Second, join in the lat/long information and convert to a
+We are going to need to do two last things to get our data ready
+to visualize. First, add a column to specify the color of the point.
+Second, join in the lat/long information and convert to a
 spatial data frame.
 
 ``` r
@@ -317,16 +328,17 @@ state_sf <- st_as_sf(maps::map('state', viz_state_names, fill = TRUE, plot = FAL
   st_transform(viz_proj)
 ```
 
-Make a single map frame!
+Build the frames
 ========================
 
-Use base plotting to make a map per day. Pick the first day in the date
-sequence to test out your single frame.
+### Test by making a single frame
+
+To create each frame, we use base R plotting functions. In the end, there will be one PNG file per day. Pick the first day in the date sequence to test out a single frame and adjust style, as needed, with this single frame before moving on to the full build.
 
 ``` r
 png("test_single_day.png", width = viz_width, height = viz_height)
 
-# Prep plotting area (no margins, small space at top/bottom for title, white background)
+# Prep plotting area (no outer margins, small space at top/bottom for title, white background)
 par(omi = c(0,0,0,0), mai = c(0.5,0,0.5,0.25), bg = "white")
 
 # Add the background map
@@ -348,12 +360,14 @@ legend("right", legend = viz_categories, col = category_col, pch = category_pch,
 dev.off()
 ```
 
+When you open your PNG file, you should see something like this. Continue to iterate here before moving on if you would like to edit the style.
+
+
 {{< figure src="/static/us-river-conditions/test_single_day.png" alt="Map depicting October 1, 2020 streamflow data with points colored red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
 
 ### Create animation frames {#makeframes}
 
-Ok, we have created one frame and we like how it looks, so time to apply
-this to every date.
+Now that we are satisified with how our single frame looks, you can move on to building one frame per day.
 
 ``` r
 frame_dir <- "frame_tmp" # Save frames to a folder
@@ -374,7 +388,7 @@ for(i in frame_configs$frame_num) {
   png(frame_configs$name[i], width = viz_width, height = viz_height) # Open file
   
   # Copied plotting code from previous step
-  # Prep plotting area (no margins, small space at top/bottom for title, white background)
+  # Prep plotting area (no outer margins, small space at top/bottom for title, white background)
   par(omi = c(0,0,0,0), mai = c(1,0,1,0.5), bg = "white")
   
   # Add the background map
