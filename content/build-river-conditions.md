@@ -21,7 +21,7 @@ tags:
   - dataRetrieval
 ---
 For the last few years, we have [released quarterly animations of
-streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/media/videos/us-river-conditions-october-december-2020). Here, we walk through the steps to recreate a similar version in R.
+streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/media/videos/us-river-conditions-october-december-2020). These visualizations use daily streamflow measurements pulled from the [USGS National Water Information System (NWIS)](https://nwis.waterdata.usgs.gov/nwis) to show how streamflow changes throughout the year and highlight the reason behind some of the hydrologic patterns. Here, we walk through the steps to recreate a similar version in R.
 
 {{< figure src="/static/us-river-conditions/blog_thumbnail.gif" alt="Map animating through time, starting October 1, 2020 and ending October 31, 2020. Points on the map show USGS stream gage locations and the points change color based on streamflow values. They are red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
 
