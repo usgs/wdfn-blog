@@ -280,8 +280,9 @@ category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
 ### Get data ready for mapping  {#mapreadydata}
 
 We are going to need to do two last things to get our data ready
-to visualize. First, add a column to specify the color of the point.
-Second, join in the lat/long information and convert to a
+to visualize. First, add columns to specify the style of the point called `viz_pt_color`, 
+`viz_pt_type`, `viz_pt_size`, and `viz_pt_outline`. Second, join in the latitude
+and longitude columns (`dec_lat_va`, `dec_long_va`) and then convert to a
 spatial data frame.
 
 ``` r
@@ -365,7 +366,7 @@ When you open your PNG file, you should see something like this. Continue to ite
 
 {{< figure src="/static/us-river-conditions/test_single_day.png" alt="Map depicting October 1, 2020 streamflow data with points colored red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
 
-### Create animation frames {#makeframes}
+### Create all animation frames {#makeframes}
 
 Now that we are satisified with how our single frame looks, you can move on to building one frame per day.
 
@@ -417,14 +418,11 @@ for(i in frame_configs$frame_num) {
 all(file.exists(frame_configs$name))
 ```
 
-Stitch together into an actual animation
+Combine frames into animations
 ----------------------------------------
 
 Now that you have all of your frames for the animation ready, we can
-stitch them together into a video or GIF! This will work for any set of
-images you have. To use this code with other frames (if you didn’t
-create the ones above), just change out the first line of the GIF or
-video code chunks that define a vector of files as `frames`.
+stitch them together into a video or GIF! 
 
 ### GIF {#creategif}
 
@@ -540,6 +538,11 @@ system(ffmpeg_command) # Run command
   <source src="static/us-river-conditions/animation_2020_10_01_2020_10_31.mp4" type="video/mp4">
 </video>
 
+This process of creating individual frames and then stitching together into a video or GIF 
+will work for any set of images you have. To use this code with other frames (if you didn’t
+create the ones above), just change out the first line of the GIF or
+video code chunks that define your vector of files as the object, `frames`.
+
 Optimizing for various platforms  {#optimize}
 --------------------------------
 
@@ -548,10 +551,14 @@ Optimizing for various platforms  {#optimize}
 For Windows users, the quality of saved PNG images is pretty low and
 results in pixelated videos. We were able to overcome this by setting
 the width and height to double the desired size and later downscaling
-the video. It will require you to adjust your point and text sizes on
-frames themselves. When creating the PNG files, I use a width and height
+the video (see [this GitHub issue](https://github.com/USGS-VIZLAB/gage-conditions-gif/issues/144)
+to read about our discovery process for fixing Windows pixelation). 
+It will require you to adjust your point and text sizes on
+frames themselves. 
+
+When creating the PNG files earlier, I used a width and height
 double the size of what I wanted in the end, so now all I have to do is
-downscale! If you follow this approach, you can downscale your video to
+downscale! If you followed this approach, you can downscale your video to
 half the size by running the following:
 
 ``` r
@@ -602,5 +609,9 @@ here. I have struggled with using that package in the past (though to be
 fair since I had been using this method, I didn’t try very hard to
 learn) and found it to be very slow compared to the multiframe plus ImageMagick
 or FFMPEG method.
+
+There are also non-R tools you can use to stitch together animation
+frames, such as Photoshop. In addition to not having a Photoshop
+license, I am a huge R nerd, so the more I can stay in R, the better :)
 
 Go forth and animate!
