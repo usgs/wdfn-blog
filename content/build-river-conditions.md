@@ -3,7 +3,7 @@ author: Lindsay RC Platt
 date: 2021-03-19
 slug: build-r-animations
 draft: True
-title: Recreating the US River Conditions animations in R
+title: Recreating the U.S. River Conditions animations in R
 type: post
 categories: Data Science
 image: /static/us-river-conditions/blog_thumbnail.gif
@@ -11,7 +11,7 @@ author_twitter: LindsayRCPlatt
 author_github: lindsayplatt
 author_staff: lindsay-rc-platt
 author_email: <lplatt@usgs.gov>
-description: Use R to generate a video and gif similar to the Vizlab animation series, US River Conditions.
+description: Use R to generate a video and gif similar to the Vizlab animation series, U.S. River Conditions.
 keywords:
   - NWIS
   - reproducibility
@@ -115,12 +115,12 @@ category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
 Get data!  {#fetchdata}
 ---------
 
-The biggest processing hurdle for the US River Conditions animation is
+The biggest processing hurdle for the U.S. River Conditions animation is
 to fetch and process EVERY streamflow data point in the entire NWIS
 database in order to calculate historic statistics. We have a separate
 pipeline to pull the data (see
 [`national-flow-observations`](https://github.com/USGS-R/national-flow-observations))
-and steps in the US River Conditions code to calculate the quantiles
+and steps in the U.S. River Conditions code to calculate the quantiles
 (see [this
 script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)).
 
