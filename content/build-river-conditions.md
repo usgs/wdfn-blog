@@ -1,6 +1,6 @@
 ---
 author: Lindsay RC Platt
-date: 2021-03-19
+date: 2021-03-29
 slug: build-r-animations
 draft: False
 title: Recreating the U.S. River Conditions animations in R
