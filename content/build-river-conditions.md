@@ -7,7 +7,6 @@ title: Recreating the U.S. River Conditions animations in R
 type: post
 categories: Data Science
 image: /static/us-river-conditions/blog_thumbnail.gif
-author_twitter: LindsayRCPlatt
 author_github: lindsayplatt
 author_staff: lindsay-rc-platt
 author_email: <lplatt@usgs.gov>
@@ -21,7 +20,7 @@ tags:
   - dataRetrieval
 ---
 For the last few years, we have [released quarterly animations of
-streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/media/videos/us-river-conditions-october-december-2020). These visualizations use daily streamflow measurements pulled from the [USGS National Water Information System (NWIS)](https://nwis.waterdata.usgs.gov/nwis) to show how streamflow changes throughout the year and highlight the reason behind some of the hydrologic patterns. Here, we walk through the steps to recreate a similar version in R.
+streamflow conditions at all active USGS streamflow sites](https://www.usgs.gov/media/videos/us-river-conditions-october-december-2020). These visualizations use daily streamflow measurements pulled from the [USGS National Water Information System (NWIS)](https://nwis.waterdata.usgs.gov/nwis) to show how streamflow changes throughout the year and highlight the reasons behind some hydrologic patterns. Here, I walk through the steps to recreate a similar version in R.
 
 {{< figure src="/static/us-river-conditions/blog_thumbnail.gif" alt="Map animating through time, starting October 1, 2020 and ending October 31, 2020. Points on the map show USGS stream gage locations and the points change color based on streamflow values. They are red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
 
@@ -128,6 +127,18 @@ for(s in viz_states) {
     error = function(e) return()
   ) %>% bind_rows(sites_available)
 }
+
+head(sites_available)
+```
+
+```r
+   site_no                                      station_nm dec_lat_va dec_long_va
+1 13027500       SALT RIVER ABOVE RESERVOIR, NEAR ETNA, WY   43.07972   -111.0372
+2 10020100   BEAR RIVER ABOVE RESERVOIR, NEAR WOODRUFF, UT   41.43439   -111.0177
+3 10020300   BEAR RIVER BELOW RESERVOIR, NEAR WOODRUFF, UT   41.50550   -111.0146
+4 13025500                    CROW CREEK NEAR FAIRVIEW, WY   42.67493   -111.0077
+5 10028500 BEAR RIVER BELOW PIXLEY DAM, NEAR COKEVILLE, WY   41.93883   -110.9855
+6 13023000    GREYS RIVER ABOVE RESERVOIR, NEAR ALPINE, WY   43.14306   -110.9769
 ```
 
 ### Next, get the statistics data
@@ -137,23 +148,24 @@ to fetch and process EVERY streamflow data point in the entire NWIS
 database in order to calculate historic statistics. We have a separate
 pipeline to pull the data (see
 [`national-flow-observations`](https://github.com/USGS-R/national-flow-observations))
-and steps in the U.S. River Conditions code to calculate the quantiles
+and steps in the U.S. River Conditions code to calculate the percentiles
 (see [this
 script](https://github.com/USGS-VIZLAB/gage-conditions-gif/blob/master/2_process/src/process_dv_historic_quantiles.R)). 
 However, for the purposes of this workflow, we will use [the `stat` service (beta)
 from NWIS](https://waterservices.usgs.gov/rest/Statistics-Service.html)
 so that we don’t need to pull down all of the historic data. This means
 that the final viz will show the values relative to that day’s historic
-values (as WaterWatch does). Using the stat service will
+values (as WaterWatch does); however, using the stat service will
 greatly simplify the processing part of this example so we can get to the
 animation!
 
-For this map, we will create a scale of 3 values from low (less than
+For this map, we will create a scale of 3 categories from low (less than
 25th percentile), normal (between 25th and 75th percentile), and high
 (greater than 75th percentile). So, let’s fetch those stats for the
 sites we found in the last code block. You can visit [the stats service
 documentation](https://waterservices.usgs.gov/rest/Statistics-Service.html#statType)
-for more on what stats are available to download.
+for more on what stats are available to download and [this website to learn
+about percentiles in streamflow](https://help.waterdata.usgs.gov/faq/surface-water/what-is-a-percentile).
 
 ``` r
 # For one month of CONUS, this took ~ 15 min
@@ -178,11 +190,23 @@ for(chk_start in req_bks) {
   error = function(e) return()
   ) %>% bind_rows(viz_stats)
 }
+
+head(viz_stats)
+```
+
+```r
+   site_no month_nu day_nu p25_va p75_va
+1 02339495        1      1     40    209
+2 02339495        1      2     59    248
+3 02339495        1      3     53    317
+4 02339495        1      4     48    464
+5 02339495        1      5     41    270
+6 02339495        1      6     39    283
 ```
 
 ### Now get the daily values
 
-Now that we have our sites and their statistics, we can pull the data for the timeframe of our visualization. These are the values that will be used against the site statistics to determine if our gage is experiencing low, normal, or high streamflow conditions.
+Now that we have our sites and their statistics, we can pull the data for the timeframe of our visualization. These are the values that will be compared with the site statistics to determine if our gage is experiencing low, normal, or high streamflow conditions.
 
 ``` r
 # For all of CONUS, there are 8500+ sites.
@@ -230,6 +254,18 @@ for(chk_start in sites_chunk) {
 viz_daily_values <-  lapply(site_data_fns, readRDS) %>% bind_rows()
 
 nrow(viz_daily_values) # ~250,000 obs for one month of CONUS data
+
+head(viz_daily_values)
+```
+
+```r
+   site_no   dateTime Flow
+1 05344490 2020-10-01 3000
+2 05344490 2020-10-02 3010
+3 05344490 2020-10-03 2890
+4 05344490 2020-10-04 2660
+5 05344490 2020-10-05 2360
+6 05344490 2020-10-06 2600
 ```
 
 Process and prepare your data for mapping {#preparedata}
@@ -247,7 +283,7 @@ frame of the animation.
 viz_daily_stats <- viz_daily_values %>% 
   mutate(month_nu = as.numeric(format(dateTime, "%m")),
          day_nu = as.numeric(format(dateTime, "%d"))) %>% 
-  # Join the statistics data and match on month_nu and day_nu
+  # Join the statistics data and automatically match on month_nu and day_nu
   left_join(viz_stats) %>% 
   # Compare the daily flow value to that sites statistic to 
   # create a column that says whether the value is low, normal, or high
@@ -256,6 +292,18 @@ viz_daily_stats <- viz_daily_values %>%
     ifelse(Flow > p25_va & Flow <= p75_va, "Normal",
            ifelse(Flow > p75_va, "High",
                   NA))))
+
+head(viz_daily_stats)
+```
+
+```r
+   site_no   dateTime Flow month_nu day_nu p25_va p75_va viz_category
+1 05344490 2020-10-01 3000       10      1   3210   6540          Low
+2 05344490 2020-10-02 3010       10      2   3150   6430          Low
+3 05344490 2020-10-03 2890       10      3   3080   6430          Low
+4 05344490 2020-10-04 2660       10      4   3360   6970          Low
+5 05344490 2020-10-05 2360       10      5   3410   8180          Low
+6 05344490 2020-10-06 2600       10      6   3330   9860          Low
 ```
 
 ### Setup visualization configs 
@@ -279,15 +327,17 @@ category_lwd <- c(NA, NA, 1, NA) # Circle outline width in order of categories
 ### Get data ready for mapping
 
 We are going to need to do two last things to get our data ready
-to visualize. First, add columns to specify the style of the point called `viz_pt_color`, 
-`viz_pt_type`, `viz_pt_size`, and `viz_pt_outline`. Second, join in the latitude
+to visualize. First, add columns to specify the style of each point called `viz_pt_color`, 
+`viz_pt_type`, `viz_pt_size`, and `viz_pt_outline`. These will be passed in to our
+plotting step so that each point has the appropriate style applied. Second, join in the latitude
 and longitude columns (`dec_lat_va`, `dec_long_va`) and then convert to a
 spatial data frame.
 
 ``` r
 # Created a function to use that picks out the correct config based on
 # category name. Made it a fxn since I needed to do it for colors, 
-# point types, and point sizes.
+# point types, and point sizes. This function assumes that all of the
+# config vectors are in the order High, Normal, Low, and Missing.
 pick_config <- function(viz_category, config) {
   ifelse(
     viz_category == "Low", config[3], 
@@ -314,6 +364,30 @@ viz_data_ready <- viz_daily_stats %>%
 viz_data_sf <- viz_data_ready %>% 
   st_as_sf(coords = c("dec_long_va", "dec_lat_va"), crs = "+proj=longlat +datum=WGS84") %>% 
   st_transform(viz_proj)
+
+head(viz_data_sf)
+```
+
+```r
+Simple feature collection with 6 features and 8 fields
+geometry type:  POINT
+dimension:      XY
+bbox:           xmin: -856104.2 ymin: -129028.2 xmax: 567670.3 ymax: 17517.14
+CRS:            +proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs
+   site_no   dateTime viz_category viz_pt_color viz_pt_type viz_pt_size viz_pt_outline
+1 05344500 2020-10-01       Normal    #EAEDE9FF          19           1             NA
+2 06036805 2020-10-01       Normal    #EAEDE9FF          19           1             NA
+3 06037100 2020-10-01       Normal    #EAEDE9FF          19           1             NA
+4 06186500 2020-10-01       Normal    #EAEDE9FF          19           1             NA
+5 06218500 2020-10-01       Normal    #EAEDE9FF          19           1             NA
+6 06220800 2020-10-01       Normal    #EAEDE9FF          19           1             NA
+                                      station_nm                    geometry
+1              MISSISSIPPI RIVER AT PRESCOTT, WI  POINT (567670.3 -3040.174)
+2            Firehole River at Old Faithful, YNP   POINT (-855744.5 -2936.8)
+3               Gibbon River at Madison Jct, YNP  POINT (-856104.2 17517.14)
+4 Yellowstone River at Yellowstone Lk Outlet YNP    POINT (-819525.6 4401.4)
+5                     WIND RIVER NEAR DUBOIS, WY POINT (-783904.9 -111020.9)
+6    WIND RIVER ABOVE RED CREEK, NEAR DUBOIS, WY POINT (-761597.7 -129028.2)
 ```
 
 ### Get background map data ready
@@ -326,6 +400,23 @@ map background.
 viz_state_names <- tolower(stateCdLookup(viz_states, "fullName"))
 state_sf <- st_as_sf(maps::map('state', viz_state_names, fill = TRUE, plot = FALSE)) %>%
   st_transform(viz_proj)
+
+head(state_sf)
+```
+
+```r
+Simple feature collection with 6 features and 1 field
+geometry type:  MULTIPOLYGON
+dimension:      XY
+bbox:           xmin: -2029655 ymin: -1556239 xmax: 2295848 ymax: 68939.91
+CRS:            +proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs
+           ID                           geom
+1     alabama MULTIPOLYGON (((1207268 -15...
+2     arizona MULTIPOLYGON (((-1329818 -9...
+3    arkansas MULTIPOLYGON (((557029.8 -1...
+4  california MULTIPOLYGON (((-1633107 -1...
+5    colorado MULTIPOLYGON (((-175185.3 -...
+6 connecticut MULTIPOLYGON (((2141452 238...
 ```
 
 Build the frames
@@ -360,7 +451,7 @@ legend("right", legend = viz_categories, col = category_col, pch = category_pch,
 dev.off()
 ```
 
-When you open your PNG file, you should see something like this. Continue to iterate here before moving on if you would like to edit the style.
+You should now have a PNG file in your working directory called `test_single_day.png`. When you open this file, you should see the following image (unless you made customizations along the way). Continue to iterate here before moving on if you would like to edit the style because it is easiest to do with just a single frame.
 
 
 {{< figure src="/static/us-river-conditions/test_single_day.png" alt="Map depicting October 1, 2020 streamflow data with points colored red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">}}
@@ -370,6 +461,8 @@ When you open your PNG file, you should see something like this. Continue to ite
 Now that we are satisified with how our single frame looks, you can move on to building one frame per day.
 
 ``` r
+# This takes ~2 minutes to create a frame per day for a month of data
+
 frame_dir <- "frame_tmp" # Save frames to a folder
 frame_configs <- data.frame(date = unique(viz_data_sf$dateTime)) %>% 
    # Each day gets it's own file
@@ -421,17 +514,17 @@ Combine frames into animations
 ----------------------------------------
 
 Now that you have all of your frames for the animation ready, we can
-stitch them together into a video or GIF! 
+stitch them together into a GIF or a video! 
 
 ### GIF {#creategif}
 
-To create GIFs, we use a software called `ImageMagick`. I am going to use
-the system library which is not an R package, but we can run commands to 
-use it through the `system` function in R. A colleage recently told me
-about the
+To create GIFs, I use a software called `ImageMagick`. It is not an R package, 
+but we can run its commands by wrapping them in the `system` function in R. A colleage 
+recently told me about the
 [R package `magick`](https://cran.r-project.org/web/packages/magick/vignettes/intro.html), 
-that saves you from learning the system commands, but I have not had 
-time to learn about it yet.
+which is a wrapper for `ImageMagick` and would allow you to avoid the `system` function. 
+It sounds great but I just learned about it and have not had time to practice it yet. 
+I might return to this post in the future with an update using `magick` once I learn it.
 
 For these commands to work, you will first need to install the
 `ImageMagick` library. Go to
@@ -476,8 +569,9 @@ if(Sys.info()[['sysname']] == "Windows") {
 system(magick_command)
 ```
 
-An optional step is to use an additional non-R library called `gifsicle`
-to simplify the GIF. It will lower the final size of your GIFs (which
+After running that code, you should now have a GIF file called `animation_2020_10_01_2020_10_31.gif`
+in your working directory! An optional step is to use an additional non-R library called `gifsicle`
+to simplify the GIF. It will lower the final size of your GIF (which
 can get quite large if you have a lot of frames). You will need to
 [install `gifsicle`](https://www.lcdf.org/gifsicle/) before you can run
 this code.
@@ -493,9 +587,9 @@ system(gifsicle_command)
 
 ### Video {#createvideo}
 
-Videos are created in a similar way to GIFs, but we use a tool called
-`ffmpeg`. There are a lot of configuration options (we are still
-learning about how to use these). What we have in the command here is
+Videos are created in a similar way to GIFs, but I use a tool called
+`ffmpeg`. There are a lot of configuration options (I am still
+learning about how to use these). The options used in the code below are
 what we have found results in the best video. You can see all of the
 options and download the tool from
 [ffmpeg.org](https://www.ffmpeg.org/).
@@ -540,6 +634,10 @@ ffmpeg_command <- sprintf(
 system(ffmpeg_command) # Run command
 ```
 
+This takes a few seconds longer than the GIF creation steps and will print a whole 
+lot of messages out to your console as it runs. Once it is complete, you will see
+a new mp4 file in your working directory called, `animation_2020_10_01_2020_10_31.mp4` and
+it should look a little something like this one:
 
 {{< rawhtml >}}
 
@@ -553,7 +651,8 @@ system(ffmpeg_command) # Run command
 This process of creating individual frames and them stitching together into a video or GIF 
 will work for any set of images you have. To use this code with other frames (if you didn’t
 create the ones above), just change out the first line of the GIF or
-video code chunks that define your vector of files as the object, `frames`.
+video code chunks that define the object, `frames`, which contains the filepaths of the images
+you want to convert to an animation.
 
 Optimizing for various platforms  {#optimize}
 --------------------------------
@@ -565,12 +664,13 @@ results in pixelated videos. We were able to overcome this by setting
 the width and height to double the desired size and later downscaling
 the video (see [this GitHub issue](https://github.com/USGS-VIZLAB/gage-conditions-gif/issues/144)
 to read about our discovery process for fixing Windows pixelation). 
-It will require you to adjust your point and text sizes on
-frames themselves. 
+If you change the size of the frames you are saving after you iterate on your 
+frame design, you will need to adjust your point and text sizes to fit the new 
+image dimensions and then recreate the animation files. 
 
 When creating the PNG files earlier, I used a width and height
 double the size of what I wanted in the end, so now all I have to do is
-downscale! If you followed this approach, you can downscale your video to
+downscale. If you followed this approach, you can downscale your video to
 half the size by running the following:
 
 ``` r
@@ -585,10 +685,14 @@ out_video_file <- gsub(".mp4", "_downscaled.mp4", video_file_out) # The final fi
 system(sprintf("ffmpeg -i %s -vf scale=iw/2:-1 %s", original_video_file, out_video_file))
 ```
 
+You will now have two new animation files, one GIF and one video, that have `_downscaled` 
+appended to their names. They should appear to be about half of the size of the originals 
+(my GIF went from 817 KB to 441 KB and my video went from 2 MB to 900 KB).
+
 ### Platform specs
 
 Different social media platforms have different requirements for your
-content. The biggest thing to check before planning your animation are
+content. The most important item to check before planning your animation are
 the dimensions and aspect ratio you will need. Those can change the way
 that you need to layout your animation (for example, Instagram videos
 are often square or portrait but rarely landscape). If I want to put
@@ -599,7 +703,7 @@ I make sure to write functions to share as much of the code as possible
 but deviate as necessary.
 
 As you plan your animation, consider the following list of technical
-specs that platforms may require. To find technical specs by platform,
+specifications that platforms may require. To find technical specs by platform,
 you can use your favorite web search! Try to look at the most recent
 list available because the specs can change. So far, I have had great
 success with [this updating article from Sprout
@@ -607,7 +711,7 @@ Social](https://sproutsocial.com/insights/social-media-image-sizes-guide/).
 
 -   maximum file size
 -   maximum video length
--   maximum/minimum height/width
+-   maximum/minimum height and width
 -   specific aspect ratio
 -   framerate
 
@@ -629,4 +733,5 @@ There are also non-R tools you can use to stitch together animation
 frames, such as Photoshop. In addition to not having a Photoshop
 license, I am a huge R nerd, so the more I can stay in R, the better :)
 
-Go forth and animate!
+That should give you some foundations and tools to build frame-based animations in R. 
+Good luck and let us know how it goes [@USGS_DataSci](https://twitter.com/USGS_DataSci)!
