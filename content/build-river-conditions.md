@@ -2,7 +2,7 @@
 author: Lindsay RC Platt
 date: 2021-03-19
 slug: build-r-animations
-draft: True
+draft: False
 title: Recreating the U.S. River Conditions animations in R
 type: post
 categories: Data Science
