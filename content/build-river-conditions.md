@@ -540,9 +540,15 @@ ffmpeg_command <- sprintf(
 system(ffmpeg_command) # Run command
 ```
 
-<video autosize=TRUE controls>
-  <source src="static/us-river-conditions/animation_2020_10_01_2020_10_31.mp4" type="video/mp4">
+
+{{< rawhtml >}}
+
+<video width=100% controls>
+    <source src="/static/us-river-conditions/animation_2020_10_01_2020_10_31.mp4" type="video/mp4" alt="Video with no sound of a map animating through time, starting October 1, 2020 and ending October 31, 2020. Points on the map show USGS stream gage locations and the points change color based on streamflow values. They are red for low flow (less than 25th percentile), white for normal, and blue for high flow (greater than or equal to 75th percentile).">
+    Your browser does not support the video tag.
 </video>
+
+{{< /rawhtml >}} 
 
 This process of creating individual frames and them stitching together into a video or GIF 
 will work for any set of images you have. To use this code with other frames (if you didn’t
