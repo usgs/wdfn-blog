@@ -1,8 +1,8 @@
 ---
 author: Lindsay RC Platt
-date: 2021-03-19
+date: 2021-03-29
 slug: build-r-animations
-draft: True
+draft: False
 title: Recreating the U.S. River Conditions animations in R
 type: post
 categories: Data Science
@@ -579,7 +579,7 @@ this code.
 ``` r
 # Simplify the gif with gifsicle - cuts size by about 2/3
 gifsicle_command <- sprintf('gifsicle -b -O3 -d %s --colors 256 %s', 
-                            round(gif_delay), gif_file_out)
+                            gif_delay, gif_file_out)
 system(gifsicle_command)
 ```
 
