@@ -42,7 +42,7 @@
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.3",
-    "wdfn-viz": "1.10.1"
+    "wdfn-viz": "1.11.0"
   },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
