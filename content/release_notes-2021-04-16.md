@@ -2,14 +2,14 @@
 author: Shawna Gregory
 date: 2021-04-16
 slug: release-notes-2021-04-16
-draft: True
+draft: False
 type: post
 image: static/release_notes-2021-04-16/image7.jpg
 title: "Spring 2021 Water Data for the Nation release notes"
 author_email: <srgregory@usgs.gov>
 categories:
   - Applications
-description: An update of next-gen monitoring location page features released in Spring 2021, including major usability improvements
+description: An update of next-gen monitoring location page features released in early Spring 2021, including major usability improvements.
 keywords:
   - water information
 tags:
