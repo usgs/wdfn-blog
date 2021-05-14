@@ -1,6 +1,6 @@
 ---
 author: David Blodgett
-date: 2020-12-28
+date: 2021-05-14
 slug: nldi-geoconnex
 draft: False
 type: post
