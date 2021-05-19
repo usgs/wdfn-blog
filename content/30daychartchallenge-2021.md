@@ -2,7 +2,7 @@
 author: USGS Vizlab
 date: 2021-05-18
 slug: 30daychartchallenge-2021
-draft: True
+draft: False
 type: post
 image: static/30daychartchallenge-2021/chartschall-01.png
 title: "A month of data viz for the #30DayChartChallenge"
