@@ -38,8 +38,27 @@ tags:
 
 
 
-USGS Water Mission Area 2021 Cluster Hires (_updated 3/15_)
+USGS Water Mission Area 2021 Cluster Hires (_updated 5/20/2021_)
 --------------------
+
+We are excited to announce that more than 300 applications were received across recent vacancies for USGS Water as part of the cluster hire described below.  
+
+Here’s an update on the interview and selection process:  
+
+The **Machine Learning** position applicants were the first to be evaluated by human resources and referred to the hiring manager in April. Fifteen applicants were invited to the first round of interviews, which took place in late April and early May, and ten were invited to the final interviews in early May. We expect offers to be extended to candidates in the coming weeks.  
+
+The **Data Science** position applicants were the second to be evaluated by human resources and referred to the hiring manager in late April. Sixty applicants were invited to the first round of interviews, which are currently underway. The final interviews are expected to take place in late May, and offers extended in June.  
+
+The **Product Manager** position applicants are currently being evaluated by human resources and will be referred to the hiring manager in late May. Two rounds of interviews are planned, and will likely take place in the month of June.  
+
+We’ll provide another update on the status of the hires next month.  
+
+
+
+---
+
+
+
 The U.S. Geological Survey Water Mission Area is hiring multiple Data Scientists, Machine Learning Specialists, and Water Information Product Managers. Apply online at USA Jobs, where the positions will open and applications will be accepted March 15-19th.  For all positions, an unofficial transcript and detailed resume summarizing job qualifications and relevant skills is needed. _We will continue to update this page with information, including direct links to the vacancies as soon as they are available._
 
 
