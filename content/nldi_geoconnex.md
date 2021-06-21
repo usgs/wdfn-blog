@@ -1,8 +1,8 @@
 ---
 author: David Blodgett
-date: 2020-12-28
+date: 2021-05-14
 slug: nldi-geoconnex
-draft: True
+draft: False
 type: post
 image: /static/nldi-geoconnex/geoconnex.png
 title: "The Network Linked Data Index and geoconnex.us"
