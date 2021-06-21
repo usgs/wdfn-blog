@@ -6,7 +6,7 @@ date: 2021-06-20
 
 slug: WebFlags
 
-draft: True
+draft: false
 
 type: post
 
