@@ -135,8 +135,8 @@ docker-compose run hugo bash -l
 ```
 
 # Local development without using Docker
-To test without docker, you must have Hugo, Go, and node.js installed. You should install the latest HUGO and the latest LTS for node, 
-although for node any version > 8.x.x should work.  Then, from the terminal you can run:
+To test without docker, you must have [Hugo](https://gohugo.io/) and [node.js](https://nodejs.org/en/) installed. You should install the latest HUGO and the latest LTS for node, 
+although for node any version > 8.x.x should work. There are numerous options for installing both Node and Hugo, though a package manager such as `apt-get` for Linux, [Homebrew](https://brew.sh/) for MacOS, or [Chocolatley](https://chocolatey.org/) for Windows is a good option. Then, from the terminal you can run:
 
 ```bash
 cd themes/wdfn_theme/
