@@ -84,9 +84,9 @@ its off season, but data will be back in a matter of months.
 
 * Weather conditions may damage sensors (e.g., due to ice chunks in the river)
 * Accessibility changes that fluctuate with seasonal changes such as
-** Lack of water flow
-** Limited access to equipment
-** Lack of ability to telemeter data
+  * Lack of water flow
+  * Limited access to equipment
+  * Lack of ability to telemeter data
 
 ## Web Flags Tell Users to be Cautious With Data 
 
@@ -135,9 +135,9 @@ Data are not being accurately transmitted due to the presence of ice.
 #### Example Causes
 
 * In cold climates, streams are commonly affected by ice, which can
-* Inaccurately show more or less water than is actually there
-** Block sensors
-** Create backwater
+  * Inaccurately show more or less water than is actually there
+  * Block sensors
+  * Create backwater
 * Otherwise prevent data from being transmitted accurately
 
 <div class="grid-row">
@@ -154,9 +154,9 @@ equipment by our field hydrologic technicians. 
 #### Example Causes
 
 * Monitoring equipment
-** Is damaged and needs to be repaired
-** Requires routine maintenance
-** Is currently undergoing maintenance
+  * Is damaged and needs to be repaired
+  * Requires routine maintenance
+  * Is currently undergoing maintenance
 
 
 <div class="grid-row">
@@ -170,4 +170,3 @@ web flags and understand why data may not be showing up, what current
 conditions are, and how reliable we believe current data to be. Data
 transparency is fundamental to our mission at USGS.
 
-### 
