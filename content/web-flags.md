@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, stream flow, public communication, stream gage
 
-image: /static/web-flags/1.png
+image: /static/web-flags/cover.png
 
 description: Water data can be masked to help explain gaps in water data availability. 
 
