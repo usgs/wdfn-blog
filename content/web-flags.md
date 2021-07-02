@@ -73,7 +73,7 @@ of time, which can vary from hours to months, depending on site access.
 * Transmission issues with telemetry equipment
 * Issues with our data processing software
 
-Seasonal
+### Seasonal
 
 #### Definition
 
@@ -153,7 +153,7 @@ equipment by our field hydrologic technicians. 
 
 #### Example Causes
 
-* Monitoring equipment
+Monitoring equipment
   * Is damaged and needs to be repaired
   * Requires routine maintenance
   * Is currently undergoing maintenance
@@ -163,7 +163,7 @@ equipment by our field hydrologic technicians. 
 {{< figure src="/static/web-flags/5.png" caption="Two USGS staff repair equipment at an active streamgage. No data will be transmitted during this activity and a web flag can be applied to data during this time period. Photo credit: USGS - Cory Rogaczewski." alt="A photograph of two people repairing instrumentation on a stream bank. No data will be transmitted during this activity and a web flag can be applied to data during this time period." >}}
 </div>
 
-This is not a comprehensive list of all web flags that may be applied,
+ <b>This is not a comprehensive list of all web flags that may be applied,</b>
 but these examples show how web flags help us to explain to users what
 is happening with our data. Users can quickly glance at hydrographs with
 web flags and understand why data may not be showing up, what current
