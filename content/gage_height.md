@@ -44,7 +44,7 @@ channel changes.
 
 </div>
 
-## Gage Height to describe Water Quantity
+## Gage Height to Describe Water Quantity
 
 *Based on user feedback, we updated our*
 *[streamgage](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects)
@@ -80,7 +80,7 @@ anticipated depth of a stream or lake because streambeds change over
 time. At some locations, particularly those near the ocean, this
 arbitrary reference point may be picked to be at sea level.
 
-## Gage Height is also called\...
+## Gage Height is Also Called\...
 
 -   Stage
 
