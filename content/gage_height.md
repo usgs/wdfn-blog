@@ -28,11 +28,7 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-<div>
 
-{{< figure src="/static/gage_height/1.png" caption= "Streamgage 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
-
-</div>
 
 ###
 
@@ -51,6 +47,13 @@ height) of the water surface above the streamgage datum reference point.
 **Gage datum** is a unique reference point to each gage site and is
 generally located underneath the streambed to accommodate for stream
 channel changes.
+
+###
+<div>
+
+{{< figure src="/static/gage_height/1.png" caption= "Streamgage 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
+
+</div>
 
 ##Why Gage Height?
 
