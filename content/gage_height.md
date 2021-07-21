@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, stream flow, public communication, stream gage, gage height, river height
 
-image: cover.png
+image: /static/gage_height/cover.png
 
 description: Gage height is used as a default parameter for water availability at streamgages for better user context. 
 
