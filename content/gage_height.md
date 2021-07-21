@@ -1,6 +1,6 @@
 ---
 
-author: Lynn Fahlquist and Candice Hopkins
+author: Lynne Fahlquist and Candice Hopkins
 
 date: 2021-07-21
 
