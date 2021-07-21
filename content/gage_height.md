@@ -4,7 +4,7 @@ author: Lynn Fahlquist and Candice Hopkins
 
 date: 2021-07-21
 
-slug: GageHeight
+slug: gage_height
 
 draft: True
 
@@ -28,12 +28,16 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-<div class="grid-row">
-{{< figure src="/static/GageHeight/1.png" caption="This streamgage (USGS 13176400, East Fork Owyhee River at
-Crutcher Crossing, ID) provides critical data that the U.S. Bureau of
+<div>
+
+{{< figure src="/static/gage_height/1.png" caption="This streamgage, USGS 13176400, East Fork Owyhee River at
+Crutcher Crossing, ID, provides critical data that the U.S. Bureau of
 Land Management needs to secure water rights to protect the Owyhee
 Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
+
 </div>
+
+###
 
 
 #Why We Use Gage Height
@@ -70,8 +74,8 @@ Discharge and gage height are related values. Although discharge values often ma
 
 <div class="grid-row">
 
-{{< figure src="/static/GageHeight/2.1.png" caption="Discharge and gage height for the same time period at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Two graphs for monitoring location 07074420: the graph on the left shows time versus discharge, and the graph on the right shows time versus gage height." class="side-by-side" >}}
-{{< figure src="/static/GageHeight/2.2.png" caption="other caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
+{{< figure src="/static/gage_height/2.1.png" caption="Discharge and gage height for the same time period at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Two graphs for monitoring location 07074420: the graph on the left shows time versus discharge, and the graph on the right shows time versus gage height." class="side-by-side" >}}
+{{< figure src="/static/gage_height/2.2.png" caption="other caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
 
 </div>
 
@@ -107,8 +111,10 @@ arbitrary reference point may be picked to be at sea level.
 # 
 
 <div class="grid-row">
-{{< figure src="/static/GageHeight/3.png" caption="USGS employee, Russ Buesing uses a cable car to access a gage (05104500) in winter on the Roseau River near Malun, MN." alt="A man hangs from a cable car suspended over a river. He is
+
+{{< figure src="/static/gage_height/3.png" caption="USGS employee, Russ Buesing uses a cable car to access a gage (05104500) in winter on the Roseau River near Malun, MN." alt="A man hangs from a cable car suspended over a river. He is
 moving towards a streamgage over the Roseau Rivernear Malun, MN." >}}
+
 </div>
 
 # Why Doesn't USGS Measure Gage Height From the Bottom of the Stream?
@@ -125,7 +131,9 @@ base of a streambed.
 ## 
 
 <div class="grid-row">
-{{< figure src="/static/GageHeight/4.png" caption="Gage height and gage datum graphic. Gage height is the measurement from the water surface down to the gage datum" alt="Stream cross section graphic depicting the height from the water surface down to the gage datum -- the gage height." >}}
+
+{{< figure src="/static/gage_height/4.png" caption="Gage height and gage datum graphic. Gage height is the measurement from the water surface down to the gage datum" alt="Stream cross section graphic depicting the height from the water surface down to the gage datum -- the gage height." >}}
+
 </div>
 
 ## Complex Math to Estimate Discharge
@@ -168,7 +176,8 @@ heights.
 
 
 <div class="grid-row">
-{{< figure src="/static/GageHeight/5.png" caption="At 2:30 pm CDT on June 6, 2021, gage height at the [Tangipahoa
+
+{{< figure src="/static/gage_height/5.png" caption="At 2:30 pm CDT on June 6, 2021, gage height at the [Tangipahoa
 River at Robert,
 LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10)
 has risen to the NWS Action Stage (13 ft). At 8:00 pm CDT, gage height
@@ -180,6 +189,7 @@ at 4:30 pm CDT on June 10, 2021." alt="A graph showing gage height over time and
 level. Horizontal lines on the graph indicate the National Weather
 Service flood levels, and the gage height at this site exceeds both the
 flood stage and moderate flood stage." >}}
+
 </div>
 
 
