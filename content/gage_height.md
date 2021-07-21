@@ -6,7 +6,7 @@ date: 2021-07-21
 
 slug: gage_height
 
-draft: True
+draft: False
 
 type: post
 
