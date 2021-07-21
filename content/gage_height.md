@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, stream flow, public communication, stream gage, gage height, river height
 
-image: /static/gage_height/cover.png
+image:/static/gage_height/cover.png
 
 description: Gage height is used as a default parameter for water availability at streamgages for better user context. 
 
@@ -30,7 +30,7 @@ author_email: \<chopkins@usgs.gov\>
 
 <div>
 
-{{< figure src="/static/gage_height/1.png" caption= "This streamgage, USGS 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
+{{< figure src="/static/gage_height/1.png" caption= "Streamgage 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
 
 </div>
 
