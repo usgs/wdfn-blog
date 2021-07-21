@@ -35,7 +35,7 @@ author_email: \<chopkins@usgs.gov\>
 
 #Why We Use Gage Height
 
-##Making Water Data Easier to Understand
+
 
 ###
 
