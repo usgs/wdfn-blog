@@ -28,8 +28,6 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-# Why We Use Gage Height
-
 ## Making Water Data Easier to Understand
 
 On USGS water monitoring location pages, the default parameter that is
@@ -46,7 +44,7 @@ channel changes.
 
 </div>
 
-## Why Gage Height?
+## Gage Height to describe Water Quantity
 
 *Based on user feedback, we updated our*
 *[streamgage](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects)
@@ -118,7 +116,7 @@ base of a streambed.
 
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/4.png" caption="Gage height and gage datum graphic. Gage height is the measurement from the water surface down to the gage datum" alt="Stream cross section graphic depicting the height from the water surface down to the gage datum -- the gage height." >}}
+{{< figure src="/static/gage_height/4.png" caption="Gage height and gage datum graphic. Gage height is the measurement from the water surface down to the gage datum." alt="Stream cross section graphic depicting the height from the water surface down to the gage datum -- the gage height." >}}
 
 </div>
 
