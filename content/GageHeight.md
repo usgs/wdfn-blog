@@ -36,9 +36,9 @@ Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a c
 </div>
 
 
-#Why We Use Gage Height\
+#Why We Use Gage Height
 
-##Making Water Data Easier to Understand\
+##Making Water Data Easier to Understand
 
 ###
 
@@ -51,7 +51,7 @@ height) of the water surface above the streamgage datum reference point.
 generally located underneath the streambed to accommodate for stream
 channel changes.
 
-##Why Gage Height?\
+##Why Gage Height?
 
 *Based on user feedback, we updated our*
 *[streamgage](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects)
@@ -76,7 +76,7 @@ Discharge and gage height are related values. Although discharge values often ma
 </div>
 
 
-##What Exactly is Gage Height?\
+##What Exactly is Gage Height?
 **Gage height** is the **distance (or height) of the stream (or lake)
 water surface above the gage datum** (reference point). Read about [the
 history of stream gages in this interactive
