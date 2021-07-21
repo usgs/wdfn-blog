@@ -28,7 +28,7 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-<div class="grid-row">
+<div>
 {{< figure src="/static/GageHeight/1.png" caption="This streamgage (USGS 13176400, East Fork Owyhee River at
 Crutcher Crossing, ID) provides critical data that the U.S. Bureau of
 Land Management needs to secure water rights to protect the Owyhee
@@ -36,9 +36,9 @@ Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a c
 </div>
 
 
-#Why We Use Gage Height
+#Why We Use Gage Height\
 
-##Making Water Data Easier to Understand
+##Making Water Data Easier to Understand\
 
 ###
 
@@ -51,7 +51,7 @@ height) of the water surface above the streamgage datum reference point.
 generally located underneath the streambed to accommodate for stream
 channel changes.
 
-##Why Gage Height?
+##Why Gage Height?\
 
 *Based on user feedback, we updated our*
 *[streamgage](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects)
