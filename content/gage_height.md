@@ -30,10 +30,7 @@ author_email: \<chopkins@usgs.gov\>
 
 <div>
 
-{{< figure src="/static/gage_height/1.png" caption="This streamgage, USGS 13176400, East Fork Owyhee River at
-Crutcher Crossing, ID, provides critical data that the U.S. Bureau of
-Land Management needs to secure water rights to protect the Owyhee
-Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
+{{< figure src="/static/gage_height/1.png" caption= "This streamgage, USGS 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
 
 </div>
 
@@ -112,8 +109,7 @@ arbitrary reference point may be picked to be at sea level.
 
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/3.png" caption="USGS employee, Russ Buesing uses a cable car to access a gage (05104500) in winter on the Roseau River near Malun, MN." alt="A man hangs from a cable car suspended over a river. He is
-moving towards a streamgage over the Roseau Rivernear Malun, MN." >}}
+{{< figure src="/static/gage_height/3.png" caption="USGS employee, Russ Buesing uses a cable car to access a gage (05104500) in winter on the Roseau River near Malun, MN." alt="A man hangs from a cable car suspended over a river. He is moving towards a streamgage over the Roseau Rivernear Malun, MN." >}}
 
 </div>
 
@@ -177,18 +173,8 @@ heights.
 
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/5.png" caption="At 2:30 pm CDT on June 6, 2021, gage height at the [Tangipahoa
-River at Robert,
-LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10)
-has risen to the NWS Action Stage (13 ft). At 8:00 pm CDT, gage height
-has further risen and at NWS Flood Stage (15 ft), and at 3:00 pm CDT on
-June 7, 2021, gage height rose to the WS Moderate Flood Stage of 18 ft.
-Gage height peaked at 8:30 am CDT on June 8^th^, 2021 at 19.47 ft., then
-started dropping so that gage height was below NWS Flood Stage (15 ft)
-at 4:30 pm CDT on June 10, 2021." alt="A graph showing gage height over time and a varying river
-level. Horizontal lines on the graph indicate the National Weather
-Service flood levels, and the gage height at this site exceeds both the
-flood stage and moderate flood stage." >}}
+{{< figure src="/static/gage_height/5.png" caption="A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible." alt="A graph showing gage height over time and a varying river
+level. Horizontal lines on the graph indicate the National Weather Service flood levels." >}}
 
 </div>
 
