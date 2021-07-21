@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, stream flow, public communication, stream gage, gage height, river height
 
-image:/static/gage_height/cover.png
+image: /static/gage_height/cover.png
 
 description: Gage height is used as a default parameter for water availability at streamgages for better user context. 
 
@@ -28,16 +28,9 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
+# Why We Use Gage Height
 
-
-###
-
-
-#Why We Use Gage Height
-
-##Making Water Data Easier to Understand
-
-###
+## Making Water Data Easier to Understand
 
 On USGS water monitoring location pages, the default parameter that is
 displayed for [streamgage](https://pubs.usgs.gov/fs/2011/3001/) sites is
@@ -48,14 +41,12 @@ height) of the water surface above the streamgage datum reference point.
 generally located underneath the streambed to accommodate for stream
 channel changes.
 
-###
 <div>
-
 {{< figure src="/static/gage_height/1.png" caption= "Streamgage 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
 
 </div>
 
-##Why Gage Height?
+## Why Gage Height?
 
 *Based on user feedback, we updated our*
 *[streamgage](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects)
@@ -80,7 +71,7 @@ Discharge and gage height are related values. Although discharge values often ma
 </div>
 
 
-##What Exactly is Gage Height?\
+## What Exactly is Gage Height?
 **Gage height** is the **distance (or height) of the stream (or lake)
 water surface above the gage datum** (reference point). Read about [the
 history of stream gages in this interactive
@@ -108,8 +99,6 @@ arbitrary reference point may be picked to be at sea level.
 
 -   Water Height
 
-# 
-
 <div class="grid-row">
 
 {{< figure src="/static/gage_height/3.png" caption="USGS employee, Russ Buesing uses a cable car to access a gage (05104500) in winter on the Roseau River near Malun, MN." alt="A man hangs from a cable car suspended over a river. He is moving towards a streamgage over the Roseau Rivernear Malun, MN." >}}
@@ -126,8 +115,6 @@ sediment, becoming shallower. To understand how those changes can affect
 streamflow, we need to measure from a reference point that does not
 change over time, which is why gage datums are chosen to be below the
 base of a streambed.
-
-## 
 
 <div class="grid-row">
 
@@ -171,18 +158,14 @@ the [Flood Inundation Mapper](https://fim.wim.usgs.gov/fim/) tool or the
 tool to visualize what flooding will look like at different gage
 heights.
 
-## 
-
-
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/5.png" caption="A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible." alt="A graph showing gage height over time and a varying river
-level. Horizontal lines on the graph indicate the National Weather Service flood levels." >}}
+{{< figure src="/static/gage_height/5.png" 
+caption=`A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible.` 
+alt=`A graph showing gage height over time and a varying river
+level. Horizontal lines on the graph indicate the National Weather Service flood levels.` >}}
 
 </div>
-
-
-## 
 
 ## Real-time Response to Changing Gage Heights (Stream or Lake Levels)
 
