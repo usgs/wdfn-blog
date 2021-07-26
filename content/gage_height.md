@@ -63,8 +63,8 @@ Discharge and gage height are related values. Although discharge values often ma
 
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/2.1.png" caption="Discharge and gage height for the same time period at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Two graphs for monitoring location 07074420: the graph on the left shows time versus discharge, and the graph on the right shows time versus gage height." class="side-by-side" >}}
-{{< figure src="/static/gage_height/2.2.png" caption="other caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
+{{< figure src="/static/gage_height/2.1.png" caption="Discharge (streamflow) for the same time period as the graph on the right at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Two graphs for monitoring location 07074420: the graph on the left shows time versus discharge, and the graph on the right shows time versus gage height." class="side-by-side" >}}
+{{< figure src="/static/gage_height/2.2.png" caption="Gage height for the same time period as the graph on the right at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Description of the image" class="side-by-side" >}}
 
 </div>
 
