@@ -37,7 +37,7 @@ author_email: \<chopkins@usgs.gov\>
 Monitoring location pages are web pages that the USGS Water Mission Area offers to display important water data like discharge (also referred to as streamflow), gage height, precipitation, water-levels, temperature, etc. Thousands of people use USGS water data each month to make decisions ranging from recreation to emergency management. 
 
 <div class="grid-row">
-{{< figure src="/static/FILENAMEHEREfornextgenscreenshot.png" caption="A Next Generation Monitoring Location Page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." alt="Screenshot of a next generation monitoring location page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+{{< figure src="/static/NextGen_Go_Live/NextGen_MLP_Ex.png" caption="A Next Generation Monitoring Location Page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." alt="Screenshot of a next generation monitoring location page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
 </div>
  
 
@@ -50,7 +50,7 @@ The original monitoring location pages have largely looked the same since their 
 The technology used to produce the original pages, what we call legacy pages, is now outdated, and prevents crucial updates from being made. But we need to meet accessibility standards, stay modern, and increase user satisfaction, so we have created new, Next Generation monitoring location pages. We give thanks to the decades of skilled software-programming work put into the legacy pages and we recognize how much they have provided to the public. We are thrilled to modernize our water data delivery as we “go live” with the NextGen pages.
 
 <div class="grid-row">
-{{< figure src="/static/FILENAMEHEREforlegacyscreenshot.png" caption="Here’s an example of a legacy page, showing monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
+{{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.png" caption="Here’s an example of a legacy page, showing monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
 </div> 
 
 ## What Does “Live” Mean? 
@@ -60,7 +60,7 @@ NextGen pages have been online and accessible for approximately two years, in wh
 When NextGen pages go live in October 2021, they will become the default page for search engines and for web traffic. The old legacy pages will still be useable for a while longer, but around March 2022 your web browser will be redirected away from them by default. By January 2023 we expect to decommission these legacy real-time pages entirely, meaning you will no longer be able to view them. 
 
 <div class="grid-row">
-{{< figure src="/static/FILENAMEHEREagiledevelopment.png" caption="The Agile Development Process as the WDFN team uses it." alt="4 part chart that goes from left to right describing the agile process. The four steps are discovery, alpha, beta, and live." >}}
+{{< figure src="/static/NextGen_Go_Live/Agile_Process.png" caption="The Agile Development Process as the WDFN team uses it." alt="4 part chart that goes from left to right describing the agile process. The four steps are discovery, alpha, beta, and live." >}}
 </div>  
 
 ## Pages Continue to Improve 
@@ -115,7 +115,7 @@ In this 5-minute video, discover how you can easily use these Next Generation mo
 
 ### Next Generation Summary Video 
 
-We recorded this talk just for you. In less than 20 minutes, it describes all the changes that are happening, and why. Please check back soon for a link to this video! 
+We recorded this talk just for you. In less than 10 minutes, it describes all the changes that are happening, and why. Please check back soon for a link to this video! 
 
 
 ## Who can you contact about these changes? 
