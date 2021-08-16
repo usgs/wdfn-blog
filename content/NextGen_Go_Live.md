@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, public communication, stream gage
 
-image:  /static/NextGen_Go_Live/WDFN Plain Logo.png
+image: 
 
 description: We are modernizing water data delivery through Water Data for the Nation. This is a post to summarize 
 
