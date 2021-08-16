@@ -158,10 +158,7 @@ heights.
 
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/5.png" 
-caption=`A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible.` 
-alt=`A graph showing gage height over time and a varying river
-level. Horizontal lines on the graph indicate the National Weather Service flood levels.` >}}
+{{< figure src="/static/gage_height/5.png" caption="A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible." alt="A graph showing gage height over time and a varying river level. Horizontal lines on the graph indicate the National Weather Service flood levels." >}}
 
 </div>
 
