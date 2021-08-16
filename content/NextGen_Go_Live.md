@@ -112,11 +112,11 @@ Tune in to our public webinar, scheduled for September 15th, 2021 at 1:00 pm EST
 
 ### How-To Video 
 
-In this 5-minute video, discover how you can easily use these Next Generation monitoring location pages. Please check back soon for a link to this video! 
+In this short video, discover how you can easily use these Next Generation monitoring location pages. We'll walk you through common functions and page uses. Please check back soon for a link to this video! 
 
 ### Next Generation Summary Video 
 
-We recorded this talk just for you. In less than 10 minutes, it describes all the changes that are happening, and why. Please check back soon for a link to this video! 
+We recorded this talk just for you. In just a few minutes, this video describes all the changes that are happening to the monitoring location pages, and why. Please check back soon for a link to this video! 
 
 
 ## Who can you contact about these changes? 
