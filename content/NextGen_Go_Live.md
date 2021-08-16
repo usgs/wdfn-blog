@@ -6,7 +6,7 @@ date: 2021-08-16
 
 slug: realtime-pages-replacement
 
-draft: True
+draft: false
 
 type: post
 
