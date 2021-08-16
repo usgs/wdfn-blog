@@ -37,7 +37,7 @@ author_email: \<jkreft@usgs.gov\>
 Monitoring location pages are web pages that the USGS Water Mission Area offers to display important water data like discharge (also referred to as streamflow), gage height, precipitation, water-levels, temperature, etc. Thousands of people use USGS water data each month to make decisions ranging from recreation to emergency management. 
 
 <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/NextGen_MLP_Ex.PNG" caption="A Next Generation Monitoring Location Page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." alt="Screenshot of a next generation monitoring location page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+{{< figure src="/static/NextGen_Go_Live/NextGen_MLP_Ex.PNG" caption="A Next Generation Monitoring Location Page for <a href="https://waterdata.usgs.gov/monitoring-location/04157005/">04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN</a>." alt="Screenshot of a next generation monitoring location page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
 </div>
  
 
@@ -50,7 +50,7 @@ The original monitoring location pages have largely looked the same since their 
 The technology used to produce the original pages, what we call legacy pages, is now outdated, and prevents crucial updates from being made. But we need to meet accessibility standards, stay modern, and increase user satisfaction, so we have created new, Next Generation monitoring location pages. We give thanks to the decades of skilled software-programming work put into the legacy pages and we recognize how much they have provided to the public. We are thrilled to modernize our water data delivery as we “go live” with the NextGen pages.
 
 <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.PNG" caption="Here’s an example of a legacy page, showing monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
+{{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.PNG" caption="Here’s an example of a legacy page, showing <a href="https://waterdata.usgs.gov/nwis/uv?site_no=01584050">monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD</a>." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
 </div> 
 
 ## What Does “Live” Mean? 
