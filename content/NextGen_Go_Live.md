@@ -101,7 +101,7 @@ Follow along with our software changes - please check back soon for a link to ou
 
 ### Webinar 
 
-Tune in to our public webinar, scheduled for September 15th, 2021 at 1:00 pm EST. Can’t make the live event? Submit your questions beforehand through our Reddit Ask Me Anything [insert link here], and catch the recording which we’ll share through social media. 
+Tune in to our public webinar, scheduled for September 15th, 2021 at 1:00 pm EST. Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov, and catch the recording which we’ll share through social media. 
 
 ### Social Media 
 <a class="twitter-timeline" data-height="600" href="https://twitter.com/USGS_Water?ref_src=twsrc%5Etfw">Tweets by USGS_Water</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
