@@ -6,7 +6,7 @@ date: 2021-08-16
 
 slug: realtime-pages-replacement
 
-draft: false
+draft: true
 
 type: post
 
@@ -53,7 +53,7 @@ The technology used to produce the original pages, what we call legacy pages, is
 {{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.PNG" caption="Here’s an example of a legacy page, showing '[monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD](https://waterdata.usgs.gov/nwis/uv?site_no=01584050)'." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
 </div> 
 
-## What Does “Live” Mean? 
+## What Does “Live” Mean? When will "Live" happen? 
 
 NextGen pages have been online and accessible for approximately two years, in what we have called the beta stage of our agile development process. Beta means the pages are accessible to the public and available for user testing. During beta, we have made many changes. 
 
@@ -77,7 +77,11 @@ Learn more about how we work and use the agile development process to display hi
 
 ## How Are NextGen Pages Different from Legacy Pages? 
 
-These NextGen pages have new features, offering more than just a 1:1 replacement of legacy pages. 
+These NextGen pages have new features, offering more than just a 1:1 replacement of legacy pages.
+ 
+ <div class="grid-row">
+{{< figure src="/static/NextGen_Go_Live/SidebysideFinal.PNG" caption="A side by side comparison of the next generation monitoring location page versus the legacy real time page for monitoring location '[04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)'." alt="Side by side comparison of screenshots for next generation monitoring location page and legacy real time page for the same monitoring location 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+</div> 
 
 ### 5 Key Differences 
 
