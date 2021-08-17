@@ -1,12 +1,12 @@
 ---
 
-author: Candice Hopkins
+author: Nicole Felts and Jim Kreft
 
 date: 2021-08-16
 
 slug: realtime-pages-replacement
 
-draft: True
+draft: true
 
 type: post
 
@@ -22,9 +22,9 @@ description: We are modernizing water data delivery through Water Data for the N
 
 keywords: water data
 
-author_staff: candice-hopkins
+author_staff: james-m-kreft
 
-author_email: \<chopkins@usgs.gov\>
+author_email: \<jkreft@usgs.gov\>
 
 ---
 
@@ -37,7 +37,7 @@ author_email: \<chopkins@usgs.gov\>
 Monitoring location pages are web pages that the USGS Water Mission Area offers to display important water data like discharge (also referred to as streamflow), gage height, precipitation, water-levels, temperature, etc. Thousands of people use USGS water data each month to make decisions ranging from recreation to emergency management. 
 
 <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/NextGen_MLP_Ex.PNG" caption="A Next Generation Monitoring Location Page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." alt="Screenshot of a next generation monitoring location page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+{{< figure src="/static/NextGen_Go_Live/NextGen_MLP_Ex.PNG" caption="A Next Generation Monitoring Location Page for '[04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)'." alt="Screenshot of a next generation monitoring location page for 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
 </div>
  
 
@@ -45,15 +45,15 @@ Monitoring location pages are web pages that the USGS Water Mission Area offers 
 
 ### Thanking Outdated Technology 
 
-The original monitoring location pages have largely looked the same since their inception in 1995. We are confident they were one of the first displays of real-time water-data anywhere in the world at a time when the web was only 5 years old and rarely displayed “live” content of any kind. Wow! 
+The original monitoring location pages have largely looked the same '[since their inception in 1995](https://waterdata.usgs.gov/blog/25-years-of-water-data-on-the-web/)'. We are confident they were one of the first displays of real-time water-data anywhere in the world at a time when the web was only 5 years old and rarely displayed “live” content of any kind. Wow! 
 
-The technology used to produce the original pages, what we call legacy pages, is now outdated, and prevents crucial updates from being made. But we need to meet accessibility standards, stay modern, and increase user satisfaction, so we have created new, Next Generation monitoring location pages. We give thanks to the decades of skilled software-programming work put into the legacy pages and we recognize how much they have provided to the public. We are thrilled to modernize our water data delivery as we “go live” with the NextGen pages.
+The technology used to produce the original pages, what we call legacy pages, is now outdated, and prevents crucial updates from being made. But we need to meet accessibility standards, stay modern, and increase user satisfaction, so we have created '[new, Next Generation monitoring location pages](https://waterdata.usgs.gov/blog/wdfn-tng/)'. We give thanks to the decades of skilled software-programming work put into the legacy pages and we recognize how much they have provided to the public. We are thrilled to modernize our water data delivery as we “go live” with the NextGen pages.
 
 <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.PNG" caption="Here’s an example of a legacy page, showing monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
+{{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.PNG" caption="Here’s an example of a legacy page, showing '[monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD](https://waterdata.usgs.gov/nwis/uv?site_no=01584050)'." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
 </div> 
 
-## What Does “Live” Mean? 
+## What Does “Live” Mean? When will "Live" happen? 
 
 NextGen pages have been online and accessible for approximately two years, in what we have called the beta stage of our agile development process. Beta means the pages are accessible to the public and available for user testing. During beta, we have made many changes. 
 
@@ -67,7 +67,7 @@ When NextGen pages go live in October 2021, they will become the default page fo
 
 ### You spoke, We Listened! #WeHeardYou 
 
-During this beta phase of the next generation pages, we asked you, the user, how these pages could better serve you. Pages will continue to be improved iteratively to create discoverable, accessible, and usable Water Data for the Nation.  
+During this beta phase of the next generation pages, '[we asked you, the user, how these pages could better serve you](https://waterdata.usgs.gov/blog/improvingmonitoringpages/)'. Pages will continue to be improved iteratively to create discoverable, accessible, and usable Water Data for the Nation.  
 
 ### How We Work 
 
@@ -77,7 +77,11 @@ Learn more about how we work and use the agile development process to display hi
 
 ## How Are NextGen Pages Different from Legacy Pages? 
 
-These NextGen pages have new features, offering more than just a 1:1 replacement of legacy pages. 
+These NextGen pages have new features, offering more than just a 1:1 replacement of legacy pages.
+ 
+ <div class="grid-row">
+{{< figure src="/static/NextGen_Go_Live/SidebysideFinal.PNG" caption="A side by side comparison of the next generation monitoring location page versus the legacy real time page for monitoring location '[04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)'." alt="Side by side comparison of screenshots for next generation monitoring location page and legacy real time page for the same monitoring location 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+</div> 
 
 ### 5 Key Differences 
 
@@ -101,7 +105,7 @@ Follow along with our software changes - please check back soon for a link to ou
 
 ### Webinar 
 
-Tune in to our public webinar, scheduled for September 15th, 2021 at 1:00 pm EST. Can’t make the live event? Submit your questions beforehand through our Reddit Ask Me Anything [insert link here], and catch the recording which we’ll share through social media. 
+Tune in to our public webinar, scheduled for September 15th, 2021 at 1:00 pm EST. Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov, and catch the recording which we’ll share through social media. 
 
 ### Social Media 
 <a class="twitter-timeline" data-height="600" href="https://twitter.com/USGS_Water?ref_src=twsrc%5Etfw">Tweets by USGS_Water</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
@@ -112,11 +116,11 @@ Tune in to our public webinar, scheduled for September 15th, 2021 at 1:00 pm EST
 
 ### How-To Video 
 
-In this 5-minute video, discover how you can easily use these Next Generation monitoring location pages. Please check back soon for a link to this video! 
+In this short video, discover how you can easily use these Next Generation monitoring location pages. We'll walk you through common functions and page uses. Please check back soon for a link to this video! 
 
 ### Next Generation Summary Video 
 
-We recorded this talk just for you. In less than 10 minutes, it describes all the changes that are happening, and why. Please check back soon for a link to this video! 
+We recorded this talk just for you. In just a few minutes, this video describes all the changes that are happening to the monitoring location pages, and why. Please check back soon for a link to this video! 
 
 
 ## Who can you contact about these changes? 
