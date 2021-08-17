@@ -1,0 +1,134 @@
+---
+
+author: Nicole Felts and Brad Garner
+
+date: 2021-08-17
+
+slug: how-to-use-nextgen-pages
+
+draft: true
+
+type: post
+
+title: How to Use Next Generation Monitoring Location Pages
+
+categories: water-information, web-communication
+
+tags: water data, public communication, stream gage
+
+image: 
+
+description: Learn how to use WDFN's  Next Generation monitoring location pages.
+
+keywords: water data
+
+author_staff: 
+
+author_email: \<wdfn@usgs.gov\>
+
+---
+
+<i>WDFN: Making Water Data Delivery Easier to Understand</i>
+
+TABLE OF CONTENTS
+Summary
+Common Requests
+How can I view 30-day rainfall data?
+Interact with the Hydrograph
+Compare to Previous Data / Display Median
+Select a Preset or Custom Time Span
+Alter the Timeframe
+Provisional Data
+Download Data for this Monitoring Location
+Select Data Parameters
+Hydrograph Data Table(s)
+Interact with the Map
+Other Monitoring Locations
+Different Map Layers
+Groundwater Data
+Affiliated Networks
+Summary of All Available Data
+Location Metadata
+Cooperators
+Navigation Bar
+Data Information
+About Water Data for the Nation & Social Media
+Data Inventory
+
+## SUMMARY
+Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
+
+## COMMON REQUESTS    
+### HOW CAN I VIEW 30-DAY RAINFALL DATA?
+1.	Select the correct timeframe by selecting a preset timespan of 30 days.
+2.	Select precipitation by choosing the correct data to graph.
+
+## IMPORTANT INFORMATION
+### PROVISIONAL DATA
+If you select a large enough date range, like 1 year selected below, notice the difference in approved (blue line) versus provisional data (orange line  ). To understand the difference in these data, please read the definition and warning for provisional data.
+ 
+## INTERACT WITH THE HYDROGRAPH
+Move your computer mouse or tap your device’s screen over top of the plot to expose the date, time, and value on the graph.  
+ 
+### COMPARE TO PREVIOUS DATA / DISPLAY MEDIAN
+Select ‘Compare to last year’ and / or ‘Display Median’ to add historical data and statistical data, when available. Note: Median is never available for gage height, but it is sometimes available for other parameters.
+ 
+ 
+### SELECT A PRESET OR CUSTOM TIME SPAN
+Choose a 7-day, 30-day, or 1-year preset time span. 
+Consider viewing the period of record for the specific parameter beforehand. To choose a custom date range, click “change time span.” The date range of your choice will populate once you click the second “change time span.” 
+ 
+### ALTER THE TIMEFRAME
+Drag the handles on the plot below the main plot to zoom in on a specific time frame. Drag the shortened window (shown in the highlighted red box below) to pan across other dates.
+ 
+ 
+### DOWNLOAD DATA FOR THIS MONITORING LOCATION
+Download data by clicking on the “Retrieve data” tab, to the right of the “Change time span” tab. Select one of the three options, then click “Retrieve” at the bottom.
+ 
+ 
+### SELECT DATA PARAMETERS
+Below the hydrograph, under the header, “Select Data to Graph,” is the option to graph various available data parameters. Select one radio button at a time to display different data types available for each site.
+ 
+ 
+### HYDROGRAPH DATA TABLE(S)
+This section provides hydrograph data in tabular format. Toggle this menu visible and invisible by clicking the horizontal line on the right, as noted by the red box.
+ 
+## INTERACT WITH THE MAP   
+Press and hold your cursor or finger on the map, then drag the cursor in any direction to move the focused view of the map. 
+ 
+### OTHER MONITORING LOCATIONS
+Notice the red dots on the map, which indicate other nearby active monitoring locations, as indicated by the Legend in the bottom right corner of the map. You can click or tap on the red dots to view other locations. 
+ 
+### DIFFERENT MAP LAYERS
+The square in the top right corner can be used to select different map layers you are currently viewing. 
+ 
+## GROUNDWATER DATA
+On some groundwater well sites, there may be instrumented groundwater data available, as on monitoring location page 350002110355501, which is associated with a WELL in NAVAJO COUNTY, ARIZONA. Toggle this menu visible or invisible by clicking the horizontal line on the right, as noted by the red box.
+ 
+## AFFILIATED NETWORKS
+One monitoring location can be associated with a group of monitoring locations; those groups, or networks, help us understand more about water resources. This section displays links to networks of monitoring locations. Toggle this menu visible or invisible by clicking the horizontal line on the right, as seen by the red box.
+ 
+ 
+## SUMMARY OF ALL AVAILABLE DATA
+The monitoring location page shows some of the most important data, but often the monitoring locations have a lot more data available; this section displays a summary of all the types of data available, with link(s) to access the data. Toggle this menu visible or invisible by clicking the horizontal line on the right, as noted by the red box.
+ 
+## LOCATION METADATA
+Metadata provides context for data and provides additional information about the monitoring location such as when the station was established, its elevation, etc. Toggle this menu visible or invisible by clicking the horizontal line on the right, as noted by the red box.
+  
+## COOPERATORS
+Sometimes monitoring locations are operated using funding and support from organizations other than USGS, such as local governments. Those cooperating agencies are shown below the Metadata section.
+ 
+ 
+## NAVIGATION BAR
+Navigate to other USGS pages that relate to water science.
+ 
+ 
+### DATA INFORMATION
+Visit links that provide additional information about water data reliability, availability, and collection. Our provisional data statement is vital to correctly interpreting water data from USGS – make sure to give it a read  !
+ 
+### ABOUT WATER DATA FOR THE NATION & SOCIAL MEDIA
+Stay connected with us! Follow our blog by clicking What’s New in Water Data for the Nation. Our blog provides easily understandable explanations of water data techniques and methods, and R code.  Follow us on Twitter and Facebook as well by following the icons in the top right, as indicated by the red box.
+ 
+ 
+### DATA INVENTORY
+This drop-down menu provides links to other pages with more water data or descriptions of data for this monitoring location. Explore them to learn more!
