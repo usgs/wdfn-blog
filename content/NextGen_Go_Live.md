@@ -1,12 +1,12 @@
 ---
 
-author: Nicole Felts and Jim Kreft
+author: Candice Hopkins
 
-date: 2021-08-16
+date: 2021-08-17
 
 slug: realtime-pages-replacement
 
-draft: true
+draft: false
 
 type: post
 
@@ -22,9 +22,9 @@ description: We are modernizing water data delivery through Water Data for the N
 
 keywords: water data
 
-author_staff: james-m-kreft
+author_staff: candice-hopkins
 
-author_email: \<jkreft@usgs.gov\>
+author_email: \<chopkins@usgs.gov\>
 
 ---
 
