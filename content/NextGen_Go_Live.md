@@ -1,6 +1,6 @@
 ---
 
-author: Candice Hopkins and Nicole Felt
+author: Candice Hopkins and Nicole Felts
 
 date: 2021-08-17
 
