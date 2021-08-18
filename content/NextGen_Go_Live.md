@@ -80,7 +80,7 @@ Learn more about how we work and use the agile development process to display hi
 These NextGen pages have new features, offering more than just a 1:1 replacement of legacy pages.
  
  <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/SidebysideFinal.PNG" caption="A side by side comparison of the next generation monitoring location page versus the legacy real time page for monitoring location '[04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)'." alt="Side by side comparison of screenshots for next generation monitoring location page and legacy real time page for the same monitoring location 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+{{< figure src="/static/NextGen_Go_Live/side_by_side.png" caption="A side by side comparison of the next generation monitoring location page versus the legacy real time page for monitoring location '[04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)'." alt="Side by side comparison of screenshots for next generation monitoring location page and legacy real time page for the same monitoring location 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
 </div> 
 
 ### 5 Key Differences 
