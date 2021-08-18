@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, public communication, stream gage
 
-image: 
+image: /static/NextGen_Go_Live/mobile_side_by_side.jpg
 
 description: We are modernizing water data delivery through Water Data for the Nation. This is a post to summarize 
 
