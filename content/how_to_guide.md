@@ -179,13 +179,13 @@ A: Eventually, yes.  Starting in October 2021 the legacy pages will no longer be
 A: Yes, they will remain viewable until their full January 2023 decommissioning.  A special link on a NextGen page will let users reach these pages after redirecting begins.  Note that after redirects begin, search engines will show legacy pages less and less in search results. 
 
 ### Q: After NWISWeb legacy pages are decommissioned, will web redirects be in place?
-A: Yes.  When possible, old URLs will redirect to a modernized, relevant alternative.  When not possible, we plan to redirect to a web page explaining where to find various types of water data. 
+#### A: Yes.  When possible, old URLs will redirect to a modernized, relevant alternative.  When not possible, we plan to redirect to a web page explaining where to find various types of water data. 
 
 ### Q: Wait! Are you turning off all of NWISWeb legacy in January 2023? 
-A: No, only the current-condition real-time pages.  All other pages like daily values, statewide streamflow, Water-Year Summary, will be evaluated and decommissioned on a case-by-case basis, leading to an eventual full decommission.  But that date is not yet known. 
+#### A: No, only the current-condition real-time pages.  All other pages like daily values, statewide streamflow, Water-Year Summary, will be evaluated and decommissioned on a case-by-case basis, leading to an eventual full decommission.  But that date is not yet known. 
 
 ### Q: You’re calling the old NWISWeb pages “legacy” pages. What do you mean? 
-A: They were excellent for their time, much like a classic car represents the best of its era. We know there is room for improvement to meet changing standards and broad user needs, which is why we are releasing NextGen pages. 
+#### A: They were excellent for their time, much like a classic car represents the best of its era. We know there is room for improvement to meet changing standards and broad user needs, which is why we are releasing NextGen pages. 
 
 ### Q: What are the features of Next Generation Monitoring Location Pages? 
 A: The redesign of real-time pages is based on several sources of information: a comprehensive inventory of existing NWISWeb functionality, customization of pages by USGS Water Science Centers, user surveys, web analytics, and the USGS Water Science Strategy.  The new user interface is more accessible for all users—especially new ones. The re-design puts data at the top of the page, is mobile ready, uses human-readable names and terms, and is built for integration with other applications and data sources. The codebase and infrastructures are optimized for performance and up-time, and instrumented with auditing tools and vulnerability detection. <b>Data integrity remains paramount.</b> Finally, an iterative software development process will engage all users early in the development process and produce frequent, meaningful improvements. 
