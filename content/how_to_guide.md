@@ -6,7 +6,7 @@ date: 2021-09-01
 
 slug: how-to-use-nextgen-pages
 
-draft: true
+draft: false
 
 type: post
 
