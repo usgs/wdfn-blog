@@ -34,15 +34,11 @@ author_email: \<wdfn@usgs.gov\>
 
 
 ## Summary
-Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
-
-## Common requests    
-### How can I view 30 Day Rainfall data?
-1.	Select the correct timeframe by selecting a preset timespan of 30 days.
-2.	Select precipitation by choosing the correct data to graph.
+This document is a how-to guide for using the USGS Water Monitoring Location Pages, which can be used to access data from thousands of water monitoring location across the United States, US, territories, and outlying areas. This document describes how to use features available in these web pages, as well as common questions users ask. Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
 
 ## Important information
 ### Provisional data
+In an effort to make water data and information available to users as rapidly as possible, the USGS releases data in near real-time in a provisional status. After technicians review the data and make any necessary corrections, the data are approved. In the hydrograph, provisional and approved data are shown in different colors.
 If you select a large enough date range, like 1 year selected below, notice the difference in approved (blue line) versus provisional data (orange line). <i>These colors are subject to change with the evolution of this product; we will update this guide as necessary.</i> We encourage all users to familiarize themselves with the limitations of provisional data by reading the provision data statement linked below the hydrograph.
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/1.png" caption="Notice the red box at the bottom of the image which highlights the provisional data statement located below the hydrograph, which is on every monitoring location page, including this one for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that highlights the provisional data statement below the hydrograph, which is on every monitoring location page, including this one for Long Green Creek at Glen Arm, MD." >}}
@@ -169,3 +165,8 @@ This drop-down menu provides links to other pages with more water data or descri
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/20_data inventory.png" caption="Data Inventory at the top of the page provides additional information on our water data." alt="Screenshot of a monitoring location page with the Data Inventory navigation button selected." >}}
 </div>
+ 
+## Common Requests / Frequently Asked Questions    
+### How can I view 30 Day Rainfall data?
+1.	Select the correct timeframe by selecting a preset timespan of 30 days.
+2.	Select precipitation by choosing the correct data to graph.
