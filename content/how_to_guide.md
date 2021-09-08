@@ -2,7 +2,7 @@
 
 author: Nicole Felts and Brad Garner
 
-date: 2021-09-01
+date: 2021-09-08
 
 slug: how-to-use-nextgen-pages
 
