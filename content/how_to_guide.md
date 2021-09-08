@@ -215,4 +215,4 @@ New pages have a button on the footer labeled "Questions or Comments."  Submissi
 No.  At this time with limited resources we are focused on building the best mobile-first website we can.  There are no plans to build platform-specific apps at this time.  
 
  ### Why is gage height the default surface-water parameter on new pages? 
-We acknowledge the value of volumetric streamflow (discharge) data.  But at this time feedback from the general public has been that gage height is preferred as the default parameter.  Read more about the importance of gage height.  Please note that bookmarking a page that shows discharge will show discharge again when that bookmark is revisited. 
+We acknowledge the value of volumetric streamflow (discharge) data.  But at this time feedback from the general public has been that gage height is preferred as the default parameter.  '[Read more about the importance of gage height.](https://waterdata.usgs.gov/blog/gage_height/)' Please note that bookmarking a page that shows discharge will show discharge again when that bookmark is revisited. 
