@@ -18,7 +18,7 @@ categories: water-information, web-communication
 
 tags: water data, public communication, stream gage
 
-image: 
+image: /static/how-to-guide/How to Use NextGen Pages.png
 
 description: Learn how to use WDFN's  Next Generation monitoring location pages.
 
