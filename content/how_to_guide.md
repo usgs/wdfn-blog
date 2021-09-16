@@ -34,12 +34,15 @@ author_email: \<wdfn@usgs.gov\>
 
 
 ## Summary
-This document is a how-to guide for using the USGS Water Monitoring Location Pages, which can be used to access data from thousands of water monitoring location across the United States, US, territories, and outlying areas. This document describes how to use features available in these web pages, as well as common questions users ask. Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
+This document is a how-to guide for using the USGS Water Monitoring Location Pages, which can be used to access data from thousands of water monitoring locations across the United States, US territories, and outlying areas. This document describes how to use features available in these web pages, as well as common questions users ask. Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
 
 ## Important information
 ### Provisional data
-In an effort to make water data and information available to users as rapidly as possible, the USGS releases data in near real-time in a provisional status. After technicians review the data and make any necessary corrections, the data are approved. In the hydrograph, provisional and approved data are shown in different colors.
-If you select a large enough date range, like 1 year selected below, notice the difference in approved (blue line) versus provisional data (orange line). <i>These colors are subject to change with the evolution of this product; we will update this guide as necessary.</i> We encourage all users to familiarize themselves with the limitations of provisional data by reading the provision data statement linked below the hydrograph.
+New data are collected continuously. In an effort to make water data and information available to users as rapidly as possible, and until new data can be checked and reviewed and approved, the USGS releases data in near real-time in a <b>provisional status.</b> Provisional data are shown on graphs with a line color that is orange, and approved data are shown with a line color that is dark blue (these colors are subject to change). The color code legend for the graphs can be found below the graphs. When viewing the data in tabular form, the value "P" is provided for provisional data and “A” is provided for approved data in the field for "Data-value qualification code."
+<i>The colors used on the graph are subject to change with the evolution of this product; we will update this guide as necessary.</i> We encourage all users to familiarize themselves with the limitations of provisional data by reading the provision data statement linked below the hydrograph.
+
+
+
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/1.png" caption="Notice the red box at the bottom of the image which highlights the provisional data statement located below the hydrograph, which is on every monitoring location page, including this one for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that highlights the provisional data statement below the hydrograph, which is on every monitoring location page, including this one for Long Green Creek at Glen Arm, MD." >}}
 </div>
@@ -53,7 +56,7 @@ Move your computer mouse or tap your device’s screen over top of the plot to e
 </div>
 
 ### Compare to previous data / display median
-Select ‘Compare to last year’ and / or ‘Display Median’ to add historical data and statistical data, when available. Note: Median is never available for gage height, but it is sometimes available for other parameters.
+Select ‘Compare to last year’ and / or ‘Display Median’ to add historical data and statistical data, when available. Note: Median is not computed for gage height, but it is sometimes available for other parameters.
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/3_display median.png" caption="Notice the red box is highlighting the toggle options for 'compare to last year' and 'display median,' which are located below the hydrograph, which is on every monitoring location page, including this one for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that highlights the toggles for 'compare to last year' and 'display median,' located below the hydrograph, which is on every monitoring location page, including this one for Long Green Creek at Glen Arm, MD." >}}
 </div>
@@ -105,13 +108,13 @@ Notice the red dots on the map, which indicate other nearby active monitoring lo
 </div>
 
 ### Different map layers
-The square in the top right corner can be used to select different map layers you are currently viewing.
+Users can change the map background by clicking on the symbol that looks like a stack of papers at the top right of the map. Selected background options are available.
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/11_map layers.png" caption="Notice the red box in the right top corner of the map which shows the different layers that can be viewed. This is the map for the monitoring location page for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that shows the available map layers for Long Green Creek at Glen Arm, MD." >}}
 </div>
 
 ## Groundwater data
-On some groundwater well sites, there may be instrumented groundwater data available, as on monitoring location page 350002110355501, which is associated with a WELL in NAVAJO COUNTY, ARIZONA. Toggle this menu visible or invisible by clicking the horizontal line on the right, as noted by the red box.
+Some groundwater sites are monitored continuously at various time-series intervals. Monitoring location 350002110355501 is an example well in Navajo County, Arizona where depth-to-water level is continuously monitored at 15-minute intervals.
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/12_groundwater data.png" caption="Notice the red boxes which indicates the toggle for groundwater data, which are only available for some monitoring locations. This is for monitoring location page for '[monitoring location 350002110355501 which is associated with a WELL in NAVAJO COUNTY, ARIZONA](https://waterdata.usgs.gov/monitoring-location/350002110355501/)'." alt="Screenshot that shows the nearby monitoring locations on the map for monitoring location 350002110355501 which is associated with a WELL in NAVAJO COUNTY, ARIZONA." >}}
 </div>
@@ -136,7 +139,7 @@ Metadata provides context for data and provides additional information about the
 </div>
 
 ## Cooperators
-Sometimes monitoring locations are operated using funding and support from organizations other than USGS, such as local governments. Those cooperating agencies are shown below the Metadata section.
+USGS monitoring locations are operated using funding and support from USGS and/ or from other sources such as other federal agencies, states, cities, local agencies, and others. The ‘cooperating’ funding source agencies are shown below the Metadata section.
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/16_cooperators.png" caption="Notice the red box that highlights the cooperator logos which now populate automatically. This monitoring location page is for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that shows the cooperators associated with this particular monitoring location at Long Green Creek at Glen Arm, MD." >}}
 </div>
