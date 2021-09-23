@@ -187,8 +187,11 @@ The NextGen pages will continue to evolve over time, adding new features and inc
 
 ### 4. Why do you now show only one hydrograph instead of a long page of many hydrographs? 
 <b>Interactive:</b> Users, #WeHearYou – you wanted an interactive hydrograph, so we made that a top priority in the early development of the new pages. Users wanted to view the data on their mobile devices, and they wanted to interact with many elements of the graph like data shown, time span, and calculated median data. 
-<b>Fast load time:</b> A single interactive hydrograph is fast for the default 7-day view, but takes some time to load data as users select longer time spans. Based on current technology, we do not advise that a single page provide interactive hydrographs for all possible parameters, as it would not allow for fast loading on mobile devices. Although there are multiple graphs on the legacy pages, those are not interactive, and the technology difference is vast between the two styles of use.
-<b>Improved usability:</b> During user testing we have found that users are confident in interacting with the hydrograph. Our usage metrics show that people use the interactive elements commonly and intuitively.  
+
+<b>Fast load time:</b> A single interactive hydrograph is fast for the default 7-day view, but takes some time to load data as users select longer time spans. Based on current technology, we do not advise that a single page provide interactive hydrographs for all possible parameters, as it would not allow for fast loading on mobile devices. Although there are multiple graphs on the legacy pages, those are not interactive, and the technology difference is vast between the two styles of use. 
+
+<b>Improved usability:</b> During user testing we have found that users are confident in interacting with the hydrograph. Our usage metrics show that people use the interactive elements commonly and intuitively. 
+
 <b>Future plans:</b> We will continue to build out the interactive elements to allow multiple parameters to show simultaneously to provide a more robust experience for our users.   
 
 ### 5. Why is the default parameter gage height? It doesn’t work best for me. 
