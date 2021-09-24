@@ -87,7 +87,7 @@ Learn more about how we work and use the agile development process to display hi
 These NextGen pages have new features, offering more than just a 1:1 replacement of legacy pages.
  
  <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/side_by_side.jpg" caption="A side by side comparison of the next generation monitoring location page versus the legacy real time page for monitoring location '[04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)'." alt="Side by side comparison of screenshots for next generation monitoring location page and legacy real time page for the same monitoring location 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
+{{< figure src="/static/NextGen_Go_Live/side_by_side.jpg" caption="A side by side comparison of the next generation monitoring location page versus the legacy real time page for monitoring location [04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN](https://waterdata.usgs.gov/monitoring-location/04157005/)." alt="Side by side comparison of screenshots for next generation monitoring location page and legacy real time page for the same monitoring location 04157005, which is associated with a STREAM in SAGINAW COUNTY, MICHIGAN." >}}
 </div> 
 
 ### 5 Key Differences 
@@ -112,12 +112,15 @@ Follow along with our software changes - please check back soon for a link to ou
 
 ### Webinar 
 
- Tune in to our public webinar, scheduled for October 13th, 2021 at 1:00 pm EST. On the day of the webinar, '[join the live Teams Live Event by clicking this link.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)'
- Although we do not have a way for attendees to "register for the event" at this time, we suggest that attendees create their own calendar event on their personal calendars and save the '[Teams live link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)' in their calendar event.
+
+ Tune in to our public webinar, scheduled for October 13th, 2021 at 1:00 pm EST. On the day of the webinar, [join the live Teams Live Event by clicking this link.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)
+ Although we do not have a way for attendees to "register for the event" at this time, we suggest that attendees create their own calendar event on their personal calendars and save the [Teams live link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) in their calendar event.
+
 Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov, and catch the recording which we’ll share through social media.
+
 <div class="grid-row">
-[{{< figure src="/static/NextGen_Go_Live/WDFN_public_10.13.png" style="width:70%; height:70%" caption="Join us on '[October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)'." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
-</div>](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)
+{{< figure src="/static/NextGen_Go_Live/WDFN_public_10.13.png" style="width:70%; height:70%" caption="Join us on [October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
+</div>
 
 ### Social Media 
 <a class="twitter-timeline" data-height="600" href="https://twitter.com/USGS_Water?ref_src=twsrc%5Etfw">Tweets by USGS_Water</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

@@ -173,3 +173,4 @@ This drop-down menu provides links to other pages with more water data or descri
 ### How can I view 30 Day Rainfall data?
 1.	Select the correct timeframe by selecting a preset timespan of 30 days.
 2.	Select precipitation by choosing the correct data to graph.
+
