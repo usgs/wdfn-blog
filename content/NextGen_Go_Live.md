@@ -108,7 +108,8 @@ Follow along with our software changes - please check back soon for a link to ou
 
 ### Webinar 
 
- '[Tune in to our public webinar, scheduled for October 13th, 2021 at 1:00 pm EST. On the day of the webinar, join the live Teams Live Event by clicking this link.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)'
+ Tune in to our public webinar, scheduled for October 13th, 2021 at 1:00 pm EST. On the day of the webinar, '[join the live Teams Live Event by clicking this link.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)'
+ Although we do not have a way for attendees to "register for the event" at this time, we suggest that attendees create their own calendar event on their personal calendars and save the '[Teams live link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)' in their calendar event.
 Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov, and catch the recording which we’ll share through social media.
 <div class="grid-row">
 [{{< figure src="/static/NextGen_Go_Live/WDFN_public_10.13.png" style="width:70%; height:70%" caption="Join us on '[October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)'." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
@@ -125,9 +126,14 @@ Can’t make the live event? Submit your questions beforehand by emailing us at 
 
 In this short video, discover how you can easily use these Next Generation monitoring location pages. We'll walk you through common functions and page uses. Please check back soon for a link to this video! 
 
-### Next Generation Summary Video 
+### Next Generation Announcement Video 
 
-We recorded this talk just for you. In just a few minutes, this video describes all the changes that are happening to the monitoring location pages, and why. Please check back soon for a link to this video! 
+We recorded this talk just for you. For more information on our water data delivery, watch this short video which shares a brief history of our legacy system, an introduction to the NextGen pages, and the timeline of these changes. <i>All videos have closed captioning capabilities.</i>
+ '[Watch the video in English, on our website.](https://www.usgs.gov/media/videos/introduction-water-data-nations-next-generation-monitoring)'
+ '[Watch the video in English, on YouTube.](https://www.youtube.com/watch?v=t0UnEH1l-Yg)'
+ '[Watch the video with Spanish closed captioning, on our website.](https://www.usgs.gov/media/videos/intro-water-data-nations-next-gen-pages-spanish-captions)'
+
+There are other modernizations upcoming for all of NWISWeb, but we will update you when we get closer.
 
 
 ## Who can you contact about these changes? 
