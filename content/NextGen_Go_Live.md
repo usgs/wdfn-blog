@@ -68,9 +68,9 @@ When NextGen pages go live in October 2021, they will become the default page fo
 
 ## Pages Continue to Improve 
 
-### You spoke, We Listened! #WeHeardYou 
+### Keep the feedback coming! #WeHearYou 
 
-During this beta phase of the next generation pages, '[we asked you, the user, how these pages could better serve you](https://waterdata.usgs.gov/blog/improvingmonitoringpages/)'. Pages will continue to be improved iteratively to create discoverable, accessible, and usable Water Data for the Nation.  
+During this beta phase of the next generation pages, '[we asked you, the user, how these pages could better serve you](https://waterdata.usgs.gov/blog/improvingmonitoringpages/)'. Pages will continue to be improved iteratively to create discoverable, accessible, and usable Water Data for the Nation, and your feedback is always welcome.
 
 ### How We Work 
 
