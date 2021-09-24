@@ -60,7 +60,11 @@ The technology used to produce the original pages, what we call legacy pages, is
 
 NextGen pages have been online and accessible for approximately two years, in what we have called the beta stage of our agile development process. Beta means the pages are accessible to the public and available for user testing. During beta, we have made many changes. 
 
-When NextGen pages go live in October 2021, they will become the default page for search engines and for web traffic. The old legacy pages will still be useable for a while longer, but around March 2022 your web browser will be redirected away from them by default. By January 2023 we expect to decommission these legacy real-time pages entirely, meaning you will no longer be able to view them. 
+NextGen pages are fully accessible today. We’re encouraging traffic to be directed to the NextGen pages over NWISWeb’s legacy pages. NextGen monitoring location pages will be linked to from other USGS websites. Search engines will prioritize NextGen pages over legacy pages in search results.
+
+Legacy real-time pages will be on a path to being turned off entirely, and in March of 2022, the legacy real-time pages will be redirected to NextGen pages, but you can still get to the legacy real-time pages if you need them.
+
+In January 2023, legacy real time pages will be fully decommissioned and no longer available. There are lots of other legacy pages that will still be available for awhile longer, but in January 2023 there will be no more legacy real-time pages.
 
 <div class="grid-row">
 {{< figure src="/static/NextGen_Go_Live/Agile_Process.PNG" caption="The Agile Development Process as the WDFN team uses it." alt="4 part chart that goes from left to right describing the agile process. The four steps are discovery, alpha, beta, and live." >}}
