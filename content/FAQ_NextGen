@@ -1,8 +1,8 @@
 ---
 
-author: Nicole Felts and Brad Garner
+author: Brad Garner and Nicole Felts
 
-date: 2021-09-23
+date: 2021-09-24
 
 slug: FAQ-nextgen-pages
 
@@ -18,7 +18,7 @@ categories: water-information, web-communication
 
 tags: water data, public communication, stream gage
 
-image: 
+image: /static/FAQ_NextGen/FAQ for NextGen Pages.png
 
 description: All your commonly asked questions about the modernization of NWISWeb's real-time pages to WDFN's Next Generation Monitoring Location pages.
 
