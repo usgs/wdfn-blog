@@ -6,7 +6,7 @@ date: 2021-09-24
 
 slug: FAQ-nextgen-pages
 
-draft: true
+draft: false
 
 type: post
 
@@ -31,6 +31,7 @@ author_email: \<wdfn@usgs.gov\>
 ---
 
 # Frequently Asked Questions
+<i>Last updated September 27th, 2021</i>
 
 ## 1. I think the old website works fine, why do you feel the need to change it? 
 The old website has served the public well, but it is 25 years old—that’s about 80% of the entire history of the World Wide Web!  Over the last 10 years, we have observed declining user satisfaction with the old website; novice users in particular tell us the legacy pages are challenging to understand and not intuitive to use.  Under the hood, the programming has become outdated and has become difficult to maintain and it is practically impossible to add new features.  The best way for us to serve the public well into the future is to modernize our pages. 
