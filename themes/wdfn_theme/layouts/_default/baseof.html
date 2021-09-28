@@ -68,11 +68,12 @@
 </head>
 
 <body>
-    <script async src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
     {{ partial "header.html" . }}
     <main>
     {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
+    <script src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
+
 </body>
 </html>
