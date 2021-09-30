@@ -28,14 +28,13 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-## </i>Learn more about these changes by attending our public webinar on October 13th, 2021 at 1 pm EDT / 10 am PDT. 
-On the day of the webinar, [join the live Teams Live Event by clicking this link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a).</i>
-We do not have a way for you to "add the event to your calendar" at this time. We recommend creating a calendar event in your personal calendar, and copying this link into the event: https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a. 
-We apologize for any inconvenience, and know that we are doing our best!
+## To learn more about these changes, attend our [public webinar on October 13th, 2021 at 1 pm EDT / 10 am PDT](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
+
+
 
 # Everything you need to know 
 
- 
+
 
 ## What are Monitoring Location Pages? 
 
@@ -114,14 +113,18 @@ Follow along with our software changes - please check back soon for a link to ou
 
 ### Webinar 
 
+On October 13th at 1 pm EDT/ 10 am PDT, join our [Teams Live Event](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) to learn about how we’re modernizing the way we display water data online.
 
- Tune in to our public webinar, scheduled for October 13th, 2021 at 1:00 pm EST. On the day of the webinar, [join the live Teams Live Event by clicking this link.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)
- Although we do not have a way for attendees to "register for the event" at this time, we suggest that attendees create their own calendar event on their personal calendars and save the [Teams live link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) in their calendar event.
+  <b>Add this event to your calendar</b>
+[Visit our event page on Eventbrite](https://www.eventbrite.com/e/modernizing-how-you-access-water-data-tickets-171511043147) to add this webinar to your calendar. Note: You do <b>not</b> have to register for the event through Eventbrite; you can just click "add to calendar."
 
-Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov, and catch the recording which we’ll share through social media.
+  <b>Link to the Live Webinar</b>
+Join the Teams Live Event at 1 pm EDT on October 13th by [clicking this link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) or pasting it into your browser (https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a). You do not have to download Teams to watch this webinar.
+
+Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov, and catch the recording which we’ll share here on the blog, and on social media.
 
 <div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/WDFN_public_webinar_10.13.21_b.png" style="width:70%; height:70%" caption="Join us on [October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
+{{< figure src="/static/NextGen_Go_Live/WDFN_public_webinar_10.13.21_b.png" style="width:70%; height:70%" caption="Join us on [October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://www.eventbrite.com/e/modernizing-how-you-access-water-data-tickets-171511043147)." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
 </div>
 
 ### Social Media 
