@@ -28,14 +28,13 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-## </i>Learn more about these changes by attending our public webinar on October 13th, 2021 at 1 pm EDT / 10 am PDT. 
-On the day of the webinar, [join the live Teams Live Event by clicking this link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a).</i>
-We do not have a way for you to "add the event to your calendar" at this time. We recommend creating a calendar event in your personal calendar, and copying this link into the event: https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a. 
-We apologize for any inconvenience, and know that we are doing our best!
+## To learn more about these changes, attend our [public webinar on October 13th, 2021 at 1 pm EDT / 10 am PDT](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
+
+
 
 # Everything you need to know 
 
- 
+
 
 ## What are Monitoring Location Pages? 
 
