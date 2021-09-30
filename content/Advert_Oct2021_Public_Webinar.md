@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, public communication, stream gage
 
-image: /static/Advert_Oct2021_Public_Webinar/
+image: /static/Advert_Oct2021_Public_Webinar/webinar_thumbnail.png
 
 description: USGS has provided crucial water data online for decades, but the system is outdated, so we're rebuilding a brand new, modernized system. We're hosting a webinar to talk about the first release of this new system. Join us for our Teams Live Event on October 13, 2021 at 1 pm EDT/ 10 am PDT.
 
@@ -29,7 +29,10 @@ author_email: \<eread@usgs.gov\>
 ---
 
 <div class="grid-row">
-{{< figure src="/static/Advert_Oct2021_Public_Webinar/WDFN_public_webinar_10.13.21_b.PNG" caption="USGS presents Water Data for the Nation - Modernizing How You Access Water Data" alt="Dark blue flyer with white USGS logo in top left, white and orange graphic stars in top right, and white waves on bottom with streamgage graphic. White and orange text reads: Water Data for the Nation. Modernizing How You Access Water Data. Making high-quality water information discoverable, accessible, and usable for everyone. Join the webinar on Wednesday, October 13th, 2021 from 1-2 pm EDT / 10-11 am PDT. Teams live event. USGS Water Mission Area is modernizing how we deliver water data to the public. You talk, #WeHearYou. https://waterdata.usgs.gov/blog/webinar-10-13-21" >}}
+{{< figure src="/static/Advert_Oct2021_Public_Webinar/WDFN_public_webinar_10_13_21_b.png" 
+caption="USGS presents Water Data for the Nation - Modernizing How You Access Water Data" 
+alt="Dark blue flyer with white USGS logo in top left, white and orange graphic stars in top right, and white waves on bottom with streamgage graphic. White and orange text reads: Water Data for the Nation. Modernizing How You Access Water Data. Making high-quality water information discoverable, accessible, and usable for everyone. Join the webinar on Wednesday, October 13th, 2021 from 1-2 pm EDT / 10-11 am PDT. Teams live event. USGS Water Mission Area is modernizing how we deliver water data to the public. You talk, WeHearYou." 
+>}}
 </div>
 
 # Join our [Teams Live Event](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) on Oct, 13th at 1 pm EDT/ 10 am PDT to learn about how we’re modernizing the way we display water data online.
