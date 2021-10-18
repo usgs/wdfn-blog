@@ -10,7 +10,7 @@ draft: false
 
 type: post
 
-title: Modernizing How You Access Water Data | Webinar on October 13 @ 1 pm EDT
+title: Modernizing How You Access Water Data | Webinar on Oct 13 | Recording Available
 
 categories: water-information, web-communication
 
