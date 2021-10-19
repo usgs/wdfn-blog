@@ -29,7 +29,8 @@ author_staff:
 author_email: \<wdfn@usgs.gov\>
 
 ---
-
+# Watch our recorded webinar - with a live demo!
+The recording of [this webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/) can be viewed on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
 
 
 
