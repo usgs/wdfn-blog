@@ -123,7 +123,7 @@ Join the Teams Live Event at 1 pm EDT on October 13th by [clicking this link](ht
 
 Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov.
 
-Missed the webinar? Watch the recording on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the [USGS YouTube channel](AWAITING LINK).
+Missed the webinar? Watch the recording on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the [USGS YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
 
 <div class="grid-row">
 {{< figure src="/static/NextGen_Go_Live/WDFN_public_webinar_10.13.21_b.png" style="width:70%; height:70%" caption="Join us on [October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://www.eventbrite.com/e/modernizing-how-you-access-water-data-tickets-171511043147)." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
