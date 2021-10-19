@@ -29,6 +29,7 @@ author_email: \<eread@usgs.gov\>
 ---
 # Missed the webinar? Watch the recording
 The recording of this webinar can be viewed on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
+{{< youtube id="6vqLR9ozLjE" title="Public Webinar — Modernizing How You Access Water Data" >}}
 ## Let us know your thoughts!
 Didn't get a chance to fill out our survey during the live event? Just now watching the recording? We'd love to hear your thoughts - it'll only take a minute. [Please, fill out our survey.](https://forms.office.com/Pages/ResponsePage.aspx?id=urWTBhhLe02TQfMvQApUlPwk2geyaQhGpWWJx543yllUOVpLWUNHNFFZWkhYWDY2Tk1JNklDN0EwRiQlQCN0PWcu)
 
