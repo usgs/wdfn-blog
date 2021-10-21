@@ -28,7 +28,7 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-## To learn more about these changes, water the recording of our [October 2021 public webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
+## To learn more about these changes, watch the recording of our [October 2021 public webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
 
 
 
@@ -48,16 +48,15 @@ Monitoring location pages are web pages that the USGS Water Mission Area offers 
 
 ## Why Are We Changing Them? 
 
-### Thanking Outdated Technology 
+The original monitoring location pages have largely looked the same [since their inception in 1995](https://waterdata.usgs.gov/blog/25-years-of-water-data-on-the-web/). We are confident they were one of the first displays of real-time water-data anywhere in the world at a time when the web was only 5 years old and rarely displayed “live” content of any kind. Wow!
 
-The original monitoring location pages have largely looked the same '[since their inception in 1995](https://waterdata.usgs.gov/blog/25-years-of-water-data-on-the-web/)'. We are confident they were one of the first displays of real-time water-data anywhere in the world at a time when the web was only 5 years old and rarely displayed “live” content of any kind. Wow! 
-
-The technology used to produce the original pages, what we call legacy pages, is now outdated, and prevents crucial updates from being made. But we need to meet accessibility standards, stay modern, and increase user satisfaction, so we have created '[new, Next Generation monitoring location pages](https://waterdata.usgs.gov/blog/wdfn-tng/)'. We give thanks to the decades of skilled software-programming work put into the legacy pages and we recognize how much they have provided to the public. We are thrilled to modernize our water data delivery as we “go live” with the NextGen pages.
+The technology used to produce the original pages, what we call legacy pages, is now outdated, and prevents crucial updates from being made. But we need to meet accessibility standards, stay modern, and increase user satisfaction, so we have created [new, Next Generation monitoring location pages](https://waterdata.usgs.gov/blog/wdfn-tng/). We give thanks to the decades of skilled software-programming work put into the legacy pages and we recognize how much they have provided to the public. We are thrilled to modernize our water data delivery as we “go live” with the NextGen pages.
 
 <div class="grid-row">
 {{< figure src="/static/NextGen_Go_Live/LegacyPage_LongGreen.PNG" caption="Here’s an example of a legacy page, showing '[monitoring location 01584050 LONG GREEN CREEK AT GLEN ARM, MD](https://waterdata.usgs.gov/nwis/uv?site_no=01584050)'." alt="Screen capture of a legacy monitoring location page for 01584050 LONG GREEN CREEK AT GLEN ARM, MD." >}}
 </div> 
 
+ 
 ## What Does “Live” Mean? When will "Live" happen? 
 
 NextGen pages have been online and accessible for approximately two years, in what we have called the beta stage of our agile development process. Beta means the pages are accessible to the public and available for user testing. During beta, we have made many changes. 
