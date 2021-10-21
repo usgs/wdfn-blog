@@ -28,11 +28,12 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-## To learn more about these changes, attend our [public webinar on October 13th, 2021 at 1 pm EDT / 10 am PDT](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
+## To learn more about these changes, water the recording of our [October 2021 public webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
 
 
 
 # Everything you need to know 
+<i>Last updated October 21, 2021</i>
 
 
 
@@ -109,25 +110,15 @@ These NextGen pages have new features, offering more than just a 1:1 replacement
 
 ### Software Updates 
 
-Follow along with our software changes - please check back soon for a link to our GitLab! Check out our blog for additional releases and related work.  
+The software that generates the Water Data for the Nation web pages is available for viewing in [our public USGS Git repository](https://code.usgs.gov/wma/iow/waterdataui).  You are welcome to inspect the programming, review code changelogs, or even clone your own copy of the software for your own software endeavors.  We hope you will find our modern website software possesses loosely coupling, service orientation, and other qualities that make it amenable to be adapted to other purposes by any interested person or group.
+
 
 ### Webinar 
 
-On October 13th at 1 pm EDT/ 10 am PDT, join our [Teams Live Event](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) to learn about how we’re modernizing the way we display water data online.
+We hosted a [public webinar in October 2021](https://waterdata.usgs.gov/blog/webinar-10-13-21/).
+  
+Did you miss the webinar? Watch the recording on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the [USGS YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
 
-  <b>Add this event to your calendar</b>
-[Visit our event page on Eventbrite](https://www.eventbrite.com/e/modernizing-how-you-access-water-data-tickets-171511043147) to add this webinar to your calendar. Note: You do <b>not</b> have to register for the event through Eventbrite; you can just click "add to calendar."
-
-  <b>Link to the Live Webinar</b>
-Join the Teams Live Event at 1 pm EDT on October 13th by [clicking this link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) or pasting it into your browser (https://teams.microsoft.com/l/meetup-join/19%3ameeting_OGU4YzcyYmUtMzcyMS00YTVhLWFmOTQtODIyZjE3ZTM3Y2Mz%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a). You do not have to download Teams to watch this webinar.
-
-Can’t make the live event? Submit your questions beforehand by emailing us at WDFN@usgs.gov.
-
-Missed the webinar? Watch the recording on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the [USGS YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
-
-<div class="grid-row">
-{{< figure src="/static/NextGen_Go_Live/WDFN_public_webinar_10.13.21_b.png" style="width:70%; height:70%" caption="Join us on [October 13th, 2021 at 1:00 pm EST / 10 am PST to hear more about the changes to how we are modernizing the delivery of Water Data for the Nation.](https://www.eventbrite.com/e/modernizing-how-you-access-water-data-tickets-171511043147)." alt="Invite flyer for a public webinar on October 13th at 1:00 pm EST on the WDFN NextGen monitoring location pages." >}}
-</div>
 
 ### Social Media 
 <a class="twitter-timeline" data-height="600" href="https://twitter.com/USGS_Water?ref_src=twsrc%5Etfw">Tweets by USGS_Water</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
