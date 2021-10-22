@@ -24,7 +24,7 @@ keywords: water data, water access, data access, data delivery, waterquality
 
 author_staff: emily-k-read
 
-author_email: \<eread@usgs.gov\>
+author_email: <eread@usgs.gov>
 
 ---
 # Missed the webinar? Watch the recording
