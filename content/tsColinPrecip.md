@@ -11,7 +11,7 @@ author_github: lindsaycarr
  
  
  
-author_email: <a href="mailto:lcarr@usgs.gov" class="email">lcarr@usgs.gov</a>
+author_email: <lcarr@usgs.gov>
 
 tags: 
   - R

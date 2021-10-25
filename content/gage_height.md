@@ -24,7 +24,7 @@ keywords: water data
 
 author_staff: candice-hopkins
 
-author_email: \<chopkins@usgs.gov\>
+author_email: <chopkins@usgs.gov>
 
 ---
 

@@ -26,7 +26,7 @@ keywords: water data
 
 author_staff: 
 
-author_email: \<wdfn@usgs.gov\>
+author_email: <wdfn@usgs.gov>
 
 ---
 
