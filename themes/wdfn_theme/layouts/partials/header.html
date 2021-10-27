@@ -68,6 +68,15 @@
                 <li class="usa-nav__primary-item">
                     <a class="usa-nav__link" href="{{ $.Site.BaseURL }}">Water Data For The Nation Blog</a>
                 </li>
+                <li class="usa-nav__primary-item">
+                    <button class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="section-monlocpages"><span>Monitoring Location Pages</span></button>
+                    <ul id="section-monlocpages" class="usa-nav__submenu">
+                        <li class="usa-nav__submenu-item"><a href="{{ $.Site.BaseURL }}realtime-pages-replacement/">Introduction</a></li>
+                        <li class="usa-nav__submenu-item"><a href="{{ $.Site.BaseURL }}faq-nextgen-pages/">FAQ</a></li>
+                        <li class="usa-nav__submenu-item"><a href="{{ $.Site.BaseURL }}how-to-use-nextgen-pages/">How-To Guide</a></li>
+                        <li class="usa-nav__submenu-item"><a href="{{ $.Site.BaseURL }}webinar-10-13-21/">Recorded Webinar</a></li>
+                    </ul>
+                </li>
                 {{ range $key, $value := .Site.Taxonomies }}
                     <li class="usa-nav__primary-item">
                         <button class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="section-{{ $key }}"><span>{{ $key | title }}</span></button>
