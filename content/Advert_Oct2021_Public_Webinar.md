@@ -32,7 +32,7 @@ The recording of this webinar can be viewed on the [USGS website](https://www.us
 {{< youtube id="6vqLR9ozLjE" title="Public Webinar — Modernizing How You Access Water Data" >}}
 
 ## Let us know your thoughts!
-Didn't get a chance to fill out our survey during the live event? Just now watching the recording? We'd love to hear your thoughts - it'll only take a minute. [Please, fill out our survey.](https://forms.office.com/Pages/ResponsePage.aspx?id=urWTBhhLe02TQfMvQApUlPwk2geyaQhGpWWJx543yllUOVpLWUNHNFFZWkhYWDY2Tk1JNklDN0EwRiQlQCN0PWcu)
+Didn't get a chance to give us your feedback during the live event? Just now watching the recording? We'd love to hear your thoughts - it'll only take a minute. [Please, fill out our feedback form.](https://forms.office.com/Pages/ResponsePage.aspx?id=urWTBhhLe02TQfMvQApUlPwk2geyaQhGpWWJx543yllUOVpLWUNHNFFZWkhYWDY2Tk1JNklDN0EwRiQlQCN0PWcu)
 
 <div class="grid-row">
 <div class="grid-col-8 grid-offset-2">
