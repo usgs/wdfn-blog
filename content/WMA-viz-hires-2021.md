@@ -4,7 +4,7 @@ date: 2021-11-02
 slug: viz-hires-2021
 draft: True
 type: post
-image: /static/viz-hires-2021/hiring_thumb_black.png
+image: /static/viz-hires-2021/hiring_thumb_dark.png
 title: "2021 Data Visualization Hires"
 author_staff: Jordan-S-Read
 author_email: <jread@usgs.gov>
@@ -27,7 +27,7 @@ tags:
   
 
 ---
-{{< figure src="/static/viz-hires-2021/hiring_thumb.png" alt="A banner announcing “We are hiring data visualization specialists. Applications will be open on USAjobs Nov 17th-23rd “.  A collection of images shows different chart and map data visualizations from USGS.">}}
+{{< figure src="/static/viz-hires-2021/hiring_banner_viz.png" alt="A banner announcing “We are hiring data visualization specialists. Applications will be open on USAjobs Nov 17th-23rd “.  A collection of images shows different chart and map data visualizations from USGS.">}}
 
 The U.S. Geological Survey Water Mission Area is hiring Data Visualization Specialists across multiple levels of experience (GS09 and GS12, more on this below). These positions will be open and accepting applications on [USAjobs.gov](https://www.usajobs.gov/) from November 17th to 23rd. For all positions, an unofficial transcript and detailed resume summarizing job qualifications, links to or samples of prior visualizations, and relevant skills are needed. _We will continue to update this page with information, including direct links to the vacancies as soon as they are available._ 
 
