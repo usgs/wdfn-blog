@@ -1,10 +1,10 @@
 ---
 author: Cee Nell (they/them), Julie Padilla (she/her), Jordan Read (he/him) 
-date: 2021-11-03
+date: 2021-11-02
 slug: viz-hires-2021
 draft: True
 type: post
-image: /static/viz-hires-2021/hiring_thumb.png
+image: /static/viz-hires-2021/hiring_thumb_black.png
 title: "2021 Data Visualization Hires"
 author_staff: Jordan-S-Read
 author_email: <jread@usgs.gov>
