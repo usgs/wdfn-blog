@@ -16,7 +16,12 @@ toc: true
 
 categories: water-information, web-communication
 
-tags: water data, public communication, stream gage
+tags: 
+- water data
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/FAQ_NextGen/FAQ for NextGen Pages.png
 
