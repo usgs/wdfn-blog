@@ -12,7 +12,9 @@ type: post
 
 title: Modernizing How You Access Water Data | Webinar on Oct 13 | Recording Available
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
 tags: 
 - water data
