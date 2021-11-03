@@ -1,6 +1,6 @@
 ---
 
-author: Candice Hopkins and Nicole Felts
+author: Candice Hopkins (she/her) and Nicole Felts (she/her)
 
 date: 2021-08-17
 
@@ -12,9 +12,16 @@ type: post
 
 title: Next Generation Monitoring Location Pages Go Live Soon!
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
-tags: water data, public communication, stream gage
+tags: 
+- water data
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/NextGen_Go_Live/mobile_side_by_side.jpg
 
