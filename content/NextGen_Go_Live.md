@@ -14,11 +14,12 @@ title: Next Generation Monitoring Location Pages Go Live Soon!
 
 categories: water-information, web-communication
 
-tags: tags: water data,
-public communication,
-stream gage,
-NextGen,
-monitoring location pages
+tags: 
+- water data
+- public communication
+- stream gage
+- NextGen
+- monitoring location page
 
 image: /static/NextGen_Go_Live/mobile_side_by_side.jpg
 
