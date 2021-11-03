@@ -14,7 +14,12 @@ title: Modernizing How You Access Water Data | Webinar on Oct 13 | Recording Ava
 
 categories: water-information, web-communication
 
-tags: water data, public communication, stream gage
+tags: 
+- water data
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/Advert_Oct2021_Public_Webinar/webinar_thumbnail.png
 
