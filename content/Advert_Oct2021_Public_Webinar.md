@@ -1,6 +1,6 @@
 ---
 
-author: Emily Read and Nicole Felts
+author: Emily Read (she/her) and Nicole Felts (she/her)
 
 date: 2021-10-01
 
