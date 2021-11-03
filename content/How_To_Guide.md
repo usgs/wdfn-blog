@@ -14,7 +14,9 @@ title: How to Use Next Generation Monitoring Location Pages
 
 toc: true
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
 tags:
 - water data
