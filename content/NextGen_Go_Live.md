@@ -12,7 +12,9 @@ type: post
 
 title: Next Generation Monitoring Location Pages Go Live Soon!
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
 tags: 
 - water data
