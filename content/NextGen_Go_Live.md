@@ -19,7 +19,7 @@ tags:
 - public communication
 - stream gage
 - NextGen
-- monitoring location page
+- monitoring location pages
 
 image: /static/NextGen_Go_Live/mobile_side_by_side.jpg
 
