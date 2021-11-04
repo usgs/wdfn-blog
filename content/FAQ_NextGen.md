@@ -1,6 +1,6 @@
 ---
 
-author: Brad Garner (he/him) and Nicole Felts (she/her)
+author: Brad Garner and Nicole Felts
 
 date: 2021-09-24
 
