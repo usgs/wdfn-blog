@@ -2,7 +2,7 @@
 title: "New Groundwater Time Series Service Available"
 author: "Candice Hopkins"
 date: '2021-11-05'
-draft: yes
+draft: False
 type: post
 slug: gw_bats
 categories: water-information, groundwater
