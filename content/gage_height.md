@@ -1,12 +1,12 @@
 ---
 
-author: Lynn Fahlquist and Candice Hopkins
+author: Lynne Fahlquist and Candice Hopkins
 
 date: 2021-07-21
 
 slug: gage_height
 
-draft: True
+draft: False
 
 type: post
 
@@ -16,7 +16,7 @@ categories: water-information, web-communication
 
 tags: water data, stream flow, public communication, stream gage, gage height, river height
 
-image:/static/gage_height/cover.png
+image: /static/gage_height/cover.png
 
 description: Gage height is used as a default parameter for water availability at streamgages for better user context. 
 
@@ -24,7 +24,7 @@ keywords: water data
 
 author_staff: candice-hopkins
 
-author_email: \<chopkins@usgs.gov\>
+author_email: <chopkins@usgs.gov>
 
 ---
 
@@ -39,14 +39,12 @@ height) of the water surface above the streamgage datum reference point.
 generally located underneath the streambed to accommodate for stream
 channel changes.
 
-###
 <div>
-
 {{< figure src="/static/gage_height/1.png" caption= "Streamgage 13176400, East Fork Owyhee River at Crutcher Crossing, ID, provides critical data that the U.S. Bureau of Land Management needs to secure water rights to protect the Owyhee Canyonlands wilderness area." alt="A photo of a streamgage on a riverbank in a canyon." >}}
 
 </div>
 
-##Why Gage Height?
+## Gage Height to Describe Water Quantity
 
 *Based on user feedback, we updated our*
 *[streamgage](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects)
@@ -65,13 +63,13 @@ Discharge and gage height are related values. Although discharge values often ma
 
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/2.1.png" caption="Discharge and gage height for the same time period at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Two graphs for monitoring location 07074420: the graph on the left shows time versus discharge, and the graph on the right shows time versus gage height." class="side-by-side" >}}
-{{< figure src="/static/gage_height/2.2.png" caption="other caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
+{{< figure src="/static/gage_height/2.1.png" caption="Discharge (streamflow) for the same time period as the graph on the right at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Two graphs for monitoring location 07074420: the graph on the left shows time versus discharge, and the graph on the right shows time versus gage height." class="side-by-side" >}}
+{{< figure src="/static/gage_height/2.2.png" caption="Gage height for the same time period as the graph on the right at monitoring location [07074420](https://waterdata.usgs.gov/monitoring-location/07074420/#parameterCode=00065), Black River at Elgin Ferry, AR" alt="Description of the image" class="side-by-side" >}}
 
 </div>
 
 
-##What Exactly is Gage Height?\
+## What Exactly is Gage Height?
 **Gage height** is the **distance (or height) of the stream (or lake)
 water surface above the gage datum** (reference point). Read about [the
 history of stream gages in this interactive
@@ -82,7 +80,7 @@ anticipated depth of a stream or lake because streambeds change over
 time. At some locations, particularly those near the ocean, this
 arbitrary reference point may be picked to be at sea level.
 
-## Gage Height is also called\...
+## Gage Height is Also Called\...
 
 -   Stage
 
@@ -98,8 +96,6 @@ arbitrary reference point may be picked to be at sea level.
 -   Stream Stage
 
 -   Water Height
-
-# 
 
 <div class="grid-row">
 
@@ -118,11 +114,9 @@ streamflow, we need to measure from a reference point that does not
 change over time, which is why gage datums are chosen to be below the
 base of a streambed.
 
-## 
-
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/4.png" caption="Gage height and gage datum graphic. Gage height is the measurement from the water surface down to the gage datum" alt="Stream cross section graphic depicting the height from the water surface down to the gage datum -- the gage height." >}}
+{{< figure src="/static/gage_height/4.png" caption="Gage height and gage datum graphic. Gage height is the measurement from the water surface down to the gage datum." alt="Stream cross section graphic depicting the height from the water surface down to the gage datum -- the gage height." >}}
 
 </div>
 
@@ -162,18 +156,11 @@ the [Flood Inundation Mapper](https://fim.wim.usgs.gov/fim/) tool or the
 tool to visualize what flooding will look like at different gage
 heights.
 
-## 
-
-
 <div class="grid-row">
 
-{{< figure src="/static/gage_height/5.png" caption="A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible." alt="A graph showing gage height over time and a varying river
-level. Horizontal lines on the graph indicate the National Weather Service flood levels." >}}
+{{< figure src="/static/gage_height/5.png" caption="A hydrograph of the [Tangipahoa River at Robert,LA](https://waterdata.usgs.gov/monitoring-location/07375500/#parameterCode=00065&startDT=2021-06-06&endDT=2021-06-10) with Flood Stages visible." alt="A graph showing gage height over time and a varying river level. Horizontal lines on the graph indicate the National Weather Service flood levels." >}}
 
 </div>
-
-
-## 
 
 ## Real-time Response to Changing Gage Heights (Stream or Lake Levels)
 
