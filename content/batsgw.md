@@ -1,30 +1,23 @@
 ---
-author: Candice Hopkins
-date: 2021-11-05
-slug: gw_bats
-draft: True
+title: "New Groundwater Time Series Service Available"
+author: "Candice Hopkins"
+date: '2021-11-05'
+draft: yes
 type: post
-title: New Groundwater Time Series Service Available
+slug: gw_bats
 categories: water-information, groundwater
-tags:
-  - water-data-for-the-nation
-image: 
-description: A new data offering which consolidates instrumented and discrete groundwater level data into a data stream that yields one value per day
+tags: water-data-for-the-nation
+image: static/gwbats/image4.png
+description: A new data offering which consolidates instrumented and discrete groundwater
+  level data into a data stream that yields one value per day
 keywords:
-  - groundwater
-  - simplified data
-  - time series
+- groundwater
+- simplified data
+- time series
 author_staff: candice-hopkins
 author_email: <chopkins@usgs.gov>
 ---
 
-
-
-
-
-
-
-# New Groundwater Time Series Service Available
 
 USGS collects water-level information at groundwater monitoring
 locations across the country and often produces dataset that are rich in
@@ -50,10 +43,11 @@ There are two ways that USGS measures groundwater-levels:
     This is called a **field visit** and generates **discrete**
     groundwater-level data.
 
-![](media\image1.jpg){width="5.0in" height="3.75in"}
+<div>
+{{< figure src="/static/gwbats/image1.jpg" caption= "A USGS scientist measures the groundwater level using a steel tape in a shallow well near Wind River at Kinnear, WY" alt="A photo of a person lowering an instrument into a groundater well." >}}
+</div>
 
-Figure 1: A USGS scientist measures the groundwater level using a steel
-tape in a shallow well near Wind River at Kinnear, WY
+
 
 -   An instrument called a pressure transducer can be placed in a well,
     borehole, or piezometer, or a streamgage can be placed at a spring.
@@ -65,13 +59,16 @@ tape in a shallow well near Wind River at Kinnear, WY
     obtain data. Data generated in this manner are called
     **instrumented** data or **timeseries** data.
 
-![](media\image2.jpg){width="3.75in" height="5.0in"}
-
-Figure 2: USGS groundwater [site
+<div>
+{{< figure src="/static/gwbats/image2.jpg" caption= "USGS groundwater [site
 414831072173002](https://nwis.waterdata.usgs.gov/nwis/uv?cb_72019=on&format=gif_default&site_no=414831072173002)
 in Tolland County, Connecticut. This well is equipped with a transducer
 and equipment that allows groundwater level data to be transmitted in
-real-time.
+real-time." alt="A photo of a groundwater site with equipment that allows data to be transmitted." >}}
+
+</div>
+
+
 
 These two methods of data collection create a data-rich record with
 varying data frequency over time; you can see this in our many
@@ -128,18 +125,15 @@ data are also available for download or for interactive viewing on
 [Monitoring Location
 Pages](https://waterdata.usgs.gov/blog/how-to-use-nextgen-pages/).
 
-![](media\image3.png){width="5.0in" height="3.2291666666666665in"}
+<div class="grid-row">
 
-Figure 4: All groundwater level observations for one year, including
-instrumented data (solid blue line, representing measurements every
-fifteen minutes) and discrete data (red dots) representing site visits
-at site 414831072173002.
-
-![](media\image4.png){width="5.0in" height="3.2291666666666665in"}
-
-Figure 5: Best Available Time Series, or one value per day, for one
+{{< figure src="/static/gwbats/image3.png" caption="All groundwater level observations for one year, including
+instrumented data (solid blue line, representing measurements every fifteen minutes) and discrete data (red dots) representing site visits at site 414831072173002." alt="Two graphs for monitoring location 414831072173002 showing changing water levels over a year." class="side-by-side" >}}
+{{< figure src="/static/gwbats/image4.png" caption="Best Available Time Series, or one value per day, for one
 year, representing instrumented data and discrete data at site
-414831072173002.
+414831072173002" alt="Hydrograph of monitoring location 414831072173002 showing water levels over a year" class="side-by-side" >}}
+
+</div>
 
 ## Options for accessing this new data offering
 
