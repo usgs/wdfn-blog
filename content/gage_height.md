@@ -28,16 +28,7 @@ author_email: \<chopkins@usgs.gov\>
 
 ---
 
-
-
-###
-
-
-#Why We Use Gage Height
-
-
-
-###
+## Making Water Data Easier to Understand
 
 On USGS water monitoring location pages, the default parameter that is
 displayed for [streamgage](https://pubs.usgs.gov/fs/2011/3001/) sites is
