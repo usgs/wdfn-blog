@@ -60,9 +60,8 @@ There are two ways that USGS measures groundwater-levels:
     **instrumented** data or **timeseries** data.
 
 <div>
-{{< figure src="/static/gwbats/image2.jpg" caption= "USGS groundwater [site
-414831072173002](https://nwis.waterdata.usgs.gov/nwis/uv?cb_72019=on&format=gif_default&site_no=414831072173002)
-in Tolland County, Connecticut. This well is equipped with a transducer
+{{< figure src="/static/gwbats/image2.jpg" caption= "USGS groundwater site
+414831072173002 in Tolland County, Connecticut. This well is equipped with a transducer
 and equipment that allows groundwater level data to be transmitted in
 real-time." alt="A photo of a groundwater site with equipment that allows data to be transmitted." >}}
 
