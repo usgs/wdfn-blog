@@ -60,11 +60,7 @@ There are two ways that USGS measures groundwater-levels:
     **instrumented** data or **timeseries** data.
 
 <div>
-{{< figure src="/static/gwbats/image2.jpg" caption= "USGS groundwater site
-414831072173002 in Tolland County, Connecticut. This well is equipped with a transducer
-and equipment that allows groundwater level data to be transmitted in
-real-time." alt="A photo of a groundwater site with equipment that allows data to be transmitted." >}}
-
+{{< figure src="/static/gwbats/image2.jpg" caption= "USGS groundwater site 414831072173002 in Tolland County, Connecticut. This well is equipped with a transducer and equipment that allows groundwater level data to be transmitted in real-time." alt="A photo of a groundwater site with equipment that allows data to be transmitted." >}}
 </div>
 
 
@@ -126,11 +122,8 @@ Pages](https://waterdata.usgs.gov/blog/how-to-use-nextgen-pages/).
 
 <div class="grid-row">
 
-{{< figure src="/static/gwbats/image3.png" caption="All groundwater level observations for one year, including
-instrumented data (solid blue line, representing measurements every fifteen minutes) and discrete data (red dots) representing site visits at site 414831072173002." alt="Two graphs for monitoring location 414831072173002 showing changing water levels over a year." class="side-by-side" >}}
-{{< figure src="/static/gwbats/image4.png" caption="Best Available Time Series, or one value per day, for one
-year, representing instrumented data and discrete data at site
-414831072173002" alt="Hydrograph of monitoring location 414831072173002 showing water levels over a year" class="side-by-side" >}}
+{{< figure src="/static/gwbats/image3.png" caption="All groundwater level observations for one year, including instrumented data (solid blue line, representing measurements every fifteen minutes) and discrete data (red dots) representing site visits at site 414831072173002." alt="Two graphs for monitoring location 414831072173002 showing changing water levels over a year." class="side-by-side" >}}
+{{< figure src="/static/gwbats/image4.png" caption="Best Available Time Series, or one value per day, for one year, representing instrumented data and discrete data at site 414831072173002" alt="Hydrograph of monitoring location 414831072173002 showing water levels over a year" class="side-by-side" >}}
 
 </div>
 
