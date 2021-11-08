@@ -1,13 +1,13 @@
 ---
 title: "New Groundwater Time Series Service Available"
-author: "Candice Hopkins"
+author: "Candice Hopkins and Brad Garner"
 date: '2021-11-05'
 draft: False
 type: post
 slug: gw_bats
 categories: water-information, groundwater
 tags: water-data-for-the-nation
-image: static/batsgw/image4.png
+image: static/batsgw/cover.png
 description: A new data offering which consolidates instrumented and discrete groundwater
   level data into a data stream that yields one value per day
 keywords:
