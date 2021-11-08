@@ -130,7 +130,7 @@ Pages](https://waterdata.usgs.gov/blog/how-to-use-nextgen-pages/).
 ## Options for accessing this new data offering
 
 These timeseries can be accessed through the [WDFN Observations Services
-API,](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=/api/observations/v3/api-docs#/Observations%20Data%20Sets/getTimeSeries)
+API,](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=%2Fapi%2Fobservations%2Fv3%2Fapi-docs#%2FObservations%20Data%20Sets%2FgetTimeSeries)
 and data are output following the WaterML schema. Through this API,
 users can request the data type as 'gw_combined', meaning they are
 requesting both discrete and instrumented data from the same call, and
