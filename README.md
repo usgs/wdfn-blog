@@ -11,7 +11,7 @@ wdfn-blog
 
 # Submitting an update
 
-1. Fork repo
+1. Fork repo and set up local development environment as needed (see sections below)
 2. Create a markdown file in (.md). This should be all lowercase and dashes (e.g. `name-of-post`)
 3. Add your markdown file to the `content` folder
 4. Include static images in `static\name-of-post`. Images *must* include alt and title text
@@ -54,7 +54,7 @@ wdfn-blog
 
   * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic USGS image will be included.
 
-  * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
+  * `categories` is a small list of approved options, curated by the managing editor.  They help build the overall site navigation structure.
 
   * `tags` are more specific words, and do not need to be on a pre-approved list, these will show up on the navigation of the post.
 
@@ -66,8 +66,8 @@ wdfn-blog
 
   * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
 
-6. Submit a pull request
-7. Wait for the pull request to get merged (wdfn-updates maintainers will do that), it will then appear on the dev site.
+6. Commit locally and push as needed, then submit a pull request
+7. Wait for the pull request to get merged, it will then appear on the dev site.
 8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site.
 9. A designated approver must sign off on content based on review response
 10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
@@ -105,6 +105,81 @@ library(jsonlite)
 ```
 
 
+# Simplified Local development in Windows
+
+Developing without Docker can be simpler on a Windows workstation, particularly if that workstation has software restrictions imposed
+by an organization's I.T. department.  There are several ways to make this work and here  is one (relatively) simple example of setting up a development environment.  Stick with us.  This is a bit of time
+and learning curve but soon you can be authoring articles and
+previewing the results on the your own PC with ease!
+
+**One-time installation steps:**
+
+1. Install and configure Visual Studio Code
+   * Visit the Visual Studio Code website and download and install the latest stable version
+   * Launch Visual Studio Code. 
+   * Install the Git extension.  If wdfn-blog is still hosted on GitHub, it will ask you for login credentials to conveniently integrate this extension with GitHub.  This works really well.
+
+1. Install Git for Windows
+   * This step is needed so you can use Git Bash for subsequent steps here.  Skip this step if you I.T. department has already installed this for you.
+
+1. Install Node.js
+   * Visit the [node.js](https://nodejs.org/en/) website and download the latest LTS (long-term stable) installer for Windows.
+   * Install with default options.  Decline additional complexities such as installing Choclatey or other things the installer offers.
+
+1. Clone the wdfn-blog repo
+   * In VS Code, click the source control tab, select "clone repository", then paste in the repo name.
+   * If working from wdfn-blog on GitHub, select "clone from GitHub" and you should conveniently see the wdfn-blog fork you have generated.
+      * In this tutorial, we have cloned it to D:\sandbox\github-user, under which the cloning process will make the folder wdfn-blog.
+   * VS Code will ask you to open this folder.  If you agree, the wdfn-blog project will conveniently always be the one that opens in VS Code when you launch it.  
+      * If not, you will need to File->Open Folder, and navigate to the wdfn-blog folder at the location you cloned it.
+
+1. Compile the blog's static assets
+   * Launch Git BASH
+   * Use the cd command to change to the wdfn-blog directory of the cloned repo.  In this example, it would be `cd /d/sandbox/github-user/wdfn-blog`
+   * Use cd to move into the themes directory `cd themes/wdfn_theme/`
+   * Install all packages needed to compile assets by typing `npm ci`
+      * Note: This is better than running npm install, because npm ci does not change the package-lock.json file, which is a file that rarely needs to be altered.
+      * You will see a large node_modules directory appear.  Cool.
+   * Compile the blog assets by typine `npm run build`
+      * You will see a new directory called static appear.  Great job.
+
+1. Download Hugo and place in path.  
+   * Visit [Hugo Releases](https://github.com/gohugoio/hugo/releases) and download the latest proper Windows 64-bit Zipfile.  For example `hugo_0.89.2_Windows-64bit.zip` is the proper file to download as of this writing in November 2021.  Later version should continue to work, as well.
+   * Unzip the contents of the Zipfile and move this folder to somewhere convenient and near your cloned repo, such as `D:\sandbox\`
+   * Add this folder to your path by right clicking on "This PC" in Windows explorer, selecting properties, searching for "envionment variables" for your account, and adding a new entry.  Paste the Hugo path here.
+   * Confirm hugo works in the path by opening Git Bash and typing `hugo env` and confirming it reports the Hugo version.
+
+**Now you are ready for development.  A development cycle should look something like this:**
+
+1. Launch Hugo server
+   * Open Git BASH anduse the cd command to change directories to the wdfn-blog (*e.g.,* `cd /d/sandbox/github-user/wdfn-blog`)
+   * Launch Hugo server by typing `hugo server --buildDrafts`
+      * This will start a local web server.
+      * If a firewall issue is raised, contact your I.T. department for an exception.
+      * Note the lines that says "web server is available at..." for the next step.
+      * Leave this window running, but in the background.  
+
+1. Open the website in a browser
+   * Launch your favorite web browser and navigate to the told to you by Hugo.  Usually it's (http://localhost:1313)
+
+1. Launch Visual Studio Code
+   * Use File->Open Folder and select the wdfn-blog folder cloned from Git. 
+   * It may be open already because the cloning step added it as the active VS Code project.
+
+1. Under the Source Control tab, select "Pull" to get the latest blog updates.
+
+1. Make your edits and additions, view the results in the open web browser
+   * Install the FrontMatter extension if you'd like.  It can be a more visually appealing way to manage the metadata for a blog post.
+   * When changed are saved, Hugo should detect them, rebuild the page, AND automatically refresh the web browser.
+
+1. Commit and push your changes to Github
+   * After you push your changes to Github, you will need to log into Github and create a pull request for these change to go from your fork back to the main master.  This is the step where you can request a peer review of your work.
+
+
+Note: There are numerous other options for installing both Node and Hugo, through a package manager such as `apt-get` for Linux, [Homebrew](https://brew.sh/) for MacOS, or [Chocolatley](https://chocolatey.org/) for Windows.  This tutorial bypasses a package manager because some I.T. departments may not approve of that
+form of software.
+
+
 # Local development with Docker
 
 A Dockerfile and Docker Compose configuration is provided that is capable of running a development server and building the deployable static site.
@@ -132,23 +207,6 @@ If the need arises, you may run arbitrary commands in the container, such as a b
 
 ```bash
 docker-compose run hugo bash -l
-```
-
-# Local development without using Docker
-To test without docker, you must have [Hugo](https://gohugo.io/) and [node.js](https://nodejs.org/en/) installed. You should install the latest HUGO and the latest LTS for node, 
-although for node any version > 8.x.x should work. There are numerous options for installing both Node and Hugo, though a package manager such as `apt-get` for Linux, [Homebrew](https://brew.sh/) for MacOS, or [Chocolatley](https://chocolatey.org/) for Windows is a good option. Then, from the terminal you can run:
-
-```bash
-cd themes/wdfn_theme/
-rm -rf node_modules
-npm install
-npm run build
-```
-You will only need to do the previous steps, when you start a new branch or you have merged the latest changes from the canonical repo. Then 
-in the home directory:
-```bash
-export HUGO_BASEURL="blog/"
-hugo server --theme=wdfn_theme --buildDrafts
 ```
 
 # Build static site using Docker
