@@ -12,3 +12,6 @@ themes/wdfn_theme/static
 *.json-e
 .idea/
 *.cache
+.vscode
+.frontmatter
+frontmatter.json
