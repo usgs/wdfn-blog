@@ -14,9 +14,17 @@ title: FAQ for Next Generation Monitoring Location Pages
 
 toc: true
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
-tags: water data, public communication, stream gage
+tags: 
+- Water Data for the Nation
+- water data
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/FAQ_NextGen/FAQ for NextGen Pages.png
 

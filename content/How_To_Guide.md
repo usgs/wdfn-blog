@@ -14,9 +14,17 @@ title: How to Use Next Generation Monitoring Location Pages
 
 toc: true
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
-tags: water data, public communication, stream gage
+tags:
+- water data
+- Water Data for the Nation
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/how-to-guide/How to Use NextGen Pages.png
 

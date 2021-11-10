@@ -1,6 +1,6 @@
 ---
 
-author: Emily Read and Nicole Felts
+author: Emily Read (she/her) and Nicole Felts (she/her)
 
 date: 2021-10-01
 
@@ -12,9 +12,17 @@ type: post
 
 title: Modernizing How You Access Water Data | Webinar on Oct 13 | Recording Available
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
-tags: water data, public communication, stream gage
+tags: 
+- water data
+- Water Data for the Nation
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/Advert_Oct2021_Public_Webinar/webinar_thumbnail.png
 
