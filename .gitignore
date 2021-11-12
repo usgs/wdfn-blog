@@ -13,5 +13,6 @@ themes/wdfn_theme/static
 .idea/
 *.cache
 .vscode
+.hugo_build.lock
 .frontmatter
 frontmatter.json
