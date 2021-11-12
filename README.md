@@ -108,26 +108,25 @@ library(jsonlite)
 # Simplified Local development in Windows
 
 Developing without Docker can be simpler on a Windows workstation, particularly if that workstation has software restrictions imposed
-by an organization's I.T. department.  There are several ways to make this work and here  is one (relatively) simple example of setting up a development environment.  Stick with us.  This is a bit of time
-and learning curve but soon you can be authoring articles and
-previewing the results on the your own PC with ease!
+by an organization's I.T. department.  There are several ways to make this work and here  is one (relatively) simple example of setting up a development environment.  Stick with us.  This takes a bit of time and is something of a learning curve, but hang in there; soon you can be authoring articles and
+previewing the results on the your own Windows workstation with ease!
 
 **One-time installation steps:**
 
-Note that items marked with **(ADMIN)** require administrative privilieges, so if your computer is managed by an I.T. department, you will likely need tocreate a service ticket requesting these installs.
+Note that items marked with **(ADMIN)** require administrative privilieges, so if your computer is managed by an I.T. department, you will likely need to originate a service ticket that requests these steps to be done on your behalf.
 
-1. **(ADMIN)** Install and configure Visual Studio Code
+1. **(ADMIN)** Install [Visual Studio Code](https://code.visualstudio.com/download)
    * Visit the Visual Studio Code website and download and install the latest stable version.  Launch VS Code to confirm install.
    * Optional: Install the Front Matter extension using the icon the left-hand bar that looks like a Tetris game.
       * Front Matter can make it easier to set up blog articles.  It has some one-time configuration for the wdfn-blog website, which is beyond the scope of this document.
 
 1. **(ADMIN)** Install [Git for Windows](https://gitforwindows.org/)
-   * This step is needed so you can use Git Bash for subsequent steps here.  
+   * This is required to use Git Bash for subsequent steps here.  
    * Skip this step if your I.T. department already installed this for you.  It's a common tool these days.
 
-1. **(ADMIN)** Install Node.js
-   * Visit the [node.js](https://nodejs.org/en/) website and download the latest LTS (long-term stable) installer for Windows.
-   * Install with default options.  Decline additional complexities such as installing Choclatey or other things the installer offers.
+1. **(ADMIN)** Install [Node.js](https://nodejs.org/en/)
+   * This is required to compile code related to the blog's visual theme.
+   * Select the latest LTS (long-term stable) installer for Windows.  Install with default options.  Decline additional complexities such as installing Choclatey.
 
 1. Clone the wdfn-blog repo
    * In VS Code, click the source control tab on the left side, select "clone repository"
@@ -156,17 +155,18 @@ Note that items marked with **(ADMIN)** require administrative privilieges, so i
       * After a some harmless text warnings, the process will complete and a large `node_modules/` directory will have appeared.  Cool.
    * Compile the blog assets by typine `npm run build`
       * A new directory called `static/` will have appeared.  Great job.
+   * NOTE: This step is usually a one-time-only step, unless changes are made by you or someone else to code in this wdfn_theme directory.
 
 1. Download Hugo and place in path.  
    * Visit [Hugo Releases](https://github.com/gohugoio/hugo/releases) and download the latest proper Windows 64-bit Zipfile.  For example `hugo_0.89.2_Windows-64bit.zip` is the proper file to download as of this writing in November 2021.  Later versions should continue to work, as well.
    * Unzip the contents of the Zipfile and move this folder to somewhere convenient and near your cloned repo, such as `D:\sandbox\`
    * Add this folder to your path by right clicking on "This PC" in Windows explorer, selecting properties, searching for "envionment variables" for your account, editing the PATH variable, and adding a new entry.  Paste the Hugo path here.
-   * Confirm hugo works in the path by opening Git Bash and typing `hugo env` and confirming it reports the Hugo version.
+   * Confirm hugo works in the path by opening Git BASH terminal and typing `hugo env` and confirming it reports the Hugo version.
 
 **Now you are ready for development.  A development cycle should look something like this:**
 
 1. Launch Hugo server
-   * Open Git BASH anduse the cd command to change directories to the wdfn-blog (*e.g.,* `cd /d/sandbox/github-user/wdfn-blog`)
+   * Open a Git BASH terminal and use change directories to the wdfn-blog (e.g., `cd /d/sandbox/github-user/wdfn-blog`)
    * Launch Hugo server by typing `hugo server --buildDrafts`
       * This will start a local web server.
       * If a firewall issue is raised, contact your I.T. department for an exception.
@@ -268,3 +268,5 @@ When setting up a new project in RStudio, there are many ways to connect to the 
 Disclaimer
 ----------
 This software is preliminary or provisional and is subject to revision. It is being provided to meet the need for timely best science. The software has not received final approval by the U.S. Geological Survey (USGS). No warranty, expressed or implied, is made by the USGS or the U.S. Government as to the functionality of the software and related material nor shall the fact of release constitute any such warranty. The software is provided on the condition that neither the USGS nor the U.S. Government shall be held liable for any damages resulting from the authorized or unauthorized use of the software.
+  
+Reference herein to any specific commercial product, process, or service, or the use of any trade, firm or corporation name is for the information and convenience of the public, and does not constitute endorsement, recommendation, or favoring by the Department of the Interior.
