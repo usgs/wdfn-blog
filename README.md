@@ -133,7 +133,7 @@ Note that items marked with **(ADMIN)** require administrative privilieges, so i
    * Either paste in the repository URL ending in .git, or if working from wdfn-blog on Github:
       * Select "clone from GitHub" and you should conveniently see the wdfn-blog fork you have generated.
       * VS Code will ask you to select the folder to clone into.
-      * In this tutorial, we clone to ``D:\sandbox\github-user``, under which the cloning process will make the folder`` wdfn-blog\``.
+      * In this tutorial, we clone to ``C:\sandbox\github-user``, under which the cloning process will make the folder`` wdfn-blog\``.
          * This tutorial recommends this new-root-folder-on-your-main-disk-drive approach, if you IT department allows you to create such things.
          * Pick whatever you like, including cloning to your Documents folder.  However, if your Documents folder is under control of MS OneDrive, you may not have a positive experience.  
          * You will need to create whatever folders needed for this new cloning destination.
@@ -141,14 +141,15 @@ Note that items marked with **(ADMIN)** require administrative privilieges, so i
          * You need a Github account for this.  They're free.
          * **NOTE!:** If you receive a certificate error in this step, you likely are inside a corporate network, either hardwired or VPN.  The simplest way around this is to temporarily log out of VPN when performing this step (you can log back in afterward).  Resolving SSL certificate errors inside of corporate networks is beyond the scope of this document.
    * Open the wdfn-blog folder you just cloned using File->Open Folder
-      * In this example, you'd select ``c:\sandbox\github-user\wdfn-blog``
+      * In this example, you'd select ``C:\sandbox\github-user\wdfn-blog``
       * In the future, if you do nothing else to VS Code, this will always be the folder that opens in VS Code.  Convenient!
       * Agree to trusting the content of this folder if asked.
 
 1. Compile the blog's static assets
    * Launch Git BASH
       * Note: You MUST use Git BASH.  Windows Powershell or Command Prompt will not work because these steps require Linux-style command-line compatibility.
-   * Use the cd command to change to the wdfn-blog directory of the cloned repo.  In this example, it would be `cd /d/sandbox/github-user/wdfn-blog`
+   * Use the cd command to change to the wdfn-blog directory of the cloned repo.  In this example, it would be `cd /c/sandbox/github-user/wdfn-blog`
+   * Note that, with cd (change directory) command, starting with a slash goes to the root of the filesystem.  Not starting with a slash starts from the directory you already are in. 
    * Use cd to move into the themes directory `cd themes/wdfn_theme/`
    * Install all packages needed to compile assets by typing `npm ci`
       * Note: This is better than running npm install, because npm ci does not change the package-lock.json file, which is a file that rarely needs to be altered.
@@ -159,9 +160,10 @@ Note that items marked with **(ADMIN)** require administrative privilieges, so i
 
 1. Download Hugo and place in path.  
    * Visit [Hugo Releases](https://github.com/gohugoio/hugo/releases) and download the latest proper Windows 64-bit Zipfile.  For example `hugo_0.89.2_Windows-64bit.zip` is the proper file to download as of this writing in November 2021.  Later versions should continue to work, as well.
-   * Unzip the contents of the Zipfile and move this folder to somewhere convenient and near your cloned repo, such as `D:\sandbox\`
-   * Add this folder to your path by right clicking on "This PC" in Windows explorer, selecting properties, searching for "envionment variables" for your account, editing the PATH variable, and adding a new entry.  Paste the Hugo path here.
-   * Confirm hugo works in the path by opening Git BASH terminal and typing `hugo env` and confirming it reports the Hugo version.
+   * Unzip the contents of the Zipfile and copy-and-paste this entire unzipped folder to somewhere convenient and near your cloned repo, such as `c:\sandbox\`
+   * Add this folder to your path by right clicking on "This PC" in Windows explorer, selecting properties, searching for "envionment variables" for your account, editing the PATH variable, and adding a new entry.  Paste the Hugo path here (you can copy it from the address bar in Windows file explorer if you navigate to the folder where you pasted it)
+   * Confirm hugo works in the path by opening a new Git BASH terminal and typing `hugo env` and confirming it reports the Hugo version.
+      * NOTE: You must launch a new Git BASH session after changing the path for it to honor the new path.
 
 **Now you are ready for development.  A development cycle should look something like this:**
 
