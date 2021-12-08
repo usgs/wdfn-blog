@@ -43,9 +43,10 @@ For additional information, please follow the [USGS Data Science Twitter](https:
 - Informational Session 1: November 12th at 11am (Eastern) on MS Teams. Join at: https://bit.ly/3nTSRSH 
 - Informational Session 2: November 17th at 7pm (Eastern) on MS Teams. Join at:  https://bit.ly/2ZJLOUy 
 
-[USAjobs](https://www.usajobs.gov/) announcements:
-- [**Data Scientist (with data visualization specialty), GS-09:** USGS-SAC-22-11284508-DE-BC](https://www.usajobs.gov/GetJob/ViewDetails/621878700) 
-- [**Data Scientist (with data visualization specialty), GS-12:** USGS-SAC-22-11247457-DHA-BC](https://www.usajobs.gov/GetJob/ViewDetails/621879500)
+[USAjobs](https://www.usajobs.gov/) announcements
+- **GS-09:** [USGS-SAC-22-11284508-DE-BC **Data Scientist (with data visualization specialty)**; _any duty station_](https://www.usajobs.gov/GetJob/ViewDetails/621878700)
+- **GS-12:** [USGS-SAC-22-11247457-DHA-BC **Data Scientist (with data visualization specialty)**; _any duty station_](https://www.usajobs.gov/GetJob/ViewDetails/621879500)
+
 
 ### Our Commitment to Diversity, Inclusion, and Transparency 
 
@@ -60,12 +61,21 @@ Positions
 
 We seek Data Visualization Specialist(s) to join our water data visualization team, the USGS Vizlab (Visualization Laboratory). The USGS Vizlab is a collaborative science communication team that uses data visualization to distill complex scientific datasets into compelling data-driven stories and graphics. These are positions at the intersection of environmental data science and science communication, with emphasis on reproducibility, accessibility, and creativity. See the Vizlab portfolio: [labs.waterdata.usgs.gov/visualizations/vizlab-home/](https://labs.waterdata.usgs.gov/visualizations/vizlab-home/index.html?utm_source=blog&utm_medium=wdfn&utm_campaign=viz_hires#/)   
 
-Specific duties may include the following: 
-- Designing static and interactive data visualizations that communicate complex, data-driven concepts to non-technical audiences 
-- Building and maintaining compelling web-based user interfaces for data visualizations 
-- Developing reproducible data processing and data visualization pipelines 
-- Contributing to data visualization engagement and outreach through blog posts, social media, and other venues 
-- Collaborating with communications specialists, subject matter experts, and stakeholders to support USGS science objectives  
+For the GS-09 position, specific duties may include the following: 
+- Serves as a data scientist working with the large data resources of the Water Mission Area (WMA), USGS and external data providers. The vast majority of these datasets are rich in complexity, including high resolution time-series observations, text, imagery, and geospatial components.
+- Contributes to individual projects applying reproducible workflows and data visualization techniques to capture and communicate complex data-intensive concepts to non-technical audiences using a variety of media (such as print, web, research products).
+- Creates interactive or static charts or maps in support of project questions related to changes in water conditions.
+- Works with high-volume and/or complex data from models to distill outputs into concise visual information products.
+- Conducts some writing and summarization as needed to convey research-based knowledge and options for visual information presentation to project leaders and team members.
+- Implement data science visualization approaches towards building solutions to areas of need. Contributes to testing of visualization approaches and the reproducible automation of these approaches.
+
+For the GS-12 position, specific duties may include the following:
+- Serves as a data science visualization expert, developing rigorous methods of scientific inquiry, analysis, and visual/text presentation associated with the large data resources of the Water Mission Area (WMA), USGS and external data providers. The vast majority of these datasets are rich in complexity, including high resolution time-series observations, text, imagery, and geospatial components.
+- Lead projects data visualization including the incorporation of reproducible workflows to capture and communicate complex data-intensive concepts to non-technical audiences.
+- Designs use cases and scenarios for gathering and harmonizing data from models and measurements to create interactive and informative visualizations for decision making and improving understanding in support of a variety of initiatives involving changes in policies, water conditions, and scientific methodology.
+- Conducts research as needed to support studies and prepare visual and written products to convey research-based knowledge and information to a variety of audiences and media (such as print, web, research products).
+- Strategize and design projects, prototypes, and/or concepts that bring new data science visualization approaches into the USGS water prediction/assessment projects.
+- Implement new and existing data science visualization approaches towards building solutions to areas of need. Can include architecting new visualization approaches and/or implementing reproducible automation of existing approaches.
 
 There will be two job announcements with the final locations negotiable. Both the GS-09 and GS-12 roles will be full-time, [permanent federal positions](https://www.usajobs.gov/help/working-in-government/appointments/) in the [Data Science Branch](https://waterdata.usgs.gov/blog/water-data-science-2021/) of the Water Mission Area. These jobs will be open to candidates who can qualify for the [Biologist](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/0400/general-natural-resources-management-and-biological-sciences-series-0401/), [Physical Scientist](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/1300/general-physical-science-series-1301/), or [Mathematical Statistician](https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/1500/mathematical-statistics-series-1529/) job series. 
 
