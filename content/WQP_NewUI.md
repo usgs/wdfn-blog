@@ -9,7 +9,7 @@ categories: applications, water-information, software-development
 tags:
   - Water Quality Portal
   - Applications
-image: static/WQP_NewUI/image2.jpg
+image: static/WQP_NewUI/image2.jpeg
 description: A new user interface was created for the Water Quatlity Portal. The redesign is more modern, intuitive, and mobile-friendly.
 author_staff: candice-hopkins
 author_email: chopkins@usgs.gov>
@@ -43,8 +43,8 @@ of viewing it. We removed the wordy homepage, and instead send users
 directly to the query form.
 
 <div class="grid-row">
-{{< figure src="/static/WQP_NewUI/image1.jpg" caption= "Landing page of the old Water Quality Portal User Interface" alt="A screenshot of the landing page of the old Water Quality Portal User Interface">}}
-{{< figure src="/static/WQP_NewUI/image2.jpg" caption= "Landing page of the new Water Quality Portal User Interface" alt="A screenshot of the landing page of the new Water Quality Portal User Interface">}}
+{{< figure src="/static/WQP_NewUI/image1.jpeg" caption= "Landing page of the old Water Quality Portal User Interface" alt="A screenshot of the landing page of the old Water Quality Portal User Interface">}}
+{{< figure src="/static/WQP_NewUI/image2.jpeg" caption= "Landing page of the new Water Quality Portal User Interface" alt="A screenshot of the landing page of the new Water Quality Portal User Interface">}}
 </div>
 
 ## Created Basic and Advanced Search Options
@@ -93,7 +93,7 @@ this to a collapsible part of the Advanced search form and clarified the
 wording about how this tool can be incorporated into a query.
 
 <div>
-{{< figure src="/static/WQP_NewUI/image5.jpg" caption= "Upstream/Downstream mapper, which is now a collapsible section of the Advanced search form" alt="A screenshot of NLDI Mapper" >}}
+{{< figure src="/static/WQP_NewUI/image5.jpeg" caption= "Upstream/Downstream mapper, which is now a collapsible section of the Advanced search form" alt="A screenshot of NLDI Mapper" >}}
 </div>
 
 # Still want to access the old User Interface?
