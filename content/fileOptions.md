@@ -11,7 +11,7 @@ author_github: ldecicco-usgs
 author_gs: jXd0feEAAAAJ
  
 author_staff: laura-decicco
-author_email: <a href="mailto:ldecicco@usgs.gov" class="email">ldecicco@usgs.gov</a>
+author_email: <ldecicco@usgs.gov>
 
 tags: 
   - R

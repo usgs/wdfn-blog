@@ -65,15 +65,15 @@
     <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}"/>
     <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}"/>
     {{ end }}
-
-    <script src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
 </head>
 
 <body>
-{{ partial "header.html" . }}
-<main>
+    {{ partial "header.html" . }}
+    <main>
     {{ block "main" . }}{{ end }}
-</main>
-{{ partial "footer.html" . }}
+    </main>
+    {{ partial "footer.html" . }}
+    <script src="{{ $.Site.BaseURL }}scripts/bundle.js"></script>
+
 </body>
 </html>

@@ -12,8 +12,8 @@ wdfn-blog
 # Submitting an update
 
 1. Fork repo
-2. Create a markdown file (.md). This should be all lowercase and dashes (e.g. `name-of-post`)
-3. Add to `content` folder
+2. Create a markdown file in (.md). This should be all lowercase and dashes (e.g. `name-of-post`)
+3. Add your markdown file to the `content` folder
 4. Include static images in `static\name-of-post`. Images *must* include alt and title text
 5. Add a header similar to:
 
@@ -52,7 +52,7 @@ wdfn-blog
 
   * `slug` slug will be the name of your url after waterdata.usgs.gov/blog/xxx
 
-  * `image` is not required, but will improve the look of the main "update" page. Without an image, a generic USGS image will be included.
+  * `image` is not required, but will improve the look of the main "blog" page. Without an image, a generic USGS image will be included.
 
   * `categories` is a small list of approved options. The current list is `Data Science`, `Applications`, and `Software Development`. For each category, there is a designated list of people that have the authority to approve posts.
 
@@ -75,13 +75,18 @@ wdfn-blog
 12. Assuming all looks good, push to prod
 
 # Tips to writing content
-1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.
+1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.   There are a few required tags:
+   * caption: The caption of the image.  Will be displayed.  Markdown within the caption will be rendered.
+   * alt: alt text, for accessibility.  Aim for text that actaully discribes in the image or gif, not just the caption text again.
+   * src: path to the image that you want to display.
 1. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place
 two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
 <div class="grid-row">
-{< figure src="/static/nldi-intro/upstream.png" caption="Title" alt="Description class="side-by-side" >}}
-{{< figure src="/static/nldi-intro/downstream.png" caption="Title" alt="Description" class="side-by-side" >}}
+
+{{< figure src="/static/nldi-intro/upstream.png" caption="caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
+{{< figure src="/static/nldi-intro/downstream.png" caption="other caption, which can have markdown in it" alt="Description of the image" class="side-by-side" >}}
+
 </div>
 ```
 1. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
@@ -117,6 +122,7 @@ If the site on http://localhost:1313 is missing various static files, you may ne
 ```bash
 docker-compose run hugo build --buildDrafts
 ```
+If you haven't set things up on the right cert bundle, it may be easier to run this command outside the USGS VPN.
 
 Once that is done, you can use `docker-compose up` to start the development server again.
 
@@ -129,8 +135,8 @@ docker-compose run hugo bash -l
 ```
 
 # Local development without using Docker
-To test without docker, you must have Hugo, Go, and node.js installed. You should install the latest HUGO and the latest LTS for node, 
-although for node any version > 8.x.x should work.  Then, from the terminal you can run:
+To test without docker, you must have [Hugo](https://gohugo.io/) and [node.js](https://nodejs.org/en/) installed. You should install the latest HUGO and the latest LTS for node, 
+although for node any version > 8.x.x should work. There are numerous options for installing both Node and Hugo, though a package manager such as `apt-get` for Linux, [Homebrew](https://brew.sh/) for MacOS, or [Chocolatley](https://chocolatey.org/) for Windows is a good option. Then, from the terminal you can run:
 
 ```bash
 cd themes/wdfn_theme/
