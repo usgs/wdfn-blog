@@ -11,12 +11,10 @@ tags:
   - Applications
 image: static/WQP_NewUI/image2.jpg
 description: A new user interface was created for the Water Quatlity Portal. The redesign is more modern, intuitive, and mobile-friendly.
-keywords:
-  - Water Quality Portal
- author_staff: candice-hopkins
+author_staff: candice-hopkins
 author_email: chopkins@usgs.gov>
 author_researchgate: Candice_Hopkins
-  ---
+---
 
 Over the past several months, our team worked to redesign the User
 Interface for the [Water Quality
