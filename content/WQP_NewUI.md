@@ -43,8 +43,8 @@ of viewing it. We removed the wordy homepage, and instead send users
 directly to the query form.
 
 <div class="grid-row">
-{{< figure src="/static/WQP_NewUI/image1.jpeg" caption= "Landing page of the old Water Quality Portal User Interface" alt="A screenshot of the landing page of the old Water Quality Portal User Interface">}}
-{{< figure src="/static/WQP_NewUI/image2.jpeg" caption= "Landing page of the new Water Quality Portal User Interface" alt="A screenshot of the landing page of the new Water Quality Portal User Interface">}}
+{{< figure src="/static/WQP_NewUI/image1.jpeg" caption= "Landing page of the old Water Quality Portal User Interface" alt="A screenshot of the landing page of the old Water Quality Portal User Interface" class="side-by-side">}}
+{{< figure src="/static/WQP_NewUI/image2.jpeg" caption= "Landing page of the new Water Quality Portal User Interface" alt="A screenshot of the landing page of the new Water Quality Portal User Interface" class="side-by-side">}}
 </div>
 
 ## Created Basic and Advanced Search Options
