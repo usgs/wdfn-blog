@@ -2,7 +2,7 @@
 author: Candice Hopkins and Laura Shumway (EPA)
 date: 2021-12-09
 slug: WQP_NewUI
-draft: True
+draft: False
 type: post
 title: New User Interface for the Water Quality Portal
 categories: applications, water-information, software-development
