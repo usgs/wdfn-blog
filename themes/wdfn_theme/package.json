@@ -51,7 +51,7 @@
     "mkdirp": "^1.0.4",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.4",
+    "postcss": "^8.4.5",
     "postcss-cli": "^9.0.2",
     "postcss-csso": "^5.0.1",
     "postcss-flexbugs-fixes": "^5.0.2",
