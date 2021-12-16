@@ -16,7 +16,7 @@ author_email: chopkins@usgs.gov>
 author_researchgate: Candice_Hopkins
 aliases:
   - /WQP_NewUI
- ---
+---
 
 Over the past several months, our team worked to redesign the User
 Interface for the [Water Quality
