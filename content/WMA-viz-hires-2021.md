@@ -29,6 +29,13 @@ tags:
 ---
 {{< figure src="/static/viz-hires-2021/hiring_banner_viz.png" alt="A banner announcing “We are hiring data visualization specialists. Applications will be open on USAjobs Nov 17th-23rd “.  A collection of images shows different chart and map data visualizations from USGS.">}}
 
+Last updated: Dec 8th, 2021  
+
+#### Thanks to everyone who applied  
+We are in the process reviewing applications now. We will be in touch in the coming weeks to schedule interviews. Thank you for your patience!
+
+--------------------
+
 The U.S. Geological Survey Water Mission Area is hiring Data Visualization Specialists across multiple levels of experience (GS-09 and GS-12, more on this below). These positions will be open and accepting applications on [USAjobs.gov](https://www.usajobs.gov/) from November 17th to 23rd. For all positions, an unofficial transcript and detailed resume summarizing job qualifications, links to or samples of prior visualizations, and relevant skills are needed. _We will continue to update this page with information, including direct links to the vacancies as soon as they are available._ 
 
 For additional information, please follow the [USGS Data Science Twitter](https://twitter.com/USGS_Datasci) feed or attend the following informational sessions: 
@@ -36,9 +43,10 @@ For additional information, please follow the [USGS Data Science Twitter](https:
 - Informational Session 1: November 12th at 11am (Eastern) on MS Teams. Join at: https://bit.ly/3nTSRSH 
 - Informational Session 2: November 17th at 7pm (Eastern) on MS Teams. Join at:  https://bit.ly/2ZJLOUy 
 
-** WILL BE ACTIVE ON NOVEMBER 17TH ** [USAjobs](https://www.usajobs.gov/) Job links and announcement numbers:
+[USAjobs](https://www.usajobs.gov/) announcements
 - **GS-09:** [USGS-SAC-22-11284508-DE-BC **Data Scientist (with data visualization specialty)**; _any duty station_](https://www.usajobs.gov/GetJob/ViewDetails/621878700)
 - **GS-12:** [USGS-SAC-22-11247457-DHA-BC **Data Scientist (with data visualization specialty)**; _any duty station_](https://www.usajobs.gov/GetJob/ViewDetails/621879500)
+
 
 ### Our Commitment to Diversity, Inclusion, and Transparency 
 
