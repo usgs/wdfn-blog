@@ -4,7 +4,7 @@ date: 2021-12-21
 slug: user_operational_pull
 draft: True
 type: post
-title: Operationalized Pull: A User Group
+title: 'Operationalized Pull: A User Group'
 categories: water-information 
 tags:
   - water-data-for-the-nation
