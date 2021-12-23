@@ -160,7 +160,7 @@ our users over social media because it can be so interactive -- connect with us 
 [Instagram](https://www.instagram.com/usgs_streamgages/) and
 [Twitter](https://twitter.com/USGS_Water).
 P.s., We're releasing the first edition
-of the new Water Data for the Nation newsletter on January 6th! [Subscribe here.](LINKLINKLINKLINKLINK)
+of the new Water Data for the Nation newsletter on January 6th! [Subscribe here.](https://usgs.us17.list-manage.com/subscribe?u=e9827ec090cef00a4355db5cb&id=5a8a7e2d2f)
 
 # How do we organize our users?
 
