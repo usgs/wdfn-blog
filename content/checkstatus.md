@@ -10,7 +10,7 @@ categories:
 tags:
   - water-data-for-the-nation
   - public-communication
-image: static/user_wdfn/Check Status Blog.gif
+image: static/user_wdfn/Check Status.png
 description: USGS Water Data for the Nation products have many users. Check Status users want to quickly check the status of water data, and in order to do this, they have specific needs. Check Status users have a few favorite USGS products they use; read on to find out what they are.
 keywords:
   - User research
