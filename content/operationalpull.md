@@ -1,6 +1,6 @@
 ---
 author: Shawna Gregory, Candice Hopkins, Rachel Volentine, Brad Garner, and Nicole Felts
-date: 2021-12-28
+date: 2021-12-29  
 slug: user_operational_pull
 draft: False
 type: post
