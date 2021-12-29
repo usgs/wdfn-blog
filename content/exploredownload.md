@@ -146,9 +146,7 @@ through the data.
 > Mapper](https://maps.waterdata.usgs.gov/mapper/index.html) to see
 > where old/inactive sites are. I never search by county, I just
 > use the map or ask others in the center about unfamiliar
-> locations."
->
-> -a Water Science Center staff member
+> locations." - a Water Science Center staff member
 
 As Explore & Download users evaluate USGS data, they are primarily
 looking at the summary of the data collected *before* making the decision
