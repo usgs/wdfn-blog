@@ -206,8 +206,8 @@ our data. Key USGS products used by these users include:
 -   [Water Quality Watch](https://waterwatch.usgs.gov/wqwatch/)
 
 # #EnGageWithUSGS
-
-Connect with us! We are learning more about Check Status users as we continue
+Connect with us! Follow us on [Twitter](https://twitter.com/USGS_water) and [Instagram](https://www.instagram.com/usgs_streamgages/).
+We are learning more about Check Status users as we continue
 our work improving the developer experience with accessing USGS water
 data. If you want to share your own workflow and feedback on the process, email [wdfn@usgs.gov](mailto:wdfn@usgs.gov),
 or if you'd be interested in participating in our user research process,
