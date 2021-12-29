@@ -5,12 +5,13 @@ slug: user_check_status
 draft: True
 type: post
 title: Check Status User Group
-categories: water-information 
+categories: 
+- water-information 
 tags:
   - water-data-for-the-nation
   - public-communication
-image: static/plotFlowConc/unnamed-chunk-4-1.png
-description: USGS Water Data products have many users. This post breaks down a user who wants to quickly check the status of water data.
+image: static/user_wdfn/Check Status Blog.gif
+description: USGS Water Data for the Nation products have many users. Check Status users want to quickly check the status of water data, and in order to do this, they have specific needs. Read more to learn how we're 
 keywords:
   - User research
   - User design
@@ -49,9 +50,9 @@ information. Here is a quick recap of the three user groups:
 > now. As we research, we learn more about our users' needs and identify
 > patterns that can be used to update our understanding.
 
-# Who are Check Status users?
+# Who Are Check Status Users?
 
-Check Status users are performing checks of a few parameters for
+Maybe you! Check Status users are performing checks of a few parameters for
 specific sites of interest. The way these users approach our data is
 diverse, but we can broadly categorize them into three sub-groups:
 
@@ -71,11 +72,10 @@ diverse, but we can broadly categorize them into three sub-groups:
     for monitoring complex water conditions for water systems such as
     dams, aquifers, and levees.
 
-While each user is unique in their data use and workflow, we wanted to
-provide a couple of Check Status user personas to help us keep our users
+Each user is unique in their data use and workflow. These user stories help us keep you - our user -
 in mind as we design our services.
 
-## User Persona: Homeowner Sally
+## Homeowner Sally
 
 Sally (she/her) has lived in her home with her husband, two children,
 and dog for six years. Her home is located near the Wapsipinicon River
@@ -83,27 +83,27 @@ in Iowa. In that time, there have been several minor floods that came
 within inches of her house and one year ago there was a major flood
 which caused severe damage to the first floor of her property. At the
 time Sally, was not prepared for the flood and did not remove personal
-goods from the first floor, so she lost several family heirlooms. Sally
+goods from the first floor, so she lost several family heirlooms. **Sally
 is a busy mother with a full-time job and needs a simple and quick way
-to get lifesaving information about potential flooding. Sally learned of
-two USGS services that can help. First, Sally signed up to receive email
+to get lifesaving information about potential flooding.** Sally learned of
+two USGS services that can help: WaterAlert & Monitoring Location Pages. First, Sally signed up to receive email
 alerts from [Water
 Alert](https://maps.waterdata.usgs.gov/mapper/wateralert/) when the
 river by her property reaches 12 feet, a minor flood stage. She says "I
 feel safer having notifications set up through Water Alert. This warns
 me of potential flooding and gives me time to make sure my pets, kids,
-and valuables safe." Sally also checks the [Wapsipinicon River
+and valuables are safe." Sally also checks the [Wapsipinicon River
 monitoring location
 page](https://waterdata.usgs.gov/monitoring-location/05421000/#parameterCode=00065&period=P7D)
 when there has been a lot of recent rain. She can see the water level
-trends and she gets additional comfort knowing how the rain is affecting
+trends and she gets additional comfort because she can see how the rain is affecting
 the Wapsipinicon River.
 
-## User Persona: Journalist Aram
+## Journalist Aram
 
 Aram (him/his) has been with the Beaumont Enterprise newspaper for
 twenty years. Part of his job is reporting on dam releases due to
-rainfall or planned event. While dam releases are necessary to keep
+rainfall or a planned event. While dam releases are necessary to keep
 water levels safe, they can cause sudden water increases in downstream
 areas and affect the safety of swimming, boating, or fishing along the
 river. Keeping his community informed and safe is an important part of
@@ -117,10 +117,9 @@ the next dam release most likely will occur. Bookmarking those sites to
 his phone allows him to quickly look at these trends and stay informed
 while he is out in the field reporting other stories. Aram says "Without
 access to USGS stream gages, I would not be able to report up-to-date
-news. My readers and Social Media followers want to know the minute that
-I do when I get important news."
+news. My readers and social media followers want to know the minute I get important news."
 
-## User Persona: Water Manager Margaret
+## Water Manager Margaret
 
 Margaret (they/their) has been the regional water manager in eastern
 Washington for two years. They are responsible for overseeing allocation
@@ -131,37 +130,40 @@ so it is important that Margaret be able to closely monitor water levels
 and present the information to her stakeholders, including local
 agencies and state officials. Margaret relies on the [National Water
 Dashboard](https://dashboard.waterdata.usgs.gov/app/nwd/?aoi=default)
-and monitoring location pages to monitor conditions in their area and
+and Next Generation monitoring location pages to monitor conditions in their area and
 nearby areas. They often pull the hydrographs from the monitoring
 location pages alongside the maps from National Water Dashboard to
 support their decisions for surface water allocation. Margaret says
 "Decisions in my job can be highly contested, so having highly trusted
 and credible data from USGS is very important."
 
+*Each user story does not represent a real person. The stories reflect real user experiences and are based on our decades-long experience with our users.*
+
 # How do Check Status users interact with USGS water information?
 
 Check Status users routinely check for a few parameters for specific
-sites. They come to us with an idea of what locations are useful to
-them. Generally, users find USGS web sites by searching the web for
+sites. You might come to us with an idea of what locations are useful to
+you. Generally, users find USGS web sites by searching the web for
 general water terms like "Boise river water level," where USGS sites
-tend to be on the first page of results. They then use our tools to find
-the closest site(s) for which they want water conditions.
+tend to be on the first page of results. They you use our tools to find
+the closest site(s) for which you want water conditions.
 
 Check Status users come to USGS to gather information to make decisions
-according to their needs. Many of these users are concerned about
-personal health and safety and seek more information about the current
-state of their local water resource. When Check Status users review the
-data, usually on a hydrograph, they apply their own thresholds to the
-data to decide what action to take (check out
-[WaterAlert](https://maps.waterdata.usgs.gov/mapper/wateralert/), a
+according to their needs. Many of you have valid concerns about
+personal health and safety, so you seek more information about the current
+state of your local water resource. When Check Status users review the
+data, usually on a hydrograph, then they apply their own thresholds to the
+data to decide what action to take using something like [WaterAlert](https://maps.waterdata.usgs.gov/mapper/wateralert/), a
 simple subscription service we offer that notifies you when a threshold
-has been reached for locations of your choice). In many cases, our
+has been reached for locations of your choice. 
+In many cases, our
 general check status users develop their thresholds through "guess and
 check" patterns where they note the value of the parameter in USGS and
 physically go out to the water resource to understand the associated
-water conditions. For example, users concerned about flooding may watch
+water conditions. Imagine you're standing at the water's edge while looking at a Next Generation monitoring location page on your phone. 
+Users concerned about flooding may watch
 the gage height parameter value for the closest river site and associate
-this value with the need to take action to protect themselves and
+this value with the need to take action to protect themselves and their
 property. Our professional check status users similarly review
 applicable data using hydrographs and tables to understand the status of
 the hydrology.
@@ -173,12 +175,12 @@ the hydrology.
 >
 > \- a user who emailed our help desk
 
-Check Status users value "at-a-glance\" data where it is clear and easy
-for them to understand the status of their water conditions. They are
-repeatedly accessing USGS web sites, due to reoccurring operational
+Check Status users value "at-a-glance" data where it is clear and easy
+for you to understand the status of water conditions. Users
+repeatedly access USGS web sites due to reoccurring operational
 needs or specific water events. After finding sites that serve the water
-data they are interested in, many users will bookmark the webpage in
-their browser for easier access the next time they need to look.
+data they're interested in, many users will bookmark the webpage in
+their browser for easier access the next time they need to look. *(Did you know? When you bookmark a monitoring location page, it will save the type of parameter you selected - so if discharge was selected when you bookmarked the page, when you open the bookmark next, the page will load discharge for that site.)*
 
 Most Check Status users are not downloading or manipulating the data,
 except the small subset of Check Status and Download users that have
@@ -203,13 +205,13 @@ our data. Key USGS products used by these users include:
 
 -   [Water Quality Watch](https://waterwatch.usgs.gov/wqwatch/)
 
-# Want to Connect?
+# #EnGageWithUSGS
 
 We are continuing to learn more about Check Status users as we continue
 our work improving the developer experience with accessing USGS water
-data. If you want to share your own workflow and feedback on the process
-or you'd be interested in participating in our user research process,
-please email <WDFN@usgs.gov>.
+data. If you want to share your own workflow and feedback on the process, email [mailto:wdfn@usgs.gov],
+or if you'd be interested in participating in our user research process,
+please email [mailto:WDFN_usabilitytesting@usgs.gov].
 
 *Quotes in this blog post have been lightly edited for grammar and
 clarity only.*
