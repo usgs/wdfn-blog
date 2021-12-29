@@ -5,19 +5,20 @@ slug: user_operational_pull
 draft: True
 type: post
 title: 'Operationalized Pull: A User Group'
-categories: water-information 
+categories: 
+- water-information 
 tags:
   - water-data-for-the-nation
   - public-communication
 image: static/plotFlowConc/unnamed-chunk-4-1.png
-description: USGS Water Data products have many users. This post breaks down a user who wants to access data through an automated process.
+description: USGS Water Data for the Nation products have many users. Operationalized users access data through automated processes, and they primarily use our APIs. Want to know more about operationalized pull users and our APIs? Read on...
 keywords:
   - User research
   - User design
 author_email: <wdfn@usgs.gov>
 ---
 
-As described in \[WDFN user blog\], we discovered three key user groups
+As described in [WDFN user blog](https://waterdata.usgs.gov/blog/user_wdfn/), we discovered three key user groups
 which we use to design our delivery of USGS water information. Here is a
 quick recap of the three user groups:
 
@@ -29,8 +30,8 @@ quick recap of the three user groups:
     information, returning repeatedly for refreshed data to pull into
     their own systems.
 
--   [**Explore &
-    Download**](https://waterdata.usgs.gov/blog/user_explore_download/):
+-   **[Explore &
+    Download](https://waterdata.usgs.gov/blog/user_explore_download/):**
     These users find nearby sites, exploring what data they collect.
     Users make ad-hoc or targeted queries to download, then alter the
     data as they need in their preferred tool (R, Excel, Python).
@@ -45,30 +46,30 @@ quick recap of the three user groups:
     user type by number of unique users. Each user generally looks at a
     handful of sites for the latest water conditions.
 
-This post will discuss what we know about our Operationalized Pull users
-right now. As we research, we learn more about our users' needs and
-identify patterns that can be used to update our understanding.
+
+> This post will discuss what we know about our Operationalized Pull users right
+> now. As we research, we learn more about your needs, identifying
+> patterns that can be used to update our understanding.
 
 # Who are these users?
 
-Anyone can use our APIs to become an Operationalized Pull user.
+Are you an Operationalized Pull user? Anyone can use our APIs to become an Operationalized Pull user.
 Currently, people from various backgrounds are regular Operationalized
 Pull users:
 
 -   Other federal, state, and local **government agencies** who manage
     or model water resources.
 
--   **Emergency Managers** who include USGS water data as part of their
+-   **Emergency Managers** who include USGS water data on their
     dashboards during emergencies
 
 -   Scientific **modelers** who include USGS water data as a data source
-    to power or validate their models
+    which powers or validates their models
 
-While each user is unique in their data use and workflow, we wanted to
-provide a couple of Operationalized Pull user personas to help us keep
-our users in mind as we design our services.
+Each user is unique in their data use and workflow. These user stories help us keep you - our user -
+in mind as we design our services.
 
-## User Persona: Francis, the River Forecaster
+## Francis, the River Forecaster
 
 Francis (she/her) has worked at the Indianapolis, Indiana National
 Weather Service River Forecast Office (RFO) for 10 years focusing on
@@ -78,34 +79,33 @@ enjoyed writing ever since winning her high school's short-story
 contest. Even though University pursuits led her to the earth sciences,
 she sees river forecasting as her way to continue honing her writing
 craft. She explains, "USGS water data is an important part of my
-writing." The RFO computer system, connected to USGS APIs, provides
+writing." The RFO computer system, connected to [USGS APIs](https://waterservices.usgs.gov/), provides
 Francis with the latest basic river data from USGS monitoring locations,
-such as stream flow and gage height. Frances takes the RFO data a step
+such as stream flow (discharge) and gage height. Frances takes the RFO data a step
 further by also looking at the history of manual field measurements and
 river data, the station metadata, and any images or videos the USGS
 provides in her river level forecasting. She says, "These help me
 imagine floods better, and they help me think of citizens who live near
 the river and are so connected to it." The richness of the data Francis
 obtains from USGS allows her to convey her information in an obtainable
-and relatable way to her region, including the public and other public
-agencies. Francis says she\'d love for all this USGS data to appear in
+and relatable way to her region, including members of the public and other public
+agencies. Francis says she'd love for all this USGS data to appear in
 her custom Geographic Information System instead of having to click
 through USGS websites all the time, and she is glad that APIs are making
 that more and more possible for someone like herself who is not a
-software programmer.
+software programmer. Francis is excited for the upcoming [API webinar series](https://www.eventbrite.co.uk/e/api-series-easily-integrate-real-time-water-data-sensorthings-tickets-231028541587) that USGS is hosting - she looks forward to seeing how our modernized APIs can help her workflow even more.
 
-## User Persona: Ted, the Flood Control Officer 
+## Ted, the Flood Control Officer 
 
 Ted (he/him) oversees a Flood Control District for Harris County, Texas,
 one of the most densely populated and low-lying counties in the United
 States. His District is responsible for getting the word out quickly
 when dangerous flooding situations are about to happen. He grew up in
-Harris County and is something of a local news celebrity there and
-appears on local news stations during major storm events. From his 52
+Harris County and is something of a local news celebrity there, appearing on local news stations during major storm events. From his 52
 years in Harris County, he knows from experience that land-use change,
 land subsidence, and climate change are making floods more frequent and
 severe. Ted recently reflected on how much
-[NWISweb](https://waterdata.usgs.gov/nwis) has helped his District
+[NWIS Web](https://waterdata.usgs.gov/nwis) has helped his District
 succeed: "When I started here in 1997, we had maybe a dozen river
 monitors that literally broadcast an alarm sound in Morse Code on a
 shortwave radio system when the sensor was submerged under water. The
@@ -113,12 +113,12 @@ system was constantly breaking. Heck, sometimes we just had to drive to
 the river and look at it." Since 2003 his district has partnered with
 USGS to monitor these rivers. The partnership helps get the live data
 directly into their data acquisition system from the USGS website. This
-provides real-time notifications of flooding conditions and Ted is more
-confident in his job and that he has the latest information. He is not
+provides real-time notifications of flooding conditions making Ted more
+confident in his job because he feels he has the latest information. He is not
 worried about missing important notifications because the two systems
 work seamlessly together.
 
-## User Persona: Maria, the Scientific Modeler
+## Maria, the Scientific Modeler
 
 Maria (she/her) recently joined the faculty of her University's earth
 sciences department. Maria has a Master's in chemistry and a PhD in
@@ -133,23 +133,25 @@ intends to develop a state-of-the-art computer model that uses the
 supercomputing power of the cloud (maybe even quantum computing). Maria
 and her team will access USGS water quality information, such as
 nutrient concentrations and temperature measurements, and quantity
-information, such as streamflow through [Water Quality Portal's Web
+information, such as streamflow, through [Water Quality Portal's Web
 Services](https://www.waterqualitydata.us/webservices_documentation/)
-and [USGS's Water Services](https://waterservices.usgs.gov/). They can
-then easily incorporate the data into their model, in part because USGS
+and [USGS's Water Services](https://waterservices.usgs.gov/). Maria can
+then easily incorporate the data into her model, in part because USGS
 uses data standards from [Open Geospatial
 Consortium](https://www.ogc.org/), which helps standardize the many
 sources of data. Maria's research should provide real, practical answers
 about the future of the hypoxic zone in the Gulf of Mexico and how
 humans' actions hundreds of miles away impact the watershed and offshore
 areas. She and her burgeoning research team have many tough problems
-ahead, but she is "grateful getting USGS water data into the model will
+ahead, but she is "grateful that getting USGS water data into the model will
 not be one of the problems."
+
+*Each user story does not represent a real person. The stories reflect real user experiences and are based on our decades-long experience with our users.*
 
 # How do Operationalized Pull users interact with USGS water information?
 
-We know these users want to easily look at USGS data alongside other
-sources of data, including state and local water information. When they
+We know you want to easily look at USGS data alongside other
+sources of data, including state and local water information. When users
 interact with our water data, they are utilizing APIs such as [USGS
 Water Services](https://waterservices.usgs.gov/) and
 [dataRetrieval](https://usgs-r.github.io/dataRetrieval/) to pull the
@@ -162,8 +164,8 @@ type, though each user's needs are unique. Some of our users will be
 very locally focused on a single hydrologic unit of data, while others
 will pull water data nationwide to serve their needs. The key
 distinction between Operationalized Pull and Explore and Download users
-is that Operationalized Pull users have used scripts or software to
-repeatedly access USGS API services to refresh their data sources as new
+is that Operationalized Pull users use scripts or software to
+repeatedly access USGS API services which refresh their data sources as new
 data comes in.
 
 > "Right now, on one dev system, I'm using ... \[existing state\]
@@ -172,7 +174,7 @@ data comes in.
 >
 > \- a federal partner
 
-Data Visualizations, statistics, and other types of contextualization of
+[Data Visualizations](https://labs.waterdata.usgs.gov/visualizations/vizlab-home/), statistics, and other types of contextualization of
 the data provided by USGS is rarely used by Operationalized Pull users.
 As USGS data is just a single part of a larger ecosystem of data, these
 users generally are looking at the data in their own tools to customize
@@ -202,13 +204,13 @@ USGS products used by these users include:
 -   [Water Data for the Nation Tableau Web Data
     Connector](https://labs.waterdata.usgs.gov/tableau-connector/index.html#/)
 
-# \#EnGageWithUSGS -- Connect with us!
+# #EnGageWithUSGS
 
-We are continuing to learn more about Operationalized Pull users as we
+Connect with us! We are continuing to learn more about Operationalized Pull users as we
 continue our work improving the developer experience with accessing USGS
-water data. If you want to share your own workflow and feedback on the
-process or if you'd be interested in participating in our user research
-process, please email <WDFN@usgs.gov>.
+water data. If you want to share your own workflow and feedback on the process, email [mailto:wdfn@usgs.gov],
+or if you'd be interested in participating in our user research process,
+please email [mailto:WDFN_usabilitytesting@usgs.gov].
 
 *Quotes in this blog post have been lightly edited for grammar and
 clarity only.*
