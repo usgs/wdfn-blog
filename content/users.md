@@ -9,7 +9,7 @@ categories: water-information
 tags:
   - water-data-for-the-nation
   - public-communication
-image: static/user_wdfn/Users Blog.gif
+image: static/user_wdfn/Users Blog_simple.gif
 description: USGS Water Data products have many users. Are you one of our users? This post breaks down who uses USGS Water products and what data is available about those users.
 keywords:
   - User research
