@@ -10,7 +10,7 @@ categories:
 tags:
   - water-data-for-the-nation
   - public-communication
-image: static/plotFlowConc/unnamed-chunk-4-1.png
+image: static/user_wdfn/Explore & Download Blog.gif
 description: USGS Water Data for the Nation products have many users. Explore & Download users want to check out different sites and download data from some of them. They have a few favorite USGS products they use; read on to find out what they are...
 keywords:
   - User research
