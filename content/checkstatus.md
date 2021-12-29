@@ -171,9 +171,7 @@ the hydrology.
 > "We have come to rely heavily on the gage to let us know when it is
 > about to flood our bridge, how soon we must evacuate, and when it
 > returns to below flood stage. All my staff have signed up for
-> WaterAlert. Thank you for the good work you and this gage do!"
->
-> \- a user who emailed our help desk
+> WaterAlert. Thank you for the good work you and this gage do!" - a user who emailed our help desk
 
 Check Status users value "at-a-glance" data where it is clear and easy
 for you to understand the status of water conditions. Users
