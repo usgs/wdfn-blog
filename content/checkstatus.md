@@ -11,7 +11,7 @@ tags:
   - water-data-for-the-nation
   - public-communication
 image: static/user_wdfn/Check Status Blog.gif
-description: USGS Water Data for the Nation products have many users. Check Status users want to quickly check the status of water data, and in order to do this, they have specific needs. Read more to learn how we're 
+description: USGS Water Data for the Nation products have many users. Check Status users want to quickly check the status of water data, and in order to do this, they have specific needs. Check Status users have a few favorite USGS products they use; read on to find out what they are.
 keywords:
   - User research
   - User design
@@ -47,7 +47,7 @@ information. Here is a quick recap of the three user groups:
     latest water conditions.
 
 > This post will discuss what we know about our Check Status users right
-> now. As we research, we learn more about our users' needs and identify
+> now. As we research, we learn more about your needs, identifying
 > patterns that can be used to update our understanding.
 
 # Who Are Check Status Users?
@@ -75,7 +75,7 @@ diverse, but we can broadly categorize them into three sub-groups:
 Each user is unique in their data use and workflow. These user stories help us keep you - our user -
 in mind as we design our services.
 
-## Homeowner Sally
+## Sally, the Homeowner
 
 Sally (she/her) has lived in her home with her husband, two children,
 and dog for six years. Her home is located near the Wapsipinicon River
@@ -99,7 +99,7 @@ when there has been a lot of recent rain. She can see the water level
 trends and she gets additional comfort because she can see how the rain is affecting
 the Wapsipinicon River.
 
-## Journalist Aram
+## Aram, the Journalist
 
 Aram (him/his) has been with the Beaumont Enterprise newspaper for
 twenty years. Part of his job is reporting on dam releases due to
@@ -119,7 +119,7 @@ while he is out in the field reporting other stories. Aram says "Without
 access to USGS stream gages, I would not be able to report up-to-date
 news. My readers and social media followers want to know the minute I get important news."
 
-## Water Manager Margaret
+## Margaret, the Water Manager
 
 Margaret (they/their) has been the regional water manager in eastern
 Washington for two years. They are responsible for overseeing allocation
@@ -207,7 +207,7 @@ our data. Key USGS products used by these users include:
 
 # #EnGageWithUSGS
 
-We are continuing to learn more about Check Status users as we continue
+Connect with us! We are continuing to learn more about Check Status users as we continue
 our work improving the developer experience with accessing USGS water
 data. If you want to share your own workflow and feedback on the process, email [mailto:wdfn@usgs.gov],
 or if you'd be interested in participating in our user research process,
