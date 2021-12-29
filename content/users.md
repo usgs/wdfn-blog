@@ -216,12 +216,14 @@ user groups such as to check levels surrounding a flood event or to
 conduct research for a project.
 
 # #EnGageWithUSGS
-When you engage with us, we learn from you how you currently use our data. Developing these relationships with our users helps us identify which user group(s) you might relate to. While these three user groups have helped us focus on
+Connect with us! When you engage with us, we learn from you how you currently use our data. Developing these relationships with our users helps us identify which user group(s) you might relate to. While these three user groups have helped us focus on
 designing around a user's workflow, sometimes we need to consider other
 important factors as well. We check in with users to understand your
 familiarity with a scientific concept or the urgency with which you
 need data. We'd love to hear your perspective on our data and ensure
 we're meeting your needs. Please contact us at
-[wdfn\@usgs.gov](mailto:wdfn@usgs.gov).
+[wdfn@usgs.gov](mailto:wdfn@usgs.gov).
+  
+[Subscribe to the new Water Data for the Nation newsletter](https://usgs.us17.list-manage.com/subscribe?u=e9827ec090cef00a4355db5cb&id=5a8a7e2d2f) to stay up to date with our product offerings, events, and other ways to connect with us.
  
 *Quotes in this blog post have been lightly edited for grammar and clarity only.*
