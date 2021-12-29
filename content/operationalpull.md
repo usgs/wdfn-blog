@@ -1,8 +1,8 @@
 ---
 author: Shawna Gregory, Candice Hopkins, Rachel Volentine, Brad Garner, and Nicole Felts
-date: 2021-12-21
+date: 2021-12-28
 slug: user_operational_pull
-draft: True
+draft: False
 type: post
 title: 'Operationalized Pull: A User Group'
 categories: 
@@ -51,7 +51,7 @@ quick recap of the three user groups:
 > now. As we research, we learn more about your needs, identifying
 > patterns that can be used to update our understanding.
 
-# Who are these users?
+# Who Are These Users?
 
 Are you an Operationalized Pull user? Anyone can use our APIs to become an Operationalized Pull user.
 Currently, people from various backgrounds are regular Operationalized
@@ -148,7 +148,7 @@ not be one of the problems."
 
 *Each user story does not represent a real person. The stories reflect real user experiences and are based on our decades-long experience with our users.*
 
-# How do Operationalized Pull users interact with USGS water information?
+# How Do Operationalized Pull Users Interact with USGS Water Information?
 
 We know you want to easily look at USGS data alongside other
 sources of data, including state and local water information. When users
