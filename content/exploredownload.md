@@ -1,8 +1,8 @@
 ---
 author: Shawna Gregory, Candice Hopkins, Rachel Volentine, Brad Garner, and Nicole Felts
-date: 2021-12-21
+date: 2021-12-29
 slug: user_explore_download
-draft: True
+draft: False
 type: post
 title: Explore & Download User Group
 categories: 
@@ -48,7 +48,7 @@ information. Here is a quick recap of the three user groups:
 This post will discuss what we know about our Explore & Download users
 right now. As we research, we learn more about our users' needs, identifying patterns that can be used to update our understanding.
 
-# Who are these users?
+# Who Are These Users?
 
 Explore & Download users are exploring our data, hoping to find
 something they can use. Does that sound like you? The way these users approach our data is
@@ -130,7 +130,7 @@ forecasts.
 
 *Each user story does not represent a real person. The stories reflect real user experiences and are based on our decades-long experience with our users.*
 
-# How do Explore & Download users interact with USGS water information?
+# How Do Explore & Download Users Interact with USGS Water Information?
 
 Explore & Download users seek to answer a question with USGS data and
 leave our website with useful water data. They tend to explore our maps
