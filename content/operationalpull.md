@@ -206,11 +206,13 @@ USGS products used by these users include:
 
 # #EnGageWithUSGS
 
-Connect with us! We are continuing to learn more about Operationalized Pull users as we
+Connect with us! We are learning more about Operationalized Pull users as we
 continue our work improving the developer experience with accessing USGS
-water data. If you want to share your own workflow and feedback on the process, email [mailto:wdfn@usgs.gov],
+water data. If you want to share your own workflow and feedback on the process, email [wdfn@usgs.gov](mailto:wdfn@usgs.gov),
 or if you'd be interested in participating in our user research process,
-please email [mailto:WDFN_usabilitytesting@usgs.gov].
+please email [wdfn_usabilitytesting@usgs.gov](mailto:wdfn_usabilitytesting@usgs.gov).
+
+[Subscribe to the new Water Data for the Nation newsletter](https://usgs.us17.list-manage.com/subscribe?u=e9827ec090cef00a4355db5cb&id=5a8a7e2d2f) to stay up to date with our product offerings, events, and other ways to connect with us.
 
 *Quotes in this blog post have been lightly edited for grammar and
 clarity only.*
