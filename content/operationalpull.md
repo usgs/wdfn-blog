@@ -168,11 +168,9 @@ is that Operationalized Pull users use scripts or software to
 repeatedly access USGS API services which refresh their data sources as new
 data comes in.
 
-> "Right now, on one dev system, I'm using ... \[existing state\]
+> "Right now, on one dev system, I'm using \[existing state\]
 > software but pulling from all 50 states + territories, sequential,
-> every 5 minutes."
->
-> \- a federal partner
+> every 5 minutes." \- a federal partner
 
 [Data Visualizations](https://labs.waterdata.usgs.gov/visualizations/vizlab-home/), statistics, and other types of contextualization of
 the data provided by USGS is rarely used by Operationalized Pull users.
@@ -185,9 +183,7 @@ data is valued as a primary data source for so many users.
 
 > "I'm not so much interested in going to USGS web pages to look at
 > what's going on - I want to pull it into my mapping system so I can
-> use \[USGS data\]."
->
-> \- an emergency manager
+> use USGS data." - an emergency manager
 
 # Key USGS Products
 
