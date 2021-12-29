@@ -1,8 +1,8 @@
 ---
 author: Shawna Gregory, Candice Hopkins, Rachel Volentine, and Nicole Felts
-date: 2021-12-21
+date: 2021-12-29
 slug: user_check_status
-draft: True
+draft: False
 type: post
 title: Check Status User Group
 categories: 
@@ -139,7 +139,7 @@ and credible data from USGS is very important."
 
 *Each user story does not represent a real person. The stories reflect real user experiences and are based on our decades-long experience with our users.*
 
-# How do Check Status users interact with USGS water information?
+# How Do Check Status Users Interact with USGS Water Information?
 
 Check Status users routinely check for a few parameters for specific
 sites. You might come to us with an idea of what locations are useful to
