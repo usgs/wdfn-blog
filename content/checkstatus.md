@@ -108,7 +108,7 @@ water levels safe, they can cause sudden water increases in downstream
 areas and affect the safety of swimming, boating, or fishing along the
 river. Keeping his community informed and safe is an important part of
 his job, and he takes pride in providing the most up-to-date
-information. For his report, Aram regularly monitors several NWIS
+information. For his report, Aram regularly monitors several [Next Generation](https://waterdata.usgs.gov/blog/realtime-pages-replacement/)
 monitoring location pages in his area. USGS provides the only source of
 continuous monitoring, providing updates every 15 minutes. In addition
 to looking at the most recent reports, Aram looks at gage height and
@@ -188,7 +188,7 @@ stakeholders who also want to understand the water conditions.
 
 # Key USGS Products
 
-Explore & Download users gravitate toward tools they can use to explore
+Check Status users gravitate toward tools they can use to explore
 our data. Key USGS products used by these users include:
 
 -   [National Water
