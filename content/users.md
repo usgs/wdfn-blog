@@ -216,7 +216,8 @@ user groups such as to check levels surrounding a flood event or to
 conduct research for a project.
 
 # #EnGageWithUSGS
-Connect with us! When you engage with us, we learn from you how you currently use our data. Developing these relationships with our users helps us identify which user group(s) you might relate to. While these three user groups have helped us focus on
+Connect with us! Follow us on [Twitter](https://twitter.com/USGS_water) and [Instagram](https://www.instagram.com/usgs_streamgages/).
+When you engage with us, we learn from you how you currently use our data. Developing these relationships with our users helps us identify which user group(s) you might relate to. While these three user groups have helped us focus on
 designing around a user's workflow, sometimes we need to consider other
 important factors as well. We check in with users to understand your
 familiarity with a scientific concept or the urgency with which you
