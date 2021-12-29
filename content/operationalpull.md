@@ -10,7 +10,7 @@ categories:
 tags:
   - water-data-for-the-nation
   - public-communication
-image: static/user_wdfn/Operational Pull Blog.gif
+image: static/user_wdfn/Operational Pull_gear only.gif
 description: USGS Water Data for the Nation products have many users. Operationalized users access data through automated processes, and they primarily use our APIs. Want to know more about operationalized pull users and our APIs? Read on...
 keywords:
   - User research
