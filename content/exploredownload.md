@@ -187,8 +187,8 @@ our data. If you think you're an explore and download user, you might be interes
 -   [Water Quality Portal](https://www.waterqualitydata.us/)
 
 # #EnGageWithUSGS
-
-Connect with us! We are learning more about Explore & Download users as we
+Connect with us! Connect with us! Follow us on [Twitter](https://twitter.com/USGS_water) and [Instagram](https://www.instagram.com/usgs_streamgages/).
+We are learning more about Explore & Download users as we
 continue our work improving the developer experience with accessing USGS
 water data. If you want to share your own workflow and feedback on the process, email [wdfn@usgs.gov](mailto:wdfn@usgs.gov),
 or if you'd be interested in participating in our user research process,
