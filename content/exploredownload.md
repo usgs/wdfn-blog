@@ -119,7 +119,7 @@ looking for groundwater data by using a search engine and found [USGS's
 Groundwater Watch](https://groundwaterwatch.usgs.gov/Default.asp). The
 Groundwater Watch map interface helped Dania realize there were many
 groundwater sites monitored by the USGS and chose a few sites to add to
-her research dataset. Diana downloaded observations from Groundwater
+her research dataset. Dania downloaded observations from Groundwater
 Watch and imported those into Excel so she could correlate water-level
 observations with sea-level observations. Dania says "there's so much we
 don't know about how sea level rise will affect real people on the
