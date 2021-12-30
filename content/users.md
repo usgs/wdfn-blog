@@ -75,7 +75,7 @@ users in 2021, perhaps due to the historic drought in the state.
 {{< figure src="/static/user_wdfn/image2.png" caption= "Figure 2. A map of the distribution of our users in Fiscal Year 2021" alt="A map of the distribution of users across the United States." >}}
 </div>
 
-# Users Trust Us
+# Users trust us
 
 Our users trust USGS to deliver highly accurate data, looking to the
 USGS as a leader in earth science data delivery. USGS data are
@@ -104,7 +104,7 @@ thousands of fish when streamflow dropped to a dangerous level.
 How do we know you?	We shape our understanding of our user base by compiling information
 using several methods.
 
-## Web Analytics
+## Web analytics
 
 We rely on analytics to understand broader questions about our users.
 This aggregated information allows us to answer quantitative questions,
