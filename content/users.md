@@ -2,7 +2,7 @@
 author: Shawna Gregory, Rachel Volentine, Candice Hopkins, Nicole Felts, and Jim Kreft
 date: 2021-12-21
 slug: user_wdfn
-draft: True
+draft: false
 type: post
 title: Are you a USGS Water Data user?
 categories: water-information 
