@@ -4,7 +4,7 @@ date: 2021-12-29
 slug: user_operational_pull
 draft: False
 type: post
-title: 'Operationalized Pull: A User Group'
+title: Operationalized Pull Users
 categories: 
 - water-information 
 tags:
