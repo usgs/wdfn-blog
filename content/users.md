@@ -4,7 +4,7 @@ date: 2021-12-21
 slug: user_wdfn
 draft: false
 type: post
-title: Are you a USGS Water Data user?
+title: Are You a USGS Water Data User?
 categories: water-information 
 tags:
   - water-data-for-the-nation
