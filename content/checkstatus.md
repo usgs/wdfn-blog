@@ -145,7 +145,7 @@ Check Status users routinely check for a few parameters for specific
 sites. You might come to us with an idea of what locations are useful to
 you. Generally, users find USGS web sites by searching the web for
 general water terms like "Boise river water level," where USGS sites
-tend to be on the first page of results. They you use our tools to find
+tend to be on the first page of results. Users just like you use our tools to find
 the closest site(s) for which you want water conditions.
 
 Check Status users come to USGS to gather information to make decisions
