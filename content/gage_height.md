@@ -12,9 +12,17 @@ type: post
 
 title: Why We Use Gage Height
 
-categories: water-information, web-communication
+categories: 
+  - water information
+  - web communication
 
-tags: water data, stream flow, public communication, stream gage, gage height, river height
+tags: 
+  - water data
+  - streamflow
+  - public communication
+  - stream gage
+  - gage height
+  - river height
 
 image: /static/gage_height/cover.png
 

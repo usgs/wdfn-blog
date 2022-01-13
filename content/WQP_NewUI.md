@@ -5,7 +5,10 @@ slug: WQP_NewUI
 draft: False
 type: post
 title: New User Interface for the Water Quality Portal
-categories: applications, water-information, software-development
+categories: 
+  - applications
+  - water-information
+  - software-development
 tags:
   - Water Quality Portal
   - Applications
