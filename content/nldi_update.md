@@ -5,7 +5,9 @@ slug: nldi_update
 draft: False
 type: post
 title: Network Linked Data Index Update and Client Applications
-categories: Data Science
+categories: 
+  - Data Science
+  - api
 tags:
   - R
 image: static/nldi_update/plot_4-1.png

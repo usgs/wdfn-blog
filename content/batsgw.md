@@ -5,8 +5,11 @@ date: '2021-11-05'
 draft: False
 type: post
 slug: gw_bats
-categories: water-information, groundwater
-tags: water-data-for-the-nation
+categories: 
+  - api
+  - groundwater
+tags: 
+  - water data for the nation
 image: static/batsgw/cover.png
 description: A new data offering which consolidates instrumented and discrete groundwater
   level data into a data stream that yields one value per day

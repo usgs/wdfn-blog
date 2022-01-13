@@ -12,9 +12,15 @@ type: post
 
 title: How Web Flags help the public understand our data
 
-categories: water-information, web-communication
+categories: 
+  - water-information
+  - web-communication
 
-tags: water data, stream flow, public communication, stream gage
+tags: 
+  - water data
+  - streamflow
+  - public communication
+  - stream gage
 
 image: /static/web-flags/cover.png
 
