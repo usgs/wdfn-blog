@@ -2,7 +2,7 @@
 title: A Catalog of USGS Water-Data APIs and Web Services
 description: A high-level cataloging of the most prominent USGS water-data APIs, web services, and endpoints.
 draft: True
-date: 2022-01-10
+date: 2022-01-18
 author: Brad Garner
 slug: api_catalog
 type: post
@@ -25,13 +25,15 @@ The USGS has published water data on the World Wide Web
 [since 1995](/25-years-of-water-data-on-the-web/).  Millions of people use our websites to 
 [check the status](/user_check_status/) of current water conditions or 
 [explore water data and download](/user_explore_download/) data they care about.  A 
-[smaller group of users](/user_operationalized_pull/) are interested in 
+[smaller group of users](/user_operational_pull/) are interested in 
 integrating USGS water data into their own software or ongoing workflows.  **If you're someone who wants to incorporate
-water data into your own application or website, our water-data web services (APIs) are for you.**
+water data into your own application or website, our water-data web services and Application Programming Interfaces 
+(APIs) are for you.**
 
 This is a high-level cataloging of our most prominent USGS water-data APIs, web services, and endpoints.  The groupings 
-are designed to guide new users to our best and newest flagship APIs, and to help existing users understand the wider
-context for the web services they already use (and to perhaps consider some new APIs).
+are designed to guide new users to our best and newest flagship APIs that adopts open standards of the Open Geospatial
+Consortium (OGC).  These groupings also should help existing users understand the wider context for the web services they 
+already use (and to perhaps consider some new APIs).
 
 For purposes of this article we define the following conventions:[^semantics]
 - _Endpoint._  A Web URL that accepts input arguments and returns data in some machine-friendly format (_i.e.,_ not HTML).
@@ -66,23 +68,26 @@ Want the latest real-time water data from a river, groundwater well, or other US
 your newest open-standard way to do that.  SensorThings is being designed to help usher in the 
 Internet of Things.  It is a simple-to-understand API that encourages software developers to use it in their 
 applications (previous open standards like WaterML were thorough and meticulous, but tedious to parse 
-to extract the actual data itself)
+to extract the actual data itself).
 
 **Endpoint for our beta OGC SensorThings API implementation: https://labs.waterdata.usgs.gov/sta/v1.1/**
 
 <h3>Getting Started</h3>
 
-Want to try out our SensorThings API?  We are developing a Python Notebook.  In the meantime, here's a super-quick way to 
-dive into it:[^jsonview] 
-1. Make a web request for one of the _things_ (our things are USGS
-monitoring locations).  For example,
-[here is the thing for Colorado River at Lees Ferry, Arizona](https://labs.waterdata.usgs.gov/sta/v1.1/Things('USGS-09380000')).
-1. Inside this JSON structure are properties for additional URLs that can be pursued to obtain data for this station. Follow
-the ```Datastreams@iot.navigationLink``` element in this JSON (which should point 
-[here](https://labs.waterdata.usgs.gov/sta/v1.1/Things('USGS-09380000')/Datastreams)).  
-1. It returns an array of 
-recent time-series data available for this station.  Try iterating through this array searching for the ParameterCode value 
-of interest (often, it’s 00060 for Discharge or 00065 for Gage Height).  
+Want to try out our SensorThings API?  We hope to release an example Python Notebook by Spring 2022, so you can
+try it out for yourself.  In the meantime, here's a super-quick way to dive into it:[^jsonview] 
+1. Make a web request for one of the
+[_things_](https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/requestingData/STA-Data-Model.html)
+(our _things_ are USGS monitoring locations).  For example,
+[here is the _thing_ for Colorado River at Lees Ferry, Arizona](https://labs.waterdata.usgs.gov/sta/v1.1/Things('USGS-09380000')).
+1. Inside the JSON structure returned for a _thing_ in (1) are properties containing additional URLs that can be opened
+to obtain data for this station. Find the property named ```Datastreams@iot.navigationLink``` and open the URL in this
+property to see 
+[datastreams associated with this _thing_](https://labs.waterdata.usgs.gov/sta/v1.1/Things('USGS-09380000')/Datastreams).
+1. The URL in (2) returns an array of recent time-series data available for this station.  Try iterating through this array 
+searching for the 5-digit
+[USGS parameter code](https://help.waterdata.usgs.gov/codes-and-parameters/parameters) you are interested in
+(often, it’s 00060 for Discharge or 00065 for Gage Height).  
 1. Following the ```Observations@iot.navigationLink``` 
 property’s URL will start returning the data of interest.
 
@@ -139,17 +144,18 @@ include daily-values and discrete groundwater levels).
 <!--- ------------- -->
 
 Interested in water quality and the laboratory analyses that inform us about the quality of the nation's 
-water?  Then the flagship Water Quality Portal.  It is a joint endeavor among 
+water?  Then the flagship Water Quality Portal is for you.  It is a joint endeavor among 
 several government agencies that collect these types of data; you can obtain data from the USGS and also other 
 government organizations like the Environmental Protection Agency.
 
 Discrete water-quality data are inherently richer, more complex, and challenging to interpret than 
 time-series data.  Accordingly the primary web-service output format is the relatively complex 
-Water Quality eXchange (WQX) open standard.  But fret not!  The Water Quality Portal also supports 
-the Web Mapping Service (WMS) open-standard API to easily get dots put 
-on map tiles and thus on interactive maps.  Even though the underlying data are complex and rich in 
-structure, support of WMS allows a low barrier to entry to begin exploring the spatial distribution
-of these data.
+[Water Quality eXchange (WQX)](https://exchangenetwork.net/data-exchange/wqx/) open standard. But
+fret not!  The Water Quality Portal also supports the 
+[OGC Web Map Service (WMS)](https://www.ogc.org/standards/wms) open-standard API to 
+easily get dots put on map tiles and thus on interactive maps.  Even though the underlying data are
+complex and rich in structure, support of WMS allows a low barrier to entry to begin exploring the 
+spatial distribution of these data.
 
 <h3>Getting Started</h3>
 
@@ -160,10 +166,11 @@ built the website will give you code you can place directly into your applicatio
 
 <span class="usa-tag">NOTE</span>
 The WQX output format is long, detailed, nested, and "narrow" as opposed to "wide."  Some of our 
-users express interest in a simplified gridded output where constituents define
+users have expressed interest in a wide format which is a simplified gridded output where constituents define
 columns, laboratory samples define rows, and numeric results and qualifiers are in each grid cell.  Water Quality
-Portal does not support this as a machine-friendly output format; it simply sacrifices too much essential 
-detail.  But certain software libraries (_e.g.,_ [DataRetrieval for R](/dataretrieval)) may enable generation of
+Portal does not support this as a machine-friendly output format; it sacrifices too much essential 
+detail without the end user having control over this selective process.[^sorich]
+But certain software libraries (_e.g.,_ [DataRetrieval for R](/dataretrieval)) may enable generation of
 such simplified grids by thoughtfully post-processing WQX data.
 
 </div>
@@ -418,15 +425,19 @@ phenomena, a daily value is an expedient trade-off that discards useful informat
 [^swaka]: Discrete surface-water field measurements are also known as calibrations, 
 gaugings, surface-water measurements, field measurements, or even simply "measurements," as ambiguous as that term may be.
 
-[^jsonview]: Many example URLs in this article return data in JSON format.  There are many ways to
-easily parse and view JSON data.  Some web browsers (_e.g.,_ Firefox) have convenient built-in JSON viewers.
-Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
+[^jsonview]: Many example URLs in this article return data in JSON format.  Many web browsers (_e.g.,_ Firefox) have
+convenient built-in JSON viewers. Any use of trade, firm, or product names is for descriptive purposes only and 
+[does not imply endorsement](/introduction/#disclaimer) by the U.S. Government.
 
 [^pleasesteal]: Reverse engineering is encouraged, as is copying and pasting, forking, etc.  As public civil servants,
-our work is done for _you_ and is in the public domain.  For example, the 
-[source code for monitoring location pages](https://code.usgs.gov/wma/iow/waterdataui) is publicly viewable.  Working
+our work is done for _you_ and is in the public domain.  For example, the source code for monitoring location pages 
+[is publicly viewable](https://code.usgs.gov/wma/iow/waterdataui).  Working
 in the open is part of [how we work](/how-we-work-spring-2021/).
 
 [^semantics]: Generally, the terms endpoint, web service, and API are more or less synonymous.
-Only in this article have we strived to enforce a consistent (and perhaps
-somewhat arbitrary) distinction.
+Only in this article have we strived to enforce a consistent (if somewhat arbitrary) distinction.
+
+[^sorich]: Any single laboratory analytical result, in addition to the final quantitaive value (_e.g._, 4.5 milligrams
+per liter), can contain metadata including but not limited to: qualifier, method reporting level, analytical method,
+laboratory free-text comments, analytical standard deviation, laboratory set numbers, sample preparation and analysis dates,
+analyzing entity, and data-approval status.
