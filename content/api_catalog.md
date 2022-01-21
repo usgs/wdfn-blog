@@ -68,32 +68,33 @@ Want the latest real-time water data from a river, groundwater well, or other US
 your newest open-standard way to do that.  SensorThings is being designed to help usher in the 
 Internet of Things.  It is a simple-to-understand API that encourages software developers to use it in their 
 applications (previous open standards like WaterML were thorough and meticulous, but tedious to parse 
-to extract the actual data itself).
+to extract the actual data itself).  
 
 **Endpoint for our beta OGC SensorThings API implementation: https://labs.waterdata.usgs.gov/sta/v1.1/**
 
 <h3>Getting Started</h3>
 
 Want to try out our SensorThings API?  We hope to release an example Python Notebook by Spring 2022, so you can
-try it out for yourself.  In the meantime, here's a super-quick way to dive into it:[^jsonview] 
+try it out for yourself.  In the meantime, here's a super-quick way to dive into it:
 1. Make a web request for one of the
 [_things_](https://fraunhoferiosb.github.io/FROST-Server/sensorthingsapi/requestingData/STA-Data-Model.html)
 (our _things_ are USGS monitoring locations).  For example,
 [here is the _thing_ for Colorado River at Lees Ferry, Arizona](https://labs.waterdata.usgs.gov/sta/v1.1/Things('USGS-09380000')).
-1. Inside the JSON structure returned for a _thing_ in (1) are properties containing additional URLs that can be opened
+1. Inside the JSON structure[^jsonview] returned for a _thing_ in (1) are properties containing additional URLs that can be opened
 to obtain data for this station. Find the property named ```Datastreams@iot.navigationLink``` and open the URL in this
 property to see 
 [datastreams associated with this _thing_](https://labs.waterdata.usgs.gov/sta/v1.1/Things('USGS-09380000')/Datastreams).
-1. The URL in (2) returns an array of recent time-series data available for this station.  Try iterating through this array 
-searching for the 5-digit
-[USGS parameter code](https://help.waterdata.usgs.gov/codes-and-parameters/parameters) you are interested in
-(often, it’s 00060 for Discharge or 00065 for Gage Height).  
+1. The URL in (2) returns an array of recent time-series data available for this station.  Each object in the array
+has a ```description``` element describing the time series, as well as a ```properties``` element that contains
+a ```ParameterCode``` element describing the time series with a 5-digit
+[USGS parameter code](https://help.waterdata.usgs.gov/codes-and-parameters/parameters)
+(_e.g.,_ 00060 signifies Discharge and 00065 signifies Gage Height).  
 1. Following the ```Observations@iot.navigationLink``` 
-property’s URL will start returning the data of interest.
+element's URL will start returning the data of interest.
 
 You also might like the 
-[Internet of Water's SensorThings resources](https://internetofwater.github.io/STA-Resources/), or
-for the more stalwart reader there is the 
+[Internet of Water's SensorThings resources](https://internetofwater.github.io/STA-Resources/), and
+for the more adventurous reader there is the 
 [official SensorThings specification](http://docs.opengeospatial.org/is/15-078r6/15-078r6.html).
 
 </div>
@@ -125,13 +126,17 @@ In the meantime, here's a super-quick way to dive into it:[^jsonview]
 1. The response provides an overview of this network of USGS monitoring locations, which in OGC API are modeled as _features_
 in a _collection_.  The features themselves in this collection (_i.e.,_ the monitoring locations in this network) can be seen
 [here](https://labs.waterdata.usgs.gov/api/observations/collections/AGL/items?f=json).  
-1. The ```properties``` objects within this response contain helpful monitoring location metadata.
+1. The ```properties``` elements within this response contain helpful monitoring location metadata.
 1. More information about any one of these features is available at a more specific URL (_e.g.,_ 
 [here is the USGS Winslow, Arizona I-40 well](https://labs.waterdata.usgs.gov/api/observations/collections/AGL/items/USGS-350002110355501?f=json)).
 1. Digging one level deeper into the observations associated with any feature may offer certain forms of water data we have 
 begun to populate in this API (_e.g.,_ 
 [the Winslow I-40 well's observations](https://labs.waterdata.usgs.gov/api/observations/collections/AGL/items/USGS-350002110355501/observations?f=json)
 include daily-values and discrete groundwater levels).
+
+You also might like the 
+[provisional Swagger Documentation](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=%2Fapi%2Fobservations%2Fv3%2Fapi-docs)
+we have published for our OGC API implementation.
 
 </div>
 
@@ -418,15 +423,16 @@ and being relayed to the Web very near the present moment).
 data also are known colloquially as field measurements or "tape-downs" owing to the 
 instrument typically used by technicians to obtain these measurements.
 
-[^oneperday]: For most large rivers and non-fractured groundwater systems, one daily value per day
-is adequately if not wholly representative of that water resource--less data but just as informative
-as dozens of instantaneous values per day.  But for small rivers and sundry hydrological 
-phenomena, a daily value is an expedient trade-off that discards useful information.
+[^oneperday]: One daily-mean value per day can be wholly adequate for large rivers and some
+data analyses.  However, if processing power and storage space allow, instantaneous values might be
+considered as a more favorable data because they are potentially richer in information.
 
 [^swaka]: Discrete surface-water field measurements are also known as calibrations, 
 gaugings, surface-water measurements, field measurements, or even simply "measurements," as ambiguous as that term may be.
 
-[^jsonview]: Many example URLs in this article return data in JSON format.  Many web browsers (_e.g.,_ Firefox) have
+[^jsonview]: JSON is a popular data-interchange format.  It is lightweight and easy to read, even for human eyes
+[(more info)](https://www.json.org/json-en.html). Example URLs throughout this article return 
+data in JSON format.  Many web browsers (_e.g.,_ Firefox) have
 convenient built-in JSON viewers. Any use of trade, firm, or product names is for descriptive purposes only and 
 [does not imply endorsement](/introduction/#disclaimer) by the U.S. Government.
 
