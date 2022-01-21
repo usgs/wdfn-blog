@@ -92,3 +92,12 @@ figure {
 pre {
   overflow-x: scroll;
 }
+
+.footnotes {
+  font-size: uswds.size('body', '3xs'); 
+}
+
+.footnotes p {
+  margin-block-start: 0.2em; /* Unsure if there is a way in USWDS to reduce gap between paragraphs */
+  margin-block-end: 0.2em;
+}
