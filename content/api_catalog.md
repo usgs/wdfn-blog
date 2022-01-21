@@ -31,7 +31,7 @@ water data into your own application or website, our water-data web services and
 (APIs) are for you.**
 
 This is a high-level cataloging of our most prominent USGS water-data APIs, web services, and endpoints.  The groupings 
-are designed to guide new users to our best and newest flagship APIs that adopts open standards of the Open Geospatial
+are designed to guide new users to our best and newest flagship APIs that adopt open standards of the Open Geospatial
 Consortium (OGC).  These groupings also should help existing users understand the wider context for the web services they 
 already use (and to perhaps consider some new APIs).
 
@@ -107,7 +107,7 @@ for the more stalwart reader there is the
 
 A majority of data collected and exchanged in the world today has a _geographic location_ as a core
 attribute.  USGS water data is no exception! So we're adopting the 
-[Open Geospatial Consortium's OGC API](https://ogcapi.ogc.org/) as a flagship API.
+[OGC API](https://ogcapi.ogc.org/) as a flagship API.
 Our implementation of OGC API offers detailed metadata about multiple stations for easy map 
 plotting, and offers certain limited forms of water data.  We've only just begun to use this API 
 and we plan to expand our use of it considerably, particularly as OGC API actively continues 
@@ -149,7 +149,7 @@ several government agencies that collect these types of data; you can obtain dat
 government organizations like the Environmental Protection Agency.
 
 Discrete water-quality data are inherently richer, more complex, and challenging to interpret than 
-time-series data.  Accordingly the primary web-service output format is the relatively complex 
+time-series data.  Accordingly, the primary web-service output format is the relatively complex 
 [Water Quality eXchange (WQX)](https://exchangenetwork.net/data-exchange/wqx/) open standard. But
 fret not!  The Water Quality Portal also supports the 
 [OGC Web Map Service (WMS)](https://www.ogc.org/standards/wms) open-standard API to 
@@ -218,9 +218,9 @@ draws the watershed boundary upstream of this station.
 <div id="a5" class="usa-accordion__content">
 <!--- ------------- -->
 
-The simplest way to integrate USGS time-series water data onto own web page or into your own application has been
-to embed a bitmap image of a hydrograph.  It's a one-line addition to an HTML file!  Minimally all you need is the USGS
-monitoring location identifier (typically an 8-digit number).  The functionality is limited: you cannot customize
+The simplest way to integrate USGS time-series water data onto your own web page or into your own application can be
+simply embedding a bitmap image of a hydrograph.  It's a one-line addition to an HTML file!  Minimally all you need is 
+the USGS monitoring location identifier (typically an 8-digit number).  The functionality is limited: you cannot customize
 the bitmap image beyond the parameters we offer you, and the image is not interactive.  Still, this remains a popular, low-complexity
 way to show your favorite river's recent streamflow or other measured data.
 
@@ -283,7 +283,7 @@ locations based on the type of data they collect and the time range those data a
 - [__Statistical period-of-record data.__](https://waterservices.usgs.gov/rest/Statistics-Service-Test-Tool.html)[^statbeta]  This 
 service outputs statistical information about time-series data from a USGS monitoring location.  It is most popularly known as 
 the service that examines the full period of approved time-series streamflow at a monitoring location and, for each day of the 
-year, calculates the long-term median, maximum, minimum, and other statistical flow percentiles.  
+year, calculates the long-term median, maximum, minimum, and other statistical flow percentiles.
 And this same statistical calculation is performed for all other approved time-series data and made
 available through this legacy service.
 
@@ -358,7 +358,7 @@ URL (_e.g.,_ [all of these measurements for Colorado River at Lees Ferry, Arizon
 For existing users and software, at this time we continue to support these web services and endpoints.  But new and existing 
 clients should strongly consider using new flagship or beta services that provide the same water data in more modern formats.
 
-- [__Legacy water-quality data.__](https://waterdata.usgs.gov/nwis/qwdata/)  You can download 
+- [__Legacy discrete water-quality data.__](https://waterdata.usgs.gov/nwis/qwdata/)  You can download 
 tab-delimited "wide" grid formats of USGS 
 water-quality data by using this search interface, indicating tab-delimited output, and noting the resultant 
 URL ([example](https://nwis.waterdata.usgs.gov/md/nwis/qwdata/?site_no=01649190&agency_cd=USGS&inventory_output=0&rdb_inventory_output=file&TZoutput=0&pm_cd_compare=Greater%20than&radio_parm_cds=all_parm_cds&qw_attributes=0&format=rdb&qw_sample_wide=wide&rdb_qw_attributes=0&date_format=YYYY-MM-DD&rdb_compression=value&submitted_form=brief_list)).  Although this gridded format
@@ -369,7 +369,8 @@ that modernization is complete, **we intend to decommission this web endpoint.**
 - [__Legacy hydrograph bitmap.__](https://waterdata.usgs.gov/nwisweb/graph) A URL that generates a standalone bitmap 
 of a hydrograph using late 20th-century plotting
 technology ([example](https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=01638500&parm_cd=00060&period=7)).  Please
-try using our beta hydrograph bitmap-image service instead, and give us feedback on what you think of it.  **This endpoint is 
+try using our beta hydrograph bitmap-image service instead (above), and give us feedback on what you think of 
+it.  **This endpoint is 
 [scheduled to be decommissioned](/realtime-pages-replacement/#when-will-live-happen) January 2023.**
 
 </div>
@@ -437,7 +438,7 @@ in the open is part of [how we work](/how-we-work-spring-2021/).
 [^semantics]: Generally, the terms endpoint, web service, and API are more or less synonymous.
 Only in this article have we strived to enforce a consistent (if somewhat arbitrary) distinction.
 
-[^sorich]: Any single laboratory analytical result, in addition to the final quantitaive value (_e.g._, 4.5 milligrams
+[^sorich]: Any single laboratory analytical result, in addition to the final quantitative value (_e.g._, 4.5 milligrams
 per liter), can contain metadata including but not limited to: qualifier, method reporting level, analytical method,
 laboratory free-text comments, analytical standard deviation, laboratory set numbers, sample preparation and analysis dates,
 analyzing entity, and data-approval status.
