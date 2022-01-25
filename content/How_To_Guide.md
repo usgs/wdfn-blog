@@ -186,3 +186,8 @@ This drop-down menu provides links to other pages with more water data or descri
 1.	Select the correct timeframe by selecting a preset timespan of 30 days.
 2.	Select precipitation by choosing the correct data to graph.
 
+### I want to see the degrees in Fahrenheit and in Celsius.
+We have both Celsius and Fahrenheit represented on our Next Generation page hydrograph. Unlike the legacy page, where they are featured on the same graph, our page features them as separate graphs. If you scroll down to the “Select Data to Graph” section, you will find “Temperature, water, degrees Fahrenheit (calculated)” listed below the Celsius option. Once selected, the data will be reflected in the hydrograph above.
+ <div class="grid-row">
+{{< figure src="/static/how-to-guide/Howto_common request_temp.png" caption="Selecting temperature on the Next Generation Monitoring location pages." alt="Screenshot of a monitoring location page with a red box around the different temperature options to graph" >}}
+</div>
