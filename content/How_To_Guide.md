@@ -42,7 +42,7 @@ author_email: <wdfn@usgs.gov>
 
 {{< youtube id="EaHfnVJDE5g" title="How To Use Water Data for Nation's NextGen Monitoring Location Pages" >}}
 
-# Watch our recorded webinar - with a live demo!
+## Watch our recorded webinar - with a live demo!
 The recording of [this webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/) can be viewed on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
 
 <!--- ACCORDION START -->
@@ -85,12 +85,8 @@ The links shown in the images below provide additional information about water d
 </div> 
  
 
- <!--- INTERACT W HYDROGRAPH ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a3">
-Interact with the Hydrograph <!--- 🚢🛥⛴🚀 -->
-</button></h2>
-<div id="a3" class="usa-accordion__content">
-<!--- ------------- -->
+
+## Interact with the Hydrograph
 Move your computer mouse or tap your device’s screen over top of the plot to expose the date, time, and value on the graph.
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/2_interact w hydrograph.png" caption="Notice the red boxes that highlight the selected condition, which in this example is gage height, which is on every monitoring location page, including this one for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that highlights the selected condition on the hydrograph, which is on every monitoring location page, including this one for Long Green Creek at Glen Arm, MD." >}}
@@ -186,26 +182,19 @@ This section provides hydrograph data in tabular format. Toggle this menu visibl
 </div> 
 
 
-<!--- ACCORDION END -->
-</div> 
 
 
-<!--- INTERACT W MAP ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a10">
-Interact with the Map <!--- 🚢🛥⛴🚀 -->
-</button></h2>
-<div id="a10" class="usa-accordion__content">
-<!--- ------------- -->  
+## Interact with the Map
 Press and hold your cursor or finger on the map, then drag the cursor in any direction to move the focused view of the map. 
 <div class="grid-row">
 {{< figure src="/static/how-to-guide/9_interact map.png" caption="Notice the red arrows on the map which indicate a user can move the map to view nearby monitoring locations, the upstream basin, and other features listed in the map legend. This is the map for the monitoring location page for '[Long Green Creek at Glen Arm, MD](https://waterdata.usgs.gov/monitoring-location/01584050/)'." alt="Screenshot that shows the ability to interact with the map for Long Green Creek at Glen Arm, MD." >}}
 </div>
 
 <!--- OTHER MONITORING LOC ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a11">
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a10">
 Other Monitoring Locations <!--- 🚢🛥⛴🚀 -->
 </button></h2>
-<div id="a11" class="usa-accordion__content">
+<div id="a10" class="usa-accordion__content">
 <!--- ------------- -->  
 Notice the red dots on the map, which indicate other nearby active monitoring locations, as indicated by the Legend in the bottom right corner of the map. You can click or tap on the red dots to view other locations. 
 <div class="grid-row">
@@ -227,8 +216,6 @@ Users can change the map background by clicking on the symbol that looks like a 
 <!--- ACCORDION END -->
 </div>
 
-<!--- ACCORDION END -->
-</div>
 
 <!--- GROUNDWATER DATA ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a12">
