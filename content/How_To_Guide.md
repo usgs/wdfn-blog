@@ -40,11 +40,6 @@ author_email: <wdfn@usgs.gov>
 
 <i>updated on January 25th, 2022 at 16:23 ET</i>
 
-{{< youtube id="EaHfnVJDE5g" title="How To Use Water Data for Nation's NextGen Monitoring Location Pages" >}}
-
-## Watch our recorded webinar - with a live demo!
-The recording of [this webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/) can be viewed on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
-
 <!--- ACCORDION START -->
 <div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
 
@@ -60,14 +55,30 @@ This document is a <b>how-to guide for using the USGS Water Monitoring Location 
 <!--- ACCORDION END -->
 </div>
 
+## Watch Our Recorded Webinar
+
+<!--- SUMMARY ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a1.1">
+Video with Live Demo <!--- 🚢🛥⛴🚀 -->
+</button></h2>
+<div id="a1.1" class="usa-accordion__content">
+<!--- ------------- -->
+
+{{< youtube id="EaHfnVJDE5g" title="How To Use Water Data for Nation's NextGen Monitoring Location Pages" >}}
+
+The recording of [this webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/) can be viewed on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
+
+<!--- ACCORDION END -->
+</div> 
+
+## Important Information
 <!--- IMPORTANT INFORMATION ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a2">
-Important Information <!--- 🚢🛥⛴🚀 -->
+Provisional Data <!--- 🚢🛥⛴🚀 -->
 </button></h2>
 <div id="a2" class="usa-accordion__content">
 <!--- ------------- -->
 
-<b>Provisional data</b><br>
 New data are collected continuously. In an effort to make water data and information available to users as rapidly as possible, and until new data can be checked and reviewed and approved, the USGS releases data in near real-time in a <b>provisional status.</b> Provisional data are shown on graphs with a line color that is orange, and approved data are shown with a line color that is dark blue (these colors are subject to change). The color code legend for the graphs can be found below the graphs. When viewing the data in tabular form, the value "P" is provided for provisional data and “A” is provided for approved data in the field for "Data-value qualification code."<br>
 <i>The colors used on the graph are subject to change with the evolution of this product; we will update this guide as necessary.</i> <br>
 We encourage all users to familiarize themselves with the limitations of provisional data by reading the provision data statement linked below the hydrograph on each monitoring location page.
@@ -216,6 +227,7 @@ Users can change the map background by clicking on the symbol that looks like a 
 <!--- ACCORDION END -->
 </div>
 
+## Explore Other NextGen Features
 
 <!--- GROUNDWATER DATA ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a12">
@@ -334,18 +346,26 @@ This drop-down menu provides links to other pages with more water data or descri
 <!--- ACCORDION END -->
 </div>
  
- <!--- COMMON REQUESTS ACCORDION SECTION START -->
+ ## Common Requests
+<!--- RAINFALL DATA ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a20">
-Common Requests <!--- 🚢🛥⛴🚀 -->
+How can I view 30 Day Rainfall data? <!--- 🚢🛥⛴🚀 -->
 </button></h2>
 <div id="a20" class="usa-accordion__content">
 <!--- ------------- -->
 
-<b>How can I view 30 Day Rainfall data?</b>
 1.	Select the correct timeframe by selecting a preset timespan of 30 days.
 2.	Select precipitation by choosing the correct data to graph.
 
-<b>I want to see the degrees in Fahrenheit and in Celsius.</b><br>
+<!--- ACCORDION END -->
+</div>
+
+<!--- TEMPERATURE ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a21">
+How can I view Fahrenheit & Celsius? <!--- 🚢🛥⛴🚀 -->
+</button></h2>
+<div id="a21" class="usa-accordion__content">
+<!--- ------------- -->
 We have both Celsius and Fahrenheit represented on our Next Generation page hydrograph. Unlike the legacy page, where they are featured on the same graph, our page features them as separate graphs. If you scroll down to the “Select Data to Graph” section, you will find “Temperature, water, degrees Fahrenheit (calculated)” listed below the Celsius option. Once selected, the data will be reflected in the hydrograph above.
  <div class="grid-row">
 {{< figure src="/static/how-to-guide/Howto_common request_temp.png" caption="Selecting temperature on the Next Generation Monitoring location pages." alt="Screenshot of a monitoring location page with a red box around the different temperature options to graph" >}}
