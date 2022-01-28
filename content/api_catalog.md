@@ -1,13 +1,13 @@
 ---
-title: A Catalog of USGS Water-Data APIs and Web Services
-description: A high-level cataloging of the most prominent USGS water-data APIs, web services, and endpoints.
-draft: True
-date: 2022-01-18
+title: A Catalog of USGS Water-Data Web APIs
+description: 'A high-level cataloging of the most prominent USGS water-data web-based APIs and data endpoints.'
+draft: true
+date: 2022-01-26
 author: Brad Garner
 slug: api_catalog
 type: post
 image: static/api_catalog/organized_and_systematized.jpg
-categories: 
+categories:
   - api
 tags:
   - public communication
@@ -27,31 +27,30 @@ The USGS has published water data on the World Wide Web
 [explore water data and download](/user_explore_download/) data they care about.  A 
 [smaller group of users](/user_operational_pull/) are interested in 
 integrating USGS water data into their own software or ongoing workflows.  **If you're someone who wants to incorporate
-water data into your own application or website, our water-data web services and Application Programming Interfaces 
+water data into your own application or website, our web-based water-data Application Programming Interfaces 
 (APIs) are for you.**
 
-This is a high-level cataloging of our most prominent USGS water-data APIs, web services, and endpoints.  The groupings 
+This is a high-level cataloging of our most prominent USGS water-data web-based APIs and endpoints.  The groupings 
 are designed to guide new users to our best and newest flagship APIs that adopt open standards of the Open Geospatial
-Consortium (OGC).  These groupings also should help existing users understand the wider context for the web services they 
-already use (and to perhaps consider some new APIs).
+Consortium (OGC).  These groupings also should help existing users understand the wider context for the APIs they 
+already use (and to perhaps consider some new ones).
 
 For purposes of this article we define the following conventions:[^semantics]
+- _API._  A collection of web services whose input arguments and output formats are
+a well-documented, allowing for automated systems interoperability.  In the case of new flagship APIs, input arguments
+and output formats ''both'' are defined by open standards.  For older web APIs, only the output formats were defined as open
+standards; input arguments were USGS-specific.
 - _Endpoint._  A Web URL that accepts input arguments and returns data in some machine-friendly format (_i.e.,_ not HTML).
 Input arguments and output formats are not necessarily well-documented.  The most basic way to
-provide water data on the Web.
-- _Web service._  A collection of endpoints whose outputs are in an open-standard format.  Input arguments are documented 
-but are not necessarily an open standard.
-- _API._  A collection of web services whose input arguments and output formats are
-a well-defined open standard, allowing for the highest level of systems interoperability.  This is what USGS is striving
-for in its flagship products.
+provide water data on the Web, it was not designed to be an automated API.
 
 
 | Icon | Significance |
 |------|--------------|
-|🚀 | Newer, flagship APIs and web services you should consider using preferentially. | 
-|👩‍🔬 | Beta experimental APIs and web services from [USGS Water Data Labs](https://labs.waterdata.usgs.gov/).  Please try them, but please understand they may change. |
-|🕸 | Legacy web services or endpoints, stable and long in production.  Continue to use for now, but be warned eventually these may be decommissioned. |
-|🛑 | Deprecated or decommissioned web services and endpoints.  Do not use these anymore. |
+|🚀 | Newer, flagship APIs you should consider using preferentially. | 
+|👩‍🔬 | Beta experimental APIs from [USGS Water Data Labs](https://labs.waterdata.usgs.gov/).  Please try them, but please understand they may change. |
+|🕸 | Legacy APIs or endpoints, stable and long in production.  Continue to use for now, but be warned eventually these may be decommissioned. |
+|🛑 | Deprecated or decommissioned APIs and endpoints.  Do not use these anymore. |
 
 
 <!--- ACCORDION START -->
@@ -154,7 +153,7 @@ several government agencies that collect these types of data; you can obtain dat
 government organizations like the Environmental Protection Agency.
 
 Discrete water-quality data are inherently richer, more complex, and challenging to interpret than 
-time-series data.  Accordingly, the primary web-service output format is the relatively complex 
+time-series data.  Accordingly, the primary output format is the relatively complex 
 [Water Quality eXchange (WQX)](https://exchangenetwork.net/data-exchange/wqx/) open standard. But
 fret not!  The Water Quality Portal also supports the 
 [OGC Web Map Service (WMS)](https://www.ogc.org/standards/wms) open-standard API to 
@@ -164,10 +163,10 @@ spatial distribution of these data.
 
 <h3>Getting Started</h3>
 
-**Read our [documentation for this web service](https://www.waterqualitydata.us/webservices_documentation/).**  It's
+**Read our [documentation for the portal's API](https://www.waterqualitydata.us/webservices_documentation/).**  It's
 about a 15-minute read and should let you begin to understand basic functionality.
 Or get started even faster by **[interactively building a search](https://www.waterqualitydata.us/);** after the query is 
-built the website will give you code you can place directly into your application.
+built the website will give you code you can embed directly into your application.
 
 <span class="usa-tag">NOTE</span>
 The WQX output format is long, detailed, nested, and "narrow" as opposed to "wide."  Some of our 
@@ -183,7 +182,7 @@ such simplified grids by thoughtfully post-processing WQX data.
 
 <!--- NLDI ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
-🚀 Hydro Network Linked Data Index (NLDI) Web Service <!--- 🚀 -->
+🚀 Hydro Network Linked Data Index (NLDI) API <!--- 🚀 -->
 </button></h2>
 <div id="a4" class="usa-accordion__content">
 <!--- ------------- -->
@@ -191,12 +190,12 @@ such simplified grids by thoughtfully post-processing WQX data.
 The NLDI allows your application to programmatically "swim" up and down the river and stream network of the United 
 States, discovering USGS monitoring locations along the way.  It also returns shapes that define watershed 
 boundaries.  The output format is GeoJSON, making it easy to integrate into web-based maps.
-Essentially, it is a web-service interface we have placed in front of the National Hydrography Dataset (NHD).
+Essentially, it is a web-based API we have placed in front of the National Hydrography Dataset (NHD).
 
-NLDI is somewhat different from other flagship services.  Instead of providing direct sensor
+NLDI is somewhat different from other flagship APIs.  Instead of providing direct sensor
 observations or laboratory-analytical data, NLDI returns metadata about how USGS monitoring locations
 are _connected_ (linked) to rivers and streams.  Instead of providing you with
-streamflow data, for example, this service conveys what river a monitoring location is associated with,
+streamflow data, for example, this API conveys what river a monitoring location is associated with,
 the watershed catchment area upstream of a monitoring location, and allows traversal up and down the stream network.
 
 <h3>Getting Started</h3>
@@ -218,7 +217,7 @@ draws the watershed boundary upstream of this station.
 
 <!--- HYDROGRAPH IMAGE ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a5">
-👩‍🔬 Hydrograph Bitmap Image Web Service<!--- 👩‍🔬⚗🧪 -->
+👩‍🔬 Hydrograph Bitmap Image API<!--- 👩‍🔬⚗🧪 -->
 </button></h2>
 <div id="a5" class="usa-accordion__content">
 <!--- ------------- -->
@@ -231,7 +230,7 @@ way to show your favorite river's recent streamflow or other measured data.
 
 <h3> Getting Started </h3>
 
-**Read our [documentation for this web service](https://labs.waterdata.usgs.gov/about-graph-image-api/).**  Or simply paste the following fragment
+**Read our [documentation for this API](https://labs.waterdata.usgs.gov/about-graph-image-api/).**  Or simply paste the following fragment
 into your HTML, and modify the reasonably self-explanatory arguments as needed
 ([the result will look like this](https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060&width=640&title=true&period=P14D)):
 
@@ -242,26 +241,26 @@ into your HTML, and modify the reasonably self-explanatory arguments as needed
 
 <!--- LEGACY WATERML ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a6">
-🕸 Legacy Web Services Still Uniquely Valuable <!--- ☎🕸👻 -->
+🕸 Legacy Web APIs Still Uniquely Valuable <!--- ☎🕸👻 -->
 </button></h2>
 <div id="a6" class="usa-accordion__content">
 <!--- ------------- -->
 
-Around 2007 we launched a generation of web services that output water data in an open-standard 
-format known as [WaterML](https://www.ogc.org/standards/waterml).  For years, these 
-were our prime web-service offerings for water data.
-Although we are striving to phase these aging services out in favor of our new flagship services, they
+Around 2007 we launched a generation of APIs[^restful] that
+output water data in an open-standard format known as [WaterML](https://www.ogc.org/standards/waterml).  For years, these 
+were our prime API web-service offerings for water data.
+Although we are striving to phase these aging APIs out in favor of our new flagship APIs, they
 will yet be around for some time because existing client software already relies on 
 them, and not all of their functionality has been conserved in our new
-flagship services.  
+flagship APIs.  
 
-Each service listed below links to URL generation pages[^openapi] that serve as a form of concise, interactive
+Each API listed below links to URL generation pages[^openapi] that serve as a form of concise, interactive
 documentation (a link to fuller documentation also can be found at the top of each of these pages).
 
 - [__Instantaneous values.__](https://waterservices.usgs.gov/rest/IV-Test-Tool.html)[^ivaka]  <span class="usa-tag">POPULAR</span> These 
 are typically 15-minute measurements of phenomena such as gage height, discharge, 
 water temperature, and much more.  If you need only the most recent of these data, we recommend our new flagship SensorThings API (above).  But 
-if you need these data farther back into the past, this continues to be the service you should use.  Its main output 
+if you need these data farther back into the past, this continues to be the API you should use.  Its main output 
 formats are tab-delimited file and WaterML.
 
 - [__Daily values.__](https://waterservices.usgs.gov/rest/DV-Test-Tool.html)[^dviv]  From the 1880s until around 2007, continuous 
@@ -273,24 +272,24 @@ back in time before around 2007 usually must incorporate daily values to achieve
 
 - [__Discrete groundwater levels.__](https://waterservices.usgs.gov/rest/GW-Levels-Test-Tool.html)[^gwaka] Individual 
 manual measurements of groundwater levels made by USGS technicians in the field.  These days the flagship OGC API 
-provides these same data in a more modern format.  One key ability in this legacy service not (yet) offered by
-our flagship services is an ability to query for multiple monitoring locations at a time.
+provides these same data in a more modern format.  One key ability in this legacy API not (yet) offered by
+our flagship APIs is an ability to query for multiple monitoring locations at a time.
 
 - [__Sites.__](https://waterservices.usgs.gov/rest/Site-Test-Tool.html)[^siteaka]  Key metadata about 
 USGS monitoring locations across the United States, such as latitude and longitude, station name, county location, and 
 so forth.  These days, this same metadata is available nearly equally well from SensorThings and OGC API in the 
-popular GeoJSON format for getting dots on maps quickly.  But this service continues to offer this information in 
+popular GeoJSON format for getting dots on maps quickly.  But this legacy API continues to offer this information in 
 tab-delimited files, as well as Keyhole Markup Language (KML), an XML open standard popular in the early 2000s.  One 
-key ability this service offers that our flagship services do not (yet) provide is the ability to query for monitoring 
+key ability this API offers that our flagship API do not (yet) provide is querying for monitoring 
 locations based on the type of data they collect and the time range those data are available. (_e.g.,_ 
 [all active monitoring locations in Kansas monitoring real-time water temperature](https://waterservices.usgs.gov/nwis/site/?format=rdb&stateCd=ks&parameterCd=00010&siteStatus=active&hasDataTypeCd=iv)).
 
 - [__Statistical period-of-record data.__](https://waterservices.usgs.gov/rest/Statistics-Service-Test-Tool.html)[^statbeta]  This 
-service outputs statistical information about time-series data from a USGS monitoring location.  It is most popularly known as 
-the service that examines the full period of approved time-series streamflow at a monitoring location and, for each day of the 
+API outputs statistical information about time-series data from a USGS monitoring location.  It is most popularly known as 
+the API that examines the full period of approved time-series streamflow at a monitoring location and, for each day of the 
 year, calculates the long-term median, maximum, minimum, and other statistical flow percentiles.
 And this same statistical calculation is performed for all other approved time-series data and made
-available through this legacy service.
+available through this legacy API.
 
 </div>
 
@@ -310,7 +309,7 @@ not formally documented; instead, arguments are discovered by using search tools
 resulting URL, and cleverly incorporating it into your code by modifying arguments as needed.
 
 **USGS intends to decommission these endpoints in the coming years, but not until adequate replacements have been developed.**  Until
-then, although we caution that these old services may be challenging to incorporate into modern software, you may
+then, although we caution that these old endpoints may be challenging to incorporate into modern software, you may
 find them uniquely valuable if they provide the water data your application needs.
 
 - [__Annual-peaks data.__](https://waterdata.usgs.gov/nwis/peak/)  The single highest flow rate and stream water level in a given 
@@ -326,7 +325,7 @@ values, use the search tool linked to here, indicate tab-delimited output, and n
 - [__Rating-curve depot.__](https://waterdata.usgs.gov/nwisweb/get_ratings?help) Most ordinary users
 do not need the technical and detailed rating curves used to convert water-level[^wlaka] data to streamflow data; they 
 simply need the high-quality streamflow data USGS publishes. But certain key
-cooperating agencies like the National Weather Service need rating curves for their computer-modeling needs.  The rating
+cooperating agencies like the National Weather Service need rating curves for their computer-modeling needs.  The ratings
 depot provides this information, as well as a way to detect when rating curves have been updated by USGS staff.
 The most popular output table is the expanded, shift-adjusted rating (EXSA), effectively a lookup table for all possible
 valid values of gage height in hundredth-of-a-foot increments at a given station
@@ -335,11 +334,11 @@ stage-discharge ratings are available; index-velocity and slope-area curves are 
 
 - [__Current surface-water conditions in historical context.__](https://waterwatch.usgs.gov/webservices/) If your application 
 wishes to create a "dot map" of current streamflow[^dotmap] conditions—to what degree USGS monitoring locations are above and below
-historical flow rates—presently your most practical option is the _realtime endpoint_ of this service.  The output format is JSON, but 
-not an open-standard format such as GeoJSON (_e.g.,_
+historical flow rates—presently your most practical option is the _realtime endpoint_ of this legacy series of endpoints.  The 
+output format is JSON, but not an open-standard format such as GeoJSON (_e.g.,_
 [the data needed for a dot-map of Kansas](https://waterwatch.usgs.gov/webservices/realtime?region=ks)).  We
-are considering how our flagship service offerings might present this valuable information in an open-standard way.  It is also possible
-to [calculate this information yourself](/stats-service-map/) using the legacy statistical period-of-record data service and a service returning
+are considering how our flagship APIs might present this valuable information in an open-standard way.  It is also possible
+to [calculate this information yourself](/stats-service-map/) using the legacy statistical period-of-record API and an API returning
 the most recent instantaneous values.
 
 - [__Discrete surface-water field measurements.__](https://waterdata.usgs.gov/nwis/measurements/)[^swaka]  To keep a continuous 
@@ -355,15 +354,15 @@ URL (_e.g.,_ [all of these measurements for Colorado River at Lees Ferry, Arizon
 
 <!--- DEPRECATED ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a8">
-🛑 Deprecated Web Services and Endpoints <!--- 🛑 -->
+🛑 Deprecated APIs and Endpoints <!--- 🛑 -->
 </button></h2>
 <div id="a8" class="usa-accordion__content">
 <!--- ------------- -->
 
-For existing users and software, at this time we continue to support these web services and endpoints.  But new and existing 
-clients should strongly consider using new flagship or beta services that provide the same water data in more modern formats.
+For existing users and software, at this time we continue to support these APIs and endpoints.  But new and existing 
+clients should strongly consider using new flagship or beta APIs that provide the same water data in more modern formats.
 
-- [__Legacy discrete water-quality data.__](https://waterdata.usgs.gov/nwis/qwdata/)  You can download 
+- [__Legacy discrete water-quality data endpoint.__](https://waterdata.usgs.gov/nwis/qwdata/)  You can download 
 tab-delimited "wide" grid formats of USGS 
 water-quality data by using this search interface, indicating tab-delimited output, and noting the resultant 
 URL ([example](https://nwis.waterdata.usgs.gov/md/nwis/qwdata/?site_no=01649190&agency_cd=USGS&inventory_output=0&rdb_inventory_output=file&TZoutput=0&pm_cd_compare=Greater%20than&radio_parm_cds=all_parm_cds&qw_attributes=0&format=rdb&qw_sample_wide=wide&rdb_qw_attributes=0&date_format=YYYY-MM-DD&rdb_compression=value&submitted_form=brief_list)).  Although this gridded format
@@ -371,10 +370,10 @@ is convenient for certain workflows, we recommend the Water Quality Portal to ob
 data. We are in the latter stages of a multi-year modernization effort of our discrete water-quality data systems.  When
 that modernization is complete, **we intend to decommission this web endpoint.** <!--- **This endpoint is scheduled to be discontinued January 2023** -->
 
-- [__Legacy hydrograph bitmap.__](https://waterdata.usgs.gov/nwisweb/graph) A URL that generates a standalone bitmap 
+- [__Legacy hydrograph bitmap endpoint.__](https://waterdata.usgs.gov/nwisweb/graph) A URL that generates a standalone bitmap 
 of a hydrograph using late 20th-century plotting
 technology ([example](https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=01638500&parm_cd=00060&period=7)).  Please
-try using our beta hydrograph bitmap-image service instead (above), and give us feedback on what you think of 
+try using our beta hydrograph bitmap-image API instead (above), and give us feedback on what you think of 
 it.  **This endpoint is 
 [scheduled to be decommissioned](/realtime-pages-replacement/#when-will-live-happen) January 2023.**
 
@@ -393,24 +392,24 @@ become the American People's preferred method for obtaining published water data
 
 [^siteaka]: These days we prefer the term monitoring location, but historically the terms monitoring location, 
 station, site, gage, gaging station, and streamgaging station all have been used rather 
-interchangeably.  That is why this legacy service is somewhat ambiguously denominated 
+interchangeably.  That is why this legacy API is somewhat ambiguously denominated 
 the "site service."
 
-[^statbeta]: Officially the period-of-record statistics service is still a beta 👩‍🔬 product!  During and after its 2007 development
+[^statbeta]: Officially the period-of-record statistics API is still a beta 👩‍🔬 product!  During and after its 2007 development
 we never found a suitable open-standard output format for these statistical data.
 
 [^dviv]: Our users have suffered no end of confusion because of historical "siloing" of instantaneous-values and daily-values 
-data.  We are considering ways we might someday provide services that unify these confusing data siloes in a 
+data.  We are considering ways we might someday provide APIs that unify these confusing data siloes in a 
 no-nonsense ["best available"](/gw_bats/#how-do-we-know-which-record-is-best) way.
 
 [^wlaka]: Water level is the most plainspoken term for this common measurement of a flowing river or waterway.  Here, 
 it is synonymous with gage height, stage, river stage, and (in a numerically inverted sense) water depth.
 
-[^dotmap]: There is no comparable web service for generating "dot maps" for groundwater or 
+[^dotmap]: There is no comparable web API for generating "dot maps" for groundwater or 
 water-quality current conditions, though these may be considered for future incorporation into a flagship API.
 
 [^openapi]: To help with documentation, we are considering implementing OpenAPI specifications for these 
-legacy services, which would allow anyone to use modern tools for testing and using these APIs. If you
+legacy APIs, which would allow anyone to use modern tools for testing and using them.  If you
 think this would be helpful for you, please let us know.
 
 [^ivaka]: We prefer the term instantaneous-values data these days, but other 
@@ -441,10 +440,15 @@ our work is done for _you_ and is in the public domain.  For example, the source
 [is publicly viewable](https://code.usgs.gov/wma/iow/waterdataui).  Working
 in the open is part of [how we work](/how-we-work-spring-2021/).
 
-[^semantics]: Generally, the terms endpoint, web service, and API are more or less synonymous.
-Only in this article have we strived to enforce a consistent (if somewhat arbitrary) distinction.
+[^semantics]: Generally, the terms endpoint, web service, and API are used rather interchangably.
+Only in this article have we attempted to enforce a somewhat consistent (if arbitrary) distinction to help readers
+distinguish the older and the newer.
 
 [^sorich]: Any single laboratory analytical result, in addition to the final quantitative value (_e.g._, 4.5 milligrams
 per liter), can contain metadata including but not limited to: qualifier, method reporting level, analytical method,
 laboratory free-text comments, analytical standard deviation, laboratory set numbers, sample preparation and analysis dates,
 analyzing entity, and data-approval status.
+
+[^restful]: In 2007 it was more common to refer to APIs as web services, though our 2007-era web services certainly fit 
+the general definition of an API.  More specifically, our 2007-era APIs are ''RESTful web services.''
+For some time we also offered SOAP web services, but they were decommissioned some time ago for lack of popular use.
