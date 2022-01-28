@@ -1,8 +1,8 @@
 ---
 title: A Catalog of USGS Water-Data Web APIs
-description: 'A high-level cataloging of the most prominent USGS water-data web-based APIs and data endpoints.'
-draft: true
-date: 2022-01-27
+description: A high-level cataloging of the most prominent USGS water-data web-based APIs and data endpoints.
+draft: false
+date: 2022-01-28
 author: Brad Garner
 slug: api_catalog
 type: post
@@ -19,8 +19,6 @@ keywords:
   - api
 author_email: <wdfn@usgs.gov>
 ---
-[^cover] <!--- cover art is public domain but requires Creative commons citation -->
-
 The USGS has published water data on the World Wide Web 
 [since 1995](/25-years-of-water-data-on-the-web/).  Millions of people use our websites to 
 [check the status](/user_check_status/) of current water conditions or 
@@ -154,7 +152,7 @@ government organizations like the Environmental Protection Agency.
 
 Discrete water-quality data are inherently richer, more complex, and challenging to interpret than 
 time-series data.  Accordingly, the primary output format is the relatively complex 
-[Water Quality eXchange (WQX)](https://exchangenetwork.net/data-exchange/wqx/) open standard. But
+[Water Quality eXchange (WQX)](https://exchangenetwork.net/data-exchange/wqx/) open standard.  But
 fret not!  The Water Quality Portal also supports the 
 [OGC Web Map Service (WMS)](https://www.ogc.org/standards/wms) open-standard API to 
 easily get dots put on map tiles and thus on interactive maps.  Even though the underlying data are
@@ -235,6 +233,12 @@ into your HTML, and modify the reasonably self-explanatory URL parameters to the
 ([the result will look like this](https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060&width=640&title=true&period=P14D)):
 
 > ```<img src="https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060&width=640&title=true&period=P14D" alt="Hydrograph of recent 14 days of 00060 streamflow at 09380000" >```
+
+Another potential solution is the USGS 
+[Graphing Water Information System](https://txpub.usgs.gov/dss/gwis/) JavaScript software library.  This library places
+an interactive hydrograph on your web page with just a few lines of code.  It is a more complex approach, however,
+in that it adds 150-240 KiB of JavaScript to your web page, and the code is provisional in its development.  If you'd like to
+try it, we'd appreciate hearing what you think of it!
 
 </div>
 
@@ -327,7 +331,7 @@ values, use the search tool linked to here, indicate tab-delimited output, and n
 
 - [__Rating-curve depot.__](https://waterdata.usgs.gov/nwisweb/get_ratings?help) Most users
 do not need the technical and detailed rating curves used to convert gage-height[^wlaka] data to streamflow data; they 
-simply need the high-quality streamflow data USGS publishes. But certain key
+simply need the high-quality streamflow data USGS publishes.  But certain key
 cooperating agencies like the National Weather Service need rating curves for their computer-modeling needs.  The ratings
 depot provides this information, as well as a way to detect when rating curves have been updated by USGS staff.
 The most popular output table is the expanded, shift-adjusted rating (EXSA), effectively a lookup table for all possible
@@ -380,6 +384,8 @@ technology ([example](https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&si
 try using our beta hydrograph bitmap-image API instead (above), and give us feedback on what you think of 
 it.  **This endpoint is 
 [scheduled to be decommissioned](/realtime-pages-replacement/#when-will-live-happen) January 2023.**
+
+<sub>There are some notable acknowledgements for this article.[^cover]</sub> <!--- cover art is public domain but requires Creative commons citation -->
 
 </div>
 
@@ -463,3 +469,62 @@ approach can be to geographically search for monitoring locations that offer ins
 [the USGS water-data mapping tool](https://maps.waterdata.usgs.gov/).
 Efforts are underway eventually to discontinue using parameter codes in favor of newer techniques made popular
 in open-standard formats such as Water Quality eXchange.  
+
+<!---
+Author's notes: 
+
+A) The GWIS version 0.0 software library (https://txpub.usgs.gov/dss/gwis/) was considered for inclusion as a flagship API
+but was not included at this time.  This was the reasoning:
+    - GWIS mostly is a language-specific (JavaScript) software library, but this article is a catalog of language-neutral
+      web APIs and endpoints.  This same reasoning is why dataRetrieval R software library is not cataloged here.
+          - However, just like dataRetrieval, there is a "shout out" to GWIS in one section of this article.
+    - GWIS ```plot``` service is a bitmap-image hydrograph API endpoint.  However, at this time (2022) this service is a direct
+      competitor to the labs.waterdata.usgs.gov bitmap image service.  The author decided it wise for this article to present
+      *one* bitmap-image endpoint as the single *best* way to do things.
+         - Read this article as a cautionary tale of offering too many mutually incompatible products and having consumers use 
+           none of them (https://www.notedcontent.com/2015/11/25/how-sony-squandered-its-resources-and-lost-out-on-billions/)
+    - GWIS' other RESTful endpoints (```site``` and ```ahps```) produce human-eye friendly HTML pages, not machine-friendly
+      data outputs.  They are therefore not like the other flagship products enumerated in this article.
+    - GWIS, as of this writing, is hosted on txpub.usgs.gov.  It would be more unified of Water Mission Area to present all
+      services on self-evident domains like waterservices.usgs.gov, api.waterdata.usgs.gov, labs.waterdata.usgs.gov, etc.
+ 
+B) Recall that the USGS water-data web presence from 2000 through 2015 was the proliferation of dozens of independently 
+   developed water-data web applications, resulting in a disharmonious and confusing water-data web presence.  GWIS represents 
+   a fine, worthy, and enterprising step forward in plotting water data.  But if GWIS is to evolve into a genuine enterprise 
+   tool worthy of cataloging at this level, the author offers these suggestions:
+    1. Pick one, best bitmap hydrograph plotting endpoint and offer it to the public.  If that is the GWIS ```plot``` endpoint,
+       then great!  Place that codebase under enterprise control and host the endpoint on foo.waterdata.usgs.gov.
+    2. Don't offer the GWIS ```site``` and ```ahps``` endpoints, for they are not true web services.  They output HTML pages,
+       which is all well and good if those pages serve a viable use case.  But they are not machine friendly web services.
+    3. Consider building a separate catalog for language-specific software libraries sponsored and maintained by USGS.
+       If ```gwis-plot-utils.js``` is added to that catalog (alongside dataRetrieval and perhaps others), the author
+       recommends ensuring it is brought under enterprise control, and its version number increments beyond 0.0.
+
+C) The emojis in the h2 headings often don't appear large enough in all web browsers.  It was not clear how Hugo might be
+   convinced to inject <span> elements to increase their size.  An alternative could be using USWDS icons, though the
+   author didn't find any of them especially compelling to this end.  Another approach could be the usa-tag element,
+   though USWDS cautions against using this too much lest it lose its impact.
+
+D) Legacy services were placed into "clumps" under single headings by design.  The design goal was: offer the newest
+   flagship APIs in a very promonent way, and then diminish the importance of all legacy services by NOT putting each of them on
+   the same hierarchical <h2> level as flagship services.  This is more of a narrative conceit than a strict, mathematically
+   enumerative technique.  But the author felt it might serve the purpose of making a compelling, reader-friendly
+   document.  Perhaps in the future the time will be appropriate for a simple, linear cataloging of all API services,
+   but this article was not considered to be that.
+
+E) There may well be another viable schema for the <h2> headings that is less narrative in flow and more of a definitive 
+   reference.  Another approach could be some use of color to consistently indicate beta services versus live services 
+   (USWDS could be extended to do this)
+   
+F) Another goal of this article was that it might serve as something like the author's last word on certain
+   semantic and nomenclature confusion that has swirled about the corridors of USGS.  The footnotes, by 
+   and large, ARE that internally focused commentary.  Most (though not all) footnotes could be
+   removed without little negative impact to a general-public audience.
+
+G) The ```cover``` footnote is there because of a technical limitation of the blog implementation, at least at this writing.
+   The cover art (i.e., blog-post thumbnail) is public domain but CC-SA requires attribution.  Ideally this citation would be 
+   adjacent to the cover art, perhaps if the cover art re-appeared inside the blog as an appealing header next to the title.
+   The acknowledgements were tacked onto this footnote awkardly; it is not standard convention to thank peer reviewers in
+   blog posts by name, but in this case the author felt it fitting because of the especially generous time the reviewers gave
+   given the specialized nature of this topic.
+-->
