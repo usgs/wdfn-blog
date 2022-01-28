@@ -2,7 +2,7 @@
 title: A Catalog of USGS Water-Data Web APIs
 description: 'A high-level cataloging of the most prominent USGS water-data web-based APIs and data endpoints.'
 draft: true
-date: 2022-01-26
+date: 2022-01-27
 author: Brad Garner
 slug: api_catalog
 type: post
@@ -36,12 +36,12 @@ Consortium (OGC).  These groupings also should help existing users understand th
 already use (and to perhaps consider some new ones).
 
 For purposes of this article we define the following conventions:[^semantics]
-- _API._  A collection of web services whose input arguments and output formats are
-a well-documented, allowing for automated systems interoperability.  In the case of new flagship APIs, input arguments
-and output formats ''both'' are defined by open standards.  For older web APIs, only the output formats were defined as open
-standards; input arguments were USGS-specific.
-- _Endpoint._  A Web URL that accepts input arguments and returns data in some machine-friendly format (_i.e.,_ not HTML).
-Input arguments and output formats are not necessarily well-documented.  The most basic way to
+- *API.*  A collection of web services whose input parameters and output formats are
+well-documented, allowing systems to integrate USGS water data.  In the case of new 
+flagship APIs, input parameters and output formats are *both* defined by open standards.  For older web APIs, only 
+output formats were defined as open standards; input parameters were USGS-specific.
+- *Endpoint.*  A Web URL that accepts input parameters and outputs data in some machine-friendly format (_i.e.,_ not HTML).
+Input parameters and output formats are not necessarily well-documented.  The most basic way to
 provide water data on the Web, it was not designed to be an automated API.
 
 
@@ -49,7 +49,7 @@ provide water data on the Web, it was not designed to be an automated API.
 |------|--------------|
 |🚀 | Newer, flagship APIs you should consider using preferentially. | 
 |👩‍🔬 | Beta experimental APIs from [USGS Water Data Labs](https://labs.waterdata.usgs.gov/).  Please try them, but please understand they may change. |
-|🕸 | Legacy APIs or endpoints, stable and long in production.  Continue to use for now, but be warned eventually these may be decommissioned. |
+|🕸 | Legacy APIs or endpoints, stable and long in production.  Continue to use for now, but be warned eventually they may be decommissioned. |
 |🛑 | Deprecated or decommissioned APIs and endpoints.  Do not use these anymore. |
 
 
@@ -87,7 +87,7 @@ property to see
 has a ```description``` element describing the time series, as well as a ```properties``` element that contains
 a ```ParameterCode``` element describing the time series with a 5-digit
 [USGS parameter code](https://help.waterdata.usgs.gov/codes-and-parameters/parameters)
-(_e.g.,_ 00060 signifies Discharge and 00065 signifies Gage Height).  
+(_e.g.,_ 00060 signifies Discharge and 00065 signifies Gage Height).[^pcodeymmv]  
 1. Following the ```Observations@iot.navigationLink``` 
 element's URL will start returning the data of interest.
 
@@ -110,7 +110,7 @@ attribute.  USGS water data is no exception! So we're adopting the
 [OGC API](https://ogcapi.ogc.org/) as a flagship API.
 Our implementation of OGC API offers detailed metadata about multiple stations for easy map 
 plotting, and offers certain limited forms of water data.  We've only just begun to use this API 
-and we plan to expand our use of it considerably, particularly as OGC API actively continues 
+and we plan to expand our use of it considerably, particularly as OGC API continues 
 evolving.  Presently we implement its foundational 
 [Part 1: Features-Core](https://ogcapi.ogc.org/features/). 
 
@@ -118,7 +118,8 @@ evolving.  Presently we implement its foundational
 
 <h3> Getting Started</h3>
 
-Want to try out our OGC API?  We are considering what developer-friendly materials we can provide.
+Want to try out our OGC API?  We are considering what developer-friendly materials we can provide and suggestions
+on client software libraries you might consider.  Please check back and also look for other blog posts.
 In the meantime, here's a super-quick way to dive into it:[^jsonview] 
 1. Make a web request for the 
 [Active Groundwater Level collection](https://labs.waterdata.usgs.gov/api/observations/collections/AGL?f=json).  
@@ -166,16 +167,15 @@ spatial distribution of these data.
 **Read our [documentation for the portal's API](https://www.waterqualitydata.us/webservices_documentation/).**  It's
 about a 15-minute read and should let you begin to understand basic functionality.
 Or get started even faster by **[interactively building a search](https://www.waterqualitydata.us/);** after the query is 
-built the website will give you code you can embed directly into your application.
+built using the advanced form, the website will give you code you can embed directly into your application.
 
-<span class="usa-tag">NOTE</span>
-The WQX output format is long, detailed, nested, and "narrow" as opposed to "wide."  Some of our 
-users have expressed interest in a wide format which is a simplified gridded output where constituents define
-columns, laboratory samples define rows, and numeric results and qualifiers are in each grid cell.  Water Quality
-Portal does not support this as a machine-friendly output format; it sacrifices too much essential 
-detail without the end user having control over this selective process.[^sorich]
-But certain software libraries (_e.g.,_ [DataRetrieval for R](/dataretrieval)) may enable generation of
-such simplified grids by thoughtfully post-processing WQX data.
+<span class="usa-tag">NOTE</span> WQX data are output in a long format, which has the benefit of 
+creating a standard, pre-defined number of fields that convey important metadata.  The 
+downside of this format is that is splits up individual measurements or results for a particular 
+sampling event.  However, there are many tools available to help reformat WQX data for 
+ease of analysis.  In fact, the USGS has created and maintains the 
+[R package dataRetrieval](/dataretrieval)), which can take issue needed API calls *and* facilitate conversion of
+the reuslting dataset into format more friendly for immediate use.
 
 </div>
 
@@ -192,11 +192,9 @@ States, discovering USGS monitoring locations along the way.  It also returns sh
 boundaries.  The output format is GeoJSON, making it easy to integrate into web-based maps.
 Essentially, it is a web-based API we have placed in front of the National Hydrography Dataset (NHD).
 
-NLDI is somewhat different from other flagship APIs.  Instead of providing direct sensor
-observations or laboratory-analytical data, NLDI returns metadata about how USGS monitoring locations
-are _connected_ (linked) to rivers and streams.  Instead of providing you with
-streamflow data, for example, this API conveys what river a monitoring location is associated with,
-the watershed catchment area upstream of a monitoring location, and allows traversal up and down the stream network.
+NLDI conveys the _relationships_ between a USGS monitoring location and waterbodies.  It also conveys how individual parts
+of the river and stream network are connected to form the overall national river and stream network.  NLDI is, therefore, 
+a form of water metadata.  For actual sensor data and analytical water data, use other APIs like SensorThings and OGC API.
 
 <h3>Getting Started</h3>
 
@@ -204,9 +202,11 @@ The best way to understand NLDI is to **[read its overview documentation](https:
 Another helpful starting point can be [this overview blog post](/nldi-intro/).
 
 Through some light reverse engineering[^pleasesteal] of [a USGS monitoring location page](https://waterdata.usgs.gov/monitoring-location/09380000/)
-courtesy of a browser's network-debugger tool (usually the F12 key), we observe the following calls to NLDI are made:
+courtesy of a browser's network-debugger tool (usually the F12 key), we can observe the calls these pages make to the NLDI API.  Other
+API calls are possible, but it may be instructive to consider these:
 1. [Upstream flowlines.](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-09380000/navigation/UM/flowlines?f=json&distance=322)  A
-GeoJSON LineString representing the river upstream of the station.  The distance parameter limits draw distance to 322 kilometers for practical performance reasons.
+GeoJSON LineString representing the river upstream of the station.  The distance parameter limits draw distance to 322 kilometers for performance 
+reasons on Monitoring Location Pages, but larger draw distances can be specified.
 1. [Downstream flowlines.](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-09380000/navigation/DM/flowlines?f=json&distance=322) Same
 as the upstream query, but in a downstream direction.
 1. [Watershed catchment area.](https://labs.waterdata.usgs.gov/api/nldi/linked-data/nwissite/USGS-09380000/basin?f=json) A GeoJSON MultiPolygon that
@@ -231,7 +231,7 @@ way to show your favorite river's recent streamflow or other measured data.
 <h3> Getting Started </h3>
 
 **Read our [documentation for this API](https://labs.waterdata.usgs.gov/about-graph-image-api/).**  Or simply paste the following fragment
-into your HTML, and modify the reasonably self-explanatory arguments as needed
+into your HTML, and modify the reasonably self-explanatory URL paramaters to the right of the ```?``` as needed
 ([the result will look like this](https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060&width=640&title=true&period=P14D)):
 
 > ```<img src="https://labs.waterdata.usgs.gov/api/graph-images/monitoring-location/09380000/?parameterCode=00060&width=640&title=true&period=P14D" alt="Hydrograph of recent 14 days of 00060 streamflow at 09380000" >```
@@ -257,18 +257,19 @@ flagship APIs.
 Each API listed below links to URL generation pages[^openapi] that serve as a form of concise, interactive
 documentation (a link to fuller documentation also can be found at the top of each of these pages).
 
-- [__Instantaneous values.__](https://waterservices.usgs.gov/rest/IV-Test-Tool.html)[^ivaka]  <span class="usa-tag">POPULAR</span> These 
-are typically 15-minute measurements of phenomena such as gage height, discharge, 
-water temperature, and much more.  If you need only the most recent of these data, we recommend our new flagship SensorThings API (above).  But 
-if you need these data farther back into the past, this continues to be the API you should use.  Its main output 
-formats are tab-delimited file and WaterML.
+- [__Instantaneous-values data.__](https://waterservices.usgs.gov/rest/IV-Test-Tool.html)[^ivaka]  <span class="usa-tag">POPULAR</span> These 
+are sensor measurements of and calculations of natural phenomena made at regular intervals, usually every 15 minutes.  These include stream
+gage height, streamflow (discharge), water temperature, and much more.  If you need only data from the most recent 4 months, we recommend
+our new flagship SensorThings API (above).  But if you need data farther back into the past, this continues to be the API you should 
+use.  Its main output formats are tab-delimited file and WaterML.
 
-- [__Daily values.__](https://waterservices.usgs.gov/rest/DV-Test-Tool.html)[^dviv]  From the 1880s until around 2007, continuous 
+- [__Daily-values data.__](https://waterservices.usgs.gov/rest/DV-Test-Tool.html)[^dviv]  From the 1880s until around 2007, continuous 
 monitoring of water resources by the USGS typically resulted in one statistically reduced data value per day: the _daily-mean 
-value_ (sometimes along with daily minimum and maximum values).  This was a practical[^oneperday] number of data values that could convey 
+value_ (sometimes also daily minimum and maximum values).  This was a practical[^oneperday] number of data values that could convey 
 water-resources in printed publications[^adr] and could be stored digitally up through the 1990s when computer 
 storage was still prohibitively expensive.  Some workflows continue to rely on daily values, and any analyses or workflows that go
-back in time before around 2007 usually must incorporate daily values to achieve historical continuity.
+back in time before around 2007 usually must incorporate daily values to achieve historical continuity.  Our beta OGC API offers
+groundwater daily-values data, but not other daily-values data yet.  Until it does, this continues to be the API you should use.
 
 - [__Discrete groundwater levels.__](https://waterservices.usgs.gov/rest/GW-Levels-Test-Tool.html)[^gwaka] Individual 
 manual measurements of groundwater levels made by USGS technicians in the field.  These days the flagship OGC API 
@@ -287,9 +288,9 @@ locations based on the type of data they collect and the time range those data a
 - [__Statistical period-of-record data.__](https://waterservices.usgs.gov/rest/Statistics-Service-Test-Tool.html)[^statbeta]  This 
 API outputs statistical information about time-series data from a USGS monitoring location.  It is most popularly known as 
 the API that examines the full period of approved time-series streamflow at a monitoring location and, for each day of the 
-year, calculates the long-term median, maximum, minimum, and other statistical flow percentiles.
-And this same statistical calculation is performed for all other approved time-series data and made
-available through this legacy API.
+year, calculates the long-term median, maximum, minimum, and other statistical flow percentiles.  This same statistical 
+calculation is performed for all other approved time-series data and made available through this legacy API.  We have not
+yet determined how we may convey these data in a flagship API, so until then this is the API you should use.
 
 </div>
 
@@ -304,9 +305,9 @@ available through this legacy API.
 Starting around the year 2000, we began publishing our water data in machine-friendly flat-file formats on a national scale.
 These earliest URL endpoints are a primitive form of web service from an earlier time in the history of the Web.  They output
 data, not in open-standard formats, but simple tab-delimited files known as 
-[RDB files](https://waterdata.usgs.gov/nwis/?tab_delimited_format_info).  The input parameters (URL arguments) are
-not formally documented; instead, arguments are discovered by using search tools on web pages, noting the
-resulting URL, and cleverly incorporating it into your code by modifying arguments as needed.
+[RDB files](https://waterdata.usgs.gov/nwis/?tab_delimited_format_info).  The input parameters (URL parameters) are
+not formally documented; instead, input parameters are discovered by using search tools on web pages, noting the
+resulting URL, and cleverly incorporating it into your code by modifying input parameters as needed.
 
 **USGS intends to decommission these endpoints in the coming years, but not until adequate replacements have been developed.**  Until
 then, although we caution that these old endpoints may be challenging to incorporate into modern software, you may
@@ -359,13 +360,14 @@ URL (_e.g.,_ [all of these measurements for Colorado River at Lees Ferry, Arizon
 <div id="a8" class="usa-accordion__content">
 <!--- ------------- -->
 
-For existing users and software, at this time we continue to support these APIs and endpoints.  But new and existing 
-clients should strongly consider using new flagship or beta APIs that provide the same water data in more modern formats.
+These web services and endpoints should no longer be used.  New users and existing 
+users should strongly consider using new flagship or beta APIs that provide the same 
+water data in more modern formats.
 
 - [__Legacy discrete water-quality data endpoint.__](https://waterdata.usgs.gov/nwis/qwdata/)  You can download 
 tab-delimited "wide" grid formats of USGS 
 water-quality data by using this search interface, indicating tab-delimited output, and noting the resultant 
-URL ([example](https://nwis.waterdata.usgs.gov/md/nwis/qwdata/?site_no=01649190&agency_cd=USGS&inventory_output=0&rdb_inventory_output=file&TZoutput=0&pm_cd_compare=Greater%20than&radio_parm_cds=all_parm_cds&qw_attributes=0&format=rdb&qw_sample_wide=wide&rdb_qw_attributes=0&date_format=YYYY-MM-DD&rdb_compression=value&submitted_form=brief_list)).  Although this gridded format
+URL ([example](https://nwis.waterdata.usgs.gov/md/nwis/qwdata/?site_no=01649190&agency_cd=USGS&inventory_output=0&rdb_inventory_output=file&TZoutput=0&pm_cd_compare=Greater%20than&radio_parm_cds=all_parm_cds&qw_attributes=0&format=rdb&qw_sample_wide=wide&rdb_qw_attributes=0&date_format=YYYY-MM-DD&rdb_compression=value&submitted_form=brief_list)).  Although this format
 is convenient for certain workflows, we recommend the Water Quality Portal to obtain discrete water-quality 
 data. We are in the latter stages of a multi-year modernization effort of our discrete water-quality data systems.  When
 that modernization is complete, **we intend to decommission this web endpoint.** <!--- **This endpoint is scheduled to be discontinued January 2023** -->
@@ -452,3 +454,10 @@ analyzing entity, and data-approval status.
 [^restful]: In 2007 it was more common to refer to APIs as web services, though our 2007-era web services certainly fit 
 the general definition of an API.  More specifically, our 2007-era APIs are ''RESTful web services.''
 For some time we also offered SOAP web services, but they were decommissioned some time ago for lack of popular use.
+
+[^pcodeymmv]: Parameter codes originated in the 1970s paper punch-card era and they have become a confusing domain of 
+5-digit codes. Discovering which 5-digit parameters codes are of interest can be challenging.  One approach can be to
+geographically search for monitoring locations that offer instantaneous-values data on
+[the USGS water-data mapping tool](https://maps.waterdata.usgs.gov/mapper/index.html).
+Efforts are underway eventually to discontinue using parameter codes in favor of newer techniques made popular
+in open-standard formats such as Water Quality eXchange.  
