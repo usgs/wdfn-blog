@@ -2,7 +2,7 @@
 author: Nicole Felts and Jim Kreft
 date: 2022-01-27
 slug: api-webinar-sensorthings
-draft: true
+draft: false 
 type: post
 title: SensorThings | API Webinar | Jan 31
 toc: false
