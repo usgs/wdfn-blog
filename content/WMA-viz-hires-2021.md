@@ -29,10 +29,10 @@ tags:
 ---
 {{< figure src="/static/viz-hires-2021/hiring_banner_viz.png" alt="A banner announcing “We are hiring data visualization specialists. Applications will be open on USAjobs Nov 17th-23rd “.  A collection of images shows different chart and map data visualizations from USGS.">}}
 
-Last updated: Dec 8th, 2021  
+Last updated: Feb 3rd, 2022  
 
 #### Thanks to everyone who applied  
-We are in the process reviewing applications now. We will be in touch in the coming weeks to schedule interviews. Thank you for your patience!
+We are in the process reviewing applications and beginning the interview process. For those who applied to the GS-09 position, your application in USAjobs should have an updated status, and we have contacted applicants for the first round of interviews. We continue to work with HR to review applicants to the GS-12 position. We will be reaching out in the coming weeks to schedule interviews for the GS-12. Thank you for your patience!
 
 --------------------
 
