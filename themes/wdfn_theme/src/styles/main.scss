@@ -1,14 +1,14 @@
 $theme-site-max-width: 'desktop';
 $theme-site-margins-width: 0;
 
-@import '../../node_modules/wdfn-viz/dist/sass/wdfnviz';
+@use 'wdfnviz';
+@use 'uswds';
 
-$fa-font-path: '../fonts' !default;
-@import 'fontawesome';
-@import 'brands';
-@import 'solid';
+@use 'fontawesome';
+@use 'brands';
+@use 'solid';
 
-@import './academicons';
+@use './academicons';
 
 table {
   @extend .usa-table;
@@ -21,10 +21,10 @@ table {
 
 .side-by-side {
   margin: 0;
-  @include at-media(tablet) {
-      @include grid-col(6);
+  @include uswds.at-media(tablet) {
+      @include uswds.grid-col(6);
   }
-  padding-right: units(1);
+  padding-right: uswds.units(1);
 }
 
 figure {
@@ -42,53 +42,62 @@ figure {
 .p-share {
   text-align: center;
   display: inline-block;
-  margin: units(2) 0;
+  margin: uswds.units(2) 0;
   a {
     display: inline-block;
-    width: units(4);
-    height: units(4);
-    line-height: units(4);
-    background-color: color('blue-80');
+    width: uswds.units(4);
+    height: uswds.units(4);
+    line-height: uswds.units(4);
+    background-color: uswds.color('blue-80');
     border-radius: 100%;
-    color: color('gray-2');
-    margin: 0 units(0.5);
+    color: uswds.color('gray-2');
+    margin: 0 uswds.units(0.5);
   }
 }
 .blog-entry-body .p-share {
-  @include at-media('tablet') {
+  @include uswds.at-media('tablet') {
     float: right;
   }
 }
 
 /* Blog entry grid */
 .blog-post-summary {
-  margin-bottom: units(3);
-  background-color: color('gray-cool-3');
-  height: units('mobile-lg');
+  margin-bottom: uswds.units(3);
+  background-color: uswds.color('gray-cool-3');
+  height: uswds.units('mobile-lg');
   overflow: hidden;
-  border: solid units('1px') color('gray-cool-10');
+  border: solid uswds.units('1px') uswds.color('gray-cool-10');
 
   .summary-body {
-    padding: units(2);
+    padding: uswds.units(2);
     background-color: transparent;
     .image {
-      min-height: units('card-lg');
-      margin-bottom: units(2);
+      min-height: uswds.units('card-lg');
+      margin-bottom: uswds.units(2);
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
     }
     .title {
       text-decoration: none;
-      max-height: units(15);
+      max-height: uswds.units(15);
       overflow: hidden;
     }
 
     .author {
-      font-size: size('body', '3xs');
+      font-size: uswds.size('body', '3xs');
     }
   }
 }
 pre {
   overflow-x: scroll;
+}
+
+.footnotes {
+  font-size: uswds.size('body', '3xs'); 
+}
+
+.footnotes p {
+  margin-block-start: 0.2em; /* Unsure if there is a way in USWDS to reduce gap between paragraphs */
+  margin-block-end: 0.2em;
 }

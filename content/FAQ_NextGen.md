@@ -14,9 +14,17 @@ title: FAQ for Next Generation Monitoring Location Pages
 
 toc: true
 
-categories: water-information, web-communication
+categories: 
+- water-information
+- web-communication
 
-tags: water data, public communication, stream gage
+tags: 
+- Water Data for the Nation
+- water data
+- public communication
+- stream gage
+- NextGen
+- monitoring location pages
 
 image: /static/FAQ_NextGen/FAQ for NextGen Pages.png
 
@@ -26,7 +34,7 @@ keywords: water data
 
 author_staff: 
 
-author_email: \<wdfn@usgs.gov\>
+author_email: <wdfn@usgs.gov>
 
 ---
 
@@ -92,3 +100,9 @@ New pages have a button on the footer labeled "Questions or Comments."  Submissi
 
 ## 19. Will you build a mobile app? 
 Not at this time. With limited resources, we are focused on building the best mobile-first website we can.  There are no plans to build platform-specific apps at this time.  
+
+## 20. I need a presentation-quality graph, but they're not available on NextGen pages. Help!
+Right now, presentation-quality graphs are not available on NextGen pages. We've gotten a few other users requesting the continuation of presentation-quality style graphs, and we'd love to help. Can you help us help you? Send us an email and tell us what you use the graphs for, and how you define a presentation-quality style graph. We'll use your feedback to inform future work on presentation-quality graphs through Water Data for the Nation.
+
+## 21. I want to be a user-tester. How do I sign up?
+Great, we'd love to have you! What kind of tester do you want to be?  Do you view water data in a web browser?  Or do you write software or code that call our services or APIs?  Or maybe some of both? We need user-testers for all user types - from the casual user checking status of a local stream or lake, to users routinely accessing our data and information programmatically. Send us an email at WDFN@usgs.gov.

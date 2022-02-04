@@ -12,9 +12,15 @@ type: post
 
 title: How Web Flags help the public understand our data
 
-categories: water-information, web-communication
+categories: 
+  - water-information
+  - web-communication
 
-tags: water data, stream flow, public communication, stream gage
+tags: 
+  - water data
+  - streamflow
+  - public communication
+  - stream gage
 
 image: /static/web-flags/cover.png
 
@@ -24,7 +30,7 @@ keywords: water data
 
 author_staff: candice-hopkins
 
-author_email: \<chopkins@usgs.gov\>
+author_email: <chopkins@usgs.gov>
 
 ---
 
