@@ -43,11 +43,11 @@ What's Next? | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
 
 In this OGC webinar, we'll give you a brief background on APIs, then we'll dive into a live demo of our OGC API. We'll show you how & why you should use USGS water data APIs to get the locations & data you need onto maps, now easier than ever!
 
-## 🕛 When is the SensorThings Webinar?
+## 🕛 When is the OGC Webinar?
 On Monday, February 28th, 2022 at 12 pm ET/ 9 am PT.
 
 
-## 👩‍💻 Who is the SensorThings Webinar For?
+## 👩‍💻 Who is the OGC Webinar For?
 - [Operationalized Pull Water Data for the Nation users](https://waterdata.usgs.gov/blog/user_operational_pull/)
 
 - Programmers interested in improving their workflow with USGS water data
