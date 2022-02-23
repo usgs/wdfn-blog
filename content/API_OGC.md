@@ -1,8 +1,8 @@
 ---
 author: Nicole Felts and Jim Kreft
-date: 2022-02-18
+date: 2022-02-23
 slug: api-webinar-OGC
-draft: true
+draft: false
 type: post
 title: OGC | API Webinar | Feb 28
 toc: false
@@ -15,7 +15,7 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - APIs
-image: /static/API_OGC/image.gif
+image: /static/API_OGC/API OGC Blog.gif
 description: On February 28th, 2022, join our webinar to learn how to use USGS Application Programming Interfaces to serve your unique water data display needs.
 keywords: water data, API, webinar, tutorial
 author_staff: 
@@ -40,8 +40,7 @@ OGC | Monday, February 28th, 2022 | 12 pm ET / 9 am PT
 What's Next? | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
 
 ## ❔ What is the OGC Webinar?
-
-In this OGC webinar, we'll give you a brief background on APIs, then we'll dive into a live demo of our OGC API. We'll show you how & why you should use USGS water data APIs to get the locations & data you need onto maps, now easier than ever!
+In this Open Geospatial Consortium (OGC) API webinar, we'll give you a brief background on APIs, then we'll dive into a live demo of our OGC API. We'll show you how & why you should use USGS water data APIs to get the locations & data you need onto maps, now easier than ever!
 
 ## 🕛 When is the OGC Webinar?
 On Monday, February 28th, 2022 at 12 pm ET/ 9 am PT.
@@ -56,7 +55,7 @@ On Monday, February 28th, 2022 at 12 pm ET/ 9 am PT.
 
 
 ## 📆 How Can I Register/ Sign Up / Add to My Calendar?
-Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-apis-easily-integrate-real-time-water-data-tickets-252218772137?aff=ebdsoporgprofile). <b>You do not have provide any personal information, and you do not have to register for the event in order to attend (we've provided this option because many users requested a way to register for the event).</b>
+Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-apis-easily-integrate-real-time-water-data-tickets-252218772137?aff=ebdsoporgprofile). <b>You do not have to provide any personal information, and you do not have to register for the event in order to attend (we've provided this option because many users requested a way to register for the event).</b>
   
 We will be providing a new way to register for events soon!
 
