@@ -55,7 +55,7 @@ On Monday, February 28th, 2022 at 12 pm ET/ 9 am PT.
 
 
 ## 📆 How Can I Register/ Sign Up / Add to My Calendar?
-Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-apis-easily-integrate-real-time-water-data-tickets-252218772137?aff=ebdsoporgprofile). <b>You do not have to provide any personal information, and you do not have to register for the event in order to attend (we've provided this option because many users requested a way to register for the event).</b>
+Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-apis-easily-integrate-real-time-water-data-tickets-252218772137?aff=ebdsoporgprofile). <b>You do not have to provide any personal information, and you do not have to register for the event on Eventbrite in order to attend</b> (we've provided this option because many users requested a way to register for the event so they could get automatic reminders).
   
 We will be providing a new way to register for events soon!
 
