@@ -15,7 +15,7 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - APIs
-image: /static/API_OGC/API OGC Blog.gif
+image: /static/API_OGC/API OGC Blog1.gif
 description: On February 28th, 2022, join our webinar to learn how to use USGS Application Programming Interfaces to serve your unique water data display needs.
 keywords: water data, API, webinar, tutorial
 author_staff: 
@@ -23,7 +23,7 @@ author_email: <wdfn@usgs.gov>
 ---
 
 <div class="grid-row">
-{{< figure src="static/API_SensorThings/API. SensorThings Banner GIF.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI). Join our next API webinar about OGC on 2/28/2022!" alt="Banner image with the following text: Join Our API Webinar Series. USGS. Easily Integrate Real-Time Water Data. SensorThings API on Monday, January 31st, 2022 at 12 pm ET/ 9 am PT. OGC API on Monday, February 28th, 2022 at 12 pm ET/ 9 am PT. What's Next? Monday, April 25th, 2022 at 12 pm ET/ 9 am PT. Water Data for the Nation. Making high-quality water information discoverable, accessible, and usable for everyone. On the right side of the image there is a computer programming screen with the text 'API.' Next to that, two gears working together continually turn, making this a gif." >}}
+{{< figure src="/static/API_SensorThings/API. SensorThings Banner GIF.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI). Join our next API webinar about OGC on 2/28/2022!" alt="Banner image with the following text: Join Our API Webinar Series. USGS. Easily Integrate Real-Time Water Data. SensorThings API on Monday, January 31st, 2022 at 12 pm ET/ 9 am PT. OGC API on Monday, February 28th, 2022 at 12 pm ET/ 9 am PT. What's Next? Monday, April 25th, 2022 at 12 pm ET/ 9 am PT. Water Data for the Nation. Making high-quality water information discoverable, accessible, and usable for everyone. On the right side of the image there is a computer programming screen with the text 'API.' Next to that, two gears working together continually turn, making this a gif." >}}
 </div>
 
 ## ❔ What is the Application Programming Interface (API) Series?
@@ -55,7 +55,7 @@ On Monday, February 28th, 2022 at 12 pm ET/ 9 am PT.
 
 
 ## 📆 How Can I Register/ Sign Up / Add to My Calendar?
-Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-apis-easily-integrate-real-time-water-data-tickets-252218772137?aff=ebdsoporgprofile). <b>You do not have to provide any personal information, and you do not have to register for the event in order to attend (we've provided this option because many users requested a way to register for the event).</b>
+Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-apis-easily-integrate-real-time-water-data-tickets-252218772137?aff=ebdsoporgprofile). <b>You do not have to provide any personal information, and you do not have to register for the event on Eventbrite in order to attend</b> (we've provided this option because many users requested a way to register for the event so they could get automatic reminders).
   
 We will be providing a new way to register for events soon!
 
