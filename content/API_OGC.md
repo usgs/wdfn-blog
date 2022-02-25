@@ -64,7 +64,7 @@ Join the [Teams Live event](https://teams.microsoft.com/l/meetup-join/19%3ameeti
 
 ## OGC API - Features Example
 
-Here is an example [Leaflet](https://leafletjs.com/) webmap that is making a live call to the USGS Implementation of OGC API - Features, and below it is the minimal code needed to build your own map! We will talk in more detail about the structure of the [USGS implementation of OGC API - Features](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=/api/observations/v3/api-docs#/Observations%20-%20OGC%20api) during the seminar.
+✍ Here is an example [Leaflet](https://leafletjs.com/) webmap that is making a live call to the USGS Implementation of OGC API - Features, and below it is the minimal code needed to build your own map! We will talk in more detail about the structure of the [USGS implementation of OGC API - Features](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=/api/observations/v3/api-docs#/Observations%20-%20OGC%20api) during the seminar.
 
 {{< rawhtml >}}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
