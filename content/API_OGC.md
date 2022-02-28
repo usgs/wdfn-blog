@@ -169,6 +169,8 @@ Here is the same code in a single html view that you can edit in any text editor
 ```
 ### Resources
 
+📚Resources mentioned during the webinar- more to come in this section after the webinar!
+
 - OGC API - Processes
     - [OGC API - Processes details from the Open Geospatial Consortium](https://ogcapi.ogc.org/processes/)
     - [USGS OGC-API Processes Endpoint](https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/processes?f=html)
