@@ -169,4 +169,11 @@ Here is the same code in a single html view that you can edit in any text editor
 ```
 ### Resources
 
+- OGC API - Processes
+    - [OGC API - Processes details from the Open Geospatial Consortium](https://ogcapi.ogc.org/processes/)
+    - [USGS OGC-API Processes Endpoint](https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/processes?f=html)
+    - [hyriver Python client](https://hyriver.readthedocs.io/en/latest/notebooks/pygeoapi.html)
+    - [R NHDPLus tools](https://usgs-r.github.io/nhdplusTools/)
+        - [Split Catchment](https://usgs-r.github.io/nhdplusTools/reference/get_split_catchment.html)
+        - [Cross Section](https://usgs-r.github.io/nhdplusTools/reference/get_xs_points.html)
 
