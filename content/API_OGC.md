@@ -167,10 +167,18 @@ Here is the same code in a single html view that you can edit in any text editor
     </body>
 </html>
 ```
-### Resources
+## Resources
 
 📚Resources mentioned during the webinar- more to come in this section after the webinar!
 
+
+- Links dropped into the chat
+    - [Catch the recording of the SensorThings webinar here](https://www.youtube.com/watch?v=n7TQoJAQ8WI) and [try out SensorThings here](https://labs.waterdata.usgs.gov/sta/v1.1/).
+    - [Check out our WDFN Users blog series](https://waterdata.usgs.gov/blog/user_wdfn/)
+    - [Learn more about OGCAPI](www.ogcapi.ogc.org)
+    - [Check out our blog post on all our major web APIs](https://waterdata.usgs.gov/blog/api_catalog/)
+    - Do you want to be a part of our agile development process? Email us if you would like to be a usability tester: [wdfn_usabilitytesting@usgs.gov] with the subject: *API Usability Testing*
+    - [Additional OGC API Features Clients and Examples](https://github.com/opengeospatial/ogcapi-features/blob/master/implementations/clients/README.md) from the maintainers of the standard.
 - OGC API - Processes
     - [OGC API - Processes details from the Open Geospatial Consortium](https://ogcapi.ogc.org/processes/)
     - [USGS OGC-API Processes Endpoint](https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/processes?f=html)
