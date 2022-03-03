@@ -2,7 +2,7 @@
 author: Nicole Felts and Jim Kreft
 date: 2022-03-3
 slug: api-webinar-OGC-processes
-draft: true
+draft: false
 type: post
 title: OGC-Processes | API Webinar | Apr 25
 toc: false
@@ -23,7 +23,7 @@ author_email: <wdfn@usgs.gov>
 ---
 
 <div class="grid-row">
-{{< figure src="/static/API_OGC/BANNER IMAGE HERE.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI). Join our next API webinar about OGC-Processes on 4/25/2022!" alt="text here" >}}
+{{< figure src="/static/API_OGC/API_OGC_Banner2.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI). Join our next API webinar about OGC-Processes on 4/25/2022!" alt="text here" >}}
 </div>
 
 ## ❔ What is the Application Programming Interface (API) Series?
