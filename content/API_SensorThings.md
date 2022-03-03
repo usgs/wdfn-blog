@@ -40,8 +40,8 @@ In this API webinar series, we'll touch on what USGS water data is, then we'll d
 | Title | Date | Time |
 |------|----------|-------|
 SensorThings | Monday, January 31st, 2022 | 12 pm ET / 9 am PT
-OGC | Monday, February 28th, 2022 | 12 pm ET / 9 am PT
-What's Next? | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
+OGC-Features | Monday, February 28th, 2022 | 12 pm ET / 9 am PT
+OGC-Processes | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
 
 ## ❔ What is the SensorThings Webinar?
 We'll start with some background on USGS water data & Application Programming Interfaces (APIs), then we'll dive into a live demo of our new API, SensorThings. 

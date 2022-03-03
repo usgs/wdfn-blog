@@ -4,7 +4,7 @@ date: 2022-02-23
 slug: api-webinar-OGC
 draft: false
 type: post
-title: OGC | API Webinar | Feb 28
+title: OGC-Features | API Webinar | Feb 28
 toc: false
 categories: 
 - Water Information
@@ -36,17 +36,17 @@ In this API webinar series, we'll touch on what USGS water data is, then we'll d
 ### Upcoming Webinars in API Series
 | Title | Date | Time |
 |------|----------|-------|
-OGC | Monday, February 28th, 2022 | 12 pm ET / 9 am PT
-What's Next? | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
+OGC-Features | Monday, February 28th, 2022 | 12 pm ET / 9 am PT
+OGC-Processes | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
 
-## ❔ What is the OGC Webinar?
-In this webinar on our Open Geospatial Consortium ([OGC](https://ogcapi.ogc.org/)) API, we'll give you a brief background on APIs, then we'll dive into a live demo of our [modernized OGC API](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=/api/observations/v3/api-docs#/Observations%20-%20OGC%20api). Check out the [features](https://ogcapi.ogc.org/features/) of OGC.
+## ❔ What is the OGC-Features Webinar?
+In this webinar on our Open Geospatial Consortium ([OGC](https://ogcapi.ogc.org/)) API, we'll give you a brief background on APIs, then we'll dive into a live demo of our [OGC API-Features](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=/api/observations/v3/api-docs#/Observations%20-%20OGC%20api). Check out the [features](https://ogcapi.ogc.org/features/) of OGC.
 
-## 🕛 When is the OGC Webinar?
+## 🕛 When is the OGC-Features Webinar?
 On Monday, February 28th, 2022 at 12 pm ET/ 9 am PT.
 
 
-## 👩‍💻 Who is the OGC Webinar For?
+## 👩‍💻 Who is the OGC-Features Webinar For?
 - [Operationalized Pull Water Data for the Nation users](https://waterdata.usgs.gov/blog/user_operational_pull/)
 
 - Programmers interested in improving their workflow with USGS water data
@@ -60,6 +60,7 @@ Conveniently add this event to your calendar by visting the event on [Eventbrite
 We will be providing a new way to register for events soon!
 
 ## 📞 Where's the link to join the live call?
+
 Join the [Teams Live event](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NDQ5NzE2ZTYtNDg0ZS00MjI2LWFhMDAtYWU1YzIxYzE3OTA0%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) at 12 pm ET/ 9 am PT on Monday, February 28th, 2022!
 
 ## OGC API - Features Example
