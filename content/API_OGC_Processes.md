@@ -15,7 +15,7 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - APIs
-image: /static/API_OGC/IMAGE HERE.gif
+image: /static/API_OGC/API_OGC_Processes_Blog.gif
 description: On April 25th, 2022, join our webinar to learn how to use USGS's Application Programming Interface OGC-Processes to serve your unique water data display needs.
 keywords: water data, API, webinar, tutorial
 author_staff: 
