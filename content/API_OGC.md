@@ -60,4 +60,131 @@ Conveniently add this event to your calendar by visting the event on [Eventbrite
 We will be providing a new way to register for events soon!
 
 ## 📞 Where's the link to join the live call?
+
 Join the [Teams Live event](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NDQ5NzE2ZTYtNDg0ZS00MjI2LWFhMDAtYWU1YzIxYzE3OTA0%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) at 12 pm ET/ 9 am PT on Monday, February 28th, 2022!
+
+## OGC API - Features Example
+
+✍ Here is an example [Leaflet](https://leafletjs.com/) webmap that is making a live call to the USGS Implementation of OGC API - Features, and below it is the minimal code needed to build your own map! We will talk in more detail about the structure of the [USGS implementation of OGC API - Features](https://labs.waterdata.usgs.gov/api/observations/swagger-ui/index.html?url=/api/observations/v3/api-docs#/Observations%20-%20OGC%20api) during the seminar.
+
+{{< rawhtml >}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<div id='map'></div>
+<script> 
+
+    var map = L.map("map").setView([45, -90], 6);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, '
+    }).addTo(map);
+
+    (async () => {
+      const monitoringLocations = await fetch(
+        "https://labs.waterdata.usgs.gov/api/observations/collections/RTS/items?stateFIPS=US%3A55&monitoringLocationType=Stream&active=true&f=json&limit=1000",
+        {}
+      ).then((response) => response.json());
+      L.geoJSON(monitoringLocations, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {});
+        },
+        onEachFeature: onEachFeature
+      }).addTo(map);
+    })();
+
+    function onEachFeature(feature, layer) {
+      var popupContent =
+        "<a href='" +
+        feature.properties.monitoringLocationUrl +
+        "' target='_blank'>" +
+        feature.properties.monitoringLocationName +
+        "</a>";
+      if (feature.properties && feature.properties.popupContent) {
+        popupContent += feature.properties.popupContent;
+      }
+      layer.bindPopup(popupContent);
+    }
+</script>
+{{< /rawhtml >}}
+
+Here is the same code in a single html view that you can edit in any text editor.
+
+```html
+<html>
+    <head>
+      <title>Stream gages with real time data in Wisconsin</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <style>
+            html, body {
+              height: 100%;
+              margin: 0;
+            }
+            #map {
+              width: 100%;
+              height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='map'></div>
+        <script>
+            var map = L.map("map").setView([45, -90], 6);
+        
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              attribution:
+                'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, '
+            }).addTo(map);
+        
+            (async () => {
+              const monitoringLocations = await fetch(
+                "https://labs.waterdata.usgs.gov/api/observations/collections/RTS/items?stateFIPS=US%3A55&monitoringLocationType=Stream&active=true&f=json&limit=1000",
+                {}
+              ).then((response) => response.json());
+              L.geoJSON(monitoringLocations, {
+                pointToLayer: function (feature, latlng) {
+                  return L.marker(latlng, {});
+                },
+                onEachFeature: onEachFeature
+              }).addTo(map);
+            })();
+        
+            function onEachFeature(feature, layer) {
+              var popupContent =
+                "<a href='" +
+                feature.properties.monitoringLocationUrl +
+                "' target='_blank'>" +
+                feature.properties.monitoringLocationName +
+                "</a>";
+              if (feature.properties && feature.properties.popupContent) {
+                popupContent += feature.properties.popupContent;
+              }
+              layer.bindPopup(popupContent);
+            }
+        </script>
+    </body>
+</html>
+```
+## Resources
+
+📚Resources mentioned during the webinar- more to come in this section after the webinar!
+
+
+- Links dropped into the chat
+    - [Catch the recording of the SensorThings webinar here](https://www.youtube.com/watch?v=n7TQoJAQ8WI) and [try out SensorThings here](https://labs.waterdata.usgs.gov/sta/v1.1/).
+    - [Check out our WDFN Users blog series](https://waterdata.usgs.gov/blog/user_wdfn/)
+    - [Learn more about OGCAPI](www.ogcapi.ogc.org)
+    - [Check out our blog post on all our major web APIs](https://waterdata.usgs.gov/blog/api_catalog/)
+    - Do you want to be a part of our agile development process? Email us if you would like to be a usability tester: [wdfn_usabilitytesting@usgs.gov] with the subject: *API Usability Testing*
+    - [Additional OGC API Features Clients and Examples](https://github.com/opengeospatial/ogcapi-features/blob/master/implementations/clients/README.md) from the maintainers of the standard.
+- OGC API - Processes
+    - [OGC API - Processes details from the Open Geospatial Consortium](https://ogcapi.ogc.org/processes/)
+    - [USGS OGC-API Processes Endpoint](https://labs.waterdata.usgs.gov/api/nldi/pygeoapi/processes?f=html)
+    - [hyriver Python client](https://hyriver.readthedocs.io/en/latest/notebooks/pygeoapi.html)
+    - [R NHDPLus tools](https://usgs-r.github.io/nhdplusTools/)
+        - [Split Catchment](https://usgs-r.github.io/nhdplusTools/reference/get_split_catchment.html)
+        - [Cross Section](https://usgs-r.github.io/nhdplusTools/reference/get_xs_points.html)
+
