@@ -1,6 +1,6 @@
 ---
 author: Nicole Felts and Jim Kreft
-date: 2022-03-3
+date: 2022-03-03
 slug: api-webinar-OGC-processes
 draft: false
 type: post
