@@ -22,12 +22,13 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
-*Updated February 14th, 2022*
+*Updated March 3rd, 2022*
 
-## [Catch the recording of the SensorThings Webinar here!](https://www.youtube.com/watch?v=n7TQoJAQ8WI)
-<div class="grid-row">
-{{< figure src="/static/API_SensorThings/API. SensorThings Banner GIF.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI)" alt="Banner image with the following text: Join Our API Webinar Series. USGS. Easily Integrate Real-Time Water Data. SensorThings API on Monday, January 31st, 2022 at 12 pm ET/ 9 am PT. OGC API on Monday, February 28th, 2022 at 12 pm ET/ 9 am PT. What's Next? Monday, April 25th, 2022 at 12 pm ET/ 9 am PT. Water Data for the Nation. Making high-quality water information discoverable, accessible, and usable for everyone. On the right side of the image there is a computer programming screen with the text 'API.' Next to that, two gears working together continually turn, making this a gif." >}}
-</div>
+## 🎥 Webinar Recording
+Watch the video below to view the recorded webinar or [visit this link](https://www.youtube.com/watch?v=n7TQoJAQ8WI). 
+
+{{< youtube id="n7TQoJAQ8WI" title="Public Webinar — SensorThings API" >}}
+
 
 ## ❔ What is the Application Programming Interface (API) Series?
 🙌 At the United States Geological Survey, we're making high-quality water information discoverable, accessible, and usable for everyone.
