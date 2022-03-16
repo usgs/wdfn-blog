@@ -1,6 +1,6 @@
 ---
 author: Nicole Felts and Jim Kreft
-date: 2022-03-3
+date: 2022-03-03
 slug: api-webinar-OGC-processes
 draft: false
 type: post
@@ -37,6 +37,7 @@ In this API webinar series, we'll touch on what USGS water data is, then we'll d
 | Title | Date | Time |
 |------|----------|-------|
 OGC-Processes | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
+What's Next | Date to come | Time to come
 Client Tooling | Date to come | Time to come
 Guest Speaker | Date to come | Time to come
 

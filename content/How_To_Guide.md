@@ -58,7 +58,7 @@ This document is a <b>how-to guide for using the USGS Water Monitoring Location 
 ## Watch Our Recorded Webinar
 
 <!--- SUMMARY ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a1.1">
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a1.1">
 Video with Live Demo <!--- 🚢🛥⛴🚀 -->
 </button></h2>
 <div id="a1.1" class="usa-accordion__content">
