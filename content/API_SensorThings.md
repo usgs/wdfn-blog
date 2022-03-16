@@ -24,6 +24,7 @@ author_email: <wdfn@usgs.gov>
 
 *Updated March 3rd, 2022*
 
+## 🎥 Webinar Recording
 Watch the video below to view the recorded webinar or [visit this link](https://www.youtube.com/watch?v=n7TQoJAQ8WI). 
 
 {{< youtube id="n7TQoJAQ8WI" title="Public Webinar — SensorThings API" >}}
