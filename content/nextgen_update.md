@@ -1,5 +1,5 @@
 ---
-author: Nicole Felts
+author: Nicole Felts, Randi Butler
 date: 2022-03-23
 slug: NextGen-webinar-apr11
 draft: false
@@ -15,16 +15,15 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - Monitoring Location Pages
-image: /static/nextgen_update/NextGen Update_Blog_2.png
+image: /static/nextgen_update/NextGen Update_Blog_3.png
 description: On April 11th, 2022, join our public webinar where we'll provide an update on the Next Generation Monitoring Location Pages and give a live demo of the Next Generation WaterAlert. Wondering what these products are? Read on...
 keywords: monitoring location pages, water data, next generation, webinar, update
 author_staff: 
 author_email: <wdfn@usgs.gov>
 ---
 
-
 <div class="grid-row">
-{{< figure src="/static/nextgen_update/NextGen Update_Blog_2.png" caption="Join our Next Generation Update Webinar on Monday, April 11th, 2022 at 12 pm ET/ 9 am PT. NextGen Monitoring Location Pages are live now and NextGen WaterAlert is coming soon in August 2022. 👀" alt="NextGen WaterAlert is displayed on an iPhone, although it is mostly hidden by a gray ribbon that reads: NextGen Coming soon! August 2022. Underneath, the text reads: WaterAlert. subscribe to alerts for your favorite gages. NextGen Monitoring Location Page is displayed on an iPhone. Underneat, the text reads: Monitoring Location Pages. check your favorite gages. The text on this image reads: Water Data for the Nation. Next Generation Update Webinar. Monday April 11th, 2022. 12 pm ET/ 9 am PT. waterdata.usgs.gov/blog. The blue USGS logo is in the top right." >}}
+{{< figure src="/static/nextgen_update/NextGen Update_Blog_3.png" caption="Join our Next Generation Update Webinar on Monday, April 11th, 2022 at 12 pm ET/ 9 am PT. NextGen Monitoring Location Pages are live now and NextGen WaterAlert is coming soon in August 2022. 👀" alt="NextGen WaterAlert is displayed on an iPhone, although it is mostly hidden by a gray ribbon that reads: NextGen Coming soon! August 2022. Underneath, the text reads: WaterAlert. subscribe to alerts for your favorite gages. NextGen Monitoring Location Page is displayed on an iPhone. Underneat, the text reads: Monitoring Location Pages. check your favorite gages. The text on this image reads: Water Data for the Nation. Next Generation Update Webinar. Monday April 11th, 2022. 12 pm ET/ 9 am PT. waterdata.usgs.gov/blog. The blue USGS logo is in the top right." >}}
 </div>
 
 ## ❔ What is this webinar about?
@@ -34,16 +33,6 @@ USGS has provided water data on the web for decades, and that data is important 
 Monitoring Location Pages provide real-time water data to users. [Read our blog post](https://waterdata.usgs.gov/blog/realtime-pages-replacement/) about the modernization of legacy current conditions pages into NextGen monitoring location pages.
 
 WaterAlert is a subscription service to real-time notifications of water levels for active gages. Check out our [detailed blog post on Next Generation WaterAlert](https://waterdata.usgs.gov/blog/WaterAlert-transition/).
-
-### 📖 Here are the modernization highlights
-You'll hear more about these in this webinar.
-
-- NextGen Monitoring Location Pages are now **live**
-- Legacy Current Conditions Pages will redirect to NextGen Monitoring Location Pages in September 2022, not March 2022
-- Legacy Current Conditions Pages will be decommissioned in July 2023, not January 2023
-- NextGen WaterAlert Early Access is available now
-- NextGen WaterAlert transition period will open in June 2022
-- NextGen WaterAlert will go live in August 2022
 
 
 ## 🕛 When is this webinar?
@@ -59,7 +48,7 @@ You'll hear more about these in this webinar.
 
 
 ## 📆 How can I register?
-Fill out [this form](https://forms.office.com/g/VuUJ4pfhUU). We'll send you an email confirmation.
+Fill out [this form](https://forms.office.com/g/VuUJ4pfhUU). Microsoft Power Automate will send you an email confirmation on our behalf. .
 
 *Note: You can attend this event without registering by clicking the link below to join the call live on the day of the event.*
 

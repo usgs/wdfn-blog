@@ -52,7 +52,9 @@ Real-time data from USGS gages are transmitted via satellite or other telemetry 
 
 Read our [check status user blog post](https://waterdata.usgs.gov/blog/user_check_status/) to get an idea of common use cases for WaterAlert.
 
-*add image of wateralert notification to orient users to what they look like*
+<div class="grid-row">
+{{< figure src="/static/WaterAlert/USGS_Legacy_WaterAlert2.PNG" caption="Legacy WaterAlert interface is outdated, and is not mobile compatible. Here is what the desktop version looks like when a user is creating a new subscription." >}}
+</div>
 
 ## 🐴 What are WaterAlert users saying?
 *From the horse's mouth.*
