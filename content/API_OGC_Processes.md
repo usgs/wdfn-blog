@@ -4,9 +4,9 @@ date: 2022-03-03
 slug: api-webinar-OGC-processes
 draft: false
 type: post
-title: OGC-Processes | API Webinar | Apr 25
+title: OGC-API-Processes | API Webinar | Apr 25
 toc: false
-categories: 
+categories:
 - Water Information
 - Web Communication
 - Events
@@ -16,14 +16,14 @@ tags:
 - Public Communication
 - APIs
 image: /static/API_OGC/API_OGC_Processes_Blog.gif
-description: On April 25th, 2022, join our webinar to learn how to use USGS's Application Programming Interface OGC-Processes to serve your unique water data display needs.
+description: On April 25th, 2022, join our webinar to learn how to use USGS's Network Linked Data Index and OGC-API Processes Application Programming Interfaces to serve your unique water data display needs.
 keywords: water data, API, webinar, tutorial
-author_staff: 
+author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
 <div class="grid-row">
-{{< figure src="/static/API_OGC/API_OGC_Banner2.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI). Join our next API webinar about OGC-Processes on 4/25/2022!" alt="text here" >}}
+{{< figure src="/static/API_OGC/API_OGC_Banner2.gif" caption="On January 31st, we hosted the [first webinar in our API series.](https://www.youtube.com/watch?v=n7TQoJAQ8WI). Join our next API webinar about the NLDI and OGC-API-Processes on 4/25/2022!" alt="text here" >}}
 </div>
 
 ## ❔ What is the Application Programming Interface (API) Series?
@@ -36,13 +36,13 @@ In this API webinar series, we'll touch on what USGS water data is, then we'll d
 ### Upcoming Webinars in API Series
 | Title | Date | Time |
 |------|----------|-------|
-OGC-Processes | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
+NLDI and OGC-API-Processes | Monday, April 25th, 2022 | 12 pm ET / 9 am PT
 What's Next | Date to come | Time to come
 Client Tooling | Date to come | Time to come
 Guest Speaker | Date to come | Time to come
 
-## ❔ What is the OGC-Processes Webinar?
-In this webinar on our Open Geospatial Consortium ([OGC](https://ogcapi.ogc.org/)) API, we'll give you a brief background on APIs, then Dave Blodgett will give a live demo of OGC-Processes.
+## ❔ What is the NLDI and OGC-API-Processes Webinar?
+In this webinar on our [Network Linked Data Index](https://waterdata.usgs.gov/blog/nldi-intro/) and Open Geospatial Consortium API ([OGC-API](https://ogcapi.ogc.org/)), we'll give you a brief background on APIs in general, then Dave Blodgett will give a live demo of the Network Linked Data Index API and associated OGC-API-Processing algorithms to retrieve precise drainage basins and cross sections at specific network locations.
 
 ## 🕛 When is the OGC-Processes Webinar?
 On Monday, April 25th, 2022 at 12 pm ET/ 9 am PT.
@@ -58,7 +58,7 @@ On Monday, April 25th, 2022 at 12 pm ET/ 9 am PT.
 
 ## 📆 How Can I Register/ Sign Up / Add to My Calendar?
 Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-processes-apis-easily-integrate-real-time-water-data-tickets-252228220397). <b>You do not have to provide any personal information, and you do not have to register for the event on Eventbrite in order to attend</b> (we've provided this option because many users requested a way to register for the event so they could get automatic reminders).
-  
+
 We will be providing a new way to register for events soon!
 
 ## 📞 Where's the link to join the live call?
