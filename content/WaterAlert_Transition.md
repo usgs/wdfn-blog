@@ -91,7 +91,7 @@ August 9th, 2022 | Next Generation WaterAlert is Turned On
 ## ❔ What is Early Access?
 For select users like people with a large number of subscriptions, or those who use it operationally for their work, we're offering access to the Next Generation of WaterAlert *before* the official transition period opens in June. Early access will provide users the opportunity to use the NextGen system while it undergoes its final changes. If they want, users may retain their alerts in the legacy system, but this means users will receive duplicate alerts (one from the NextGen system, one from the legacy system). 
 
-*Early Access will never close.* **Confirm this with Shawna**
+If you receive early access, you will not have to take any action once the transition period opens in June, and your NextGen WaterAlert account will still be active once the NextGen system goes live for everyone else in August.
 
 ## 🔔 How can I request Early Access?
 Email wdfn_usabilitytesting@usgs.gov with the subject: **WaterAlert Early Access**. Tell us about your role and your usage of WaterAlert.
