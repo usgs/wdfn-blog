@@ -34,6 +34,8 @@ Monitoring Location Pages provide real-time water data to users. [Read our blog 
 
 WaterAlert is a subscription service to real-time notifications of water levels for active gages. Check out our [detailed blog post on Next Generation WaterAlert](https://waterdata.usgs.gov/blog/WaterAlert-transition/).
 
+*P.S. You'll get a first look at NextGen WaterAlert when Product Owner Randi Butler gives a live demo. 🙌🥳*
+
 
 ## 🕛 When is this webinar?
 **On Monday, April 11th, 2022 at 12 pm ET/ 9 am PT.**
