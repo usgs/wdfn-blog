@@ -167,4 +167,4 @@ text here text here
 <br><br>
 
 
-*🙌 At the United States Geological Survey with Water Data for the Nation, we are making high-quality water information discoverable, accessible, and usable for everyone.*
+*🙌 With Water Data for the Nation, the USGS is making high-quality water information discoverable, accessible, and usable for everyone.*

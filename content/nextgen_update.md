@@ -50,7 +50,7 @@ WaterAlert is a subscription service to real-time notifications of water levels 
 
 
 ## 📆 How can I register?
-Fill out [this form](https://forms.office.com/g/VuUJ4pfhUU). Microsoft Power Automate will send you an email confirmation on our behalf. .
+Fill out [this form](https://forms.office.com/g/VuUJ4pfhUU). Microsoft Power Automate will send you an email confirmation on our behalf with the link to join the webinar (link is also below). We've noticed that Gmail often directs these automated confirmation emails to spam - so be sure to check your spam folder!
 
 *Note: You can attend this event without registering by clicking the link below to join the call live on the day of the event.*
 
