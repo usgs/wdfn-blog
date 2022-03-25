@@ -2,7 +2,7 @@
 author: Gary Rowe (he/him)
 date: 2022-03-24
 slug: lasd-hiring
-draft: True
+draft: False
 type: post
 image: /static/hiring-lasd/thumb-lasd-01.png
 title: "We’re Hiring: Director of the Laboratory and Analytical Services Division"
@@ -77,7 +77,3 @@ Please feel free to reach out to us with any questions you have, we are here to 
 
 Job series qualifications for [Chemist (job series 1320)](https://www.usgs.gov/human-capital/chemist-gs-1320)
  
-
-**Q:** _I am a student graduating after the application window closes, can I still apply?_  
-
-**A:** Yes. As long as you will meet the educational requirements, or combined education and experience qualifications before the start date, you can apply.
