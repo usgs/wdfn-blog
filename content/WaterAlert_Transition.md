@@ -14,7 +14,7 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - WaterAlert
-image: /static/WaterAlert/WaterAlert Transition Blog_2.gif
+image: /static/WaterAlert/WaterAlert_ComingSoon.gif
 description: On August 9th, 2022, the modernized, Next Generation WaterAlert will go live. Starting on June 9th, 2022, you will be able to transition your legacy subscriptions to the NextGen WaterAlert. In this blog post, learn about what is WaterAlert, why we're transitioning, and how easy we've made this transition for you.
 keywords: wateralert, water data, subscription
 author_staff: 
