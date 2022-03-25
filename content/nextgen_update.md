@@ -15,7 +15,7 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - Monitoring Location Pages
-image: /static/nextgen_update/NextGen Update_Blog_3.png
+image: /static/nextgen_update/NextGen Update_Blog_4.png
 description: On April 11th, 2022, join our public webinar where we'll provide an update on the Next Generation Monitoring Location Pages and give a live demo of the Next Generation WaterAlert. Wondering what these products are? Read on...
 keywords: monitoring location pages, water data, next generation, webinar, update
 author_staff: 
@@ -23,7 +23,7 @@ author_email: <wdfn@usgs.gov>
 ---
 
 <div class="grid-row">
-{{< figure src="/static/nextgen_update/NextGen Update_Blog_3.png" caption="Join our Next Generation Update Webinar on Monday, April 11th, 2022 at 12 pm ET/ 9 am PT. NextGen Monitoring Location Pages are live now and NextGen WaterAlert is coming soon in August 2022. 👀" alt="NextGen WaterAlert is displayed on an iPhone, although it is mostly hidden by a gray ribbon that reads: NextGen Coming soon! August 2022. Underneath, the text reads: WaterAlert. subscribe to alerts for your favorite gages. NextGen Monitoring Location Page is displayed on an iPhone. Underneat, the text reads: Monitoring Location Pages. check your favorite gages. The text on this image reads: Water Data for the Nation. Next Generation Update Webinar. Monday April 11th, 2022. 12 pm ET/ 9 am PT. waterdata.usgs.gov/blog. The blue USGS logo is in the top right." >}}
+{{< figure src="/static/nextgen_update/NextGen Update_Blog_4.png" caption="Join our Next Generation Update Webinar on Monday, April 11th, 2022 at 12 pm ET/ 9 am PT. NextGen Monitoring Location Pages are live now and NextGen WaterAlert is coming soon in August 2022. 👀" alt="NextGen WaterAlert is displayed on an iPhone, although it is mostly hidden by a gray ribbon that reads: NextGen Coming soon! August 2022. Underneath, the text reads: WaterAlert. subscribe to alerts for your favorite gages. NextGen Monitoring Location Page is displayed on an iPhone. Underneat, the text reads: Monitoring Location Pages. check your favorite gages. The text on this image reads: Water Data for the Nation. Next Generation Update Webinar. Monday April 11th, 2022. 12 pm ET/ 9 am PT. waterdata.usgs.gov/blog. The blue USGS logo is in the top right." >}}
 </div>
 
 ## ❔ What is this webinar about?
