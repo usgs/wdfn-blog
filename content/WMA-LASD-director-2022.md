@@ -4,7 +4,7 @@ date: 2022-03-24
 slug: lasd-hiring
 draft: True
 type: post
-image: /static/hiring-lasd/thumb-lasd.png
+image: /static/hiring-lasd/thumb-lasd-01.png
 title: "We’re Hiring: Director of the Laboratory and Analytical Services Division"
 author_staff: gary-l-rowe
 author_email: <glrowe@usgs.gov>
@@ -19,7 +19,7 @@ tags:
   
 
 ---
-{{< figure src="/static/hiring-lasd/banner-lasd-river-01.png" alt="A banner announcing that the USGS Water Mission Area is hiring for the Director of the Laboratory and Analytical Services Division. Apply online at USAjobs.gov. Accepting Applications March 28th-April 15th.">}}
+{{< figure src="/static/hiring-lasd/banner-lasd-rivers-01.png" alt="A banner announcing that the USGS Water Mission Area is hiring for the Director of the Laboratory and Analytical Services Division. Apply online at USAjobs.gov. Accepting Applications March 28th-April 15th.">}}
 
 The U.S. Geological Survey’s Water Mission Area (WMA) is looking to hire an outstanding leader and manager to serve as the Director of the WMA's Laboratory and Analytical Services Division (LASD). We are committed to inclusive hiring practices that build a healthy workplace where diversity is a strength, and everyone has the support they need to succeed. We encourage applicants who are BIPOC, LGBTQIA+, have a disability, or are of any marginalized identity.  
 
