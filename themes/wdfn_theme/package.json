@@ -57,7 +57,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "rollup": "^2.67.2",
     "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.49.7",
+    "sass": "^1.49.10",
     "stylelint": "^14.5.1",
     "stylelint-config-recommended-scss": "^5.0.2",
     "stylelint-scss": "^4.1.0",
