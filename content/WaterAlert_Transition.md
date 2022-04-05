@@ -2,7 +2,7 @@
 author: Nicole Felts, Shawna Gregory, and Randi Butler
 date: 2022-03-23
 slug: WaterAlert-transition
-draft: true
+draft: false
 type: post
 title: Next Generation WaterAlert | Steps to Transition
 toc: false
