@@ -22,6 +22,8 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
+# [Join the live webinar](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NjlmMmEwZGItN2U5ZS00NDgzLWE2NjktNGRjMzUwOTU5NmQy%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%7d) at 12 pm ET/ 9 am PT on Monday, April 11th!
+
 <div class="grid-row">
 {{< figure src="/static/nextgen_update/NextGen Update_Blog_4.png" caption="Join our Next Generation Update Webinar on Monday, April 11th, 2022 at 12 pm ET/ 9 am PT. NextGen Monitoring Location Pages are live now and NextGen WaterAlert is coming soon in August 2022. 👀" alt="NextGen WaterAlert is displayed on an iPhone, although it is mostly hidden by a gray ribbon that reads: NextGen Coming soon! August 2022. Underneath, the text reads: WaterAlert. subscribe to alerts for your favorite gages. NextGen Monitoring Location Page is displayed on an iPhone. Underneat, the text reads: Monitoring Location Pages. check your favorite gages. The text on this image reads: Water Data for the Nation. Next Generation Update Webinar. Monday April 11th, 2022. 12 pm ET/ 9 am PT. waterdata.usgs.gov/blog. The blue USGS logo is in the top right." >}}
 </div>
