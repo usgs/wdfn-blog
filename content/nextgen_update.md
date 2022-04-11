@@ -30,7 +30,7 @@ author_email: <wdfn@usgs.gov>
 
 ## ❔ What is this webinar about?
 
-USGS has provided water data on the web for decades, and that data is important to many users from recreationalists to critical decision-makers. Some of our data delivery systems are outdated and can no longer be updated. In order for our water data to be effectively used, we have to modernize our systems, so Water Resources Mission Area has been gradually replacing legacy systems. In this webinar, we'll talk about our modernization process in general, then we'll dive deeper into the Next Generation Montitoring Location Pages and WaterAlert.
+USGS has provided water data on the web for decades, and that data is important to many users from recreationalists to critical decision-makers. Some of our data delivery systems are outdated and can no longer be updated. In order for our water data to be effectively used, we have to modernize our systems, so Water Resources Mission Area has been gradually replacing legacy systems. In this webinar, we'll talk about our modernization process in general, then we'll dive deeper into the Next Generation Monitoring Location Pages and WaterAlert.
 
 Monitoring Location Pages provide real-time water data to users. [Read our blog post](https://waterdata.usgs.gov/blog/realtime-pages-replacement/) about the modernization of legacy current conditions pages into NextGen monitoring location pages.
 
