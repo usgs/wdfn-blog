@@ -12,7 +12,7 @@ type: post
 
 title: How to Use Next Generation Monitoring Location Pages
 
-toc: true
+toc: false
 
 categories: 
 - water-information
@@ -38,40 +38,37 @@ author_email: <wdfn@usgs.gov>
 
 ---
 
-<i>updated on January 25th, 2022 at 16:23 ET</i>
+<i>Last updated April 7th, 2022</i>
 
-<!--- ACCORDION START -->
-<div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
+<div
+  class="usa-summary-box"
+  role="region"
+  aria-labelledby="summary-box-key-information"
+>
+  <div class="usa-summary-box__body">
+    <h3 class="usa-summary-box__heading" id="summary-box-key-information">
+      Welcome to our <b>how-to guide for WDFN's Next Generation Monitoring Location Pages</b>
+    </h3>
+    <div class="usa-summary-box__text">
 
-<!--- SUMMARY ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a1">
-Summary <!--- 🚢🛥⛴🚀 -->
-</button></h2>
-<div id="a1" class="usa-accordion__content">
-<!--- ------------- -->
-
-This document is a <b>how-to guide for using the USGS Water Monitoring Location Pages</b>, which can be used to access data from thousands of water monitoring locations across the United States, US territories, and outlying areas. This document describes how to use features available in these web pages, as well as common questions users ask. Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
-
-<!--- ACCORDION END -->
+Looking for guidance on how to use the NextGen pages? You're in the right place! If you're not familiar with our NextGen pages, check out this [blog post](https://waterdata.usgs.gov/blog/realtime-pages-replacement/). Throughout this document, unless otherwise noted, the example monitoring location is 01584050, which is associated with a STREAM in BALTIMORE COUNTY, MARYLAND.
 </div>
+</div>
+</div>
+<br>
 
-## Watch Our Recorded Webinar
-
-<!--- SUMMARY ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a1.1">
-Video with Live Demo <!--- 🚢🛥⛴🚀 -->
-</button></h2>
-<div id="a1.1" class="usa-accordion__content">
-<!--- ------------- -->
+## First, watch this 5 minute how-to video
 
 {{< youtube id="EaHfnVJDE5g" title="How To Use Water Data for Nation's NextGen Monitoring Location Pages" >}}
 
-The recording of [this webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/) can be viewed on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE).
+We hosted a [public webinar](https://waterdata.usgs.gov/blog/webinar-10-13-21/) with live Q & A on October 13th, 2021. Watch the recording on the [USGS website](https://www.usgs.gov/media/videos/public-webinar-modernizing-how-you-access-water-data) or on the USGS [YouTube channel](https://www.youtube.com/watch?v=6vqLR9ozLjE). Check out [all of our events](https://waterdata.usgs.gov/blog/categories/events/).
 
-<!--- ACCORDION END -->
-</div> 
+<br>
 
-## Important Information
+<!--- ACCORDION START -->
+<div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
+<span class="usa-tag">IMPORTANT</span>
+
 <!--- IMPORTANT INFORMATION ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a2">
 Provisional Data <!--- 🚢🛥⛴🚀 -->
@@ -95,7 +92,7 @@ The links shown in the images below provide additional information about water d
 <!--- ACCORDION END -->
 </div> 
  
-
+<br>
 
 ## Interact with the Hydrograph
 Move your computer mouse or tap your device’s screen over top of the plot to expose the date, time, and value on the graph.
@@ -347,6 +344,7 @@ This drop-down menu provides links to other pages with more water data or descri
 </div>
  
  ## Common Requests
+
 <!--- RAINFALL DATA ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a20">
 How can I view 30 Day Rainfall data? <!--- 🚢🛥⛴🚀 -->
@@ -372,3 +370,27 @@ We have both Celsius and Fahrenheit represented on our Next Generation page hydr
 </div>
 <!--- ACCORDION END -->
 </div>
+
+<br>
+
+  <li class="tablet:grid-col-6 usa-card usa-card--flag">
+    <div class="usa-card__container">
+      <header class="usa-card__header">
+        <h2 class="usa-card__heading">More Qs?</h2>
+      </header>
+      <div class="usa-card__media">
+        <div class="usa-card__img">
+          <img
+            src="/static/FAQ_NextGen/FAQ for NextGen Pages.png"
+            alt="A placeholder image"
+          />
+        </div>
+      </div>
+      <div class="usa-card__body">
+        <p>Have more questions about our NextGen pages?</p>
+      </div>
+      <div class="usa-card__footer">
+        <button class="usa-button">Read our FAQ</button>
+      </div>
+    </div>
+  </li>

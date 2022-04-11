@@ -39,70 +39,271 @@ author_email: <wdfn@usgs.gov>
 ---
 
 # Frequently Asked Questions
-<i>Last updated September 27th, 2021</i>
+<i>Last updated April 7th, 2022</i>
 
-## 1. I think the old website works fine, why do you feel the need to change it? 
+<!--- ACCORDION START -->
+<div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a1">
+1. I think the old website works fine, why do you feel the need to change it?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a1" class="usa-accordion__content">
+<!--- ------------- -->
+
 The old website has served the public well, but it is 25 years old—that’s about 80% of the entire history of the World Wide Web!  Over the last 10 years, we have observed declining user satisfaction with the old website; novice users in particular tell us the legacy pages are challenging to understand and not intuitive to use.  Under the hood, the programming has become outdated and has become difficult to maintain and it is practically impossible to add new features.  The best way for us to serve the public well into the future is to modernize our pages. 
+</div>
 
-## 2. Will you be adding the ability to show data from multiple monitoring locations at the same time? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a2">
+2. Will you be adding the ability to show data from multiple monitoring locations at the same time?   <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a2" class="usa-accordion__content">
+<!--- ------------- -->
+
 Not yes, not no... we need more information first, so we are currently gathering use-cases to better understand our users’ needs. We plan to undertake a “discovery” research project on these needs in fiscal year 2022. These kinds of reports that summarize multiple monitoring locations are valuable for certain advanced users, and we need to ensure all members of the public can derive value from these reports. 
+</div>
 
-## 3. What will happen to all of the other USGS water data on legacy pages? I don’t see it on the new pages... 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a3">
+3. What will happen to all of the other USGS water data on legacy pages? I don’t see it on the new pages...   <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a3" class="usa-accordion__content">
+<!--- ------------- -->
+
 The NextGen pages will continue to evolve over time, adding new features and incorporating key information available on legacy pages. Current-condition real-time water data account for over 90% of our water-data web page requests, but we understand that other types of water data are very important to some users. These other forms of water data available in legacy pages—daily values, statewide streamflow tables, annual-peak values, and many more—will be evaluated for modernization in the coming years.  Eventually the entire old legacy website will be turned off (decommissioned) but that will not happen until we are able to evaluate the importance of all water data currently available on legacy pages. 
+</div>
 
-## 4. Why do you now show only one hydrograph instead of a long page of many hydrographs? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a4">
+4. Why do you now show only one hydrograph instead of a long page of many hydrographs?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a4" class="usa-accordion__content">
+<!--- ------------- -->
+
 <b>Interactive:</b> Users, #WeHearYou – you wanted an interactive hydrograph, so we made that a top priority in the early development of the new pages. Users wanted to view the data on their mobile devices, and they wanted to interact with many elements of the graph like data shown, time span, and calculated median data. 
+<br>
 <b>Fast load time:</b> A single interactive hydrograph is fast for the default 7-day view, but takes some time to load data as users select longer time spans. Based on current technology, we do not advise that a single page provide interactive hydrographs for all possible parameters, as it would not allow for fast loading on mobile devices. Although there are multiple graphs on the legacy pages, those are not interactive, and the technology difference is vast between the two styles of use.
+<br>
 <b>Improved usability:</b> During user testing we have found that users are confident in interacting with the hydrograph. Our usage metrics show that people use the interactive elements commonly and intuitively.  
+<br>
 <b>Future plans:</b> We will continue to build out the interactive elements to allow multiple parameters to show simultaneously to provide a more robust experience for our users.   
+</div>
 
-## 5. Why is the default parameter gage height? It doesn’t work best for me. 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a5">
+5. Why is the default parameter gage height? It doesn’t work best for me.   <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a5" class="usa-accordion__content">
+<!--- ------------- -->
+
 We have an easy way for you to customize your default parameter: bookmarking a page that shows discharge will show discharge again when that bookmark is revisited. We acknowledge the value of the other common parameter: volumetric streamflow (discharge) data. But at this time, feedback from the general public has been that gage height is preferred as the default parameter. Read more about the importance of gage height in our recent blog post. 
+</div>
 
-## 6. Are real-time pages of today being discontinued? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a6">
+6. Are real-time pages of today being discontinued?   <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a6" class="usa-accordion__content">
+<!--- ------------- -->
+
 Eventually, yes.  Starting in October 2021 the legacy pages will no longer be the preferred view the public sees and search engines index.  In March 2022, the Next Generation pages will become the default view and legacy pages will redirect to them.  In January 2023 the legacy real-time current-condition pages will be decommissioned entirely. 
+</div>
 
-## 7. After NWISWeb legacy real-time pages begin redirecting, will they still be viewable in some manner?   
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a7">
+7. After NWISWeb legacy real-time pages begin redirecting, will they still be viewable in some manner? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a7" class="usa-accordion__content">
+<!--- ------------- -->
+ 
 Yes, they will remain viewable until their full January 2023 decommissioning.  A special link on a NextGen page will let users reach these pages after redirecting begins.  Note that after redirects begin, search engines will show legacy pages less and less in search results. 
+</div>
 
-## 8. After NWISWeb legacy pages are decommissioned, will web redirects be in place?
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a8">
+8. After NWISWeb legacy pages are decommissioned, will web redirects be in place? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a8" class="usa-accordion__content">
+<!--- ------------- -->
+
 Yes.  When possible, old URLs will redirect to a modernized, relevant alternative.  When not possible, we plan to redirect to a web page explaining where to find various types of water data. 
+</div>
 
-## 9. Wait! Are you turning off all of NWISWeb legacy in January 2023? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a9">
+9. Wait! Are you turning off all of NWISWeb legacy in January 2023? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a9" class="usa-accordion__content">
+<!--- ------------- -->
+
 No, only the current-condition real-time pages.  All other pages like daily values, statewide streamflow, Water-Year Summary, will be evaluated and decommissioned on a case-by-case basis, leading to an eventual full decommission.  But that date is not yet known. 
+</div>
 
-## 10. You’re calling the old NWISWeb pages “legacy” pages. What do you mean? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a10">
+10. You’re calling the old NWISWeb pages “legacy” pages. What do you mean?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a10" class="usa-accordion__content">
+<!--- ------------- -->
+
 They were excellent for their time, much like a classic car represents the best of its era. We know there is room for improvement to meet changing standards and broad user needs, which is why we are releasing NextGen pages. 
+</div>
 
-## 11. What are the features of Next Generation Monitoring Location Pages? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a11">
+11. What are the features of Next Generation Monitoring Location Pages?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a11" class="usa-accordion__content">
+<!--- ------------- -->
+
 The redesign of real-time pages is based on several sources of information: a comprehensive inventory of existing NWISWeb functionality, customization of pages by USGS Water Science Centers, user surveys, web analytics, and the USGS Water Science Strategy.  The new user interface is more accessible for all users—especially new ones. The re-design puts data at the top of the page, is mobile ready, uses human-readable names and terms, and is built for integration with other applications and data sources. The codebase and infrastructures are optimized for performance and up-time, and instrumented with auditing tools and vulnerability detection. <b>Data integrity remains paramount.</b> Finally, an iterative software development process will engage all users early in the development process and produce frequent, meaningful improvements. 
+</div>
 
-## 12. Will NextGen Monitoring Location Pages continue to get new capabilities past year 2021? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a12">
+12. Will NextGen Monitoring Location Pages continue to get new capabilities past year 2021?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a12" class="usa-accordion__content">
+<!--- ------------- -->
+
 Yes, for several reasons but let's consider the principal one:  we are still modernizing old systems and then turning them off!  So things like discrete water-quality data, annual-peaks data, daily-values data, and more must be fairly represented in modernized pages.  We will be sharing our roadmap and backlog of feature requests so you can understand what might be coming. 
+</div>
 
-## 13. I use one certain capability on the old system.  Will that capability be maintained in the modernized system? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a13">
+13. I use one certain capability on the old system.  Will that capability be maintained in the modernized system? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a13" class="usa-accordion__content">
+<!--- ------------- -->
+
 It depends.  For real-time current-condition pages, the answer was and is "Yes!"  For other capabilities, we are evaluating them on a module-by-module basis.  Features may be modernized, may be discontinued, or in some cases reconceived in a very different way based on what has been learned from 25 years of water data on the web. 
+</div>
 
-## 14. Will modernized systems have my favorite feature x, y or z? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a14">
+14. Will modernized systems have my favorite feature x, y or z?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a14" class="usa-accordion__content">
+<!--- ------------- -->
+
 We are working on publishing a roadmap and/or feature backlog for you to view for yourself.  As of late 2021, examples of important features considered for modernization are: discrete water-quality data, imagery such as cameras, multiple parameters on one plot, daily-values data, annual-peaks data, and downloadable plots.  If usability tests and analytics indicate a feature was not used or was difficult to understand, we might not keep it. 
+</div>
 
-## 15. Will you be building multi-station summary views like the statewide streamflow table, multi-station graphs, and reports? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a15">
+15. Will you be building multi-station summary views like the statewide streamflow table, multi-station graphs, and reports? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a15" class="usa-accordion__content">
+<!--- ------------- -->
+
 The WDFN team in Water Mission Area is collecting these use cases and plan to undertake a "discovery" research project on these in FY22.  We understand cooperators fund networks of gages (not individual gages), but we also must ensure members of the public derive value from these types of reports. 
+</div>
 
-## 16. NWISWeb legacy data discovery and site navigation has always been awkward. Are you fixing this? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a16">
+16. NWISWeb legacy data discovery and site navigation has always been awkward. Are you fixing this?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a16" class="usa-accordion__content">
+<!--- ------------- -->
+
 Yes, we plan to develop a new explore, filter, and download user interface in FY22.  We also know that external search engines are the source of most web traffic to real-time pages, so we will be making the redesigned pages as “crawlable” and “friendly” to search engine robots as possible. 
+</div>
 
-## 17. Do you still want input from USGS employees and the public? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a17">
+17. Do you still want input from USGS employees and the public?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a17" class="usa-accordion__content">
+<!--- ------------- -->
+
 Yes, more than ever. We are here to listen. Constructive feedback is intrinsic to our design process.  By users’ feedback and through their actions (tracked by web analytics), we continue to optimize design and functionality. 
+</div>
 
-## 18. How do you accept feedback and feature requests? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a18">
+18. How do you accept feedback and feature requests?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a18" class="usa-accordion__content">
+<!--- ------------- -->
+
 New pages have a button on the footer labeled "Questions or Comments."  Submission here go directly to our product management team. 
+</div>
 
-## 19. Will you build a mobile app? 
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a19">
+19. Will you build a mobile app?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a19" class="usa-accordion__content">
+<!--- ------------- -->
+
 Not at this time. With limited resources, we are focused on building the best mobile-first website we can.  There are no plans to build platform-specific apps at this time.  
+</div>
 
-## 20. I need a presentation-quality graph, but they're not available on NextGen pages. Help!
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a20">
+20. I need a presentation-quality graph, but they're not available on NextGen pages. Help! <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a20" class="usa-accordion__content">
+<!--- ------------- -->
+
 Right now, presentation-quality graphs are not available on NextGen pages. We've gotten a few other users requesting the continuation of presentation-quality style graphs, and we'd love to help. Can you help us help you? Send us an email and tell us what you use the graphs for, and how you define a presentation-quality style graph. We'll use your feedback to inform future work on presentation-quality graphs through Water Data for the Nation.
+</div>
 
-## 21. I want to be a user-tester. How do I sign up?
-Great, we'd love to have you! What kind of tester do you want to be?  Do you view water data in a web browser?  Or do you write software or code that call our services or APIs?  Or maybe some of both? We need user-testers for all user types - from the casual user checking status of a local stream or lake, to users routinely accessing our data and information programmatically. Send us an email at WDFN@usgs.gov.
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a21">
+21. I want to be a usability tester. How do I sign up? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a21" class="usa-accordion__content">
+<!--- ------------- -->
+
+Great, we'd love to have you! What kind of tester do you want to be?  Do you view water data in a web browser?  Or do you write software or code that call our services or APIs?  Or maybe some of both? We need usability testers for all user types - from the casual user checking status of a local stream or lake, to users routinely accessing our data and information programmatically. Send us an email at WDFN_usabilitytesting@usgs.gov.
+</div>
+</div>
+
+<h2 class="site-preview-heading">Additional Resources</h2>
+<ul class="usa-card-group">
+  <li class="tablet:grid-col-6 usa-card usa-card--flag">
+    <div class="usa-card__container">
+      <header class="usa-card__header">
+        <h2 class="usa-card__heading">Water Data</h2>
+      </header>
+      <div class="usa-card__media">
+        <div class="usa-card__img">
+          <img
+            src="/static/NextGen_Go_Live/mobile_side_by_side.jpg"
+            alt="A placeholder image"
+          />
+        </div>
+      </div>
+      <div class="usa-card__body">
+        <p>Next Generation Monitoring Location Pages provide crucial water data to people across the nation.</p>
+      </div>
+      <div class="usa-card__footer">
+        <button class="usa-button">Learn more</button>
+      </div>
+    </div>
+
+  </li>
+  <li class="tablet:grid-col-6 usa-card usa-card--flag usa-card--media-right">
+    <div class="usa-card__container">
+      <header class="usa-card__header">
+        <h2 class="usa-card__heading">NextGen</h2>
+      </header>
+      <div class="usa-card__media">
+        <div class="usa-card__img">
+          <img
+            src="/static/how-to-guide/How to Use NextGen Pages.png"
+            alt="A placeholder image"
+          />
+        </div>
+      </div>
+      <div class="usa-card__body">
+        <p>Our NextGen pages are tested by users like you to ensure they're intuitive.</p>
+      </div>
+      <div class="usa-card__footer">
+        <button class="usa-button">Read our How-To</button>
+      </div>
+    </div>
+  </li>
+</ul>
