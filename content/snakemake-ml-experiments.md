@@ -1,4 +1,3 @@
-
 ---
 author: Jeff Sadler
 date: 2022-01-19
@@ -16,14 +15,14 @@ tags:
   - data-science
 ---
 
-A paper we wrote was recently published [Link](link_to_paper)! 
+A [paper we wrote](link_to_paper) was recently published! 
 In the paper we had to run and evaluate many DL model runs.
 This post is all about how we automated these model runs and executed them in parallel using the workflow management software, [Snakemake](https://snakemake.github.io).
 
 # To multi-task or not to multi-task? 
 Before getting to Snakemake, we wanted to share some background about what exactly we were trying to do.
 In our paper, we asked (and started to answer) a somewhat basic question: is it helpful to multi-task?
-More specifically, we wondered if a deep learning model would be more accurate when trained to predict just one variable, streamflow, or when trained to predict two related variables (streamflow and water temperature)?
+More specifically, we wondered if a deep learning model would be more accurate when trained to predict just one variable, streamflow, or when trained to predict two related variables, streamflow and water temperature?
 To answer this question, we designed a few experiments.
 Here we'll focus on just one of four experiments - the one that required the most model runs.
 We used Snakemake for the other three as well and found some interesting things from those too.
@@ -46,7 +45,7 @@ Because all of the model runs were independent, they could be trained in paralle
 To keep track of the 27,270 model runs, not to mention the data preprocessing, the model prediction, and the model evaluation steps (an additional 40k+ independent tasks), and to execute those tasks in parallel, we used Snakemake.
 
 ## Our Snakefile and rules: defining the workflow
-Snakemake is a make-like workflow management software.
+Snakemake is a make-like workflow management software tool.
 A Snakemake workflow is defined in a Snakefile.
 A Snakefile is a plain-text file that uses a yaml-like structure to define a series of rules representing different steps of the workflow.
 Unlike a normal yaml file, in a Snakefile, you can also directly write in Python code.
@@ -54,7 +53,7 @@ For example, you can import modules like Pandas or define and run a custom funct
 
 A Snakemake rule defines (1) the input files, (2) the output files, and (3) the processing step to produce the output from the input.
 For example, below is our `evaluate_predictions` rule.
-It (1) takes model predictions and observation data as input, (2) produces a metrics csv file as output, and (3) executes the `calculate_metrics` python function with the inputs to produce the output.
+It (1) takes model predictions and observation data as input, (2) produces a metrics .csv file as output, and (3) executes the `calculate_metrics` Python function with the inputs to produce the output.
 
 ```
 rule evaluate_predictions:
@@ -69,17 +68,17 @@ rule evaluate_predictions:
 The curly braces are "wildcard" placeholders which we'll talk more about later.
 
 In addition to the `evaluate_predictions` rule, we defined 
-- the `prep_io_data` rule to prepare our data for model training 
-- the `train_model` rule that used the prepared data (the output of the `prep_io_data` rule) to train the DL model
-- and the `make_predictions` rule that took the trained model and the prepared data to make predictions
+- the `prep_io_data` rule to prepare our data for model training,
+- the `train_model` rule that used the prepared data (the output of the `prep_io_data` rule) to train the DL model,
+- and the `make_predictions` rule that took the trained model and the prepared data to make predictions.
 
-With these rules Snakemake could make a directed acyclic graph (DAG) that mapped the entire process of getting the end products (a csv file with the performance metrics for each model run) from the initial inputs (the input and observation files). 
+With these rules Snakemake could make a directed acyclic graph (DAG) that mapped the entire process of getting the end products (a .csv file with the performance metrics for each model run) from the initial inputs (the input and observation files). 
  
 
 ## Wildcards, `expand`ing, and gathering: scaling to 27,270 branches
-The prep_io_data rule was performed for each of the 101 sites and was the same for each random starting point and multi-task scaling factor.
+The `prep_io_data` rule was performed for each of the 101 sites and was the same for each random starting point and multi-task scaling factor.
 The train, predict, and evaluate rules, were applied to all 27,270 model runs.
-These processes were the same for every `observation site/multi-task scaling factor/random initialization` combination.
+These processes were the same for every `observation site`/`multi-task scaling factor`/`random initialization` combination.
 Snakemake's "wildcard" and "expand" functionalities allowed us to apply the same rules to all these combinations and keep track of them all.
 We also defined a rule to gather all of the metric files for the final analysis.
 
@@ -136,7 +135,7 @@ rule combine_metrics:
     run:
         combine_exp_metrics(input, output[0])
 ```
-In this rule, the `combine_exp_metrics` Python function took the list of the 27,270 csv files (produced by the `expand` function), read them into Pandas DataFrames, combined them into a single Pandas DataFrame, and wrote that DataFrame to a new csv file.
+In this rule, the `combine_exp_metrics` Python function took the list of the 27,270 .csv files (produced by the `expand` function) and combined them into a new .csv file.
 
 Finally, to let Snakemake know that this was the ultimate file we needed we added this in the first rule of the Snakefile:
 
@@ -184,14 +183,14 @@ The command on the HPC looked like this:
 nohup snakemake --cluster "sbatch -A {cluster.account} -t {cluster.time} -p {cluster.partition} -N {cluster.nodes} -n 1 {cluster.gpu}" -p -k -j 400 --cluster-config ~/cluster_config.yml --rerun-incomplete --configfile config.yml -T 0 > run.out &
 ```
 
-`nohup` let us start the job and then exit the terminal. The ``"sbatch ..."`` bit is the command that prefaced each job submission and the values for the {cluster.account} etc. were found in the `cluster_config.yml` file. The `-k` flag is short for "keep going" meaning that if one job failed, the other independent jobs would still be submitted. And `-j 400` meant that we were asking it to run 400 jobs at once (i.e., we were going to submit up to 400 jobs to the scheduler at a time). By running it on many cores at a time, it took only a couple of hours to churn through these 80k+ jobs and get our experiment results!
+`nohup` let us start the job and then exit the terminal. The ``"sbatch ..."`` bit is the command that prefaced each job submission and the values for the `{cluster.account}` etc. were found in the `cluster_config.yml` file. The `-k` flag is short for "keep going" meaning that if one job failed, the other independent jobs would still be submitted. And `-j 400` meant that we were asking it to run 400 jobs at once (i.e., we were going to submit up to 400 jobs to the scheduler at a time). By running it on many cores at a time, it took only a couple of hours to churn through these 80k+ jobs and get our experiment results!
 
 ## When things didn't work
 As you may imagine, there were some hiccups in getting the workflow exactly right.
 Some of those hiccups were our errors.
 Some were other issues with the cluster.
-One critical advantage of using Snakemake, is that it checks to see if an output file is created and up-to-date before trying to create it.
-So if only 40% of the workflow ran before there was an error, the next time we ran Snakemake it would start running on just the parts that weren't executed. 
+One critical advantage of using Snakemake, is that it checks to see if an output file is created and up to date before trying to create it.
+So, if only 40% of the workflow ran before there was an error, the next time we ran Snakemake it would start running on just the parts that weren't executed. 
 This was an essential functionality with 80k+ jobs since otherwise, we'd only get the answer if it ran the whole workflow without a single error.
 
 # Wrapping up
@@ -205,7 +204,7 @@ With all of this functionality, Snakemake was a critical tool that let us get an
 
 # Endnotes
 ## The workflows used for our paper
-The worflows used for our paper are found in a Sciencebase data release that accompanies our manuscript [link to data release]().
+The workflows used for our paper are found in a [ScienceBase data release]() that accompanies our manuscript.
 Note that for this blog post, we made some simplifications to the workflow to more clearly communicate the concepts.
 
 ## The entire workflow
