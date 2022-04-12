@@ -121,7 +121,7 @@ Plus, we have some information that will hopefully help you navigate the process
 
 **Intangibles -** If the mission of public service towards advancing environmental science and data delivery resonates with you, there will be no shortage of energy and motivation available when working with great colleagues on these challenges. Likewise, a flexible schedule and emphasis on work life balance are important components to work at the USGS.
 
-#### Applying for the job
+### Applying for the job
 
 **Creating a USA Jobs account -** All of these federal positions will be posted and filled using public vacancy announcements on [usajobs.gov](https://www.usajobs.gov/). If you are remotely interested in applying to any of the positions mentioned here or elsewhere, get ahead by creating an account as soon as you can. Having an active account will allow you to set up job filters and get a jump start on getting your application materials together.
 
@@ -141,11 +141,8 @@ Plus, we have some information that will hopefully help you navigate the process
 
 **Timeline --** After the application window closes, HR combs through applications and filters for candidates who meet the GS Grade qualifications and specialized experience. Then they'll pass on that entire list to the hiring manager, Emily Read. The hiring manager will contact all the qualified candidates for additional information and will set up interviews, visits, or writing/code/portfolio requests. From there, they will refer a selected candidate to HR, and HR will extend an offer. After HR makes an offer, that is your chance to negotiate the offer and ultimately accept or reject it. Once negotiations are done and you accept the offer, HR will perform a background check. Then you agree to a start date and at that time your employment at the USGS begins!
 
-**Questions?**
 
-Please feel free to reach out to us with any questions you have, we are here to help! Contact the hiring manager, Emily Read (she/her), at <eread@usgs.gov>.
-
-**Common Questions**
+#### Common Questions
 
 **Q:** *Is this open to non-U.S. citizens?*
 
@@ -156,3 +153,7 @@ Please feel free to reach out to us with any questions you have, we are here to 
 **A:** Either is fine. Whichever format you choose, we recommend taking time to explicitly spell out how your experience meets the qualification requirements for the job series and GS level.
 
 [USGS tips on combining education and experience](https://www.usgs.gov/human-capital/basic-education-requirement-combining-education-and-experience)
+
+### Questions?
+
+Please feel free to reach out to us with any questions you have, we are here to help! Contact the hiring manager, Emily Read (she/her), at <eread@usgs.gov>.
