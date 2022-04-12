@@ -27,7 +27,7 @@ tags:
 - operations
 - technology
 
-image: 
+image: static/hiring_tech_spring_2022/Spring_tech_cluster_hire.png
 
 description: Learn about DevOps and Usabilty Specialist positions that are opening in the USGS Water Mission Area
 
