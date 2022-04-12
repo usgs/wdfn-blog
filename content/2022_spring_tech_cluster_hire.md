@@ -92,7 +92,7 @@ We have two (2) vacancies for IT Specialists -- DevOps in this cluster hire. The
 
 -   Working closely with software developers and application support teams to continuously improve deployment, testing, and monitoring approaches.
 
--   sDeveloping standard operating procedures for a variety of IT hardware tasks or activities.
+-   Developing standard operating procedures for a variety of IT hardware and infrastructure tasks or activities.
 
 -   Planning and coordinating product and equipment installation and lifecycle upgrades, overseeing and resolving technical and administrative problems, controlling current versions and future releases of hardware and applications software, and documenting the physical configuration of the systems.
 
@@ -100,11 +100,10 @@ We have two (2) vacancies for IT Specialists -- DevOps in this cluster hire. The
 
 -   Ensuring guidance and work products comply with Department and the organization\'s IT security requirements
 
-### 
 
 ### Location
 
-### The location of the duty station for the employees is negotiable upon selection of a candidate.
+The location of the duty station for the employees is negotiable upon selection of a candidate.
 
 ### The Process
 
@@ -112,7 +111,7 @@ We're here to answer any questions you have about what we do and how to navigate
 
 Plus, we have some information that will hopefully help you navigate the process of applying to a federal job. It can get confusing, but you're awesome and we want to get to know you!
 
-#### Calculating the value of the job
+### Calculating the value of the job
 
 **General Schedule Grades --** The pay and responsibilities of these Federal jobs are defined by general schedule (GS) *Grades,* which are roughly equivalent to the levels concept used elsewhere. The Usability Specialist will be advertised at GS-12 grade.The DevOps positions will be advertised at both the GS-9 and GS-12 level.
 
