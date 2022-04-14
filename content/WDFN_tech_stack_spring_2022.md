@@ -28,7 +28,7 @@ tags:
 
 image: /static/how-to-guide/How to Use NextGen Pages.png
 
-description: A medium depth dive into the WAter Data for the Nation team's tech stacks
+description: A medium depth dive into the Water Data for the Nation team's tech stacks
 
 keywords: water data
 
@@ -39,7 +39,7 @@ author_email: <wdfn@usgs.gov>
 ---
 
 
-The goal of this post is to give a technical reader an idea of what technologies the Water Data for the Nation (WDFN) team uses, because it is both varied and ever changing.  Broadly, we there are three areas that the WDFN team focuses on, and each have their own unique tech stacks.  These areas are Front end- for the User Interface, the back end, for databases and APIs, and Data Engineering, where we transform the data from upstream systems and prepare it for the APIs and ultimately display.
+The goal of this post is to give a technical reader an idea of what technologies the Water Data for the Nation (WDFN) team uses, because it is both varied and ever changing.  Broadly, there are three areas that the WDFN team focuses on, and each have their own unique tech stacks.  These areas are front end- for the User Interface, the back end, for databases and APIs, and Data Engineering, where we transform the data from upstream systems and prepare it for the APIs and ultimately display.
 
 ## Front end
 
@@ -52,14 +52,14 @@ Front end development, the WDFN teams basic ethos is to generate semantic HTML b
 Examples of Flask-based applications include:
 
 * [WaterdataUI](https://code.usgs.gov/wma/iow/waterdataui), which, among other things, generate the next generation monitoring location pages
-* [WQP_UI](https://github.com/NWQMC/WQP_UI/), the Fromt end for the [Water Quality Portal](https://www.waterqualitydata.us) an interagency tool for accessing water quality data.
+* [WQP_UI](https://github.com/NWQMC/WQP_UI/), the front end for the [Water Quality Portal](https://www.waterqualitydata.us), an interagency tool for accessing water quality data.
 * 
 
-Flask-based User interfaces allow for a hard separation between user interfaces and Application Programming Interfaces( APIs, which both forceses us to be consumers of our own API's, which are also used by thousands of other organizations and individuals, it also allows for flexibility as we transition from old to new APIs, Flask can act as a bridge between the different systems.
+Flask-based user interfaces allow for a hard separation between user interfaces and Application Programming Interfaces(APIs). We can then easily be consumers of our own API's, which are also used by thousands of other organizations and individuals and allows for flexibility as we transition from old to new APIs.
 
 ### Django for self-contained, transactional systems
 
-For the most part, the WDFN team runs in a read-only world.  We transform data for public consumption (more about that later), but we don't manage much additional data.  There are, However a few execeptions, where we do need to manage transactions and store data.  The scale on these systems is not large, and the overall complexity is low.  After some past experimentation with low-code frameworks, we have instead found that the batteries-included nature of the [Django](https://www.djangoproject.com/) works well for our needs.  If it isn't built into Django itself, there is generally a community plugin that fits our basc needs, so we can focus on the important parts- making systems that work for our users. 
+For the most part, the WDFN team runs in a read-only world.  We transform data for public consumption (more about that later), but we don't manage much additional data.  There are, However a few exceptions, where we do need to manage transactions and store data.  The scale on these systems is not large, and the overall complexity is low.  After some past experimentation with low-code frameworks, we have instead found that the batteries-included nature of the [Django](https://www.djangoproject.com/) works well for our needs.  If it isn't built into Django itself, there is generally a community plugin that fits our basc needs, so we can focus on the important parts - making systems that work for our users. 
 
 WDFN applications that use Django include:
 * WDFN-Accounts, the transactional system behind the [next generation Water Alert System](https://waterdata.usgs.gov/blog/wateralert-transition/) _The code for this application is not yet public_
@@ -74,11 +74,11 @@ Example Hugo-based pages
 * [WDFN Blog](https://github.com/usgs/wdfn-blog/) The content for this blog
 * [WDFN Labs](https://github.com/usgs/waterdata_labs) Static Content for [labs.waterdata.usgs.gov](https://labs.waterdata.usgs.gov/index.html)
 
-## Back end- APIs, Databases, and data processing
+## Back end - APIs, Databases, and data processing
 
 ### Spring Boot for Java-based Application Programming Interfaces (APIs)
 
-APIs are a crucial component of Water Data for the Nation. Many users of USGS water data never see the user interfaces that we build on the WDFN team.  Instead, they interact with our data in systems built on top of the APIs that we build. One of the core architectures that we use to build these APIs is a to use the Java [Spring Boot Framework](https://spring.io/projects/spring-boot), with OpenAPI documents generated from annotations in the code using [Springdoc](https://springdoc.org/).  When we need a high performance streaming API, this framework has served us well.  These applications are typically deployed as serverless containerized applications using [AWS Fargate](https://aws.amazon.com/fargate/) 
+APIs are a crucial component of Water Data for the Nation. Many users of USGS water data never see the user interfaces that we build on the WDFN team.  Instead, they interact with our data in systems built on top of the APIs that we build. One of the core architectures that we use to build these APIs is the Java [Spring Boot Framework](https://spring.io/projects/spring-boot), with OpenAPI documents generated from annotations in the code using [Springdoc](https://springdoc.org/).  When we need a high performance streaming API, this framework has served us well.  These applications are typically deployed as serverless containerized applications using [AWS Fargate](https://aws.amazon.com/fargate/) 
 
 Example Spring Boot APIs
 * Observations service (labs)
@@ -97,7 +97,7 @@ Example Spring Boot APIs
 ### Databases and datastores
 
 #### Postgres 
-The WDFN team has settled on [Postgres](https://www.postgresql.org/) and its associated [PostGIS](https://postgis.net/) extension for most database tasks. Itworks well in the AWS RDS system, and for the most part we can just leave it alone.  There is certainly more that we could do with our database layer with dedicated database manager, but we appreciate he general simplicity of the system.  Within postgres, we use [Liquibase](https://www.liquibase.org/) to manage our database structure, which allows for very low risk database changes- by authomating the database management, we know that we will be able to apply exactly the same changes that we tested out on lower tiers (say, changes to partitioning or indexing) on the production tiers. 
+The WDFN team has settled on [Postgres](https://www.postgresql.org/) and its associated [PostGIS](https://postgis.net/) extension for most database tasks. It works well in the AWS RDS system, and for the most part we can just leave it alone.  There is certainly more that we could do with our database layer with dedicated database manager, but we appreciate the general simplicity of the system.  Within postgres, we use [Liquibase](https://www.liquibase.org/) to manage our database structure, which allows for very low risk database changes - by automating the database management, we know that we will be able to apply exactly the same changes that we tested out on lower tiers (say, changes to partitioning or indexing) on the production tiers. 
 
 #### NoSQL datastore
 There are a few places where we are using document databases instead of traditional RDBMS systems, in spaces where the data structure is rapidly evolving, we don't expect to need to do complex queries, and don't anticipate a need for complex analytics or reporting.  When we are working in the NoSQL space, we use AWS DynamoDB  
@@ -107,9 +107,9 @@ Sometimes, we need to query a whole bunch of stuff such as log information or ot
 
 ### Data Engineering
 
-A very large percent of the WDFN's development time is actually focused on preparing data for access by the public.  For various reasons, the data and API structures used by upstream data management applications do not lend themselves to effective data access.  For example, if one were to want to query the Aquarious Time Series System for the latest data for all of our time series, it would be on the order of 100,000 individual web service calls!  While we have been pulling data from Aquarious Time Series for quite some time, the legacy system depended heavily on data structures that simply don't mee our current needs.  Hence, we are putting serious effort into building cloud-native, event-driven, serverless data processing pipelines.
+A very large percent of the WDFN's development time is actually focused on preparing data for access by the public.  For various reasons, the data and API structures used by upstream data management applications do not lend themselves to effective data access.  For example, if one were to want to query the Aquarious Time Series System for the latest data for all of our time series, it would be on the order of 100,000 individual web service calls!  While we have been pulling data from Aquarious Time Series for quite some time, the legacy system depended heavily on data structures that simply don't meet our current needs.  Hence, we are putting serious effort into building cloud-native, event-driven, serverless data processing pipelines.
 
-Since we started building this tooling in 2019, we have learned a LOT about scaling, cost management, repository structure, and more.  There is also plenty more that we can do.  Tools that we use to build our data processing pipelines include:
+Since we started building this tooling in 2019, we have learned a LOT about scaling, cost management, repository structure, and more.  There is plenty more that we can do.  Tools that we use to build our data processing pipelines include:
 * [AWS Lambda functions](https://aws.amazon.com/lambda/), mostly written in Python, but with a few in Java
 * [AWS SQS](https://aws.amazon.com/sqs/) and [AWS SNS](https://aws.amazon.com/sns/) for managing events  
 * [pandas](https://pandas.pydata.org/), the Python data processing library for munching data into the form that we need it
