@@ -27,7 +27,7 @@ tags:
 - operations
 - technology
 
-image: static/hiring_tech_spring_2022/spring_tech_cluster_hire_thumb.png
+image: static/hiring_tech_spring_2022/we_are_hiring_thumb.png
 
 description: Learn about DevOps and Usabilty Specialist positions that are opening in the USGS Water Mission Area
 
@@ -39,6 +39,7 @@ author_email: <eread@usgs.gov>
 
 ---
 
+{{< figure src="/static/hiring_tech_spring_2022/we_are_hiring_medium.png" alt="A banner announcing that the USGS Water Mission Area is hiring for 1 usability specialist and 2 Devops positions. Apply online at USAjobs.gov. Applications open April 25th, 2022">}}
 
 ## USGS Water Mission Area 2022 Cluster Hires (*updated 4/11/2022*)
 
