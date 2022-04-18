@@ -61,9 +61,7 @@ Read our [check status user blog post](https://waterdata.usgs.gov/blog/user_chec
 
 > "I have a cabin about 300 miles from my home. I appreciate getting the alerts **so I know if the water level is rising.** It helps me protect my property and stay informed."
 
-> "I am a rescue diver and work for a trauma team, **it’s important for me to know status of the flow.**"
-
-> "This service lets us know if our land will flood and if we need to move our cars. There is a gage station near our house so this has become **an essential safety service.**"
+> "I am a rescue diver and work for a trauma team, **it’s important for me to know status of the flow.**" 
 
 ## 🎉 Why are we modernizing?
 WaterAlert has been a tried-and-true service for years, but the system was aging, making it vulnerable to breaking. Many users found navigating the system challenging, so we needed to modernize the system. Modernizing gave us the opportunity to provide new features and to make things look more approachable for all users! We're enthusiastic that the Next Generation of WaterAlert will be more discoverable, accessible, and usable for all users.
