@@ -125,5 +125,5 @@ In the cloud, the WDFN team has found that there is significant overhead to runn
 On premise, server configuration is managed in a variety of ways, but application configuration is mostly managed using [Ansible](https://www.ansible.com/) and [Jenkins](https://www.jenkins.io/).
 
 ### Monitoring
-*writing more here!*
-Monitoring is an area that we are rapidly learning about.  We rely heavily on CloudWatch dashboards,
+
+Monitoring is an area that we are rapidly learning about.  For our modernized, cloud native tools, we currently rely heavily on dynamically created Cloudwatch dashaboards, but know that we have a lot more work to do as we work toward building resiliant, observable systems.  Watch for future posts about more changes as we move forward.
