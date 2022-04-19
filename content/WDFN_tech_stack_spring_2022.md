@@ -26,7 +26,7 @@ tags:
 - NextGen
 - monitoring location pages
 
-image: 
+image: /static/WDFN_tech_stack_spring_2022/WDFN_Tech_Stack_Blog.png
 
 description: A medium depth dive into the Water Data for the Nation team's tech stacks
 
