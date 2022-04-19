@@ -6,7 +6,7 @@ date: 2022-04-14
 
 slug: WDFN-tech-stack-spring-2022
 
-draft: true
+draft: False
 
 type: post
 
@@ -26,7 +26,7 @@ tags:
 - NextGen
 - monitoring location pages
 
-image: /static/how-to-guide/How to Use NextGen Pages.png
+image: 
 
 description: A medium depth dive into the Water Data for the Nation team's tech stacks
 
@@ -39,10 +39,10 @@ author_email: <wdfn@usgs.gov>
 ---
 
 
-The goal of this post is to give a technical reader an idea of what technologies the Water Data for the Nation (WDFN) team uses, because it is both varied and ever changing.  Broadly, we there are three areas that the WDFN team focuses on, and each have their own unique tech stacks.  These areas are: Front end- for the User Interface; the back end, for databases and APIs, and Data Engineering, where we transform the data from upstream systems and prepare it for the APIs and ultimately display.
+The goal of this post is to give a technical reader an idea of what technologies the Water Data for the Nation (WDFN) team uses, because it is both varied and ever changing. There are three areas that the WDFN team focuses on, and each have their own unique tech stacks. These areas are: the Front End, for user interfaces; the Back End, for databases and APIs; and Data Engineering, where we transform the data from upstream systems and prepare it for the APIs and ultimately display.
 
 ## Front end
-The WDFN team's basic ethos is to generate semantic HTML pages. We use our own APIs to generate the information on our pages thus ensuring that the information that you see on a page has been generated from publicly available APIs. Care is taken to ensure that our pages have a common look and feel. We start with the [United State Web Design System](https://designsystem.digital.gov/) as the basis for styling our pages allowing our pages to be mobile friendly and meet accessibility requirements. On top of that, we have developed a npm installable package, [wdfn-viz](https://code.usgs.gov/wma/iow/wdfn-viz), which includes USGS visual ID components.
+The WDFN team's basic ethos is to generate semantic HTML pages. We use our own APIs to generate the information on our pages thus ensuring that the information that you see on a page has been generated from publicly available APIs. Care is taken to ensure that our pages have a common look and feel. We start with the [United States Web Design System](https://designsystem.digital.gov/) as the basis for styling our pages allowing our pages to be mobile friendly and meet accessibility requirements. On top of that, we have developed a npm installable package, [wdfn-viz](https://code.usgs.gov/wma/iow/wdfn-viz), which includes USGS visual ID components.
 
 ### Web server technology stacks
 The tech stack selected for the web server depends on the needs of the specific applications. We have converged on three different tech stacks.
@@ -58,7 +58,7 @@ Examples of Flask-based applications include:
 For the most part, the WDFN team runs in a read-only world.  We transform data for public consumption (more about that later), but we don't manage much additional data.  There are, a few exceptions, where we do need to manage transactions and store data.  The scale on these systems is not large, and the overall complexity is low.  After some past experimentation with low-code frameworks, we have instead found that the batteries-included nature of [Django](https://www.djangoproject.com/) works well for our needs.  If it isn't built into Django itself, there is generally a community plugin that fits our basic needs, so we can focus on the important parts- making systems that work for our users.
 
 WDFN applications that use Django include:
-* WDFN-Accounts, the transactional system behind the [next generation Water Alert System](https://waterdata.usgs.gov/blog/wateralert-transition/) _The code for this application is not yet public_
+* WDFN-Accounts, the transactional system behind the [next generation Water Alert System](https://waterdata.usgs.gov/blog/wateralert-transition/). _The code for this application is not yet public_
 * [Well registry Manager](https://github.com/ACWI-SOGW/well_registry_management) A tool for cooperators to manage well metatdata for the [National Groundwater Monitoring Network Data Portal](https://cida.usgs.gov/ngwmn/)
 * [The National Environmental Methods Index (NEMI)](https://github.com/NWQMC/nemi_dj_webapp) a cross agency application for storing and managing environmental methods, which is available at [nemi.gov](https://www.nemi.gov).
 
@@ -78,7 +78,7 @@ For styling, we use [Sass](https://sass-lang.com/) along with mixins provided by
 
 ## Back end - APIs, Databases, and data processing
 ### Spring Boot for Java-based Application Programming Interfaces (APIs)
-APIs are a crucial component of Water Data for the Nation. Many users of USGS water data never see the user interfaces that we build on the WDFN team.  Instead, they interact with our data via systems built on top of the APIs that we build. One of the core architectures that we use to build these APIs is a to use the Java [Spring Boot Framework](https://spring.io/projects/spring-boot), with OpenAPI documents generated from annotations in the code using [Springdoc](https://springdoc.org/).  When we need a high performance streaming API, this framework has served us well.  These applications are typically deployed as serverless containerized applications using [AWS Fargate](https://aws.amazon.com/fargate/)
+APIs are a crucial component of Water Data for the Nation. Many users of USGS water data never see the user interfaces that we build on the WDFN team.  Instead, they interact with our data via systems built on top of the APIs that we build. One of the core architectures that we use to build these APIs is a to use the Java [Spring Boot Framework](https://spring.io/projects/spring-boot), with OpenAPI documents generated from annotations in the code using [Springdoc](https://springdoc.org/).  When we need a high performance streaming API, this framework has served us well.  These applications are typically deployed as serverless containerized applications using [AWS Fargate](https://aws.amazon.com/fargate/).
 
 Example Spring Boot APIs
 * Observations service (labs)
@@ -126,4 +126,6 @@ On premise, server configuration is managed in a variety of ways, but applicatio
 
 ### Monitoring
 
-Monitoring is an area that we are rapidly learning about.  For our modernized, cloud native tools, we currently rely heavily on dynamically created Cloudwatch dashaboards, but know that we have a lot more work to do as we work toward building resiliant, observable systems.  Watch for future posts about more changes as we move forward.
+Monitoring is an area that we are rapidly learning about.  For our modernized, cloud native tools, we currently rely heavily on dynamically created Cloudwatch dashboards, but know that we have a lot more work to do as we work toward building resiliant, observable systems.  Watch for future posts about more changes as we move forward.
+
+* "Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government." *
