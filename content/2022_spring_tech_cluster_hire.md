@@ -41,7 +41,7 @@ author_email: <eread@usgs.gov>
 
 {{< figure src="/static/hiring_tech_spring_2022/we_are_hiring_medium.png" alt="A banner announcing that the USGS Water Mission Area is hiring for 1 usability specialist and 2 Devops positions. Apply online at USAjobs.gov. Applications open April 25th, 2022">}}
 
-## USGS Water Mission Area 2022 Cluster Hires (*updated 4/11/2022*)
+## USGS Water Mission Area 2022 Cluster Hires (*updated 4/19/2022*)
 
 The U.S. Geological Survey Water Mission Area is hiring multiple Term Information Technology (IT) Specialist positions in Usability Research and Development-Operations (DevOps) for enterprise data delivery systems.
 
@@ -57,9 +57,9 @@ For additional information, please follow the [USGS Water Resources Twitter](htt
 
 [USAJOBS](https://www.usajobs.gov/) Job links and announcement numbers will be posted here when available:
 
--   Link forthcoming: Information Technology Specialist (Internet) -- Usability
+-   [Information Technology Specialist (Internet) -- Usability](https://www.usajobs.gov/job/649633500)
 
--   Link forthcoming: Information Technology Specialist (SysAdmin) - DevOps
+-   [Information Technology Specialist (SysAdmin) - DevOps](https://www.usajobs.gov/job/649632900)
 
 ### Our Commitment to Diversity, Inclusion, and Transparency
 
@@ -87,7 +87,7 @@ The Usability Specialist will plan and conduct user research on web-based produc
 
 ### Information Technology Specialist (System Administration) - *DevOps*
 
-We have two (2) vacancies for IT Specialists -- DevOps in this cluster hire. The Web Communications Branch makes real-time and historical water information available through data processing pipelines, web interfaces and APIs to best meet user needs, we are working towards a continuous deployment model. To make a continuous deployment possible system administration within the Web Communication branch takes a development-operations (DevOps) approach, which includes infrastructure as code, automation of tests, static code analysis, and continuous integration. Cloud computing and cloud-native approaches to building and operating applications, such as serverless, containerization, and hosted databases. DevOps specialists within the Web Communications Branch plan, implement, and/or coordinate DevOps methods to accomplish information technology (IT) system provisioning, testing, troubleshooting, monitoring, and backup. The use of version control and experience in Agile IT software project management practices are important for the job. The DevOps Specialists will collaborate with multiple teams within and outside of the branch to achieve the goal of providing the Nation with discoverable, accessible, and usable water information for everyone. \[We're actively working on a blog post about what DevOps and our tech stack looks like at USGS, check back again for more info.\] The duties of a DevOps Specialist the Integrated Information Dissemination Division will include:
+We have two (2) vacancies for IT Specialists -- DevOps in this cluster hire. The Web Communications Branch makes real-time and historical water information available through data processing pipelines, web interfaces and APIs to best meet user needs, we are working towards a continuous deployment model. To make a continuous deployment possible system administration within the Web Communication branch takes a development-operations (DevOps) approach, which includes infrastructure as code, automation of tests, static code analysis, and continuous integration. Cloud computing and cloud-native approaches to building and operating applications, such as serverless, containerization, and hosted databases. DevOps specialists within the Web Communications Branch plan, implement, and/or coordinate DevOps methods to accomplish information technology (IT) system provisioning, testing, troubleshooting, monitoring, and backup. The use of version control and experience in Agile IT software project management practices are important for the job. The DevOps Specialists will collaborate with multiple teams within and outside of the branch to achieve the goal of providing the Nation with discoverable, accessible, and usable water information for everyone. You can learn more about the tech stack that the WDFN team currently uses [on this recent blog post](https://waterdata.usgs.gov/blog/wdfn-tech-stack-spring-2022/). The duties of a DevOps Specialist the Integrated Information Dissemination Division will include:
 
 -   Reprioritizing and allocating resources as they become available and recommending additional components to improve overall system performance.
 
