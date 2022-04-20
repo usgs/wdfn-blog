@@ -4,7 +4,7 @@ date: 2022-04-12
 slug: nldi-processes
 draft: True
 type: post
-image: /static/nldi-processes/TODO.png
+image: /static/nldi_processes/basin_zoom.png
 title: "The Network Linked Data Index Geoprocessing with OGC API Processes"
 author_twitter: D_Blodgett
 author_github: dblodgett-usgs
@@ -40,7 +40,7 @@ Each `featureSource` has a set of `featureID`s.
 Each `featureID` is indexed to a network of catchment polygons and some are also indexed to the flowpaths that connect the catchments.
 
 Using these indexes, the NLDI offers a `navigation` api based on each `featureID` providing upstream/downstream search and access to network-data.  
-`.../api/nldi/linked-data/{featureSource}/{featureID}/navigation`
+`.../api/nldi/linked-data/{featureSource}/{featureID}/navigation`  
 `.../api/nldi/linked-data/{featureSource}/{featureID}/navigation/{mode}/{dataSource}`
 
 Two other capabilities stem from each `featureID` -- one to retrieve a `basin` upstream of the feature and one to retrieve local, total accumulated, or divergence-routed accumulated landscape characteristics.  
