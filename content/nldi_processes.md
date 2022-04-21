@@ -29,7 +29,7 @@ This post announces new capabilities that extend the base NLDI API with processi
 
 # NLDI API Background:
 
-For those not familiar, a quick overview follows. The NLDI API ([swagger docs](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html)) offers a intuitive set of web resources via a `linked-data` endpoint.
+For those not familiar, a quick overview follows. The NLDI API offers an intuitive set of web resources via a `linked-data` endpoint. It is hosted on `https://labs.waterdata.usgs.gov`. `...` below is used as shorthand for this base URL. For full API details, see the [Swagger API documentation here.](https://labs.waterdata.usgs.gov/api/nldi/swagger-ui/index.html)
 
 A set of `featureSource`s can be discovered at the `linked-data` root.  
 `.../api/nldi/linked-data/`
@@ -47,13 +47,13 @@ Two other capabilities stem from each `featureID` -- one to retrieve a `basin` u
 `.../api/nldi/linked-data/{featureSource}/{featureID}/basin`  
 `.../api/nldi/linked-data/{featureSource}/{featureID}/{local|tot|div}`
 
-There is one "special" `featureSource`, `comid`, which corresponds to identifiers for the catchment polygons and flowpath lines of the base index.  
+`comid` is a "special" `featureSource` which corresponds to identifiers for the catchment polygons and flowpath lines of the base index.  
 `.../api/nldi/linked-data/comid/`
 
-The `comid` `feautureSource` offers a `position` endpoint allowing discovery of network identifiers for a given lon/lat location.  
+The `comid` `feautureSource` offers a `position` endpoint allowing discovery of network identifiers for a given lon/lat location. This is a simple "point in polygon" query that returns the flowline for the catchment area the provided coordinates are in.  
 `.../api/nldi/linked-data/comid/position?coords=POINT({lon} {lat})`
 
-There is also a generic `hydrolocation` endpoint that will return a linear reference to a flowline as well as a "raindrop trace line" that follows an elevation surface downstream to the nearest flowline.  
+There is also a `hydrolocation` endpoint that returns a linear reference to a flowline. If the provided point is within 200 meters, it is "snapped" to the flowline, otherwise the linear reference is derived using a "raindrop trace" that follows an elevation surface downstream to the nearest flowline.  
 `.../api/nldi/linked-data/hydrolocation?coords=POINT({lon lat})`
 
 <figure>
@@ -76,7 +76,7 @@ The two processes that are tightly integrated into the NLDI are called in the co
 
 <figure>
 <img src='/static/nldi_processes/basin_zoom.png' title='Raindrop trace and split catchment.' alt='Simple map depicting a raindrop trace intersection with a flowline and the resulting split catchment and basin boundary.' >
-<figcaption>This figure shows a raindrop trace (dark blue) that intersects an existing flowline (lighter blue), the local catchment (green), and a custom drainage basin for the intersection point (faint green with blue border).</figcaption>
+<figcaption>This figure shows a raindrop trace (dark blue) that intersects an existing flowline (lighter blue), the local NHDPlusV2 catchment area (green), and a custom drainage basin for the intersection point (faint green with blue border).</figcaption>
 </figure>
 
 The second process called in the code behind the `basin` endpoint is the split catchment algorithm. This algorithm requires that a precise location along a flowline be provided (as can be derived from the raindrop trace algorithm). Given this point, the process retrieves needed data to delineate a "split catchment", returning one polygon upstream of the provided point and one downstream. These two polygons "split" the catchment polygon that defines the area that drains to the flowline in question. This split catchment can be used in conjunction with an upstream basin to provide a "precise" basin that is delineated to any provided location.
