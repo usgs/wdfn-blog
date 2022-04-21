@@ -16,8 +16,8 @@ tags:
 - Public Communication
 - WaterAlert
 - NextGen
-image: /static/WaterAlert/WaterAlert Coming Soon Blog.gif
-description: In Fall* 2022, the modernized, Next Generation WaterAlert will go live. Starting in Summer* 2022, you will be able to transition your legacy alerts to the NextGen WaterAlert. In this blog post, learn about what is WaterAlert, why we're transitioning, and how easy we've made this transition for you.
+image: /static/WaterAlert/WaterAlert Coming Soon Blog_FALL.gif
+description: In Fall* 2022, the modernized, Next Generation WaterAlert will go live. Starting in summer* 2022, you will be able to transition your legacy alerts to the NextGen WaterAlert. In this blog post, learn about what is WaterAlert, why we're transitioning, and how easy we've made this transition for you.
 keywords: wateralert, water data, subscription
 author_staff: 
 author_email: <wdfn@usgs.gov>
@@ -34,7 +34,7 @@ author_email: <wdfn@usgs.gov>
     </h3>
     <div class="usa-summary-box__text">
 
-Starting in Summer* 2022, expect to hear from us by email or text about transitiong your legacy alerts to **Next Generation WaterAlert**, which will go live in Fall* 2022.
+Starting in summer* 2022, expect to hear from us by email or text about transitiong your legacy alerts to **Next Generation WaterAlert**, which will go live in fall* 2022.
 </div>
 </div>
 </div>
@@ -42,7 +42,7 @@ Starting in Summer* 2022, expect to hear from us by email or text about transiti
 
 
 <div class="grid-row">
-{{< figure src="/static/WaterAlert/WaterAlert Coming Soon Blog.png" width="60%" caption="The Next Generation of WaterAlert is coming soon. 👀" alt="Next Generation WaterAlert is coming soon. iPhone screen shows NextGen WaterAlert. NextGen access opens August 2022." >}}
+{{< figure src="/static/WaterAlert/WaterAlert Coming Soon Blog_FALL.png" width="60%" caption="The Next Generation of WaterAlert is coming in fall 2022. 👀" alt="Next Generation WaterAlert is coming soon. iPhone screen shows NextGen WaterAlert. NextGen access opens August 2022." >}}
 </div>
 
 ## ❔ What is WaterAlert?
@@ -87,7 +87,7 @@ Fall* 2022 | Next Generation WaterAlert goes [Live]()
 Fall* 2022 | Legacy WaterAlert is [Decomissioned]().
 
 ## ➡ Transitioning Legacy users
-Starting in Summer* 2022, currents users of Legacy WaterAlert will be able to transfer their alerts to NextGen WaterAlert. Once users transfer, they will be able to see their account in NextGen WaterAlert. They'll be able to create, edit, and delete alerts in NextGen WaterAlert, **but alerts in NextGen WaterAlert will not be active until Legacy WaterAlert is decommissioned**. (Early Access users will have active alerts in the NextGen system.)
+Starting in summer* 2022, currents users of Legacy WaterAlert will be able to transfer their alerts to NextGen WaterAlert. Once users transfer, they will be able to see their account in NextGen WaterAlert. They'll be able to create, edit, and delete alerts in NextGen WaterAlert, **but alerts in NextGen WaterAlert will not be active until Legacy WaterAlert is decommissioned**.
 
 **The transition period will be open for two months**. We'll be available to help you at any time, but we hope you'll find the process fast and easy to complete on your own.
 
@@ -103,21 +103,20 @@ Later this spring, we will post more detailed written instructions that will wal
 Later this spring, re-visit this blog post or check out the [USGS YouTube channel](https://www.youtube.com/channel/UCeXH8GZyV3sVqAr45AvupOA) for a short instructional video on transitioning your legacy WaterAlert subscriptions to the NextGen WaterAlert system.
 
 <div class="grid-row">
-{{< figure src="/static/WaterAlert/WaterAlert_TransitionSteps.gif" width="60%" caption="When the transition period opens in Summer 2022, there will be 3 simple steps to transition legacy alerts to the NextGen system. 1. Login using login.gov or your AD credentials (internal folks). 2. Transfer your alerts. 3. Check out your NextGen account -- you're done!" alt="Steps to transition legacy alerts to the NextGen system: login, transfer alerts, done!" >}}
+{{< figure src="/static/WaterAlert/WaterAlert_TransitionSteps_FALL.png" width="60%" caption="When the transition period opens in summer 2022, there will be 3 simple steps to transition legacy alerts to the NextGen system. 1. Login using login.gov or your AD credentials (internal folks). 2. Transfer your alerts. 3. Check out your NextGen account -- you're done!" alt="Steps to transition legacy alerts to the NextGen system: login, transfer alerts, done!" >}}
 </div>
 
 ## ❔ What is Early Access?
-For select users like people who make safety decisions, those with a large number of subscriptions, or those who use it operationally for their work, we're offering access to Next Generation WaterAlert *before* NextGen access is open to everyone in the fall. Early access will provide users the opportunity to use the NextGen system while it undergoes its final changes. Users who request early access will receive duplicate alerts (one from the NextGen system, one from the Legacy system), and we encourage these early access users to compare the legacy alerts with the NextGen alerts, and to email us if there are any discrepancies. 
+For select users like people who make safety decisions, those with a large number of subscriptions, or those who use it operationally for their work, we're offering access to Next Generation WaterAlert *before* NextGen access is open to everyone in the fall. Early access will provide users the opportunity to use the NextGen system while it undergoes its final changes.
 
-**If you receive Early Access, you will not have to take any action once the transition period opens in June, and your NextGen WaterAlert account will still be active once the NextGen system goes live for everyone else in the fall.** (TAKE THIS OUT, but how we will comment on retracting this statement?)
+## 🔔 How can I request Early Access?
+Email wdfn_usabilitytesting@usgs.gov with the subject: **WaterAlert Early Access**. Tell us about your role and your usage of WaterAlert.
+
+We are currently collecting names of people who are interested in requesting Early Access. **We will update this blog post and notify the approved users once we open Early Access closer to summer 2022.** Because of other dependencies, the date that Early Access will open is TBD.
 
 <div class="grid-row">
 {{< figure src="/static/WaterAlert/Early Access WaterAlert.png" width="60%" caption="If you have a lot of alerts, have to make safety decisions, or have operational use-cases, request early access by emailing us at wdfn_usabilitytesting@usgs.gov with the subject WaterAlert Early Access. Please include your name and role!" alt="Next Generation WaterAlert *beta*. Try out WaterAlert beta. Request early access. If you have... a lot of alerts, to make safety decisions, or operational use-cases. Request early access: send an email to wdfn_usabilitytesting@usgs.gov, use the subject WaterAlert Early Access, and please include your name and role!" >}}
 </div>
-
-## 🔔 How can I request Early Access?
-We are currently collecting names of people who are interested in requesting Early Access. We will update this blog post and notify the approved users once we open Early Access. Because of other dependencies, the date on which Early Access will open is TBD.
-Email wdfn_usabilitytesting@usgs.gov with the subject: **WaterAlert Early Access**. Tell us about your role and your usage of WaterAlert.
 
 
 ## ❓ Common questions
@@ -162,6 +161,6 @@ After the transition period closes, you'll need to login or create an account in
 
 
 <br>
-*Timeframes are anticipated, based on availability of login.gov access. Earlier we used specific dates, and we're sorry to have to take that back, but there is uncertainty surrounding when a dependency will be made available for us, and this is outside of our control. So, we're now talking about the release of NextGen WaterAlert and the associated transition with *summer* and *fall* instead of specific dates because at this time it is more accurate. Rest assured that you will be repeatedly notified of this transition, and you will have plenty of time to transition your alerts.
+*The timelines presented here and in all other communication on the WaterAlert modernization are estimated. These timelines may be subject to change. Check back here for the most accurate and up to date information. 
 
 *🙌 With Water Data for the Nation, the USGS is making high-quality water information discoverable, accessible, and usable for everyone.*

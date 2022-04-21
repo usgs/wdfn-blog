@@ -28,7 +28,7 @@ tags:
 
 image: /static/how-to-guide/How to Use NextGen Pages.png
 
-description: Learn how to use WDFN's  Next Generation monitoring location pages.
+description: Learn how to use WDFN's Next Generation Monitoring Location Pages.
 
 keywords: water data
 
@@ -102,7 +102,7 @@ Move your computer mouse or tap your device’s screen over top of the plot to e
 
 <!--- COMPARE TO PREVIOUS DATA ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a4">
-Compare to Previous Data / Display Median <!--- 🚢🛥⛴🚀 -->
+Compare to Last Year / Display Median <!--- 🚢🛥⛴🚀 -->
 </button></h2>
 <div id="a4" class="usa-accordion__content">
 <!--- ------------- --> 
