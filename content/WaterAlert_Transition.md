@@ -42,7 +42,7 @@ Starting in summer* 2022, expect to hear from us by email or text about transiti
 
 
 <div class="grid-row">
-{{< figure src="/static/WaterAlert/WaterAlert Coming Soon Blog_FALL.png" width="60%" caption="The Next Generation of WaterAlert is coming in fall 2022. 👀" alt="Next Generation WaterAlert is coming soon. iPhone screen shows NextGen WaterAlert. NextGen access opens August 2022." >}}
+{{< figure src="/static/WaterAlert/WaterAlert Coming Soon Blog_FALL.png" width="60%" caption="The Next Generation of WaterAlert is coming in fall 2022. 👀" alt="Next Generation WaterAlert is coming soon. iPhone screen shows NextGen WaterAlert. NextGen coming in fall 2022." >}}
 </div>
 
 ## ❔ What is WaterAlert?
@@ -83,8 +83,8 @@ Once the transition opens, if you do transition your alerts, you will receive up
 Coming Soon/ TBD | Early Access available for select users
 Summer* 2022 | Transition Period opens
 Fall* 2022 | Transition Period closes
-Fall* 2022 | Next Generation WaterAlert goes [Live]()
-Fall* 2022 | Legacy WaterAlert is [Decomissioned]().
+Fall* 2022 | Next Generation WaterAlert goes Live
+Fall* 2022 | Legacy WaterAlert is Decomissioned
 
 ## ➡ Transitioning Legacy users
 Starting in summer* 2022, currents users of Legacy WaterAlert will be able to transfer their alerts to NextGen WaterAlert. Once users transfer, they will be able to see their account in NextGen WaterAlert. They'll be able to create, edit, and delete alerts in NextGen WaterAlert, **but alerts in NextGen WaterAlert will not be active until Legacy WaterAlert is decommissioned**.
