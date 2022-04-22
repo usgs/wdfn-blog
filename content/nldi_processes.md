@@ -2,7 +2,7 @@
 author: David Blodgett
 date: 2022-04-12
 slug: nldi-processes
-draft: True
+draft: False
 type: post
 image: /static/nldi_processes/basin_zoom.png
 title: "The Network Linked Data Index Geoprocessing with OGC API Processes"
@@ -21,7 +21,7 @@ tags:
 
 ---
 
-The [Network Linked Data Index](https://labs.waterdata.usgs.gov/about-nldi/index.html) (NLDI) is a search engine that uses the river network as it's index. Like a search engine, it can cache and index new data. Beyond indexing and data discovery, it also offers some convenient data services like basin boundaries and accumulated catchment characteristics.
+The [Network Linked Data Index](https://labs.waterdata.usgs.gov/about-nldi/index.html) (NLDI) is a search engine that indexes data to the flowpaths and/or catchments of a river network and provides discovery services based on position in that network. Like a search engine, it can cache and index new data. It also offers some convenient data services like basin boundaries and accumulated catchment characteristics.
 
 Previous waterdata blog post ([intro](https://waterdata.usgs.gov/blog/nldi-intro/), [new functionality](https://waterdata.usgs.gov/blog/nldi_update/) and [linked-data](https://waterdata.usgs.gov/blog/nldi-geoconnex/)) describe what the Network Linked Data Index (NLDI) is and what it can do in detail.
 
@@ -34,16 +34,14 @@ For those not familiar, a quick overview follows. The NLDI API offers an intuiti
 A set of `featureSource`s can be discovered at the `linked-data` root.  
 `.../api/nldi/linked-data/`
 
-Each `featureSource` has a set of `featureID`s.  
+Each `featureSource` is made up of a set of features. each with its own  `featureID`. A specific `featureID` can be accessed with a URL like:  
 `.../api/nldi/linked-data/{featureSource}/{featureID}`
 
-Each `featureID` is indexed to a network of catchment polygons and some are also indexed to the flowpaths that connect the catchments.
-
-Using these indexes, the NLDI offers a `navigation` api based on each `featureID` providing upstream/downstream search and access to network-data.  
+The NLDI has a `navigation` api based on each `featureID` providing upstream/downstream search and access to network-data.  
 `.../api/nldi/linked-data/{featureSource}/{featureID}/navigation`  
 `.../api/nldi/linked-data/{featureSource}/{featureID}/navigation/{mode}/{dataSource}`
 
-Two other capabilities stem from each `featureID` -- one to retrieve a `basin` upstream of the feature and one to retrieve local, total accumulated, or divergence-routed accumulated landscape characteristics.  
+Two other capabilities stem from each `featureID` -- one to retrieve a `basin` polygon upstream of the feature and one to retrieve local, total accumulated, or divergence-routed accumulated landscape characteristics.  
 `.../api/nldi/linked-data/{featureSource}/{featureID}/basin`  
 `.../api/nldi/linked-data/{featureSource}/{featureID}/{local|tot|div}`
 
@@ -68,11 +66,11 @@ There is also a `hydrolocation` endpoint that returns a linear reference to a fl
 <figcaption>This figure shows a stream gage (black dot) at the outlet of a drainage basin. In this case, the streamgage is at a naturally occurring basin outlet in the hydrographic data used by the NLDI. But this is not always the case. Sometimes, as shown below, we need to derive a drainage basin for a point midway up a flowline river segment.</figcaption>
 </figure>
 
-The NLDI `hydrolocation` and `basin` endpoints both rely on some custom elevation-based processing. The two processes are referred to as "raindrop trace" and "split catchment" algorithms. Two other algorithms, both to retrieve cross sections are included in the current (Spring 2022) NLDI processes services. These algorithms retrieve cross sections either at a point along a flowline from the NLDI or between two provided points (presumable spanning a river to form a cross section). 
+The NLDI `hydrolocation` and `basin` endpoints both rely on some custom elevation-based processing. The two processes are referred to as "raindrop trace" and "split catchment" algorithms. Two other algorithms, both to retrieve cross sections are included in the current (Spring 2022) NLDI processing services. These algorithms retrieve cross sections either at a point along a flowline from the NLDI or between two provided points (presumable spanning a river to form a cross section). 
 
-These processes are available as stand alone python packages: [nldi-xstool](https://code.usgs.gov/wma/nhgf/toolsteam/nldi-xstool) and [nldi-flowtools](https://code.usgs.gov/wma/nhgf/toolsteam/nldi-flowtools) as well as hosted processing services via the [NLDI "pygeoapi" server.](https://labs.waterdata.usgs.gov/api/nldi/pygeoapi) [pygeoapi](https://pygeoapi.io/) is a python [OGC API](https://ogcapi.ogc.org/) server that the USGS waterdata teams use for a number of applications.
+These raindrop trace an split catchment algorithms are available as stand alone python packages: [nldi-xstool](https://code.usgs.gov/wma/nhgf/toolsteam/nldi-xstool) and [nldi-flowtools](https://code.usgs.gov/wma/nhgf/toolsteam/nldi-flowtools) as well as hosted processing services via the [NLDI "pygeoapi" server.](https://labs.waterdata.usgs.gov/api/nldi/pygeoapi) [pygeoapi](https://pygeoapi.io/) is a python [OGC API](https://ogcapi.ogc.org/) server that the USGS waterdata teams use for a number of applications.
 
-The two processes that are tightly integrated into the NLDI are called in the code behind the `hydrolocation` and `basin` endpoints. In both of these endpoints, the raindrop trace algorithm is used to ensure that a flowline within the local watershed of a selected point is found and the point used for basin retrieval is along a flowline.
+Both the `hydrolocation` and `basin` endpoints use the raindrop trace algorithm. It ensures that a flowline within the local catchment of a selected point is found, rather than one that is nearby but in a different catchment and the point used for basin retrieval is along a flowline rather than a small dributary implied by elevation data.
 
 <figure>
 <img src='/static/nldi_processes/basin_zoom.png' title='Raindrop trace and split catchment.' alt='Simple map depicting a raindrop trace intersection with a flowline and the resulting split catchment and basin boundary.' >
