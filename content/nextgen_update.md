@@ -15,6 +15,7 @@ tags:
 - Water Data for the Nation
 - Public Communication
 - Monitoring Location Pages
+- NextGen
 image: /static/nextgen_update/NextGen Update_Blog_4.png
 description: On April 11th, 2022, join our public webinar where we'll provide an update on the Next Generation Monitoring Location Pages and give a live demo of the Next Generation WaterAlert. Wondering what these products are? Read on...
 keywords: monitoring location pages, water data, next generation, webinar, update
@@ -22,7 +23,14 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
-# [Join the live webinar](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NjlmMmEwZGItN2U5ZS00NDgzLWE2NjktNGRjMzUwOTU5NmQy%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%7d) at 12 pm ET/ 9 am PT on Monday, April 11th!
+[Watch the recording]()
+
+# Summary
+## Monitoring Location Pages
+During this webinar, we notified users that our timelines have shifted for NextGen Monitoring Location Pages.
+Instead of redirecting the pages in March of 2022, we will be redirecting the pages in September 2022. We will be decommissioning the NWISWeb current-conditions real-time pages in July 2023. They are our most popular pages on the National Water Information System Web (NWISWeb) and they are being replaced with Next Generation Monitoring Location pages. By July 2023, NextGen pages will have all of the critical functionality of the legacy pages and more, so we will be ready to say thank you and goodbye to these popular legacy real-time current-conditions pages.
+## WaterAlert
+We announced Next Generation WaterAlert is coming in August 2022. The transition period for all users will open in June 2022 and close when the NextGen system goes live in August 2022. If users do not transition their alerts during this 2 month period, their alerts will permanently disappear. They can create new alerts in the NextGen system. 
 
 <div class="grid-row">
 {{< figure src="/static/nextgen_update/NextGen Update_Blog_4.png" caption="Join our Next Generation Update Webinar on Monday, April 11th, 2022 at 12 pm ET/ 9 am PT. NextGen Monitoring Location Pages are live now and NextGen WaterAlert is coming soon in August 2022. 👀" alt="NextGen WaterAlert is displayed on an iPhone, although it is mostly hidden by a gray ribbon that reads: NextGen Coming soon! August 2022. Underneath, the text reads: WaterAlert. subscribe to alerts for your favorite gages. NextGen Monitoring Location Page is displayed on an iPhone. Underneat, the text reads: Monitoring Location Pages. check your favorite gages. The text on this image reads: Water Data for the Nation. Next Generation Update Webinar. Monday April 11th, 2022. 12 pm ET/ 9 am PT. waterdata.usgs.gov/blog. The blue USGS logo is in the top right." >}}
