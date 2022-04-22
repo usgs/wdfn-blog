@@ -78,7 +78,7 @@ WaterAlert has been a tried-and-true service for years, but the system was aging
 > 👍 **Short-code SMS messages:** WaterAlert text messages are being updated to follow industry standards using short-code SMS messages ensuring clarity for all users.
 
 ## 🕕 When will things happen?
-Once the transition opens, if you do transition your alerts, you will receive up to three emails by the time the transition closes in Fall* 2022. Once you successfully transition your alerts, you will not receive any more reminders about the transition.
+Once the transition opens in summer* 2022 (anticipated to open in June), if you do transition your alerts, you will receive up to three emails by the time the transition closes in fall* 2022 (anticipated to close in August). Once you successfully transition your alerts, you will not receive any more reminders about the transition.
 
 | Date | What Will Happen |
 |------|----------|
