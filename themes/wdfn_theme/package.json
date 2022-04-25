@@ -21,7 +21,7 @@
     "watch:uswdsinit": "npm run build:uswdsinit"
   },
   "engines": {
-    "node": "16.14.0"
+    "node": "16.14.2"
   },
   "repository": {
     "type": "git",
@@ -42,25 +42,25 @@
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.4",
-    "wdfn-viz": "2.1.1"
+    "wdfn-viz": "2.1.2"
   },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "autoprefixer": "^10.4.2",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "autoprefixer": "^10.4.5",
     "mkdirp": "^1.0.4",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.6",
+    "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
     "postcss-csso": "^6.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "rollup": "^2.67.2",
+    "rollup": "^2.70.2",
     "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.49.7",
-    "stylelint": "^14.5.1",
-    "stylelint-config-recommended-scss": "^5.0.2",
-    "stylelint-scss": "^4.1.0",
-    "terser": "^5.10.0"
+    "sass": "^1.50.1",
+    "stylelint": "^14.7.1",
+    "stylelint-config-recommended-scss": "^6.0.0",
+    "stylelint-scss": "^4.2.0",
+    "terser": "^5.12.1"
   }
 }
