@@ -37,9 +37,7 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 
 ---
-
-# Frequently Asked Questions
-<i>Last updated April 7th, 2022</i>
+<b><i>Last updated April 27th, 2022</i></b>
 
 <!--- ACCORDION START -->
 <div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
@@ -259,7 +257,18 @@ Right now, presentation-quality graphs are not available on NextGen pages. We've
 
 Great, we'd love to have you! What kind of tester do you want to be?  Do you view water data in a web browser?  Or do you write software or code that call our services or APIs?  Or maybe some of both? We need usability testers for all user types - from the casual user checking status of a local stream or lake, to users routinely accessing our data and information programmatically. Send us an email at WDFN_usabilitytesting@usgs.gov.
 </div>
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a22">
+22. I don't see statistical information like daily low/ high for gage height. Will you include that?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a22" class="usa-accordion__content">
+<!--- ------------- -->
+Yes! Thanks to your feedback, we have prioritized offering a feature that will display daily statistics for the latest day. We expect to release that feature before we redirect legacy real-time pages to Next Generation Monitoring Location Pages, which is the next step in decommissioning the legacy pages.
 </div>
+</div>
+
+Is your question not answered here? Let us know by sending us an email at wdfn@usgs.gov. 
 
 <h2 class="site-preview-heading">Additional Resources</h2>
 <ul class="usa-card-group">
