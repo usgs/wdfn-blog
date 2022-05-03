@@ -37,7 +37,9 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 
 ---
-<b><i>Last updated April 27th, 2022</i></b>
+<b><i>Last updated May 3rd, 2022</i></b>
+
+For ease of use, we recommend you CTRL+F (for Windows) or Command+F (for Mac) to search this page for the section that relates to your question.
 
 <!--- ACCORDION START -->
 <div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
