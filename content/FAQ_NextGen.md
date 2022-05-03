@@ -37,9 +37,7 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 
 ---
-
-# Frequently Asked Questions
-<i>Last updated April 7th, 2022</i>
+<b><i>Last updated April 27th, 2022</i></b>
 
 <!--- ACCORDION START -->
 <div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
@@ -259,7 +257,49 @@ Right now, presentation-quality graphs are not available on NextGen pages. We've
 
 Great, we'd love to have you! What kind of tester do you want to be?  Do you view water data in a web browser?  Or do you write software or code that call our services or APIs?  Or maybe some of both? We need usability testers for all user types - from the casual user checking status of a local stream or lake, to users routinely accessing our data and information programmatically. Send us an email at WDFN_usabilitytesting@usgs.gov.
 </div>
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a22">
+22. I don't see statistical information like daily low/ high for gage height. Will you include that?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a22" class="usa-accordion__content">
+<!--- ------------- -->
+Yes! Thanks to your feedback, we have prioritized offering a feature that will display daily statistics for the latest day. We expect to release that feature before we redirect legacy real-time pages to Next Generation Monitoring Location Pages, which is the next step in decommissioning the legacy pages.
 </div>
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a23">
+23. I don't see statistical information in tabular format for discharge. Will you include that?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a23" class="usa-accordion__content">
+<!--- ------------- -->
+We are planning to include statistical information in tabular format for discharge. We know this is important information for our users, so we are prioritizing providing this in the most intuitive way possible. In order to do that, we are researching different methods to display the data by conducting a Discovery.
+<div class="grid-row">
+{{< figure src="/static/FAQ_NextGen/daily stats.png" caption="Daily statistics in table format as it appears on NWISWeb Legacy Current-Conditions Real-time pages." alt="Daily statistics in table format as it appears on NWISWeb Legacy Current-Conditions Real-time pages." >}}
+</div>
+</div>
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a24">
+24. Why aren't you including flood forecasting anymore? It's really important to me.  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a24" class="usa-accordion__content">
+<!--- ------------- -->
+Although this feature is not available on all Legacy Current-Conditions Real-time pages, we can completely understand how important that information is for our users, whether you are looking to go fishing in a few days, or whether you are an emergency mananger needing to prepare.
+
+
+But USGS does not provide forecasting data, the [National Weather Service (NWS)](https://www.weather.gov/) does, so on some of our Legacy pages, Water Science Centers offer a link to the forecasting information provided by the National Weather Service's [Advanced Hydrologic Prediction Service](https://water.weather.gov/ahps2/forecasts.php?wfo=mob).
+
+On our Next Generation Monitoring Location Pages, we do not have a link to the NWS's flood forecasting pages, however, in an attempt to meet user needs, we are researching if it's possible for us to provide that forecasting information on the NextGen pages. 
+<div class="grid-row">
+{{< figure src="/static/FAQ_NextGen/NWS forecast.png" width= "70%" caption="Example of the customized text from a Water Science Center that offers a link to the National Weather Service's Advanced Hydrologic Prediction Services page." alt="Daily statistics in table format as it appears on NWISWeb Legacy Current-Conditions Real-time pages." >}}
+</div>
+<div class="grid-row">
+{{< figure src="/static/FAQ_NextGen/NWS forecast2.png" width= "70%" caption="Example of the National Weather Service's Advanced Hydrologic Prediction Services page for a particular monitoring location." alt="Daily statistics in table format as it appears on NWISWeb Legacy Current-Conditions Real-time pages." >}}
+</div>
+</div>
+
+Is your question not answered here? Let us know by sending us an email at wdfn@usgs.gov. 
 
 <h2 class="site-preview-heading">Additional Resources</h2>
 <ul class="usa-card-group">
