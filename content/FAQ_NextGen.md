@@ -271,7 +271,7 @@ Yes! Thanks to your feedback, we have prioritized offering a feature that will d
 
 <!--- Common Questions START -->
 <h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a23">
-23. I don't see statistical information in tabular format for discharge. Will you include that?  <!--- 🚢🛥⛴🚀 -->
+23. I like the daily discharge stats table. Will you have that on the NextGen pages?  <!--- 🚢🛥⛴🚀 -->
 </button></h1>
 <div id="a23" class="usa-accordion__content">
 <!--- ------------- -->

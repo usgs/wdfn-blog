@@ -21,7 +21,6 @@ keywords: water data, API, webinar, tutorial
 author_staff:
 author_email: <wdfn@usgs.gov>
 ---
-# [Join the live event](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MGU4Mjc3NmMtZGMzMy00MjRiLTljZDEtYjdhM2QxYWQ3NGM3%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)
 
 <div class="grid-row">
 {{< figure src="/static/API_OGC/API_OGC_Banner2.gif" caption="Join our next API webinar about the NLDI and OGC-API-Processes on 4/25/2022!" alt="text here" >}}
@@ -31,7 +30,7 @@ author_email: <wdfn@usgs.gov>
 In this webinar on our [Network Linked Data Index](https://waterdata.usgs.gov/blog/nldi-intro/) and Open Geospatial Consortium API ([OGC-API](https://ogcapi.ogc.org/)), we'll give you a brief background on APIs in general, then Dave Blodgett will give a live demo of the Network Linked Data Index API and associated OGC-API-Processing algorithms to retrieve precise drainage basins and cross sections at specific network locations.
 
 ## 🕛 When is it?
-On Monday, April 25th, 2022 at 12 pm ET/ 9 am PT. **This webinar will be recorded. We'll post the recording about one week after the event** on this blog post, on our [WMA website](https://www.usgs.gov/mission-areas/water-resources), and on the [USGS YouTube channel](https://www.youtube.com/channel/UCeXH8GZyV3sVqAr45AvupOA).
+This webinar occurred on Monday, April 25th, 2022 at 12 pm ET/ 9 am PT. **This webinar was [recorded](https://www.youtube.com/watch?v=BI8dMvtEPj8).**
 
 
 ## 👩‍💻 Who is it for?
@@ -40,15 +39,6 @@ On Monday, April 25th, 2022 at 12 pm ET/ 9 am PT. **This webinar will be recorde
 - Programmers interested in improving their workflow with USGS water data
 
 - Anyone who wants to learn more about the power of APIs!
-
-
-## 📆 How Can I Register?
-Conveniently add this event to your calendar by visting the event on [Eventbrite](https://www.eventbrite.com/e/ogc-processes-apis-easily-integrate-real-time-water-data-tickets-252228220397). <b>You do not have to provide any personal information, and you do not have to register for the event on Eventbrite in order to attend</b> (we've provided this option because many users requested a way to register for the event so they could get automatic reminders). We will be providing a new way to register for events soon!
-
-## 📞 Where's the link to join the live call?
-[Click this link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MGU4Mjc3NmMtZGMzMy00MjRiLTljZDEtYjdhM2QxYWQ3NGM3%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a) to join the live event on Monday, April 25th at 12 pm ET/ 9 am PT!
-
-----
 
 ## 🤩 Tell me about the API Series
 🙌 At the United States Geological Survey, we're making high-quality water information discoverable, accessible, and usable for everyone.
@@ -61,7 +51,7 @@ In this API webinar series, we'll touch on what USGS water data is, then we'll d
 |------|----------|-------|
 *[SensorThings](https://www.youtube.com/watch?v=n7TQoJAQ8WI)* | *Monday, January 31st, 2022* (PAST) | *12 pm ET / 9 am PT*
 *[OGC API-Features](https://www.youtube.com/watch?v=ppLyZjovmxQ)* | *Monday, February 28th, 2022* (PAST) | *12 pm ET / 9 am PT*
-**[NLDI and OGC-API-Processes](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MGU4Mjc3NmMtZGMzMy00MjRiLTljZDEtYjdhM2QxYWQ3NGM3%40thread.v2/0?context=%7b%22Tid%22%3a%220693b5ba-4b18-4d7b-9341-f32f400a5494%22%2c%22Oid%22%3a%2274c01c76-7d2c-4555-94ec-9e22ecb44037%22%2c%22IsBroadcastMeeting%22%3atrue%7d&btype=a&role=a)** | **Monday, April 25th, 2022** | **12 pm ET / 9 am PT**
+**[NLDI and OGC-API-Processes](https://www.youtube.com/watch?v=BI8dMvtEPj8)** | **Monday, April 25th, 2022** | **12 pm ET / 9 am PT**
 What's Next | TBD | TBD
 Client Tooling | TBD | TBD
 Guest Speaker | TBD | TBD
@@ -76,5 +66,5 @@ We'll include links to all the resources we reference in this webinar.
 [Thresholds Demo Notebook](https://nbviewer.org/github/ACWI-SSWD/nldi_xstool_thresholds_test/blob/main/notebooks/Threshold_XSTool_Demo.ipynb)
 R NHDPLus tools: [Split Catchment NHD Plus tools](https://usgs-r.github.io/nhdplusTools/reference/get_split_catchment.html) and [Cross Section](https://usgs-r.github.io/nhdplusTools/reference/get_xs_points.html)
 
-## 🎥 Recording
-Check back about one week after the event and we'll post the recording!
+## 🎥 [Recording](https://www.youtube.com/watch?v=BI8dMvtEPj8)
+{{< youtube id="BI8dMvtEPj8" title="OGC API Processes for USGS Water Data" >}}
