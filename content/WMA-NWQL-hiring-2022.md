@@ -19,7 +19,7 @@ tags:
   
 
 ---
-{{< figure src="/static/hiring-nqwl/banner-nqwl-01.png" alt="A banner announcing that the USGS Water Mission Area is hiring leadership positions in the National Water Quality Lab. Apply online at USAjobs.gov. Accepting Applications May 9th-May 23rd.">}}
+{{< figure src="/static/hiring-nwql/banner-nwql-01.png" alt="A banner announcing that the USGS Water Mission Area is hiring leadership positions in the National Water Quality Lab. Apply online at USAjobs.gov. Accepting Applications May 9th-May 23rd.">}}
 
 The U.S. Geological Survey’s Water Mission Area (WMA) is looking to hire two outstanding leaders and managers: one will serve as the **National Water Quality Laboratory (NWQL) Assistant Chief** and the other as the **Analytical Services Chief**. We are committed to inclusive hiring practices that build a healthy workplace where diversity is a strength, and everyone has the support they need to succeed. We encourage applicants who are BIPOC, LGBTQIA+, have a disability, or are of any marginalized identity. Apply online at USAJobs, where the positions will be open for submission of applications under a single posting from **Monday, May 9 to Monday, May 23, 2022**. This posting will close when we have received 75 applications, which may be sooner than the closing date.   
 
