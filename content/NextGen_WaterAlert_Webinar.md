@@ -5,7 +5,7 @@ slug: nextgen-wateralert-webinar
 draft: false
 type: post
 title: NextGen WaterAlert | Webinar | June 6
-toc: false
+toc: true
 categories:
 - Water Information
 - Web Communication

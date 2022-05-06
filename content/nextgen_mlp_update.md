@@ -1,6 +1,6 @@
 ---
 author: Nicole Felts, Randi Butler
-date: 2022-04-28
+date: 2022-05-06
 slug: nextgen-mlp-update
 draft: true
 type: post
@@ -18,7 +18,7 @@ tags:
 - NextGen
 - news
 
-image: /static/.png
+image: /static/nextgen_mlp_update/NextGen MonLoc Update Blog.png
 description: Our Next Generation Monitoring Location Pages continue to receive updates based on our priorities and your feedback. Legacy real-time pages will redirect to NextGen pages in September 2022 and legacy pages will be decommissioned in July 2023.
 keywords: monitoring location pages, water data, next generation, update, news, events
 author_staff: 
@@ -26,7 +26,10 @@ author_email: <wdfn@usgs.gov>
 ---
 On April 11th, we hosted a [public webinar](https://waterdata.usgs.gov/blog/nextgen-webinar-apr11/) during which we updated our stakeholders on the progress of replacing [Legacy real-time pages](https://waterdata.usgs.gov/nwis/uv?site_no=01584050) with [Next Generation Monitoring location pages](https://waterdata.usgs.gov/monitoring-location/01584050/).
 
-We anticipate to begin redirecting Legacy pages to NextGen pages in September 2022. This means when you click a bookmark for a Legacy page, your web browser will automatically redirect you to the NextGen page, but you'll still be able to access the Legacy page if you click on the link at the top of NextGen pages. (INSERT SCREENSHOT HERE)
+We anticipate to begin redirecting Legacy pages to NextGen pages in September 2022. This means when you click a bookmark for a Legacy page, your web browser will automatically redirect you to the NextGen page, but you'll still be able to access the Legacy page if you click on the link at the top of NextGen pages. 
+<div class="grid-row">
+{{< figure src="/static/nextgen_mlp_update/legacy link.png" alignment="center" caption="Notice the <b>Legacy real-time page</b> link at the top of a Next Generation Monitoring Location Page." alt="text here" >}}
+</div>
 
 After adding many highly-requested features, we anticipate decommissioning the NWISWeb Legacy current-conditions real-time pages in July 2023.
 
