@@ -2,7 +2,7 @@
 author: Jeff McCory (he/him)
 date: 2022-05-05
 slug: nwql-hiring
-draft: True
+draft: False
 type: post
 image: /static/hiring-nwql/thumb-nwql-01.png
 title: "We’re Hiring: National Water Quality Lab Leadership Positions"
