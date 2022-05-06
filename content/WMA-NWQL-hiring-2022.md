@@ -1,6 +1,6 @@
 ---
-author: Gary Rowe (he/him)
-date: 2022-03-24
+author: Jeff McCory (he/him)
+date: 2022-05-05
 slug: nwql-hiring
 draft: True
 type: post
