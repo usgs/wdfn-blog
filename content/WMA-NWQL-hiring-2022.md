@@ -1,5 +1,5 @@
 ---
-author: Jeff McCory (he/him)
+author: Jeff McCoy (he/him)
 date: 2022-05-05
 slug: nwql-hiring
 draft: False
