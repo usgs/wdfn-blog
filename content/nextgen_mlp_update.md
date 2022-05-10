@@ -2,7 +2,7 @@
 author: Nicole Felts, Randi Butler
 date: 2022-05-06
 slug: nextgen-mlp-update
-draft: true
+draft: false
 type: post
 title: Next Generation Monitoring Location Pages Update
 toc: false
