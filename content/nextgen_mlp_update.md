@@ -18,7 +18,7 @@ tags:
 - NextGen
 - news
 
-image: /static/nextgen_mlp_update/NextGen MonLoc Update Blog.png
+image: /static/nextgen_mlp_update/NextGen MonLoc Update Blog2.png
 description: Our Next Generation Monitoring Location Pages continue to receive updates based on our priorities and your feedback. Legacy real-time pages will redirect to NextGen pages in September 2022 and legacy pages will be decommissioned in July 2023.
 keywords: monitoring location pages, water data, next generation, update, news, events
 author_staff: 
@@ -31,12 +31,9 @@ We anticipate to begin redirecting Legacy pages to NextGen pages in September 20
 {{< figure src="/static/nextgen_mlp_update/legacy link.png" alignment="center" caption="Notice the <b>Legacy real-time page</b> link at the top of a Next Generation Monitoring Location Page." alt="text here" >}}
 </div>
 
-After adding many highly-requested features, we anticipate decommissioning the NWISWeb Legacy current-conditions real-time pages in July 2023.
-
-Check out our [roadmap](https://labs.waterdata.usgs.gov/roadmap/index.html) to follow along with specific feature requests. We update our roadmap quarterly.
+After addressing many highly-requested features, we anticipate decommissioning the NWISWeb Legacy current-conditions real-time pages in July 2023.
 
 ## Some features we plan to add before the redirect in September 2022
-(IS THIS LIST EXHAUSTIVE?)
 - ✔ Add scale to map (complete!)
 - ✔ Provide option to download data near data tables (complete!)
 - Make data sortable by time
@@ -45,7 +42,7 @@ Check out our [roadmap](https://labs.waterdata.usgs.gov/roadmap/index.html) to f
 - Daily statistics for the latest day
 - Multi-parameter feature (2 parameters on the same plot)
 
-## Some features we plan to add before Legacy decommission in July 2023
+## Some features we anticipate addressing before Legacy decommission in July 2023
 - Better download capability
 - Possible expansion of WSC-specified text fields like manuscript, location-level revisions (interaction with SIMS)
 - Make wind direction parameter a set of discrete measurements (not continuous line)

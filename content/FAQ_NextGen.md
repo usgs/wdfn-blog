@@ -61,6 +61,8 @@ The old website has served the public well, but it is 25 years old—that’s ab
 <div id="a2" class="usa-accordion__content">
 <!--- ------------- -->
 
+Yes, we will be, but we're not sure exactly how it will look or by when exactly we will release this feature.
+
 Not yes, not no... we need more information first, so we are currently gathering use-cases to better understand our users’ needs. We plan to undertake a “discovery” research project on these needs in fiscal year 2022. These kinds of reports that summarize multiple monitoring locations are valuable for certain advanced users, and we need to ensure all members of the public can derive value from these reports. 
 </div>
 
@@ -298,6 +300,27 @@ On our Next Generation Monitoring Location Pages, we do not have a link to the N
 </div>
 <div class="grid-row">
 {{< figure src="/static/FAQ_NextGen/NWS forecast2.png" width= "70%" caption="Example of the National Weather Service's Advanced Hydrologic Prediction Services page for a particular monitoring location." alt="Daily statistics in table format as it appears on NWISWeb Legacy Current-Conditions Real-time pages." >}}
+</div>
+</div>
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a25">
+25. Why can't I find the median for a specific parameter?  <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a25" class="usa-accordion__content">
+<!--- ------------- -->
+<div class="grid-row">
+{{< figure src="/static/FAQ_NextGen/display median.png" caption="If you check the 'display median' check box for a parameter for which we do not publish a daily value statistic, it will display 'no data'." alt="" >}}
+</div>
+
+We don't always have median data available for one of two reasons: 
+1. We have no median data recorded for that parameter at that particular monitoring location because it has not been calculated
+<b>or</b>
+2. We can't offer median data for that specific parameter because it goes against best data management practices
+<br>
+
+<div class="grid-row">
+{{< figure src="/static/FAQ_NextGen/contact WSC.png" width="50%" caption="If you want the median data for a specific parameter at a specific location, click the 'Questions or Comments' button on any monitoring location page (see previous screenshot) and select the 'Contact the office that manages this station' option to talk to the Water Science Center associated with that monitoring location." alt="" >}}
 </div>
 </div>
 
