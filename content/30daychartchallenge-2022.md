@@ -2,7 +2,7 @@
 author: USGS Vizlab
 date: 2022-05-06
 slug: chart-challenge-2022
-draft: True
+draft: False
 type: post
 image: static/30daychartchallenge-2022/30DayChartChallenge.gif
 title: "The 30 Day Chart Challenge with the USGS VizLab"
@@ -25,7 +25,7 @@ During the month of April, the 30 Day Chart Challenge brought data visualization
 
 {{< tweet 1509439977674915843 >}}
 
-Here at USGS, we were excited to share our science and learn new data visualization skills along the way. Throughout the month we shared 23 new charts featuring the work of hydrologists, data scientists, and science communicators. A big thank you to all of the contributors from across the USGS Water Mission Area and Water Science Centers! We had participation from the Observing Systems Division (OSD), the Integrated Information Dissemination Division (IIDD), the Integrated Modeling and Prediction Division (IMPD), and the Utah (UT), South Atlantic (SA), Oregon (OR), Maryland-Delaware-DC (MD/DE/DC) and New England (NE) Water Science Centers (WSCs). 
+Here at USGS, we were excited to share our science and learn new data visualization skills along the way. Throughout the month we shared 23 new charts featuring the work of hydrologists, data scientists, and science communicators. A big thank you to all of the contributors from across the USGS Water Mission Area and Water Science Centers! We had participation from the Observing Systems Division (OSD), the Integrated Information Dissemination Division (IIDD), the Integrated Modeling and Prediction Division (IMPD), and the Utah (UT), South Atlantic (SA), Oregon (OR), Maryland-Delaware-DC (MD-DE-DC) and New England (NE) Water Science Centers (WSCs). 
 
 See below for all of the contributions form the chart challenge, and don't forget to follow [@USGS_DataSci](https://twitter.com/USGS_DataSci) on Twitter to see future data visualizations, or check out the [USGS VizLab portfolio](https://labs.waterdata.usgs.gov/visualizations/vizlab-home/index.html#/?utm_source=wdfn&utm_medium=blog&utm_campaign=30DayChartChall22). 
 
@@ -72,7 +72,7 @@ See below for all of the contributions form the chart challenge, and don't forge
 {{< tweet 1521225403058339842 >}}
 ## Day 21, Timeseries: Down/Upwards by Theodore Thompson & Salme Cook (IMPD)
 {{< tweet 1520102202433576960 >}}
-## Day 22, Timeseries: Animation by David Fisher (MD/DE/DC WSC) 
+## Day 22, Timeseries: Animation by David Fisher (MD-DE-DC WSC) 
 {{< tweet 1517592256508829698 >}}
 ## Day 23, Timeseries: Tiles by John Mullaney (NE WSC) 
 {{< tweet 1517870260732534785 >}}
