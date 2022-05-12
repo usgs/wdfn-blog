@@ -4,7 +4,7 @@ date: 2022-05-06
 slug: chart-challenge-2022
 draft: True
 type: post
-image: static/30daychartchallenge-2022/chartchall-01.png
+image: static/30daychartchallenge-2022/30DayChartChallenge.gif
 title: "The 30 Day Chart Challenge with the USGS VizLab"
 author_email: <gs-w_vizlab@usgs.gov>
 author_twitter: USGS_DataSci
