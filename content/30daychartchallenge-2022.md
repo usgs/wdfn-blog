@@ -25,12 +25,14 @@ During the month of April, the 30 Day Chart Challenge brought data visualization
 
 {{< tweet 1509439977674915843 >}}
 
-Here at USGS, we were excited to share our science and learn new data visualization skills along the way! Throughout the month we shared 23 new charts featuring the work of hydrologists, data scientists, and science communicators. A big thank you to all of the contributors from across the USGS Water Mission Area and Water Science Centers! 
+Here at USGS, we were excited to share our science and learn new data visualization skills along the way. Throughout the month we shared 23 new charts featuring the work of hydrologists, data scientists, and science communicators. A big thank you to all of the contributors from across the USGS Water Mission Area and Water Science Centers! We had participation from the Observing Systems Division (OSD), the Integrated Information Dissemination Division (IIDD), the Integrated Modeling and Prediction Division (IMPD), and the Utah (UT), South Atlantic (SA), Oregon (OR), Maryland-Delaware-DC (MD/DE/DC) and New England (NE) Water Science Centers (WSCs). 
 
-See below for all of the contributions form the chart challenge, and don't forget to follow [@USGS_DataSci](https://twitter.com/USGS_DataSci) on Twitter to see future data visualizations, or check out the [USGS VizLab portfolio]https://labs.waterdata.usgs.gov/visualizations/vizlab-home/index.html#/?utm_source=wdfn&utm_medium=blog&utm_campaign=30DayChartChall22). 
+See below for all of the contributions form the chart challenge, and don't forget to follow [@USGS_DataSci](https://twitter.com/USGS_DataSci) on Twitter to see future data visualizations, or check out the [USGS VizLab portfolio](https://labs.waterdata.usgs.gov/visualizations/vizlab-home/index.html#/?utm_source=wdfn&utm_medium=blog&utm_campaign=30DayChartChall22). 
 
 ## Day 1, Comparisons: Part-to-Whole by Michael Meyer (OSD) 
 {{< tweet 1509899903761362958 >}}
+{{< tweet 1509899907309711388 >}}
+{{< tweet 1509899914272292868 >}}
 ## Day 1, Comparisons: Part-to-Whole by Cee Nell (IIDD) 
 {{< tweet 1509969870129086472 >}}
 ## Day 2, Comparisons: Pictogram by Cee Nell (IIDD) 
@@ -53,14 +55,17 @@ See below for all of the contributions form the chart challenge, and don't forge
 {{< tweet 1513619581679587333 >}}
 ## Day 11, Distributions: Circular by Caelan Simeone (OR WSC) 
 {{< tweet 1513565235831099394 >}}
+{{< tweet 1513565239022956549 >}}
 ## Day 11, Distributions: Circular by Hayley Corson-Dosch (IIDD) 
 {{< tweet 1513670982334099458 >}}
+{{< tweet 1513670988407443463 >}}
 ## Day 14, Relationships: 3-Dimensional by Michael Meyer (OSD) 
 {{< tweet 1515091100763049992 >}}
 ## Day 16, Relationships: Environment by Lindsay Platt (IIDD) 
 {{< tweet 1521547523592175618 >}}
 ## Day 19, Timeseries: Global Change by Scott Hamshaw (IMPD) 
 {{< tweet 1516447170437726208 >}}
+{{< tweet 1516447178314690564 >}}
 ## Day 20, Timeseries: New Tool by Bekah Redwine and Nicole Felts (IIDD) 
 {{< tweet 1516839970429931523 >}}
 ## Day 20, Timeseries: New Tool by Merritt Harlan (OSD) 
