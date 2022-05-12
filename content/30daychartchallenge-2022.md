@@ -1,6 +1,6 @@
 ---
 author: USGS Vizlab
-date: 2022-05-06
+date: 2022-05-12
 slug: chart-challenge-2022
 draft: False
 type: post
