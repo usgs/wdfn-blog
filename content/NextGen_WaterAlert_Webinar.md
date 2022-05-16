@@ -16,14 +16,14 @@ tags:
 - Public Communication
 - WaterAlert
 - Next Generation
-image: /static/NextGen_WaterAlert_Webinar/WaterAlert Webinar_June6.png
+image: /static/NextGen_WaterAlert_Webinar/WaterAlert Webinar_1.png
 description: In this webinar, learn how to transition your alerts to Next Generation WaterAlert.
 keywords: water data, WaterAlert, transition, Next Generation
 author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 <div class="grid-row">
-{{< figure src="/static/NextGen_WaterAlert_Webinar/WaterAlert Webinar_June6.png" width="80%" caption="This webinar on Next Generation WaterAlert will answer all your questions, facilitating the transition for Legacy WaterAlert users." alt="text here" >}}
+{{< figure src="/static/NextGen_WaterAlert_Webinar/WaterAlert Webinar_1.png" width="80%" caption="This webinar on Next Generation WaterAlert will answer all your questions, facilitating the transition for Legacy WaterAlert users." alt="Next Generation WaterAlert. Webinar. Date & time to come! Check the WDFN blog for more details. On the right, there is an image of a cellphone with screenshot of NextGen WaterAlert with a banner hiding most of the screenshot. Text on banner reads NextGen WaterAlert Coming Fall 2022." >}}
 </div>
 
 ## ❔ What is the NextGen WaterAlert Webinar?
@@ -36,7 +36,8 @@ USGS is on a long-haul journey to modernize our water data delivery systems and 
 [Read more about the WaterAlert transition](https://waterdata.usgs.gov/blog/wateralert-transition/).
 
 ## 🕛 When is it?
-We're not sure yet! Check back soon for a date and time. We're scheduling this event for when the transition period opens, but we're not sure on the exact date that the transition will start, so read [this blog post](https://waterdata.usgs.gov/blog/wateralert-transition/) for more details. **This webinar will be recorded. We'll post the recording about one week after the event** on this blog post, on our [WMA website](https://www.usgs.gov/mission-areas/water-resources), and on the [USGS YouTube channel](https://www.youtube.com/channel/UCeXH8GZyV3sVqAr45AvupOA).
+We're not sure yet! Check back soon for a date and time. We're scheduling this event for immediately after the transition period opens so we can walk you through the transition, but we're not sure on the exact date that the transition will open, so read [this blog post](https://waterdata.usgs.gov/blog/wateralert-transition/) for more details. 
+**This webinar will be recorded. We'll post the recording about one week after the event** on this blog post, on our [WMA website](https://www.usgs.gov/mission-areas/water-resources), and on the [USGS YouTube channel](https://www.youtube.com/channel/UCeXH8GZyV3sVqAr45AvupOA).
 
 
 ## 👩‍💻 Who is it for?
