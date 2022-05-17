@@ -1,11 +1,13 @@
 @use 'wdfnviz';
 @use 'uswds';
 
-@use 'fontawesome';
-@use 'brands';
-@use 'solid';
-
 @use './academicons';
+
+$fa-font-path: './webfonts' !default;
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid';
+
 
 table {
   @extend .usa-table;
