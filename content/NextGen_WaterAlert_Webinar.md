@@ -38,7 +38,7 @@ USGS is on a long-haul journey to modernize our water data delivery systems and 
 [Read more about the WaterAlert transition](https://waterdata.usgs.gov/blog/wateralert-transition/).
 
 ## 🕛 When is it?
-We're not sure yet! Check back soon for a date and time. We're scheduling this event for immediately after the transition period opens so we can walk you through the transition, but we're not sure on the exact date that the transition will open, so read [this blog post](https://waterdata.usgs.gov/blog/wateralert-transition/) for more details. 
+Check back soon for a date and time. The webinar will likely be some time in July. We're scheduling this event for immediately after the transition period opens so we can walk you through the transition, but we're not sure on the exact date that the transition will open, so for now read [this blog post](https://waterdata.usgs.gov/blog/wateralert-transition/) for more details. 
 **This webinar will be recorded. We'll post the recording about one week after the event** on this blog post, on our [WMA website](https://www.usgs.gov/mission-areas/water-resources), and on the [USGS YouTube channel](https://www.youtube.com/channel/UCeXH8GZyV3sVqAr45AvupOA).
 
 
