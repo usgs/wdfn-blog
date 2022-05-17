@@ -2,7 +2,7 @@
 author: Jeff Sadler
 date: 2022-04-19
 slug: snakemake-for-ml-experiments
-draft: True
+draft: False
 image: static/snakemake-ml-experiments/dag_few_cases.png
 type: post
 title: Large, parallel deep learning experiments using Snakemake
