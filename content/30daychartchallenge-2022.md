@@ -31,8 +31,6 @@ See below for all of the contributions form the chart challenge, and don't forge
 
 ## Day 1, Comparisons: Part-to-Whole by Michael Meyer (OSD) 
 {{< tweet 1509899903761362958 >}}
-{{< tweet 1509899907309711388 >}}
-{{< tweet 1509899914272292868 >}}
 ## Day 1, Comparisons: Part-to-Whole by Cee Nell (IIDD) 
 {{< tweet 1509969870129086472 >}}
 ## Day 2, Comparisons: Pictogram by Cee Nell (IIDD) 
@@ -55,17 +53,14 @@ See below for all of the contributions form the chart challenge, and don't forge
 {{< tweet 1513619581679587333 >}}
 ## Day 11, Distributions: Circular by Caelan Simeone (OR WSC) 
 {{< tweet 1513565235831099394 >}}
-{{< tweet 1513565239022956549 >}}
 ## Day 11, Distributions: Circular by Hayley Corson-Dosch (IIDD) 
 {{< tweet 1513670982334099458 >}}
-{{< tweet 1513670988407443463 >}}
 ## Day 14, Relationships: 3-Dimensional by Michael Meyer (OSD) 
 {{< tweet 1515091100763049992 >}}
 ## Day 16, Relationships: Environment by Lindsay Platt (IIDD) 
 {{< tweet 1521547523592175618 >}}
 ## Day 19, Timeseries: Global Change by Scott Hamshaw (IMPD) 
 {{< tweet 1516447170437726208 >}}
-{{< tweet 1516447178314690564 >}}
 ## Day 20, Timeseries: New Tool by Bekah Redwine and Nicole Felts (IIDD) 
 {{< tweet 1516839970429931523 >}}
 ## Day 20, Timeseries: New Tool by Merritt Harlan (OSD) 
