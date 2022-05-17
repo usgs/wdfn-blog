@@ -22,6 +22,8 @@ keywords: water data, WaterAlert, transition, Next Generation
 author_staff:
 author_email: <wdfn@usgs.gov>
 ---
+*Updated May 17th, 2022*
+
 <div class="grid-row">
 {{< figure src="/static/NextGen_WaterAlert_Webinar/WaterAlert Webinar_1.png" width="80%" caption="This webinar on Next Generation WaterAlert will answer all your questions, facilitating the transition for Legacy WaterAlert users." alt="Next Generation WaterAlert. Webinar. Date & time to come! Check the WDFN blog for more details. On the right, there is an image of a cellphone with screenshot of NextGen WaterAlert with a banner hiding most of the screenshot. Text on banner reads NextGen WaterAlert Coming Fall 2022." >}}
 </div>
