@@ -74,13 +74,12 @@ wdfn-blog
 11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
 12. Assuming all looks good, push to prod
 
-# Tips to writing content
+# Tips for writing content
 1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.   There are a few required tags:
    * caption: The caption of the image.  Will be displayed.  Markdown within the caption will be rendered.
    * alt: alt text, for accessibility.  Aim for text that actually describes in the image or gif, not just the caption text again.
    * src: path to the image that you want to display.
-2. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place
-two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
+2. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
 <div class="grid-row">
 
@@ -89,8 +88,8 @@ two images side by side. You should wrap them in a <div> tag with the class set 
 
 </div>
 ```
-1. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
-1. Use the following markup to implement the ability to Show/Hide code sections:
+3. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
+4. Use the following markup to implement the ability to Show/Hide code sections:
 ```html
 <button class="toggle-button" onclick="toggle_visibility(this, 'hideMe1')">Show Code</button>
 <div id="hideMe1" style="display:none">
