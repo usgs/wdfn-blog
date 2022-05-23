@@ -8,9 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf static && mkdirp static",
     "build": "npm run clean && run-p build:*",
-    "build:css": "mkdirp static/ && sass --load-path node_modules/wdfn-viz/src/stylesheets --load-path node_modules/@uswds/uswds/src/stylesheets --load-path node_modules/@uswds/uswds/packages  --load-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/main.css && postcss static/main.css -o static/main.css",
-    "build:fonts": "mkdirp static/fonts && mkdirp static/webfonts && cp src/fonts/* static/fonts && cp -r node_modules/@uswds/uswds/dist/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/webfonts",
-    "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/@uswds/uswds/dist/img/* static/img && cp -r node_modules/wdfn-viz/src/img/* static/img",
+    "build:css": "mkdirp static/ && sass --load-path node_modules/wdfn-viz/dist/sass --load-path node_modules/@uswds/uswds/src/stylesheets --load-path node_modules/@uswds/uswds/packages  --load-path node_modules/@fortawesome/fontawesome-free/scss src/styles/main.scss static/main.css && postcss static/main.css -o static/main.css",
+    "build:fonts": "mkdirp static/fonts && mkdirp static/webfonts && cp src/fonts/* static/fonts && cp -r node_modules/wdfn-viz/dist/fonts/* static/fonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* static/webfonts",
+    "build:images": "mkdirp static/img && cp -r src/images/* static/img && cp -r node_modules/wdfn-viz/dist/img/* static/img",
     "build:js": "mkdirp static/scripts && rollup -c --environment NODE_ENV:production",
     "build:uswdsinit": "mkdirp static/scripts && cp -r node_modules/@uswds/uswds/dist/js/uswds-init.min.* static/scripts",
     "watch": "run-p watch:*",
@@ -42,7 +42,7 @@
   "homepage": "https://github.com/usgs/wdfn-blog#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.4",
-    "wdfn-viz": "3.0.1"
+    "wdfn-viz": "3.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
