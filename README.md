@@ -64,23 +64,22 @@ wdfn-blog
 
   * It's a good idea to direct people to github issues, emails, or other ways to communicate if they have questions/comments/etc.
 
-  * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholor (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
+  * You can also add single author attributes for the following: twitter handles (`author_twitter`), github (`author_github`), Google Scholar (`author_gs`), ResearchGate (`author_researchgate`), USGS staff profile (`author_staff`), and email (`author_email`)
 
 6. Commit locally and push as needed, then submit a pull request
 7. Wait for the pull request to get merged, it will then appear on the dev site.
-8. Submitter is responsible for getting 1 internal peer-review of content (interal reviews can be done on a Google Form). Send the reviewer a link to the dev site.
+8. Submitter is responsible for getting 1 internal peer-review of content (internal reviews can be done on a Google Form). Send the reviewer a link to the dev site.
 9. A designated approver must sign off on content based on review response
 10. A designated web content manager will sign-off on if the page is generally fit to be published on a government website (verify the header follows the "Important notes" above, images contain alt/title tags)
 11. Once the content is approved, the draft status can be removed, and the content will appear on the QA site.
 12. Assuming all looks good, push to prod
 
-# Tips to writing content
+# Tips for writing content
 1. If you want to add an image to your content, use the figure shortcode. See < figure > shortcode, https://gohugo.io/content-management/shortcodes/#figure.   There are a few required tags:
    * caption: The caption of the image.  Will be displayed.  Markdown within the caption will be rendered.
-   * alt: alt text, for accessibility.  Aim for text that actaully discribes in the image or gif, not just the caption text again.
+   * alt: alt text, for accessibility.  Aim for text that actually describes in the image or gif, not just the caption text again.
    * src: path to the image that you want to display.
-1. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place
-two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
+2. You can use the class ".side-by" if you want your image to only take up 50% of the screen width or if you want to place two images side by side. You should wrap them in a <div> tag with the class set to "grid-row". Example below:
 ```html
 <div class="grid-row">
 
@@ -89,8 +88,8 @@ two images side by side. You should wrap them in a <div> tag with the class set 
 
 </div>
 ```
-1. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
-1. Use the following markup to implement the ability to Show/Hide code sections:
+3. For embedded r code make sure there is a blank line in the markdown between the code and the preceding content text.
+4. Use the following markup to implement the ability to Show/Hide code sections:
 ```html
 <button class="toggle-button" onclick="toggle_visibility(this, 'hideMe1')">Show Code</button>
 <div id="hideMe1" style="display:none">
@@ -108,27 +107,27 @@ library(jsonlite)
 # Simplified Local development in Windows
 
 Developing without Docker can be simpler on a Windows workstation, particularly if that workstation has software restrictions imposed
-by an organization's I.T. department.  There are several ways to make this work and here  is one (relatively) simple example of setting up a development environment.  Stick with us.  This takes a bit of time and is something of a learning curve, but hang in there; soon you can be authoring articles and
-previewing the results on the your own Windows workstation with ease!
+by an organization's I.T. department.  There are several ways to make this work and here is one (relatively) simple example of setting up a development environment.  Stick with us.  This takes a bit of time and is something of a learning curve, but hang in there; soon you can be authoring articles and
+previewing the results on your own Windows workstation with ease!
 
 **One-time installation steps:**
 
-Note that items marked with **(ADMIN)** require administrative privilieges, so if your computer is managed by an I.T. department, you will likely need to originate a service ticket that requests these steps to be done on your behalf.
+Note that items marked with **(ADMIN)** require administrative privileges, so if your computer is managed by an I.T. department, you will likely need to originate a service ticket that requests these steps to be done on your behalf.
 
 1. **(ADMIN)** Install [Visual Studio Code](https://code.visualstudio.com/download)
    * Visit the Visual Studio Code website and download and install the latest stable version.  Launch VS Code to confirm install.
    * Optional: Install the Front Matter extension using the icon the left-hand bar that looks like a Tetris game.
       * Front Matter can make it easier to set up blog articles.  It has some one-time configuration for the wdfn-blog website, which is beyond the scope of this document.
 
-1. **(ADMIN)** Install [Git for Windows](https://gitforwindows.org/)
+2. **(ADMIN)** Install [Git for Windows](https://gitforwindows.org/)
    * This is required to use Git Bash for subsequent steps here.  
    * Skip this step if your I.T. department already installed this for you.  It's a common tool these days.
 
-1. **(ADMIN)** Install [Node.js](https://nodejs.org/en/)
+3. **(ADMIN)** Install [Node.js](https://nodejs.org/en/)
    * This is required to compile code related to the blog's visual theme.
    * Select the latest LTS (long-term stable) installer for Windows.  Install with default options.  Decline additional complexities such as installing Choclatey.
 
-1. Clone the wdfn-blog repo
+4. Clone the wdfn-blog repo
    * In VS Code, click the source control tab on the left side, select "clone repository"
    * Either paste in the repository URL ending in .git, or if working from wdfn-blog on Github:
       * Select "clone from GitHub" and you should conveniently see the wdfn-blog fork you have generated.
@@ -139,13 +138,13 @@ Note that items marked with **(ADMIN)** require administrative privilieges, so i
          * You will need to create whatever folders needed for this new cloning destination.
       * Perform a one-time permissions granting step for GitHub.
          * You need a Github account for this.  They're free.
-         * **NOTE!:** If you receive a certificate error in this step, you likely are inside a corporate network, either hardwired or VPN.  The simplest way around this is to temporarily log out of VPN when performing this step (you can log back in afterward).  Resolving SSL certificate errors inside of corporate networks is beyond the scope of this document.
+         * **NOTE!:** If you receive a certificate error in this step, you likely are inside a corporate network, either hardwired or VPN.  The simplest way around this is to temporarily log out of VPN when performing this step (you can log back in afterward).  Resolving SSL certificate errors inside corporate networks is beyond the scope of this document.
    * Open the wdfn-blog folder you just cloned using File->Open Folder
       * In this example, you'd select ``C:\sandbox\github-user\wdfn-blog``
       * In the future, if you do nothing else to VS Code, this will always be the folder that opens in VS Code.  Convenient!
       * Agree to trusting the content of this folder if asked.
 
-1. Compile the blog's static assets
+5. Compile the blog's static assets
    * Launch Git BASH
       * Note: You MUST use Git BASH.  Windows Powershell or Command Prompt will not work because these steps require Linux-style command-line compatibility.
    * Use the cd command to change to the wdfn-blog directory of the cloned repo.  In this example, it would be `cd /c/sandbox/github-user/wdfn-blog`
@@ -154,14 +153,14 @@ Note that items marked with **(ADMIN)** require administrative privilieges, so i
    * Install all packages needed to compile assets by typing `npm ci`
       * Note: This is better than running npm install, because npm ci does not change the package-lock.json file, which is a file that rarely needs to be altered.
       * After a some harmless text warnings, the process will complete and a large `node_modules/` directory will have appeared.  Cool.
-   * Compile the blog assets by typine `npm run build`
+   * Compile the blog assets by typing `npm run build`
       * A new directory called `static/` will have appeared.  Great job.
    * NOTE: This step is usually a one-time-only step, unless changes are made by you or someone else to code in this wdfn_theme directory.
 
-1. Download Hugo and place in path.  
-   * Visit [Hugo Releases](https://github.com/gohugoio/hugo/releases) and download the latest proper Windows 64-bit Zipfile.  For example `hugo_0.89.2_Windows-64bit.zip` is the proper file to download as of this writing in November 2021.  Later versions should continue to work, as well.
+6. Download Hugo and place in path.  
+   * Visit [Hugo Releases](https://github.com/gohugoio/hugo/releases) and download the latest proper Windows 64-bit Zipfile.  For example, `hugo_0.89.2_Windows-64bit.zip` is the proper file to download as of this writing in November 2021.  Later versions should continue to work, as well.
    * Unzip the contents of the Zipfile and copy-and-paste this entire unzipped folder to somewhere convenient and near your cloned repo, such as `c:\sandbox\`
-   * Add this folder to your path by right clicking on "This PC" in Windows explorer, selecting properties, searching for "envionment variables" for your account, editing the PATH variable, and adding a new entry.  Paste the Hugo path here (you can copy it from the address bar in Windows file explorer if you navigate to the folder where you pasted it)
+   * Add this folder to your path by right clicking on "This PC" in Windows explorer, selecting properties, searching for "environment variables" for your account, editing the PATH variable, and adding a new entry.  Paste the Hugo path here (you can copy it from the address bar in Windows file explorer if you navigate to the folder where you pasted it)
    * Confirm hugo works in the path by opening a new Git BASH terminal and typing `hugo env` and confirming it reports the Hugo version.
       * NOTE: You must launch a new Git BASH session after changing the path for it to honor the new path.
 
@@ -278,7 +277,7 @@ remotes::install_github('usgs-r/USGSmarkdowntemplates')
 
 This will add `draft: True` to the markdown header (not rmarkdown file). It is up to you to remove that AFTER the content has been reviewed.
 
-Make sure to format your blog a .md file, not a .Rmd file (which is the deafult if using a package such as blogdown).There are some simple functions for converting between the two if using R. 
+Make sure to format your blog a .md file, not a .Rmd file (which is the default if using a package such as blogdown). There are some simple functions for converting between the two if using R. 
 
 When setting up a new project in RStudio, there are many ways to connect to the project. One is by starting a new project, then choose version control, select Git and use the URL "https://github.com/username/wdfn-blog.git". This should allow you to use Git push, pull, and merge code within RStudio.
 
