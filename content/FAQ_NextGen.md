@@ -61,9 +61,9 @@ The old website has served the public well, but it is 25 years old—that’s ab
 <div id="a2" class="usa-accordion__content">
 <!--- ------------- -->
 
-Yes, we will be, but we're not sure exactly how it will look or by when exactly we will release this feature.
+We know a multi-station or multi-parameter feature is highly requested from users. We're addressing this by gathering more use-cases and undertaking a discovery project in 2022. We're excited for this feature to be released, but each feature takes time to produce and we're working on many features, so [we’ve committed to addressing this](https://waterdata.usgs.gov/blog/nextgen-mlp-update/) before the next step in the decommission process which we anticipate will occur in September 2022.
 
-Not yes, not no... we need more information first, so we are currently gathering use-cases to better understand our users’ needs. We plan to undertake a “discovery” research project on these needs in fiscal year 2022. These kinds of reports that summarize multiple monitoring locations are valuable for certain advanced users, and we need to ensure all members of the public can derive value from these reports. 
+
 </div>
 
 <!--- Common Questions START -->
