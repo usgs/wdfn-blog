@@ -2,10 +2,10 @@
 author: Jeff Sadler
 date: 2022-04-19
 slug: snakemake-for-ml-experiments
-draft: True
+draft: False
 image: static/snakemake-ml-experiments/dag_few_cases.png
 type: post
-title: Big, parallel deep learning experiments using the workflow management tool, Snakemake
+title: Large, parallel deep learning experiments using Snakemake
 author_email: <jsadler@usgs.gov>
 author_github: jsadler2
 description: How we used Snakemake to automate and parallelize big deep learning experiments.
@@ -116,7 +116,7 @@ calculate_metrics("expA/site_id_01022500/factor_10/rand_seed_4/validation_preds.
 
 <div class="grid-row">
     <div class="grid-col-8 grid-offset-2">
-    {{< figure src="/static/snakemake-ml-experiments/dag_one_task.png" caption="The DAG (directed acyclic graph) for producing performance metrics for one site, one multi-task scaling factor, and one random seed." alt="The DAG (directed acyclic graph) for producing performance metrics for one site, one multi-task scaling factor, and one random seed." >}}
+    {{< figure src="/static/snakemake-ml-experiments/dag_one_task.png" caption="The DAG (directed acyclic graph) for producing performance metrics for one site, one multi-task scaling factor, and one random seed." alt="The DAG (directed acyclic graph) for producing performance metrics for one site, one multi-task scaling factor, and one random seed." width="50%">}}
     </div>
 </div>
 
