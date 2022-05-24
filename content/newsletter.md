@@ -1,8 +1,8 @@
 ---
 author: Nicole Felts
-date: 2022-05-23
+date: 2022-05-24
 slug: wdfn-newsletter
-draft: true
+draft: false
 type: post
 title: WDFN Quarterly Newsletter
 toc: false
