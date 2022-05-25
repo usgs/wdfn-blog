@@ -1,8 +1,8 @@
 ---
 author: Nicole Felts
-date: 2022-04-27
+date: 2022-05-24
 slug: wdfn-newsletter
-draft: true
+draft: false
 type: post
 title: WDFN Quarterly Newsletter
 toc: false
@@ -24,11 +24,10 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
-Did you know that we have a quarterly newsletter?
+# Did you know that we have a quarterly newsletter? [Check out our latest edition!](https://mailchi.mp/usgs/spring2022)
 
-We just released our second edition this week. Check it out!
 <div class="grid-row">
-{{< figure src="/static/newsletter/spring edition.png" width="80%" caption="BLANK" alt="BLANK" >}}
+{{< figure src="/static/newsletter/spring newsletter clip2.png" caption="Screenshot of the beginning of our [Spring 2022 WDFN Newsletter](https://mailchi.mp/usgs/spring2022)." alt="Blue USGS logo is at the top. Water Data for the Nation Newsletter. Spring 2022. USGS Water Resources on Facebook. Follow our new Facebook page! Like, comment, & share our posts about #WaterScience. Did you know we're on Facebook? Give our page a like! We share all things water data: USGS publications, modernization updates, upcoming events, & guides for using our data. What's on USGS Water's Facebook?" >}}
 </div>
 
 And consider [subscribing](https://usgs.us17.list-manage.com/subscribe?u=e9827ec090cef00a4355db5cb&id=5a8a7e2d2f) so you don't miss any important updates. We only send our newsletter quarterly, so we won't clog up your inbox. We also send out periodic reminders about WDFN-hosted events. <b>We provide updates on the modernization of USGS water data delivery products, helpful tips on using water data, and other opportunities to #EnGageWithUSGS!</b>
