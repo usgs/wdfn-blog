@@ -50,7 +50,7 @@ High-quality water information is fundamental for managing water resources, prot
 Students, teachers, other professionals, as well as curious information seekers all use the Water Science School. We’re always striving to improve the Water Science School usefulness and value for users. We do this through user-centered design, an iterative process that allows us to focus our designs based on our users’ needs. We're using user-centered design to redesign the Water Science School’s water cycle diagram (coming soon!).
 
 <div class="grid-row">
-{{< figure src="/static/wss_survey/WSS Survey Graphic DRAFT 6.png" width="70%" caption="." alt="" >}}
+{{< figure src="/static/wss_survey/WSS Survey Graphic DRAFT 6.png" width="70%" caption="Do you use USGS's Water Science School? Thanks for taking a few minutes of your time to [provide us feedback](https://forms.office.com/g/zKxRaQpZYc) - by knowing what you need, we're able to improve!" alt="Text at the top reads 'Do you use USGS's Water Science School? usgs.gov/wss.' Drippy stands on the left with a speech bubble on the right that reads, 'your feedback helps us meet your needs. Thanks for filling out our survey!' The text at the bottom reads, 'we're improving. have your voice heard.'" >}}
 </div>
 
 ## Have your voice heard 
