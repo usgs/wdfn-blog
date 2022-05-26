@@ -2,7 +2,7 @@
 author: Charlotte Riggs, Nicole Felts, Rachel Volentine
 date: 2022-05-26
 slug: wss-survey
-draft: true
+draft: false
 type: post
 title: Water Science School Survey
 toc: false
@@ -47,10 +47,10 @@ High-quality water information is fundamental for managing water resources, prot
 
 <b>The [USGS Water Science School](https://www.usgs.gov/wss) is designed to teach visitors all about water.</b> Each year, more than 8 million people visit the site to learn about the many aspects of water: [what it is](https://www.usgs.gov/special-topics/water-science-school/science/facts-about-water), [how much and where it is](https://www.usgs.gov/special-topics/water-science-school/science/how-much-water-there-earth), [how it cycles in and around the Earth](https://www.usgs.gov/special-topics/water-science-school/science/fundamentals-water-cycle), and [how it is used](https://www.usgs.gov/special-topics/water-science-school/science/water-use-information-topic). Water Science School offers articles about science topics, pictures, diagrams, and interactive educational activities. 
 
-Students, teachers, other professionals, as well as curious information seekers all use the Water Science School. We’re always striving to improve the Water Science School usefulness and value for users. We do this through user-centered design, an iterative process that allows us to focus our designs based on our users’ needs. We're using user-centered design to redesign the Water Science School’s water cycle diagram (coming soon!).
+Students, teachers, other professionals, as well as curious information seekers all use the Water Science School. We’re always striving to improve the Water Science School usefulness and value for users. We do this through user-centered design, an iterative process that allows us to focus our designs based on our users’ needs. We're undertaking a user-centered redesign of the Water Science School’s water cycle diagram (coming soon!).
 
 <div class="grid-row">
-{{< figure src="/static/wss_survey/WSS Survey Graphic DRAFT 6.png" width="70%" caption="Do you use USGS's Water Science School? Thanks for taking a few minutes of your time to [provide us feedback](https://forms.office.com/g/zKxRaQpZYc) - by knowing what you need, we're able to improve!" alt="Text at the top reads 'Do you use USGS's Water Science School? usgs.gov/wss.' Drippy stands on the left with a speech bubble on the right that reads, 'your feedback helps us meet your needs. Thanks for filling out our survey!' The text at the bottom reads, 'we're improving. have your voice heard.'" >}}
+{{< figure src="/static/wss_survey/WSS Survey Graphic DRAFT 6.png" width="70%" caption="Do you use USGS's Water Science School? Thanks for taking a few minutes of your time to [provide us feedback](https://forms.office.com/g/zKxRaQpZYc) - by knowing what you need, we're able to improve!" alt="Text at the top reads 'Do you use USGS's Water Science School? usgs.gov/wss.' Drippy stands on the left with a speech bubble on the right that reads, 'your feedback helps us meet your needs. Thanks for filling out our survey!' The text at the bottom reads, 'we're improving. have your voice heard.'" link="https://forms.office.com/g/zKxRaQpZYc" >}}
 </div>
 
 ## Have your voice heard 
