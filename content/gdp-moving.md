@@ -23,9 +23,9 @@ tags:
 
 The USGS Geo Data Portal (GDP) provides access to numerous datasets, including gridded data for climate and land use. Datasets can be subsetted or summarized before download using several algorithms, and these algorithms can also be applied to other datasets hosted elsewhere. 
 
-The system has been hosted via `cida.usgs.gov` since its original release in 2011. See this report for more: Blodgett, David L., Nathaniel L. Booth, Thomas C. Kunicki, Jordan I. Walker, and Roland J. Viger. Description and testing of the Geo Data Portal: Data integration framework and Web processing services for environmental science collaboration. [No. 2011-1157. US Geological Survey, 2011.](https://pubs.usgs.gov/of/2011/1157/)
+The system has been hosted via `cida.usgs.gov` since its original release in 2011. See this report for more information on GDP: Blodgett, David L., Nathaniel L. Booth, Thomas C. Kunicki, Jordan I. Walker, and Roland J. Viger. Description and testing of the Geo Data Portal: Data integration framework and Web processing services for environmental science collaboration. [No. 2011-1157. US Geological Survey, 2011.](https://pubs.usgs.gov/of/2011/1157/)
 
-As part of a broader modernization of the system, all components of the GDP are migrating to a new hosting environment and new URLs. 
+All components of the GDP are migrating to a new hosting environment and new URLs as part of a modernization effort of the entire system.  
 
 On or about July 1st, 2022:
 
@@ -37,7 +37,7 @@ On or about July 1st, 2022:
 
 No redirects will be put in place. By July 10th 2022, the three `cida.usgs.gov` end points will return a document pointing to this blog post.
 
-We apologize for any inconvenience that this migration may cause. However, it will expand the potential for modernization of the GDP system and, long run, lead to much better data access.
+We apologize for any inconvenience that this migration may cause. However, it will expand the potential for modernization of the GDP system and, in the long run, lead to much better data access.
 
 In the coming months, new APIs and processing capabilities will become available via labs.waterdata.usgs.gov and possibly other URLs to replace the Geo Data Portal. The exact plans for this modernization are not established, but stay tuned for more user friendly APIs, more cloud-ready data access options, and a generally refined ecosystem of data, services and tools. 
 
