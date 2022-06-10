@@ -2,7 +2,7 @@
 author: Rachel Volentine, Nicole Felts
 date: 2022-06-08
 slug: user-centered-design
-draft: true
+draft: false
 type: post
 title: User-Centered Design
 toc: false
