@@ -128,4 +128,4 @@ On premise, server configuration is managed in a variety of ways, but applicatio
 
 Monitoring is an area that we are rapidly learning about.  For our modernized, cloud native tools, we currently rely heavily on dynamically created Cloudwatch dashboards, but know that we have a lot more work to do as we work toward building resiliant, observable systems.  Watch for future posts about more changes as we move forward.
 
-* "Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government." *
+_Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government._
