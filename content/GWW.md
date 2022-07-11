@@ -1,4 +1,23 @@
-# Decommissioning Groundwater Watch 
+---
+author: Candice Hopkins and Rachel Volentine
+date: 2022-07-11
+slug: GWW
+draft: True
+type: post
+title: Decommissioning Groundwater Watch
+categories: water-information, groundwater, decommission
+tags:
+  - water-data-for-the-nation
+  - public-communication
+image: static/GWW/animation.gif
+description: The legacy Groundwater Watch application is being decommissioned. This blog post explains where users can find similar functionaltiy in other publicly available products.
+keywords:
+  - Groundwater
+  - Grondwater-level
+author_staff: candice-hopkins
+author_email: <chopkins@usgs.gov>
+author_researchgate: Candice-Hopkins
+---
 
 ## What are you decommissioning?
 
@@ -11,9 +30,9 @@ individual site pages for wells and springs, maps of current conditions,
 and graphs showing the statistical context of recent measurements; major
 functionality of Groundwater Watch is pictured in Figure 1.
 
-![Shape Description automatically
-generated](media\image1.jpg){width="6.5in"
-height="5.6673600174978125in"}However, the application's architecture,
+{{< figure src="/static/GWW/image1.jpeg" caption="Figure 1. A diagram indicating functionality offered by the Groundwater Watch Application." alt="A diagram describing major functionality of Groundwater Watch." >}}
+
+However, the application's architecture,
 aging code base, and other factors make it difficult to update and keep
 secure. In the coming year, modern software replacements of the unique
 groundwater functionality will be developed by USGS Water. In the
@@ -25,8 +44,8 @@ described below.
 
 ## Where can I find water level data after the application is turned off?
 
-![](media\image2.jpeg){width="5.8858267716535435in"
-height="3.1145833333333335in"}
+{{< figure src="/static/GWW/image2.jpeg" caption="Figure 2. A diagram indicating that water level data and data feeds are available from sources outside of Groundwater Watch" alt="A diagram describing other sources of groundwater level data." >}}
+
 
 Unprocessed groundwater level data are always available on [Water Data
 for the Nation](https://waterdata.usgs.gov/nwis/gw); this website is the
@@ -55,9 +74,7 @@ USGS wells.
 
 ## Where can I find groundwater level maps after the application is turned off?
 
-![Diagram Description automatically generated with low
-confidence](media\image3.jpg){width="6.5in"
-height="3.1006944444444446in"}
+{{< figure src="/static/GWW/image3.jpeg" caption="Figure 3. A diagram indicating that maps and visualizations are available from sources outside of Groundwater Watch" alt="A diagram describing other sources of mapped groundwater data." >}}
 
 Users have come to rely on Groundwater Watch to deliver simple maps that
 display the statistical context of recent measurements through colored
@@ -81,8 +98,7 @@ be used by anyone.
 
 ## Where can I find groundwater level statistics and graphs after the application is turned off?
 
-![A picture containing text, businesscard Description automatically
-generated](media\image4.jpg){width="6.5in" height="2.4125in"}
+{{< figure src="/static/GWW/image4.jpeg" caption="Figure 4. A diagram indicating that statistics for groundwater level data are available from sources outside of Groundwater Watch" alt="A diagram describing other sources of groundwater level statistics." >}}
 
 The detailed statistics and graphical representation of water-level data
 on site pages are some of Groundwater Watch's most popular features.
@@ -106,7 +122,7 @@ site pages. This application serves data not available elsewhere on
 other USGS systems, representing data from over 37 contributing
 organizations.
 
-### What if I use another feature that was not listed above?
+## What if I use another feature that was not listed above?
 
 We acknowledge there might be additional functionality of Groundwater
 Watch that cannot easily be replicated in another product. We're sorry.
@@ -115,7 +131,16 @@ functionality in the next several years. We will keep everyone informed
 as we work on the modernized software and publicize as new products and
 functionality are available.
 
-## Water Data for the Nation and Webservices
+<!--- ACCORDION START -->
+<div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
+
+
+<!--- WDFN AND WEBSERVICES ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a1">
+Water Data for the Nation and Web Services 
+</button></h2>
+<div id="a1" class="usa-accordion__content">
+<!--- ------------- -->
 
 Unprocessed groundwater level data are available on ; this website is
 the best place to get our most recent, uninterpreted data. Users can
@@ -132,7 +157,15 @@ GWW alternatives:
 
 -   Data access at thousands of sites
 
-# NGWMN Data Portal
+</div>
+
+
+<!--- NGWMN ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
+NGWMN Data Portal
+</button></h2>
+<div id="a4" class="usa-accordion__content">
+<!--- ------------- -->
 
 [NGWMN Data Portal](https://cida.usgs.gov/ngwmn/) serves data from the
 National Groundwater Monitoring Network (NGWMN). This product serves
@@ -157,7 +190,16 @@ GWW alternatives:
 
 -   Downloading Statistics for Groundwater Levels
 
-# Hydrologic Analysis Package 
+</div>
+
+
+<!--- HASP ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
+Hydrologic Analysis Package
+</button></h2>
+<div id="a4" class="usa-accordion__content">
+<!--- ------------- -->
+
 
 The [Hydrologic AnalySis Package
 (HASP)](https://code.usgs.gov/water/stats/hasp) is a USGS authored,
@@ -177,7 +219,15 @@ GWW alternatives:
 
 -   Downloading Statistics for Groundwater Levels
 
-# National Water Dashboard
+</div>
+
+
+<!--- NWD ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
+National Water Dashboard
+</button></h2>
+<div id="a4" class="usa-accordion__content">
+<!--- ------------- -->
 
 The [USGS National Water
 Dashboard](https://dashboard.waterdata.usgs.gov/app/nwd/?aoi=default)
@@ -192,7 +242,14 @@ GWW alternatives:
 
 -   Maps with symbols indicating recent conditions
 
-# U.S. Groundwater Conditions Data Viz
+</div>
+
+<!--- DataViz ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
+U.S. Groundwater Conditions Data Viz
+</button></h2>
+<div id="a4" class="usa-accordion__content">
+<!--- ------------- -->
 
 The USGS VizLab team created a [data visualization of U.S. Groundwater
 Conditions](https://labs.waterdata.usgs.gov/visualizations/gw-conditions/index.html#/?utm_source=drupal&utm_medium=home&utm_campaign=gw_conditions)
@@ -206,7 +263,14 @@ GWW alternatives:
 
 -   National Animations of Groundwater Conditions
 
-# Best Available Time Series for Groundwater Levels Service
+</div>
+
+<!--- BATS ACCORDION SECTION START -->
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
+Best Available Time Series for Groundwater Levels Service
+</button></h2>
+<div id="a4" class="usa-accordion__content">
+<!--- ------------- -->
 
 The [Best Available Time Series (BATS) for Groundwater
 Levels](https://waterdata.usgs.gov/blog/gw_bats/) was built to deliver a
@@ -220,7 +284,9 @@ GWW alternatives:
 
 -   Raw Data Feed Consumption
 
-### What is the timeline?
+</div>
+
+## What is the timeline?
 
 We will turn this application off on September 1, 2022. After that,
 users will be directed to Water Data for the Nation from the legacy URL.
@@ -232,8 +298,9 @@ to this blog for more information.
 ## What if these suggestions don't meet my needs?
 
 We want to hear your feedback on how you access and use groundwater
-data. Please contact <WDFN@usgs.gov>with questions or to request more
-information on the products mentioned in this
+data. Please contact <WDFN@usgs.gov> with questions or to request more
+information on the products mentioned in this post.
+
 
 Any use of trade, firm, or product names is for descriptive purposes
 only and does not imply endorsement by the U.S. Government.
