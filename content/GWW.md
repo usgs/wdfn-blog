@@ -2,14 +2,14 @@
 author: Candice Hopkins and Rachel Volentine
 date: 2022-07-11
 slug: GWW
-draft: False
+draft: True
 type: post
 title: Decommissioning Groundwater Watch
 categories: water-information, groundwater, decommission
 tags:
   - water-data-for-the-nation
   - public-communication
-image: static/GWW/animation.gif
+image: static/GWW/cover.png
 description: The legacy Groundwater Watch application is being decommissioned. This blog post explains where users can find similar functionaltiy in other publicly available products.
 keywords:
   - Groundwater
@@ -34,7 +34,7 @@ functionality of Groundwater Watch is pictured in Figure 1.
 
 However, the application's architecture,
 aging code base, and other factors make it difficult to update and keep
-secure. In the coming year, modern software replacements of the unique
+secure. In the coming years, modern software replacements of the unique
 groundwater functionality will be developed by USGS Water. In the
 meantime, users can access other USGS products with similar
 functionality. You can determine which products best suit your needs as
@@ -88,7 +88,7 @@ In each of these products, a site is represented by a symbol indicating
 the status of the most recent measurement, if enough data are available
 at that site.
 
-The USGS VizLab produced a [visualization of current conditions of
+The [USGS VizLab] (https://labs.waterdata.usgs.gov/visualizations/vizlab-home/index.html#/) produced a [visualization of current conditions of
 wells](https://labs.waterdata.usgs.gov/visualizations/gw-conditions/index.html#/?utm_source=drupal&utm_medium=home&utm_campaign=gw_conditions)
 that have continuous data and at least three years of available data.
 The current iteration of the animation contains about 2,300 wells. The
@@ -151,7 +151,7 @@ interactively explore water-level data for individual sites on our
 [Next- Generation Monitoring Location
 Pages](https://waterdata.usgs.gov/blog/how-to-use-nextgen-pages/).
 
-GWW alternatives:
+Groundwater Watch alternatives:
 
 -   Raw data feed consumption
 
@@ -180,7 +180,7 @@ criteria. The NGWMN statistics microservice has been tested to match the
 statistical calculations in Groundwater Watch; the color ramp used in
 this application also matches that used in Groundwater Watch.
 
-GWW alternatives:
+Groundwater Watch alternatives:
 
 -   Site Pages with Statistics and Graphics of Groundwater Conditions
 
@@ -202,7 +202,7 @@ Hydrologic Analysis Package
 
 The [Hydrologic AnalySis Package
 (HASP)](https://code.usgs.gov/water/stats/hasp) is a USGS authored,
-peer-reviewed R package designed to create GWW-style graphs and
+peer-reviewed R package designed to create Groundwaer Watch-style graphs and
 statistics in the R environment. Data can be explored for a single site
 or group of sites in the same aquifer. If sites are classified in a
 national aquifer, HASP can produce statistics and graphics at the
@@ -212,7 +212,7 @@ the same site-specific or aquifer-specific graphics that would appear on
 Groundwater Watch. Users must have R and R Studio on their computers to
 access this package and associated R Shiny application.
 
-GWW alternatives:
+Groundwater Watch alternatives:
 
 -   Site Pages with Statistics and Graphics of Groundwater Conditions
 
@@ -232,12 +232,12 @@ The [USGS National Water
 Dashboard](https://dashboard.waterdata.usgs.gov/app/nwd/?aoi=default)
 (NWD) offers a groundwater-level layer that shows current conditions at
 about 1,800 instrumented and real-time sites nation-wide. The NWD map
-contains many of the same sites as the GWW Real-Time Groundwater Level
+contains many of the same sites as the Groundwater Watch Real-Time Groundwater Level
 Network, but uses a different statistical method to generate percentile
 classes. Methodological improvement of percentile classes in the NWD
 will be a priority in FY23.
 
-GWW alternatives:
+Groundwater Watch alternatives:
 
 -   Maps with symbols indicating recent conditions
 
@@ -257,7 +257,7 @@ showing current conditions of wells with continuous data and at least
 three years of data available. Currently, this viz includes about 2,300
 wells and the plans are to run the code to update this map quarterly.
 
-GWW alternatives:
+Groundwater Watch alternatives:
 
 -   Maps with symbols indicating recent conditions
 
@@ -279,9 +279,9 @@ longer period of record for groundwater-level sites, combining both
 discrete and instrumented measurements into one service. This data
 source may be used to construct analyses and tools with a simpler data
 stream. Analyses using this service should be similar to those produced
-by GWW.
+by Groundwater Watch.
 
-GWW alternatives:
+Groundwater Watch alternatives:
 
 -   Raw Data Feed Consumption
 
@@ -298,7 +298,7 @@ We will turn this application off on September 1, 2022. After that,
 users will be directed to Water Data for the Nation from the legacy URL.
 
 In future years, USGS Water plans to build out modernized software and
-tools to replace some unique GroundWater Watch functionality. Stay tuned
+tools to replace some unique Groundwater Watch functionality. Stay tuned
 to this blog for more information.
 
 ## What if these suggestions don't meet my needs?
