@@ -164,7 +164,7 @@ GWW alternatives:
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a2">
 NGWMN Data Portal
 </button></h2>
-<div id="a4" class="usa-accordion__content">
+<div id="a2" class="usa-accordion__content">
 <!--- ------------- -->
 
 [NGWMN Data Portal](https://cida.usgs.gov/ngwmn/) serves data from the
@@ -197,7 +197,7 @@ GWW alternatives:
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a3">
 Hydrologic Analysis Package
 </button></h2>
-<div id="a4" class="usa-accordion__content">
+<div id="a3" class="usa-accordion__content">
 <!--- ------------- -->
 
 The [Hydrologic AnalySis Package
@@ -248,7 +248,7 @@ GWW alternatives:
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a5">
 U.S. Groundwater Conditions Data Viz
 </button></h2>
-<div id="a4" class="usa-accordion__content">
+<div id="a5" class="usa-accordion__content">
 <!--- ------------- -->
 
 The USGS VizLab team created a [data visualization of U.S. Groundwater
@@ -270,7 +270,7 @@ GWW alternatives:
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a6">
 Best Available Time Series for Groundwater Levels Service
 </button></h2>
-<div id="a4" class="usa-accordion__content">
+<div id="a6" class="usa-accordion__content">
 <!--- ------------- -->
 
 The [Best Available Time Series (BATS) for Groundwater
@@ -286,6 +286,7 @@ GWW alternatives:
 -   Raw Data Feed Consumption
 
 </div>
+
 
 <!--- ACCORDION END -->
 </div>
