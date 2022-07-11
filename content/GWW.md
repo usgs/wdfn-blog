@@ -267,7 +267,7 @@ GWW alternatives:
 
 
 <!--- BATS ACCORDION SECTION START -->
-<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a4">
+<h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a6">
 Best Available Time Series for Groundwater Levels Service
 </button></h2>
 <div id="a4" class="usa-accordion__content">
@@ -285,6 +285,9 @@ GWW alternatives:
 
 -   Raw Data Feed Consumption
 
+</div>
+
+<!--- ACCORDION END -->
 </div>
 
 
