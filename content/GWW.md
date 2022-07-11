@@ -2,7 +2,7 @@
 author: Candice Hopkins and Rachel Volentine
 date: 2022-07-11
 slug: GWW
-draft: True
+draft: False
 type: post
 title: Decommissioning Groundwater Watch
 categories: water-information, groundwater, decommission
@@ -300,6 +300,8 @@ to this blog for more information.
 We want to hear your feedback on how you access and use groundwater
 data. Please contact <WDFN@usgs.gov> with questions or to request more
 information on the products mentioned in this post.
+
+
 
 
 Any use of trade, firm, or product names is for descriptive purposes
