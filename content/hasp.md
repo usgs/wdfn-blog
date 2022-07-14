@@ -1,5 +1,5 @@
 ---
-author: Candice Hopkins and Laura DeCicco
+author: Candice Hopkins
 date: 2022-07-13
 slug: HASP
 draft: True
