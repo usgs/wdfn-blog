@@ -24,6 +24,9 @@ keywords: monitoring location pages, water data, next generation, update, news, 
 author_staff: 
 author_email: <wdfn@usgs.gov>
 ---
+
+*Last updated July 14th, 2022*
+
 On April 11th, we hosted a [public webinar](https://waterdata.usgs.gov/blog/nextgen-webinar-apr11/) during which we updated our stakeholders on the progress of replacing [Legacy real-time pages](https://waterdata.usgs.gov/nwis/uv?site_no=01584050) with [Next Generation Monitoring location pages](https://waterdata.usgs.gov/monitoring-location/01584050/).
 
 We anticipate to begin redirecting Legacy pages to NextGen pages in September 2022. This means when you click a bookmark for a Legacy page, your web browser will automatically redirect you to the NextGen page, but you'll still be able to access the Legacy page if you click on the link at the top of NextGen pages. 
@@ -47,3 +50,12 @@ After addressing many highly-requested features, we anticipate decommissioning t
 - Possible expansion of WSC-specified text fields like manuscript, location-level revisions (interaction with SIMS)
 - Make wind direction parameter a set of discrete measurements (not continuous line)
 - Features to better show water quality samples: Showing some field visit data with continuous water quality measurements; Having a summary of available water quality data
+
+
+
+
+<br>
+<br>
+
+## Have more questions about the modernization of Monitoring Location Pages?
+Check out [this older blog post](https://waterdata.usgs.gov/blog/realtime-pages-replacement/) of ours for more context, but **please always refer to the most recent communications for the most accurate product timeline.**
