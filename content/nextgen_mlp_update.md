@@ -45,7 +45,9 @@ After addressing many highly-requested features, we anticipate decommissioning t
 - Daily statistics for the latest day
 - Multi-parameter feature (2 parameters on the same graph)
 
-***INSERT PHOTO OF SLIDE 17*** use a version of presenter notes for caption
+<div class="grid-row">
+{{< figure src="/static/nextgen_mlp_update/MLPs_feature_examples.png" alignment="center" caption="Here are a few examples of the remaining tasks that are soon to be completed for the redirect. We are working on placing 2 parameters on the hydrograph giving the option for our users to compare their data. We are making the data table sortable giving the users a choice to see their data in a specific order and we are adding the daily stats table to the monitoring location pages." alt="screenshot of 3 upcoming features: 2 parameters on the same graph, make data sortable by time, daily statistics for the latest day." >}}
+</div>
 
 ## Some features we anticipate addressing before Legacy decommission in July 2023
 - Better download capability
