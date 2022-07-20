@@ -25,7 +25,7 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
-*Last updated July 14th, 2022*
+*Last updated July 20th, 2022 at 17:05 ET* 
 
 On April 11th, we hosted a [public webinar](https://waterdata.usgs.gov/blog/nextgen-webinar-apr11/) during which we updated our stakeholders on the progress of replacing [Legacy real-time pages](https://waterdata.usgs.gov/nwis/uv?site_no=01584050) with [Next Generation Monitoring location pages](https://waterdata.usgs.gov/monitoring-location/01584050/).
 
@@ -43,15 +43,23 @@ After addressing many highly-requested features, we anticipate decommissioning t
 - Make Facebook shares more compelling with images
 - New zoom options to improve interactivity with graph and axis
 - Daily statistics for the latest day
-- Multi-parameter feature (2 parameters on the same plot)
+- Multi-parameter feature (2 parameters on the same graph)
+
+***INSERT PHOTO OF SLIDE 17*** use a version of presenter notes for caption
 
 ## Some features we anticipate addressing before Legacy decommission in July 2023
 - Better download capability
 - Possible expansion of WSC-specified text fields like manuscript, location-level revisions (interaction with SIMS)
 - Make wind direction parameter a set of discrete measurements (not continuous line)
 - Features to better show water quality samples: Showing some field visit data with continuous water quality measurements; Having a summary of available water quality data
+### A few features we know are essential
+- Cooperator access – there is an access level for cooperators for semi-public data
+- Discrete data, field visits, and stats access - we've heard this is important for our advanced users
+- Multi-station data access - we plan to conduct a discovery with our users to determine how to best offer this highly requested feature
 
 
+## Get involved! Have your voice heard
+Want to test the multi-station feature in beta? Email us: wdfn_usabilitytesting@usgs.gov with the **subject: Multi-Station Feature**.
 
 
 <br>
