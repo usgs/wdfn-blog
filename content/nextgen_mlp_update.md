@@ -25,9 +25,9 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
-*Last updated July 14th, 2022*
+*Last updated July 20th, 2022 at 17:05 ET* 
 
-On April 11th, we hosted a [public webinar](https://waterdata.usgs.gov/blog/nextgen-webinar-apr11/) during which we updated our stakeholders on the progress of replacing [Legacy real-time pages](https://waterdata.usgs.gov/nwis/uv?site_no=01584050) with [Next Generation Monitoring location pages](https://waterdata.usgs.gov/monitoring-location/01584050/).
+On April 11th, we hosted a [public webinar](https://waterdata.usgs.gov/blog/nextgen-webinar-apr11/) during which we updated our stakeholders on the progress of replacing [Legacy real-time pages](https://waterdata.usgs.gov/nwis/uv?site_no=01584050) with [Next Generation Monitoring Location Pages](https://waterdata.usgs.gov/monitoring-location/01584050/).
 
 We anticipate to begin redirecting Legacy pages to NextGen pages in September 2022. This means when you click a bookmark for a Legacy page, your web browser will automatically redirect you to the NextGen page, but you'll still be able to access the Legacy page if you click on the link at the top of NextGen pages. 
 <div class="grid-row">
@@ -43,15 +43,25 @@ After addressing many highly-requested features, we anticipate decommissioning t
 - Make Facebook shares more compelling with images
 - New zoom options to improve interactivity with graph and axis
 - Daily statistics for the latest day
-- Multi-parameter feature (2 parameters on the same plot)
+- Multi-parameter feature (2 parameters on the same graph)
+
+<div class="grid-row">
+{{< figure src="/static/nextgen_mlp_update/MLPs_feature_examples.png" alignment="center" caption="Here are a few examples of the remaining tasks that are soon to be completed for the redirect. We are working on placing 2 parameters on the hydrograph, giving the option for our users to compare their data. We are making the data table sortable, giving the users a choice to see their data in a specific order. Finally, we are adding the daily stats table to the monitoring location pages." alt="screenshot of 3 upcoming features: 2 parameters on the same graph, make data sortable by time, daily statistics for the latest day." >}}
+</div>
 
 ## Some features we anticipate addressing before Legacy decommission in July 2023
 - Better download capability
 - Possible expansion of WSC-specified text fields like manuscript, location-level revisions (interaction with SIMS)
 - Make wind direction parameter a set of discrete measurements (not continuous line)
 - Features to better show water quality samples: Showing some field visit data with continuous water quality measurements; Having a summary of available water quality data
+### A few features we know are essential
+- Cooperator access – there is an access level for cooperators for semi-public data
+- Discrete data, field visits, and stats access - we've heard this is important for our advanced users
+- Multi-station data access - we plan to conduct a discovery with our users to determine how to best offer this highly requested feature
 
 
+## Get involved! Have your voice heard
+Want to test the multi-station feature in beta? Email us: wdfn_usabilitytesting@usgs.gov with the **subject: Multi-Station Feature**.
 
 
 <br>
