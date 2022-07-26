@@ -1,11 +1,11 @@
 ---
 author: Aliesha Krall
-date: 2022-07-14
+date: 2022-07-26
 slug: large_sample_pull
-draft: True
 title: Large sample pulls using dataRetrieval
 type: post
 categories: Data Science
+image: static/LargeQuery/siteloc-1.png
 author_github: alkrall
 author_staff: aliesha-l-krall
 author_email: <akrall@usgs.gov>
@@ -490,7 +490,7 @@ and state outlines, while the `map_data` function from the `ggplot2`
 package creates the data frame containing the base map data in a data
 frame. The `all_state` variable was assigned the map boundary to all
 states in the contiguous United States. In the base map data frame, the
-“group” column groups the data by state (e.g., 1 = Alabama, 2 =
+"group" column groups the data by state (e.g., 1 = Alabama, 2 =
 Arizona).
 
 Second, plot the base map and add the data to it. Here, the base map
@@ -549,3 +549,7 @@ The below line of code will save the output gif:
 ``` r
 #anim_save("TN.gif", map_with_data, nframes = num_years, fps = 1)  # save
 ```
+
+# Disclaimer
+
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
