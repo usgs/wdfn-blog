@@ -83,7 +83,6 @@ Once the transition opens in summer* 2022 (anticipated to open in August), if yo
 
 | Date | What Will Happen |
 |------|----------|
-Coming Soon/ TBD | Early Access available for select users
 Summer* 2022 | Transition Period opens
 Fall* 2022 | Transition Period closes
 Fall* 2022 | Next Generation WaterAlert goes Live
