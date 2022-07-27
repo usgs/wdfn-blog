@@ -83,7 +83,6 @@ Once the transition opens in summer* 2022 (anticipated to open in August), if yo
 
 | Date | What Will Happen |
 |------|----------|
-Coming Soon/ TBD | Early Access available for select users
 Summer* 2022 | Transition Period opens
 Fall* 2022 | Transition Period closes
 Fall* 2022 | Next Generation WaterAlert goes Live
@@ -143,7 +142,7 @@ What happens if I don't transfer my alerts before the transition period closes? 
 
 Once the transition period opens, you will have two months to transfer your alerts from the legacy system. We'll be available to help you at any time, but we hope you'll find the process fast and easy.
 <br>
-At the time of transition, all subscriptions that have been associated with a user account will start using our upgraded service.<b> Any subscriptions that have not transitioned will disappear when the legacy system is decommissioned. </b>
+At the time of transition, all subscriptions that have been associated with a user account will start using our upgraded service.<b> You will no longer have access to legacy alerts once the legacy system is decommissioned. </b>
 <br>
 After the transition period closes, you'll need to create an account in NextGen WaterAlert in order to create new alerts. It's fast and easy! Check back later in the summer for a video we'll have that will walk users through how to create an account and alerts with NextGen WaterAlert.
 If you are having trouble or if you are unable to transition, even after the transition closes, please contact us for help! Email us: wdfn@usgs.gov.
