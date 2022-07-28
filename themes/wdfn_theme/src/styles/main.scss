@@ -1,14 +1,18 @@
-$theme-site-max-width: 'desktop';
-$theme-site-margins-width: 0;
+@use 'uswds-core' with (
+  $theme-font-path: './fonts',
+  $theme-image-path: './img'
+);
 
 @use 'wdfnviz';
 @use 'uswds';
 
-@use 'fontawesome';
-@use 'brands';
-@use 'solid';
-
 @use './academicons';
+
+$fa-font-path: './webfonts' !default;
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid';
+
 
 table {
   @extend .usa-table;
@@ -91,4 +95,17 @@ figure {
 }
 pre {
   overflow-x: scroll;
+}
+
+#map {
+  width: 100%;
+  height: 500px;
+}
+.footnotes {
+  font-size: uswds.size('body', '3xs'); 
+}
+
+.footnotes p {
+  margin-block-start: 0.2em; /* Unsure if there is a way in USWDS to reduce gap between paragraphs */
+  margin-block-end: 0.2em;
 }

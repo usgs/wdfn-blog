@@ -5,7 +5,9 @@ slug: nldi-intro
 draft: False
 title: The Hydro Network-Linked Data Index
 type: post
-categories: Data Science
+categories: 
+ - Data Science
+ - api
 image: static/nldi-intro/upstream.png
 author_twitter: D_Blodgett
 author_github: dblodgett-usgs

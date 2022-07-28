@@ -30,46 +30,46 @@ See below for our contributions throughout the month.
 
 ## The challenge:
 
-{{< tweet 1377636528751579136  >}}
+{{< tweet user="30DayChartChall" id="1377636528751579136"  >}}
 
 ## Day 2: comparisons, pictogram  
-{{< tweet 1378070227670327296 >}}
+{{< tweet user="USGS_DataSci" id="1378070227670327296" >}}
 ## Day 3: comparisons, historical 
-{{< tweet 1378351609239994374 >}}
+{{< tweet user="USGS_DataSci" id="1378351609239994374" >}}
 ## Day 4: comparisons, magical 
-{{< tweet 1378722525895528458 >}}
+{{< tweet user="USGS_DataSci" id="1378722525895528458" >}}
 ## Day 6: comparisons, experimental 
-{{< tweet 1379485726514020353 >}}
+{{< tweet user="USGS_DataSci" id="1379485726514020353" >}}
 ## Day 7: distributions, physical 
-{{< tweet 1379861161550696454 >}}
+{{< tweet user="USGS_DataSci" id="1379861161550696454" >}}
 ## Day 8: distributions, animals 
-{{< tweet 1380227272490299407 >}}
-{{< tweet 1380214974467993603 >}}
-{{< tweet 1380271522691047428 >}}
+{{< tweet user="USGS_DataSci" id="1380227272490299407" >}}
+{{< tweet user="USGS_DataSci" id="1380214974467993603" >}}
+{{< tweet user="USGS_DataSci" id="1380271522691047428" >}}
 ## Day 9: distributions, statistics
-{{< tweet 1380576643106869249 >}}
+{{< tweet user="USGS_DataSci" id="1380576643106869249" >}}
 ## Day 10: distributions, abstract 
-{{< tweet 1380891190556508160 >}}
+{{< tweet user="USGS_DataSci" id="1380891190556508160" >}}
 ## Day 12: distributions, strips 
-{{< tweet 1381726113488117762 >}}
+{{< tweet user="USGS_DataSci" id="1381726113488117762" >}}
 ## Day 13: relationships, correlation
-{{< tweet 1382392034724564993 >}}
+{{< tweet user="USGS_DataSci" id="1382392034724564993" >}}
 ## Day 14: relationships, space 
-{{< tweet 1382737878489387013 >}}
+{{< tweet user="USGS_DataSci" id="1382737878489387013" >}}
 ## Day 15: relationships, multivariate
-{{< tweet 1387450575772606467 >}}
+{{< tweet user="USGS_DataSci" id="1387450575772606467" >}}
 ## Day 18: relationships, connections
-{{< tweet 1383822617392553987 >}}
+{{< tweet user="USGS_DataSci" id="1383822617392553987" >}}
 ## Day 19: timeseries, global change 
-{{< tweet 1384210959556767752 >}}
+{{< tweet user="USGS_DataSci" id="1384210959556767752" >}}
 ## Day 20: timeseries, upwards 
-{{< tweet 1384541933222178816 >}}
+{{< tweet user="USGS_DataSci" id="1384541933222178816" >}}
 ## Day 21: timeseries, downwards 
-{{< tweet 1384998873945497607 >}}
+{{< tweet user="USGS_DataSci" id="1384998873945497607" >}}
 ## Day 22: timeseries, animation
-{{< tweet 1388869132356030464 >}}
+{{< tweet user="USGS_DataSci" id="1388869132356030464" >}}
 ## Day 23: timeseries, tiles
-{{< tweet 1385637442254897152 >}}
+{{< tweet user="USGS_DataSci" id="1385637442254897152" >}}
 
 Even though we did not make it to every day, we had a lot of fun along the way exploring new datasets, revisiting old datasets, and trying out new visualization tools in R. Many thanks to the #30DayChartChallenge organizers, Cédric Scherer and Dominic Royé. 
 
