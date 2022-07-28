@@ -1,8 +1,8 @@
 ---
 author: Candice Hopkins and Rachel Volentine
-date: 2022-07-11
-slug: GWW
-draft: True
+date: 2022-08-01
+slug: gww
+draft: False
 type: post
 title: Decommissioning Groundwater Watch
 categories: water-information, groundwater, decommission
@@ -10,10 +10,10 @@ tags:
   - water-data-for-the-nation
   - public-communication
 image: static/GWW/cover.png
-description: The legacy Groundwater Watch application is being decommissioned. This blog post explains where users can find similar functionaltiy in other publicly available products.
+description: The legacy Groundwater Watch application is being decommissioned. This blog post explains where users can find similar functionality in other publicly available products.
 keywords:
   - Groundwater
-  - Grondwater-level
+  - Groundwater-level
 author_staff: candice-hopkins
 author_email: <chopkins@usgs.gov>
 author_researchgate: Candice-Hopkins
@@ -81,8 +81,8 @@ display the statistical context of recent measurements through colored
 dots. Animations of these dots over time are a feature that has been
 used to show changing conditions over time. This feature was so popular
 that aspects of it are replicated in the [NGWMN Data
-Portal](https://cida.usgs.gov/ngwmn/provider/statistics-methods/) and in
-the [National Water
+Portal](https://cida.usgs.gov/ngwmn/doc/TipSheets/NGWMN_WL_Statistics_Tip_Sheet.pdf)
+and in the [National Water
 Dashboard](https://dashboard.waterdata.usgs.gov/app/nwd/?aoi=default).
 In each of these products, a site is represented by a symbol indicating
 the status of the most recent measurement, if enough data are available
@@ -114,7 +114,8 @@ a site and produce statistics and graphics on any USGS site of their
 choosing. Users can also produce hydrographs for entire aquifers using
 the Composite Workflows. HASP also allows users to produce some
 water-quality cross-plots. This package can be accessed via RStudio and
-interacted with through a clickable Shiny application.
+interacted with through a clickable Shiny application and is described
+further [here](https://waterdata.usgs.gov/blog/hasp/).
 
 The [NGWMN Data Portal](https://cida.usgs.gov/ngwmn/index.jsp) allows
 access to interactive hydrographs and advanced statistics on individual
@@ -137,7 +138,7 @@ functionality are available.
 
 <!--- WDFN AND WEBSERVICES ACCORDION SECTION START -->
 <h2 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a1">
-Water Data for the Nation and Web Services 
+Water Data for the Nation and WaterServices 
 </button></h2>
 <div id="a1" class="usa-accordion__content">
 <!--- ------------- -->
