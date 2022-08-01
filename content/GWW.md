@@ -30,7 +30,7 @@ individual site pages for wells and springs, maps of current conditions,
 and graphs showing the statistical context of recent measurements; major
 functionality of Groundwater Watch is pictured in Figure 1.
 
-{{< figure src="/static/GWW/image1.jpg" caption="Figure 1. A diagram indicating functionality offered by the Groundwater Watch Application." alt="A diagram describing major functionality of Groundwater Watch." >}}
+{{< figure src="/static/GWW/figure1.jpg" caption="Figure 1. A diagram indicating functionality offered by the Groundwater Watch Application." alt="A diagram describing major functionality of Groundwater Watch." >}}
 
 However, the application's architecture,
 aging code base, and other factors make it difficult to update and keep
@@ -98,7 +98,7 @@ be used by anyone.
 
 ## Where can I find groundwater level statistics and graphs after the application is turned off?
 
-{{< figure src="/static/GWW/image4.jpg" caption="Figure 4. A diagram indicating that statistics for groundwater level data are available from sources outside of Groundwater Watch" alt="A diagram describing other sources of groundwater level statistics." >}}
+{{< figure src="/static/GWW/figure4.jpg" caption="Figure 4. A diagram indicating that statistics for groundwater level data are available from sources outside of Groundwater Watch" alt="A diagram describing other sources of groundwater level statistics." >}}
 
 The detailed statistics and graphical representation of water-level data
 on site pages are some of Groundwater Watch's most popular features.
