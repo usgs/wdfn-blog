@@ -22,7 +22,7 @@ keywords: wateralert, water data, subscription
 author_staff: 
 author_email: <wdfn@usgs.gov>
 ---
-*Last updated July 20th, 2022 at 16:45 ET*
+*Last updated July 29th, 2022 at 16:00 ET*
 
 <div
   class="usa-summary-box"
@@ -35,7 +35,7 @@ author_email: <wdfn@usgs.gov>
     </h3>
     <div class="usa-summary-box__text">
 
-Starting in summer* 2022, expect to hear from us by email or text about transitioning your legacy alerts to **Next Generation WaterAlert**, which will go live in fall* 2022.
+Starting in summer* 2022, expect to hear from us by email or text about transitioning your legacy alerts to [**Next Generation WaterAlert**](https://accounts.waterdata.usgs.gov/wateralert/), which will go live in fall* 2022.
 </div>
 </div>
 </div>
@@ -48,9 +48,11 @@ Starting in summer* 2022, expect to hear from us by email or text about transiti
 
 ## ❔ What is WaterAlert?
 
-**[WaterAlert](https://maps.waterdata.usgs.gov/mapper/wateralert/) is a popular subscription service that allows users to subscribe to e-mail or text (SMS) messages when certain parameters, as measured by a USGS monitoring location, exceed user-definable thresholds.** The development and maintenance of the WaterAlert system is supported by the USGS and its partners, including numerous federal, state, and local agencies.
+**[Legacy](https://maps.waterdata.usgs.gov/mapper/wateralert/) WaterAlert is a popular subscription service that allows users to subscribe to e-mail or text (SMS) messages when certain parameters, as measured by a USGS monitoring location, exceed user-definable thresholds.** The development and maintenance of the WaterAlert system is supported by the USGS and its partners, including numerous federal, state, and local agencies.
 
 Real-time data from USGS gages are transmitted via satellite or other telemetry to USGS offices at various intervals; in most cases, once every hour. Emergency transmissions, such as during floods, may be more frequent. Notifications will be based on the data received at these site-dependent intervals.
+
+[<button class="usa-button usa-button--big">Explore NextGen WaterAlert</button>](https://accounts.waterdata.usgs.gov/wateralert/)
 
 Read our [check status user blog post](https://waterdata.usgs.gov/blog/user_check_status/) to get an idea of common use cases for WaterAlert.
 
@@ -83,10 +85,10 @@ Once the transition opens in summer* 2022 (anticipated to open in August), if yo
 
 | Date | What Will Happen |
 |------|----------|
-Summer* 2022 | Transition Period opens
-Fall* 2022 | Transition Period closes
-Fall* 2022 | Next Generation WaterAlert goes Live
-Fall* 2022 | Legacy WaterAlert is Decomissioned
+August 2022 | [Next Generation WaterAlert](https://accounts.waterdata.usgs.gov/wateralert/) is available
+August 2022 | Transition Period opens
+September 2022 | Transition Period closes
+December 2022 | Legacy WaterAlert is Decomissioned
 
 ## ➡ Transitioning Legacy users
 Starting in summer* 2022, currents users of Legacy WaterAlert will be able to transfer their alerts to NextGen WaterAlert. As a part of the transition, users will create an account in NextGen WaterAlert. Once users transition, they will be able to create, edit, and delete alerts in NextGen WaterAlert, **and alerts in NextGen WaterAlert will be active immediately.**
@@ -100,7 +102,7 @@ Starting in summer* 2022, currents users of Legacy WaterAlert will be able to tr
 
 **Users will choose from [login.gov](https://login.gov/) or AD credentials. If you do not have a login.gov account, you can quickly and easily create one.*
 
-Later this summer, we will update this blog post with more detailed written instructions that will walk users through how to transition, step-by-step. Current Legacy WaterAlert users should expect to hear from us via email or text about transitioning legacy alerts.
+Later this summer, we will update this blog post with more detailed written instructions that will walk users through how to transition, step-by-step. Current Legacy WaterAlert users should expect to hear from us via email or text about transitioning legacy alerts. We will be [hosting a webinar](https://waterdata.usgs.gov/blog/nextgen-wateralert-webinar/) to walk users through step-by-step on August 24th at 1 pm ET/ 10 am PT.
 
 Later this summer, re-visit this blog post or check out the [USGS YouTube channel](https://www.youtube.com/channel/UCeXH8GZyV3sVqAr45AvupOA) for a short instructional video on transitioning your legacy WaterAlert subscriptions to the NextGen WaterAlert system.
 
@@ -133,6 +135,16 @@ Why will I have to login? <!--- 🚢🛥⛴🚀 -->
 In order to provide a better experience, we need to associate every subscription with a user authentication account, either through USGS's Active Directory (AD) or login.gov. Other government organizations (e.g., USA Jobs) currently use login.gov, a federal service that allows public users to interact with USGS water data.
 </div>
 
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a6">
+Will I receive alerts from both Legacy and NextGen after I transition? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a6" class="usa-accordion__content">
+<!--- ------------- -->
+Yes, you will receive duplicate alerts. We recommend turning off your Legacy alerts if you do not want to receive duplicate alerts during the period of time after you transition, before we decommission Legacy WaterAlert.
+</div>
+
 <!--- Common Questions START -->
 <h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a4">
 What happens if I don't transfer my alerts before the transition period closes? <!--- 🚢🛥⛴🚀 -->
@@ -146,6 +158,16 @@ At the time of transition, all subscriptions that have been associated with a us
 <br>
 After the transition period closes, you'll need to create an account in NextGen WaterAlert in order to create new alerts. It's fast and easy! Check back later in the summer for a video we'll have that will walk users through how to create an account and alerts with NextGen WaterAlert.
 If you are having trouble or if you are unable to transition, even after the transition closes, please contact us for help! Email us: wdfn@usgs.gov.
+</div>
+
+<!--- Common Questions START -->
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a5">
+What if I don't want to transition? <!--- 🚢🛥⛴🚀 -->
+</button></h1>
+<div id="a5" class="usa-accordion__content">
+<!--- ------------- -->
+
+No worries, you don't have to! You're welcome to [start creating alerts in NextGen WaterAlert](https://accounts.waterdata.usgs.gov/wateralert/) instead and let your Legacy alerts disappear when we decommission the Legacy system. If you do not transition, you will continue to receive the reminders until we decommission the Legacy system.
 </div>
 
 
