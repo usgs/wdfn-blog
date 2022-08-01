@@ -1,8 +1,8 @@
 ---
 author: Candice Hopkins
-date: 2022-07-13
+date: 2022-07-26
 slug: HASP
-draft: True
+draft: false
 title: Hydrologic Analysis Package Available to Users
 type: post
 categories: Data Science
@@ -225,3 +225,7 @@ access a complete record of all observations at a site over time,
 helping users to easily access data and statistics over the entire
 period of observation. If you have thoughts about how we can further
 enhance this package, email <WDFN@usgs.gov>.
+
+# Disclaimer
+
+Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
