@@ -116,13 +116,13 @@ Later this summer, re-visit this blog post or check out the [USGS YouTube channe
 <div class="usa-accordion usa-accordion--bordered" aria-multiselectable="true">
 
 <!--- Common Questions START -->
-<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="false" aria-controls="a2">
+<h1 class="usa-accordion__heading"><button class="usa-accordion__button" aria-expanded="true" aria-controls="a2">
 Why can't you just transfer my alerts automatically? <!--- 🚢🛥⛴🚀 -->
 </button></h1>
 <div id="a2" class="usa-accordion__content">
 <!--- ------------- -->
 
-We wish we could! We know it would make a lot of our users happy. But, we can't for one big reason: users will have to login to NextGen WaterAlert. Because login is required, we are not able to automatically transfer alerts since the user's account needs to be set up first -- and that account set up, or login, must be done by the user. For public users who don't already have login.gov, the process to create an account is simple and easy. Thank you for understanding!
+We wish we could! We know it would make a lot of our users happy. But, we can't for one big reason: users will have to login to NextGen WaterAlert. Because login is required, we are not able to automatically transfer alerts since the user's account needs to be set up first -- and that account set up, or login, must be done by the user. For public users who don't already have [login.gov](https://www.login.gov/), the process to create an account is simple and easy. Thank you for understanding!
 </div>
 
 <!--- Common Questions START -->
@@ -132,7 +132,7 @@ Why will I have to login? <!--- 🚢🛥⛴🚀 -->
 <div id="a3" class="usa-accordion__content">
 <!--- ------------- -->
 
-In order to provide a better experience, we need to associate every subscription with a user authentication account, either through USGS's Active Directory (AD) or login.gov. Other government organizations (e.g., USA Jobs) currently use login.gov, a federal service that allows public users to interact with USGS water data.
+In order to provide a better experience, we need to associate every subscription with a user authentication account, either through USGS's Active Directory (AD) or [login.gov](https://www.login.gov/). Other government organizations (e.g., USA Jobs) currently use login.gov, a federal service that allows public users to interact with USGS water data.
 </div>
 
 
