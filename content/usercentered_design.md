@@ -96,4 +96,4 @@ As we move forward, we will continue to involve our users as much as possible, e
 
 We employ user-centered design to make high-quality information on Water Data for the Nation and our other products discoverable, accessible, and usable for everyone. 
 
-Are you interested in participating in future usability testing and research? If interested, please email us at wdfn_usabilitytesting@usgs.gov and let us know which product(s) you use and how you use it. We’ll add you to our rooster! 
+Are you interested in participating in future usability testing and research? If interested, please email us at wdfn_usabilitytesting@usgs.gov and let us know which product(s) you use and how you use it. We’ll add you to our roster! 

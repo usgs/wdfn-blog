@@ -25,7 +25,7 @@ author_staff:
 author_email: <wdfn@usgs.gov>
 ---
 
-*Last updated July 20th, 2022 at 17:05 ET* 
+*Last updated August 12th, 2022* 
 
 On April 11th, we hosted a [public webinar](https://waterdata.usgs.gov/blog/nextgen-webinar-apr11/) during which we updated our stakeholders on the progress of replacing [Legacy real-time pages](https://waterdata.usgs.gov/nwis/uv?site_no=01584050) with [Next Generation Monitoring Location Pages](https://waterdata.usgs.gov/monitoring-location/01584050/).
 
@@ -36,18 +36,21 @@ We anticipate to begin redirecting Legacy pages to NextGen pages in September 20
 
 After addressing many highly-requested features, we anticipate decommissioning the NWISWeb Legacy current-conditions real-time pages in July 2023.
 
-## Some features we plan to add before the redirect in September 2022
-- ✔ Add scale to map (complete!)
-- ✔ Provide option to download data near data tables (complete!)
-- Make data sortable by time
-- Make Facebook shares more compelling with images
-- New zoom options to improve interactivity with graph and axis
-- Daily statistics for the latest day
-- Multi-parameter feature (2 parameters on the same graph)
+## Recently released features
+✔ Add scale to map (complete!) <br>
+✔ Provide option to download data near data tables (complete!) <br>
+✔ data sortable by time <br>
+✔ Make Facebook shares more compelling with images <br>
+✔ Daily statistics for the latest day <br>
+✔ Multi-parameter feature (2 parameters on the same graph) <br>
 
 <div class="grid-row">
-{{< figure src="/static/nextgen_mlp_update/MLPs_feature_examples.png" alignment="center" caption="Here are a few examples of the remaining tasks that are soon to be completed for the redirect. We are working on placing 2 parameters on the hydrograph, giving the option for our users to compare their data. We are making the data table sortable, giving the users a choice to see their data in a specific order. Finally, we are adding the daily stats table to the monitoring location pages." alt="screenshot of 3 upcoming features: 2 parameters on the same graph, make data sortable by time, daily statistics for the latest day." >}}
+{{< figure src="/static/nextgen_mlp_update/Recently_released_features_2.png" alignment="center" caption="Here are a few examples of recently released features. Having 2 parameters on the hydrograph was a highly requested feature which now gives users the option to compare data. We made the data table sortable, giving the users a choice to see their data in a specific order. Finally, we added the daily stats table to the monitoring location pages." alt="screenshot of 3 recently released features: 2 parameters on the same graph, make data sortable by time, daily statistics for the latest day." >}}
 </div>
+
+
+## Only remaining feature we need to add before the redirect in September 2022
+- New zoom options to improve interactivity with graph and axis
 
 ## Some features we anticipate addressing before Legacy decommission in July 2023
 - Better download capability
