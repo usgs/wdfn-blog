@@ -22,6 +22,8 @@ keywords: wateralert, water data, subscription
 author_staff: 
 author_email: <wdfn@usgs.gov>
 ---
+# [See our most recent blog post on WaterAlert.](https://waterdata.usgs.gov/blog/wateralert-transition-open/)
+
 *Last updated July 29th, 2022 at 16:00 ET*
 
 <div
