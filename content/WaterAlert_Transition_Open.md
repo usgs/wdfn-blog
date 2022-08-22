@@ -2,7 +2,7 @@
 author: Nicole Felts and Randi Butler
 date: 2022-08-22
 slug: WaterAlert-transition-open
-draft: true
+draft: false
 type: post
 title: Transition to NextGen WaterAlert NOW
 toc: false
