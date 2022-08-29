@@ -143,7 +143,7 @@ Water Data for the Nation and WaterServices
 <div id="a1" class="usa-accordion__content">
 <!--- ------------- -->
 
-Unprocessed groundwater level data are available on ; this website is
+Unprocessed groundwater level data are available on [NWISweb](https://waterdata.usgs.gov/nwis/gw)  ; this website is
 the best place to get our most recent, uninterpreted data. Users can
 search and download water-level data on Water Data for the Nation, or
 programmatically access these data via
