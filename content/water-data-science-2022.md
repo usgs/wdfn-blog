@@ -49,7 +49,7 @@ Our data visualization sub-team ("Vizlab") has been around since 2014, but is co
 Vizlab **right now** includes three full time federal employees and a mix of part time contributors. The group excels at producing new visualization content that ranges from social media (e.g., [#30DayChartChallenge](../chart-challenge-2022/)), complex interactives (e.g.,  [stream temperature in the Delaware River Basin](https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/index.html#)), and storytelling like in [“From Snow to Flow”](https://labs.waterdata.usgs.gov/visualizations/snow-to-flow/index.html#). In addition to being excellent data communicators, Vizlab builds data workflows that make it faster to template or reuse content in the future, such as for recurring event types or seasonal summaries. 
 
 
-Vizlab **in the future _could_** begin 
+Vizlab **in the future _may_** continue to refine 
       
 #### Where Vizlab could go: 
 Templates for events, new visuals for explaining/exploring large environmental datasets, building processes for efficient code/data publication alongside visualizations.
@@ -61,8 +61,10 @@ Templates for events, new visuals for explaining/exploring large environmental d
 ### Web analytics
       where we are:
       where we could go:
-      
+
 ### Reproducible data assembly
+<div class="grid-row">
+{{< figure src="/static/water-data-science-2022/repro-data-assembly-2022.png" alt="An animation of how a machine learning model takes two inputs of temperature and precipitation to make a prediction of water temperature. The model learns by penalizing iterative versions of the model that make bad predictions according to measured temperature. The model evolves into a stream network to show the connections between stream reaches and how the temperature in one location impacts another. This stream view morphs into an information graph to show how this is treated in the model. Lastly, the process-guided deep learning model takes into account the physical relationships that impact water temperatures." class="side-by-side" caption="An animation of of a process-guided deep learning model predicting stream water temperature. (credit H Corson-Dosch)">}}
       where we are: TERM hiring, targets/snakemake, collab code
       where we could go:
 
