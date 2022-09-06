@@ -4,7 +4,7 @@ date: 2022-09-03
 slug: water-data-science-2022
 draft: False
 type: post
-image: /static/FY21DataSci/pgdl_flubber_small.gif
+image: /static/water-data-science-2022/DaSB_thumbnail.png
 title: "USGS water data science in 2022"
 author_staff: Jordan-S-Read
 author_email: <jread@usgs.gov>
