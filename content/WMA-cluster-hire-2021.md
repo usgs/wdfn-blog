@@ -76,7 +76,7 @@ For additional information, please follow the [USGS Data Science Twitter](https:
 - [USGS-SAC-21-11059332-DHA-BC **Machine Learning Specialist**; _Tuscaloosa, AL_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595097400)
 - [USGS-SAC-21-11059333-DHA-BC **Machine Learning Specialist**; _any_ duty station](https://www.usajobs.gov/GetJob/ViewDetails/595095600)
 
-### Our Commitment to Diversity, Inclusion, and Transparency 
+### Our Commitment to Diversity, Inclusion, and Transparency {#DIT}
 
 The federal hiring process is complex, but we don’t want that to be the reason you don’t apply.  We are committed to inclusive hiring practices that build a healthy workplace where diversity is our strength and everyone has the support they need to succeed.  That starts right now, with us lifting the veil on the confusing process of applying for federal jobs. We especially encourage you to apply if you are BIPOC, LGBTQIA+, have a disability, or are of any marginalized identity. Please read below for details on how the application process works. 
 
