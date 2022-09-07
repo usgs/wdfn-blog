@@ -43,7 +43,7 @@ What are these capabilities/teams?
 --------------------
 
 ### Visualizations
-{{< figure src="/static/what-is-vizlab/viz-logo.png" alt="A banner for the USGS Vizlab water data visualization team featuring an abstract streamgraph that mimics flowing water.">}}
+{{< figure src="/static/water-data-science-2022/vizlab_function.png" alt="A cartogram map of the US with proportional area charts for each state showing the proportion of streamgages by flow levels in August 2022, categorized using percentile bins." class="side-by-side" caption="A cartogram map of the US with proportional area charts for each state showing the proportion of streamgages by flow levels for August 2022, categorized using percentile bins. (credit USGS Vizlab)">}}
 
 Our data visualization sub-team ("Vizlab") has been around since 2014, but is constantly evolving and [added staff this year](../viz-hires-2021/). Described by [Cee recently](../what-is-vizlab/) as "_**a collaborative team that uses data visualization to communicate water science and data to non-technical audiences. Our mission is to create timely visualizations that distill complex scientific concepts and datasets into compelling charts, maps, and graphics. We operate at the intersection of data science and science communication.**_" See also <a href="https://labs.waterdata.usgs.gov/visualizations/vizlab-home/index.html#/?utm_source=blog&utm_medium=wdfn&utm_campaign=what_is_vizlab#/" target="_blank" >Vizlab's portfolio site</a>.
 
@@ -57,7 +57,7 @@ Vizlab **in the future _may_** provide new leadership in the publication of data
 Machine learning (ML) is a rapidly growing capability in the U.S. Geological Survey, and the Water Mission Area is no exception. ML offers a ton of promise for a range of important applications, including improving our ability to predict changes in water quality/quantity as well as more business-oriented decisions, such as improving user experience through our large portfolio of water information web applications and providing early warnings of sensor failures in the field. 
 
 <div class="grid-row">
-{{< figure src="/static/water-data-science-2022/ML-2022.png" alt="*********." caption="********* (credit A P Appling)." class="side-by-side" >}}
+{{< figure src="/static/water-data-science-2022/ML_function.png" alt="Model types positioned by their use of design and discovery, with models such as deep neural networks and process-guided deep learning scoring higher on discovery and process-based models scoring higher on design." caption="Model types positioned by their use of design and discovery. (credit A P Appling)." class="side-by-side" >}}
 
 <p class="side-by-side" >
 Our ML capability <strong>right now</strong> includes three machine learning specialist full time federal employees and an ML postdoc in the data science branch, with three more in our partner "analysis and prediction" branch coming out of our <a href="../hiring-spring-2021">joint hiring effort</a> from last year. The group's current strengths are in temporally and spatially aware deep learning approaches for predict water quality changes in streams and rivers, most of which involve adding forms of "process-guidance" to an otherwise purely data-driven model. Alison is providing leadership for the growth of this capability in USGS water, including leading an effort tasked with "building capacity in AI/ML" and authoring a recent comprehensive book chapter on ML for inland waters (see <a href="https://www.sciencedirect.com/science/article/pii/B9780128191668001213">journal link</a> or <a href="https://doi.org/10.1016/B978-0-12-819166-8.00121-3">non-paywalled preprint</a>). Jake and Sam led new water temperature forecasts for the Delaware River Basin that provide a quasi-operational delivery of ... 
@@ -76,14 +76,16 @@ Our data science branch ML sub-team **in the future _may_** inference, operation
 
 [Details here about analytics]
 
+{{< figure src="/static/water-data-science-2022/analytics_function.png" alt="Graphics showing active users for September 7, 2022 by time of day, geographical location, and by date." class="side-by-side" caption="Graphics that represent active users for USGS Water Mission Area web products. (credit Google Analytics)">}}
+
 Our web analytics sub-team **right now** includes 
 
 Our web analytics sub-team **in the future _may_** 
 
 ### Reproducible data assembly
 <div class="grid-row">
-{{< figure src="/static/water-data-science-2022/repro-data-assembly-2022.png" alt="*********." class="side-by-side" caption="*********. (credit L Platt)">}}
-</div>
+
+{{< figure src="/static/water-data-science-2022/assembly_function.png" alt="*********." class="side-by-side" caption="*********. (credit L Platt)">}}
 
 Our reproducible data assembly capability **right now** includes TERM hiring, targets/snakemake, collab code
 
