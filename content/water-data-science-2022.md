@@ -2,7 +2,7 @@
 author: Jordan S Read (he/him)
 date: 2022-09-03
 slug: water-data-science-2022
-draft: False
+draft: True
 type: post
 image: /static/water-data-science-2022/DaSB_thumbnail.png
 title: "USGS water data science in 2022"
@@ -57,28 +57,27 @@ Vizlab **in the future _may_** provide new leadership in the publication of data
 Machine learning (ML) is a rapidly growing capability in the U.S. Geological Survey, and the Water Mission Area is no exception. ML offers a ton of promise for a range of important applications, including improving our ability to predict changes in water quality/quantity as well as more business-oriented decisions, such as improving user experience through our large portfolio of water information web applications and providing early warnings of sensor failures in the field. 
 
 <div class="grid-row">
-{{< figure src="/static/water-data-science-2022/ML_function.png" alt="Model types positioned by their use of design and discovery, with models such as deep neural networks and process-guided deep learning scoring higher on discovery and process-based models scoring higher on design." caption="Model types positioned by their use of design and discovery. (credit A P Appling)." class="side-by-side" >}}
+{{< figure src="/static/water-data-science-2022/ML_function.png" alt="Model types positioned by their use of design and discovery, with models such as deep neural networks and process-guided deep learning scoring higher on discovery and process-based models scoring higher on design." caption="Model types positioned by their use of design and discovery. (credit AP Appling)." class="side-by-side" >}}
 
 <p class="side-by-side" >
-Our ML capability <strong>right now</strong> includes three machine learning specialist full time federal employees and an ML postdoc in the data science branch, with three more in our partner "analysis and prediction" branch coming out of our <a href="../hiring-spring-2021">joint hiring effort</a> from last year. The group's current strengths are in temporally and spatially aware deep learning approaches for predict water quality changes in streams and rivers, most of which involve adding forms of "process-guidance" to an otherwise purely data-driven model. Alison is providing leadership for the growth of this capability in USGS water, including leading an effort tasked with "building capacity in AI/ML" and authoring a recent comprehensive book chapter on ML for inland waters (see <a href="https://www.sciencedirect.com/science/article/pii/B9780128191668001213">journal link</a> or <a href="https://doi.org/10.1016/B978-0-12-819166-8.00121-3">non-paywalled preprint</a>). Jake and Sam led new water temperature forecasts for the Delaware River Basin that provide a quasi-operational delivery of ... 
+Our ML capability <strong>right now</strong> includes three machine learning specialist full time federal employees and an ML postdoc in the data science branch, with three more in our partner "analysis and prediction" branch coming out of our <a href="../hiring-spring-2021">joint hiring effort</a> from last year. The group's current strengths are in temporally and spatially aware deep learning approaches for predict water quality changes in streams and rivers, most of which involve adding forms of "process-guidance" to an otherwise purely data-driven model. Alison is providing leadership for the growth of this capability in USGS water, including leading an effort tasked with "building capacity in AI/ML" (AI = artificial intelligence) and authoring a recent comprehensive book chapter on ML for inland waters (see <a href="https://www.sciencedirect.com/science/article/pii/B9780128191668001213">journal link</a> or <a href="https://doi.org/10.1016/B978-0-12-819166-8.00121-3">non-paywalled preprint</a>, as well as the adjacent figure). Jake and Sam led forecasts for the Delaware River Basin that provide quasi-operational delivery of <a href="https://labs.waterdata.usgs.gov/water-temperature-forecasts/DRB/2022/index.html">zero to seven-day-ahead summer water temperatures</a> with innovative ML and data assimilation methods that are described in a <a href="https://doi.org/10.31223/X55K7G">companion paper</a> led by Jake
+This crew is also working actively on a strategy document for ML opportunities in USGS water and also exploring methods in explainable AI (XAI), as well as continuing to provide leadership and development in the new field of knowledge-guided machine learning (KGML). 
 </p>
-
-
-forecasting, KGML, TERM hiring, capacity building, ML strategy, some XAI,
-
-We've provided leadership in the new field of knowledge-guided machine learning (KGML) 
-
-Our data science branch ML sub-team **in the future _may_** inference, operational data, KGML, integration with enterprise modeling, decision-focused model streams, PERM hiring and leadership, MLOps, mature XAI.
 </div>
+
+Our data science branch ML sub-team **in the future _may_** strive to mature our methods for inference in ML applications and advancing XAI. Given our place in a science agency that places great value on understanding processes at play alongside more accurate prediction goals, it is unlikely to see closed-box (i.e., not inrepretable) approaches gain traction in critical applications. I'd also expect a continued effort to build data and operations (operations = robust and dependable, less nimble and exploratory) capabilities that complement ML development efforts. David moved into a role in ML operations (MLOps) this year and the needs for these skills will grow as projects mature and codes migrate into more operational use-cases. Similarly, efforts in USGS water to build enterprise models will create opportunities to strategically fuse ML and process-based codes in formal model/software development efforts that will require thoughtful architectures and robust implementations. Lastly, as our ML capability spreads to touch on more diverse applications, I wouldn't be surprised to see more situations of "decision-tuned" predictions where a similar underlying model is subtly re-purposed to deliver parallel data streams for distinct use-cases. For example, training two variants of a model to predict maximum temperature alongside temperature exposure duration may inform two different decisions with a single model development investment; using a variant of an environmental forecasting model to also provide real-time warning of faulty automated field measurements may result in field visit efficiencies. Ok, one more... I think the challenges related to model sharing, model/environment capture, model reuse, and general open science needs for ML models and their associated data prep and computing needs are going to lean on leadership from this sub-team in collaboration with the data assembly sub-team mentioned below. 
 
 
 ### Web analytics
 
-[Details here about analytics]
-
+Our data science branch is situated within the "Integrated Information Dissemination Division" along with the web communications branch and the decision support branch. Our colleagues build lots of [web applications](../tags/water-data-for-the-nation/) that deliver tons of water data to the public and decision makers. Our web analytics capability is responsible for capturing data on user or machine interactions with these data/information delivery systems and turning it into useful insights that can be used to make decisions that improve these systems or help them reach new audiences. The data we have available include user interface details (mostly captured via Google Analytics presently) and server logs. The web portfolio within the scope of the analytics capability has tens of millions of unique users each year. 
+<div class="grid-row">
 {{< figure src="/static/water-data-science-2022/analytics_function.png" alt="Graphics showing active users for September 7, 2022 by time of day, geographical location, and by date." class="side-by-side" caption="Graphics that represent active users for USGS Water Mission Area web products. (credit Google Analytics)">}}
 
-Our web analytics sub-team **right now** includes 
+<p class="side-by-side" >
+Our web analytics sub-team <strong>right now</strong> includes a few data scientist contributors that primarily work on other projects. We're currently light on staffing but heavy in opportunities for growth in this area. The primary efforts of web analytics right now include development and maintenance of a real-time analytics dashboard that provides access and summarization of patterns and trends in application usage across over four dozen unique web applications. We deliver quarterly reports as part of Congressional communication that provide a view into how much water data is being served (e.g., last quarter there were 1.1 billion requests to <a href = "../user_operational_pull/">USGS water services</a> and 104 billion rows of discrete water quality data served from 2.3 million unique data requests to the multi-agency <a href="https://www.waterqualitydata.us/">Water Quality Portal</a>). David led prior work to build data flows that make feed these summaries as well as the analytics dashboard and much of the current work is automated. 
+</p>
+</div>
 
 Our web analytics sub-team **in the future _may_** 
 
@@ -90,7 +89,7 @@ Our web analytics sub-team **in the future _may_**
 Our reproducible data assembly capability **right now** includes TERM hiring, targets/snakemake, collab code
 
 Our reproducible data assembly sub-team **in the future _may_** 
-
+</div>
 
 ## Other focal areas in 2022:
 
