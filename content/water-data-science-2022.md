@@ -60,10 +60,13 @@ Machine learning (ML) is a rapidly growing capability in the U.S. Geological Sur
 {{< figure src="/static/water-data-science-2022/ML-2022.png" alt="*********." caption="********* (credit A P Appling)." class="side-by-side" >}}
 
 <p class="side-by-side" >
-Our ML capability <strong>right now</strong> includes three machine learning specialist full time federal employees and an ML postdoc in the data science branch, with three more in our partner "analysis and prediction" branch coming out of our <a href="../hiring-spring-2021">joint hiring effort</a> from last year. forecasting, KGML, TERM hiring, capacity building, ML strategy, some XAI,
+Our ML capability <strong>right now</strong> includes three machine learning specialist full time federal employees and an ML postdoc in the data science branch, with three more in our partner "analysis and prediction" branch coming out of our <a href="../hiring-spring-2021">joint hiring effort</a> from last year. The group's current strengths are in temporally and spatially aware deep learning approaches for predict water quality changes in streams and rivers, most of which involve adding forms of "process-guidance" to an otherwise purely data-driven model. Alison is providing leadership for the growth of this capability in USGS water, including leading an effort tasked with "building capacity in AI/ML" and authoring a recent comprehensive book chapter on ML for inland waters (see <a href="https://www.sciencedirect.com/science/article/pii/B9780128191668001213">journal link</a> or <a href="https://doi.org/10.1016/B978-0-12-819166-8.00121-3">non-paywalled preprint</a>). Jake and Sam led new water temperature forecasts for the Delaware River Basin that provide a quasi-operational delivery of ... 
+</p>
+
+
+forecasting, KGML, TERM hiring, capacity building, ML strategy, some XAI,
 
 We've provided leadership in the new field of knowledge-guided machine learning (KGML) 
-</p>
 
 Our data science branch ML sub-team **in the future _may_** inference, operational data, KGML, integration with enterprise modeling, decision-focused model streams, PERM hiring and leadership, MLOps, mature XAI.
 </div>
@@ -80,6 +83,8 @@ Our web analytics sub-team **in the future _may_**
 ### Reproducible data assembly
 <div class="grid-row">
 {{< figure src="/static/water-data-science-2022/repro-data-assembly-2022.png" alt="*********." class="side-by-side" caption="*********. (credit L Platt)">}}
+</div>
+
 Our reproducible data assembly capability **right now** includes TERM hiring, targets/snakemake, collab code
 
 Our reproducible data assembly sub-team **in the future _may_** 
