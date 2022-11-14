@@ -58,7 +58,7 @@
     "rollup": "^2.72.1",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.51.0",
-    "stylelint": "^14.8.2",
+    "stylelint": "^14.15.0",
     "stylelint-config-recommended-scss": "^6.0.0",
     "stylelint-scss": "^4.2.0",
     "terser": "^5.13.1"
